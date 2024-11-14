@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Welcome to My Portfolio on Natasha Smith Portfolio</title>
+        <link>https://drnsmith.github.io/</link>
+        <description>Recent content in Welcome to My Portfolio on Natasha Smith Portfolio</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <managingEditor>drnatashasth@gmail.com (Natasha Smith)</managingEditor>
+        <webMaster>drnatashasth@gmail.com (Natasha Smith)</webMaster>
+        <lastBuildDate>Thu, 14 Nov 2024 17:21:46 +1300</lastBuildDate><atom:link href="https://drnsmith.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mypost</title>
+        <link>https://drnsmith.github.io/posts/mypost/</link>
+        <pubDate>Thu, 14 Nov 2024 17:21:46 +1300</pubDate>
+        <author>drnatashasth@gmail.com (Natasha Smith)</author>
+        <guid>https://drnsmith.github.io/posts/mypost/</guid>
+        <description>&lt;p&gt;this is some posts i&amp;rsquo;ve written to date.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>About Me</title>
+        <link>https://drnsmith.github.io/about/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <author>drnatashasth@gmail.com (Natasha Smith)</author>
+        <guid>https://drnsmith.github.io/about/</guid>
+        <description>&lt;p&gt;Welcome to my portfolio! I&amp;rsquo;m Natasha Smith, exploring the intersection of data, technology, and humanity. With expertise in data science and a passion for impactful insights, I’ve built a collection of projects to showcase my journey.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Blog</title>
+        <link>https://drnsmith.github.io/blog/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <author>drnatashasth@gmail.com (Natasha Smith)</author>
+        <guid>https://drnsmith.github.io/blog/</guid>
+        <description>&lt;p&gt;Welcome to my blog! Here, I share insights, tutorials, and reflections on the world of data science, technology, and its ethical implications.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Contact</title>
+        <link>https://drnsmith.github.io/contact/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <author>drnatashasth@gmail.com (Natasha Smith)</author>
+        <guid>https://drnsmith.github.io/contact/</guid>
+        <description>&lt;p&gt;If you&amp;rsquo;d like to reach out, feel free to contact me via email or connect on social media. You can also check out my latest articles on &lt;strong&gt;Substack&lt;/strong&gt; and &lt;strong&gt;Medium&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;If my content resonates with you, consider &lt;strong&gt;following me&lt;/strong&gt; on Medium and &lt;strong&gt;subscribing&lt;/strong&gt; to my newly launched Substack, &lt;em&gt;Never Oblivious&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;contact-options&#34;&gt;Contact Options
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;: &lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;LinkedIn&lt;/strong&gt;: &lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Substack&lt;/strong&gt;: &lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Medium&lt;/strong&gt;: &lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Home Page</title>
+        <link>https://drnsmith.github.io/home/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <author>drnatashasth@gmail.com (Natasha Smith)</author>
+        <guid>https://drnsmith.github.io/home/</guid>
+        <description>&lt;p&gt;Hello, World!&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Projects</title>
+        <link>https://drnsmith.github.io/projects/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <author>drnatashasth@gmail.com (Natasha Smith)</author>
+        <guid>https://drnsmith.github.io/projects/</guid>
+        <description>&lt;h3 id=&#34;my-projects&#34;&gt;My Projects
+&lt;/h3&gt;&lt;p&gt;Welcome to my project showcase. Below are highlights of my data science, AI, and machine learning projects. Click on each project for detailed insights.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
