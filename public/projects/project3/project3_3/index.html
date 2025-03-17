@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 3. Designing the Snowflake Schema for Efficient Data Analysis. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog focuses on the design of a Snowflake Schema, which was used to efficiently organise and centralise data for analysis. Learn how the Snowflake Schema helps reduce redundancy, ensures consistency, and optimises the structure for advanced data queries.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project3_images/pr3.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 3. Designing the Snowflake Schema for Efficient Data Analysis.
+          </h1>
+          
+            <p class="f5">This blog focuses on the design of a Snowflake Schema, which was used to efficiently organise and centralise data for analysis. Learn how the Snowflake Schema helps reduce redundancy, ensures consistency, and optimises the structure for advanced data queries.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project3_images/pr3.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In the world of data warehousing, choosing the right schema is a pivotal decision that determines the efficiency of the entire project.</p>
+<p>For &lsquo;OfficeProducts&rsquo;, we opted for a <strong>Snowflake Schema</strong> to create a streamlined and high-performing data warehouse.</p>
+<p>This schema design allowed us to effectively reduce redundancy, maintain data integrity, and improve overall query performance, making it ideal for deep analysis of sales and product performance data.</p>
+<h3 id="what-is-a-snowflake-schema">What is a Snowflake Schema?</h3>
+<p>The Snowflake Schema is an extension of the <strong>Star Schema</strong>, where dimension tables are normalised into multiple related tables.</p>
+<p>Unlike a traditional star schema, where each dimension table is typically denormalised and contains redundant data, the <strong>Snowflake Schema</strong> breaks those dimensions into smaller, normalised tables.</p>
+<p>This results in a more structured and layered approach that enhances data integrity and reduces storage requirements.</p>
+<p>In our case, the <strong>Transactional Fact Table</strong> was the central hub of the schema, which contained transactional data linked to multiple dimensions like products, clients, channels, suppliers, and dates.</p>
+<p>These dimension tables were normalised to minimise redundancy and make it easier to maintain data accuracy across the warehouse.</p>
+<h3 id="designing-the-tables">Designing the Tables</h3>
+<p>The <strong>Snowflake Schema</strong> revolves around the <strong>Transactional Fact Table</strong> and various dimension tables. Let’s break down the tables we designed:</p>
+<ul>
+<li><strong>Transactional Fact Table</strong>: holds information about each transaction, including fields like <strong>TRANSACTION ID</strong>, <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, <strong>CHANNEL ID</strong>, <strong>DATE</strong>, and <strong>QUANTITY</strong>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> FACT_TRANSACTIONS (
+</span></span><span style="display:flex;"><span>    TRANSACTION_ID VARCHAR2(<span style="color:#ae81ff">8</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    PRODUCT_ID VARCHAR2(<span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>    CLIENT_ID VARCHAR2(<span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>    CHANNEL_ID VARCHAR2(<span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>    DATE_ID DATE,
+</span></span><span style="display:flex;"><span>    QUANTITY NUMBER(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    TOTAL_SALE NUMBER(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (PRODUCT_ID) <span style="color:#66d9ef">REFERENCES</span> DIMPRODUCT(PRODUCT_ID),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (CLIENT_ID) <span style="color:#66d9ef">REFERENCES</span> DIMCLIENT(CLIENT_ID),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (CHANNEL_ID) <span style="color:#66d9ef">REFERENCES</span> DIMCHANNEL(CHANNEL_ID),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (DATE_ID) <span style="color:#66d9ef">REFERENCES</span> DIMDATE(DATE_ID)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><ul>
+<li><strong>DIM PRODUCT Dimension Table</strong>: contains details about products, including product name, brand, supplier, and availability.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> DIMPRODUCT (
+</span></span><span style="display:flex;"><span>    PRODUCT_ID VARCHAR2(<span style="color:#ae81ff">6</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    PRODUCT_NAME VARCHAR2(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    BRAND_NAME VARCHAR2(<span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    SUPPLIER_ID VARCHAR2(<span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>    AVAILABILITY_STATUS VARCHAR2(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><ul>
+<li><strong>DIM CLIENT Dimension Table</strong>: stores information about clients, including customer lifetime value (CLV), client type, and contact details.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> DIMCLIENT (
+</span></span><span style="display:flex;"><span>    CLIENT_ID VARCHAR2(<span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    CLIENT_NAME VARCHAR2(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    CLV NUMBER(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    CLIENT_TYPE VARCHAR2(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    CLIENT_ADDRESS VARCHAR2(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    PHONE_NUMBER VARCHAR2(<span style="color:#ae81ff">15</span>),
+</span></span><span style="display:flex;"><span>    EMAIL_ADDRESS VARCHAR2(<span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="advantages-of-the-snowflake-schema">Advantages of the Snowflake Schema</h3>
+<p>The Snowflake Schema offers several advantages for data analysis, especially in a large-scale data warehouse like &lsquo;OfficeProducts&rsquo;:</p>
+<ul>
+<li>
+<p><em>Reduced Data Redundancy</em>: By normalising dimension tables, we reduced the repetition of data, which also reduced storage requirements and simplified data maintenance.</p>
+</li>
+<li>
+<p><em>Data Integrity</em>: With multiple, smaller tables connected via foreign keys, it was easier to maintain data consistency and integrity. Each table contains only unique and non-redundant data, reducing the risk of discrepancies.</p>
+</li>
+<li>
+<p><em>Improved Query Performance</em>: Normalised tables can optimise <strong>read performance</strong> in specific use cases, particularly when dealing with high-cardinality attributes like products or clients. Oracle&rsquo;s capabilities in handling joins ensured that query performance remained robust even when dimension tables were heavily normalised.</p>
+</li>
+</ul>
+<h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<p>While the Snowflake Schema provided many benefits, there were also challenges:</p>
+<ul>
+<li>
+<p><em>Complex Joins</em>: With more normalised tables, the number of joins in queries increased, which could impact performance. To mitigate this, we leveraged <strong>Oracle indexes</strong> to enhance retrieval speed.</p>
+</li>
+<li>
+<p><em>Maintenance Overhead</em>: Normalised tables require careful maintenance and updates, especially when new data types or dimensions are added. We addressed this through automated ETL scripts that ensured data was accurately propagated across all linked tables.</p>
+</li>
+</ul>
+<h3 id="snowflake-schema-in-practice-entity-relationship-diagram">Snowflake Schema in Practice: Entity-Relationship Diagram</h3>
+<p>The Entity-Relationship Diagram (ERD) of the Snowflake Schema visually represents the relationships between the Transactional Fact Table and its connected dimensions.
+<figure><img src="/images/project3_images/ERD.png">
+</figure>
+</p>
+<p>Each dimension table serves a specific purpose in providing context to the transactions, such as product characteristics, client demographics, or sales channel types.</p>
+<p>The ERD acts as a blueprint, guiding us in understanding the structure and relationships of our data.</p>
+<p>The central fact table is surrounded by dimension tables, connected by foreign keys that represent the logical relationships between entities.</p>
+<h3 id="summary">Summary</h3>
+<p>The <strong>Snowflake Schema</strong> was instrumental in organising the data for &lsquo;OfficeProducts&rsquo; into a highly efficient structure.</p>
+<p>By reducing redundancy, maintaining data integrity, and leveraging Oracle&rsquo;s capabilities, we created a schema that supported fast, reliable, and insightful data analysis.</p>
+<p>For those looking to build their own data warehouse, the <strong>Snowflake Schema</strong> can be a great choice, especially when dealing with complex datasets that need normalisation to manage redundancy and maintain accuracy.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

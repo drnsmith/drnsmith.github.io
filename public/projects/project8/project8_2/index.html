@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Learn how exploratory data analysis reveals patterns in PM10 levels, highlights key contributors to pollution, and prepares the dataset for advanced modelling.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project8_images/pr8.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.
+          </h1>
+          
+            <p class="f5">Learn how exploratory data analysis reveals patterns in PM10 levels, highlights key contributors to pollution, and prepares the dataset for advanced modelling.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project8_images/pr8.jpg"
+    alt="Photo by Dom J on Pexels"><figcaption>
+      <p>Photo by Dom J on Pexels</p>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Behind every successful machine learning (ML) project is a stage that is equal parts science and art: <strong>Exploratory Data Analysis (EDA)</strong>.</p>
+<p>This step is where we uncover the hidden stories in the data, identify patterns, and gain insights that inform the model-building process.</p>
+<p>When working with air pollution data, EDA plays a vital role in answering key questions:</p>
+<ul>
+<li><em>What are the main factors influencing PM10 levels?</em></li>
+<li><em>Are there seasonal or daily trends in air pollution?</em></li>
+<li><em>How do weather and traffic impact PM10 concentrations?</em></li>
+</ul>
+<p>In this blog, I’ll take you through the EDA process for the PM10 prediction project. We’ll explore the patterns and correlations in the data, visualise trends, and prepare our dataset for ML models.</p>
+<h4 id="why-pm10-understanding-the-choice-of-focus">Why PM10? Understanding the Choice of Focus</h4>
+<p>In air quality studies, both PM10 (particles ≤10 micrometers) and PM2.5 (particles ≤2.5 micrometers) are widely analysed.</p>
+<p>Each has unique health implications and sources. In this project, I focused on PM10 for several reasons, as shown in the descriptive statistics below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load your dataset containing PM10 and PM2.5 data</span>
+</span></span><span style="display:flex;"><span>file_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/.../PM2.5_PM10_merged.xlsx&#39;</span>
+</span></span><span style="display:flex;"><span>merged_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_excel(file_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Descriptive Statistics</span>
+</span></span><span style="display:flex;"><span>desc_stats <span style="color:#f92672">=</span> merged_df[[<span style="color:#e6db74">&#39;PM2.5&#39;</span>, <span style="color:#e6db74">&#39;PM10&#39;</span>]]<span style="color:#f92672">.</span>describe()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adding Standard Deviation to the table</span>
+</span></span><span style="display:flex;"><span>std_dev <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;PM2.5&#39;</span>: [merged_df[<span style="color:#e6db74">&#39;PM2.5&#39;</span>]<span style="color:#f92672">.</span>std()],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;PM10&#39;</span>: [merged_df[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>std()]
+</span></span><span style="display:flex;"><span>}, index<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;std_dev&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Concatenating the descriptive statistics and standard deviation</span>
+</span></span><span style="display:flex;"><span>result_table <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([desc_stats, std_dev])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Printing the result table</span>
+</span></span><span style="display:flex;"><span>print(result_table)
+</span></span></code></pre></div><p><strong>Key Insights</strong>:</p>
+<ul>
+<li>The average value of PM10 was higher than that of PM2.5, indicating that PM10 generally has higher concentrations in the dataset.</li>
+<li>PM10 also exhibited a higher standard deviation, suggesting more variability in its concentrations compared to PM2.5.</li>
+<li>The maximum PM10 value far exceeded that of PM2.5, showing that PM10 has a wider range of concentrations.</li>
+<li>The 25th, 50th (median), and 75th percentiles of PM10 were consistently higher than those of PM2.5, confirming higher concentrations across the dataset.</li>
+</ul>
+<p><strong>Why PM10 Matters More in This Case</strong>:</p>
+<ul>
+<li>Given PM10&rsquo;s greater variability and concentration, it serves as a better target for ML models aiming to predict pollution spikes.</li>
+<li>Additionally, PM10’s larger particles originate from diverse sources, including construction, vehicle emissions, and natural phenomena like dust storms, making it an important metric for urban air quality monitoring.</li>
+</ul>
+<p>By analySing PM10, therefore, I address a broader range of pollution sources, providing actionable insights for mitigating air quality issues in urban areas.</p>
+<h3 id="1-starting-with-the-basics">1. Starting with the Basics</h3>
+<p>The first step in EDA is getting a sense of the data. After cleaning the dataset in the pre-processing phase, I began by summarising the key statistics and visualising the distributions of variables.</p>
+<h4 id="summary-statistics">Summary Statistics</h4>
+<p>Using <code>Pandas</code>, I calculated the mean, median, standard deviation, and other basic metrics for PM10 and other relevant features like temperature, wind speed, and traffic volume.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display summary statistics</span>
+</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>describe()
+</span></span></code></pre></div><p>This revealed a lot about the data:</p>
+<ul>
+<li>PM10 levels varied significantly, with occasional spikes that hinted at outliers or pollution events.</li>
+<li>Weather variables like temperature and wind speed showed consistent ranges, confirming the reliability of the sensors.</li>
+</ul>
+<h3 id="2-visualising-pm10-levels">2. Visualising PM10 Levels</h3>
+<ul>
+<li><em>Histogram of PM10 Levels</em></li>
+</ul>
+<p>To understand the distribution of PM10 levels, I plotted a histogram. This helped identify whether the data was skewed or normally distributed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plotting histogram of PM10 levels</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>hist(data[<span style="color:#e6db74">&#39;PM10&#39;</span>], bins<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, edgecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Distribution of PM10 Levels&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;PM10&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Frequency&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>The histogram revealed a right-skewed distribution, meaning that while most pollution levels were moderate, there were occasional high pollution events. These spikes required further investigation to determine their causes.</p>
+<p><em>Time-Series Plot</em></p>
+<p>Next, I plotted PM10 levels over time to identify any trends or recurring patterns.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plotting PM10 over time</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(data[<span style="color:#e6db74">&#39;Timestamp&#39;</span>], data[<span style="color:#e6db74">&#39;PM10&#39;</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;PM10 Levels Over Time&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Time&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;PM10&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>This visualisation highlighted some clear trends:</p>
+<ul>
+<li><em>Seasonal variations</em>: PM10 levels tended to rise during the winter months, likely due to heating systems and stagnant air.</li>
+<li><em>Daily fluctuations</em>: There were spikes in the morning and evening, coinciding with rush hour traffic.</li>
+</ul>
+<h3 id="3-correlation-analysis-the-key-to-pm10-insights">3. Correlation Analysis: The Key to PM10 Insights</h3>
+<p>A major highlight of the EDA process was the correlation heatmap, which provided a comprehensive look at how PM10 is related to other variables. The heatmap below shows the correlations among pollutants, weather variables, and PM10 levels.</p>
+<figure><img src="/images/project8_images/heatmap.png">
+</figure>
+
+<p><strong>Interpreting the Heatmap</strong></p>
+<ul>
+<li>Strong Correlations with PM10:
+&ndash; Sulfur dioxide emissions (SO2)strongly correlate with PM10, likely due to shared sources like industrial activities.</li>
+</ul>
+<p>&ndash; Traffic-Related Pollutants (NO2, CO): Nitrogen dioxide and carbon monoxide showed moderate positive correlations, reflecting their role in traffic-related emissions.</p>
+<ul>
+<li>
+<p>Negative Correlations:</p>
+</li>
+<li>
+<p><em>Wind Speed</em>: As expected, wind speed negatively correlates with PM10. High winds disperse pollutants, lowering concentrations.</p>
+</li>
+<li>
+<p><em>Seasonality</em>: Certain gases like methane (CH4) showed variability that indirectly affected PM10 patterns.</p>
+</li>
+<li>
+<p>Multicollinearity:</p>
+</li>
+<li>
+<p>Some variables, like NH3 and N2O, are highly correlated with each other, suggesting they may represent similar sources or processes.</p>
+</li>
+</ul>
+<p>The heatmap also helped identify which variables might be redundant or less informative, guiding the feature selection process for modeling.</p>
+<h3 id="4-uncovering-patterns-and-trends">4. Uncovering Patterns and Trends</h3>
+<h4 id="daily-and-seasonal-trends">Daily and Seasonal Trends</h4>
+<p>To dive deeper into how PM10 levels varied over time, I broke the data down into daily and monthly averages.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Grouping data by month and day</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Month&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Timestamp&#39;</span>]<span style="color:#f92672">.</span>dt<span style="color:#f92672">.</span>month
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;DayOfWeek&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Timestamp&#39;</span>]<span style="color:#f92672">.</span>dt<span style="color:#f92672">.</span>dayofweek
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate monthly and daily averages</span>
+</span></span><span style="display:flex;"><span>monthly_avg <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Month&#39;</span>)[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>mean()
+</span></span><span style="display:flex;"><span>daily_avg <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;DayOfWeek&#39;</span>)[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>mean()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plotting</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(monthly_avg, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;o&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Monthly Average PM10 Levels&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Month&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;PM10&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>This revealed two important trends:</p>
+<ul>
+<li><em>Higher pollution in winter months</em>: Likely due to heating emissions and stable atmospheric conditions that trap pollutants near the ground.</li>
+<li><em>Weekly patterns</em>: PM10 levels were higher on weekdays compared to weekends, reflecting traffic-related emissions.</li>
+</ul>
+<h4 id="scatter-plots-for-key-relationships">Scatter Plots for Key Relationships</h4>
+<p>Scatter plots helped visualise relationships between PM10 and other variables.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Scatter plot of PM10 vs Traffic Volume</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(data[<span style="color:#e6db74">&#39;TrafficVolume&#39;</span>], data[<span style="color:#e6db74">&#39;PM10&#39;</span>], alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;PM10 vs Traffic Volume&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Traffic Volume&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;PM10&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>The scatter plot showed a clear upward trend, confirming that traffic is a major contributor to pollution levels.</p>
+<h3 id="5-feature-selection-insights">5. Feature Selection Insights</h3>
+<p>EDA isn’t just about understanding the data; it also informs which features to include in the model. From my analysis, the following features stood out as critical for predicting PM10 levels:</p>
+<ul>
+<li><em>Traffic Volume</em>: A strong direct correlation with PM10.</li>
+<li><em>Temperature</em>: Indirectly affects pollution by influencing atmospheric conditions.</li>
+<li><em>Wind Speed</em>: Disperses pollutants, reducing PM10 levels.</li>
+<li><em>Time-Based Features</em>: Seasonal and daily trends are essential for capturing recurring patterns.</li>
+</ul>
+<h3 id="6-challenges-encountered-during-eda">6. Challenges Encountered During EDA</h3>
+<p>While EDA is a powerful tool, it’s not without challenges:</p>
+<ul>
+<li><strong>Handling High Variability</strong>: Pollution levels can vary widely based on external factors like geography or sudden weather changes, making it difficult to generalise trends.</li>
+<li><strong>Balancing Signal and Noise</strong>: Some patterns in the data may be statistical noise, not meaningful trends.</li>
+<li><strong>Data Gaps</strong>: Despite cleaning efforts, some gaps remained, particularly for certain monitoring stations.</li>
+</ul>
+<h4 id="why-eda-matters">Why EDA Matters</h4>
+<p>EDA isn’t just a box to tick off before modeling—it’s where you understand your data’s story.</p>
+<p>For this PM10 prediction project, EDA uncovered the key drivers of air pollution, highlighted patterns worth modeling, and ensured the dataset was ready for machine learning algorithms.</p>
+<p>By the end of the EDA phase, I had a clear roadmap for the next steps. With the insights gained, I could confidently move forward to build models that predict PM10 levels with accuracy and reliability.</p>
+<h3 id="conclusion-from-data-to-insights">Conclusion: From Data to Insights</h3>
+<p>EDA bridges the gap between raw data and actionable insights.</p>
+<p>For this project, it transformed thousands of rows of PM10 measurements into meaningful patterns, showing us how pollution levels change over time and what factors contribute most to poor air quality.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

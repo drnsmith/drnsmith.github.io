@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MapReduce on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/mapreduce/</link>
+    <description>Recent content in MapReduce on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Aug 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/mapreduce/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis.</title>
+      <link>http://localhost:1313/projects/project4/project4_1/</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_1/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts.&lt;/p&gt;&#xA;&lt;p&gt;Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment. This blog dissects a technical project that analysed tweets related to NASDAQ-listed companies, including giants like Apple, Tesla, and Microsoft, over a five-year span (2015–2020).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Scalling Sentiment Analysis with MapReduce.</title>
+      <link>http://localhost:1313/projects/project4/project4_2/</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_2/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern.&lt;/p&gt;&#xA;&lt;p&gt;To address this, we employed &lt;strong&gt;MapReduce&lt;/strong&gt;, a distributed data processing model that enables parallel computation across multiple nodes.&lt;/p&gt;&#xA;&lt;p&gt;This blog walks through the implementation of &lt;strong&gt;MapReduce&lt;/strong&gt; for sentiment analysis, focusing on how it handles data at scale. We&amp;rsquo;ll include examples of mappers and reducers with Python code to explain the workflow.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Visualising Market Sentiments with Hive and Kibana.</title>
+      <link>http://localhost:1313/projects/project4/project4_3/</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_3/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data visualisation bridges the gap between raw data and actionable insights.&lt;/p&gt;&#xA;&lt;p&gt;After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers.&lt;/p&gt;&#xA;&lt;p&gt;Using &lt;strong&gt;Hive&lt;/strong&gt; for data aggregation and &lt;strong&gt;Kibana&lt;/strong&gt; for visualisation, we uncovered trends in public discourse around NASDAQ companies.&lt;/p&gt;&#xA;&lt;p&gt;This blog walks through the process of aggregating data with &lt;strong&gt;Hive&lt;/strong&gt; and creating interactive dashboards in &lt;strong&gt;Kibana&lt;/strong&gt;, complete with code snippets and visual examples.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies.</title>
+      <link>http://localhost:1313/projects/project4/project4_4/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_4/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;While numerical analysis reveals overarching trends, visual representations like &lt;strong&gt;word clouds&lt;/strong&gt; provide an intuitive way to explore the most frequently used terms in a dataset.&lt;/p&gt;&#xA;&lt;p&gt;For this project, word clouds were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. These insights complemented the sentiment analysis, offering a richer understanding of public opinion.&lt;/p&gt;&#xA;&lt;p&gt;This blog covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Latent Themes in Tweets: Topic Modelling with LDA.</title>
+      <link>http://localhost:1313/projects/project4/project4_5/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_5/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. &lt;strong&gt;Latent Dirichlet Allocation (LDA)&lt;/strong&gt;, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.&lt;/p&gt;&#xA;&lt;p&gt;In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Sentiment Trends: Insights by Company and Year.</title>
+      <link>http://localhost:1313/projects/project4/project4_6/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_6/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this blog, we analyze sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualized longitudinal sentiment patterns, highlighting their value for investors and analysts.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;step-1-aggregating-sentiment-by-date&#34;&gt;&lt;strong&gt;Step 1: Aggregating Sentiment by Date&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;p&gt;The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 7. Overcoming Challenges in Sentiment Analysis.</title>
+      <link>http://localhost:1313/projects/project4/project4_7/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/project4_7/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.&lt;/p&gt;&#xA;&lt;h3 id=&#34;key-challenges-in-sentiment-analysis&#34;&gt;Key Challenges in Sentiment Analysis&lt;/h3&gt;&#xA;&lt;h4 id=&#34;1-sarcasm-and-context-dependency&#34;&gt;1. Sarcasm and Context Dependency&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tweets like &lt;em&gt;&amp;ldquo;Oh great, another Tesla delay. Just what we needed!&amp;rdquo;&lt;/em&gt; express negative sentiment despite containing positive words like &amp;ldquo;great.&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;Contextual understanding is essential for accurate classification.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;em&gt;Solution&lt;/em&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sentiment Speaks: Analysing Twitter Discourse on NASDAQ Companies</title>
+      <link>http://localhost:1313/projects/project4/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

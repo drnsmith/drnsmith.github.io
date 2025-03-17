@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 2. From Words to Vectors: Embedding Techniques in Recipe Analysis. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Discover how text embedding techniques like TF-IDF and Word2Vec transform recipes into meaningful data for ML. This blog I explore how these methods unlock patterns, enhance recommendations, and revolutionise how we analyse textual data in the culinary world.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project2_images/pr2.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 2. From Words to Vectors: Embedding Techniques in Recipe Analysis.
+          </h1>
+          
+            <p class="f5">Discover how text embedding techniques like TF-IDF and Word2Vec transform recipes into meaningful data for ML. This blog I explore how these methods unlock patterns, enhance recommendations, and revolutionise how we analyse textual data in the culinary world.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project2_images/pr2.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In a world driven by data, text is the unsung hero that powers everything from search engines to recommendation systems. For a data scientist, textual data isn&rsquo;t just words—it&rsquo;s a goldmine waiting to be unlocked. Recipes, for instance, are more than a collection of instructions. They&rsquo;re narratives of culture, flavour profiles, and culinary creativity. But to analyse them computationally, we must first transform these words into something machines can process: <em>vectors</em>. In this article, I’ll dive into how text embedding techniques like <strong>TF-IDF</strong> and <strong>Word2Vec</strong> can be applied to recipe data. By converting recipes into meaningful numerical representations, we uncover patterns and relationships hidden in the data.</p>
+<h3 id="the-challenge-text-to-numbers">The Challenge: Text to Numbers</h3>
+<p>At its core, Natural Language Processing (NLP) involves converting unstructured text into structured data. Machines don’t understand words the way we do—they understand numbers. Hence, embedding techniques are crucial in bridging this gap. In this project, I leveraged a combination of <strong>TF-IDF</strong> and <strong>Word2Vec</strong> to transform raw text into feature-rich vectors.</p>
+<h3 id="tf-idf-the-foundation-of-text-representation">TF-IDF: The Foundation of Text Representation</h3>
+<p>TF-IDF, or <strong>Term Frequency-Inverse Document Frequency</strong>, is a statistical measure that captures the importance of a word in a document relative to a collection of documents (corpus). It’s calculated as:</p>
+<p>TF-IDF(w) = TF(w) × IDF(w)</p>
+<p>Where:</p>
+<ul>
+<li><strong>TF(w)</strong>: How often the word appears in the document.</li>
+<li><strong>IDF(w)</strong>: The inverse frequency of the word across all documents in the corpus.</li>
+</ul>
+<p>In recipe analysis, TF-IDF helped me identify key ingredients or instructions that define a particular recipe while discounting commonly used words like &ldquo;mix&rdquo; or &ldquo;add.&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample corpus of recipe instructions</span>
+</span></span><span style="display:flex;"><span>corpus <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Preheat oven to 350 degrees. Mix flour and sugar.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Boil water and add pasta. Cook until tender.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Chop onions and sauté with garlic in olive oil.&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise TF-IDF Vectorizer</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(stop_words<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;english&#39;</span>)
+</span></span><span style="display:flex;"><span>tfidf_matrix <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(corpus)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># View TF-IDF Scores</span>
+</span></span><span style="display:flex;"><span>feature_names <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>get_feature_names_out()
+</span></span><span style="display:flex;"><span>tfidf_scores <span style="color:#f92672">=</span> tfidf_matrix<span style="color:#f92672">.</span>toarray()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print the results</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> doc_idx, doc_scores <span style="color:#f92672">in</span> enumerate(tfidf_scores):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Document </span><span style="color:#e6db74">{</span>doc_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> word_idx, score <span style="color:#f92672">in</span> enumerate(doc_scores):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> score <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;  </span><span style="color:#e6db74">{</span>feature_names[word_idx]<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">:</span><span style="color:#e6db74">.4f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>This output reveals the weight of each term in the recipes, allowing us to pinpoint ingredients or steps that differentiate one recipe from another.</p>
+<h3 id="word2vec-capturing-semantic-relationships">Word2Vec: Capturing Semantic Relationships</h3>
+<p>While TF-IDF treats each word as independent, <strong>Word2Vec</strong> takes it a step further by capturing the semantic relationships between words. Using neural networks, Word2Vec maps words to dense vector spaces where semantically similar words are closer together. For example:</p>
+<ul>
+<li>“Flour” and “sugar” might have similar embeddings because they frequently appear together in baking recipes.</li>
+<li>“Boil” and “sauté” might cluster together due to their shared context in cooking.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.models <span style="color:#f92672">import</span> Word2Vec
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Tokenized corpus of recipe instructions</span>
+</span></span><span style="display:flex;"><span>tokenized_corpus <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;preheat&#34;</span>, <span style="color:#e6db74">&#34;oven&#34;</span>, <span style="color:#e6db74">&#34;mix&#34;</span>, <span style="color:#e6db74">&#34;flour&#34;</span>, <span style="color:#e6db74">&#34;sugar&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;boil&#34;</span>, <span style="color:#e6db74">&#34;water&#34;</span>, <span style="color:#e6db74">&#34;add&#34;</span>, <span style="color:#e6db74">&#34;pasta&#34;</span>, <span style="color:#e6db74">&#34;cook&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;chop&#34;</span>, <span style="color:#e6db74">&#34;onions&#34;</span>, <span style="color:#e6db74">&#34;sauté&#34;</span>, <span style="color:#e6db74">&#34;garlic&#34;</span>, <span style="color:#e6db74">&#34;olive&#34;</span>, <span style="color:#e6db74">&#34;oil&#34;</span>]
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train Word2Vec model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Word2Vec(sentences<span style="color:#f92672">=</span>tokenized_corpus, vector_size<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Get vector for the word &#34;sugar&#34;</span>
+</span></span><span style="display:flex;"><span>vector_sugar <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>wv[<span style="color:#e6db74">&#39;sugar&#39;</span>]
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Vector for &#39;sugar&#39;:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>vector_sugar<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Find similar words to &#34;sugar&#34;</span>
+</span></span><span style="display:flex;"><span>similar_words <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>wv<span style="color:#f92672">.</span>most_similar(<span style="color:#e6db74">&#34;sugar&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Words similar to &#39;sugar&#39;: </span><span style="color:#e6db74">{</span>similar_words<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>This approach provides richer, context-aware representations that allow us to group recipes by style, ingredient similarity, or preparation method.</p>
+<h3 id="clustering-recipes-using-word-embeddings">Clustering Recipes Using Word Embeddings</h3>
+<p>Once I transformed recipe text into vectors, I can perform clustering to identify patterns. For instance, recipes with similar ingredients or cooking techniques naturally group together. To visualise these clusters, I used <code>t-SNE (t-distributed Stochastic Neighbor Embedding)</code>, a technique for reducing high-dimensional data into two dimensions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.manifold <span style="color:#f92672">import</span> TSNE
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reduce Word2Vec embeddings to 2D for visualization</span>
+</span></span><span style="display:flex;"><span>word_vectors <span style="color:#f92672">=</span> [model<span style="color:#f92672">.</span>wv[word] <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>wv<span style="color:#f92672">.</span>index_to_key]
+</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>reduced_vectors <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(word_vectors)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot the results</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, word <span style="color:#f92672">in</span> enumerate(model<span style="color:#f92672">.</span>wv<span style="color:#f92672">.</span>index_to_key):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(reduced_vectors[i, <span style="color:#ae81ff">0</span>], reduced_vectors[i, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>text(reduced_vectors[i, <span style="color:#ae81ff">0</span>], reduced_vectors[i, <span style="color:#ae81ff">1</span>], word)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;t-SNE Visualization of Word Embeddings&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="insights-from-recipe-embeddings">Insights from Recipe Embeddings</h3>
+<p>By analysing the clustered embeddings, I uncovered:</p>
+<ul>
+<li>Recipes grouped by cuisine type (e.g., Italian pasta dishes vs. French pastries).</li>
+<li>Ingredients that frequently co-occur, revealing flavor pairings.
+Variations in cooking styles, such as baking vs. frying.</li>
+</ul>
+<p>These insights not only improve recipe recommendations but also pave the way for personalized cooking guides.</p>
+<h3 id="challenges-and-future-directions">Challenges and Future Directions</h3>
+<p>While embedding techniques unlock valuable insights, they come with challenges:</p>
+<ul>
+<li><em>Computational Costs</em>: Training Word2Vec or similar models requires significant resources.</li>
+<li><em>Contextual Limitations</em>: While static embeddings like Word2Vec are powerful, they don’t capture word meanings in different contexts (e.g., “oil” as an ingredient vs. “oil” as a verb).</li>
+</ul>
+<p>Future work could explore contextual embeddings like <code>BERT</code> to overcome these limitations and integrate image data for a multimodal analysis of recipes.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Text embedding techniques are transforming how we analyse unstructured data. In the realm of recipe analysis, they allowed me to move beyond simple keyword matching to uncover deeper patterns and relationships. By turning words into vectors, I made text machine-readable and also unlocked its full potential for discovery and innovation. Whether you&rsquo;re a data scientist working with textual data or a curious foodie, embedding techniques offer a new lens to explore the culinary world.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

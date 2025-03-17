@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 3. Visualising Market Sentiments with Hive and Kibana. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog focuses on how Hive and Kibana were utilised to aggregate and visualise sentiment analysis results. By integrating big data tools with visual dashboards, the project uncovered actionable insights about public discourse on NASDAQ companies.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project4_images/pr4.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 3. Visualising Market Sentiments with Hive and Kibana.
+          </h1>
+          
+            <p class="f5">This blog focuses on how Hive and Kibana were utilised to aggregate and visualise sentiment analysis results. By integrating big data tools with visual dashboards, the project uncovered actionable insights about public discourse on NASDAQ companies.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Data visualisation bridges the gap between raw data and actionable insights.</p>
+<p>After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers.</p>
+<p>Using <strong>Hive</strong> for data aggregation and <strong>Kibana</strong> for visualisation, we uncovered trends in public discourse around NASDAQ companies.</p>
+<p>This blog walks through the process of aggregating data with <strong>Hive</strong> and creating interactive dashboards in <strong>Kibana</strong>, complete with code snippets and visual examples.</p>
+<h3 id="step-1-aggregating-data-with-hive">Step 1: Aggregating Data with Hive</h3>
+<p>Hive simplifies querying and analysing large datasets stored in distributed systems like <strong>Hadoop</strong>. For this project, Hive was used to summarise sentiment counts for each company.</p>
+<h4 id="hive-query-sentiment-aggregation">Hive Query: Sentiment Aggregation</h4>
+<p>Below is the <code>HiveQL</code> query to count positive, neutral, and negative tweets for each company:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> sentiment_counts <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> 
+</span></span><span style="display:flex;"><span>    company_ticker,
+</span></span><span style="display:flex;"><span>    sentiment,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">count</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> 
+</span></span><span style="display:flex;"><span>    tweets_sentiment
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> 
+</span></span><span style="display:flex;"><span>    company_ticker, sentiment;
+</span></span></code></pre></div><h4 id="explanation">Explanation:</h4>
+<p><code>tweets_sentiment</code>: A table containing processed tweet data with columns for company ticker and sentiment.</p>
+<p><em>COUNT(</em>)*: Counts the number of tweets for each sentiment category.</p>
+<p><em>GROUP BY</em>: Groups the data by company ticker and sentiment.</p>
+<p>The resulting table, <code>sentiment_counts</code>, provides a concise summary of sentiment distribution for each company.</p>
+<h3 id="step-2-exporting-data-for-visualisation">Step 2: Exporting Data for Visualisation</h3>
+<p>Once the aggregated data was prepared, it was exported from Hive in a format compatible with Kibana (e.g., <code>JSON</code> or <code>CSV</code>). Here’s how the export process was handled:</p>
+<h4 id="hive-export-command">Hive Export Command</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> OVERWRITE DIRECTORY <span style="color:#e6db74">&#39;/path/to/output&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ROW</span> FORMAT DELIMITED
+</span></span><span style="display:flex;"><span>FIELDS TERMINATED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;,&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sentiment_counts;
+</span></span></code></pre></div><p>The exported file was then ingested into <strong>Elasticsearch</strong>, the backend for Kibana, enabling real-time visualisation.</p>
+<h3 id="step-3-creating-dashboards-in-kibana">Step 3: Creating Dashboards in Kibana</h3>
+<p><em>Kibana</em> provides a powerful interface for building interactive dashboards. For this project, we used Kibana to create:</p>
+<ul>
+<li><em>Pie Charts</em>: To visualise sentiment distribution by company.</li>
+<li><em>Bar Charts</em>: For comparing sentiments across companies.</li>
+<li><em>Heatmaps</em>: To show sentiment trends over time.
+<figure><img src="/images/project4_images/3.png">
+</figure>
+
+<figure><img src="/images/project4_images/4.png">
+</figure>
+</li>
+</ul>
+<h3 id="results">Results</h3>
+<p>Visualisations helped uncover key insights:</p>
+<ul>
+<li><em>Tesla&rsquo;s Polarising Sentiment</em>: Tesla had the highest positive and negative sentiments, reflecting its polarising reputation.</li>
+<li><em>Neutral Sentiments Dominate</em>: Across companies, neutral sentiments were the most common, indicating informational content.</li>
+<li><em>Temporal Trends</em>: Peaks in sentiment activity corresponded to significant events like product launches or earnings calls.</li>
+</ul>
+<h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<ul>
+<li><em>Data Volume</em>: Large datasets required optimised queries in Hive.</li>
+</ul>
+<p><em>Solution</em>: Use partitioning and indexing to speed up queries.</p>
+<ul>
+<li><em>Visualisation Complexity</em>: Balancing detail and clarity in dashboards.</li>
+</ul>
+<p><em>Solution</em>: Iteratively refine visualisations based on user feedback.</p>
+<ul>
+<li><em>Integration with Elasticsearch</em>: Ensuring smooth ingestion of Hive exports.</li>
+</ul>
+<p><em>Solution</em>: Validate data formats and field mappings before ingestion.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>By combining <strong>Hive</strong> for data aggregation and <strong>Kibana</strong> for visualisation, we transformed millions of tweets into meaningful insights. The interactive dashboards allowed stakeholders to explore sentiment trends and make data-driven decisions with ease.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

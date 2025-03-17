@@ -1,0 +1,11 @@
+<nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      {{ range .Site.Menus.main }}
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="{{ .URL }}">{{ .Name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+  
+  

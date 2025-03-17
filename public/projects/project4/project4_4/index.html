@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores how word clouds were used to gain qualitative insights from Twitter data. By focusing on frequently used words in positive, neutral, and negative tweets, the project added context to sentiment analysis, revealing key themes in public opinion on NASDAQ companies.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project4_images/pr4.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies.
+          </h1>
+          
+            <p class="f5">This blog explores how word clouds were used to gain qualitative insights from Twitter data. By focusing on frequently used words in positive, neutral, and negative tweets, the project added context to sentiment analysis, revealing key themes in public opinion on NASDAQ companies.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>While numerical analysis reveals overarching trends, visual representations like <strong>word clouds</strong> provide an intuitive way to explore the most frequently used terms in a dataset.</p>
+<p>For this project, word clouds were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. These insights complemented the sentiment analysis, offering a richer understanding of public opinion.</p>
+<p>This blog covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.</p>
+<h3 id="step-1-preparing-data-for-word-clouds">Step 1: Preparing Data for Word Clouds</h3>
+<p>The first step in creating word clouds is to extract the text data corresponding to each sentiment category (positive, neutral, negative). Using the cleaned tweets from our dataset, we grouped text by sentiment.</p>
+<h4 id="python-code-grouping-tweets-by-sentiment">Python Code: Grouping Tweets by Sentiment</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample DataFrame with cleaned tweets and sentiments</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;cleaned_tweet&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tesla new model amazing&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;apple stock overvalued&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tesla cars future&#34;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sentiment&#34;</span>: [<span style="color:#e6db74">&#34;positive&#34;</span>, <span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#e6db74">&#34;positive&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Group tweets by sentiment</span>
+</span></span><span style="display:flex;"><span>grouped_tweets <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#34;sentiment&#34;</span>)[<span style="color:#e6db74">&#34;cleaned_tweet&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(x))<span style="color:#f92672">.</span>reset_index()
+</span></span><span style="display:flex;"><span>print(grouped_tweets)
+</span></span></code></pre></div><h3 id="step-2-generating-word-clouds">Step 2: Generating Word Clouds</h3>
+<p>Using the <code>WordCloud</code> library in Python, we generated word clouds for each sentiment. This visualised the most frequently mentioned words, with their size reflecting their frequency in the text.</p>
+<h4 id="python-code-creating-word-clouds">Python Code: Creating Word Clouds</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> wordcloud <span style="color:#f92672">import</span> WordCloud
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_word_cloud</span>(text, title):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Generates and displays a word cloud.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    text (str): Input text for the word cloud.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    title (str): Title of the word cloud.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    wordcloud <span style="color:#f92672">=</span> WordCloud(width<span style="color:#f92672">=</span><span style="color:#ae81ff">800</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">400</span>, background_color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>)<span style="color:#f92672">.</span>generate(text)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(wordcloud, interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bilinear&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#34;off&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(title, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate word clouds for each sentiment</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _, row <span style="color:#f92672">in</span> grouped_tweets<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>    generate_word_cloud(row[<span style="color:#e6db74">&#34;cleaned_tweet&#34;</span>], <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Word Cloud for </span><span style="color:#e6db74">{</span>row[<span style="color:#e6db74">&#39;sentiment&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> Tweets&#34;</span>)
+</span></span></code></pre></div><p><figure><img src="/images/project4_images/1.png">
+</figure>
+
+<figure><img src="/images/project4_images/2.png">
+</figure>
+</p>
+<h4 id="step-3-insights-from-word-clouds">Step 3: Insights from Word Clouds</h4>
+<p><strong>Positive Tweets</strong></p>
+<ul>
+<li>Common words: &ldquo;amazing,&rdquo; &ldquo;future,&rdquo; &ldquo;innovation.&rdquo;</li>
+<li>Insight: Positive tweets often celebrated new products, innovative technology, and optimistic visions.</li>
+</ul>
+<p><strong>Negative Tweets</strong></p>
+<ul>
+<li>Common words: &ldquo;overvalued,&rdquo; &ldquo;disappointed,&rdquo; &ldquo;delay.&rdquo;</li>
+<li>Insight: Negative tweets highlighted dissatisfaction with stock valuations, product delays, or unmet expectations.</li>
+</ul>
+<p><strong>Neutral Tweets</strong></p>
+<ul>
+<li>Common words: &ldquo;earnings,&rdquo; &ldquo;release,&rdquo; &ldquo;announcement.&rdquo;</li>
+<li>Insight: Neutral tweets focused on factual updates, such as financial performance and product releases.</li>
+</ul>
+<h4 id="impact-of-word-clouds">Impact of Word Clouds</h4>
+<p>Word clouds added a qualitative layer to our analysis by:</p>
+<ul>
+<li><em>Revealing Context</em>: Highlighting the topics driving positive or negative sentiments.</li>
+<li><em>Identifying Trends</em>: Frequently mentioned terms pointed to recurring themes, such as product launches or stock discussions.</li>
+<li><em>Enhancing Interpretability</em>: Providing a visual summary of large text datasets.</li>
+</ul>
+<h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<ul>
+<li><em>Overwhelming Common Words</em>: Words like &ldquo;Tesla&rdquo; or &ldquo;Apple&rdquo; dominated the clouds.</li>
+</ul>
+<p><em>Solution</em>: Use custom stop word lists to filter out company names.</p>
+<ul>
+<li><em>Ambiguity in Terms</em>: Words like &ldquo;delay&rdquo; could have different connotations depending on context.</li>
+</ul>
+<p><em>Solution</em>: Combine word clouds with topic modelling for deeper insights.</p>
+<ul>
+<li><em>Limited Detail</em>: Word clouds alone do not convey the full sentiment behind the words.</li>
+</ul>
+<p><em>Solution</em>: Use them as a complementary tool alongside quantitative analysis.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Word clouds proved to be a valuable tool for decoding public opinion, offering intuitive and impactful visualisations of frequently mentioned terms. By pairing word clouds with sentiment-specific filtering, we gained additional context to our quantitative findings.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

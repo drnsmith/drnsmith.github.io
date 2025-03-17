@@ -1,0 +1,36 @@
+{{ define "main" }}
+  <article class="pa3 pa4-ns">
+    <section class="tc">
+      <h1 class="f2">Projects</h1>
+      <p class="f4 lh-copy measure center">
+        This page shows the projects I worked on. Click on each to learn more.
+      </p>
+    </section>
+
+    <!-- Projects Grid (Newest First) -->
+    <section class="flex flex-wrap justify-center">
+      {{ range .Pages.ByDate.Reverse }}  
+        <div class="w-100 w-30-l pa2">
+          <div class="bg-light-gray pa3 br3 shadow-4">
+            {{ if .Params.image }}
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" class="w-100 br2 mb3">
+            {{ end }}
+            <h2 class="f4">{{ .Title }}</h2>
+            <p class="f6">
+              {{ .Params.description | default "No description available." }}
+            </p>
+            <div class="mt3">
+              <a href="{{ .Permalink }}" 
+                 class="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib dark-gray">
+                Read More
+              </a>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    </section>
+  </article>
+{{ end }}
+
+
+

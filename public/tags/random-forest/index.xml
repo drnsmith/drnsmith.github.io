@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Random Forest on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/random-forest/</link>
+    <description>Recent content in Random Forest on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 Apr 2022 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/random-forest/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Building an AI-Powered Recipe Difficulty Classifier: A Journey Through NLP and ML.</title>
+      <link>http://localhost:1313/projects/project1/project1_1/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/project1_1/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge was to develop a ML model that classifies recipes into four difficulty levels—&lt;strong&gt;Easy, Medium, Hard, and Very Hard&lt;/strong&gt;—using &lt;strong&gt;Natural Language Processing (NLP)&lt;/strong&gt; and &lt;strong&gt;Machine Learning (ML)&lt;/strong&gt;. In this post, I focus on &lt;strong&gt;data collection, cleaning, and pre-processing&lt;/strong&gt;, which lay the foundation for training a robust ML model.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Exploring Feature Engineering for Recipe Classification: How AI Understands Cooking Complexity.</title>
+      <link>http://localhost:1313/projects/project1/project1_2/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/project1_2/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In ML, features are measurable characteristics or properties that help a model make predictions. In recipe classification, features such as ingredient complexity, cooking techniques, and step count become powerful predictors of recipe difficulty. Feature engineering helps us take unstructured data, such as recipe instructions, and turn it into structured data that the model can understand.&lt;/p&gt;&#xA;&lt;p&gt;For example, a recipe with advanced ingredients (like &amp;ldquo;saffron&amp;rdquo; or &amp;ldquo;truffle oil&amp;rdquo;) is likely to be more challenging than one with everyday items like &amp;ldquo;salt&amp;rdquo; or &amp;ldquo;flour.&amp;rdquo; Similarly, recipes that involve techniques like &amp;ldquo;blanching&amp;rdquo; or &amp;ldquo;flambé&amp;rdquo; tend to require more skill than those involving basic steps like &amp;ldquo;stirring.&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 3. Choosing the Right Model: Training and Evaluating an AI Recipe Difficulty Classifier</title>
+      <link>http://localhost:1313/projects/project1/project1_3/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/project1_3/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In the previous post, I explored how feature engineering transforms raw recipe data into valuable insights for predicting recipe difficulty. With features like ingredient complexity, technique identification, and step count, my dataset is now ready for the next stage: selecting, training, and evaluating a machine learning model that can classify recipes by difficulty level. Model selection is a crucial step in building a successful classifier. In this post, I’ll walk you through the models I tested, the training process, and the metrics I used to evaluate performance.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Tackling Overfitting in Recipe Difficulty Classification: Lessons Learned and Solutions.</title>
+      <link>http://localhost:1313/projects/project1/project1_4/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/project1_4/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;As I progressed with training my AI-powered recipe classifier, I noticed a common issue creeping in: &lt;em&gt;overfitting&lt;/em&gt;, which happens when a model performs well on the training data but struggles to generalise to new, unseen data. In ML, this can result in poor accuracy on validation or test data. In this blog, I’ll walk you through how I identified overfitting in my model and the steps I took to address it. I’ll also explain the visual clues from training and validation loss/accuracy graphs that helped me recognise this issue.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Interpreting the AI Recipe Classifier with LIME: Making ML Transparent.</title>
+      <link>http://localhost:1313/projects/project1/project1_5/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/project1_5/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In building a recipe difficulty classifier, I wanted to make sure the model&amp;rsquo;s predictions weren’t just accurate but also understandable. For anyone working with ML, especially in fields where transparency is key, model interpretability is crucial. This is where LIME (Local Interpretable Model-Agnostic Explanations) comes in.&#xA;In this blog post, I’ll walk you through how I used LIME to make sense of my classifier’s decisions, ensuring that its predictions are grounded and explainable.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Deploying an AI Model for Recipe Classification: Bringing the Classifier to Life.</title>
+      <link>http://localhost:1313/projects/project1/project1_6/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/project1_6/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Once a model that classifies recipes by difficulty level is built and trained , the next challenge is deploying it into a real-world environment. In this blog, we’ll cover the process of moving our trained model from a development setting to a production environment. Deployment enables the model to make predictions and serve users in real-time, opening up possibilities for applications like recipe recommendation engines, cooking assistant apps, or culinary content platforms.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Difficulty Classification</title>
+      <link>http://localhost:1313/projects/project1/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

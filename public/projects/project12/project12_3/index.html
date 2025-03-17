@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 3. ReLU vs Sigmoid: Which Activation Function Wins on Fashion MNIST? | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Compare the performance of ReLU and Sigmoid activation functions in neural networks. Discover the strengths and weaknesses of each through practical experiments.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project12_images/pr12.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 3. ReLU vs Sigmoid: Which Activation Function Wins on Fashion MNIST?
+          </h1>
+          
+            <p class="f5">Compare the performance of ReLU and Sigmoid activation functions in neural networks. Discover the strengths and weaknesses of each through practical experiments.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project12_images/pr12.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>When building neural networks (NNs), the activation function you choose can make or break your model. It’s the part of the network that decides whether a neuron &ldquo;fires&rdquo; and passes information forward.</p>
+<p>For years, Sigmoid was the go-to activation function, but then ReLU came along, revolutionising deep learning with its simplicity and effectiveness. But how do these activation functions stack up against each other in practice?</p>
+<p>In this blog, we’ll:</p>
+<ul>
+<li>Explore the key differences between ReLU and Sigmoid.</li>
+<li>Compare their impact on training dense neural networks using Fashion MNIST.</li>
+<li>Share practical insights and results from experiments with both.</li>
+</ul>
+<p>By the end, you’ll know which activation function to use and why.</p>
+<p>Let’s dive in!</p>
+<h3 id="technical-explanation">Technical Explanation</h3>
+<h4 id="what-are-activation-functions">What Are Activation Functions?</h4>
+<p>Activation functions introduce non-linearity into a NN, enabling it to learn complex patterns. Without them, the network would behave like a linear regression model, no matter how many layers it had.</p>
+<p>Two of the most common activation functions are:</p>
+<p><strong>Sigmoid Activation Function</strong>
+Sigmoid squashes input values to a range between 0 and 1, making it useful for probabilistic outputs.</p>
+<p>[
+\sigma(x) = \frac{1}{1 + e^{-x}}
+]</p>
+<p>However, Sigmoid has drawbacks, including vanishing gradients for large or small input values, leading to slower learning.</p>
+<p>ReLU (Rectified Linear Unit)
+ReLU outputs the input value if it’s positive; otherwise, it outputs zero.</p>
+<p><strong>ReLU (Rectified Linear Unit) Activation Function</strong>
+[
+f(x) = \max(0, x)
+]</p>
+<p>ReLU is computationally efficient and avoids the vanishing gradient problem for positive inputs, making it the default choice in modern deep learning.</p>
+<h4 id="comparing-relu-and-sigmoid-on-fashion-mnist">Comparing ReLU and Sigmoid on Fashion MNIST</h4>
+<p>To evaluate these activation functions, we trained two dense NNs on Fashion MNIST. The architecture and hyperparameters were identical except for the activation functions in the hidden layers:</p>
+<p><strong>Model 1 (ReLU):</strong></p>
+<ul>
+<li>Activation function in hidden layers: ReLU</li>
+<li>Output layer: Softmax</li>
+</ul>
+<p><strong>Model 2 (Sigmoid):</strong></p>
+<ul>
+<li>Activation function in hidden layers: Sigmoid</li>
+<li>Output layer: Softmax</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Flatten
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Model with ReLU</span>
+</span></span><span style="display:flex;"><span>model_relu <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>)),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>model_relu<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Model with Sigmoid</span>
+</span></span><span style="display:flex;"><span>model_sigmoid <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>)),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>model_sigmoid<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span></code></pre></div><h3 id="experimental-results">Experimental Results</h3>
+<p><strong>With Sigmoid:</strong>
+<figure><img src="/images/project12_images/sigmond.png">
+</figure>
+</p>
+<p>With <strong>ReLU:</strong>
+<figure><img src="/images/project12_images/relu.png">
+</figure>
+</p>
+<p><strong>Sigmoid Model Performance:</strong></p>
+<ul>
+<li>Training Accuracy: ~53.64%</li>
+<li>Test Accuracy: ~55.17%</li>
+<li>Train Loss: 2.1737</li>
+<li>Test Loss: 2.1664</li>
+</ul>
+<p><em>Overall Observations</em>:
+The Sigmoid activation function has challenges with gradient saturation, especially when the inputs are large or small, leading to slower learning and potentially lower performance.</p>
+<p>The test and training accuracy are quite close, suggesting that while the model doesn&rsquo;t overfit, it struggles to learn effectively from the data.</p>
+<p><strong>ReLU Model Performance:</strong></p>
+<ul>
+<li>Training Accuracy: ~76.54%</li>
+<li>Test Accuracy: ~76.77%</li>
+<li>Train Loss: 0.7040</li>
+<li>Test Loss: 0.7047</li>
+</ul>
+<p><em>Overall Observations</em>:
+ReLU significantly outperforms Sigmoid, with much higher training and test accuracy.</p>
+<p>The test and training loss are closely aligned, indicating good generalisation without overfitting.
+The ReLU activation function avoids gradient saturation, making it better suited for deeper networks and image classification tasks.</p>
+<h3 id="understanding-dataset-complexity-and-model-architecture">Understanding Dataset Complexity and Model Architecture</h3>
+<p>When it comes to choosing an activation function, the dataset&rsquo;s complexity and the model architecture play a crucial role.</p>
+<p>In our experiment with Fashion MNIST, a dataset of medium complexity, the Sigmoid activation function struggled to deliver high performance. The primary reason? <strong>Gradient saturation</strong>.</p>
+<p>Sigmoid compresses input values into a narrow range [0, 1], which can lead to vanishing gradients during backpropagation.</p>
+<p>This limitation becomes especially noticeable in deeper networks or datasets that require the model to capture subtle variations, such as differentiating between classes like &ldquo;Shirt&rdquo; and &ldquo;Pullover&rdquo; in Fashion MNIST.</p>
+<p>On the other hand, the ReLU activation function allowed the model to learn and adapt effectively. Unlike Sigmoid, ReLU outputs the input directly if it&rsquo;s positive, avoiding gradient saturation and enabling faster learning.</p>
+<p>This ability is especially useful for datasets like Fashion MNIST, where capturing spatial patterns and hierarchical features is essential for classification.</p>
+<h4 id="why-modern-deep-learning-favors-relu">Why Modern Deep Learning Favors ReLU</h4>
+<p>ReLU has become the default choice in modern deep learning architectures, and for good reasons:</p>
+<ul>
+<li><em>Computational Efficiency</em>: ReLU involves a simple comparison operation, making it computationally lighter than Sigmoid or Tanh.</li>
+<li><em>Effective Gradient Flow</em>: By preserving positive gradients, ReLU avoids the bottleneck of vanishing gradients, enabling deeper networks to train effectively.</li>
+<li><em>Sparse Representations</em>: ReLU outputs zero for negative inputs, introducing sparsity into the network. Sparse activations reduce interdependence between neurons, helping models generalise better.</li>
+</ul>
+<p>Our results mirror these advantages:</p>
+<ul>
+<li>The ReLU model achieved a significantly higher test accuracy (~77%) compared to the Sigmoid model (~55%).</li>
+<li>The loss curves show better convergence for ReLU, indicating efficient learning and generalisation.</li>
+</ul>
+<p><strong>Lessons Learned:</strong>
+This comparison underscores the importance of aligning activation function choice with the dataset and model architecture.</p>
+<p>For datasets with complex patterns, where subtle variations need to be captured, ReLU provides the necessary flexibility and computational edge.</p>
+<p>In real-world scenarios, modern deep learning architectures like ResNet, VGG, and EfficientNet almost exclusively use ReLU (or its variants like Leaky ReLU).</p>
+<p>This adoption reflects its ability to scale with increasing dataset size and model depth, making it indispensable for building robust image classification systems.</p>
+<p>By understanding these trade-offs, we can make informed choices that align with the dataset&rsquo;s complexity and the goals of our machine learning pipeline.</p>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<h4 id="when-to-use-relu">When to Use ReLU</h4>
+<p>ReLU is the standard for hidden layers in modern neural networks, especially in:</p>
+<ul>
+<li>Image Classification: Handles complex, high-dimensional data like Fashion MNIST.</li>
+<li>Deep Architectures: Prevents vanishing gradients in networks with many layers.</li>
+</ul>
+<h4 id="when-to-use-sigmoid">When to Use Sigmoid</h4>
+<p>Sigmoid is still useful in specific scenarios, such as:</p>
+<ul>
+<li>Binary Classification: Output layer for tasks requiring probabilities between 0 and 1.</li>
+<li>Shallow Networks: Can perform well when model depth is limited.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Choosing the right activation function can dramatically affect your model’s performance. For Fashion MNIST, ReLU was the clear winner, offering faster training, better accuracy, and smoother loss convergence.</p>
+<p>While Sigmoid has its place in certain use cases, it struggles with modern datasets and deep architectures. The lesson? Start with ReLU for hidden layers, and reserve Sigmoid for specific needs like binary classification.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

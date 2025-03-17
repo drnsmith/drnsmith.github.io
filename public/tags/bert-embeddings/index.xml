@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BERT Embeddings on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/bert-embeddings/</link>
+    <description>Recent content in BERT Embeddings on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Apr 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/bert-embeddings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.</title>
+      <link>http://localhost:1313/projects/project2/project2_1/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/project2_1/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.&#xA;I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. From Words to Vectors: Embedding Techniques in Recipe Analysis.</title>
+      <link>http://localhost:1313/projects/project2/project2_2/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/project2_2/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In a world driven by data, text is the unsung hero that powers everything from search engines to recommendation systems. For a data scientist, textual data isn&amp;rsquo;t just words—it&amp;rsquo;s a goldmine waiting to be unlocked. Recipes, for instance, are more than a collection of instructions. They&amp;rsquo;re narratives of culture, flavour profiles, and culinary creativity. But to analyse them computationally, we must first transform these words into something machines can process: &lt;em&gt;vectors&lt;/em&gt;. In this article, I’ll dive into how text embedding techniques like &lt;strong&gt;TF-IDF&lt;/strong&gt; and &lt;strong&gt;Word2Vec&lt;/strong&gt; can be applied to recipe data. By converting recipes into meaningful numerical representations, we uncover patterns and relationships hidden in the data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Uncovering Themes in Recipes with Topic Modelling.</title>
+      <link>http://localhost:1313/projects/project2/project2_3/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/project2_3/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Recipes are more than just lists of ingredients and instructions—they encapsulate cultural, dietary, and thematic patterns waiting to be uncovered. In the ever-growing realm of textual data, topic modelling serves as a powerful tool to discover hidden themes and insights.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll explore how topic modeling techniques, such as Latent Dirichlet Allocation (LDA) and Non-Negative Matrix Factorisation (NMF), help us extract meaningful themes from recipes.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges.</title>
+      <link>http://localhost:1313/projects/project2/project2_4/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/project2_4/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction-clustering-recipes-based-on-similarity-an-overview-of-techniques-and-challenges&#34;&gt;Introduction. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges&lt;/h3&gt;&#xA;&lt;p&gt;Clustering is a powerful unsupervised learning technique that organises data points into groups based on shared features.&lt;/p&gt;&#xA;&lt;p&gt;When applied to recipes, clustering can reveal hidden patterns, such as regional cuisines, ingredient pairings, or common preparation techniques.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll explore:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Clustering methods like K-Means and Hierarchical Clustering.&lt;/li&gt;&#xA;&lt;li&gt;Pre-processing and feature selection for recipe data.&lt;/li&gt;&#xA;&lt;li&gt;Evaluating clusters for meaningfulness.&lt;/li&gt;&#xA;&lt;li&gt;Challenges and lessons learned during clustering experiments.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;why-clustering-recipes&#34;&gt;Why Clustering Recipes?&lt;/h3&gt;&#xA;&lt;p&gt;Clustering allows us to group recipes into meaningful categories based on similarity. For example:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights.</title>
+      <link>http://localhost:1313/projects/project2/project2_5/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/project2_5/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction-evaluating-and-interpreting-recipe-clusters-for-meaningful-insights&#34;&gt;Introduction. Evaluating and Interpreting Recipe Clusters for Meaningful Insights&lt;/h3&gt;&#xA;&lt;p&gt;Clustering recipes can reveal fascinating patterns, but identifying meaningful clusters is only half the battle.&lt;/p&gt;&#xA;&lt;p&gt;The real challenge lies in evaluating their quality and interpreting their results effectively. Without rigorous evaluation, clusters might lack utility, leading to misleading conclusions.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll cover:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Techniques for evaluating cluster quality.&lt;/li&gt;&#xA;&lt;li&gt;Methods for interpreting recipe clusters.&lt;/li&gt;&#xA;&lt;li&gt;Challenges and insights gained from real-world clustering projects.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;why-does-cluster-evaluation-matter&#34;&gt;Why Does Cluster Evaluation Matter?&lt;/h3&gt;&#xA;&lt;p&gt;Creating clusters is straightforward, but ensuring they represent meaningful groupings requires evaluation. For recipes, this means asking:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Applications of Recipe Topic Modelling and Clustering.</title>
+      <link>http://localhost:1313/projects/project2/project2_6/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/project2_6/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction-applications-of-recipe-topic-modelling-and-clustering-in-real-life&#34;&gt;Introduction. Applications of Recipe Topic Modelling and Clustering in Real Life&lt;/h3&gt;&#xA;&lt;p&gt;Recipes are more than just instructions—they are cultural artifacts, sources of inspiration, and solutions to everyday problems. But as the number of recipes available online grows exponentially, finding the right one can feel overwhelming. That’s where the power of topic modelling and clustering comes into play.&lt;/p&gt;&#xA;&lt;p&gt;These techniques unlock the potential of recipe data, helping users discover, search, and explore recipes in ways that feel intuitive and tailored. In this blog, we’ll explore:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Decoding Culinary Narratives: Combining advanced NLP techniques (BERT embeddings) with LDA topic modelling</title>
+      <link>http://localhost:1313/projects/project2/</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

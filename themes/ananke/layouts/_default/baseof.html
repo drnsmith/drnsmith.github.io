@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{ block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+
+    {{ hugo.Generator }}
+
+    {{ block "head" . }}{{ partial "head-additions.html" . }}{{ end }}
+
+    {{ partial "site-style.html" . }}
+    <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
+    {{ partial "site-scripts.html" . }}
+  </head>
+
+  <body class="ma0 {{ .Param "body_classes" | default "avenir bg-near-white" }}">
+    <!-- 1. Navigation bar partial -->
+    {{ partial "nav.html" . }}
+
+    <!-- 2. Hero/Header Block — uses .Params.image if present -->
+    {{ block "hero" . }}
+      {{ if .Params.image }}
+      <header class="page-header"
+        style="
+          background-image: url('{{ .Params.image }}');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            {{ .Title }}
+          </h1>
+          {{ with .Params.description }}
+            <p class="f5">{{ . }}</p>
+          {{ end }}
+        </div>
+      </header>
+      {{ end }}
+    {{ end }}
+
+    <!-- 3. Main Content -->
+    <main class="pb7" role="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "site-footer.html" . }}
+  </body>
+</html>
+
+

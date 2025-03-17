@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Building a Secure Client-Server System with Python. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="A deep dive into the implementation of a secure client-server application using Python socket programming. Learn how serialisation, file encryption, and multi-threading were used to create a robust communication system.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project6_images/pr6.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Building a Secure Client-Server System with Python.
+          </h1>
+          
+            <p class="f5">A deep dive into the implementation of a secure client-server application using Python socket programming. Learn how serialisation, file encryption, and multi-threading were used to create a robust communication system.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project6_images/pr6.jpg"
+    alt="Image by Brett Sayles on Pexels"><figcaption>
+      <p>Image by Brett Sayles on Pexels</p>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Client-Server-Network-Socket-Programming" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In the world of distributed systems, client-server architecture forms the backbone of communication between applications.</p>
+<p>This project demonstrates the development of a <strong>secure client-server system</strong> using Python, incorporating features like <strong>serialisation</strong>, <strong>file encryption</strong>, and <strong>multi-threading</strong> to ensure reliability and security.</p>
+<p>This blog walks through the design, implementation, and key features of this system, offering insights into how these concepts can be applied in real-world scenarios.</p>
+<h3 id="project-overview">Project Overview</h3>
+<p>The project involved building a system where a client and server communicate securely to exchange serialised data and files. Key functionalities included:</p>
+<ol>
+<li>
+<p><strong>Data Serialisation</strong>:<br>
+Transforming Python objects (e.g., dictionaries) into transmittable formats.</p>
+</li>
+<li>
+<p><strong>File Transfer</strong>: Enabling clients to upload and download text files.</p>
+</li>
+<li>
+<p><strong>Encryption and Security</strong>: Protecting data during transfer with encryption and decryption.</p>
+</li>
+<li>
+<p><strong>Multi-Threading</strong>: Allowing the server to handle multiple client requests simultaneously.</p>
+</li>
+</ol>
+<h3 id="setting-up-client-server-communication">Setting Up Client-Server Communication</h3>
+<h4 id="1-socket-programming-basics">1. Socket Programming Basics</h4>
+<p>The server listens for incoming connections, while clients connect to send requests. Python&rsquo;s <code>socket</code> library was used to set up this communication.</p>
+<h4 id="python-code-server">Python Code: Server</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> threading
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise server</span>
+</span></span><span style="display:flex;"><span>server_socket <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+</span></span><span style="display:flex;"><span>server_socket<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#34;0.0.0.0&#34;</span>, <span style="color:#ae81ff">8080</span>))
+</span></span><span style="display:flex;"><span>server_socket<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Server is listening on port 8080&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_client</span>(client_socket):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Handles client requests in a separate thread.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    request <span style="color:#f92672">=</span> client_socket<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Received: </span><span style="color:#e6db74">{</span>request<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    client_socket<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#34;Acknowledged&#34;</span><span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    client_socket<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    client, address <span style="color:#f92672">=</span> server_socket<span style="color:#f92672">.</span>accept()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Accepted connection from </span><span style="color:#e6db74">{</span>address<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    client_thread <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>handle_client, args<span style="color:#f92672">=</span>(client,))
+</span></span><span style="display:flex;"><span>    client_thread<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><h4 id="python-code-client">Python Code: Client</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Connect to server</span>
+</span></span><span style="display:flex;"><span>client_socket <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+</span></span><span style="display:flex;"><span>client_socket<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, <span style="color:#ae81ff">8080</span>))
+</span></span><span style="display:flex;"><span>client_socket<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#34;Hello, Server!&#34;</span><span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Receive server response</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> client_socket<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Server responded: </span><span style="color:#e6db74">{</span>response<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>client_socket<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><h4 id="2-data-serialisation">2. Data Serialisation</h4>
+<p>To send complex objects (e.g., dictionaries), the system serialised data using Python’s pickle module.</p>
+<h4 id="python-code-serialisation">Python Code: Serialisation</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pickle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Data to serialise</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;filename&#34;</span>: <span style="color:#e6db74">&#34;example.txt&#34;</span>, <span style="color:#e6db74">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;upload&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Serialise and send</span>
+</span></span><span style="display:flex;"><span>serialized_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>dumps(data)
+</span></span><span style="display:flex;"><span>client_socket<span style="color:#f92672">.</span>send(serialized_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Server receives and deserialises</span>
+</span></span><span style="display:flex;"><span>received_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>loads(client_socket<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Received: </span><span style="color:#e6db74">{</span>received_data<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="3-file-transfer">3. File Transfer</h4>
+<p>The system supported uploading and downloading files. Files were read in binary mode and transmitted in chunks for efficiency.</p>
+<h4 id="python-code-file-transfer">Python Code: File Transfer</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Client: Upload file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;upload.txt&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> chunk <span style="color:#f92672">:=</span> file<span style="color:#f92672">.</span>read(<span style="color:#ae81ff">1024</span>):
+</span></span><span style="display:flex;"><span>        client_socket<span style="color:#f92672">.</span>send(chunk)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Server: Receive and save file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;received.txt&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> chunk <span style="color:#f92672">:=</span> client_socket<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>):
+</span></span><span style="display:flex;"><span>        file<span style="color:#f92672">.</span>write(chunk)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">4.</span> Encryption <span style="color:#f92672">and</span> Decryption
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>To secure file transfers, encryption was implemented using Python<span style="color:#960050;background-color:#1e0010">’</span>s cryptography library<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#### Python Code: Encryption</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>python
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> cryptography.fernet <span style="color:#f92672">import</span> Fernet
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate encryption key</span>
+</span></span><span style="display:flex;"><span>key <span style="color:#f92672">=</span> Fernet<span style="color:#f92672">.</span>generate_key()
+</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> Fernet(key)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Encrypt file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;upload.txt&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    encrypted_data <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(file<span style="color:#f92672">.</span>read())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Decrypt file</span>
+</span></span><span style="display:flex;"><span>decrypted_data <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(encrypted_data)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;decrypted.txt&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(decrypted_data)
+</span></span></code></pre></div><h4 id="5-multi-threaded-server">5. Multi-Threaded Server</h4>
+<p>To handle multiple clients simultaneously, multi-threading was implemented. Each client connection was processed in a separate thread.</p>
+<h4 id="python-code-multi-threaded-server">Python Code: Multi-Threaded Server</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> threading
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_client</span>(client_socket):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Processes client requests in a separate thread.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> client_socket<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> data:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Received: </span><span style="color:#e6db74">{</span>data<span style="color:#f92672">.</span>decode()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            client_socket<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#34;Acknowledged&#34;</span><span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error: </span><span style="color:#e6db74">{</span>e<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">finally</span>:
+</span></span><span style="display:flex;"><span>        client_socket<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Accept multiple clients</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    client, address <span style="color:#f92672">=</span> server_socket<span style="color:#f92672">.</span>accept()
+</span></span><span style="display:flex;"><span>    thread <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>handle_client, args<span style="color:#f92672">=</span>(client,))
+</span></span><span style="display:flex;"><span>    thread<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<p><strong>Data Loss During Transfer</strong>:</p>
+<ul>
+<li>Issue: Large files caused data to be dropped.</li>
+<li><em>Solution</em>: Implemented chunk-based file transfer.</li>
+</ul>
+<p><strong>Encryption Overhead</strong>:</p>
+<ul>
+<li>Issue: Encryption slowed down the transfer speed for large files.</li>
+<li><em>Solution</em>: Optimised encryption with asynchronous I/O.</li>
+</ul>
+<p><strong>Concurrent Connections</strong>:</p>
+<ul>
+<li>Issue: Multi-threading led to race conditions.</li>
+<li><em>Solution</em>: Used thread-safe data structures.</li>
+</ul>
+<h3 id="applications">Applications</h3>
+<p>This system has applications in:</p>
+<ul>
+<li><em>Secure File Transfers</em>: Transmitting sensitive files over networks.</li>
+<li><em>Real-Time Communication</em>: Chat or messaging systems.</li>
+<li><em>Data Serialisation</em>: Sharing structured data between systems.</li>
+</ul>
+<h3 id="future-directions">Future Directions</h3>
+<ul>
+<li><em>Multi-Client Support</em>: Extending to a fully functional multi-client architecture.</li>
+<li><em>Scalability</em>: Integrating load balancers for handling high traffic.</li>
+<li><em>Improved Encryption</em>: Using hybrid encryption techniques for enhanced security.</li>
+</ul>
+<h3 id="real-world-applications"><strong>Real-World Applications</strong></h3>
+<p>The client-server system implemented in this project has versatile applications in various domains:</p>
+<h4 id="1-secure-file-transfer-systems"><strong>1. Secure File Transfer Systems</strong></h4>
+<ul>
+<li>The system can be adapted for secure exchange of sensitive files, such as legal documents or medical records, over a network.</li>
+<li><strong>Use Case</strong>: Hospitals transmitting patient records between departments.</li>
+</ul>
+<h4 id="2-real-time-communication-platforms"><strong>2. Real-Time Communication Platforms</strong></h4>
+<ul>
+<li>With modifications, the architecture can be used as a foundation for chat applications, collaborative tools, or notification systems.</li>
+<li><strong>Use Case</strong>: Messaging apps for internal business communication.</li>
+</ul>
+<h4 id="3-remote-data-sharing"><strong>3. Remote Data Sharing</strong></h4>
+<ul>
+<li>Organisations can leverage the system to serialise and exchange structured data (e.g., JSON, dictionaries) between remote locations.</li>
+<li><strong>Use Case</strong>: IoT devices sending telemetry data to centralised servers.</li>
+</ul>
+<h4 id="4-encryption-for-security"><strong>4. Encryption for Security</strong></h4>
+<ul>
+<li>The encryption module ensures secure transmission, protecting against data breaches and unauthorised access.</li>
+<li><strong>Use Case</strong>: Financial institutions exchanging transaction details between servers.</li>
+</ul>
+<h4 id="5-distributed-systems-development"><strong>5. Distributed Systems Development</strong></h4>
+<ul>
+<li>This project provides the groundwork for building distributed systems with multi-client and multi-server architectures.</li>
+<li><strong>Use Case</strong>: Scalable cloud services for data processing.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This project demonstrated the design and implementation of a secure client-server communication system. By combining socket programming, serialisation, encryption, and multi-threading, we created a robust and scalable architecture. The lessons learned here can be extended to build more advanced and secure distributed systems.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

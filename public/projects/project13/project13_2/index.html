@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 2. Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Learn how to address class imbalance in histopathological datasets using techniques like weighted loss functions and data augmentation to improve AI model performance.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project13_images/pr13.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 2. Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective.
+          </h1>
+          
+            <p class="f5">Learn how to address class imbalance in histopathological datasets using techniques like weighted loss functions and data augmentation to improve AI model performance.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project13_images/pr13.jpg"><figcaption>
+      <h4>Photo by Ben Hershey on Unsplash</h4>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="handling-class-imbalance-in-medical-imaging-a-deep-learning-perspective"><strong>Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective</strong></h3>
+<p>Class imbalance is a common issue in histopathological datasets, such as the BreakHis dataset used for breast cancer detection. This imbalance, where benign samples constitute 31% and malignant samples 69%, can adversely affect model performance by causing the model to prioritize the majority class. In this blog, we explore techniques employed in your project, including <strong>weighted loss functions</strong>, <strong>data augmentation</strong>, and <strong>stratified sampling</strong>, to address this challenge and enhance model performance.</p>
+<hr>
+<h3 id="class-imbalance-in-the-breakhis-dataset"><strong>Class Imbalance in the BreakHis Dataset</strong></h3>
+<p>The BreakHis dataset comprises 7,909 images of breast tissue biopsies, categorized into benign and malignant classes. The dataset&rsquo;s inherent class imbalance highlights the need for tailored solutions to prevent the model from favoring the dominant malignant class at the expense of underrepresented benign samples.</p>
+<hr>
+<h3 id="techniques-to-address-class-imbalance"><strong>Techniques to Address Class Imbalance</strong></h3>
+<h4 id="1-weighted-loss-functions"><strong>1. Weighted Loss Functions</strong></h4>
+<p>Weighted loss functions penalize misclassifications in the minority class more heavily, ensuring the model learns to treat all classes with equal importance.</p>
+<p><strong>Implementation</strong>:
+A custom <strong>weighted binary cross-entropy loss function</strong> was implemented in the project, with weights inversely proportional to class frequencies:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.losses <span style="color:#f92672">import</span> BinaryCrossentropy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compute class weights</span>
+</span></span><span style="display:flex;"><span>class_counts <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>: <span style="color:#ae81ff">2480</span>, <span style="color:#ae81ff">1</span>: <span style="color:#ae81ff">5429</span>}  <span style="color:#75715e"># Benign (0) and Malignant (1)</span>
+</span></span><span style="display:flex;"><span>total_samples <span style="color:#f92672">=</span> sum(class_counts<span style="color:#f92672">.</span>values())
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>: total_samples <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> class_counts[<span style="color:#ae81ff">0</span>]),
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span>: total_samples <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> class_counts[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compile model with weighted loss</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span>BinaryCrossentropy(), metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(x_train, y_train, class_weight<span style="color:#f92672">=</span>class_weights, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, validation_data<span style="color:#f92672">=</span>(x_val, y_val))
+</span></span></code></pre></div><p><strong>Benefits</strong>:</p>
+<ul>
+<li>Reduces bias toward the majority class.</li>
+<li>Improves sensitivity for the minority class, crucial in detecting benign cases.</li>
+</ul>
+<hr>
+<h4 id="2-data-augmentation"><strong>2. Data Augmentation</strong></h4>
+<p>Data augmentation expands the dataset by creating synthetic variations of existing images, increasing diversity and balancing class representation.</p>
+<p><strong>Augmentation Techniques Applied</strong>:</p>
+<ul>
+<li><strong>Flipping</strong>: Simulates variations in orientation.</li>
+<li><strong>Rotation</strong>: Introduces diverse angles for the same sample.</li>
+<li><strong>Scaling</strong>: Mimics different magnification levels.</li>
+<li><strong>Shearing</strong>: Distorts images slightly for variation.</li>
+</ul>
+<p><strong>Implementation</strong>:
+Using TensorFlow’s <code>ImageDataGenerator</code>, augmented samples were generated dynamically during training:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply augmentation to training data</span>
+</span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(x_train, y_train, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_generator, validation_data<span style="color:#f92672">=</span>(x_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span></code></pre></div><p><strong>Benefits</strong>:</p>
+<ul>
+<li>Increases dataset diversity, reducing overfitting.</li>
+<li>Enhances the model&rsquo;s robustness to real-world variations.</li>
+</ul>
+<hr>
+<h4 id="3-stratified-sampling"><strong>3. Stratified Sampling</strong></h4>
+<p>Stratified sampling ensures that both training and validation sets maintain the same class distribution as the original dataset. This technique prevents evaluation biases caused by imbalanced splits.</p>
+<p><strong>Implementation</strong>:
+Using <code>train_test_split</code> with stratification:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x_train, x_val, y_train, y_val <span style="color:#f92672">=</span> train_test_split(
+</span></span><span style="display:flex;"><span>    images, labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, stratify<span style="color:#f92672">=</span>labels, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p><strong>Benefits</strong>:</p>
+<ul>
+<li>Maintains balanced class distributions in both training and validation sets.</li>
+<li>Provides consistent and reliable evaluation metrics.</li>
+</ul>
+<hr>
+<h3 id="results-and-insights"><strong>Results and Insights</strong></h3>
+<h4 id="impact-of-techniques"><strong>Impact of Techniques</strong></h4>
+<p>The combination of weighted loss functions, data augmentation, and stratified sampling significantly improved the model&rsquo;s ability to detect benign samples, addressing the class imbalance challenge.</p>
+<p><strong>Performance Metrics</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Model</strong></th>
+          <th><strong>Accuracy</strong></th>
+          <th><strong>Sensitivity (Benign)</strong></th>
+          <th><strong>Sensitivity (Malignant)</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Baseline (No Techniques)</td>
+          <td>89.2%</td>
+          <td>62.1%</td>
+          <td>96.8%</td>
+      </tr>
+      <tr>
+          <td>Weighted Loss Only</td>
+          <td>93.7%</td>
+          <td>85.3%</td>
+          <td>95.1%</td>
+      </tr>
+      <tr>
+          <td>Weighted Loss + Augmentation</td>
+          <td>96.2%</td>
+          <td>89.8%</td>
+          <td>97.4%</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="visualization"><strong>Visualization</strong></h3>
+<h4 id="augmented-data-examples"><strong>Augmented Data Examples</strong></h4>
+<p>Augmented images from the BreakHis dataset, including rotated, flipped, and scaled variations, demonstrate the diversity introduced by augmentation techniques.</p>
+<h4 id="confusion-matrices"><strong>Confusion Matrices</strong></h4>
+<p>Comparison of confusion matrices with and without class imbalance handling highlights the improved detection of benign cases.</p>
+<hr>
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+<p>Class imbalance is a critical challenge in medical imaging datasets, but techniques like weighted loss functions, data augmentation, and stratified sampling provide effective solutions. By implementing these approaches, your project significantly enhanced the performance of deep learning models on the BreakHis dataset, improving sensitivity for minority classes and ensuring robust, fair predictions.</p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

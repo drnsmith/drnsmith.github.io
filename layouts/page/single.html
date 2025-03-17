@@ -1,0 +1,21 @@
+{{ define "header" }}
+  <header class="page-header"
+    style="background-image: url('{{ .Params.image }}'); background-size: cover; background-position: center; height: 400px; display: flex; align-items: center; justify-content: center; color: white; text-align: center;">
+    <div>
+      <h1 class="f1 athelas mt3 mb1">
+        {{ .Title }}
+      </h1>
+      <p class="f5">
+        {{ .Params.description }}
+      </p>
+    </div>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | default "serif"}} f4 nested-links {{ $.Param "text_color" | default "mid-gray" }}">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

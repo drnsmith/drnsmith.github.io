@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 4. Tackling Overfitting in Recipe Difficulty Classification: Lessons Learned and Solutions. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Overfitting can be a major hurdle in machine learning. This blog discusses the techniques I employed to prevent overfitting, ensuring that the recipe difficulty classifier generalises well to new data.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project1_images/pr1.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 4. Tackling Overfitting in Recipe Difficulty Classification: Lessons Learned and Solutions.
+          </h1>
+          
+            <p class="f5">Overfitting can be a major hurdle in machine learning. This blog discusses the techniques I employed to prevent overfitting, ensuring that the recipe difficulty classifier generalises well to new data.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project1_images/pr1.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>As I progressed with training my AI-powered recipe classifier, I noticed a common issue creeping in: <em>overfitting</em>, which happens when a model performs well on the training data but struggles to generalise to new, unseen data. In ML, this can result in poor accuracy on validation or test data. In this blog, I’ll walk you through how I identified overfitting in my model and the steps I took to address it. I’ll also explain the visual clues from training and validation loss/accuracy graphs that helped me recognise this issue.</p>
+<h3 id="1-spotting-overfitting-through-training-metrics">1. Spotting Overfitting Through Training Metrics</h3>
+<p>During the model training, I kept track of both training loss and validation loss as well as accuracy metrics for both datasets. Here&rsquo;s what I observed.</p>
+<p><em>Loss</em>: Initially, both training and validation loss decreased, indicating the model was learning well. However, after the first epoch, the training loss continued to drop, while validation loss began to increase. This divergence suggested the model was memorising training data rather than learning generalisable patterns.</p>
+<p><em>Accuracy</em>: A similar trend appeared in the accuracy plot. While training accuracy increased steadily, validation accuracy plateaued and eventually decreased, another clear sign that overfitting was happening. These visual cues were instrumental in understanding the model’s learning behaviour and prompted me to make adjustments to prevent further overfitting.</p>
+<h3 id="2-techniques-i-used-to-address-overfitting">2. Techniques I Used to Address Overfitting</h3>
+<p>To combat overfitting, I implemented several techniques commonly used in ML. Here’s what I tried and how each approach helped.</p>
+<p>a. <em>Adding Dropout Layers</em>
+Dropout is a regularisation technique that randomly “drops” a fraction of neurons in the neural network during training. This prevents the model from relying too heavily on any particular neuron, which helps improve generalisation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dropout
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adding Dropout layers after each Dense layer</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.5</span>))  <span style="color:#75715e"># Dropout rate of 50%</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">64</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.3</span>))  <span style="color:#75715e"># Dropout rate of 30%</span>
+</span></span></code></pre></div><p>b. <em>Reducing Model Complexity</em>
+Overly complex models with too many layers or neurons are prone to overfitting because they can “memorise” the training data. Simplifying the model architecture can help reduce this effect. I reduced the number of neurons in each layer and removed unnecessary layers. This helped make the model less complex and more focused on capturing essential features rather than noise.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Simplified model architecture</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">64</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, input_shape<span style="color:#f92672">=</span>(input_shape,)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">32</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(num_classes, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
+</span></span></code></pre></div><p>c. <em>Early Stopping</em>
+Early stopping is a technique that halts training once the validation loss starts increasing, even if the training loss is still decreasing. This prevents the model from overfitting further.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.callbacks <span style="color:#f92672">import</span> EarlyStopping
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Setting up early stopping</span>
+</span></span><span style="display:flex;"><span>early_stopping <span style="color:#f92672">=</span> EarlyStopping(monitor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;val_loss&#39;</span>, patience<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, restore_best_weights<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fitting the model with early stopping</span>
+</span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(X_train, y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, validation_data<span style="color:#f92672">=</span>(X_val, y_val), callbacks<span style="color:#f92672">=</span>[early_stopping])
+</span></span></code></pre></div><p>d. <em>Data Augmentation</em>
+Although more common in image processing, data augmentation can also benefit text-based models by generating variations of the original data. In my case, I experimented with slight modifications in the dataset, like randomising ingredient order or rephrasing instructions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> textaugment <span style="color:#f92672">import</span> EDA
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>augmenter <span style="color:#f92672">=</span> EDA()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example of augmenting a text sample</span>
+</span></span><span style="display:flex;"><span>original_text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Chop the onions finely.&#34;</span>
+</span></span><span style="display:flex;"><span>augmented_text <span style="color:#f92672">=</span> augmenter<span style="color:#f92672">.</span>synonym_replacement(original_text)
+</span></span><span style="display:flex;"><span>print(augmented_text)  <span style="color:#75715e"># Output could be a slight variation of the instruction</span>
+</span></span></code></pre></div><p>e. <em>Regularisation Techniques</em>
+Finally, L2 regularisation penalises large weights in the model, encouraging it to focus on smaller, more generalisable patterns.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.regularizers <span style="color:#f92672">import</span> l2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adding L2 regularization to dense layers</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, kernel_regularizer<span style="color:#f92672">=</span>l2(<span style="color:#ae81ff">0.01</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">64</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, kernel_regularizer<span style="color:#f92672">=</span>l2(<span style="color:#ae81ff">0.01</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(num_classes, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
+</span></span></code></pre></div><h3 id="3-results-after-applying-these-techniques">3. Results After Applying These Techniques</h3>
+<p>After implementing these techniques, I retrained the model and saw promising results:
+<img src="/images/2.png" alt="Training and Validation Loss and Accuracy"></p>
+<p><em>Figure: Training and validation loss and accuracy across epochs, highlighting overfitting tendencies.</em></p>
+<ul>
+<li>Decreased Validation Loss: Validation loss stabilised instead of diverging from training loss, as shown in the graph above.</li>
+<li>Improved Generalisation: Validation accuracy improved, meaning the model was now able to classify unseen recipes more accurately.</li>
+</ul>
+<p>The combination of these methods led to a more balanced performance across both training and validation sets, allowing the model to generalise better without compromising too much on training accuracy.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Overfitting can be a challenging issue, especially when working with complex datasets like recipe classification. However, with techniques like dropout, early stopping, data augmentation, and regularisation, I was able to create a model that performs well on both training and unseen data. Understanding the balance between learning and generalisation is key, and monitoring training metrics is crucial to spotting overfitting early on.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Neural Networks on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/neural-networks/</link>
+    <description>Recent content in Neural Networks on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Sep 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/neural-networks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning.</title>
+      <link>http://localhost:1313/projects/project12/project12_1/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_1/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts.&lt;/p&gt;&#xA;&lt;p&gt;But here’s the thing—MNIST is old news. It’s solved, overused, and no longer representative of real-world challenges. Fashion MNIST is a modern, robust alternative that brings fresh complexity to the table.&lt;/p&gt;&#xA;&lt;p&gt;Fashion MNIST is a game-changer. With its focus on apparel images like shirts, sneakers, and dresses, it mirrors the kind of messy, nuanced data we deal with today.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction.</title>
+      <link>http://localhost:1313/projects/project8/project8_1/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/project8_1/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Have you ever stopped to think about the data behind environmental predictions?&lt;/p&gt;&#xA;&lt;p&gt;We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions.&lt;/p&gt;&#xA;&lt;p&gt;The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 1. Challenges in Medical Imaging Datasets.</title>
+      <link>http://localhost:1313/projects/project5/project5_1/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/project5_1/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges.&lt;/p&gt;&#xA;&lt;p&gt;In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong&gt;dataset imbalance&lt;/strong&gt; and &lt;strong&gt;small validation sets&lt;/strong&gt;, which can hinder model performance.&lt;/p&gt;&#xA;&lt;p&gt;This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Boosting Model Generalisation with Data Augmentation.</title>
+      <link>http://localhost:1313/projects/project5/project5_2/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/project5_2/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.&lt;/p&gt;&#xA;&lt;p&gt;To overcome this challenge in our pneumonia detection project, we used &lt;strong&gt;data augmentation&lt;/strong&gt; (DA) techniques to artificially expand the training dataset.&lt;/p&gt;&#xA;&lt;p&gt;DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&amp;rsquo;s generalisation to unseen chest X-ray images.&lt;/p&gt;&#xA;&lt;p&gt;This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Designing Dense Neural Networks: Lessons from Fashion MNIST.</title>
+      <link>http://localhost:1313/projects/project12/project12_2/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_2/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Designing neural networks (NNs) is an art as much as it is a science. When faced with the challenge of classifying Fashion MNIST images, I needed a lightweight yet powerful architecture to handle the complexity of apparel images. Dense neural networks, with their fully connected layers, were the perfect choice for this task.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll walk through:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How dense neural networks work and their role in image classification.&lt;/li&gt;&#xA;&lt;li&gt;Designing an efficient architecture using activation functions and layers.&lt;/li&gt;&#xA;&lt;li&gt;Practical lessons learned while optimising performance with Fashion MNIST.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;By the end, you’ll have a clear roadmap to build your own dense networks for image classification tasks.&#xA;Let’s dive in!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.</title>
+      <link>http://localhost:1313/projects/project8/project8_2/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/project8_2/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Behind every successful machine learning (ML) project is a stage that is equal parts science and art: &lt;strong&gt;Exploratory Data Analysis (EDA)&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This step is where we uncover the hidden stories in the data, identify patterns, and gain insights that inform the model-building process.&lt;/p&gt;&#xA;&lt;p&gt;When working with air pollution data, EDA plays a vital role in answering key questions:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis.</title>
+      <link>http://localhost:1313/projects/project5/project5_3/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/project5_3/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning (DL) provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we compare the performance of a &lt;strong&gt;manual CNN&lt;/strong&gt; and the &lt;strong&gt;VGG16 pre-trained model&lt;/strong&gt; for pneumonia detection.&lt;/p&gt;&#xA;&lt;p&gt;While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of transfer learning with its pre-trained &lt;strong&gt;ImageNet&lt;/strong&gt; weights.&lt;/p&gt;&#xA;&lt;p&gt;This comparative analysis explores their architectures, training strategies, and results.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. ReLU vs Sigmoid: Which Activation Function Wins on Fashion MNIST?</title>
+      <link>http://localhost:1313/projects/project12/project12_3/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_3/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When building neural networks (NNs), the activation function you choose can make or break your model. It’s the part of the network that decides whether a neuron &amp;ldquo;fires&amp;rdquo; and passes information forward.&lt;/p&gt;&#xA;&lt;p&gt;For years, Sigmoid was the go-to activation function, but then ReLU came along, revolutionising deep learning with its simplicity and effectiveness. But how do these activation functions stack up against each other in practice?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Regression Models for Air Quality Prediction: From Simplicity to Accuracy.</title>
+      <link>http://localhost:1313/projects/project8/project8_3/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/project8_3/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Predicting air pollution isn’t just about crunching numbers—it’s about finding patterns, building models, and learning how different variables interact with one another.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I take the first step toward accurate PM10 predictions by exploring regression models. These models form the backbone of many machine learning (ML) projects, providing interpretable results and insights into the relationships between variables.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Evaluating CNN Models for Pneumonia Detection.</title>
+      <link>http://localhost:1313/projects/project5/project5_4/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/project5_4/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.&lt;/p&gt;&#xA;&lt;p&gt;Metrics like &lt;strong&gt;precision&lt;/strong&gt;, &lt;strong&gt;recall&lt;/strong&gt;, and &lt;strong&gt;F1-score&lt;/strong&gt; provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection.&lt;/p&gt;&#xA;&lt;p&gt;This blog explores how our models—&lt;strong&gt;Manual CNN&lt;/strong&gt; and &lt;strong&gt;VGG16&lt;/strong&gt;—were evaluated and highlights the role of confusion matrices in understanding their performance.&lt;/p&gt;&#xA;&lt;h3 id=&#34;metrics-for-evaluation&#34;&gt;Metrics for Evaluation&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Accuracy&lt;/strong&gt;: The percentage of correctly classified samples.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach.</title>
+      <link>http://localhost:1313/projects/project12/project12_4/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_4/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When training neural networks (NNs), every parameter matters. Hyperparameters like learning rate and batch size aren’t learned by the model—they’re chosen by you. These settings can make or break your model’s performance. But how do you find the right combination?&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll take you through my experience fine-tuning hyperparameters for a NN trained on the Fashion MNIST dataset. We’ll cover:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Advanced Machine Learning for PM10 Prediction: Random Forest, XGBoost, and More.</title>
+      <link>http://localhost:1313/projects/project8/project8_4/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/project8_4/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Regression models laid a solid foundation for PM10 prediction, but air pollution is a complex phenomenon influenced by nonlinear and time-dependent factors.&lt;/p&gt;&#xA;&lt;p&gt;To capture these intricacies, advanced machine learning models like neural networks (NNs) and ensemble methods come into play. These models are capable of uncovering patterns and relationships that simpler models might overlook.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</title>
+      <link>http://localhost:1313/projects/project5/project5_5/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/project5_5/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When evaluating AI models for medical diagnostics, metrics like &lt;strong&gt;sensitivity&lt;/strong&gt; and &lt;strong&gt;specificity&lt;/strong&gt; are crucial.&lt;/p&gt;&#xA;&lt;p&gt;Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.&lt;/p&gt;&#xA;&lt;p&gt;For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Perfecting Data Splits: Train-Test and Validation Strategies for Reliable Results. How thoughtful data splitting practices ensure consistent performance in machine learning pipelines.</title>
+      <link>http://localhost:1313/projects/project12/project12_5/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_5/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Machine learning models are only as good as the data they’re trained on. But even the best dataset won’t save you if your data splits are flawed. Splitting data into training, validation, and test sets seems straightforward, but small mistakes can lead to big problems like overfitting, underfitting, or unreliable performance metrics.&lt;/p&gt;&#xA;&lt;p&gt;You have a perfectly balanced dataset. Every class is equally represented, and it seems like splitting the data into training, testing, and validation sets should be a no-brainer. But even with balanced datasets like Fashion MNIST, thoughtful splitting is critical to ensure fair evaluation, reproducibility, and proper generalisation.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Evaluating and Selecting the Best Models for PM10 Prediction.</title>
+      <link>http://localhost:1313/projects/project8/project8_5/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/project8_5/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;After building and testing various machine learning models, the next critical step is evaluating their performance and selecting the best ones for deployment.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).&lt;/p&gt;&#xA;&lt;p&gt;We’ll also explore hyperparameter tuning for neural networks, leveraging GridSearchCV for optimal performance.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Future Directions for AI-Assisted Medical Imaging.</title>
+      <link>http://localhost:1313/projects/project5/project5_6/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/project5_6/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project.&lt;/p&gt;&#xA;&lt;p&gt;However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Simplicity and Control in Optimising Neural Networks: The Stochastic Gradient Descent optimiser and its role in fine-tuning neural networks.</title>
+      <link>http://localhost:1313/projects/project12/project12_6/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_6/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Training a neural network requires more than just a good dataset or an effective architecture—it requires the right optimiser. Stochastic Gradient Descent (SGD) is a staple of deep learning.&lt;/p&gt;&#xA;&lt;p&gt;In my Fashion MNIST project, I used Stochastic Gradient Descent (SGD) to optimise a dense neural network. Why? Because simplicity doesn’t just work—it excels, especially when resources are limited or interpretability is key.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. From Data to Action: What Pollution Data and AI Teach Us About Cleaner Air.</title>
+      <link>http://localhost:1313/projects/project8/project8_6/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/project8_6/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Predicting PM10 and other pollutants is not just about building models or visualising data—it&amp;rsquo;s about understanding the invisible threats in the air we breathe and finding ways to address them.&lt;/p&gt;&#xA;&lt;p&gt;After exploring data pre-processing, modelling, and evaluation, this final piece reflects on the insights gained and their real-world implications.&lt;/p&gt;&#xA;&lt;p&gt;I’ll discuss how the results from this project—built on advanced AI/ML techniques—can guide better decision-making for policymakers, businesses, and citizens alike.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 7. The Power of Sparse Categorical Crossentropy: A guide to understanding loss functions for multi-class classification.</title>
+      <link>http://localhost:1313/projects/project12/project12_7/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_7/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Choosing the right loss function is one of the most critical decisions when building a neural network. For multi-class classification tasks, like predicting clothing categories in Fashion MNIST, the sparse categorical crossentropy (SCC) loss function is often the go-to solution. But what makes it so effective?&lt;/p&gt;&#xA;&lt;p&gt;This blog dives into:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;What sparse categorical crossentropy is and how it works.&lt;/li&gt;&#xA;&lt;li&gt;Why it’s the ideal choice for tasks involving multiple classes.&lt;/li&gt;&#xA;&lt;li&gt;How to implement it efficiently in TensorFlow/Keras.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;By the end, you’ll have a solid understanding of this loss function and when to use it in your own projects.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST</title>
+      <link>http://localhost:1313/projects/project12/project12_8/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/project12_8/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Training neural networks (NNs) is a lot like navigating uncharted waters. No matter how much preparation or theoretical knowledge you have, it’s the experiments—and the inevitable mistakes—that shape your skills.&lt;/p&gt;&#xA;&lt;p&gt;As a data scientist working on Fashion MNIST, a dataset of 28x28 grayscale images representing 10 clothing categories, I realised that building effective models requires more than just writing code; it demands iteration, debugging, and adaptability.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks</title>
+      <link>http://localhost:1313/projects/project5/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Building Robust CNN Pipelines for Fashion MNIST: From Data to Deployment</title>
+      <link>http://localhost:1313/projects/project12/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK</title>
+      <link>http://localhost:1313/projects/project8/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

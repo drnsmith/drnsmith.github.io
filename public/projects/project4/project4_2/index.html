@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 2. Scalling Sentiment Analysis with MapReduce. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores how MapReduce was utilised to scale sentiment analysis for 4&#43; million tweets about NASDAQ companies. By leveraging distributed data processing, the project efficiently classified sentiments, uncovering insights at scale.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project4_images/pr4.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 2. Scalling Sentiment Analysis with MapReduce.
+          </h1>
+          
+            <p class="f5">This blog explores how MapReduce was utilised to scale sentiment analysis for 4&#43; million tweets about NASDAQ companies. By leveraging distributed data processing, the project efficiently classified sentiments, uncovering insights at scale.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern.</p>
+<p>To address this, we employed <strong>MapReduce</strong>, a distributed data processing model that enables parallel computation across multiple nodes.</p>
+<p>This blog walks through the implementation of <strong>MapReduce</strong> for sentiment analysis, focusing on how it handles data at scale. We&rsquo;ll include examples of mappers and reducers with Python code to explain the workflow.</p>
+<h3 id="what-is-mapreduce">What is MapReduce?</h3>
+<p><strong>MapReduce</strong> is a programming model designed to process large datasets by splitting tasks into two main phases:</p>
+<ol>
+<li>
+<p><strong>Mapping</strong>: Processes data in parallel, emitting key-value pairs.</p>
+</li>
+<li>
+<p><strong>Reducing</strong>: Aggregates the results of mapping to produce a final output.</p>
+</li>
+</ol>
+<p>In this project, <strong>MapReduce</strong> helped analyse millions of tweets by distributing sentiment classification tasks across multiple nodes.</p>
+<h3 id="step-1-map-phase">Step 1: Map Phase</h3>
+<p>The mapper processes each tweet to:</p>
+<ol>
+<li>Extract metadata (e.g., Tweet ID, text, ticker symbol).</li>
+<li>Compute sentiment using the AFINN lexicon.</li>
+<li>Emit a key-value pair for each tweet:<br>
+<code>Key: Company ticker, Value: Sentiment (positive/neutral/negative).</code></li>
+</ol>
+<h4 id="python-code-mapper">Python Code: Mapper</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mapper_sentiment</span>(line):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Processes a single tweet and emits the sentiment.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    line (str): Tab-separated tweet data (Tweet ID, Text, Ticker).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    tuple: (Ticker, Sentiment)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Split the line into components</span>
+</span></span><span style="display:flex;"><span>    tweet_id, tweet, ticker <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Analyze sentiment using the AFINN lexicon</span>
+</span></span><span style="display:flex;"><span>    sentiment <span style="color:#f92672">=</span> analyze_sentiment(tweet)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Emit ticker symbol and sentiment as key-value pair</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (ticker, sentiment)
+</span></span></code></pre></div><h3 id="step-2-reduce-phase">Step 2: Reduce Phase</h3>
+<p>The reducer aggregates the sentiments by company, counting the number of positive, neutral, and negative tweets for each ticker.</p>
+<h4 id="python-code-reducer">Python Code: Reducer</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reducer_sentiment</span>(key, values):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Aggregates sentiments for a given company.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    key (str): Company ticker symbol.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    values (list): List of sentiments (positive/neutral/negative).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Sentiment counts for the ticker.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    sentiment_counts <span style="color:#f92672">=</span> defaultdict(int)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Count each sentiment</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> sentiment <span style="color:#f92672">in</span> values:
+</span></span><span style="display:flex;"><span>        sentiment_counts[sentiment] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Emit ticker and aggregated counts</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {key: dict(sentiment_counts)}
+</span></span></code></pre></div><h3 id="step-3-integrating-mapreduce">Step 3: Integrating MapReduce</h3>
+<p>With the <strong>mapper</strong> and <strong>reducer</strong> defined, the next step involves integrating them into a distributed environment.</p>
+<p>In practice, this would involve a framework like <strong>Hadoop</strong> or <strong>Spark</strong>. For demonstration, here’s a simplified Python implementation of the <strong>MapReduce</strong> workflow:</p>
+<h4 id="python-code-mapreduce-workflow">Python Code: MapReduce Workflow</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mapreduce</span>(data, mapper, reducer):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Simulates the MapReduce process.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    data (list): List of tab-separated tweet data.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    mapper (function): Mapper function.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    reducer (function): Reducer function.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Aggregated sentiment counts for each ticker.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Map phase</span>
+</span></span><span style="display:flex;"><span>    intermediate <span style="color:#f92672">=</span> defaultdict(list)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> data:
+</span></span><span style="display:flex;"><span>        key, value <span style="color:#f92672">=</span> mapper(line)
+</span></span><span style="display:flex;"><span>        intermediate[key]<span style="color:#f92672">.</span>append(value)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Reduce phase</span>
+</span></span><span style="display:flex;"><span>    results <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> key, values <span style="color:#f92672">in</span> intermediate<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>        results<span style="color:#f92672">.</span>update(reducer(key, values))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> results
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example dataset (tab-separated: Tweet ID, Text, Ticker)</span>
+</span></span><span style="display:flex;"><span>sample_data <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;1</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Tesla is amazing!</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">TSLA&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;2</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Apple stock is overvalued.</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">AAPL&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;3</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Tesla cars are the future.</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">TSLA&#34;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run MapReduce</span>
+</span></span><span style="display:flex;"><span>results <span style="color:#f92672">=</span> mapreduce(sample_data, mapper_sentiment, reducer_sentiment)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Sentiment Analysis Results:&#34;</span>, results)
+</span></span></code></pre></div><h3 id="results">Results</h3>
+<p>For the sample dataset:</p>
+<p>Input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Copy code
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>    Tesla <span style="color:#66d9ef">is</span> amasing!        TSLA
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>    Apple stock <span style="color:#66d9ef">is</span> overvalued. AAPL
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>    Tesla cars are the future. TSLA
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;TSLA&#34;</span>: {<span style="color:#f92672">&#34;positive&#34;</span>: <span style="color:#ae81ff">2</span>, <span style="color:#f92672">&#34;neutral&#34;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&#34;negative&#34;</span>: <span style="color:#ae81ff">0</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;AAPL&#34;</span>: {<span style="color:#f92672">&#34;positive&#34;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&#34;neutral&#34;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&#34;negative&#34;</span>: <span style="color:#ae81ff">1</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This demonstrates how <strong>MapReduce</strong> aggregates results efficiently, even for large datasets.</p>
+<h4 id="benefits-of-mapreduce">Benefits of MapReduce</h4>
+<ul>
+<li>
+<p><em>Scalability</em>:
+Processes data across multiple nodes, enabling efficient handling of large datasets.</p>
+</li>
+<li>
+<p><em>Fault Tolerance</em>:
+Ensures continuity by re-executing failed tasks on other nodes.</p>
+</li>
+<li>
+<p><em>Simplicity</em>:
+The mapper and reducer logic focus on specific tasks, abstracting the complexity of distributed execution.</p>
+</li>
+</ul>
+<h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<ul>
+<li><strong>Skewed Data:</strong>
+Uneven distribution of tweets among nodes can cause bottlenecks.</li>
+</ul>
+<p><em>Solution</em>: Use partitioners to balance data load.</p>
+<ul>
+<li><strong>Complex Sentiment Analysis</strong>:
+Context-dependent expressions (e.g., sarcasm) can be misclassified.</li>
+</ul>
+<p><em>Solution</em>: Enhance lexicon-based approaches with machine learning models.</p>
+<ul>
+<li><strong>Memory Constraints</strong>:
+Large intermediate results can overwhelm memory.</li>
+</ul>
+<p><em>Solution</em>: Use combiners to aggregate results locally before the reduce phase.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p><strong>MapReduce</strong> proved invaluable for processing millions of tweets efficiently, enabling us to scale sentiment analysis for large datasets. By distributing tasks, it transformed what could have been a challenging computational problem into a manageable workflow.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+
