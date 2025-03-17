@@ -1,72 +1,72 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Computer Vision on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/computer-vision/</link><description>Recent content in Computer Vision on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Sep 2024 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/computer-vision/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Transforming Breast Cancer Diagnosis with Deep Learning. The Future of AI in Histopathology: Innovations and Challenges.</title><link>http://localhost:1313/projects/project13/project13_1/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Computer Vision on Natasha Smith Portfolio</title><link>https://drnsmith.github.io/tags/computer-vision/</link><description>Recent content in Computer Vision on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Sep 2024 10:58:08 -0400</lastBuildDate><atom:link href="https://drnsmith.github.io/tags/computer-vision/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Transforming Breast Cancer Diagnosis with Deep Learning. The Future of AI in Histopathology: Innovations and Challenges.</title><link>https://drnsmith.github.io/projects/project13/project13_1/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_1/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>The field of histopathology is witnessing a paradigm shift with the integration of artificial intelligence (AI) and deep learning (DL). This blog delves into a research project that explores advanced deep learning techniques to enhance breast cancer diagnosis using histopathology images (HIs). The project, based on the BreakHis dataset, leverages state-of-the-art convolutional neural networks (CNNs), ensemble methods, and interpretability tools such as Grad-CAM and LIME. These innovations aim to address critical challenges in clinical applications, including class imbalance, model reliability, and diagnostic accuracy.&lt;/p></description></item><item><title>Part 1. Challenges in Medical Imaging Datasets.</title><link>http://localhost:1313/projects/project5/project5_1/</link><pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
+&lt;p>The field of histopathology is witnessing a paradigm shift with the integration of artificial intelligence (AI) and deep learning (DL). This blog delves into a research project that explores advanced deep learning techniques to enhance breast cancer diagnosis using histopathology images (HIs). The project, based on the BreakHis dataset, leverages state-of-the-art convolutional neural networks (CNNs), ensemble methods, and interpretability tools such as Grad-CAM and LIME. These innovations aim to address critical challenges in clinical applications, including class imbalance, model reliability, and diagnostic accuracy.&lt;/p></description></item><item><title>Part 1. Challenges in Medical Imaging Datasets.</title><link>https://drnsmith.github.io/projects/project5/project5_1/</link><pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/project5_1/</guid><description>&lt;p>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project5_images/pr5.jpg">
 &lt;/figure>
 
 &lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges.&lt;/p>
 &lt;p>In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong>dataset imbalance&lt;/strong> and &lt;strong>small validation sets&lt;/strong>, which can hinder model performance.&lt;/p>
-&lt;p>This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p></description></item><item><title>Part 2. Boosting Model Generalisation with Data Augmentation.</title><link>http://localhost:1313/projects/project5/project5_2/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
+&lt;p>This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p></description></item><item><title>Part 2. Boosting Model Generalisation with Data Augmentation.</title><link>https://drnsmith.github.io/projects/project5/project5_2/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/project5_2/</guid><description>&lt;p>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project5_images/pr5.jpg">
 &lt;/figure>
 
 &lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
 &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.&lt;/p>
 &lt;p>To overcome this challenge in our pneumonia detection project, we used &lt;strong>data augmentation&lt;/strong> (DA) techniques to artificially expand the training dataset.&lt;/p>
 &lt;p>DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&amp;rsquo;s generalisation to unseen chest X-ray images.&lt;/p>
-&lt;p>This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.&lt;/p></description></item><item><title>Part 2. Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective.</title><link>http://localhost:1313/projects/project13/project13_2/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.&lt;/p></description></item><item><title>Part 2. Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective.</title><link>https://drnsmith.github.io/projects/project13/project13_2/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_2/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="handling-class-imbalance-in-medical-imaging-a-deep-learning-perspective">&lt;strong>Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective&lt;/strong>&lt;/h3>
-&lt;p>Class imbalance is a common issue in histopathological datasets, such as the BreakHis dataset used for breast cancer detection. This imbalance, where benign samples constitute 31% and malignant samples 69%, can adversely affect model performance by causing the model to prioritize the majority class. In this blog, we explore techniques employed in your project, including &lt;strong>weighted loss functions&lt;/strong>, &lt;strong>data augmentation&lt;/strong>, and &lt;strong>stratified sampling&lt;/strong>, to address this challenge and enhance model performance.&lt;/p></description></item><item><title>Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis.</title><link>http://localhost:1313/projects/project5/project5_3/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
+&lt;p>Class imbalance is a common issue in histopathological datasets, such as the BreakHis dataset used for breast cancer detection. This imbalance, where benign samples constitute 31% and malignant samples 69%, can adversely affect model performance by causing the model to prioritize the majority class. In this blog, we explore techniques employed in your project, including &lt;strong>weighted loss functions&lt;/strong>, &lt;strong>data augmentation&lt;/strong>, and &lt;strong>stratified sampling&lt;/strong>, to address this challenge and enhance model performance.&lt;/p></description></item><item><title>Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis.</title><link>https://drnsmith.github.io/projects/project5/project5_3/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/project5_3/</guid><description>&lt;p>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project5_images/pr5.jpg">
 &lt;/figure>
 
 &lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
 &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>Deep learning (DL) provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models.&lt;/p>
 &lt;p>In this blog, we compare the performance of a &lt;strong>manual CNN&lt;/strong> and the &lt;strong>VGG16 pre-trained model&lt;/strong> for pneumonia detection.&lt;/p>
 &lt;p>While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of transfer learning with its pre-trained &lt;strong>ImageNet&lt;/strong> weights.&lt;/p>
-&lt;p>This comparative analysis explores their architectures, training strategies, and results.&lt;/p></description></item><item><title>Part 3. Choosing the Best CNN Architecture for Breast Cancer Detection: How Ensemble Models Improve Breast Cancer Detection with AI.</title><link>http://localhost:1313/projects/project13/project13_3/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>This comparative analysis explores their architectures, training strategies, and results.&lt;/p></description></item><item><title>Part 3. Choosing the Best CNN Architecture for Breast Cancer Detection: How Ensemble Models Improve Breast Cancer Detection with AI.</title><link>https://drnsmith.github.io/projects/project13/project13_3/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_3/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;h3 id="choosing-the-best-cnn-architecture-for-breast-cancer-detection-how-ensemble-models-improve-accuracy">&lt;strong>Choosing the Best CNN Architecture for Breast Cancer Detection: How Ensemble Models Improve Accuracy&lt;/strong>&lt;/h3>
-&lt;p>Deep learning has revolutionized breast cancer detection, especially with histopathological image analysis. Among the arsenal of Convolutional Neural Network (CNN) architectures, models like &lt;strong>ResNet&lt;/strong>, &lt;strong>DenseNet&lt;/strong>, and &lt;strong>EfficientNet&lt;/strong> have proven highly effective. However, instead of relying on a single architecture, combining them through ensemble learning often yields superior performance. In this blog, we’ll compare these top architectures and explore how an &lt;strong>ensemble approach using logistic regression&lt;/strong> as a meta-model improves diagnostic accuracy and robustness.&lt;/p></description></item><item><title>Part 4. Evaluating CNN Models for Pneumonia Detection.</title><link>http://localhost:1313/projects/project5/project5_4/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
+&lt;p>Deep learning has revolutionized breast cancer detection, especially with histopathological image analysis. Among the arsenal of Convolutional Neural Network (CNN) architectures, models like &lt;strong>ResNet&lt;/strong>, &lt;strong>DenseNet&lt;/strong>, and &lt;strong>EfficientNet&lt;/strong> have proven highly effective. However, instead of relying on a single architecture, combining them through ensemble learning often yields superior performance. In this blog, we’ll compare these top architectures and explore how an &lt;strong>ensemble approach using logistic regression&lt;/strong> as a meta-model improves diagnostic accuracy and robustness.&lt;/p></description></item><item><title>Part 4. Evaluating CNN Models for Pneumonia Detection.</title><link>https://drnsmith.github.io/projects/project5/project5_4/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/project5_4/</guid><description>&lt;p>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project5_images/pr5.jpg">
 &lt;/figure>
 
 &lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
 &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.&lt;/p>
@@ -75,111 +75,111 @@
 &lt;h3 id="metrics-for-evaluation">Metrics for Evaluation&lt;/h3>
 &lt;ol>
 &lt;li>
-&lt;p>&lt;strong>Accuracy&lt;/strong>: The percentage of correctly classified samples.&lt;/p></description></item><item><title>Part 4. Boosting AI Performance: Data Augmentation for Histopathological Imaging.</title><link>http://localhost:1313/projects/project13/project13_4/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>&lt;strong>Accuracy&lt;/strong>: The percentage of correctly classified samples.&lt;/p></description></item><item><title>Part 4. Boosting AI Performance: Data Augmentation for Histopathological Imaging.</title><link>https://drnsmith.github.io/projects/project13/project13_4/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_4/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;h3 id="boosting-ai-performance-data-augmentation-for-histopathological-imaging">&lt;strong>Boosting AI Performance: Data Augmentation for Histopathological Imaging&lt;/strong>&lt;/h3>
-&lt;p>In medical imaging, especially in histopathology, deep learning models often face challenges such as limited datasets and class imbalances. These limitations can hinder the performance of models and their generalization to new data. A powerful technique to overcome these issues is &lt;strong>data augmentation&lt;/strong>—synthetically increasing the size and diversity of the training data. In this blog, we’ll dive into how data augmentation techniques like flipping, rotation, and scaling can enhance deep learning models for medical imaging.&lt;/p></description></item><item><title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</title><link>http://localhost:1313/projects/project5/project5_5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
+&lt;p>In medical imaging, especially in histopathology, deep learning models often face challenges such as limited datasets and class imbalances. These limitations can hinder the performance of models and their generalization to new data. A powerful technique to overcome these issues is &lt;strong>data augmentation&lt;/strong>—synthetically increasing the size and diversity of the training data. In this blog, we’ll dive into how data augmentation techniques like flipping, rotation, and scaling can enhance deep learning models for medical imaging.&lt;/p></description></item><item><title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</title><link>https://drnsmith.github.io/projects/project5/project5_5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/project5_5/</guid><description>&lt;p>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project5_images/pr5.jpg">
 &lt;/figure>
 
 &lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
 &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>When evaluating AI models for medical diagnostics, metrics like &lt;strong>sensitivity&lt;/strong> and &lt;strong>specificity&lt;/strong> are crucial.&lt;/p>
 &lt;p>Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.&lt;/p>
 &lt;p>For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.&lt;/p>
-&lt;p>In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.&lt;/p></description></item><item><title>Part 5. Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis.</title><link>http://localhost:1313/projects/project13/project13_5/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.&lt;/p></description></item><item><title>Part 5. Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis.</title><link>https://drnsmith.github.io/projects/project13/project13_5/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_5/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;h3 id="why-ai-calibration-is-critical-for-reliable-breast-cancer-diagnosis">&lt;strong>Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis&lt;/strong>&lt;/h3>
-&lt;p>AI-powered tools are revolutionizing healthcare by providing fast, accurate, and scalable diagnostic solutions. In breast cancer diagnosis, deep learning models, particularly Convolutional Neural Networks (CNNs), have shown remarkable promise. However, a highly accurate model is not necessarily a reliable one. This is where &lt;strong>AI calibration&lt;/strong> plays a critical role—ensuring that a model’s predicted probabilities align closely with the actual likelihood of events, making predictions more interpretable and trustworthy.&lt;/p></description></item><item><title>Part 6. Future Directions for AI-Assisted Medical Imaging.</title><link>http://localhost:1313/projects/project5/project5_6/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
+&lt;p>AI-powered tools are revolutionizing healthcare by providing fast, accurate, and scalable diagnostic solutions. In breast cancer diagnosis, deep learning models, particularly Convolutional Neural Networks (CNNs), have shown remarkable promise. However, a highly accurate model is not necessarily a reliable one. This is where &lt;strong>AI calibration&lt;/strong> plays a critical role—ensuring that a model’s predicted probabilities align closely with the actual likelihood of events, making predictions more interpretable and trustworthy.&lt;/p></description></item><item><title>Part 6. Future Directions for AI-Assisted Medical Imaging.</title><link>https://drnsmith.github.io/projects/project5/project5_6/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/project5_6/</guid><description>&lt;p>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project5_images/pr5.jpg">
 &lt;/figure>
 
 &lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
 &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project.&lt;/p>
 &lt;p>However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery.&lt;/p>
-&lt;p>In this blog, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.&lt;/p></description></item><item><title>Part 6. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis.</title><link>http://localhost:1313/projects/project13/project13_6/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>In this blog, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.&lt;/p></description></item><item><title>Part 6. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis.</title><link>https://drnsmith.github.io/projects/project13/project13_6/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_6/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;p>In the ever-evolving field of AI, deep learning (DL) has emerged as a transformative force, reshaping industries and driving innovation. In medical imaging, where precision and interpretability are critical, advanced techniques like Grad-CAM (Gradient-weighted Class Activation Mapping) and LIME (Local Interpretable Model-agnostic Explanations) are becoming essential tools for understanding how models make decisions.&lt;/p>
-&lt;p>This project leverages Grad-CAM and LIME to explain predictions made by cutting-edge deep learning models like &lt;code>ResNet50&lt;/code>, &lt;code>EfficientNetB0&lt;/code>, and &lt;code>DenseNet201&lt;/code> for breast cancer diagnosis. By visualising what a model &amp;ldquo;sees&amp;rdquo; and validating its decision-making process, we bridge the gap between AI&amp;rsquo;s technical prowess and the human trust required for adoption in critical healthcare settings.&lt;/p></description></item><item><title>Part 7. Evaluating AI Models for Healthcare: Beyond Accuracy.</title><link>http://localhost:1313/projects/project13/project13_7/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_7/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>This project leverages Grad-CAM and LIME to explain predictions made by cutting-edge deep learning models like &lt;code>ResNet50&lt;/code>, &lt;code>EfficientNetB0&lt;/code>, and &lt;code>DenseNet201&lt;/code> for breast cancer diagnosis. By visualising what a model &amp;ldquo;sees&amp;rdquo; and validating its decision-making process, we bridge the gap between AI&amp;rsquo;s technical prowess and the human trust required for adoption in critical healthcare settings.&lt;/p></description></item><item><title>Part 7. Evaluating AI Models for Healthcare: Beyond Accuracy.</title><link>https://drnsmith.github.io/projects/project13/project13_7/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_7/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
 &lt;h3 id="evaluating-ai-models-for-healthcare-beyond-accuracy">&lt;strong>Evaluating AI Models for Healthcare: Beyond Accuracy&lt;/strong>&lt;/h3>
-&lt;p>In healthcare, the stakes are higher than in most other fields. A seemingly high-performing AI model that achieves 95% accuracy may still fail to detect critical cases, leading to life-threatening consequences. For clinical applications, performance metrics like &lt;strong>sensitivity&lt;/strong>, &lt;strong>specificity&lt;/strong>, and &lt;strong>Area Under the Curve (AUC)&lt;/strong> provide a more nuanced evaluation, ensuring AI models align with real-world needs.&lt;/p></description></item><item><title>Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs.</title><link>http://localhost:1313/projects/project13/project13_8/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_8/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>In healthcare, the stakes are higher than in most other fields. A seemingly high-performing AI model that achieves 95% accuracy may still fail to detect critical cases, leading to life-threatening consequences. For clinical applications, performance metrics like &lt;strong>sensitivity&lt;/strong>, &lt;strong>specificity&lt;/strong>, and &lt;strong>Area Under the Curve (AUC)&lt;/strong> provide a more nuanced evaluation, ensuring AI models align with real-world needs.&lt;/p></description></item><item><title>Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs.</title><link>https://drnsmith.github.io/projects/project13/project13_8/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_8/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;p>Got it! Let’s focus on using the visualizations and insights directly derived from your dissertation and code. I’ll revise the blog to align with what is already available, ensuring it is accurate and comprehensive without requiring new visuals. Here’s the updated write-up:&lt;/p>
 &lt;hr>
 &lt;h3 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h3>
-&lt;p>Medical imaging has revolutionized diagnostics, offering clinicians unprecedented insight into human health. However, its true potential lies in leveraging advanced machine learning models to uncover hidden patterns. This blog explores how three cutting-edge deep learning models—&lt;strong>ResNet50&lt;/strong>, &lt;strong>EfficientNetB0&lt;/strong>, and &lt;strong>DenseNet201&lt;/strong>—extract meaningful features from medical images. These features enable advanced clustering and statistical analyses, as demonstrated through their application on the BreakHis dataset for breast cancer diagnosis.&lt;/p></description></item><item><title>PART 9. Clustering Breast Cancer Features: An Innovative Approach Using CNNs.</title><link>http://localhost:1313/projects/project13/project13_9/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_9/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>Medical imaging has revolutionized diagnostics, offering clinicians unprecedented insight into human health. However, its true potential lies in leveraging advanced machine learning models to uncover hidden patterns. This blog explores how three cutting-edge deep learning models—&lt;strong>ResNet50&lt;/strong>, &lt;strong>EfficientNetB0&lt;/strong>, and &lt;strong>DenseNet201&lt;/strong>—extract meaningful features from medical images. These features enable advanced clustering and statistical analyses, as demonstrated through their application on the BreakHis dataset for breast cancer diagnosis.&lt;/p></description></item><item><title>PART 9. Clustering Breast Cancer Features: An Innovative Approach Using CNNs.</title><link>https://drnsmith.github.io/projects/project13/project13_9/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_9/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h3>
-&lt;p>Breast cancer imaging datasets provide invaluable data for early detection and diagnostics. However, even within the same diagnostic category, significant variations can exist. These intra-class variations often hold critical information about tumor subtypes, aggressiveness, and treatment response. By employing &lt;strong>hierarchical clustering&lt;/strong> and &lt;strong>statistical analysis&lt;/strong>, researchers can uncover these subtle differences, enabling personalized diagnostics and treatment strategies. In this blog, we’ll explore how these techniques can be applied to breast cancer imaging datasets to drive precision medicine.&lt;/p></description></item><item><title>Part 10. Enhancing Interpretability in CNNs: Statistical Insights from Breast Cancer Data.</title><link>http://localhost:1313/projects/project13/project13_10/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_10/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>Breast cancer imaging datasets provide invaluable data for early detection and diagnostics. However, even within the same diagnostic category, significant variations can exist. These intra-class variations often hold critical information about tumor subtypes, aggressiveness, and treatment response. By employing &lt;strong>hierarchical clustering&lt;/strong> and &lt;strong>statistical analysis&lt;/strong>, researchers can uncover these subtle differences, enabling personalized diagnostics and treatment strategies. In this blog, we’ll explore how these techniques can be applied to breast cancer imaging datasets to drive precision medicine.&lt;/p></description></item><item><title>Part 10. Enhancing Interpretability in CNNs: Statistical Insights from Breast Cancer Data.</title><link>https://drnsmith.github.io/projects/project13/project13_10/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_10/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h3>
-&lt;p>Deep learning (DL) models, particularly Convolutional Neural Networks (CNNs), are powerful tools for analysing medical imaging data. However, their &amp;ldquo;black-box&amp;rdquo; nature often limits their utility in sensitive applications like breast cancer diagnostics, where interpretability is paramount. By combining CNN feature extraction with statistical analysis, we can enhance model interpretability, revealing meaningful patterns and offering deeper insights into the data.&lt;/p></description></item><item><title>Part 11. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description.</title><link>http://localhost:1313/projects/project13/project13_11/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project13/project13_11/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project13_images/pr13.jpg">&lt;figcaption>
+&lt;p>Deep learning (DL) models, particularly Convolutional Neural Networks (CNNs), are powerful tools for analysing medical imaging data. However, their &amp;ldquo;black-box&amp;rdquo; nature often limits their utility in sensitive applications like breast cancer diagnostics, where interpretability is paramount. By combining CNN feature extraction with statistical analysis, we can enhance model interpretability, revealing meaningful patterns and offering deeper insights into the data.&lt;/p></description></item><item><title>Part 11. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description.</title><link>https://drnsmith.github.io/projects/project13/project13_11/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project13/project13_11/</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project13_images/pr13.jpg">&lt;figcaption>
  &lt;h4>Photo by Ben Hershey on Unsplash&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
 
 &lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
 &lt;a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
  &lt;/a>
 &lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deploying AI models for clinical use, particularly in breast cancer diagnosis, is a multi-faceted challenge. My project on the BreakHis dataset highlighted several computational and practical hurdles, such as optimising resource usage, addressing class imbalance, and ensuring model compatibility with real-world clinical workflows. This blog explores these challenges and the solutions implemented in my work, including specific metrics, code snippets, and insights.&lt;/p></description></item><item><title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks</title><link>http://localhost:1313/projects/project5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
+&lt;p>Deploying AI models for clinical use, particularly in breast cancer diagnosis, is a multi-faceted challenge. My project on the BreakHis dataset highlighted several computational and practical hurdles, such as optimising resource usage, addressing class imbalance, and ensuring model compatibility with real-world clinical workflows. This blog explores these challenges and the solutions implemented in my work, including specific metrics, code snippets, and insights.&lt;/p></description></item><item><title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks</title><link>https://drnsmith.github.io/projects/project5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/project5/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
