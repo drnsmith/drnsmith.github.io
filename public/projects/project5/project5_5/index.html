@@ -1,247 +1,54 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog delves into the critical metrics of sensitivity and specificity, exploring their importance in evaluating AI models for pneumonia detection. Learn how these metrics influenced our model selection and diagnostic accuracy.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project5_images/pr5.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.
-          </h1>
-          
-            <p class="f5">This blog delves into the critical metrics of sensitivity and specificity, exploring their importance in evaluating AI models for pneumonia detection. Learn how these metrics influenced our model selection and diagnostic accuracy.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project5_images/pr5.jpg">
-</figure>
-
-<strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-</a>
-<h3 id="introduction">Introduction</h3>
-<p>When evaluating AI models for medical diagnostics, metrics like <strong>sensitivity</strong> and <strong>specificity</strong> are crucial.</p>
-<p>Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.</p>
-<p>For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.</p>
-<p>In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.</p>
-<h3 id="understanding-sensitivity-and-specificity">Understanding Sensitivity and Specificity</h3>
-<ol>
-<li>
-<p><strong>Sensitivity (Recall)</strong>: Measures the model&rsquo;s ability to correctly identify positive cases (patients with pneumonia).</p>
-<ul>
-<li><strong>Formula</strong>: <code>Sensitivity = TP / (TP + FN)</code></li>
-<li>High sensitivity reduces false negatives, which is critical for timely diagnosis and treatment.</li>
-</ul>
-</li>
-<li>
-<p><strong>Specificity</strong>: Measures the model&rsquo;s ability to correctly identify negative cases (healthy patients).</p>
-<ul>
-<li><strong>Formula</strong>: <code>Specificity = TN / (TN + FP)</code></li>
-<li>High specificity reduces false positives, ensuring healthy patients are not misdiagnosed.</li>
-</ul>
-</li>
-</ol>
-<h3 id="why-these-metrics-matter-in-pneumonia-detection">Why These Metrics Matter in Pneumonia Detection</h3>
-<ol>
-<li>
-<p><strong>Sensitivity Prioritisation</strong>:</p>
-<ul>
-<li>Missing a pneumonia case (false negative) can lead to delayed treatment and severe outcomes.</li>
-<li>High sensitivity ensures most pneumonia cases are detected.</li>
-</ul>
-</li>
-<li>
-<p><strong>Balancing Specificity</strong>:</p>
-<ul>
-<li>While high sensitivity is critical, specificity ensures resources are not wasted on unnecessary follow-ups for false positives.</li>
-</ul>
-</li>
-</ol>
-<h3 id="python-code-calculating-sensitivity-and-specificity">Python Code: Calculating Sensitivity and Specificity</h3>
-<p>Using the confusion matrix results, we calculated these metrics for both models.</p>
-<h4 id="code-for-metrics-calculation">Code for Metrics Calculation</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_sensitivity_specificity</span>(confusion_matrix):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculates sensitivity and specificity from a confusion matrix.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    confusion_matrix (ndarray): 2x2 confusion matrix [[TN, FP], [FN, TP]].
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Sensitivity and specificity values.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    TN, FP, FN, TP <span style="color:#f92672">=</span> confusion_matrix<span style="color:#f92672">.</span>ravel()
-</span></span><span style="display:flex;"><span>    sensitivity <span style="color:#f92672">=</span> TP <span style="color:#f92672">/</span> (TP <span style="color:#f92672">+</span> FN)
-</span></span><span style="display:flex;"><span>    specificity <span style="color:#f92672">=</span> TN <span style="color:#f92672">/</span> (TN <span style="color:#f92672">+</span> FP)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;Sensitivity&#34;</span>: sensitivity, <span style="color:#e6db74">&#34;Specificity&#34;</span>: specificity}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example confusion matrices</span>
-</span></span><span style="display:flex;"><span>manual_cnn_cm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">15</span>], [<span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">260</span>]])
-</span></span><span style="display:flex;"><span>vgg16_cm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">210</span>, <span style="color:#ae81ff">10</span>], [<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">270</span>]])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate metrics</span>
-</span></span><span style="display:flex;"><span>manual_metrics <span style="color:#f92672">=</span> calculate_sensitivity_specificity(manual_cnn_cm)
-</span></span><span style="display:flex;"><span>vgg16_metrics <span style="color:#f92672">=</span> calculate_sensitivity_specificity(vgg16_cm)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Manual CNN Metrics:&#34;</span>, manual_metrics)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;VGG16 Metrics:&#34;</span>, vgg16_metrics)
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog delves into the critical metrics of sensitivity and specificity, exploring their importance in evaluating AI models for pneumonia detection. Learn how these metrics influenced our model selection and diagnostic accuracy."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project5_images/pr5.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</h1><p class=f5>This blog delves into the critical metrics of sensitivity and specificity, exploring their importance in evaluating AI models for pneumonia detection. Learn how these metrics influenced our model selection and diagnostic accuracy.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project5_images/pr5.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/pneumonia-detection-CNN target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>When evaluating AI models for medical diagnostics, metrics like <strong>sensitivity</strong> and <strong>specificity</strong> are crucial.</p><p>Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.</p><p>For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.</p><p>In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.</p><h3 id=understanding-sensitivity-and-specificity>Understanding Sensitivity and Specificity</h3><ol><li><p><strong>Sensitivity (Recall)</strong>: Measures the model&rsquo;s ability to correctly identify positive cases (patients with pneumonia).</p><ul><li><strong>Formula</strong>: <code>Sensitivity = TP / (TP + FN)</code></li><li>High sensitivity reduces false negatives, which is critical for timely diagnosis and treatment.</li></ul></li><li><p><strong>Specificity</strong>: Measures the model&rsquo;s ability to correctly identify negative cases (healthy patients).</p><ul><li><strong>Formula</strong>: <code>Specificity = TN / (TN + FP)</code></li><li>High specificity reduces false positives, ensuring healthy patients are not misdiagnosed.</li></ul></li></ol><h3 id=why-these-metrics-matter-in-pneumonia-detection>Why These Metrics Matter in Pneumonia Detection</h3><ol><li><p><strong>Sensitivity Prioritisation</strong>:</p><ul><li>Missing a pneumonia case (false negative) can lead to delayed treatment and severe outcomes.</li><li>High sensitivity ensures most pneumonia cases are detected.</li></ul></li><li><p><strong>Balancing Specificity</strong>:</p><ul><li>While high sensitivity is critical, specificity ensures resources are not wasted on unnecessary follow-ups for false positives.</li></ul></li></ol><h3 id=python-code-calculating-sensitivity-and-specificity>Python Code: Calculating Sensitivity and Specificity</h3><p>Using the confusion matrix results, we calculated these metrics for both models.</p><h4 id=code-for-metrics-calculation>Code for Metrics Calculation</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>calculate_sensitivity_specificity</span>(confusion_matrix):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Calculates sensitivity and specificity from a confusion matrix.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Args:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    confusion_matrix (ndarray): 2x2 confusion matrix [[TN, FP], [FN, TP]].
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Returns:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    dict: Sensitivity and specificity values.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    TN, FP, FN, TP <span style=color:#f92672>=</span> confusion_matrix<span style=color:#f92672>.</span>ravel()
+</span></span><span style=display:flex><span>    sensitivity <span style=color:#f92672>=</span> TP <span style=color:#f92672>/</span> (TP <span style=color:#f92672>+</span> FN)
+</span></span><span style=display:flex><span>    specificity <span style=color:#f92672>=</span> TN <span style=color:#f92672>/</span> (TN <span style=color:#f92672>+</span> FP)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> {<span style=color:#e6db74>&#34;Sensitivity&#34;</span>: sensitivity, <span style=color:#e6db74>&#34;Specificity&#34;</span>: specificity}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Example confusion matrices</span>
+</span></span><span style=display:flex><span>manual_cnn_cm <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([[<span style=color:#ae81ff>200</span>, <span style=color:#ae81ff>15</span>], [<span style=color:#ae81ff>25</span>, <span style=color:#ae81ff>260</span>]])
+</span></span><span style=display:flex><span>vgg16_cm <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([[<span style=color:#ae81ff>210</span>, <span style=color:#ae81ff>10</span>], [<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>270</span>]])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Calculate metrics</span>
+</span></span><span style=display:flex><span>manual_metrics <span style=color:#f92672>=</span> calculate_sensitivity_specificity(manual_cnn_cm)
+</span></span><span style=display:flex><span>vgg16_metrics <span style=color:#f92672>=</span> calculate_sensitivity_specificity(vgg16_cm)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Manual CNN Metrics:&#34;</span>, manual_metrics)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;VGG16 Metrics:&#34;</span>, vgg16_metrics)
 </span></span></code></pre></div><p>Output:
-<strong>For Manual CNN</strong>:</p>
-<ul>
-<li>Sensitivity: 91.2%</li>
-<li>Specificity: 93.0%</li>
-</ul>
-<p><strong>For VGG16</strong>:</p>
-<ul>
-<li>Sensitivity: 93.1%</li>
-<li>Specificity: 95.5%</li>
-</ul>
-<h3 id="performance-comparison">Performance Comparison</h3>
-<h4 id="manual-cnn">Manual CNN:</h4>
-<ul>
-<li>Strength: Balanced performance with reasonable sensitivity and specificity.</li>
-<li>Limitation: Slightly lower sensitivity could lead to missed pneumonia cases.</li>
-</ul>
-<h4 id="vgg16">VGG16:</h4>
-<ul>
-<li>Strength: Higher sensitivity reduces false negatives, making it more reliable for detecting pneumonia.</li>
-<li>Limitation: Marginally lower specificity compared to manual CNN.</li>
-</ul>
-<h3 id="sensitivity-specificity-trade-offs">Sensitivity-Specificity Trade-offs</h3>
-<p>Balancing sensitivity and specificity is key in medical diagnostics:</p>
-<h4 id="high-sensitivity">High Sensitivity:</h4>
-<ul>
-<li>Essential for critical conditions like pneumonia, where missing a positive case can have life-threatening consequences.</li>
-<li>Prioritise recall over precision.</li>
-</ul>
-<h4 id="high-specificity">High Specificity:</h4>
-<ul>
-<li>Reduces false positives, minimising unnecessary stress, costs, and resource usage.</li>
-<li>Important in resource-limited settings.</li>
-</ul>
-<h3 id="visualising-the-trade-offs">Visualising the Trade-offs</h3>
-<h4 id="python-code-roc-curve">Python Code: ROC Curve</h4>
-<p>We used the Receiver Operating Characteristic (ROC) curve to visualise the sensitivity-specificity trade-off across different thresholds.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_curve, auc
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_roc_curve</span>(model, test_generator):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Plots the ROC curve for a given model and test data.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    y_true <span style="color:#f92672">=</span> test_generator<span style="color:#f92672">.</span>classes
-</span></span><span style="display:flex;"><span>    y_pred <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(test_generator)<span style="color:#f92672">.</span>ravel()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    fpr, tpr, _ <span style="color:#f92672">=</span> roc_curve(y_true, y_pred)
-</span></span><span style="display:flex;"><span>    roc_auc <span style="color:#f92672">=</span> auc(fpr, tpr)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot(fpr, tpr, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ROC curve (area = </span><span style="color:#e6db74">{</span>roc_auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gray&#34;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;False Positive Rate (1 - Specificity)&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;True Positive Rate (Sensitivity)&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;ROC Curve&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lower right&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>grid()
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage with VGG16 model</span>
-</span></span><span style="display:flex;"><span>plot_roc_curve(vgg16_model, test_generator)
-</span></span></code></pre></div><h3 id="key-takeaways">Key Takeaways</h3>
-<h4 id="vgg16-outperforms">VGG16 Outperforms:</h4>
-<ul>
-<li>The higher sensitivity and ROC AUC score make VGG16 a better choice for pneumonia detection.</li>
-<li>Reduces false negatives, ensuring more pneumonia cases are caught.</li>
-</ul>
-<h4 id="manual-cnn-is-reliable">Manual CNN is Reliable:</h4>
-<ul>
-<li>Offers a balanced approach, with decent sensitivity and specificity.</li>
-<li>Suitable for scenarios with resource constraints.</li>
-</ul>
-<h3 id="conclusion">Conclusion</h3>
-<p>Sensitivity and specificity are critical metrics in evaluating AI models for medical imaging. While both the Manual CNN and VGG16 demonstrated strong performance, VGG16’s superior sensitivity makes it the preferred choice for pneumonia detection, prioritising patient safety.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<strong>For Manual CNN</strong>:</p><ul><li>Sensitivity: 91.2%</li><li>Specificity: 93.0%</li></ul><p><strong>For VGG16</strong>:</p><ul><li>Sensitivity: 93.1%</li><li>Specificity: 95.5%</li></ul><h3 id=performance-comparison>Performance Comparison</h3><h4 id=manual-cnn>Manual CNN:</h4><ul><li>Strength: Balanced performance with reasonable sensitivity and specificity.</li><li>Limitation: Slightly lower sensitivity could lead to missed pneumonia cases.</li></ul><h4 id=vgg16>VGG16:</h4><ul><li>Strength: Higher sensitivity reduces false negatives, making it more reliable for detecting pneumonia.</li><li>Limitation: Marginally lower specificity compared to manual CNN.</li></ul><h3 id=sensitivity-specificity-trade-offs>Sensitivity-Specificity Trade-offs</h3><p>Balancing sensitivity and specificity is key in medical diagnostics:</p><h4 id=high-sensitivity>High Sensitivity:</h4><ul><li>Essential for critical conditions like pneumonia, where missing a positive case can have life-threatening consequences.</li><li>Prioritise recall over precision.</li></ul><h4 id=high-specificity>High Specificity:</h4><ul><li>Reduces false positives, minimising unnecessary stress, costs, and resource usage.</li><li>Important in resource-limited settings.</li></ul><h3 id=visualising-the-trade-offs>Visualising the Trade-offs</h3><h4 id=python-code-roc-curve>Python Code: ROC Curve</h4><p>We used the Receiver Operating Characteristic (ROC) curve to visualise the sensitivity-specificity trade-off across different thresholds.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> roc_curve, auc
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>plot_roc_curve</span>(model, test_generator):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Plots the ROC curve for a given model and test data.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    y_true <span style=color:#f92672>=</span> test_generator<span style=color:#f92672>.</span>classes
+</span></span><span style=display:flex><span>    y_pred <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(test_generator)<span style=color:#f92672>.</span>ravel()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    fpr, tpr, _ <span style=color:#f92672>=</span> roc_curve(y_true, y_pred)
+</span></span><span style=display:flex><span>    roc_auc <span style=color:#f92672>=</span> auc(fpr, tpr)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>6</span>))
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>plot(fpr, tpr, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;blue&#34;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;ROC curve (area = </span><span style=color:#e6db74>{</span>roc_auc<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>plot([<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>], [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>], color<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;gray&#34;</span>, linestyle<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;--&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;False Positive Rate (1 - Specificity)&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;True Positive Rate (Sensitivity)&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;ROC Curve&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>legend(loc<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;lower right&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>grid()
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Example usage with VGG16 model</span>
+</span></span><span style=display:flex><span>plot_roc_curve(vgg16_model, test_generator)
+</span></span></code></pre></div><h3 id=key-takeaways>Key Takeaways</h3><h4 id=vgg16-outperforms>VGG16 Outperforms:</h4><ul><li>The higher sensitivity and ROC AUC score make VGG16 a better choice for pneumonia detection.</li><li>Reduces false negatives, ensuring more pneumonia cases are caught.</li></ul><h4 id=manual-cnn-is-reliable>Manual CNN is Reliable:</h4><ul><li>Offers a balanced approach, with decent sensitivity and specificity.</li><li>Suitable for scenarios with resource constraints.</li></ul><h3 id=conclusion>Conclusion</h3><p>Sensitivity and specificity are critical metrics in evaluating AI models for medical imaging. While both the Manual CNN and VGG16 demonstrated strong performance, VGG16’s superior sensitivity makes it the preferred choice for pneumonia detection, prioritising patient safety.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

@@ -1,216 +1,26 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PART 2. Understanding the Predictors of Air Pollution | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Learn how features like lagged PM10 values, weather variables, and traffic-related pollutants contribute to air pollution predictions. This blog highlights the feature engineering process and its critical role in building effective machine learning models.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project9_images/pr9.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            PART 2. Understanding the Predictors of Air Pollution
-          </h1>
-          
-            <p class="f5">Learn how features like lagged PM10 values, weather variables, and traffic-related pollutants contribute to air pollution predictions. This blog highlights the feature engineering process and its critical role in building effective machine learning models.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project9_images/pr9.jpg"
-    alt="Photo by Markus Distelrath on Pexels"><figcaption>
-      <p>Photo by Markus Distelrath on Pexels</p>
-    </figcaption>
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>What makes air pollution worse?</p>
-<p>Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.</p>
-<p>In this blog, we dive into the heart of the Auckland PM10 prediction project: <strong>feature selection</strong>.</p>
-<p>From traffic patterns to weather variables, we’ll explore the key predictors of air pollution and how they were prepared to train ML models.</p>
-<h3 id="1-why-feature-selection-matters">1. Why Feature Selection Matters</h3>
-<p>ML models rely on features—the independent variables that explain or predict the outcome. Selecting the right features is crucial because:</p>
-<ul>
-<li><em>Irrelevant Features</em>: Adding unnecessary variables can confuse the model and reduce accuracy.</li>
-<li><em>Multicollinearity</em>: Highly correlated variables can distort model interpretations.</li>
-<li><em>Data Overhead</em>: Too many features increase computational costs and risk overfitting.</li>
-</ul>
-<p>For this project, we identified and engineered features that influence PM10 pollution in Auckland.</p>
-<h3 id="2-key-predictors-of-pm10-pollution">2. Key Predictors of PM10 Pollution</h3>
-<h4 id="traffic-volume">Traffic Volume</h4>
-<p>Traffic is a major contributor to air pollution, especially in urban areas. Vehicle emissions release PM10 directly into the air.</p>
-<p>Traffic volume data from Auckland’s highways was integrated into the dataset as a leading feature.</p>
-<h4 id="weather-variables">Weather Variables</h4>
-<p>Weather has a significant impact on pollution levels:</p>
-<ul>
-<li><strong>Wind Speed</strong>: Disperses pollutants, lowering PM10 concentrations.</li>
-<li><strong>Temperature</strong>: Affects chemical reactions in the atmosphere, influencing pollution levels.</li>
-<li><strong>Humidity</strong>: Can trap particulate matter closer to the ground, increasing PM10 levels.</li>
-<li><strong>Precipitation</strong>: Cleanses the air by washing pollutants away.</li>
-</ul>
-<h4 id="time-features">Time Features</h4>
-<p>Pollution levels follow temporal patterns:</p>
-<ul>
-<li><strong>Hour of the Day</strong>: Morning and evening rush hours typically see spikes in PM10.</li>
-<li><strong>Day of the Week</strong>: Weekends may have lower traffic and, consequently, less pollution.</li>
-<li><strong>Season</strong>: Winter often shows higher pollution levels due to stagnant air and increased heating emissions.</li>
-</ul>
-<h4 id="lagged-pm10-values">Lagged PM10 Values</h4>
-<p>Past PM10 values were used as lagged predictors, capturing temporal dependencies in pollution trends.</p>
-<h3 id="3-feature-engineering">3. Feature Engineering</h3>
-<p>Feature engineering bridges raw data and machine learning models. For this project, it involved:</p>
-<ul>
-<li><em>Creating Lagged Variables</em>: To capture temporal trends, lagged PM10 values were added for 1-hour, 2-hour, and 24-hour delays.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Adding lagged PM10 values</span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_lag_1&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>shift(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_lag_24&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>shift(<span style="color:#ae81ff">24</span>)
-</span></span></code></pre></div><ul>
-<li><em>Encoding Time Variables</em>: Hour, day, and season were encoded as categorical variables for use in regression and neural network models.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Encoding time features</span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Hour_sin&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;Hour&#39;</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">24</span>)
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Hour_cos&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;Hour&#39;</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">24</span>)
-</span></span></code></pre></div><ul>
-<li><em>Handling Correlations</em>: To address multicollinearity, highly correlated features were flagged, and a few were removed based on their   <code>variance inflation factor (VIF)</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> statsmodels.stats.outliers_influence <span style="color:#f92672">import</span> variance_inflation_factor
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculating VIF</span>
-</span></span><span style="display:flex;"><span>vif_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
-</span></span><span style="display:flex;"><span>vif_data[<span style="color:#e6db74">&#34;feature&#34;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>columns
-</span></span><span style="display:flex;"><span>vif_data[<span style="color:#e6db74">&#34;VIF&#34;</span>] <span style="color:#f92672">=</span> [variance_inflation_factor(data<span style="color:#f92672">.</span>values, i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(data<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>])]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(vif_data)
-</span></span></code></pre></div><ul>
-<li><em>Transformations</em>: PM10 values were log-transformed to reduce skewness and stabilize variance.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Log transformation</span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_log&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>log1p(data[<span style="color:#e6db74">&#39;PM10&#39;</span>])
-</span></span></code></pre></div><h3 id="4-correlations-and-initial-observations">4. Correlations and Initial Observations</h3>
-<p>VisualiSing correlations provided valuable insights into the relationships between variables:</p>
-<ul>
-<li>PM10 vs. Traffic Volume: A positive correlation indicated that more traffic led to higher PM10 levels.</li>
-<li>PM10 vs. Wind Speed: A negative correlation confirmed wind’s role in dispersing pollutants.</li>
-<li>Seasonality: Pollution levels were higher in winter months, correlating with stagnant air conditions.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Correlation heatmap</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
-</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>heatmap(data<span style="color:#f92672">.</span>corr(), annot<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coolwarm&#39;</span>, fmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.2f&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Correlation Heatmap&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><figure><img src="/images/project9_images/heat_map.png">
-</figure>
-
-<h3 id="5-feature-selection-for-model-training">5. Feature Selection for Model Training</h3>
-<p>After engineering and analysing features, we selected the following predictors for model training:</p>
-<ul>
-<li><strong>Traffic Variables</strong>: Traffic volume and congestion metrics.</li>
-<li><strong>Weather Features</strong>: Wind speed, temperature, and humidity.</li>
-<li><strong>Temporal Features</strong>: Encoded hour, day, and season.</li>
-<li><strong>Lagged PM10 Values</strong>: 1-hour and 24-hour delays.</li>
-</ul>
-<h4 id="why-these-features">Why These Features?</h4>
-<ul>
-<li>Predictive Power: Each variable contributed significantly to explaining PM10 variability.</li>
-<li>Interpretability: The selected features offered actionable insights for stakeholders.</li>
-</ul>
-<h3 id="6-reflections-on-feature-engineering">6. Reflections on Feature Engineering</h3>
-<p><strong>Lessons Learned</strong></p>
-<ul>
-<li><em>Feature Engineering is Iterative</em>: Adding lagged values and encoded time variables significantly improved model accuracy.</li>
-<li><em>Context is Key</em>: Understanding the environmental factors behind the data ensured meaningful feature selection.</li>
-</ul>
-<p><strong>Challenges Faced</strong></p>
-<ul>
-<li><em>Multicollinearity</em>: Balancing the inclusion of highly correlated weather features required careful judgment.</li>
-<li><em>Data Transformations</em>: Deciding when and how to transform variables, like applying logarithms to PM10, required trial and error.</li>
-</ul>
-<h3 id="conclusion-laying-the-groundwork-for-accurate-predictions">Conclusion: Laying the Groundwork for Accurate Predictions</h3>
-<p>The predictors of air pollution are as complex as the phenomenon itself. By engineering meaningful features and understanding their relationships, we laid the groundwork for building effective ML models.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PART 2. Understanding the Predictors of Air Pollution | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Learn how features like lagged PM10 values, weather variables, and traffic-related pollutants contribute to air pollution predictions. This blog highlights the feature engineering process and its critical role in building effective machine learning models."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project9_images/pr9.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">PART 2. Understanding the Predictors of Air Pollution</h1><p class=f5>Learn how features like lagged PM10 values, weather variables, and traffic-related pollutants contribute to air pollution predictions. This blog highlights the feature engineering process and its critical role in building effective machine learning models.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project9_images/pr9.jpg alt="Photo by Markus Distelrath on Pexels"><figcaption><p>Photo by Markus Distelrath on Pexels</p></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Pollution-Prediction-Auckland target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>What makes air pollution worse?</p><p>Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.</p><p>In this blog, we dive into the heart of the Auckland PM10 prediction project: <strong>feature selection</strong>.</p><p>From traffic patterns to weather variables, we’ll explore the key predictors of air pollution and how they were prepared to train ML models.</p><h3 id=1-why-feature-selection-matters>1. Why Feature Selection Matters</h3><p>ML models rely on features—the independent variables that explain or predict the outcome. Selecting the right features is crucial because:</p><ul><li><em>Irrelevant Features</em>: Adding unnecessary variables can confuse the model and reduce accuracy.</li><li><em>Multicollinearity</em>: Highly correlated variables can distort model interpretations.</li><li><em>Data Overhead</em>: Too many features increase computational costs and risk overfitting.</li></ul><p>For this project, we identified and engineered features that influence PM10 pollution in Auckland.</p><h3 id=2-key-predictors-of-pm10-pollution>2. Key Predictors of PM10 Pollution</h3><h4 id=traffic-volume>Traffic Volume</h4><p>Traffic is a major contributor to air pollution, especially in urban areas. Vehicle emissions release PM10 directly into the air.</p><p>Traffic volume data from Auckland’s highways was integrated into the dataset as a leading feature.</p><h4 id=weather-variables>Weather Variables</h4><p>Weather has a significant impact on pollution levels:</p><ul><li><strong>Wind Speed</strong>: Disperses pollutants, lowering PM10 concentrations.</li><li><strong>Temperature</strong>: Affects chemical reactions in the atmosphere, influencing pollution levels.</li><li><strong>Humidity</strong>: Can trap particulate matter closer to the ground, increasing PM10 levels.</li><li><strong>Precipitation</strong>: Cleanses the air by washing pollutants away.</li></ul><h4 id=time-features>Time Features</h4><p>Pollution levels follow temporal patterns:</p><ul><li><strong>Hour of the Day</strong>: Morning and evening rush hours typically see spikes in PM10.</li><li><strong>Day of the Week</strong>: Weekends may have lower traffic and, consequently, less pollution.</li><li><strong>Season</strong>: Winter often shows higher pollution levels due to stagnant air and increased heating emissions.</li></ul><h4 id=lagged-pm10-values>Lagged PM10 Values</h4><p>Past PM10 values were used as lagged predictors, capturing temporal dependencies in pollution trends.</p><h3 id=3-feature-engineering>3. Feature Engineering</h3><p>Feature engineering bridges raw data and machine learning models. For this project, it involved:</p><ul><li><em>Creating Lagged Variables</em>: To capture temporal trends, lagged PM10 values were added for 1-hour, 2-hour, and 24-hour delays.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Adding lagged PM10 values</span>
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;PM10_lag_1&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;PM10&#39;</span>]<span style=color:#f92672>.</span>shift(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;PM10_lag_24&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;PM10&#39;</span>]<span style=color:#f92672>.</span>shift(<span style=color:#ae81ff>24</span>)
+</span></span></code></pre></div><ul><li><em>Encoding Time Variables</em>: Hour, day, and season were encoded as categorical variables for use in regression and neural network models.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Encoding time features</span>
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;Hour_sin&#39;</span>] <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>sin(<span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;Hour&#39;</span>] <span style=color:#f92672>/</span> <span style=color:#ae81ff>24</span>)
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;Hour_cos&#39;</span>] <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>cos(<span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> data[<span style=color:#e6db74>&#39;Hour&#39;</span>] <span style=color:#f92672>/</span> <span style=color:#ae81ff>24</span>)
+</span></span></code></pre></div><ul><li><em>Handling Correlations</em>: To address multicollinearity, highly correlated features were flagged, and a few were removed based on their <code>variance inflation factor (VIF)</code>.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> statsmodels.stats.outliers_influence <span style=color:#f92672>import</span> variance_inflation_factor
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Calculating VIF</span>
+</span></span><span style=display:flex><span>vif_data <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>DataFrame()
+</span></span><span style=display:flex><span>vif_data[<span style=color:#e6db74>&#34;feature&#34;</span>] <span style=color:#f92672>=</span> data<span style=color:#f92672>.</span>columns
+</span></span><span style=display:flex><span>vif_data[<span style=color:#e6db74>&#34;VIF&#34;</span>] <span style=color:#f92672>=</span> [variance_inflation_factor(data<span style=color:#f92672>.</span>values, i) <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(data<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>1</span>])]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(vif_data)
+</span></span></code></pre></div><ul><li><em>Transformations</em>: PM10 values were log-transformed to reduce skewness and stabilize variance.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Log transformation</span>
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;PM10_log&#39;</span>] <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>log1p(data[<span style=color:#e6db74>&#39;PM10&#39;</span>])
+</span></span></code></pre></div><h3 id=4-correlations-and-initial-observations>4. Correlations and Initial Observations</h3><p>VisualiSing correlations provided valuable insights into the relationships between variables:</p><ul><li>PM10 vs. Traffic Volume: A positive correlation indicated that more traffic led to higher PM10 levels.</li><li>PM10 vs. Wind Speed: A negative correlation confirmed wind’s role in dispersing pollutants.</li><li>Seasonality: Pollution levels were higher in winter months, correlating with stagnant air conditions.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Correlation heatmap</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>8</span>))
+</span></span><span style=display:flex><span>sns<span style=color:#f92672>.</span>heatmap(data<span style=color:#f92672>.</span>corr(), annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;coolwarm&#39;</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;.2f&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Correlation Heatmap&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><figure><img src=/images/project9_images/heat_map.png></figure><h3 id=5-feature-selection-for-model-training>5. Feature Selection for Model Training</h3><p>After engineering and analysing features, we selected the following predictors for model training:</p><ul><li><strong>Traffic Variables</strong>: Traffic volume and congestion metrics.</li><li><strong>Weather Features</strong>: Wind speed, temperature, and humidity.</li><li><strong>Temporal Features</strong>: Encoded hour, day, and season.</li><li><strong>Lagged PM10 Values</strong>: 1-hour and 24-hour delays.</li></ul><h4 id=why-these-features>Why These Features?</h4><ul><li>Predictive Power: Each variable contributed significantly to explaining PM10 variability.</li><li>Interpretability: The selected features offered actionable insights for stakeholders.</li></ul><h3 id=6-reflections-on-feature-engineering>6. Reflections on Feature Engineering</h3><p><strong>Lessons Learned</strong></p><ul><li><em>Feature Engineering is Iterative</em>: Adding lagged values and encoded time variables significantly improved model accuracy.</li><li><em>Context is Key</em>: Understanding the environmental factors behind the data ensured meaningful feature selection.</li></ul><p><strong>Challenges Faced</strong></p><ul><li><em>Multicollinearity</em>: Balancing the inclusion of highly correlated weather features required careful judgment.</li><li><em>Data Transformations</em>: Deciding when and how to transform variables, like applying logarithms to PM10, required trial and error.</li></ul><h3 id=conclusion-laying-the-groundwork-for-accurate-predictions>Conclusion: Laying the Groundwork for Accurate Predictions</h3><p>The predictors of air pollution are as complex as the phenomenon itself. By engineering meaningful features and understanding their relationships, we laid the groundwork for building effective ML models.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

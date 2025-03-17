@@ -1,211 +1,49 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Optimising hyperparameters like learning rate, batch size, regularisation, and dropout rates can make or break a model.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project12_images/pr12.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach.
-          </h1>
-          
-            <p class="f5">Optimising hyperparameters like learning rate, batch size, regularisation, and dropout rates can make or break a model.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project12_images/pr12.jpg">
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>When training neural networks (NNs), every parameter matters. Hyperparameters like learning rate and batch size aren’t learned by the model—they’re chosen by you. These settings can make or break your model’s performance. But how do you find the right combination?</p>
-<p>In this blog, I’ll take you through my experience fine-tuning hyperparameters for a NN trained on the Fashion MNIST dataset. We’ll cover:</p>
-<ul>
-<li>How learning rate impacts convergence.</li>
-<li>Why batch size can influence both speed and stability.</li>
-<li>The importance of regularisation techniques like dropout to prevent overfitting.</li>
-<li>Interpreting precision, recall, and F1-score to evaluate model performance.</li>
-</ul>
-<h3 id="technical-explanation">Technical Explanation</h3>
-<h4 id="the-starting-point">The Starting Point</h4>
-<p>I built a simple but effective NN to classify images in the Fashion MNIST dataset. The network consisted of:</p>
-<ul>
-<li>A <strong>Flatten</strong> layer to prepare the input data.</li>
-<li>Two fully connected <strong>Dense</strong> layers with ReLU activation.</li>
-<li>A final Dense layer with <strong>softmax</strong> activation for classification.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Flatten, Dropout
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> SGD
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
-</span></span><span style="display:flex;"><span>    Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span><span style="color:#f92672">*</span><span style="color:#ae81ff">28</span>,)),  <span style="color:#75715e"># Flatten the input</span>
-</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),  <span style="color:#75715e"># First hidden layer</span>
-</span></span><span style="display:flex;"><span>    Dropout(<span style="color:#ae81ff">0.2</span>),  <span style="color:#75715e"># Dropout for regularisation</span>
-</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),  <span style="color:#75715e"># Second hidden layer</span>
-</span></span><span style="display:flex;"><span>    Dropout(<span style="color:#ae81ff">0.2</span>),  <span style="color:#75715e"># Dropout for regularisation</span>
-</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)  <span style="color:#75715e"># Output layer</span>
-</span></span><span style="display:flex;"><span>])
-</span></span></code></pre></div><p>With the base model defined, the challenge was to optimise its performance by tuning hyperparameters.</p>
-<ul>
-<li><strong>1. Learning Rate: Finding the Sweet Spot</strong>
-The learning rate determines how much the model adjusts during training. Too high, and the model overshoots the optimal point. Too low, and training takes forever.</li>
-</ul>
-<p>I used the SGD optimiser and set the learning rate to 0.01. This value offered a balance between stability and speed. The model converged efficiently without oscillating or plateauing.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> SGD
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>), 
-</span></span><span style="display:flex;"><span>              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, 
-</span></span><span style="display:flex;"><span>              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
-</span></span></code></pre></div><ul>
-<li><strong>2. Batch Size: Balancing Speed and Stability</strong>
-The batch size controls how many samples the model processes before updating weights. Smaller batch sizes can result in noisier gradients, while larger batches provide more stable updates but consume more memory.</li>
-</ul>
-<p>I chose a batch size of 1000, which was a practical choice for my computational setup. It allowed the model to process the data efficiently without overwhelming memory.
-The batch size of 1000 worked well, offering smooth training and good validation performance.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(train_images, train_labels, 
-</span></span><span style="display:flex;"><span>                    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, 
-</span></span><span style="display:flex;"><span>                    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, 
-</span></span><span style="display:flex;"><span>                    validation_data<span style="color:#f92672">=</span>(test_images, test_labels))
-</span></span></code></pre></div><ul>
-<li><strong>3. Regularisation Done Right: Dropout</strong>
-Regularisation is essential to prevent overfitting, especially when dealing with relatively simple datasets like Fashion MNIST.</li>
-</ul>
-<p>I used dropout layers in my architecture, which randomly deactivate a fraction of neurons during training, forcing the network to learn more robust features.</p>
-<p>The addition of dropout layers reduced overfitting, as evidenced by a smaller gap between training and validation accuracy.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dropout
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adding Dropout layers to the model</span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.2</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.2</span>))
-</span></span></code></pre></div><h3 id="performance-metrics-precision-recall-and-f1-score">Performance Metrics: Precision, Recall, and F1-Score</h3>
-<p>While accuracy gives an overall idea of the model’s performance, it doesn’t tell the full story—especially in imbalanced datasets. Metrics like precision, recall, and F1-score provide deeper insights.</p>
-<p>Here’s how these metrics break down:</p>
-<ul>
-<li><em>Precision</em>: Out of all predicted positives, how many were correct?</li>
-<li><em>Recall</em>: Out of all actual positives, how many were correctly predicted?</li>
-<li><em>F1-Score</em>: The harmonic mean of precision and recall, balancing both metrics.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict the classes of the test images</span>
-</span></span><span style="display:flex;"><span>test_predictions <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(test_images)
-</span></span><span style="display:flex;"><span>predicted_classes <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(test_predictions, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate classification report</span>
-</span></span><span style="display:flex;"><span>report <span style="color:#f92672">=</span> classification_report(test_labels, predicted_classes, target_names<span style="color:#f92672">=</span>[
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;T-shirt/top&#39;</span>, <span style="color:#e6db74">&#39;Trouser&#39;</span>, <span style="color:#e6db74">&#39;Pullover&#39;</span>, <span style="color:#e6db74">&#39;Dress&#39;</span>, <span style="color:#e6db74">&#39;Coat&#39;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Sandal&#39;</span>, <span style="color:#e6db74">&#39;Shirt&#39;</span>, <span style="color:#e6db74">&#39;Sneaker&#39;</span>, <span style="color:#e6db74">&#39;Bag&#39;</span>, <span style="color:#e6db74">&#39;Ankle boot&#39;</span>
-</span></span><span style="display:flex;"><span>])
-</span></span><span style="display:flex;"><span>print(report)
-</span></span></code></pre></div><p>Results from My Project:
-<figure><img src="/images/project12_images/results.png">
-</figure>
-</p>
-<h3 id="real-world-applications">Real-World Applications</h3>
-<h4 id="why-hyperparameter-tuning-metrics-and-regularisation-matter">Why Hyperparameter Tuning, Metrics, and Regularisation Matter</h4>
-<ul>
-<li>
-<p><strong>Efficient Model Training</strong>
-By tuning learning rate and batch size, you can train models faster and avoid computational bottlenecks.</p>
-</li>
-<li>
-<p><strong>Robust Performance</strong>
-Regularisation techniques like dropout ensure the model generalises better, avoiding overfitting and performing well on unseen data.</p>
-</li>
-<li>
-<p><strong>Interpreting Results</strong>
-Metrics like precision, recall, and F1-score help identify weaknesses. For example, low recall on certain classes could indicate the need for more data augmentation.</p>
-</li>
-</ul>
-<h3 id="conclusion">Conclusion</h3>
-<p>Hyperparameter tuning is an art and a science. In my project, optimising learning rate and batch size improved both speed and accuracy. Adding dropout reduced overfitting, while precision, recall, and F1-score highlighted the model’s strengths and areas for improvement.</p>
-<p>If you’re training a NN, take the time to tune hyperparameters, evaluate with meaningful metrics, and incorporate regularisation. Your model—and your future projects—will thank you.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and be trendy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Optimising hyperparameters like learning rate, batch size, regularisation, and dropout rates can make or break a model."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project12_images/pr12.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach.</h1><p class=f5>Optimising hyperparameters like learning rate, batch size, regularisation, and dropout rates can make or break a model.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project12_images/pr12.jpg></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>When training neural networks (NNs), every parameter matters. Hyperparameters like learning rate and batch size aren’t learned by the model—they’re chosen by you. These settings can make or break your model’s performance. But how do you find the right combination?</p><p>In this blog, I’ll take you through my experience fine-tuning hyperparameters for a NN trained on the Fashion MNIST dataset. We’ll cover:</p><ul><li>How learning rate impacts convergence.</li><li>Why batch size can influence both speed and stability.</li><li>The importance of regularisation techniques like dropout to prevent overfitting.</li><li>Interpreting precision, recall, and F1-score to evaluate model performance.</li></ul><h3 id=technical-explanation>Technical Explanation</h3><h4 id=the-starting-point>The Starting Point</h4><p>I built a simple but effective NN to classify images in the Fashion MNIST dataset. The network consisted of:</p><ul><li>A <strong>Flatten</strong> layer to prepare the input data.</li><li>Two fully connected <strong>Dense</strong> layers with ReLU activation.</li><li>A final Dense layer with <strong>softmax</strong> activation for classification.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.models <span style=color:#f92672>import</span> Sequential
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.layers <span style=color:#f92672>import</span> Dense, Flatten, Dropout
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.optimizers <span style=color:#f92672>import</span> SGD
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> Sequential([
+</span></span><span style=display:flex><span>    Flatten(input_shape<span style=color:#f92672>=</span>(<span style=color:#ae81ff>28</span><span style=color:#f92672>*</span><span style=color:#ae81ff>28</span>,)),  <span style=color:#75715e># Flatten the input</span>
+</span></span><span style=display:flex><span>    Dense(<span style=color:#ae81ff>128</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>),  <span style=color:#75715e># First hidden layer</span>
+</span></span><span style=display:flex><span>    Dropout(<span style=color:#ae81ff>0.2</span>),  <span style=color:#75715e># Dropout for regularisation</span>
+</span></span><span style=display:flex><span>    Dense(<span style=color:#ae81ff>128</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>),  <span style=color:#75715e># Second hidden layer</span>
+</span></span><span style=display:flex><span>    Dropout(<span style=color:#ae81ff>0.2</span>),  <span style=color:#75715e># Dropout for regularisation</span>
+</span></span><span style=display:flex><span>    Dense(<span style=color:#ae81ff>10</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;softmax&#39;</span>)  <span style=color:#75715e># Output layer</span>
+</span></span><span style=display:flex><span>])
+</span></span></code></pre></div><p>With the base model defined, the challenge was to optimise its performance by tuning hyperparameters.</p><ul><li><strong>1. Learning Rate: Finding the Sweet Spot</strong>
+The learning rate determines how much the model adjusts during training. Too high, and the model overshoots the optimal point. Too low, and training takes forever.</li></ul><p>I used the SGD optimiser and set the learning rate to 0.01. This value offered a balance between stability and speed. The model converged efficiently without oscillating or plateauing.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.optimizers <span style=color:#f92672>import</span> SGD
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>compile(optimizer<span style=color:#f92672>=</span>SGD(learning_rate<span style=color:#f92672>=</span><span style=color:#ae81ff>0.01</span>), 
+</span></span><span style=display:flex><span>              loss<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;sparse_categorical_crossentropy&#39;</span>, 
+</span></span><span style=display:flex><span>              metrics<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;accuracy&#39;</span>])
+</span></span></code></pre></div><ul><li><strong>2. Batch Size: Balancing Speed and Stability</strong>
+The batch size controls how many samples the model processes before updating weights. Smaller batch sizes can result in noisier gradients, while larger batches provide more stable updates but consume more memory.</li></ul><p>I chose a batch size of 1000, which was a practical choice for my computational setup. It allowed the model to process the data efficiently without overwhelming memory.
+The batch size of 1000 worked well, offering smooth training and good validation performance.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>history <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>fit(train_images, train_labels, 
+</span></span><span style=display:flex><span>                    epochs<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>, 
+</span></span><span style=display:flex><span>                    batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1000</span>, 
+</span></span><span style=display:flex><span>                    validation_data<span style=color:#f92672>=</span>(test_images, test_labels))
+</span></span></code></pre></div><ul><li><strong>3. Regularisation Done Right: Dropout</strong>
+Regularisation is essential to prevent overfitting, especially when dealing with relatively simple datasets like Fashion MNIST.</li></ul><p>I used dropout layers in my architecture, which randomly deactivate a fraction of neurons during training, forcing the network to learn more robust features.</p><p>The addition of dropout layers reduced overfitting, as evidenced by a smaller gap between training and validation accuracy.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.layers <span style=color:#f92672>import</span> Dropout
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Adding Dropout layers to the model</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>128</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dropout(<span style=color:#ae81ff>0.2</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>128</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dropout(<span style=color:#ae81ff>0.2</span>))
+</span></span></code></pre></div><h3 id=performance-metrics-precision-recall-and-f1-score>Performance Metrics: Precision, Recall, and F1-Score</h3><p>While accuracy gives an overall idea of the model’s performance, it doesn’t tell the full story—especially in imbalanced datasets. Metrics like precision, recall, and F1-score provide deeper insights.</p><p>Here’s how these metrics break down:</p><ul><li><em>Precision</em>: Out of all predicted positives, how many were correct?</li><li><em>Recall</em>: Out of all actual positives, how many were correctly predicted?</li><li><em>F1-Score</em>: The harmonic mean of precision and recall, balancing both metrics.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Predict the classes of the test images</span>
+</span></span><span style=display:flex><span>test_predictions <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>predict(test_images)
+</span></span><span style=display:flex><span>predicted_classes <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>argmax(test_predictions, axis<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Generate classification report</span>
+</span></span><span style=display:flex><span>report <span style=color:#f92672>=</span> classification_report(test_labels, predicted_classes, target_names<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;T-shirt/top&#39;</span>, <span style=color:#e6db74>&#39;Trouser&#39;</span>, <span style=color:#e6db74>&#39;Pullover&#39;</span>, <span style=color:#e6db74>&#39;Dress&#39;</span>, <span style=color:#e6db74>&#39;Coat&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;Sandal&#39;</span>, <span style=color:#e6db74>&#39;Shirt&#39;</span>, <span style=color:#e6db74>&#39;Sneaker&#39;</span>, <span style=color:#e6db74>&#39;Bag&#39;</span>, <span style=color:#e6db74>&#39;Ankle boot&#39;</span>
+</span></span><span style=display:flex><span>])
+</span></span><span style=display:flex><span>print(report)
+</span></span></code></pre></div><p>Results from My Project:<figure><img src=/images/project12_images/results.png></figure></p><h3 id=real-world-applications>Real-World Applications</h3><h4 id=why-hyperparameter-tuning-metrics-and-regularisation-matter>Why Hyperparameter Tuning, Metrics, and Regularisation Matter</h4><ul><li><p><strong>Efficient Model Training</strong>
+By tuning learning rate and batch size, you can train models faster and avoid computational bottlenecks.</p></li><li><p><strong>Robust Performance</strong>
+Regularisation techniques like dropout ensure the model generalises better, avoiding overfitting and performing well on unseen data.</p></li><li><p><strong>Interpreting Results</strong>
+Metrics like precision, recall, and F1-score help identify weaknesses. For example, low recall on certain classes could indicate the need for more data augmentation.</p></li></ul><h3 id=conclusion>Conclusion</h3><p>Hyperparameter tuning is an art and a science. In my project, optimising learning rate and batch size improved both speed and accuracy. Adding dropout reduced overfitting, while precision, recall, and F1-score highlighted the model’s strengths and areas for improvement.</p><p>If you’re training a NN, take the time to tune hyperparameters, evaluate with meaningful metrics, and incorporate regularisation. Your model—and your future projects—will thank you.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and be trendy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

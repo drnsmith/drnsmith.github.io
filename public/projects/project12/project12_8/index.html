@@ -1,216 +1,42 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Neural network training involves plenty of experimentation. This blog shares practical lessons from trial and error, covering common pitfalls, debugging strategies, and actionable takeaways from Fashion MNIST.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project12_images/pr12.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST
-          </h1>
-          
-            <p class="f5">Neural network training involves plenty of experimentation. This blog shares practical lessons from trial and error, covering common pitfalls, debugging strategies, and actionable takeaways from Fashion MNIST.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project12_images/pr12.jpg">
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>Training neural networks (NNs) is a lot like navigating uncharted waters. No matter how much preparation or theoretical knowledge you have, it’s the experiments—and the inevitable mistakes—that shape your skills.</p>
-<p>As a data scientist working on Fashion MNIST, a dataset of 28x28 grayscale images representing 10 clothing categories, I realised that building effective models requires more than just writing code; it demands iteration, debugging, and adaptability.</p>
-<p>In this blog, I’ll share:</p>
-<ul>
-<li>How trial and error play a key role in refining NNs.</li>
-<li>Practical strategies for debugging during model training.</li>
-<li>Actionable lessons I learned from the common pitfalls I faced while training a neural network on Fashion MNIST.</li>
-</ul>
-<p>If you’ve ever been stuck staring at poor model performance, wondering where things went wrong, this blog is for you.</p>
-<h3 id="technical-explanation">Technical Explanation</h3>
-<h4 id="the-importance-of-experimentation">The Importance of Experimentation</h4>
-<p>Deep learning doesn’t come with a one-size-fits-all solution. Building an effective model often means experimenting with different architectures, hyperparameters, and pre-processing techniques.</p>
-<p>Here’s why trial and error is so vital:</p>
-<ul>
-<li><strong>No Dataset Is the Same</strong>: Even with datasets as well-structured as Fashion MNIST, quirks like feature variability and class nuances demand exploration.</li>
-<li><strong>Unknown Hyperparameter Combinations</strong>: Learning rate, batch size, and regularisation parameters all impact how well a model learns.</li>
-<li><strong>Model Complexity Matters</strong>: Simpler datasets like MNIST might work with basic architectures, but more nuanced datasets like Fashion MNIST often benefit from iterative refinement.</li>
-</ul>
-<h4 id="common-pitfalls-in-neural-network-training">Common Pitfalls in Neural Network Training</h4>
-<p>Let’s start by addressing some of the mistakes I encountered during training:</p>
-<ul>
-<li><strong>Overfitting to Training Data</strong>
-Early in my experiments, I achieved excellent accuracy on the training set but saw poor performance on the test set.</li>
-</ul>
-<p>The culprit? Overfitting. My model was memorising the training data instead of generalising to new examples.</p>
-<p><strong>Solution</strong>: Adding dropout layers to the network significantly reduced overfitting by deactivating random neurons during training.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dropout
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.5</span>))  <span style="color:#75715e"># Dropout layer to reduce overfitting</span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>))
-</span></span></code></pre></div><ul>
-<li><strong>Choosing the Wrong Learning Rate</strong>
-In early runs, I picked a learning rate that was either too high (causing erratic performance) or too low (leading to painfully slow convergence).</li>
-</ul>
-<p><strong>Solution</strong>: Through experimentation, I found that a learning rate of <code>0.01</code> worked best for my setup when paired with the SGD optimiser.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> SGD
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>SGD(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>), 
-</span></span><span style="display:flex;"><span>              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, 
-</span></span><span style="display:flex;"><span>              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
-</span></span></code></pre></div><ul>
-<li><strong>Ignoring Validation Data</strong>
-Initially, I focused solely on test accuracy and overlooked validation performance. This led to overestimating my model’s robustness.</li>
-</ul>
-<p><strong>Solution</strong>: Splitting the data into training, validation, and test sets allowed me to track performance more accurately and tune hyperparameters effectively.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(train_images, train_labels, 
-</span></span><span style="display:flex;"><span>                    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, 
-</span></span><span style="display:flex;"><span>                    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, 
-</span></span><span style="display:flex;"><span>                    validation_split<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)  <span style="color:#75715e"># Monitor validation performance</span>
-</span></span></code></pre></div><ul>
-<li><strong>Misinterpreting Loss and Accuracy Trends</strong>
-During one experiment, I noticed that while training accuracy improved steadily, validation accuracy plateaued. Without paying attention, I would have wasted time training the model further.</li>
-</ul>
-<p><strong>Solution</strong>: Visualising loss and accuracy over epochs helped me identify when the model stopped improving and implement early stopping techniques.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Validation Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epochs&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><h4 id="debugging-strategies-in-deep-learning">Debugging Strategies in Deep Learning</h4>
-<p>NNs can be a black box, making it hard to pinpoint errors. Here’s how I debugged my experiments:</p>
-<ul>
-<li><em>Start Simple</em>
-Always begin with a baseline model. For Fashion MNIST, I started with a single dense layer to establish baseline performance. This allowed me to focus on improving accuracy step by step.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
-</span></span><span style="display:flex;"><span>    Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>)),
-</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),
-</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
-</span></span><span style="display:flex;"><span>])
-</span></span></code></pre></div><ul>
-<li><em>Analyse Misclassified Examples</em>
-By examining where the model struggled, I identified weaknesses in specific classes (e.g., distinguishing between &ldquo;Shirts&rdquo; and &ldquo;Pullovers&rdquo;).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>misclassified_indices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>where(predicted_classes <span style="color:#f92672">!=</span> test_labels)[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> misclassified_indices[:<span style="color:#ae81ff">5</span>]:  <span style="color:#75715e"># Show first 5 misclassified examples</span>
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(test_images[i]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>), cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;True: </span><span style="color:#e6db74">{</span>test_labels[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">, Predicted: </span><span style="color:#e6db74">{</span>predicted_classes[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><ul>
-<li><em>Experiment Incrementally</em>
-Changing too many variables at once can make it impossible to isolate what worked. Instead, I iteratively tested one hyperparameter at a time, logging results for each change.</li>
-</ul>
-<h3 id="real-world-applications">Real-World Applications</h3>
-<p>The lessons learned from trial and error in Fashion MNIST training extend to real-world machine learning projects:</p>
-<ul>
-<li>
-<p><strong>Debugging Complex Pipelines</strong>
-In production, debugging models can save resources. Lessons from validation splits and loss visualisation apply equally to diagnosing issues with large-scale pipelines.</p>
-</li>
-<li>
-<p><strong>Improving Transfer Learning</strong>
-Analysing misclassified examples helps fine-tune pre-trained models when adapting them to new domains, such as medical imaging or e-commerce.</p>
-</li>
-<li>
-<p><strong>Building Robust Deployment Pipelines</strong>
-Overfitting and validation issues often surface when moving from research to production. Techniques like dropout and incremental experimentation mitigate these risks.</p>
-</li>
-</ul>
-<h3 id="conclusion">Conclusion</h3>
-<p>Training neural networks involves navigating a landscape of trial and error. From overfitting and learning rate adjustments to understanding the importance of validation splits, the lessons learned from Fashion MNIST are invaluable for anyone building machine learning models.</p>
-<h4 id="key-takeaways">Key takeaways:</h4>
-<ul>
-<li>Overfitting is inevitable without proper regularisation. Dropout is your ally.</li>
-<li>Choosing the right learning rate and batch size can accelerate training and improve stability.</li>
-<li>Visualising trends in loss and accuracy is crucial for understanding model behaviour.</li>
-</ul>
-<p>Remember, every mistake is an opportunity to learn and refine your craft. So embrace the trial and error process, iterate on your designs, and build models that are not just accurate but also robust and interpretable.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and be trendy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Neural network training involves plenty of experimentation. This blog shares practical lessons from trial and error, covering common pitfalls, debugging strategies, and actionable takeaways from Fashion MNIST."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project12_images/pr12.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST</h1><p class=f5>Neural network training involves plenty of experimentation. This blog shares practical lessons from trial and error, covering common pitfalls, debugging strategies, and actionable takeaways from Fashion MNIST.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project12_images/pr12.jpg></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Training neural networks (NNs) is a lot like navigating uncharted waters. No matter how much preparation or theoretical knowledge you have, it’s the experiments—and the inevitable mistakes—that shape your skills.</p><p>As a data scientist working on Fashion MNIST, a dataset of 28x28 grayscale images representing 10 clothing categories, I realised that building effective models requires more than just writing code; it demands iteration, debugging, and adaptability.</p><p>In this blog, I’ll share:</p><ul><li>How trial and error play a key role in refining NNs.</li><li>Practical strategies for debugging during model training.</li><li>Actionable lessons I learned from the common pitfalls I faced while training a neural network on Fashion MNIST.</li></ul><p>If you’ve ever been stuck staring at poor model performance, wondering where things went wrong, this blog is for you.</p><h3 id=technical-explanation>Technical Explanation</h3><h4 id=the-importance-of-experimentation>The Importance of Experimentation</h4><p>Deep learning doesn’t come with a one-size-fits-all solution. Building an effective model often means experimenting with different architectures, hyperparameters, and pre-processing techniques.</p><p>Here’s why trial and error is so vital:</p><ul><li><strong>No Dataset Is the Same</strong>: Even with datasets as well-structured as Fashion MNIST, quirks like feature variability and class nuances demand exploration.</li><li><strong>Unknown Hyperparameter Combinations</strong>: Learning rate, batch size, and regularisation parameters all impact how well a model learns.</li><li><strong>Model Complexity Matters</strong>: Simpler datasets like MNIST might work with basic architectures, but more nuanced datasets like Fashion MNIST often benefit from iterative refinement.</li></ul><h4 id=common-pitfalls-in-neural-network-training>Common Pitfalls in Neural Network Training</h4><p>Let’s start by addressing some of the mistakes I encountered during training:</p><ul><li><strong>Overfitting to Training Data</strong>
+Early in my experiments, I achieved excellent accuracy on the training set but saw poor performance on the test set.</li></ul><p>The culprit? Overfitting. My model was memorising the training data instead of generalising to new examples.</p><p><strong>Solution</strong>: Adding dropout layers to the network significantly reduced overfitting by deactivating random neurons during training.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.layers <span style=color:#f92672>import</span> Dropout
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>128</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dropout(<span style=color:#ae81ff>0.5</span>))  <span style=color:#75715e># Dropout layer to reduce overfitting</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>10</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;softmax&#39;</span>))
+</span></span></code></pre></div><ul><li><strong>Choosing the Wrong Learning Rate</strong>
+In early runs, I picked a learning rate that was either too high (causing erratic performance) or too low (leading to painfully slow convergence).</li></ul><p><strong>Solution</strong>: Through experimentation, I found that a learning rate of <code>0.01</code> worked best for my setup when paired with the SGD optimiser.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.optimizers <span style=color:#f92672>import</span> SGD
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>compile(optimizer<span style=color:#f92672>=</span>SGD(learning_rate<span style=color:#f92672>=</span><span style=color:#ae81ff>0.01</span>), 
+</span></span><span style=display:flex><span>              loss<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;sparse_categorical_crossentropy&#39;</span>, 
+</span></span><span style=display:flex><span>              metrics<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;accuracy&#39;</span>])
+</span></span></code></pre></div><ul><li><strong>Ignoring Validation Data</strong>
+Initially, I focused solely on test accuracy and overlooked validation performance. This led to overestimating my model’s robustness.</li></ul><p><strong>Solution</strong>: Splitting the data into training, validation, and test sets allowed me to track performance more accurately and tune hyperparameters effectively.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>history <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>fit(train_images, train_labels, 
+</span></span><span style=display:flex><span>                    epochs<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>, 
+</span></span><span style=display:flex><span>                    batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1000</span>, 
+</span></span><span style=display:flex><span>                    validation_split<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>)  <span style=color:#75715e># Monitor validation performance</span>
+</span></span></code></pre></div><ul><li><strong>Misinterpreting Loss and Accuracy Trends</strong>
+During one experiment, I noticed that while training accuracy improved steadily, validation accuracy plateaued. Without paying attention, I would have wasted time training the model further.</li></ul><p><strong>Solution</strong>: Visualising loss and accuracy over epochs helped me identify when the model stopped improving and implement early stopping techniques.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(history<span style=color:#f92672>.</span>history[<span style=color:#e6db74>&#39;loss&#39;</span>], label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Training Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(history<span style=color:#f92672>.</span>history[<span style=color:#e6db74>&#39;val_loss&#39;</span>], label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Validation Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Epochs&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#39;Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><h4 id=debugging-strategies-in-deep-learning>Debugging Strategies in Deep Learning</h4><p>NNs can be a black box, making it hard to pinpoint errors. Here’s how I debugged my experiments:</p><ul><li><em>Start Simple</em>
+Always begin with a baseline model. For Fashion MNIST, I started with a single dense layer to establish baseline performance. This allowed me to focus on improving accuracy step by step.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>model <span style=color:#f92672>=</span> Sequential([
+</span></span><span style=display:flex><span>    Flatten(input_shape<span style=color:#f92672>=</span>(<span style=color:#ae81ff>28</span>, <span style=color:#ae81ff>28</span>)),
+</span></span><span style=display:flex><span>    Dense(<span style=color:#ae81ff>128</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>),
+</span></span><span style=display:flex><span>    Dense(<span style=color:#ae81ff>10</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;softmax&#39;</span>)
+</span></span><span style=display:flex><span>])
+</span></span></code></pre></div><ul><li><em>Analyse Misclassified Examples</em>
+By examining where the model struggled, I identified weaknesses in specific classes (e.g., distinguishing between &ldquo;Shirts&rdquo; and &ldquo;Pullovers&rdquo;).</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>misclassified_indices <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>where(predicted_classes <span style=color:#f92672>!=</span> test_labels)[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> misclassified_indices[:<span style=color:#ae81ff>5</span>]:  <span style=color:#75715e># Show first 5 misclassified examples</span>
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>imshow(test_images[i]<span style=color:#f92672>.</span>reshape(<span style=color:#ae81ff>28</span>, <span style=color:#ae81ff>28</span>), cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;True: </span><span style=color:#e6db74>{</span>test_labels[i]<span style=color:#e6db74>}</span><span style=color:#e6db74>, Predicted: </span><span style=color:#e6db74>{</span>predicted_classes[i]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><ul><li><em>Experiment Incrementally</em>
+Changing too many variables at once can make it impossible to isolate what worked. Instead, I iteratively tested one hyperparameter at a time, logging results for each change.</li></ul><h3 id=real-world-applications>Real-World Applications</h3><p>The lessons learned from trial and error in Fashion MNIST training extend to real-world machine learning projects:</p><ul><li><p><strong>Debugging Complex Pipelines</strong>
+In production, debugging models can save resources. Lessons from validation splits and loss visualisation apply equally to diagnosing issues with large-scale pipelines.</p></li><li><p><strong>Improving Transfer Learning</strong>
+Analysing misclassified examples helps fine-tune pre-trained models when adapting them to new domains, such as medical imaging or e-commerce.</p></li><li><p><strong>Building Robust Deployment Pipelines</strong>
+Overfitting and validation issues often surface when moving from research to production. Techniques like dropout and incremental experimentation mitigate these risks.</p></li></ul><h3 id=conclusion>Conclusion</h3><p>Training neural networks involves navigating a landscape of trial and error. From overfitting and learning rate adjustments to understanding the importance of validation splits, the lessons learned from Fashion MNIST are invaluable for anyone building machine learning models.</p><h4 id=key-takeaways>Key takeaways:</h4><ul><li>Overfitting is inevitable without proper regularisation. Dropout is your ally.</li><li>Choosing the right learning rate and batch size can accelerate training and improve stability.</li><li>Visualising trends in loss and accuracy is crucial for understanding model behaviour.</li></ul><p>Remember, every mistake is an opportunity to learn and refine your craft. So embrace the trial and error process, iterate on your designs, and build models that are not just accurate but also robust and interpretable.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and be trendy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

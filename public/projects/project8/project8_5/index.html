@@ -1,209 +1,60 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 5. Evaluating and Selecting the Best Models for PM10 Prediction. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog delves into the systematic evaluation of ML models for PM10 prediction, comparing various techniques. Learn how cross-validation, hyperparameter tuning, and performance metrics like RMSE and MAE were used to identify the best models for predicting air pollution.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project8_images/pr8.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 5. Evaluating and Selecting the Best Models for PM10 Prediction.
-          </h1>
-          
-            <p class="f5">This blog delves into the systematic evaluation of ML models for PM10 prediction, comparing various techniques. Learn how cross-validation, hyperparameter tuning, and performance metrics like RMSE and MAE were used to identify the best models for predicting air pollution.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project8_images/pr8.jpg"
-    alt="Photo by Dom J on Pexels"><figcaption>
-      <p>Photo by Dom J on Pexels</p>
-    </figcaption>
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>After building and testing various machine learning models, the next critical step is evaluating their performance and selecting the best ones for deployment.</p>
-<p>In this blog, we’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).</p>
-<p>We’ll also explore hyperparameter tuning for neural networks, leveraging GridSearchCV for optimal performance.</p>
-<h3 id="1-the-need-for-systematic-evaluation">1. The Need for Systematic Evaluation</h3>
-<p>With several models—Linear Regression, Random Forest, Gradient Boosting, XGBoost, Ridge, Lasso, and Neural Networks—it’s essential to evaluate them fairly. We used:</p>
-<ul>
-<li><em>Cross-validation</em>: To ensure models perform consistently across different data splits.</li>
-<li><em>Scoring metrics</em>: RMSE for penalising large errors and MAE for measuring average error magnitude.</li>
-</ul>
-<h3 id="2-evaluating-multiple-models">2. Evaluating Multiple Models</h3>
-<p>I evaluated six models initially using cross-validation and computed RMSE and MAE for each:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> cross_val_score
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> mean_squared_error, mean_absolute_error
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise the models</span>
-</span></span><span style="display:flex;"><span>models <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Linear Regression&#34;</span>: LinearRegression(),
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Random Forest&#34;</span>: RandomForestRegressor(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>),
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Gradient Boosting&#34;</span>: GradientBoostingRegressor(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>),
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Ridge&#34;</span>: Ridge(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>),
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Lasso&#34;</span>: Lasso(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>),
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;XGBoost&#34;</span>: xgb<span style="color:#f92672">.</span>XGBRegressor(objective<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;reg:squarederror&#39;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise results DataFrame</span>
-</span></span><span style="display:flex;"><span>results_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Model&#39;</span>, <span style="color:#e6db74">&#39;RMSE&#39;</span>, <span style="color:#e6db74">&#39;MAE&#39;</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform cross-validation and store results</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> model_name, model <span style="color:#f92672">in</span> models<span style="color:#f92672">.</span>items():
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Calculate cross-validated RMSE</span>
-</span></span><span style="display:flex;"><span>    neg_mse_scores <span style="color:#f92672">=</span> cross_val_score(model, X, y, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, scoring<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;neg_mean_squared_error&#39;</span>)
-</span></span><span style="display:flex;"><span>    rmse_scores <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sqrt(<span style="color:#f92672">-</span>neg_mse_scores)
-</span></span><span style="display:flex;"><span>    avg_rmse <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(rmse_scores)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Calculate cross-validated MAE</span>
-</span></span><span style="display:flex;"><span>    mae_scores <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>cross_val_score(model, X, y, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, scoring<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;neg_mean_absolute_error&#39;</span>)
-</span></span><span style="display:flex;"><span>    avg_mae <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(mae_scores)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Append results to the DataFrame</span>
-</span></span><span style="display:flex;"><span>    results_df <span style="color:#f92672">=</span> results_df<span style="color:#f92672">.</span>append({<span style="color:#e6db74">&#39;Model&#39;</span>: model_name, <span style="color:#e6db74">&#39;RMSE&#39;</span>: avg_rmse, <span style="color:#e6db74">&#39;MAE&#39;</span>: avg_mae}, ignore_index<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print the results table</span>
-</span></span><span style="display:flex;"><span>print(results_df)
-</span></span></code></pre></div><p><strong>Prelimenary Results:</strong></p>
-<p>The cross-validation results revealed clear differences in model performance.</p>
-<p>While simpler models like Linear Regression were fast, they struggled to capture complex patterns.</p>
-<p>Ensemble methods like Random Forest and Gradient Boosting performed better, and XGBoost emerged as a strong contender.</p>
-<p><strong>Fine-Tuning NNs</strong></p>
-<p>We extended the evaluation to include a NN Regressor, focusing on optimising its architecture and hyperparameters.</p>
-<ul>
-<li>Hyperparameter Tuning with GridSearchCV</li>
-</ul>
-<p>Using a grid search, we tested different configurations for hidden layers, activation functions, and learning rates.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.neural_network <span style="color:#f92672">import</span> MLPRegressor
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> GridSearchCV
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define hyperparameter grid</span>
-</span></span><span style="display:flex;"><span>param_grid <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;hidden_layer_sizes&#39;</span>: [(<span style="color:#ae81ff">100</span>,), (<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>)],
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;activation&#39;</span>: [<span style="color:#e6db74">&#39;relu&#39;</span>, <span style="color:#e6db74">&#39;tanh&#39;</span>],
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;learning_rate_init&#39;</span>: [<span style="color:#ae81ff">0.001</span>, <span style="color:#ae81ff">0.01</span>],
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Scale the features</span>
-</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> StandardScaler()
-</span></span><span style="display:flex;"><span>X_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>fit_transform(X)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform Grid Search</span>
-</span></span><span style="display:flex;"><span>nn_model <span style="color:#f92672">=</span> MLPRegressor(max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
-</span></span><span style="display:flex;"><span>grid_search <span style="color:#f92672">=</span> GridSearchCV(nn_model, param_grid, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, scoring<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;neg_mean_squared_error&#39;</span>)
-</span></span><span style="display:flex;"><span>grid_search<span style="color:#f92672">.</span>fit(X_scaled, y)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract the best model</span>
-</span></span><span style="display:flex;"><span>best_nn_model <span style="color:#f92672">=</span> grid_search<span style="color:#f92672">.</span>best_estimator_
-</span></span></code></pre></div><p><strong>NN Results:</strong></p>
-<p>The best NN configuration achieved significant improvements, particularly for RMSE, but required more computational resources and careful scaling.</p>
-<h3 id="3-model-comparison">3. Model Comparison</h3>
-<figure><img src="/images/project8_images/eval3.png">
-</figure>
-
-<p><strong>Key Takeaways</strong>:</p>
-<ul>
-<li>XGBoost and Neural Networks: Consistently outperformed other models, capturing both linear and nonlinear patterns effectively.</li>
-<li>Ensemble Methods: Random Forest and Gradient Boosting offered a balance of accuracy and interpretability.</li>
-<li>Linear Models: Useful for insights but struggled with complex relationships.</li>
-</ul>
-<h4 id="lessons-learned">Lessons Learned</h4>
-<ul>
-<li><em>Importance of Cross-Validation</em>: Ensures the models generalise well and avoid overfitting.</li>
-<li><em>Scalability of NNs</em>: Requires careful tuning and pre-processing but offers unmatched accuracy for complex datasets.</li>
-<li><em>XGBoost’s Efficiency</em>: Emerged as a strong contender for both accuracy and speed, making it ideal for large-scale deployments.</li>
-</ul>
-<h3 id="conclusion">Conclusion</h3>
-<p>After evaluating multiple models, NNs and XGBoost emerged as the top performers for PM10 prediction.</p>
-<p>While NNs offered the highest accuracy, XGBoost provided a competitive alternative with faster training times and interpretability.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 5. Evaluating and Selecting the Best Models for PM10 Prediction. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog delves into the systematic evaluation of ML models for PM10 prediction, comparing various techniques. Learn how cross-validation, hyperparameter tuning, and performance metrics like RMSE and MAE were used to identify the best models for predicting air pollution."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project8_images/pr8.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 5. Evaluating and Selecting the Best Models for PM10 Prediction.</h1><p class=f5>This blog delves into the systematic evaluation of ML models for PM10 prediction, comparing various techniques. Learn how cross-validation, hyperparameter tuning, and performance metrics like RMSE and MAE were used to identify the best models for predicting air pollution.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project8_images/pr8.jpg alt="Photo by Dom J on Pexels"><figcaption><p>Photo by Dom J on Pexels</p></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/PM-London-Pollution target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>After building and testing various machine learning models, the next critical step is evaluating their performance and selecting the best ones for deployment.</p><p>In this blog, we’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).</p><p>We’ll also explore hyperparameter tuning for neural networks, leveraging GridSearchCV for optimal performance.</p><h3 id=1-the-need-for-systematic-evaluation>1. The Need for Systematic Evaluation</h3><p>With several models—Linear Regression, Random Forest, Gradient Boosting, XGBoost, Ridge, Lasso, and Neural Networks—it’s essential to evaluate them fairly. We used:</p><ul><li><em>Cross-validation</em>: To ensure models perform consistently across different data splits.</li><li><em>Scoring metrics</em>: RMSE for penalising large errors and MAE for measuring average error magnitude.</li></ul><h3 id=2-evaluating-multiple-models>2. Evaluating Multiple Models</h3><p>I evaluated six models initially using cross-validation and computed RMSE and MAE for each:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> cross_val_score
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> mean_squared_error, mean_absolute_error
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Initialise the models</span>
+</span></span><span style=display:flex><span>models <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Linear Regression&#34;</span>: LinearRegression(),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Random Forest&#34;</span>: RandomForestRegressor(random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Gradient Boosting&#34;</span>: GradientBoostingRegressor(random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Ridge&#34;</span>: Ridge(alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;Lasso&#34;</span>: Lasso(alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.1</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;XGBoost&#34;</span>: xgb<span style=color:#f92672>.</span>XGBRegressor(objective<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;reg:squarederror&#39;</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Initialise results DataFrame</span>
+</span></span><span style=display:flex><span>results_df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>DataFrame(columns<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;Model&#39;</span>, <span style=color:#e6db74>&#39;RMSE&#39;</span>, <span style=color:#e6db74>&#39;MAE&#39;</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Perform cross-validation and store results</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> model_name, model <span style=color:#f92672>in</span> models<span style=color:#f92672>.</span>items():
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Calculate cross-validated RMSE</span>
+</span></span><span style=display:flex><span>    neg_mse_scores <span style=color:#f92672>=</span> cross_val_score(model, X, y, cv<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>, scoring<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;neg_mean_squared_error&#39;</span>)
+</span></span><span style=display:flex><span>    rmse_scores <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>sqrt(<span style=color:#f92672>-</span>neg_mse_scores)
+</span></span><span style=display:flex><span>    avg_rmse <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mean(rmse_scores)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Calculate cross-validated MAE</span>
+</span></span><span style=display:flex><span>    mae_scores <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>cross_val_score(model, X, y, cv<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>, scoring<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;neg_mean_absolute_error&#39;</span>)
+</span></span><span style=display:flex><span>    avg_mae <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mean(mae_scores)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Append results to the DataFrame</span>
+</span></span><span style=display:flex><span>    results_df <span style=color:#f92672>=</span> results_df<span style=color:#f92672>.</span>append({<span style=color:#e6db74>&#39;Model&#39;</span>: model_name, <span style=color:#e6db74>&#39;RMSE&#39;</span>: avg_rmse, <span style=color:#e6db74>&#39;MAE&#39;</span>: avg_mae}, ignore_index<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Print the results table</span>
+</span></span><span style=display:flex><span>print(results_df)
+</span></span></code></pre></div><p><strong>Prelimenary Results:</strong></p><p>The cross-validation results revealed clear differences in model performance.</p><p>While simpler models like Linear Regression were fast, they struggled to capture complex patterns.</p><p>Ensemble methods like Random Forest and Gradient Boosting performed better, and XGBoost emerged as a strong contender.</p><p><strong>Fine-Tuning NNs</strong></p><p>We extended the evaluation to include a NN Regressor, focusing on optimising its architecture and hyperparameters.</p><ul><li>Hyperparameter Tuning with GridSearchCV</li></ul><p>Using a grid search, we tested different configurations for hidden layers, activation functions, and learning rates.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neural_network <span style=color:#f92672>import</span> MLPRegressor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> GridSearchCV
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardScaler
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Define hyperparameter grid</span>
+</span></span><span style=display:flex><span>param_grid <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;hidden_layer_sizes&#39;</span>: [(<span style=color:#ae81ff>100</span>,), (<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>50</span>)],
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;activation&#39;</span>: [<span style=color:#e6db74>&#39;relu&#39;</span>, <span style=color:#e6db74>&#39;tanh&#39;</span>],
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;learning_rate_init&#39;</span>: [<span style=color:#ae81ff>0.001</span>, <span style=color:#ae81ff>0.01</span>],
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Scale the features</span>
+</span></span><span style=display:flex><span>scaler <span style=color:#f92672>=</span> StandardScaler()
+</span></span><span style=display:flex><span>X_scaled <span style=color:#f92672>=</span> scaler<span style=color:#f92672>.</span>fit_transform(X)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Perform Grid Search</span>
+</span></span><span style=display:flex><span>nn_model <span style=color:#f92672>=</span> MLPRegressor(max_iter<span style=color:#f92672>=</span><span style=color:#ae81ff>2000</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
+</span></span><span style=display:flex><span>grid_search <span style=color:#f92672>=</span> GridSearchCV(nn_model, param_grid, cv<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>, scoring<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;neg_mean_squared_error&#39;</span>)
+</span></span><span style=display:flex><span>grid_search<span style=color:#f92672>.</span>fit(X_scaled, y)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Extract the best model</span>
+</span></span><span style=display:flex><span>best_nn_model <span style=color:#f92672>=</span> grid_search<span style=color:#f92672>.</span>best_estimator_
+</span></span></code></pre></div><p><strong>NN Results:</strong></p><p>The best NN configuration achieved significant improvements, particularly for RMSE, but required more computational resources and careful scaling.</p><h3 id=3-model-comparison>3. Model Comparison</h3><figure><img src=/images/project8_images/eval3.png></figure><p><strong>Key Takeaways</strong>:</p><ul><li>XGBoost and Neural Networks: Consistently outperformed other models, capturing both linear and nonlinear patterns effectively.</li><li>Ensemble Methods: Random Forest and Gradient Boosting offered a balance of accuracy and interpretability.</li><li>Linear Models: Useful for insights but struggled with complex relationships.</li></ul><h4 id=lessons-learned>Lessons Learned</h4><ul><li><em>Importance of Cross-Validation</em>: Ensures the models generalise well and avoid overfitting.</li><li><em>Scalability of NNs</em>: Requires careful tuning and pre-processing but offers unmatched accuracy for complex datasets.</li><li><em>XGBoost’s Efficiency</em>: Emerged as a strong contender for both accuracy and speed, making it ideal for large-scale deployments.</li></ul><h3 id=conclusion>Conclusion</h3><p>After evaluating multiple models, NNs and XGBoost emerged as the top performers for PM10 prediction.</p><p>While NNs offered the highest accuracy, XGBoost provided a competitive alternative with faster training times and interpretability.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

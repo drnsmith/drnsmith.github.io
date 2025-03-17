@@ -1,283 +1,60 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog explores the critical role of performance metrics in evaluating machine learning models. I delve into metrics like precision, recall, F1-score, and ROC-AUC, explaining how they provide deeper insights into a model’s strengths and weaknesses.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project11_images/pr11.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights.
-          </h1>
-          
-            <p class="f5">This blog explores the critical role of performance metrics in evaluating machine learning models. I delve into metrics like precision, recall, F1-score, and ROC-AUC, explaining how they provide deeper insights into a model’s strengths and weaknesses.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project11_images/pr11.jpg">
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>Accuracy is one of the most common metrics used to evaluate machine learning models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease.</p>
-<p>This blog aims to expand your understanding of model evaluation by:</p>
-<ul>
-<li>Exploring precision, recall, specificity, and F1-score to provide deeper insights into model performance.</li>
-<li>Introducing the <code>Receiver Operating Characteristic (ROC)</code> curve and AUC for evaluating classification thresholds.</li>
-<li>Demonstrating these metrics with Python code and visualisations.</li>
-</ul>
-<p>By the end, you’ll have the tools to evaluate your models comprehensively, ensuring they meet the demands of real-world challenges.</p>
-<h3 id="technical-explanation">Technical Explanation</h3>
-<h3 id="why-accuracy-isnt-always-enough">Why Accuracy Isn’t Always Enough</h3>
-<p>Accuracy simply measures the percentage of correct predictions:</p>
-<p>\[
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores the critical role of performance metrics in evaluating machine learning models. I delve into metrics like precision, recall, F1-score, and ROC-AUC, explaining how they provide deeper insights into a model’s strengths and weaknesses."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project11_images/pr11.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights.</h1><p class=f5>This blog explores the critical role of performance metrics in evaluating machine learning models. I delve into metrics like precision, recall, F1-score, and ROC-AUC, explaining how they provide deeper insights into a model’s strengths and weaknesses.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project11_images/pr11.jpg></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Accuracy is one of the most common metrics used to evaluate machine learning models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease.</p><p>This blog aims to expand your understanding of model evaluation by:</p><ul><li>Exploring precision, recall, specificity, and F1-score to provide deeper insights into model performance.</li><li>Introducing the <code>Receiver Operating Characteristic (ROC)</code> curve and AUC for evaluating classification thresholds.</li><li>Demonstrating these metrics with Python code and visualisations.</li></ul><p>By the end, you’ll have the tools to evaluate your models comprehensively, ensuring they meet the demands of real-world challenges.</p><h3 id=technical-explanation>Technical Explanation</h3><h3 id=why-accuracy-isnt-always-enough>Why Accuracy Isn’t Always Enough</h3><p>Accuracy simply measures the percentage of correct predictions:</p><p>\[
 \text{Accuracy} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Predictions}}
-\]</p>
-<p>While useful in balanced datasets, accuracy fails when the data is imbalanced. For example:</p>
-<ul>
-<li>Dataset: 90% benign, 10% malignant.</li>
-<li>Model predicts all cases as benign.</li>
-<li><strong>Accuracy = 90%, but the model identifies zero malignant cases.</strong></li>
-</ul>
-<p>This is where other metrics come into play.</p>
-<h3 id="specificity">Specificity</h3>
-<p>Specificity measures the ability of a model to correctly identify true negatives (negative cases that are correctly classified as negative). It is calculated as:</p>
-<p>[
+\]</p><p>While useful in balanced datasets, accuracy fails when the data is imbalanced. For example:</p><ul><li>Dataset: 90% benign, 10% malignant.</li><li>Model predicts all cases as benign.</li><li><strong>Accuracy = 90%, but the model identifies zero malignant cases.</strong></li></ul><p>This is where other metrics come into play.</p><h3 id=specificity>Specificity</h3><p>Specificity measures the ability of a model to correctly identify true negatives (negative cases that are correctly classified as negative). It is calculated as:</p><p>[
 \text{Specificity} = \frac{\text{True Negatives}}{\text{True Negatives} + \text{False Positives}}
-]</p>
-<p><strong>Key Insight</strong>: High specificity ensures the model avoids falsely classifying negative cases as positive. This is especially crucial in medical diagnostics, where a false positive can lead to unnecessary treatments and anxiety for patients.</p>
-<p><strong>Example</strong>:</p>
-<ul>
-<li>True Negatives (TN): 90</li>
-<li>False Positives (FP): 10
+]</p><p><strong>Key Insight</strong>: High specificity ensures the model avoids falsely classifying negative cases as positive. This is especially crucial in medical diagnostics, where a false positive can lead to unnecessary treatments and anxiety for patients.</p><p><strong>Example</strong>:</p><ul><li>True Negatives (TN): 90</li><li>False Positives (FP): 10
 [
 \text{Specificity} = \frac{90}{90+10} = 0.9
-]</li>
-</ul>
-<h3 id="precision">Precision</h3>
-<p>Precision focuses on the proportion of true positive predictions out of all positive predictions:</p>
-<p>\[
+]</li></ul><h3 id=precision>Precision</h3><p>Precision focuses on the proportion of true positive predictions out of all positive predictions:</p><p>\[
 \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
-\]</p>
-<p><strong>Key Insight</strong>: High precision means the model avoids false alarms. It is critical in applications like spam detection or cancer diagnosis, where false positives can be costly.</p>
-<p><strong>Example</strong>:</p>
-<ul>
-<li>True Positives (TP): 80</li>
-<li>False Positives (FP): 20
+\]</p><p><strong>Key Insight</strong>: High precision means the model avoids false alarms. It is critical in applications like spam detection or cancer diagnosis, where false positives can be costly.</p><p><strong>Example</strong>:</p><ul><li>True Positives (TP): 80</li><li>False Positives (FP): 20
 \[
 \text{Precision} = \frac{80}{80+20} = 0.8
-\]</li>
-</ul>
-<h3 id="recall">Recall</h3>
-<p>Recall measures the proportion of actual positives correctly identified:</p>
-<p>\[
+\]</li></ul><h3 id=recall>Recall</h3><p>Recall measures the proportion of actual positives correctly identified:</p><p>\[
 \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
-\]</p>
-<p><strong>Key Insight</strong>: High recall ensures the model captures as many true positives as possible. This is crucial in medical diagnostics where missing a positive case (false negative) can have serious consequences.</p>
-<p><strong>Example</strong>:</p>
-<ul>
-<li>True Positives (TP): 80</li>
-<li>False Negatives (FN): 20
+\]</p><p><strong>Key Insight</strong>: High recall ensures the model captures as many true positives as possible. This is crucial in medical diagnostics where missing a positive case (false negative) can have serious consequences.</p><p><strong>Example</strong>:</p><ul><li>True Positives (TP): 80</li><li>False Negatives (FN): 20
 \[
 \text{Recall} = \frac{80}{80+20} = 0.8
-\]</li>
-</ul>
-<h3 id="f1-score">F1-Score</h3>
-<p>F1-score provides a balance between precision and recall:</p>
-<p>\[
+\]</li></ul><h3 id=f1-score>F1-Score</h3><p>F1-score provides a balance between precision and recall:</p><p>\[
 \text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
-\]</p>
-<p><strong>Key Insight</strong>: Use F1-score when there’s an uneven class distribution and you need a single metric that balances false positives and false negatives.</p>
-<p><strong>Example</strong>:</p>
-<ul>
-<li>Precision: 0.8</li>
-<li>Recall: 0.8
+\]</p><p><strong>Key Insight</strong>: Use F1-score when there’s an uneven class distribution and you need a single metric that balances false positives and false negatives.</p><p><strong>Example</strong>:</p><ul><li>Precision: 0.8</li><li>Recall: 0.8
 \[
 \text{F1-Score} = 2 \cdot \frac{0.8 \cdot 0.8}{0.8 + 0.8} = 0.8
-\]</li>
-</ul>
-<h3 id="roc-auc-receiver-operating-characteristic---area-under-curve">ROC-AUC (Receiver Operating Characteristic - Area Under Curve)</h3>
-<p>ROC-AUC evaluates the model&rsquo;s ability to distinguish between classes at various threshold settings.</p>
-<p>The <strong>ROC Curve</strong> plots:</p>
-<ul>
-<li><strong>True Positive Rate (TPR)</strong>: Same as recall.</li>
-<li><strong>False Positive Rate (FPR)</strong>:</li>
-</ul>
-<p>\[
+\]</li></ul><h3 id=roc-auc-receiver-operating-characteristic---area-under-curve>ROC-AUC (Receiver Operating Characteristic - Area Under Curve)</h3><p>ROC-AUC evaluates the model&rsquo;s ability to distinguish between classes at various threshold settings.</p><p>The <strong>ROC Curve</strong> plots:</p><ul><li><strong>True Positive Rate (TPR)</strong>: Same as recall.</li><li><strong>False Positive Rate (FPR)</strong>:</li></ul><p>\[
 \text{FPR} = \frac{\text{False Positives}}{\text{False Positives} + \text{True Negatives}}
-\]</p>
-<p><strong>Key Insight</strong>: AUC values range from 0.5 (random guessing) to 1 (perfect classification). Higher AUC indicates better model performance.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> precision_score, recall_score
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>y_true <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>precision <span style="color:#f92672">=</span> precision_score(y_true, y_pred)
-</span></span><span style="display:flex;"><span>recall <span style="color:#f92672">=</span> recall_score(y_true, y_pred)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Precision: </span><span style="color:#e6db74">{</span>precision<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Recall: </span><span style="color:#e6db74">{</span>recall<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><p><strong>The Area Under the Curve (AUC)</strong> quantifies the ROC curve. An AUC of 1.0 represents a perfect model, while 0.5 indicates random guessing.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_curve, roc_auc_score
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>y_scores <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.35</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">0.65</span>, <span style="color:#ae81ff">0.7</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.9</span>, <span style="color:#ae81ff">0.6</span>, <span style="color:#ae81ff">0.3</span>]
-</span></span><span style="display:flex;"><span>fpr, tpr, _ <span style="color:#f92672">=</span> roc_curve(y_true, y_scores)
-</span></span><span style="display:flex;"><span>auc <span style="color:#f92672">=</span> roc_auc_score(y_true, y_scores)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(fpr, tpr, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ROC Curve (AUC = </span><span style="color:#e6db74">{</span>auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Random Guess&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;False Positive Rate&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;True Positive Rate&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;ROC Curve&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><h3 id="visualising-the-metrics">Visualising the Metrics</h3>
-<p><strong>Confusion Matrix</strong>
-The confusion matrix summarises true positives, true negatives, false positives, and false negatives.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> confusion_matrix, ConfusionMatrixDisplay
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cm <span style="color:#f92672">=</span> confusion_matrix(y_true, y_pred)
-</span></span><span style="display:flex;"><span>disp <span style="color:#f92672">=</span> ConfusionMatrixDisplay(confusion_matrix<span style="color:#f92672">=</span>cm, display_labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Class 0&#34;</span>, <span style="color:#e6db74">&#34;Class 1&#34;</span>])
-</span></span><span style="display:flex;"><span>disp<span style="color:#f92672">.</span>plot(cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Blues&#39;</span>, values_format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;d&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Confusion Matrix&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><figure><img src="/images/project11_images/conf.png">
-</figure>
-
-<p><strong>Insights</strong></p>
-<ul>
-<li>Strengths:</li>
-</ul>
-<p>The model has high precision and recall for identifying malignant cases, making it reliable for detecting positive cases.
-A high accuracy of 93.5% shows the overall performance is strong.</p>
-<ul>
-<li>Areas for Improvement:</li>
-</ul>
-<p>Specificity (88.5%) indicates room for improvement in correctly identifying benign cases. The False Positive rate (28 misclassified benign cases) could be reduced.</p>
-<ul>
-<li>Use Case Context:</li>
-</ul>
-<p>In medical diagnostics, recall (sensitivity) is typically prioritised to avoid missing malignant cases (false negatives). This model achieves an excellent recall of 95.8%.</p>
-<h3 id="real-world-applications">Real-World Applications</h3>
-<h4 id="medical-diagnostics">Medical Diagnostics</h4>
-<ul>
-<li><strong>Precision</strong>: Avoid unnecessary treatments by minimising false positives.</li>
-<li><strong>Recall</strong>: Ensure all potential cases are flagged for further examination.</li>
-</ul>
-<h4 id="fraud-detection">Fraud Detection</h4>
-<ul>
-<li><strong>Precision</strong>: Focus on correctly identifying fraudulent transactions.</li>
-<li><strong>Recall</strong>: Minimise missed fraudulent cases to protect users.</li>
-</ul>
-<h4 id="search-engines">Search Engines</h4>
-<ul>
-<li><strong>Precision</strong>: Deliver highly relevant results to users.</li>
-<li><strong>Recall</strong>: Ensure comprehensive coverage of relevant documents.</li>
-</ul>
-<h4 id="marketing-campaigns">Marketing Campaigns</h4>
-<ul>
-<li><strong>F1-Score</strong>: Balance between targeting the right audience and ensuring campaign reach.</li>
-</ul>
-<h3 id="conclusion">Conclusion</h3>
-<p>Model evaluation is more than just maximising accuracy. Metrics like precision, recall, F1-score, and ROC-AUC provide nuanced insights into a model&rsquo;s performance, especially in the face of imbalanced datasets.</p>
-<p>These metrics enable you to align your model&rsquo;s outputs with real-world needs, ensuring better decision-making and impactful applications.</p>
-<p>By mastering these metrics, you’ll not only optimise your machine learning models but also contribute to solving complex problems in fields like healthcare, finance, and beyond.</p>
-<p><strong>Key Takeaways:</strong></p>
-<ul>
-<li>Accuracy alone is insufficient for imbalanced datasets or critical applications.</li>
-<li>Metrics like precision, recall, specificity, and F1-score provide deeper insights.</li>
-<li>ROC curves and AUC offer a holistic view of model performance across thresholds.</li>
-<li>Evaluating models comprehensively ensures they meet the demands of real-world scenarios.</li>
-<li>
-<ul>
-<li>By adopting these metrics, you can build models that not only perform well on paper but also deliver meaningful results in practice.</li>
-</ul>
-</li>
-</ul>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+\]</p><p><strong>Key Insight</strong>: AUC values range from 0.5 (random guessing) to 1 (perfect classification). Higher AUC indicates better model performance.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> precision_score, recall_score
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_true <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>y_pred <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>precision <span style=color:#f92672>=</span> precision_score(y_true, y_pred)
+</span></span><span style=display:flex><span>recall <span style=color:#f92672>=</span> recall_score(y_true, y_pred)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Precision: </span><span style=color:#e6db74>{</span>precision<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Recall: </span><span style=color:#e6db74>{</span>recall<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><strong>The Area Under the Curve (AUC)</strong> quantifies the ROC curve. An AUC of 1.0 represents a perfect model, while 0.5 indicates random guessing.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> roc_curve, roc_auc_score
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y_scores <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0.1</span>, <span style=color:#ae81ff>0.4</span>, <span style=color:#ae81ff>0.35</span>, <span style=color:#ae81ff>0.8</span>, <span style=color:#ae81ff>0.65</span>, <span style=color:#ae81ff>0.7</span>, <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.9</span>, <span style=color:#ae81ff>0.6</span>, <span style=color:#ae81ff>0.3</span>]
+</span></span><span style=display:flex><span>fpr, tpr, _ <span style=color:#f92672>=</span> roc_curve(y_true, y_scores)
+</span></span><span style=display:flex><span>auc <span style=color:#f92672>=</span> roc_auc_score(y_true, y_scores)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(fpr, tpr, label<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;ROC Curve (AUC = </span><span style=color:#e6db74>{</span>auc<span style=color:#e6db74>:</span><span style=color:#e6db74>.2f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>)&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot([<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>], [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>], linestyle<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;--&#34;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Random Guess&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;False Positive Rate&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;True Positive Rate&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;ROC Curve&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><h3 id=visualising-the-metrics>Visualising the Metrics</h3><p><strong>Confusion Matrix</strong>
+The confusion matrix summarises true positives, true negatives, false positives, and false negatives.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> confusion_matrix, ConfusionMatrixDisplay
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>cm <span style=color:#f92672>=</span> confusion_matrix(y_true, y_pred)
+</span></span><span style=display:flex><span>disp <span style=color:#f92672>=</span> ConfusionMatrixDisplay(confusion_matrix<span style=color:#f92672>=</span>cm, display_labels<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;Class 0&#34;</span>, <span style=color:#e6db74>&#34;Class 1&#34;</span>])
+</span></span><span style=display:flex><span>disp<span style=color:#f92672>.</span>plot(cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Blues&#39;</span>, values_format<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;d&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Confusion Matrix&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><figure><img src=/images/project11_images/conf.png></figure><p><strong>Insights</strong></p><ul><li>Strengths:</li></ul><p>The model has high precision and recall for identifying malignant cases, making it reliable for detecting positive cases.
+A high accuracy of 93.5% shows the overall performance is strong.</p><ul><li>Areas for Improvement:</li></ul><p>Specificity (88.5%) indicates room for improvement in correctly identifying benign cases. The False Positive rate (28 misclassified benign cases) could be reduced.</p><ul><li>Use Case Context:</li></ul><p>In medical diagnostics, recall (sensitivity) is typically prioritised to avoid missing malignant cases (false negatives). This model achieves an excellent recall of 95.8%.</p><h3 id=real-world-applications>Real-World Applications</h3><h4 id=medical-diagnostics>Medical Diagnostics</h4><ul><li><strong>Precision</strong>: Avoid unnecessary treatments by minimising false positives.</li><li><strong>Recall</strong>: Ensure all potential cases are flagged for further examination.</li></ul><h4 id=fraud-detection>Fraud Detection</h4><ul><li><strong>Precision</strong>: Focus on correctly identifying fraudulent transactions.</li><li><strong>Recall</strong>: Minimise missed fraudulent cases to protect users.</li></ul><h4 id=search-engines>Search Engines</h4><ul><li><strong>Precision</strong>: Deliver highly relevant results to users.</li><li><strong>Recall</strong>: Ensure comprehensive coverage of relevant documents.</li></ul><h4 id=marketing-campaigns>Marketing Campaigns</h4><ul><li><strong>F1-Score</strong>: Balance between targeting the right audience and ensuring campaign reach.</li></ul><h3 id=conclusion>Conclusion</h3><p>Model evaluation is more than just maximising accuracy. Metrics like precision, recall, F1-score, and ROC-AUC provide nuanced insights into a model&rsquo;s performance, especially in the face of imbalanced datasets.</p><p>These metrics enable you to align your model&rsquo;s outputs with real-world needs, ensuring better decision-making and impactful applications.</p><p>By mastering these metrics, you’ll not only optimise your machine learning models but also contribute to solving complex problems in fields like healthcare, finance, and beyond.</p><p><strong>Key Takeaways:</strong></p><ul><li>Accuracy alone is insufficient for imbalanced datasets or critical applications.</li><li>Metrics like precision, recall, specificity, and F1-score provide deeper insights.</li><li>ROC curves and AUC offer a holistic view of model performance across thresholds.</li><li>Evaluating models comprehensively ensures they meet the demands of real-world scenarios.</li><li><ul><li>By adopting these metrics, you can build models that not only perform well on paper but also deliver meaningful results in practice.</li></ul></li></ul><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

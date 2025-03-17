@@ -1,185 +1,37 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 2. Exploring Feature Engineering for Recipe Classification: How AI Understands Cooking Complexity. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Feature engineering is crucial for any machine learning project. In the second blog, I discuss how I extracted meaningful features from recipe data to help the AI model better understand cooking complexity. This blog covers the techniques I used to represent ingredients and cooking steps, allowing the model to distinguish between easy and challenging recipes.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project1_images/pr1.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 2. Exploring Feature Engineering for Recipe Classification: How AI Understands Cooking Complexity.
-          </h1>
-          
-            <p class="f5">Feature engineering is crucial for any machine learning project. In the second blog, I discuss how I extracted meaningful features from recipe data to help the AI model better understand cooking complexity. This blog covers the techniques I used to represent ingredients and cooking steps, allowing the model to distinguish between easy and challenging recipes.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project1_images/pr1.jpg">
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>In ML, features are measurable characteristics or properties that help a model make predictions. In recipe classification, features such as ingredient complexity, cooking techniques, and step count become powerful predictors of recipe difficulty. Feature engineering helps us take unstructured data, such as recipe instructions, and turn it into structured data that the model can understand.</p>
-<p>For example, a recipe with advanced ingredients (like &ldquo;saffron&rdquo; or &ldquo;truffle oil&rdquo;) is likely to be more challenging than one with everyday items like &ldquo;salt&rdquo; or &ldquo;flour.&rdquo; Similarly, recipes that involve techniques like &ldquo;blanching&rdquo; or &ldquo;flambé&rdquo; tend to require more skill than those involving basic steps like &ldquo;stirring.&rdquo;</p>
-<p>In this post, I’ll take you behind the scenes into one of the most critical aspects of this project: <em>feature engineering</em>. This is where raw recipe data is transformed into a format that AI can interpret. By selecting and creating features, my model gets the context it needs to classify recipes effectively.</p>
-<h3 id="step-by-step-guide-to-key-features-in-recipe-classification">Step-by-Step Guide to Key Features in Recipe Classification</h3>
-<p>To provide the model with a complete view of a recipe’s complexity, I engineered the following features:</p>
-<ul>
-<li>Ingredients Complexity
-The ingredients of a recipe can offer a lot of information about its difficulty.  Advanced or rare ingredients are generally associated with higher-difficulty recipes.
-To quantify ingredient complexity, we scored ingredients based on rarity and skill level.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Feature extraction for ingredient complexity</span>
-</span></span><span style="display:flex;"><span>rare_ingredients <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;saffron&#34;</span>, <span style="color:#e6db74">&#34;truffle oil&#34;</span>, <span style="color:#e6db74">&#34;foie gras&#34;</span>]
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#34;ingredient_complexity&#34;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;ingredients&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: sum(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> rare_ingredients <span style="color:#66d9ef">if</span> i <span style="color:#f92672">in</span> x))
-</span></span></code></pre></div><p>In this example, I created a list of rare ingredients and calculated the complexity score by counting how many rare ingredients appear in each recipe.</p>
-<ul>
-<li>Technique Identification
-Cooking techniques add another layer of difficulty. A recipe that involves techniques like &ldquo;poaching&rdquo; or &ldquo;julienne&rdquo; is typically more complex than one that simply calls for &ldquo;stirring.&rdquo; To identify and score these techniques, I used natural language processing (NLP) to detect specific terms associated with higher difficulty.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Feature extraction for technique complexity</span>
-</span></span><span style="display:flex;"><span>advanced_techniques <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;julienne&#34;</span>, <span style="color:#e6db74">&#34;blanch&#34;</span>, <span style="color:#e6db74">&#34;poach&#34;</span>, <span style="color:#e6db74">&#34;flambé&#34;</span>]
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#34;technique_complexity&#34;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;steps&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: sum(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> technique <span style="color:#f92672">in</span> advanced_techniques <span style="color:#66d9ef">if</span> technique <span style="color:#f92672">in</span> x))
-</span></span></code></pre></div><p>By scanning each recipe for these advanced techniques, we assigned a score based on the presence of each technique.</p>
-<h3 id="3-step-count-and-length-as-complexity-indicators">3. Step Count and Length as Complexity Indicators</h3>
-<p>The number of steps and the length of instructions provide insight into a recipe’s complexity.</p>
-<p>Recipes with many steps or lengthy instructions are generally more challenging.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Extract step count and length as features</span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#34;step_count&#34;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;steps&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: len(x<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;. &#34;</span>)))  <span style="color:#75715e"># Count sentences as steps</span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#34;step_length&#34;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;steps&#34;</span>]<span style="color:#f92672">.</span>apply(len)  <span style="color:#75715e"># Total character length of the steps</span>
-</span></span></code></pre></div><p>In this example, we use sentence count as a proxy for step count, and character length as an indicator of instruction complexity.</p>
-<p>These features, when combined, create a profile of each recipe that our model can use to predict difficulty.</p>
-<p>The more detailed the features, the better the model becomes at distinguishing between easy and difficult recipes.</p>
-<h3 id="challenges-in-feature-engineering-for-textual-data">Challenges in Feature Engineering for Textual Data</h3>
-<p>Working with textual data from recipes posed some unique challenges. Here’s how I tackled a few of them:</p>
-<ul>
-<li>Handling Ambiguity in Recipe Difficulty
-Recipe difficulty can be subjective. An experienced chef may find a recipe easy, while a novice finds it challenging.</li>
-</ul>
-<p>To address this, I used broad categories (Easy, Medium, Hard, and Very Hard) to create a more generalised difficulty scale.</p>
-<ul>
-<li>Data Imbalance
-The data was skewed toward certain difficulty levels, with many recipes labeled as &ldquo;Easy.&rdquo;</li>
-</ul>
-<p>To address this imbalance, I used SMOTE (Synthetic Minority Over-sampling Technique), which synthesizes new data points for underrepresented classes, making it easier for the model to learn from all categories.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> imblearn.over_sampling <span style="color:#f92672">import</span> SMOTE
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply SMOTE to balance the classes in the training set</span>
-</span></span><span style="display:flex;"><span>sm <span style="color:#f92672">=</span> SMOTE(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
-</span></span><span style="display:flex;"><span>X_balanced, y_balanced <span style="color:#f92672">=</span> sm<span style="color:#f92672">.</span>fit_resample(X_train, y_train)
-</span></span></code></pre></div><h3 id="dealing-with-informal-and-varying-language">Dealing with Informal and Varying Language</h3>
-<p>Recipe instructions often contain informal language or vary in word choice. I applied lemmatisation and tokenisation to standardise terms, making it easier for the model to identify patterns.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.stem <span style="color:#f92672">import</span> WordNetLemmatizer
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.tokenize <span style="color:#f92672">import</span> word_tokenize
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>lemmatizer <span style="color:#f92672">=</span> WordNetLemmatizer()
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#34;steps&#34;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;steps&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join([lemmatizer<span style="color:#f92672">.</span>lemmatize(word) <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> word_tokenize(x)]))
-</span></span></code></pre></div><p>These preprocessing steps helped create consistency across the dataset, allowing the model to recognize terms despite variations in language.</p>
-<h3 id="results-and-insights-on-feature-importance">Results and Insights on Feature Importance</h3>
-<p>After training the model, I analyzed feature importance to understand which features had the biggest impact on recipe difficulty predictions.</p>
-<p>Ingredient complexity was a strong predictor of recipe difficulty. Recipes with rare ingredients tended to be more challenging.</p>
-<p>Cooking techniques added nuance to the model, as advanced techniques were often associated with higher difficulty.</p>
-<p>Step count and instruction length provided valuable context, as recipes with longer instructions were generally more difficult.</p>
-<h3 id="visualisation-of-feature-importance">Visualisation of Feature Importance</h3>
-<p>Below is a sample code snippet to visualize feature importance using matplotlib:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Assuming model.feature_importances_ returns the importance of each feature</span>
-</span></span><span style="display:flex;"><span>features <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Ingredient Complexity&#34;</span>, <span style="color:#e6db74">&#34;Technique Complexity&#34;</span>, <span style="color:#e6db74">&#34;Step Count&#34;</span>, <span style="color:#e6db74">&#34;Step Length&#34;</span>]
-</span></span><span style="display:flex;"><span>importances <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>feature_importances_
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>barh(features, importances, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;skyblue&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Feature Importance&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Feature Importance in Recipe Difficulty Prediction&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><p>This bar chart provides an at-a-glance view of which features contribute most to the classifier’s predictions.</p>
-<h3 id="concluding-thoughts-turning-culinary-knowledge-into-predictive-power">Concluding Thoughts: Turning Culinary Knowledge into Predictive Power</h3>
-<p>Feature engineering for this recipe difficulty classifier was as much about understanding cooking as it was about technical methods.</p>
-<p>By quantifying culinary concepts like ingredient rarity and cooking techniques, we turned qualitative data into quantitative insights.</p>
-<p>This not only enhances the model’s predictive power but also enriches the cooking experience by enabling personalized recipe suggestions.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 2. Exploring Feature Engineering for Recipe Classification: How AI Understands Cooking Complexity. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Feature engineering is crucial for any machine learning project. In the second blog, I discuss how I extracted meaningful features from recipe data to help the AI model better understand cooking complexity. This blog covers the techniques I used to represent ingredients and cooking steps, allowing the model to distinguish between easy and challenging recipes."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project1_images/pr1.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 2. Exploring Feature Engineering for Recipe Classification: How AI Understands Cooking Complexity.</h1><p class=f5>Feature engineering is crucial for any machine learning project. In the second blog, I discuss how I extracted meaningful features from recipe data to help the AI model better understand cooking complexity. This blog covers the techniques I used to represent ingredients and cooking steps, allowing the model to distinguish between easy and challenging recipes.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project1_images/pr1.jpg></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/AI-Recipe-Classifier target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>In ML, features are measurable characteristics or properties that help a model make predictions. In recipe classification, features such as ingredient complexity, cooking techniques, and step count become powerful predictors of recipe difficulty. Feature engineering helps us take unstructured data, such as recipe instructions, and turn it into structured data that the model can understand.</p><p>For example, a recipe with advanced ingredients (like &ldquo;saffron&rdquo; or &ldquo;truffle oil&rdquo;) is likely to be more challenging than one with everyday items like &ldquo;salt&rdquo; or &ldquo;flour.&rdquo; Similarly, recipes that involve techniques like &ldquo;blanching&rdquo; or &ldquo;flambé&rdquo; tend to require more skill than those involving basic steps like &ldquo;stirring.&rdquo;</p><p>In this post, I’ll take you behind the scenes into one of the most critical aspects of this project: <em>feature engineering</em>. This is where raw recipe data is transformed into a format that AI can interpret. By selecting and creating features, my model gets the context it needs to classify recipes effectively.</p><h3 id=step-by-step-guide-to-key-features-in-recipe-classification>Step-by-Step Guide to Key Features in Recipe Classification</h3><p>To provide the model with a complete view of a recipe’s complexity, I engineered the following features:</p><ul><li>Ingredients Complexity
+The ingredients of a recipe can offer a lot of information about its difficulty. Advanced or rare ingredients are generally associated with higher-difficulty recipes.
+To quantify ingredient complexity, we scored ingredients based on rarity and skill level.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Feature extraction for ingredient complexity</span>
+</span></span><span style=display:flex><span>rare_ingredients <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;saffron&#34;</span>, <span style=color:#e6db74>&#34;truffle oil&#34;</span>, <span style=color:#e6db74>&#34;foie gras&#34;</span>]
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#34;ingredient_complexity&#34;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#34;ingredients&#34;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: sum(<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> rare_ingredients <span style=color:#66d9ef>if</span> i <span style=color:#f92672>in</span> x))
+</span></span></code></pre></div><p>In this example, I created a list of rare ingredients and calculated the complexity score by counting how many rare ingredients appear in each recipe.</p><ul><li>Technique Identification
+Cooking techniques add another layer of difficulty. A recipe that involves techniques like &ldquo;poaching&rdquo; or &ldquo;julienne&rdquo; is typically more complex than one that simply calls for &ldquo;stirring.&rdquo; To identify and score these techniques, I used natural language processing (NLP) to detect specific terms associated with higher difficulty.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Feature extraction for technique complexity</span>
+</span></span><span style=display:flex><span>advanced_techniques <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;julienne&#34;</span>, <span style=color:#e6db74>&#34;blanch&#34;</span>, <span style=color:#e6db74>&#34;poach&#34;</span>, <span style=color:#e6db74>&#34;flambé&#34;</span>]
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#34;technique_complexity&#34;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#34;steps&#34;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: sum(<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>for</span> technique <span style=color:#f92672>in</span> advanced_techniques <span style=color:#66d9ef>if</span> technique <span style=color:#f92672>in</span> x))
+</span></span></code></pre></div><p>By scanning each recipe for these advanced techniques, we assigned a score based on the presence of each technique.</p><h3 id=3-step-count-and-length-as-complexity-indicators>3. Step Count and Length as Complexity Indicators</h3><p>The number of steps and the length of instructions provide insight into a recipe’s complexity.</p><p>Recipes with many steps or lengthy instructions are generally more challenging.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Extract step count and length as features</span>
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#34;step_count&#34;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#34;steps&#34;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: len(x<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;. &#34;</span>)))  <span style=color:#75715e># Count sentences as steps</span>
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#34;step_length&#34;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#34;steps&#34;</span>]<span style=color:#f92672>.</span>apply(len)  <span style=color:#75715e># Total character length of the steps</span>
+</span></span></code></pre></div><p>In this example, we use sentence count as a proxy for step count, and character length as an indicator of instruction complexity.</p><p>These features, when combined, create a profile of each recipe that our model can use to predict difficulty.</p><p>The more detailed the features, the better the model becomes at distinguishing between easy and difficult recipes.</p><h3 id=challenges-in-feature-engineering-for-textual-data>Challenges in Feature Engineering for Textual Data</h3><p>Working with textual data from recipes posed some unique challenges. Here’s how I tackled a few of them:</p><ul><li>Handling Ambiguity in Recipe Difficulty
+Recipe difficulty can be subjective. An experienced chef may find a recipe easy, while a novice finds it challenging.</li></ul><p>To address this, I used broad categories (Easy, Medium, Hard, and Very Hard) to create a more generalised difficulty scale.</p><ul><li>Data Imbalance
+The data was skewed toward certain difficulty levels, with many recipes labeled as &ldquo;Easy.&rdquo;</li></ul><p>To address this imbalance, I used SMOTE (Synthetic Minority Over-sampling Technique), which synthesizes new data points for underrepresented classes, making it easier for the model to learn from all categories.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> imblearn.over_sampling <span style=color:#f92672>import</span> SMOTE
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Apply SMOTE to balance the classes in the training set</span>
+</span></span><span style=display:flex><span>sm <span style=color:#f92672>=</span> SMOTE(random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
+</span></span><span style=display:flex><span>X_balanced, y_balanced <span style=color:#f92672>=</span> sm<span style=color:#f92672>.</span>fit_resample(X_train, y_train)
+</span></span></code></pre></div><h3 id=dealing-with-informal-and-varying-language>Dealing with Informal and Varying Language</h3><p>Recipe instructions often contain informal language or vary in word choice. I applied lemmatisation and tokenisation to standardise terms, making it easier for the model to identify patterns.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> nltk.stem <span style=color:#f92672>import</span> WordNetLemmatizer
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> nltk.tokenize <span style=color:#f92672>import</span> word_tokenize
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>lemmatizer <span style=color:#f92672>=</span> WordNetLemmatizer()
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#34;steps&#34;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#34;steps&#34;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: <span style=color:#e6db74>&#34; &#34;</span><span style=color:#f92672>.</span>join([lemmatizer<span style=color:#f92672>.</span>lemmatize(word) <span style=color:#66d9ef>for</span> word <span style=color:#f92672>in</span> word_tokenize(x)]))
+</span></span></code></pre></div><p>These preprocessing steps helped create consistency across the dataset, allowing the model to recognize terms despite variations in language.</p><h3 id=results-and-insights-on-feature-importance>Results and Insights on Feature Importance</h3><p>After training the model, I analyzed feature importance to understand which features had the biggest impact on recipe difficulty predictions.</p><p>Ingredient complexity was a strong predictor of recipe difficulty. Recipes with rare ingredients tended to be more challenging.</p><p>Cooking techniques added nuance to the model, as advanced techniques were often associated with higher difficulty.</p><p>Step count and instruction length provided valuable context, as recipes with longer instructions were generally more difficult.</p><h3 id=visualisation-of-feature-importance>Visualisation of Feature Importance</h3><p>Below is a sample code snippet to visualize feature importance using matplotlib:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Assuming model.feature_importances_ returns the importance of each feature</span>
+</span></span><span style=display:flex><span>features <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;Ingredient Complexity&#34;</span>, <span style=color:#e6db74>&#34;Technique Complexity&#34;</span>, <span style=color:#e6db74>&#34;Step Count&#34;</span>, <span style=color:#e6db74>&#34;Step Length&#34;</span>]
+</span></span><span style=display:flex><span>importances <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>feature_importances_
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>6</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>barh(features, importances, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;skyblue&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;Feature Importance&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Feature Importance in Recipe Difficulty Prediction&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>This bar chart provides an at-a-glance view of which features contribute most to the classifier’s predictions.</p><h3 id=concluding-thoughts-turning-culinary-knowledge-into-predictive-power>Concluding Thoughts: Turning Culinary Knowledge into Predictive Power</h3><p>Feature engineering for this recipe difficulty classifier was as much about understanding cooking as it was about technical methods.</p><p>By quantifying culinary concepts like ingredient rarity and cooking techniques, we turned qualitative data into quantitative insights.</p><p>This not only enhances the model’s predictive power but also enriches the cooking experience by enabling personalized recipe suggestions.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

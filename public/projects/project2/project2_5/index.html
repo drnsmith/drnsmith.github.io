@@ -1,186 +1,21 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Dive into the art and science of assessing the quality of recipe clusters and extracting actionable insights. This blog explores evaluation techniques like silhouette scores, coherence measures, and manual inspection.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project2_images/pr2.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights.
-          </h1>
-          
-            <p class="f5">Dive into the art and science of assessing the quality of recipe clusters and extracting actionable insights. This blog explores evaluation techniques like silhouette scores, coherence measures, and manual inspection.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project2_images/pr2.jpg">
-</figure>
-
-<strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction-evaluating-and-interpreting-recipe-clusters-for-meaningful-insights">Introduction. Evaluating and Interpreting Recipe Clusters for Meaningful Insights</h3>
-<p>Clustering recipes can reveal fascinating patterns, but identifying meaningful clusters is only half the battle.</p>
-<p>The real challenge lies in evaluating their quality and interpreting their results effectively. Without rigorous evaluation, clusters might lack utility, leading to misleading conclusions.</p>
-<p>In this blog, we’ll cover:</p>
-<ol>
-<li>Techniques for evaluating cluster quality.</li>
-<li>Methods for interpreting recipe clusters.</li>
-<li>Challenges and insights gained from real-world clustering projects.</li>
-</ol>
-<h3 id="why-does-cluster-evaluation-matter">Why Does Cluster Evaluation Matter?</h3>
-<p>Creating clusters is straightforward, but ensuring they represent meaningful groupings requires evaluation. For recipes, this means asking:</p>
-<ul>
-<li>Are clusters cohesive and distinct?</li>
-<li>Do clusters align with culinary logic (e.g., cuisines, ingredient combinations)?</li>
-<li>Can the clusters provide actionable insights?</li>
-</ul>
-<h3 id="techniques-for-evaluating-clusters">Techniques for Evaluating Clusters</h3>
-<h3 id="1-silhouette-score">1. Silhouette Score</h3>
-<p>The silhouette score measures how similar a recipe is to its assigned cluster compared to other clusters. It ranges from -1 to 1, where:</p>
-<ul>
-<li><strong>1:</strong> Perfect cohesion within the cluster.</li>
-<li><strong>0:</strong> Overlap between clusters.</li>
-<li><strong>-1:</strong> Poor assignment (likely noise).</li>
-</ul>
-<p>Here’s how I calculated the silhouette score for recipe clusters:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> silhouette_score
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compute silhouette score</span>
-</span></span><span style="display:flex;"><span>score <span style="color:#f92672">=</span> silhouette_score(recipe_vectors, clusters)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Silhouette Score: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><p><strong>Use Case</strong>: During clustering experiments, silhouette scores helped us identify the optimal number of clusters.</p>
-<h3 id="2-coherence-measures">2. Coherence Measures</h3>
-<p>Coherence measures assess the interpretability of clusters by analysing the similarity of terms or features within each cluster.</p>
-<p>For <em>topic modelling</em> (e.g., LDA), coherence scores quantify how well words in a topic relate to each other.
-For <em>recipe clustering</em>, this could involve measuring the semantic similarity of key ingredients or cooking methods.</p>
-<p><strong>Key Challenge</strong>: Coherence scores require careful tuning of feature extraction methods to capture the nuances of recipe data.</p>
-<h3 id="3-manual-inspection">3. Manual Inspection</h3>
-<p>Automated metrics are valuable, but manual inspection remains indispensable for evaluating recipe clusters. This involves:</p>
-<ul>
-<li>Sampling recipes from each cluster.
-Checking for logical groupings (e.g., similar cuisines or ingredient profiles).</li>
-<li>Collaborating with culinary experts for domain insights.
-Example: A cluster containing “Pasta with Tomato Sauce” and “Lasagna” suggests cohesion, while a mix of “Pasta” and “Chocolate Cake” might indicate poor clustering.</li>
-</ul>
-<h3 id="interpreting-recipe-clusters">Interpreting Recipe Clusters</h3>
-<p>Interpreting clusters requires understanding their practical relevance. For recipes, this could mean identifying:</p>
-<ul>
-<li><em>Cuisine Groups</em>: Groupings like Italian, Asian, or Mediterranean cuisines.</li>
-<li><em>Dietary Patterns</em>: Clusters representing vegan, keto, or gluten-free recipes.</li>
-<li><em>Cooking Techniques</em>: Categories based on methods like baking, grilling, or steaming.</li>
-</ul>
-<h3 id="visualising-clusters">Visualising Clusters</h3>
-<p>Visualisation helps make sense of high-dimensional data. Techniques like t-SNE or PCA reduce dimensionality, enabling clear visualizations of cluster separations.</p>
-<p>Here’s an example using t-SNE:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.manifold <span style="color:#f92672">import</span> TSNE
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform t-SNE</span>
-</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
-</span></span><span style="display:flex;"><span>reduced_data <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(recipe_vectors<span style="color:#f92672">.</span>toarray())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot clusters</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(reduced_data[:, <span style="color:#ae81ff">0</span>], reduced_data[:, <span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span>clusters, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;viridis&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>colorbar()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><p>Visualisations often reveal overlaps or outliers that might not be evident from metrics alone.</p>
-<h3 id="challenges-in-recipe-cluster-interpretation">Challenges in Recipe Cluster Interpretation</h3>
-<h3 id="1-ambiguity-in-features">1. Ambiguity in Features</h3>
-<p>Recipes often share overlapping features (e.g., “chicken curry” and “chicken salad” both include chicken), making it difficult to distinguish clusters based solely on ingredients.</p>
-<h3 id="2-domain-specific-knowledge">2. Domain-Specific Knowledge</h3>
-<p>Interpreting clusters without culinary expertise can lead to false assumptions. For example, a cluster labeled as “Asian cuisine” might actually combine unrelated dishes due to shared ingredients like soy sauce or rice.</p>
-<h3 id="3-sparse-data">3. Sparse Data</h3>
-<p>Sparse feature vectors, especially in TF-IDF-based clustering, can dilute the relationships between recipes, leading to clusters that are hard to interpret.</p>
-<h3 id="lessons-learned">Lessons Learned</h3>
-<ul>
-<li><em>Combine Metrics and Manual Evaluation</em>: Automated metrics like silhouette and coherence scores provide a starting point but must be paired with manual inspection for practical insights.</li>
-<li><em>Engage Domain Experts</em>: Culinary expertise adds depth to interpretations, ensuring clusters align with real-world culinary logic.</li>
-<li><em>Iterate and Refine</em>: Cluster evaluation is an iterative process. Refining features, adjusting parameters, and reevaluating are essential steps.</li>
-</ul>
-<h3 id="final-thoughts">Final Thoughts</h3>
-<p>Evaluating and interpreting recipe clusters goes beyond calculating scores—it’s about connecting the output to meaningful insights. By combining metrics, visualisations, and domain expertise, you can ensure your clusters tell a story worth exploring.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Dive into the art and science of assessing the quality of recipe clusters and extracting actionable insights. This blog explores evaluation techniques like silhouette scores, coherence measures, and manual inspection."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project2_images/pr2.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights.</h1><p class=f5>Dive into the art and science of assessing the quality of recipe clusters and extracting actionable insights. This blog explores evaluation techniques like silhouette scores, coherence measures, and manual inspection.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project2_images/pr2.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction-evaluating-and-interpreting-recipe-clusters-for-meaningful-insights>Introduction. Evaluating and Interpreting Recipe Clusters for Meaningful Insights</h3><p>Clustering recipes can reveal fascinating patterns, but identifying meaningful clusters is only half the battle.</p><p>The real challenge lies in evaluating their quality and interpreting their results effectively. Without rigorous evaluation, clusters might lack utility, leading to misleading conclusions.</p><p>In this blog, we’ll cover:</p><ol><li>Techniques for evaluating cluster quality.</li><li>Methods for interpreting recipe clusters.</li><li>Challenges and insights gained from real-world clustering projects.</li></ol><h3 id=why-does-cluster-evaluation-matter>Why Does Cluster Evaluation Matter?</h3><p>Creating clusters is straightforward, but ensuring they represent meaningful groupings requires evaluation. For recipes, this means asking:</p><ul><li>Are clusters cohesive and distinct?</li><li>Do clusters align with culinary logic (e.g., cuisines, ingredient combinations)?</li><li>Can the clusters provide actionable insights?</li></ul><h3 id=techniques-for-evaluating-clusters>Techniques for Evaluating Clusters</h3><h3 id=1-silhouette-score>1. Silhouette Score</h3><p>The silhouette score measures how similar a recipe is to its assigned cluster compared to other clusters. It ranges from -1 to 1, where:</p><ul><li><strong>1:</strong> Perfect cohesion within the cluster.</li><li><strong>0:</strong> Overlap between clusters.</li><li><strong>-1:</strong> Poor assignment (likely noise).</li></ul><p>Here’s how I calculated the silhouette score for recipe clusters:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> silhouette_score
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Compute silhouette score</span>
+</span></span><span style=display:flex><span>score <span style=color:#f92672>=</span> silhouette_score(recipe_vectors, clusters)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Silhouette Score: </span><span style=color:#e6db74>{</span>score<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><strong>Use Case</strong>: During clustering experiments, silhouette scores helped us identify the optimal number of clusters.</p><h3 id=2-coherence-measures>2. Coherence Measures</h3><p>Coherence measures assess the interpretability of clusters by analysing the similarity of terms or features within each cluster.</p><p>For <em>topic modelling</em> (e.g., LDA), coherence scores quantify how well words in a topic relate to each other.
+For <em>recipe clustering</em>, this could involve measuring the semantic similarity of key ingredients or cooking methods.</p><p><strong>Key Challenge</strong>: Coherence scores require careful tuning of feature extraction methods to capture the nuances of recipe data.</p><h3 id=3-manual-inspection>3. Manual Inspection</h3><p>Automated metrics are valuable, but manual inspection remains indispensable for evaluating recipe clusters. This involves:</p><ul><li>Sampling recipes from each cluster.
+Checking for logical groupings (e.g., similar cuisines or ingredient profiles).</li><li>Collaborating with culinary experts for domain insights.
+Example: A cluster containing “Pasta with Tomato Sauce” and “Lasagna” suggests cohesion, while a mix of “Pasta” and “Chocolate Cake” might indicate poor clustering.</li></ul><h3 id=interpreting-recipe-clusters>Interpreting Recipe Clusters</h3><p>Interpreting clusters requires understanding their practical relevance. For recipes, this could mean identifying:</p><ul><li><em>Cuisine Groups</em>: Groupings like Italian, Asian, or Mediterranean cuisines.</li><li><em>Dietary Patterns</em>: Clusters representing vegan, keto, or gluten-free recipes.</li><li><em>Cooking Techniques</em>: Categories based on methods like baking, grilling, or steaming.</li></ul><h3 id=visualising-clusters>Visualising Clusters</h3><p>Visualisation helps make sense of high-dimensional data. Techniques like t-SNE or PCA reduce dimensionality, enabling clear visualizations of cluster separations.</p><p>Here’s an example using t-SNE:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.manifold <span style=color:#f92672>import</span> TSNE
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Perform t-SNE</span>
+</span></span><span style=display:flex><span>tsne <span style=color:#f92672>=</span> TSNE(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
+</span></span><span style=display:flex><span>reduced_data <span style=color:#f92672>=</span> tsne<span style=color:#f92672>.</span>fit_transform(recipe_vectors<span style=color:#f92672>.</span>toarray())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Plot clusters</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>scatter(reduced_data[:, <span style=color:#ae81ff>0</span>], reduced_data[:, <span style=color:#ae81ff>1</span>], c<span style=color:#f92672>=</span>clusters, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;viridis&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>colorbar()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>Visualisations often reveal overlaps or outliers that might not be evident from metrics alone.</p><h3 id=challenges-in-recipe-cluster-interpretation>Challenges in Recipe Cluster Interpretation</h3><h3 id=1-ambiguity-in-features>1. Ambiguity in Features</h3><p>Recipes often share overlapping features (e.g., “chicken curry” and “chicken salad” both include chicken), making it difficult to distinguish clusters based solely on ingredients.</p><h3 id=2-domain-specific-knowledge>2. Domain-Specific Knowledge</h3><p>Interpreting clusters without culinary expertise can lead to false assumptions. For example, a cluster labeled as “Asian cuisine” might actually combine unrelated dishes due to shared ingredients like soy sauce or rice.</p><h3 id=3-sparse-data>3. Sparse Data</h3><p>Sparse feature vectors, especially in TF-IDF-based clustering, can dilute the relationships between recipes, leading to clusters that are hard to interpret.</p><h3 id=lessons-learned>Lessons Learned</h3><ul><li><em>Combine Metrics and Manual Evaluation</em>: Automated metrics like silhouette and coherence scores provide a starting point but must be paired with manual inspection for practical insights.</li><li><em>Engage Domain Experts</em>: Culinary expertise adds depth to interpretations, ensuring clusters align with real-world culinary logic.</li><li><em>Iterate and Refine</em>: Cluster evaluation is an iterative process. Refining features, adjusting parameters, and reevaluating are essential steps.</li></ul><h3 id=final-thoughts>Final Thoughts</h3><p>Evaluating and interpreting recipe clusters goes beyond calculating scores—it’s about connecting the output to meaningful insights. By combining metrics, visualisations, and domain expertise, you can ensure your clusters tell a story worth exploring.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

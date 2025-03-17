@@ -1,199 +1,40 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog explores the challenges of working with messy environmental data, such as missing values and outliers, and demonstrates how effective pre-processing lays the foundation for accurate pollution predictions.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project8_images/pr8.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction.
-          </h1>
-          
-            <p class="f5">This blog explores the challenges of working with messy environmental data, such as missing values and outliers, and demonstrates how effective pre-processing lays the foundation for accurate pollution predictions.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project8_images/pr8.jpg"
-    alt="Photo by Dom J on Pexels"><figcaption>
-      <p>Photo by Dom J on Pexels</p>
-    </figcaption>
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>Have you ever stopped to think about the data behind environmental predictions?</p>
-<p>We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions.</p>
-<p>The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.</p>
-<p>For those of us who work with environmental datasets, we know that real-world data is never perfect. It’s often messy, inconsistent, and incomplete.</p>
-<p>This is especially true when working with air quality data, where we’re dealing with thousands of readings, irregular patterns, missing values, and numerous variables that impact pollution levels.</p>
-<p>In this blog, I’ll walk you through the challenges I faced while cleaning environmental data for a PM10 prediction project.</p>
-<p>I’ll demonstrate how effective pre-processing laid the foundation for accurate predictions of air quality levels and ultimately, how machine learning (ML) models could be used to tackle air pollution.</p>
-<p>So, let’s dive in and clean the air—starting with cleaning the data.</p>
-<h3 id="whats-the-problem-with-environmental-data">What’s the Problem with Environmental Data?</h3>
-<p>When I first started working with environmental data, I was amased by how much information was available.</p>
-<p>Hourly measurements, pollution concentrations, temperature readings, wind speed, and more—data coming from different sources, like air quality monitoring stations, weather reports, and traffic records.</p>
-<p>But as exciting as this data was, it was also messy. And not just a little bit messy—extremely messy.</p>
-<h4 id="missing-data">Missing Data</h4>
-<p>One of the biggest challenges I faced was dealing with missing values.</p>
-<p>Imagine trying to predict the pollution level for a city based on incomplete data—missing temperature readings, unrecorded pollutant levels, or even entire days without data.</p>
-<p>In some cases, I could find gaps of several hours or days in the data. These gaps needed to be handled with care to avoid distorting the predictions.</p>
-<p>So, how do we deal with missing data? The approach I took was a combination of:</p>
-<ul>
-<li><strong>Interpolation</strong>: Estimating the missing values based on surrounding data points.</li>
-<li><strong>Exclusion</strong>: In cases where gaps were too large or could distort the overall trends, I excluded that data.</li>
-</ul>
-<p>While it’s not perfect, it’s a compromise that ensures the model remains accurate enough to make useful predictions.</p>
-<h4 id="outliers">Outliers</h4>
-<p>Outliers are another problem in environmental datasets. An outlier in air quality data could be a sudden spike in pollution levels due to a sensor malfunction, or it could represent a real pollution event like a nearby fire or industrial accident. The challenge is figuring out which is which.</p>
-<p>In some cases, I used statistical methods (like Interquartile Range (IQR)) to detect and remove outliers that were too extreme to be real.</p>
-<p>But I also made judgment calls. Some spikes might be significant enough to keep in the dataset, while others were obvious sensor errors that needed to be discarded.</p>
-<h4 id="irregularities-in-the-data">Irregularities in the Data</h4>
-<p>Environmental data is also inconsistent.</p>
-<p>Different air quality stations report data at different times, or even use different methods to record measurements. This means that some of the data might not align correctly, making it difficult to perform meaningful analysis.</p>
-<p>For example, one station might measure PM10 levels every 15 minutes, while another station might do so every hour. To handle this, I had to standardise the time intervals and make sure the data was aligned across different stations.</p>
-<h3 id="steps-in-data-pre-processing-for-pm10-prediction">Steps in Data Pre-processing for PM10 Prediction</h3>
-<h4 id="step-1-data-import-and-inspection">Step 1: Data Import and Inspection</h4>
-<p>The first step in cleaning the data was importing the various datasets, which were in multiple formats. I used <code>Pandas</code> to load data from <code>CSVs</code>, <code>Excel</code> files, and other formats into <code>DataFrames</code> for easier manipulation.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load data into a DataFrame</span>
-</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_excel(<span style="color:#e6db74">&#39;PM10_final_updated_with_lags.xlsx&#39;</span>)
-</span></span></code></pre></div><p>Once the data was loaded, I inspected it to understand its structure. I used commands like <code>.head()</code>, <code>.info()</code>, and <code>.describe()</code> to get a glimpse of the first few rows, check the column data types, and get summary statistics.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Inspecting the first few rows</span>
-</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>head()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Checking for missing values and datatypes</span>
-</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>info()
-</span></span></code></pre></div><h4 id="step-2-handling-missing-values">Step 2: Handling Missing Values</h4>
-<p>Next, I tackled the missing values. Some were easy to handle with interpolation, while others required filling with a placeholder value or removing entire rows.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filling missing values using forward-fill method</span>
-</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>fillna(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ffill&#39;</span>, inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or interpolate using linear interpolation for numerical columns</span>
-</span></span><span style="display:flex;"><span>data<span style="color:#f92672">.</span>interpolate(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linear&#39;</span>, inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span></code></pre></div><h4 id="step-3-outlier-detection">Step 3: Outlier Detection</h4>
-<p>For outliers, I used the <strong>IQR method</strong> to identify and remove extreme values.</p>
-<p>The IQR is a measure of statistical dispersion, and outliers can be defined as any values outside the range of [Q1 - 1.5 * IQR, Q3 + 1.5 * IQR] (where Q1 and Q3 are the first and third quartiles).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculating the IQR for detecting outliers</span>
-</span></span><span style="display:flex;"><span>Q1 <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>quantile(<span style="color:#ae81ff">0.25</span>)
-</span></span><span style="display:flex;"><span>Q3 <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>quantile(<span style="color:#ae81ff">0.75</span>)
-</span></span><span style="display:flex;"><span>IQR <span style="color:#f92672">=</span> Q3 <span style="color:#f92672">-</span> Q1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Identifying outliers</span>
-</span></span><span style="display:flex;"><span>outliers <span style="color:#f92672">=</span> (data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&lt;</span> (Q1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1.5</span> <span style="color:#f92672">*</span> IQR)) <span style="color:#f92672">|</span> (data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&gt;</span> (Q3 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.5</span> <span style="color:#f92672">*</span> IQR))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Removing outliers</span>
-</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data[<span style="color:#f92672">~</span>outliers]
-</span></span></code></pre></div><h4 id="step-4-feature-engineering-and-transformation">Step 4: Feature Engineering and Transformation</h4>
-<p>In this step, I created new features that would improve the model’s ability to predict pollution levels.</p>
-<p>For example, lagged variables were created to account for the fact that pollution from one hour might affect the next. This transformation is crucial for time-series data.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creating lagged features for PM10 levels</span>
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_lag_1&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>shift(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_lag_2&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>shift(<span style="color:#ae81ff">2</span>)
-</span></span></code></pre></div><p>I also scaled the data, since many  ML models work better when numerical features are normalised to a similar scale. For this, I used <code>StandardScaler</code> from <code>scikit-learn</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Scaling numerical columns</span>
-</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> StandardScaler()
-</span></span><span style="display:flex;"><span>data[[<span style="color:#e6db74">&#39;PM10&#39;</span>, <span style="color:#e6db74">&#39;Temperature&#39;</span>, <span style="color:#e6db74">&#39;WindSpeed&#39;</span>]] <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>fit_transform(data[[<span style="color:#e6db74">&#39;PM10&#39;</span>, <span style="color:#e6db74">&#39;Temperature&#39;</span>, <span style="color:#e6db74">&#39;WindSpeed&#39;</span>]])
-</span></span></code></pre></div><h3 id="why-data-preprocessing-matters">Why Data Preprocessing Matters</h3>
-<p>Effective data pre-processing is a critical step in any ML project, but it’s particularly important when dealing with environmental data.</p>
-<p>If you don&rsquo;t clean your data, the models you build might fail to capture important patterns, or worse, they might produce inaccurate predictions that could mislead decision-makers.</p>
-<p>In our case, cleaning the air (the data) was essential to making accurate predictions about pollution levels.</p>
-<p>By dealing with missing data, outliers, and inconsistencies, I ensured that the models would receive high-quality data, which ultimately led to better predictions and more actionable insights.</p>
-<h3 id="conclusion-data-is-the-foundation-for-clean-air">Conclusion: Data Is the Foundation for Clean Air</h3>
-<p>As we’ve seen, cleaning data isn’t a glamorous task, but it’s one of the most important steps in any ML project.</p>
-<p>By properly handling messy environmental data, we can build robust models that predict PM10 levels with greater accuracy, providing decision-makers with the insights they need to improve air quality and public health.</p>
-<p>So, next time you breathe in a breath of fresh air, remember—it’s not just the air you’re breathing, but the data behind it that helps us make it cleaner.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores the challenges of working with messy environmental data, such as missing values and outliers, and demonstrates how effective pre-processing lays the foundation for accurate pollution predictions."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project8_images/pr8.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction.</h1><p class=f5>This blog explores the challenges of working with messy environmental data, such as missing values and outliers, and demonstrates how effective pre-processing lays the foundation for accurate pollution predictions.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project8_images/pr8.jpg alt="Photo by Dom J on Pexels"><figcaption><p>Photo by Dom J on Pexels</p></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/PM-London-Pollution target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Have you ever stopped to think about the data behind environmental predictions?</p><p>We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions.</p><p>The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.</p><p>For those of us who work with environmental datasets, we know that real-world data is never perfect. It’s often messy, inconsistent, and incomplete.</p><p>This is especially true when working with air quality data, where we’re dealing with thousands of readings, irregular patterns, missing values, and numerous variables that impact pollution levels.</p><p>In this blog, I’ll walk you through the challenges I faced while cleaning environmental data for a PM10 prediction project.</p><p>I’ll demonstrate how effective pre-processing laid the foundation for accurate predictions of air quality levels and ultimately, how machine learning (ML) models could be used to tackle air pollution.</p><p>So, let’s dive in and clean the air—starting with cleaning the data.</p><h3 id=whats-the-problem-with-environmental-data>What’s the Problem with Environmental Data?</h3><p>When I first started working with environmental data, I was amased by how much information was available.</p><p>Hourly measurements, pollution concentrations, temperature readings, wind speed, and more—data coming from different sources, like air quality monitoring stations, weather reports, and traffic records.</p><p>But as exciting as this data was, it was also messy. And not just a little bit messy—extremely messy.</p><h4 id=missing-data>Missing Data</h4><p>One of the biggest challenges I faced was dealing with missing values.</p><p>Imagine trying to predict the pollution level for a city based on incomplete data—missing temperature readings, unrecorded pollutant levels, or even entire days without data.</p><p>In some cases, I could find gaps of several hours or days in the data. These gaps needed to be handled with care to avoid distorting the predictions.</p><p>So, how do we deal with missing data? The approach I took was a combination of:</p><ul><li><strong>Interpolation</strong>: Estimating the missing values based on surrounding data points.</li><li><strong>Exclusion</strong>: In cases where gaps were too large or could distort the overall trends, I excluded that data.</li></ul><p>While it’s not perfect, it’s a compromise that ensures the model remains accurate enough to make useful predictions.</p><h4 id=outliers>Outliers</h4><p>Outliers are another problem in environmental datasets. An outlier in air quality data could be a sudden spike in pollution levels due to a sensor malfunction, or it could represent a real pollution event like a nearby fire or industrial accident. The challenge is figuring out which is which.</p><p>In some cases, I used statistical methods (like Interquartile Range (IQR)) to detect and remove outliers that were too extreme to be real.</p><p>But I also made judgment calls. Some spikes might be significant enough to keep in the dataset, while others were obvious sensor errors that needed to be discarded.</p><h4 id=irregularities-in-the-data>Irregularities in the Data</h4><p>Environmental data is also inconsistent.</p><p>Different air quality stations report data at different times, or even use different methods to record measurements. This means that some of the data might not align correctly, making it difficult to perform meaningful analysis.</p><p>For example, one station might measure PM10 levels every 15 minutes, while another station might do so every hour. To handle this, I had to standardise the time intervals and make sure the data was aligned across different stations.</p><h3 id=steps-in-data-pre-processing-for-pm10-prediction>Steps in Data Pre-processing for PM10 Prediction</h3><h4 id=step-1-data-import-and-inspection>Step 1: Data Import and Inspection</h4><p>The first step in cleaning the data was importing the various datasets, which were in multiple formats. I used <code>Pandas</code> to load data from <code>CSVs</code>, <code>Excel</code> files, and other formats into <code>DataFrames</code> for easier manipulation.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Load data into a DataFrame</span>
+</span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_excel(<span style=color:#e6db74>&#39;PM10_final_updated_with_lags.xlsx&#39;</span>)
+</span></span></code></pre></div><p>Once the data was loaded, I inspected it to understand its structure. I used commands like <code>.head()</code>, <code>.info()</code>, and <code>.describe()</code> to get a glimpse of the first few rows, check the column data types, and get summary statistics.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Inspecting the first few rows</span>
+</span></span><span style=display:flex><span>data<span style=color:#f92672>.</span>head()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Checking for missing values and datatypes</span>
+</span></span><span style=display:flex><span>data<span style=color:#f92672>.</span>info()
+</span></span></code></pre></div><h4 id=step-2-handling-missing-values>Step 2: Handling Missing Values</h4><p>Next, I tackled the missing values. Some were easy to handle with interpolation, while others required filling with a placeholder value or removing entire rows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Filling missing values using forward-fill method</span>
+</span></span><span style=display:flex><span>data<span style=color:#f92672>.</span>fillna(method<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ffill&#39;</span>, inplace<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Or interpolate using linear interpolation for numerical columns</span>
+</span></span><span style=display:flex><span>data<span style=color:#f92672>.</span>interpolate(method<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;linear&#39;</span>, inplace<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span></code></pre></div><h4 id=step-3-outlier-detection>Step 3: Outlier Detection</h4><p>For outliers, I used the <strong>IQR method</strong> to identify and remove extreme values.</p><p>The IQR is a measure of statistical dispersion, and outliers can be defined as any values outside the range of [Q1 - 1.5 * IQR, Q3 + 1.5 * IQR] (where Q1 and Q3 are the first and third quartiles).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Calculating the IQR for detecting outliers</span>
+</span></span><span style=display:flex><span>Q1 <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;PM10&#39;</span>]<span style=color:#f92672>.</span>quantile(<span style=color:#ae81ff>0.25</span>)
+</span></span><span style=display:flex><span>Q3 <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;PM10&#39;</span>]<span style=color:#f92672>.</span>quantile(<span style=color:#ae81ff>0.75</span>)
+</span></span><span style=display:flex><span>IQR <span style=color:#f92672>=</span> Q3 <span style=color:#f92672>-</span> Q1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Identifying outliers</span>
+</span></span><span style=display:flex><span>outliers <span style=color:#f92672>=</span> (data[<span style=color:#e6db74>&#39;PM10&#39;</span>] <span style=color:#f92672>&lt;</span> (Q1 <span style=color:#f92672>-</span> <span style=color:#ae81ff>1.5</span> <span style=color:#f92672>*</span> IQR)) <span style=color:#f92672>|</span> (data[<span style=color:#e6db74>&#39;PM10&#39;</span>] <span style=color:#f92672>&gt;</span> (Q3 <span style=color:#f92672>+</span> <span style=color:#ae81ff>1.5</span> <span style=color:#f92672>*</span> IQR))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Removing outliers</span>
+</span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> data[<span style=color:#f92672>~</span>outliers]
+</span></span></code></pre></div><h4 id=step-4-feature-engineering-and-transformation>Step 4: Feature Engineering and Transformation</h4><p>In this step, I created new features that would improve the model’s ability to predict pollution levels.</p><p>For example, lagged variables were created to account for the fact that pollution from one hour might affect the next. This transformation is crucial for time-series data.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Creating lagged features for PM10 levels</span>
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;PM10_lag_1&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;PM10&#39;</span>]<span style=color:#f92672>.</span>shift(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;PM10_lag_2&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;PM10&#39;</span>]<span style=color:#f92672>.</span>shift(<span style=color:#ae81ff>2</span>)
+</span></span></code></pre></div><p>I also scaled the data, since many ML models work better when numerical features are normalised to a similar scale. For this, I used <code>StandardScaler</code> from <code>scikit-learn</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardScaler
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Scaling numerical columns</span>
+</span></span><span style=display:flex><span>scaler <span style=color:#f92672>=</span> StandardScaler()
+</span></span><span style=display:flex><span>data[[<span style=color:#e6db74>&#39;PM10&#39;</span>, <span style=color:#e6db74>&#39;Temperature&#39;</span>, <span style=color:#e6db74>&#39;WindSpeed&#39;</span>]] <span style=color:#f92672>=</span> scaler<span style=color:#f92672>.</span>fit_transform(data[[<span style=color:#e6db74>&#39;PM10&#39;</span>, <span style=color:#e6db74>&#39;Temperature&#39;</span>, <span style=color:#e6db74>&#39;WindSpeed&#39;</span>]])
+</span></span></code></pre></div><h3 id=why-data-preprocessing-matters>Why Data Preprocessing Matters</h3><p>Effective data pre-processing is a critical step in any ML project, but it’s particularly important when dealing with environmental data.</p><p>If you don&rsquo;t clean your data, the models you build might fail to capture important patterns, or worse, they might produce inaccurate predictions that could mislead decision-makers.</p><p>In our case, cleaning the air (the data) was essential to making accurate predictions about pollution levels.</p><p>By dealing with missing data, outliers, and inconsistencies, I ensured that the models would receive high-quality data, which ultimately led to better predictions and more actionable insights.</p><h3 id=conclusion-data-is-the-foundation-for-clean-air>Conclusion: Data Is the Foundation for Clean Air</h3><p>As we’ve seen, cleaning data isn’t a glamorous task, but it’s one of the most important steps in any ML project.</p><p>By properly handling messy environmental data, we can build robust models that predict PM10 levels with greater accuracy, providing decision-makers with the insights they need to improve air quality and public health.</p><p>So, next time you breathe in a breath of fresh air, remember—it’s not just the air you’re breathing, but the data behind it that helps us make it cleaner.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

@@ -1,54 +1,81 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution on Natasha Smith Portfolio</title>
-    <link>http://localhost:1313/projects/project9/</link>
-    <description>Recent content in Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution on Natasha Smith Portfolio</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 03 Feb 2024 10:58:08 -0400</lastBuildDate>
-    <atom:link href="http://localhost:1313/projects/project9/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>PART 1. The Importance of Data Cleaning in Environmental Analysis</title>
-      <link>http://localhost:1313/projects/project9/project9_1/</link>
-      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/projects/project9/project9_1/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.&lt;/p&gt;&#xA;&lt;p&gt;This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.&lt;/p&gt;&#xA;&lt;p&gt;When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PART 2. Understanding the Predictors of Air Pollution</title>
-      <link>http://localhost:1313/projects/project9/project9_2/</link>
-      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/projects/project9/project9_2/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;What makes air pollution worse?&lt;/p&gt;&#xA;&lt;p&gt;Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we dive into the heart of the Auckland PM10 prediction project: &lt;strong&gt;feature selection&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PART 3. Regression Models for Pollution Prediction</title>
-      <link>http://localhost:1313/projects/project9/project9_3/</link>
-      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/projects/project9/project9_3/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PART 4. Neural Networks in Environmental Data Analysis</title>
-      <link>http://localhost:1313/projects/project9/project9_4/</link>
-      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/projects/project9/project9_4/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</title>
-      <link>http://localhost:1313/projects/project9/project9_5/</link>
-      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/projects/project9/project9_5/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional machine learning (ML)models often struggle with.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict PM10 pollution levels in Auckland.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>PART 6. Comparing Models and Real-World Implications</title>
-      <link>http://localhost:1313/projects/project9/project9_6/</link>
-      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/projects/project9/project9_6/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Artificial intelligence (AI) and machine learning (ML) are not just tools for academic research—they hold transformative potential for real-world applications.&lt;/p&gt;&#xA;&lt;p&gt;In this final blog, we focus on translating our findings into actionable insights:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How can the models and predictions generated in this project help policymakers, urban planners, and individuals?&lt;/li&gt;&#xA;&lt;li&gt;What are the future possibilities for AI in environmental health?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;1-the-power-of-predictions&#34;&gt;1. The Power of Predictions&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Turning Numbers Into Actions&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution on Natasha Smith Portfolio</title><link>http://localhost:1313/projects/project9/</link><description>Recent content in Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 03 Feb 2024 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/projects/project9/index.xml" rel="self" type="application/rss+xml"/><item><title>PART 1. The Importance of Data Cleaning in Environmental Analysis</title><link>http://localhost:1313/projects/project9/project9_1/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
+ alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
+ &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
+&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+ &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;/a>
+&lt;h3 id="introduction">Introduction&lt;/h3>
+&lt;p>Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.&lt;/p>
+&lt;p>This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.&lt;/p>
+&lt;p>When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.&lt;/p></description></item><item><title>PART 2. Understanding the Predictors of Air Pollution</title><link>http://localhost:1313/projects/project9/project9_2/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
+ alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
+ &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
+&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+ &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;/a>
+&lt;h3 id="introduction">Introduction&lt;/h3>
+&lt;p>What makes air pollution worse?&lt;/p>
+&lt;p>Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.&lt;/p>
+&lt;p>In this blog, we dive into the heart of the Auckland PM10 prediction project: &lt;strong>feature selection&lt;/strong>.&lt;/p></description></item><item><title>PART 3. Regression Models for Pollution Prediction</title><link>http://localhost:1313/projects/project9/project9_3/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
+ alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
+ &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
+&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+ &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;/a>
+&lt;h3 id="introduction">Introduction&lt;/h3>
+&lt;p>Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.&lt;/p>
+&lt;p>In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.&lt;/p></description></item><item><title>PART 4. Neural Networks in Environmental Data Analysis</title><link>http://localhost:1313/projects/project9/project9_4/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
+ alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
+ &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
+&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+ &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;/a>
+&lt;h3 id="introduction">Introduction&lt;/h3>
+&lt;p>When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.&lt;/p>
+&lt;p>In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.&lt;/p></description></item><item><title>PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</title><link>http://localhost:1313/projects/project9/project9_5/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
+ alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
+ &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
+&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+ &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;/a>
+&lt;h3 id="introduction">Introduction&lt;/h3>
+&lt;p>Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional machine learning (ML)models often struggle with.&lt;/p>
+&lt;p>In this blog, we delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict PM10 pollution levels in Auckland.&lt;/p></description></item><item><title>PART 6. Comparing Models and Real-World Implications</title><link>http://localhost:1313/projects/project9/project9_6/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
+ alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
+ &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
+&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+ &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+ &lt;/a>
+&lt;h3 id="introduction">Introduction&lt;/h3>
+&lt;p>Artificial intelligence (AI) and machine learning (ML) are not just tools for academic research—they hold transformative potential for real-world applications.&lt;/p>
+&lt;p>In this final blog, we focus on translating our findings into actionable insights:&lt;/p>
+&lt;ul>
+&lt;li>How can the models and predictions generated in this project help policymakers, urban planners, and individuals?&lt;/li>
+&lt;li>What are the future possibilities for AI in environmental health?&lt;/li>
+&lt;/ul>
+&lt;h3 id="1-the-power-of-predictions">1. The Power of Predictions&lt;/h3>
+&lt;p>&lt;strong>Turning Numbers Into Actions&lt;/strong>&lt;/p></description></item></channel></rss>

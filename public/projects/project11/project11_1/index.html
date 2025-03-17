@@ -1,226 +1,65 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 1. Building Custom CNN Architectures: From Scratch to Mastery. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog guides readers through building a custom CNN from scratch for binary classification tasks, providing step-by-step implementation using TensorFlow/Keras.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project11_images/pr11.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 1. Building Custom CNN Architectures: From Scratch to Mastery.
-          </h1>
-          
-            <p class="f5">This blog guides readers through building a custom CNN from scratch for binary classification tasks, providing step-by-step implementation using TensorFlow/Keras.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project11_images/pr11.jpg">
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous.</p>
-<p>But while pre-trained models like ResNet and EfficientNet are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch.</p>
-<p>In this blog, I’ll explore how to construct a custom CNN tailored for binary classification tasks. Whether you&rsquo;re new to deep learning or looking to deepen your understanding, this guide will help you:</p>
-<ul>
-<li>Understand the anatomy of CNNs and the purpose of their components.</li>
-<li>Build a CNN model step by step using TensorFlow/Keras.</li>
-<li>Train the model and evaluate its performance with visualisations.</li>
-</ul>
-<p>By the end of this post, you&rsquo;ll have the tools to create your own custom CNNs and tailor them to specific datasets and challenges.</p>
-<h3 id="technical-explanation">Technical Explanation</h3>
-<h4 id="what-are-cnns">What Are CNNs?</h4>
-<p>At their core, CNNs are specialised neural networks (NNs) designed to process grid-structured data like images. Unlike traditional NNs, CNNs use layers of convolutional filters to automatically extract hierarchical features, from simple edges to complex patterns.</p>
-<h4 id="anatomy-of-a-cnn">Anatomy of a CNN</h4>
-<p>A CNN architecture typically consists of:</p>
-<ul>
-<li>Convolutional Layers: Extract features from the input image using filters.</li>
-<li>Pooling Layers: Reduce the spatial dimensions of feature maps to lower computational cost.</li>
-<li>Fully Connected Layers: Perform classification based on the extracted features.</li>
-<li>Dropout Layers: Mitigate overfitting by randomly deactivating neurons during training.</li>
-<li>Activation Functions: Introduce non-linearity, enabling the model to learn complex patterns.</li>
-</ul>
-<h3 id="designing-a-custom-cnn">Designing a Custom CNN</h3>
-<p>Here’s how to construct a custom CNN for binary classification:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the CNN model</span>
-</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add convolutional layers</span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Conv2D(<span style="color:#ae81ff">32</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>)))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(BatchNormalization())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Conv2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Conv2D(<span style="color:#ae81ff">128</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Flatten and add dense layers</span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Flatten())
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.5</span>))
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>))  <span style="color:#75715e"># Binary classification</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compile the model</span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;binary_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print model summary</span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
-</span></span></code></pre></div><h3 id="training-the-model">Training the Model</h3>
-<p>After defining the architecture, the next step is to train the model. Training involves feeding the CNN with labelled data, enabling it to learn patterns associated with each class.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(
-</span></span><span style="display:flex;"><span>    train_data, train_labels,
-</span></span><span style="display:flex;"><span>    validation_data<span style="color:#f92672">=</span>(val_data, val_labels),
-</span></span><span style="display:flex;"><span>    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>,
-</span></span><span style="display:flex;"><span>    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>
-</span></span><span style="display:flex;"><span>)
-</span></span></code></pre></div><h3 id="visualising-training-progress">Visualising Training Progress</h3>
-<p>To monitor the model&rsquo;s learning curve, we plot the training and validation accuracy and loss:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract metrics</span>
-</span></span><span style="display:flex;"><span>acc <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;accuracy&#39;</span>]
-</span></span><span style="display:flex;"><span>val_acc <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_accuracy&#39;</span>]
-</span></span><span style="display:flex;"><span>loss <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>]
-</span></span><span style="display:flex;"><span>val_loss <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot accuracy</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(acc, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training Accuracy&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(val_acc, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Validation Accuracy&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Training and Validation Accuracy&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epochs&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Accuracy&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot loss</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(loss, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(val_loss, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Validation Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Training and Validation Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epochs&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Loss&#39;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><h4 id="visualisation-example">Visualisation Example</h4>
-<p>Here are two visualisations showcasing the training dynamics of a CNN:</p>
-<p>Training and Validation Accuracy
-<figure><img src="/images/project11_images/training_validation_accuracy.png">
-</figure>
-</p>
-<p>Training and Validation Loss
-<figure><img src="/images/project11_images/training_validation_loss.png">
-</figure>
-</p>
-<h3 id="real-world-applications">Real-World Applications</h3>
-<h4 id="why-build-custom-cnns">Why Build Custom CNNs?</h4>
-<p>Custom CNNs allow you to:</p>
-<ul>
-<li>Tailor architectures for unique datasets, such as high-resolution images or imbalanced classes.</li>
-<li>Experiment with architectural innovations to achieve better performance.</li>
-<li>Gain a deeper understanding of how CNNs learn and generalise.</li>
-</ul>
-<h4 id="real-world-use-case-medical-imaging-diagnostics">Real-World Use Case: Medical Imaging Diagnostics</h4>
-<p>Custom CNNs are widely used in medical diagnostics to detect anomalies like tumors or fractures.</p>
-<p>For example, a CNN trained on mammography images can classify lesions as benign or malignant, aiding early detection of breast cancer.</p>
-<p>By designing the CNN with appropriate layers and regularisation, practitioners can address challenges like small dataset sizes and class imbalances.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Building a custom CNN is an invaluable skill that bridges the gap between understanding deep learning and applying it to real-world problems. In this blog, we’ve covered:</p>
-<ul>
-<li>The structure and components of a CNN.</li>
-<li>How to design, train, and evaluate a custom CNN using TensorFlow/Keras.</li>
-<li>The importance of visualisation for understanding model performance.</li>
-</ul>
-<p>Whether you&rsquo;re working on medical imaging, autonomous vehicles, or any other domain, custom CNNs empower you to create tailored solutions with deep learning.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 1. Building Custom CNN Architectures: From Scratch to Mastery. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog guides readers through building a custom CNN from scratch for binary classification tasks, providing step-by-step implementation using TensorFlow/Keras."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project11_images/pr11.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 1. Building Custom CNN Architectures: From Scratch to Mastery.</h1><p class=f5>This blog guides readers through building a custom CNN from scratch for binary classification tasks, providing step-by-step implementation using TensorFlow/Keras.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project11_images/pr11.jpg></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous.</p><p>But while pre-trained models like ResNet and EfficientNet are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch.</p><p>In this blog, I’ll explore how to construct a custom CNN tailored for binary classification tasks. Whether you&rsquo;re new to deep learning or looking to deepen your understanding, this guide will help you:</p><ul><li>Understand the anatomy of CNNs and the purpose of their components.</li><li>Build a CNN model step by step using TensorFlow/Keras.</li><li>Train the model and evaluate its performance with visualisations.</li></ul><p>By the end of this post, you&rsquo;ll have the tools to create your own custom CNNs and tailor them to specific datasets and challenges.</p><h3 id=technical-explanation>Technical Explanation</h3><h4 id=what-are-cnns>What Are CNNs?</h4><p>At their core, CNNs are specialised neural networks (NNs) designed to process grid-structured data like images. Unlike traditional NNs, CNNs use layers of convolutional filters to automatically extract hierarchical features, from simple edges to complex patterns.</p><h4 id=anatomy-of-a-cnn>Anatomy of a CNN</h4><p>A CNN architecture typically consists of:</p><ul><li>Convolutional Layers: Extract features from the input image using filters.</li><li>Pooling Layers: Reduce the spatial dimensions of feature maps to lower computational cost.</li><li>Fully Connected Layers: Perform classification based on the extracted features.</li><li>Dropout Layers: Mitigate overfitting by randomly deactivating neurons during training.</li><li>Activation Functions: Introduce non-linearity, enabling the model to learn complex patterns.</li></ul><h3 id=designing-a-custom-cnn>Designing a Custom CNN</h3><p>Here’s how to construct a custom CNN for binary classification:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> tensorflow <span style=color:#66d9ef>as</span> tf
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.layers <span style=color:#f92672>import</span> Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.models <span style=color:#f92672>import</span> Sequential
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Define the CNN model</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> Sequential()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Add convolutional layers</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Conv2D(<span style=color:#ae81ff>32</span>, (<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>), activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>, input_shape<span style=color:#f92672>=</span>(<span style=color:#ae81ff>224</span>, <span style=color:#ae81ff>224</span>, <span style=color:#ae81ff>3</span>)))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(MaxPooling2D((<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span>)))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(BatchNormalization())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Conv2D(<span style=color:#ae81ff>64</span>, (<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>), activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(MaxPooling2D((<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span>)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Conv2D(<span style=color:#ae81ff>128</span>, (<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>), activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(MaxPooling2D((<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>2</span>)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Flatten and add dense layers</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Flatten())
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>256</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dropout(<span style=color:#ae81ff>0.5</span>))
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>1</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;sigmoid&#39;</span>))  <span style=color:#75715e># Binary classification</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Compile the model</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>compile(optimizer<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;adam&#39;</span>, loss<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;binary_crossentropy&#39;</span>, metrics<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;accuracy&#39;</span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Print model summary</span>
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>summary()
+</span></span></code></pre></div><h3 id=training-the-model>Training the Model</h3><p>After defining the architecture, the next step is to train the model. Training involves feeding the CNN with labelled data, enabling it to learn patterns associated with each class.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>history <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>fit(
+</span></span><span style=display:flex><span>    train_data, train_labels,
+</span></span><span style=display:flex><span>    validation_data<span style=color:#f92672>=</span>(val_data, val_labels),
+</span></span><span style=display:flex><span>    epochs<span style=color:#f92672>=</span><span style=color:#ae81ff>50</span>,
+</span></span><span style=display:flex><span>    batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=visualising-training-progress>Visualising Training Progress</h3><p>To monitor the model&rsquo;s learning curve, we plot the training and validation accuracy and loss:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Extract metrics</span>
+</span></span><span style=display:flex><span>acc <span style=color:#f92672>=</span> history<span style=color:#f92672>.</span>history[<span style=color:#e6db74>&#39;accuracy&#39;</span>]
+</span></span><span style=display:flex><span>val_acc <span style=color:#f92672>=</span> history<span style=color:#f92672>.</span>history[<span style=color:#e6db74>&#39;val_accuracy&#39;</span>]
+</span></span><span style=display:flex><span>loss <span style=color:#f92672>=</span> history<span style=color:#f92672>.</span>history[<span style=color:#e6db74>&#39;loss&#39;</span>]
+</span></span><span style=display:flex><span>val_loss <span style=color:#f92672>=</span> history<span style=color:#f92672>.</span>history[<span style=color:#e6db74>&#39;val_loss&#39;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Plot accuracy</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>5</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(acc, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Training Accuracy&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(val_acc, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Validation Accuracy&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Training and Validation Accuracy&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Epochs&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#39;Accuracy&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Plot loss</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>5</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(loss, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Training Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(val_loss, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Validation Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Training and Validation Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Epochs&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#39;Loss&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><h4 id=visualisation-example>Visualisation Example</h4><p>Here are two visualisations showcasing the training dynamics of a CNN:</p><p>Training and Validation Accuracy<figure><img src=/images/project11_images/training_validation_accuracy.png></figure></p><p>Training and Validation Loss<figure><img src=/images/project11_images/training_validation_loss.png></figure></p><h3 id=real-world-applications>Real-World Applications</h3><h4 id=why-build-custom-cnns>Why Build Custom CNNs?</h4><p>Custom CNNs allow you to:</p><ul><li>Tailor architectures for unique datasets, such as high-resolution images or imbalanced classes.</li><li>Experiment with architectural innovations to achieve better performance.</li><li>Gain a deeper understanding of how CNNs learn and generalise.</li></ul><h4 id=real-world-use-case-medical-imaging-diagnostics>Real-World Use Case: Medical Imaging Diagnostics</h4><p>Custom CNNs are widely used in medical diagnostics to detect anomalies like tumors or fractures.</p><p>For example, a CNN trained on mammography images can classify lesions as benign or malignant, aiding early detection of breast cancer.</p><p>By designing the CNN with appropriate layers and regularisation, practitioners can address challenges like small dataset sizes and class imbalances.</p><h3 id=conclusion>Conclusion</h3><p>Building a custom CNN is an invaluable skill that bridges the gap between understanding deep learning and applying it to real-world problems. In this blog, we’ve covered:</p><ul><li>The structure and components of a CNN.</li><li>How to design, train, and evaluate a custom CNN using TensorFlow/Keras.</li><li>The importance of visualisation for understanding model performance.</li></ul><p>Whether you&rsquo;re working on medical imaging, autonomous vehicles, or any other domain, custom CNNs empower you to create tailored solutions with deep learning.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

@@ -1,201 +1,44 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 2. Boosting Model Generalisation with Data Augmentation. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog explores how data augmentation techniques were used to enhance the generalisation of CNN models for pneumonia detection. From rotations to zooming, augmentation improved model performance on unseen chest X-ray images.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project5_images/pr5.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 2. Boosting Model Generalisation with Data Augmentation.
-          </h1>
-          
-            <p class="f5">This blog explores how data augmentation techniques were used to enhance the generalisation of CNN models for pneumonia detection. From rotations to zooming, augmentation improved model performance on unseen chest X-ray images.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project5_images/pr5.jpg">
-</figure>
-
-<strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-</a>
-<h3 id="introduction">Introduction</h3>
-<p>Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.</p>
-<p>To overcome this challenge in our pneumonia detection project, we used <strong>data augmentation</strong> (DA) techniques to artificially expand the training dataset.</p>
-<p>DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&rsquo;s generalisation to unseen chest X-ray images.</p>
-<p>This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.</p>
-<h3 id="why-data-augmentation">Why Data Augmentation?</h3>
-<p>Medical imaging datasets, including chest X-rays, often have limited samples due to privacy concerns and collection difficulties. This leads to:</p>
-<ul>
-<li><strong>Overfitting</strong>: Models learn noise instead of generalisable patterns.</li>
-<li><strong>Bias</strong>: Models may struggle with unseen data due to lack of variability in the training set.</li>
-</ul>
-<p>DA tackles these issues by generating diverse versions of existing images, effectively increasing the dataset size and variability.</p>
-<h3 id="techniques-used">Techniques Used</h3>
-<ul>
-<li><strong>Rotation</strong>: Randomly rotates images within a specified range (e.g., ±15°).</li>
-<li><strong>Scaling</strong>: Enlarges or shrinks images, simulating distance variations.</li>
-<li><strong>Horizontal Flipping</strong>: Mirrors images horizontally to introduce spatial diversity.</li>
-<li><strong>Zooming</strong>: Randomly zooms into or out of an image.</li>
-<li><strong>Shifting</strong>: Translates images along the X and Y axes.</li>
-</ul>
-<h4 id="python-code-applying-da">Python Code: Applying DA</h4>
-<p>We used TensorFlow&rsquo;s <code>ImageDataGenerator</code> to apply augmentation during training.</p>
-<h4 id="da-setup">DA Setup</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define augmentation parameters</span>
-</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
-</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>,
-</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
-</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
-</span></span><span style="display:flex;"><span>    shear_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
-</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
-</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
-</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nearest&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load training images and apply augmentation</span>
-</span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;train&#34;</span>,
-</span></span><span style="display:flex;"><span>    target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>),
-</span></span><span style="display:flex;"><span>    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>,
-</span></span><span style="display:flex;"><span>    class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span></code></pre></div><h3 id="visualisation-of-augmented-images">Visualisation of Augmented Images</h3>
-<p>Visualising augmented images helps ensure the transformations are realistic and meaningful.</p>
-<h4 id="python-code-visualising-augmented-images">Python Code: Visualising Augmented Images</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load a single image from the training directory</span>
-</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;train/Normal/normal_sample.jpeg&#34;</span>
-</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>imread(img_path)
-</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(img, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate augmented images</span>
-</span></span><span style="display:flex;"><span>augmented_images <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(img, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot augmented images</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>))
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">9</span>):
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>    batch <span style="color:#f92672">=</span> next(augmented_images)
-</span></span><span style="display:flex;"><span>    augmented_img <span style="color:#f92672">=</span> batch[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(augmented_img<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#34;uint8&#34;</span>))
-</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#34;off&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#34;Augmented Images&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><h3 id="impact-of-augmentation-on-model-performance">Impact of Augmentation on Model Performance</h3>
-<p>DA significantly improved the generalisation capabilities of both models:</p>
-<p><strong>Manual CNN</strong>:</p>
-<ul>
-<li>Training accuracy: 95%</li>
-<li>Validation accuracy: 87% (without augmentation) → 91% (with augmentation)</li>
-</ul>
-<p><strong>VGG16</strong>:</p>
-<ul>
-<li>Training accuracy: 97%</li>
-<li>Validation accuracy: 89% (without augmentation) → 93% (with augmentation)</li>
-</ul>
-<figure><img src="/images/project5_images/confusion_matrix.png">
-</figure>
-
-<h3 id="challenges-with-augmentation">Challenges with Augmentation</h3>
-<ul>
-<li><em>Computational Overhead</em>:</li>
-</ul>
-<p>Augmentation increases training time as new images are generated on the fly.</p>
-<p><em>Solution</em>: Use GPU acceleration to speed up the process.</p>
-<ul>
-<li><em>Over-Augmentation</em>:</li>
-</ul>
-<p>Excessive transformations may distort critical features in medical images.</p>
-<p><em>Solution</em>: Restrict parameters like rotation and zoom to realistic ranges.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>DA proved to be a powerful tool for enhancing model performance in this pneumonia detection project. By introducing variability in the training dataset, we improved the generalisation of both the manual CNN and the pre-trained VGG16 models.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 2. Boosting Model Generalisation with Data Augmentation. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores how data augmentation techniques were used to enhance the generalisation of CNN models for pneumonia detection. From rotations to zooming, augmentation improved model performance on unseen chest X-ray images."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project5_images/pr5.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 2. Boosting Model Generalisation with Data Augmentation.</h1><p class=f5>This blog explores how data augmentation techniques were used to enhance the generalisation of CNN models for pneumonia detection. From rotations to zooming, augmentation improved model performance on unseen chest X-ray images.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project5_images/pr5.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/pneumonia-detection-CNN target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.</p><p>To overcome this challenge in our pneumonia detection project, we used <strong>data augmentation</strong> (DA) techniques to artificially expand the training dataset.</p><p>DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&rsquo;s generalisation to unseen chest X-ray images.</p><p>This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.</p><h3 id=why-data-augmentation>Why Data Augmentation?</h3><p>Medical imaging datasets, including chest X-rays, often have limited samples due to privacy concerns and collection difficulties. This leads to:</p><ul><li><strong>Overfitting</strong>: Models learn noise instead of generalisable patterns.</li><li><strong>Bias</strong>: Models may struggle with unseen data due to lack of variability in the training set.</li></ul><p>DA tackles these issues by generating diverse versions of existing images, effectively increasing the dataset size and variability.</p><h3 id=techniques-used>Techniques Used</h3><ul><li><strong>Rotation</strong>: Randomly rotates images within a specified range (e.g., ±15°).</li><li><strong>Scaling</strong>: Enlarges or shrinks images, simulating distance variations.</li><li><strong>Horizontal Flipping</strong>: Mirrors images horizontally to introduce spatial diversity.</li><li><strong>Zooming</strong>: Randomly zooms into or out of an image.</li><li><strong>Shifting</strong>: Translates images along the X and Y axes.</li></ul><h4 id=python-code-applying-da>Python Code: Applying DA</h4><p>We used TensorFlow&rsquo;s <code>ImageDataGenerator</code> to apply augmentation during training.</p><h4 id=da-setup>DA Setup</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.preprocessing.image <span style=color:#f92672>import</span> ImageDataGenerator
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Define augmentation parameters</span>
+</span></span><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(
+</span></span><span style=display:flex><span>    rotation_range<span style=color:#f92672>=</span><span style=color:#ae81ff>15</span>,
+</span></span><span style=display:flex><span>    width_shift_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.1</span>,
+</span></span><span style=display:flex><span>    height_shift_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.1</span>,
+</span></span><span style=display:flex><span>    shear_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.1</span>,
+</span></span><span style=display:flex><span>    zoom_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.1</span>,
+</span></span><span style=display:flex><span>    horizontal_flip<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
+</span></span><span style=display:flex><span>    fill_mode<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;nearest&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># Load training images and apply augmentation</span>
+</span></span><span style=display:flex><span>train_generator <span style=color:#f92672>=</span> datagen<span style=color:#f92672>.</span>flow_from_directory(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;train&#34;</span>,
+</span></span><span style=display:flex><span>    target_size<span style=color:#f92672>=</span>(<span style=color:#ae81ff>150</span>, <span style=color:#ae81ff>150</span>),
+</span></span><span style=display:flex><span>    batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>,
+</span></span><span style=display:flex><span>    class_mode<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;binary&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h3 id=visualisation-of-augmented-images>Visualisation of Augmented Images</h3><p>Visualising augmented images helps ensure the transformations are realistic and meaningful.</p><h4 id=python-code-visualising-augmented-images>Python Code: Visualising Augmented Images</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Load a single image from the training directory</span>
+</span></span><span style=display:flex><span>img_path <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;train/Normal/normal_sample.jpeg&#34;</span>
+</span></span><span style=display:flex><span>img <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>imread(img_path)
+</span></span><span style=display:flex><span>img <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>expand_dims(img, axis<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Generate augmented images</span>
+</span></span><span style=display:flex><span>augmented_images <span style=color:#f92672>=</span> datagen<span style=color:#f92672>.</span>flow(img, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Plot augmented images</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>9</span>):
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>, i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    batch <span style=color:#f92672>=</span> next(augmented_images)
+</span></span><span style=display:flex><span>    augmented_img <span style=color:#f92672>=</span> batch[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>imshow(augmented_img<span style=color:#f92672>.</span>astype(<span style=color:#e6db74>&#34;uint8&#34;</span>))
+</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>axis(<span style=color:#e6db74>&#34;off&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>suptitle(<span style=color:#e6db74>&#34;Augmented Images&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><h3 id=impact-of-augmentation-on-model-performance>Impact of Augmentation on Model Performance</h3><p>DA significantly improved the generalisation capabilities of both models:</p><p><strong>Manual CNN</strong>:</p><ul><li>Training accuracy: 95%</li><li>Validation accuracy: 87% (without augmentation) → 91% (with augmentation)</li></ul><p><strong>VGG16</strong>:</p><ul><li>Training accuracy: 97%</li><li>Validation accuracy: 89% (without augmentation) → 93% (with augmentation)</li></ul><figure><img src=/images/project5_images/confusion_matrix.png></figure><h3 id=challenges-with-augmentation>Challenges with Augmentation</h3><ul><li><em>Computational Overhead</em>:</li></ul><p>Augmentation increases training time as new images are generated on the fly.</p><p><em>Solution</em>: Use GPU acceleration to speed up the process.</p><ul><li><em>Over-Augmentation</em>:</li></ul><p>Excessive transformations may distort critical features in medical images.</p><p><em>Solution</em>: Restrict parameters like rotation and zoom to realistic ranges.</p><h3 id=conclusion>Conclusion</h3><p>DA proved to be a powerful tool for enhancing model performance in this pneumonia detection project. By introducing variability in the training dataset, we improved the generalisation of both the manual CNN and the pre-trained VGG16 models.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

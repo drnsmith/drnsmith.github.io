@@ -1,222 +1,69 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 6. Sentiment Trends: Insights by Company and Year. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog explores how sentiment trends for NASDAQ companies were analysed over time. By using time-series analysis, the project identified key events and shifts in public sentiment, offering a longitudinal perspective on market discourse.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project4_images/pr4.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 6. Sentiment Trends: Insights by Company and Year.
-          </h1>
-          
-            <p class="f5">This blog explores how sentiment trends for NASDAQ companies were analysed over time. By using time-series analysis, the project identified key events and shifts in public sentiment, offering a longitudinal perspective on market discourse.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
-</figure>
-
-<strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this blog, we analyze sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualized longitudinal sentiment patterns, highlighting their value for investors and analysts.</p>
-<hr>
-<h3 id="step-1-aggregating-sentiment-by-date"><strong>Step 1: Aggregating Sentiment by Date</strong></h3>
-<p>The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.</p>
-<h4 id="python-code-aggregating-sentiments"><strong>Python Code: Aggregating Sentiments</strong></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example DataFrame with tweets, sentiment, and dates</span>
-</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;date&#34;</span>: [<span style="color:#e6db74">&#34;2022-01-01&#34;</span>, <span style="color:#e6db74">&#34;2022-01-01&#34;</span>, <span style="color:#e6db74">&#34;2022-01-02&#34;</span>, <span style="color:#e6db74">&#34;2022-01-02&#34;</span>, <span style="color:#e6db74">&#34;2022-01-02&#34;</span>],
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;company_ticker&#34;</span>: [<span style="color:#e6db74">&#34;TSLA&#34;</span>, <span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>, <span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>],
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sentiment&#34;</span>: [<span style="color:#e6db74">&#34;positive&#34;</span>, <span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#e6db74">&#34;neutral&#34;</span>, <span style="color:#e6db74">&#34;positive&#34;</span>, <span style="color:#e6db74">&#34;negative&#34;</span>]
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Group data by date, company, and sentiment</span>
-</span></span><span style="display:flex;"><span>sentiment_trends <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>groupby([<span style="color:#e6db74">&#34;date&#34;</span>, <span style="color:#e6db74">&#34;company_ticker&#34;</span>, <span style="color:#e6db74">&#34;sentiment&#34;</span>])<span style="color:#f92672">.</span>size()<span style="color:#f92672">.</span>reset_index(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;count&#34;</span>)
-</span></span><span style="display:flex;"><span>print(sentiment_trends)
-</span></span><span style="display:flex;"><span>Output:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>yaml
-</span></span><span style="display:flex;"><span>Copy code
-</span></span><span style="display:flex;"><span>         date company_ticker sentiment  count
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span>           AAPL  negative      <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span>           TSLA  positive      <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>           AAPL  positive      <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>           TSLA  negative      <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>           TSLA   neutral      <span style="color:#ae81ff">1</span>
-</span></span></code></pre></div><h3 id="step-2-visualising-sentiment-trends">Step 2: Visualising Sentiment Trends</h3>
-<p>To visualise sentiment trends, we plotted sentiment counts for each company over time. This helped identify peaks and shifts corresponding to key events.</p>
-<h4 id="python-code-plotting-sentiment-trends">Python Code: Plotting Sentiment Trends</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filter data for a specific company (e.g., Tesla)</span>
-</span></span><span style="display:flex;"><span>tesla_data <span style="color:#f92672">=</span> sentiment_trends[sentiment_trends[<span style="color:#e6db74">&#34;company_ticker&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;TSLA&#34;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pivot data for easier plotting</span>
-</span></span><span style="display:flex;"><span>pivot_data <span style="color:#f92672">=</span> tesla_data<span style="color:#f92672">.</span>pivot(index<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>, columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentiment&#34;</span>, values<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;count&#34;</span>)<span style="color:#f92672">.</span>fillna(<span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot sentiment trends</span>
-</span></span><span style="display:flex;"><span>pivot_data<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;line&#34;</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Sentiment Trends for Tesla Over Time&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Date&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Tweet Count&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Sentiment&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><figure><img src="/images/project4_images/5.png">
-</figure>
-
-<p>If there are irregularities in tweet counts year over year, it
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 6. Sentiment Trends: Insights by Company and Year. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores how sentiment trends for NASDAQ companies were analysed over time. By using time-series analysis, the project identified key events and shifts in public sentiment, offering a longitudinal perspective on market discourse."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project4_images/pr4.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 6. Sentiment Trends: Insights by Company and Year.</h1><p class=f5>This blog explores how sentiment trends for NASDAQ companies were analysed over time. By using time-series analysis, the project identified key events and shifts in public sentiment, offering a longitudinal perspective on market discourse.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project4_images/pr4.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this blog, we analyze sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualized longitudinal sentiment patterns, highlighting their value for investors and analysts.</p><hr><h3 id=step-1-aggregating-sentiment-by-date><strong>Step 1: Aggregating Sentiment by Date</strong></h3><p>The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.</p><h4 id=python-code-aggregating-sentiments><strong>Python Code: Aggregating Sentiments</strong></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Example DataFrame with tweets, sentiment, and dates</span>
+</span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;date&#34;</span>: [<span style=color:#e6db74>&#34;2022-01-01&#34;</span>, <span style=color:#e6db74>&#34;2022-01-01&#34;</span>, <span style=color:#e6db74>&#34;2022-01-02&#34;</span>, <span style=color:#e6db74>&#34;2022-01-02&#34;</span>, <span style=color:#e6db74>&#34;2022-01-02&#34;</span>],
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;company_ticker&#34;</span>: [<span style=color:#e6db74>&#34;TSLA&#34;</span>, <span style=color:#e6db74>&#34;AAPL&#34;</span>, <span style=color:#e6db74>&#34;TSLA&#34;</span>, <span style=color:#e6db74>&#34;AAPL&#34;</span>, <span style=color:#e6db74>&#34;TSLA&#34;</span>],
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;sentiment&#34;</span>: [<span style=color:#e6db74>&#34;positive&#34;</span>, <span style=color:#e6db74>&#34;negative&#34;</span>, <span style=color:#e6db74>&#34;neutral&#34;</span>, <span style=color:#e6db74>&#34;positive&#34;</span>, <span style=color:#e6db74>&#34;negative&#34;</span>]
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>DataFrame(data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Group data by date, company, and sentiment</span>
+</span></span><span style=display:flex><span>sentiment_trends <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>groupby([<span style=color:#e6db74>&#34;date&#34;</span>, <span style=color:#e6db74>&#34;company_ticker&#34;</span>, <span style=color:#e6db74>&#34;sentiment&#34;</span>])<span style=color:#f92672>.</span>size()<span style=color:#f92672>.</span>reset_index(name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;count&#34;</span>)
+</span></span><span style=display:flex><span>print(sentiment_trends)
+</span></span><span style=display:flex><span>Output:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>yaml
+</span></span><span style=display:flex><span>Copy code
+</span></span><span style=display:flex><span>         date company_ticker sentiment  count
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span>  <span style=color:#ae81ff>2022</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span>           AAPL  negative      <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span>  <span style=color:#ae81ff>2022</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span>           TSLA  positive      <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span>  <span style=color:#ae81ff>2022</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span><span style=color:#f92672>-</span><span style=color:#ae81ff>02</span>           AAPL  positive      <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span>  <span style=color:#ae81ff>2022</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span><span style=color:#f92672>-</span><span style=color:#ae81ff>02</span>           TSLA  negative      <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span>  <span style=color:#ae81ff>2022</span><span style=color:#f92672>-</span><span style=color:#ae81ff>01</span><span style=color:#f92672>-</span><span style=color:#ae81ff>02</span>           TSLA   neutral      <span style=color:#ae81ff>1</span>
+</span></span></code></pre></div><h3 id=step-2-visualising-sentiment-trends>Step 2: Visualising Sentiment Trends</h3><p>To visualise sentiment trends, we plotted sentiment counts for each company over time. This helped identify peaks and shifts corresponding to key events.</p><h4 id=python-code-plotting-sentiment-trends>Python Code: Plotting Sentiment Trends</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Filter data for a specific company (e.g., Tesla)</span>
+</span></span><span style=display:flex><span>tesla_data <span style=color:#f92672>=</span> sentiment_trends[sentiment_trends[<span style=color:#e6db74>&#34;company_ticker&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;TSLA&#34;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Pivot data for easier plotting</span>
+</span></span><span style=display:flex><span>pivot_data <span style=color:#f92672>=</span> tesla_data<span style=color:#f92672>.</span>pivot(index<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;date&#34;</span>, columns<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;sentiment&#34;</span>, values<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;count&#34;</span>)<span style=color:#f92672>.</span>fillna(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Plot sentiment trends</span>
+</span></span><span style=display:flex><span>pivot_data<span style=color:#f92672>.</span>plot(kind<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;line&#34;</span>, figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>6</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Sentiment Trends for Tesla Over Time&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;Date&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;Tweet Count&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend(title<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Sentiment&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><figure><img src=/images/project4_images/5.png></figure><p>If there are irregularities in tweet counts year over year, it
 might indicate inconsistencies in how the data was collected
 or recorded. For instance, a sudden drop in one year might
-mean data loss or issues with data collection that year.</p>
-<p>This variation across the years I noticed might be indicative of
+mean data loss or issues with data collection that year.</p><p>This variation across the years I noticed might be indicative of
 multiple factors. For example, specific events or news in a
-particular year might lead to increased tweeting activity.</p>
-<p>The variations might reflect the changing behavior or engagement
+particular year might lead to increased tweeting activity.</p><p>The variations might reflect the changing behavior or engagement
 level of Twitter users. Also, any changes in the platform’s
 algorithms, policies, or features might influence user activity.
 Broader societal, economic, or technological changes might
-also play a role.</p>
-<h3 id="step-3-key-insights">Step 3: Key Insights</h3>
-<p><strong>1. Tesla’s Sentiment Peaks</strong>:</p>
-<ul>
-<li>Positive Sentiment Spikes: Corresponded to major announcements like product launches or stock splits.</li>
-<li>Negative Sentiment Spikes: Related to delays or controversial tweets by Elon Musk.</li>
-</ul>
-<p><strong>2. Apple’s Consistent Sentiment</strong>:</p>
-<ul>
-<li>Sentiment remained stable over time, with minor fluctuations around earnings reports and product releases.</li>
-</ul>
-<p><strong>3. Seasonal Trends</strong>:</p>
-<ul>
-<li>Certain months (e.g., Q4) showed higher activity due to events like holiday season promotions or year-end financial updates.</li>
-</ul>
-<h3 id="step-4-annotating-significant-events">Step 4: Annotating Significant Events</h3>
-<p>To provide context, significant events were overlaid on the sentiment trends.</p>
-<h4 id="python-code-adding-annotations">Python Code: Adding Annotations</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Annotate significant events on the Tesla plot</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(pivot_data<span style="color:#f92672">.</span>index, pivot_data[<span style="color:#e6db74">&#34;positive&#34;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Positive&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;green&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(pivot_data<span style="color:#f92672">.</span>index, pivot_data[<span style="color:#e6db74">&#34;negative&#34;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Negative&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Annotate key events</span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Product Launch&#34;</span>, xy<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-02&#34;</span>, <span style="color:#ae81ff">5</span>), xytext<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-05&#34;</span>, <span style="color:#ae81ff">6</span>),
-</span></span><span style="display:flex;"><span>             arrowprops<span style="color:#f92672">=</span>dict(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>, arrowstyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-&gt;&#34;</span>))
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Controversial Tweet&#34;</span>, xy<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-07&#34;</span>, <span style="color:#ae81ff">3</span>), xytext<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-10&#34;</span>, <span style="color:#ae81ff">4</span>),
-</span></span><span style="display:flex;"><span>             arrowprops<span style="color:#f92672">=</span>dict(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>, arrowstyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-&gt;&#34;</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Tesla Sentiment Trends with Annotations&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Date&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Tweet Count&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><h3 id="challenges-in-sentiment-trend-analysis">Challenges in Sentiment Trend Analysis</h3>
-<p><strong>Event Correlation:</strong></p>
-<ul>
-<li>Establishing a direct link between sentiment spikes and events required external data sources (e.g., news articles).</li>
-</ul>
-<p><em>Solution</em>: Integrate APIs to fetch event metadata.</p>
-<p><strong>Outliers in Data</strong>:</p>
-<ul>
-<li>Certain days showed unusually high sentiment counts due to bot activity.</li>
-</ul>
-<p><em>Solution</em>: Apply anomaly detection to filter out extreme outliers.</p>
-<p><strong>Granularity</strong>:</p>
-<ul>
-<li>Daily aggregation may miss trends visible at finer granularity (e.g., hourly).</li>
-</ul>
-<p><em>Solution</em>: Allow flexible time windows for analysis.</p>
-<h3 id="conclusion">Conclusion</h3>
-<p>Sentiment trend analysis revealed how public opinion evolves over time, reflecting the impact of market events and company announcements. By identifying key moments of sentiment change, this analysis provided actionable insights for stakeholders.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+also play a role.</p><h3 id=step-3-key-insights>Step 3: Key Insights</h3><p><strong>1. Tesla’s Sentiment Peaks</strong>:</p><ul><li>Positive Sentiment Spikes: Corresponded to major announcements like product launches or stock splits.</li><li>Negative Sentiment Spikes: Related to delays or controversial tweets by Elon Musk.</li></ul><p><strong>2. Apple’s Consistent Sentiment</strong>:</p><ul><li>Sentiment remained stable over time, with minor fluctuations around earnings reports and product releases.</li></ul><p><strong>3. Seasonal Trends</strong>:</p><ul><li>Certain months (e.g., Q4) showed higher activity due to events like holiday season promotions or year-end financial updates.</li></ul><h3 id=step-4-annotating-significant-events>Step 4: Annotating Significant Events</h3><p>To provide context, significant events were overlaid on the sentiment trends.</p><h4 id=python-code-adding-annotations>Python Code: Adding Annotations</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Annotate significant events on the Tesla plot</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>6</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(pivot_data<span style=color:#f92672>.</span>index, pivot_data[<span style=color:#e6db74>&#34;positive&#34;</span>], label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Positive&#34;</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;green&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(pivot_data<span style=color:#f92672>.</span>index, pivot_data[<span style=color:#e6db74>&#34;negative&#34;</span>], label<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Negative&#34;</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;red&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Annotate key events</span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>annotate(<span style=color:#e6db74>&#34;Product Launch&#34;</span>, xy<span style=color:#f92672>=</span>(<span style=color:#e6db74>&#34;2022-01-02&#34;</span>, <span style=color:#ae81ff>5</span>), xytext<span style=color:#f92672>=</span>(<span style=color:#e6db74>&#34;2022-01-05&#34;</span>, <span style=color:#ae81ff>6</span>),
+</span></span><span style=display:flex><span>             arrowprops<span style=color:#f92672>=</span>dict(facecolor<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;black&#34;</span>, arrowstyle<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-&gt;&#34;</span>))
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>annotate(<span style=color:#e6db74>&#34;Controversial Tweet&#34;</span>, xy<span style=color:#f92672>=</span>(<span style=color:#e6db74>&#34;2022-01-07&#34;</span>, <span style=color:#ae81ff>3</span>), xytext<span style=color:#f92672>=</span>(<span style=color:#e6db74>&#34;2022-01-10&#34;</span>, <span style=color:#ae81ff>4</span>),
+</span></span><span style=display:flex><span>             arrowprops<span style=color:#f92672>=</span>dict(facecolor<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;black&#34;</span>, arrowstyle<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-&gt;&#34;</span>))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Tesla Sentiment Trends with Annotations&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;Date&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;Tweet Count&#34;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid()
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><h3 id=challenges-in-sentiment-trend-analysis>Challenges in Sentiment Trend Analysis</h3><p><strong>Event Correlation:</strong></p><ul><li>Establishing a direct link between sentiment spikes and events required external data sources (e.g., news articles).</li></ul><p><em>Solution</em>: Integrate APIs to fetch event metadata.</p><p><strong>Outliers in Data</strong>:</p><ul><li>Certain days showed unusually high sentiment counts due to bot activity.</li></ul><p><em>Solution</em>: Apply anomaly detection to filter out extreme outliers.</p><p><strong>Granularity</strong>:</p><ul><li>Daily aggregation may miss trends visible at finer granularity (e.g., hourly).</li></ul><p><em>Solution</em>: Allow flexible time windows for analysis.</p><h3 id=conclusion>Conclusion</h3><p>Sentiment trend analysis revealed how public opinion evolves over time, reflecting the impact of market events and company announcements. By identifying key moments of sentiment change, this analysis provided actionable insights for stakeholders.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

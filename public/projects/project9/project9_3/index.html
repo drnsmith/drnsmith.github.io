@@ -1,208 +1,45 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PART 3. Regression Models for Pollution Prediction | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog delves into the use of regression models, including OLS, Ridge, and Weighted Least Squares, to analyse PM10 levels. It discusses challenges like heteroscedasticity and how adjustments improved model reliability.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project9_images/pr9.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            PART 3. Regression Models for Pollution Prediction
-          </h1>
-          
-            <p class="f5">This blog delves into the use of regression models, including OLS, Ridge, and Weighted Least Squares, to analyse PM10 levels. It discusses challenges like heteroscedasticity and how adjustments improved model reliability.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project9_images/pr9.jpg"
-    alt="Photo by Markus Distelrath on Pexels"><figcaption>
-      <p>Photo by Markus Distelrath on Pexels</p>
-    </figcaption>
-</figure>
-
-<p><strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.</p>
-<p>In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.</p>
-<h3 id="1-why-regression-models">1. Why Regression Models?</h3>
-<p>Regression models are often the first step in predictive analysis because:</p>
-<ul>
-<li><em>Simplicity</em>: They are easy to implement and interpret.</li>
-<li><em>Baseline Performance</em>: They establish a benchmark for more complex models.</li>
-<li><em>Insights</em>: Regression models identify which predictors have the most significant impact on the target variable.</li>
-</ul>
-<p>In this project, we tested multiple regression models, each tailored to address specific challenges in the dataset.</p>
-<h3 id="2-models-explored">2. Models Explored</h3>
-<h4 id="ordinary-least-squares-ols-regression">Ordinary Least Squares (OLS) Regression</h4>
-<p>OLS regression minimises the sum of squared differences between the observed and predicted PM10 values. It provides a baseline for understanding the linear relationships between predictors and PM10 levels.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LinearRegression
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train OLS regression model</span>
-</span></span><span style="display:flex;"><span>ols_model <span style="color:#f92672">=</span> LinearRegression()
-</span></span><span style="display:flex;"><span>ols_model<span style="color:#f92672">.</span>fit(X_train, y_train)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate the model</span>
-</span></span><span style="display:flex;"><span>ols_predictions <span style="color:#f92672">=</span> ols_model<span style="color:#f92672">.</span>predict(X_test)
-</span></span><span style="display:flex;"><span>rmse_ols <span style="color:#f92672">=</span> mean_squared_error(y_test, ols_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;OLS Regression RMSE: </span><span style="color:#e6db74">{</span>rmse_ols<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><h4 id="ridge-regression">Ridge Regression</h4>
-<p>Ridge regression adds a penalty term to the OLS objective function to reduce over-fitting, especially when predictors are highly correlated.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> Ridge
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train Ridge regression model</span>
-</span></span><span style="display:flex;"><span>ridge_model <span style="color:#f92672">=</span> Ridge(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>)
-</span></span><span style="display:flex;"><span>ridge_model<span style="color:#f92672">.</span>fit(X_train, y_train)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate the model</span>
-</span></span><span style="display:flex;"><span>ridge_predictions <span style="color:#f92672">=</span> ridge_model<span style="color:#f92672">.</span>predict(X_test)
-</span></span><span style="display:flex;"><span>rmse_ridge <span style="color:#f92672">=</span> mean_squared_error(y_test, ridge_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Ridge Regression RMSE: </span><span style="color:#e6db74">{</span>rmse_ridge<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><h4 id="weighted-least-squares-wls-regression">Weighted Least Squares (WLS) Regression</h4>
-<p>WLS regression accounts for heteroscedasticity (non-constant variance in errors) by assigning weights to observations.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> statsmodels.api <span style="color:#66d9ef">as</span> sm
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train WLS regression model</span>
-</span></span><span style="display:flex;"><span>weights <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (X_train<span style="color:#f92672">.</span>var(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))  <span style="color:#75715e"># Example of weighting</span>
-</span></span><span style="display:flex;"><span>wls_model <span style="color:#f92672">=</span> sm<span style="color:#f92672">.</span>WLS(y_train, X_train, weights<span style="color:#f92672">=</span>weights)<span style="color:#f92672">.</span>fit()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate the model</span>
-</span></span><span style="display:flex;"><span>wls_predictions <span style="color:#f92672">=</span> wls_model<span style="color:#f92672">.</span>predict(X_test)
-</span></span><span style="display:flex;"><span>rmse_wls <span style="color:#f92672">=</span> mean_squared_error(y_test, wls_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;WLS Regression RMSE: </span><span style="color:#e6db74">{</span>rmse_wls<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><h3 id="3-feature-selection-for-regression-and-evaluation-metrics">3. Feature Selection for Regression and Evaluation Metrics</h3>
-<p>Feature selection played a crucial role in improving model performance:</p>
-<ul>
-<li>Lagged PM10 Values: Past PM10 levels provided temporal context.</li>
-<li>Weather Variables: Wind speed and temperature had significant predictive power.</li>
-<li>Traffic Volume: A key driver of PM10 pollution in urban areas.</li>
-</ul>
-<p>Using correlation analysis and feature importance scores, we refined the set of predictors for each model.</p>
-<p>Regression models were evaluated using:</p>
-<ul>
-<li><strong>Root Mean Squared Error (RMSE)</strong>: Measures the average magnitude of prediction errors.</li>
-<li><strong>Mean Absolute Error (MAE)</strong>: Indicates the average absolute error between predicted and observed values.</li>
-<li><strong>R-Squared</strong>: Explains the proportion of variance in PM10 levels captured by the model.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> mean_squared_error, mean_absolute_error, r2_score
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate model performance</span>
-</span></span><span style="display:flex;"><span>rmse <span style="color:#f92672">=</span> mean_squared_error(y_test, predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>mae <span style="color:#f92672">=</span> mean_absolute_error(y_test, predictions)
-</span></span><span style="display:flex;"><span>r2 <span style="color:#f92672">=</span> r2_score(y_test, predictions)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;RMSE: </span><span style="color:#e6db74">{</span>rmse<span style="color:#e6db74">}</span><span style="color:#e6db74">, MAE: </span><span style="color:#e6db74">{</span>mae<span style="color:#e6db74">}</span><span style="color:#e6db74">, R-Squared: </span><span style="color:#e6db74">{</span>r2<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span></code></pre></div><p><strong>Key Insights</strong></p>
-<ul>
-<li><em>Importance of Traffic and Weather</em>:
-Regression models consistently highlighted the importance of traffic volume and wind speed. For example:</li>
-</ul>
-<p>&ndash; Higher traffic volume correlated with increased PM10 levels.
-&ndash; High wind speeds dispersed pollutants, reducing PM10 concentrations.</p>
-<ul>
-<li>
-<p><em>Strengths of Ridge Regression</em>:
-Ridge regression performed better than OLS when predictors were correlated, such as temperature and wind speed.</p>
-</li>
-<li>
-<p><em>Limitations of Regression Models</em>:
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PART 3. Regression Models for Pollution Prediction | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog delves into the use of regression models, including OLS, Ridge, and Weighted Least Squares, to analyse PM10 levels. It discusses challenges like heteroscedasticity and how adjustments improved model reliability."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project9_images/pr9.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">PART 3. Regression Models for Pollution Prediction</h1><p class=f5>This blog delves into the use of regression models, including OLS, Ridge, and Weighted Least Squares, to analyse PM10 levels. It discusses challenges like heteroscedasticity and how adjustments improved model reliability.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project9_images/pr9.jpg alt="Photo by Markus Distelrath on Pexels"><figcaption><p>Photo by Markus Distelrath on Pexels</p></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Pollution-Prediction-Auckland target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.</p><p>In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.</p><h3 id=1-why-regression-models>1. Why Regression Models?</h3><p>Regression models are often the first step in predictive analysis because:</p><ul><li><em>Simplicity</em>: They are easy to implement and interpret.</li><li><em>Baseline Performance</em>: They establish a benchmark for more complex models.</li><li><em>Insights</em>: Regression models identify which predictors have the most significant impact on the target variable.</li></ul><p>In this project, we tested multiple regression models, each tailored to address specific challenges in the dataset.</p><h3 id=2-models-explored>2. Models Explored</h3><h4 id=ordinary-least-squares-ols-regression>Ordinary Least Squares (OLS) Regression</h4><p>OLS regression minimises the sum of squared differences between the observed and predicted PM10 values. It provides a baseline for understanding the linear relationships between predictors and PM10 levels.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.linear_model <span style=color:#f92672>import</span> LinearRegression
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Train OLS regression model</span>
+</span></span><span style=display:flex><span>ols_model <span style=color:#f92672>=</span> LinearRegression()
+</span></span><span style=display:flex><span>ols_model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Evaluate the model</span>
+</span></span><span style=display:flex><span>ols_predictions <span style=color:#f92672>=</span> ols_model<span style=color:#f92672>.</span>predict(X_test)
+</span></span><span style=display:flex><span>rmse_ols <span style=color:#f92672>=</span> mean_squared_error(y_test, ols_predictions, squared<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;OLS Regression RMSE: </span><span style=color:#e6db74>{</span>rmse_ols<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h4 id=ridge-regression>Ridge Regression</h4><p>Ridge regression adds a penalty term to the OLS objective function to reduce over-fitting, especially when predictors are highly correlated.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.linear_model <span style=color:#f92672>import</span> Ridge
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Train Ridge regression model</span>
+</span></span><span style=display:flex><span>ridge_model <span style=color:#f92672>=</span> Ridge(alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>1.0</span>)
+</span></span><span style=display:flex><span>ridge_model<span style=color:#f92672>.</span>fit(X_train, y_train)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Evaluate the model</span>
+</span></span><span style=display:flex><span>ridge_predictions <span style=color:#f92672>=</span> ridge_model<span style=color:#f92672>.</span>predict(X_test)
+</span></span><span style=display:flex><span>rmse_ridge <span style=color:#f92672>=</span> mean_squared_error(y_test, ridge_predictions, squared<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Ridge Regression RMSE: </span><span style=color:#e6db74>{</span>rmse_ridge<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h4 id=weighted-least-squares-wls-regression>Weighted Least Squares (WLS) Regression</h4><p>WLS regression accounts for heteroscedasticity (non-constant variance in errors) by assigning weights to observations.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> statsmodels.api <span style=color:#66d9ef>as</span> sm
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Train WLS regression model</span>
+</span></span><span style=display:flex><span>weights <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>/</span> (X_train<span style=color:#f92672>.</span>var(axis<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>))  <span style=color:#75715e># Example of weighting</span>
+</span></span><span style=display:flex><span>wls_model <span style=color:#f92672>=</span> sm<span style=color:#f92672>.</span>WLS(y_train, X_train, weights<span style=color:#f92672>=</span>weights)<span style=color:#f92672>.</span>fit()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Evaluate the model</span>
+</span></span><span style=display:flex><span>wls_predictions <span style=color:#f92672>=</span> wls_model<span style=color:#f92672>.</span>predict(X_test)
+</span></span><span style=display:flex><span>rmse_wls <span style=color:#f92672>=</span> mean_squared_error(y_test, wls_predictions, squared<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;WLS Regression RMSE: </span><span style=color:#e6db74>{</span>rmse_wls<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h3 id=3-feature-selection-for-regression-and-evaluation-metrics>3. Feature Selection for Regression and Evaluation Metrics</h3><p>Feature selection played a crucial role in improving model performance:</p><ul><li>Lagged PM10 Values: Past PM10 levels provided temporal context.</li><li>Weather Variables: Wind speed and temperature had significant predictive power.</li><li>Traffic Volume: A key driver of PM10 pollution in urban areas.</li></ul><p>Using correlation analysis and feature importance scores, we refined the set of predictors for each model.</p><p>Regression models were evaluated using:</p><ul><li><strong>Root Mean Squared Error (RMSE)</strong>: Measures the average magnitude of prediction errors.</li><li><strong>Mean Absolute Error (MAE)</strong>: Indicates the average absolute error between predicted and observed values.</li><li><strong>R-Squared</strong>: Explains the proportion of variance in PM10 levels captured by the model.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> mean_squared_error, mean_absolute_error, r2_score
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Evaluate model performance</span>
+</span></span><span style=display:flex><span>rmse <span style=color:#f92672>=</span> mean_squared_error(y_test, predictions, squared<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
+</span></span><span style=display:flex><span>mae <span style=color:#f92672>=</span> mean_absolute_error(y_test, predictions)
+</span></span><span style=display:flex><span>r2 <span style=color:#f92672>=</span> r2_score(y_test, predictions)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;RMSE: </span><span style=color:#e6db74>{</span>rmse<span style=color:#e6db74>}</span><span style=color:#e6db74>, MAE: </span><span style=color:#e6db74>{</span>mae<span style=color:#e6db74>}</span><span style=color:#e6db74>, R-Squared: </span><span style=color:#e6db74>{</span>r2<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><strong>Key Insights</strong></p><ul><li><em>Importance of Traffic and Weather</em>:
+Regression models consistently highlighted the importance of traffic volume and wind speed. For example:</li></ul><p>&ndash; Higher traffic volume correlated with increased PM10 levels.
+&ndash; High wind speeds dispersed pollutants, reducing PM10 concentrations.</p><ul><li><p><em>Strengths of Ridge Regression</em>:
+Ridge regression performed better than OLS when predictors were correlated, such as temperature and wind speed.</p></li><li><p><em>Limitations of Regression Models</em>:
 &ndash; Non-Linearity: Regression models struggled to capture complex relationships in the data.
-&ndash; Sequential Dependencies: They couldn’t fully utilize temporal patterns, like hourly or daily trends in PM10 levels.</p>
-</li>
-</ul>
-<p><strong>Lessons Learned</strong></p>
-<ul>
-<li><em>Baseline Models Matter</em>: Regression models provided a strong starting point for understanding PM10 pollution.</li>
-<li><em>Iterative Feature Engineering</em>: Adding lagged variables and addressing multicollinearity improved performance.</li>
-</ul>
-<p><strong>Challenges Faced</strong></p>
-<ul>
-<li><em>Heteroscedasticity</em>: Weighted least squares addressed this challenge but required careful tuning.</li>
-<li><em>Data Transformation</em>: Log-transforming PM10 values stabilised variance and improved model accuracy.</li>
-</ul>
-<h3 id="conclusion-building-a-strong-foundation">Conclusion: Building a Strong Foundation</h3>
-<p>Regression models are not just simple tools—they provide foundational insights and benchmarks for more complex approaches. By identifying key predictors and addressing data challenges, these models laid the groundwork for exploring advanced techniques like neural networks and LSTM.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+&ndash; Sequential Dependencies: They couldn’t fully utilize temporal patterns, like hourly or daily trends in PM10 levels.</p></li></ul><p><strong>Lessons Learned</strong></p><ul><li><em>Baseline Models Matter</em>: Regression models provided a strong starting point for understanding PM10 pollution.</li><li><em>Iterative Feature Engineering</em>: Adding lagged variables and addressing multicollinearity improved performance.</li></ul><p><strong>Challenges Faced</strong></p><ul><li><em>Heteroscedasticity</em>: Weighted least squares addressed this challenge but required careful tuning.</li><li><em>Data Transformation</em>: Log-transforming PM10 values stabilised variance and improved model accuracy.</li></ul><h3 id=conclusion-building-a-strong-foundation>Conclusion: Building a Strong Foundation</h3><p>Regression models are not just simple tools—they provide foundational insights and benchmarks for more complex approaches. By identifying key predictors and addressing data challenges, these models laid the groundwork for exploring advanced techniques like neural networks and LSTM.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>

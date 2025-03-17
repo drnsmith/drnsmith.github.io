@@ -1,209 +1,61 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Part 4. Multidimensional Data Analysis: Practical Insights. | Natasha Smith Portfolio</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="This blog dives into the multidimensional analysis carried out using the data warehouse, highlighting how questions were formulated, data was aggregated, and insights were derived using SQL operations like ROLLUP and CUBE.">
-
-    <meta name="generator" content="Hugo 0.142.0">
-
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    <link rel="stylesheet" href="/css/custom.css">
-    
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-    
-    <nav class="pa3 pa4-ns flex justify-end items-center">
-    <ul class="list flex ma0 pa0">
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/">Home</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/about/">About</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
-      </li>
-      
-      <li class="ml3">
-        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
-      </li>
-      
-    </ul>
-  </nav>
-  
-  
-
-    
-    
-      
-      <header class="page-header"
-        style="
-          background-image: url('/images/project3_images/pr3.jpg');
-          background-size: cover;
-          background-position: center;
-          height: 400px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          text-align: center;">
-        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
-          <h1 class="f1 athelas mt3 mb1">
-            Part 4. Multidimensional Data Analysis: Practical Insights.
-          </h1>
-          
-            <p class="f5">This blog dives into the multidimensional analysis carried out using the data warehouse, highlighting how questions were formulated, data was aggregated, and insights were derived using SQL operations like ROLLUP and CUBE.</p>
-          
-        </div>
-      </header>
-      
-    
-
-    
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project3_images/pr3.jpg">
-</figure>
-
-<strong>View Project on GitHub</strong>:</p>
-<a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
-<h3 id="introduction">Introduction</h3>
-<p>The ultimate purpose of building a data warehouse is to be able to perform powerful and meaningful analyses to derive actionable business insights.</p>
-<p>For the &lsquo;OfficeProducts&rsquo; project, we carried out several forms of multidimensional analysis to answer key business questions related to product sales, customer trends, and promotional effectiveness.</p>
-<p>In this post, I&rsquo;ll explore the practical insights gained through these analyses and how tools like <strong>ROLLUP</strong> and <strong>CUBE</strong> helped extract deeper trends from the data.</p>
-<h3 id="multidimensional-data-analysis">Multidimensional Data Analysis</h3>
-<p>The data warehouse for &lsquo;OfficeProducts&rsquo; enabled us to conduct multidimensional analysis by organising the data in a way that allowed easy aggregation and exploration across various dimensions, such as products, sales channels, clients, and time.</p>
-<p>These analyses helped in understanding sales performance, identifying top-performing products, and exploring the effectiveness of different promotional campaigns.</p>
-<p>The following sections provide a detailed overview of the questions we addressed and the insights derived.</p>
-<p><strong>Question a: Top Countries by Total Sales</strong></p>
-<p>The first analysis involved identifying the top three countries in terms of total sales. By using an aggregate <strong>SUM</strong> function, we were able to rank countries based on their total sales.</p>
-<p>Here is a snippet of the SQL code that facilitated this analysis:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> CountrySales <span style="color:#66d9ef">AS</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">c</span>.country_iso_code, <span style="color:#66d9ef">c</span>.country_name, <span style="color:#66d9ef">SUM</span>(s.amount_sold) <span style="color:#66d9ef">AS</span> total_sales
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SH.COUNTRIES <span style="color:#66d9ef">c</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.CUSTOMERS cust <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">c</span>.country_id <span style="color:#f92672">=</span> cust.country_id
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.SALES s <span style="color:#66d9ef">ON</span> cust.cust_id <span style="color:#f92672">=</span> s.cust_id
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">c</span>.country_iso_code, <span style="color:#66d9ef">c</span>.country_name
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> country_iso_code, country_name, total_sales
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> country_iso_code, country_name, total_sales,
-</span></span><span style="display:flex;"><span>           RANK() OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> total_sales <span style="color:#66d9ef">DESC</span>) <span style="color:#66d9ef">AS</span> ranking
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> CountrySales
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> ranking <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">3</span>;
-</span></span></code></pre></div><p>This query highlighted which countries contributed the most to overall sales, providing valuable insight into geographic markets that could be further targeted for promotions or resource allocation.</p>
-<p><strong>Question b: Top-Selling Products by Year</strong></p>
-<p>To understand product trends, we analysed the most sold products in the US for each year from 1998 to 2001.</p>
-<p>This analysis helped identify the popularity of products over time, which in turn informed inventory planning and promotional strategies.</p>
-<p>Below is a portion of the SQL code used for this analysis:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> RankedProducts <span style="color:#66d9ef">AS</span> (
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> t2.calendar_year <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">year</span>,
-</span></span><span style="display:flex;"><span>           p2.prod_name,
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">SUM</span>(s2.quantity_sold) <span style="color:#66d9ef">AS</span> total_quantity,
-</span></span><span style="display:flex;"><span>           RANK() OVER (PARTITION <span style="color:#66d9ef">BY</span> t2.calendar_year <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">SUM</span>(s2.quantity_sold) <span style="color:#66d9ef">DESC</span>) <span style="color:#66d9ef">AS</span> prod_rank
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SH.TIMES t2
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.SALES s2 <span style="color:#66d9ef">ON</span> t2.time_id <span style="color:#f92672">=</span> s2.time_id
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.CUSTOMERS c2 <span style="color:#66d9ef">ON</span> s2.cust_id <span style="color:#f92672">=</span> c2.cust_id
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.PRODUCTS p2 <span style="color:#66d9ef">ON</span> s2.prod_id <span style="color:#f92672">=</span> p2.prod_id
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.COUNTRIES co2 <span style="color:#66d9ef">ON</span> c2.country_id <span style="color:#f92672">=</span> co2.country_id
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">WHERE</span> co2.country_iso_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;US&#39;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">AND</span> t2.calendar_year <span style="color:#66d9ef">BETWEEN</span> <span style="color:#e6db74">&#39;1998&#39;</span> <span style="color:#66d9ef">AND</span> <span style="color:#e6db74">&#39;2001&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> t2.calendar_year, p2.prod_name
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">year</span>, prod_name, total_quantity
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> RankedProducts
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> prod_rank <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><p>This query enabled us to track changes in product popularity and helped us adjust our marketing strategies accordingly.</p>
-<p><strong>Question c: Comprehensive Sales Analysis Using ROLLUP and CUBE</strong></p>
-<p>One of the most advanced analyses we performed involved using <strong>ROLLUP</strong> and <strong>CUBE</strong> operations to uncover trends in product sales across different promotions.</p>
-<p>The <strong>ROLLUP</strong> operation helped aggregate data in a hierarchical manner, from the most detailed level to a grand total, while <strong>CUBE</strong> provided a more granular, multi-dimensional aggregation.</p>
-<p><strong>Example: Using ROLLUP for Aggregation</strong></p>
-<p>Below is an example SQL snippet that shows how we used the <strong>ROLLUP</strong> operation to perform hierarchical aggregations:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
-</span></span><span style="display:flex;"><span>    p.PROMONAME,
-</span></span><span style="display:flex;"><span>    pr.PRODNAME,
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SUM</span>(mv.TOTAL_SALES) <span style="color:#66d9ef">AS</span> TOTAL_SALES
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>
-</span></span><span style="display:flex;"><span>    Promotion_Analysis_mv mv
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
-</span></span><span style="display:flex;"><span>    SH.PRODUCTS pr <span style="color:#66d9ef">ON</span> mv.PROD_ID <span style="color:#f92672">=</span> pr.PROD_ID
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
-</span></span><span style="display:flex;"><span>    SH.PROMOTIONS p <span style="color:#66d9ef">ON</span> mv.PROMO_ID <span style="color:#f92672">=</span> p.PROMO_ID
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ROLLUP</span> (p.PROMONAME, pr.PRODNAME)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>
-</span></span><span style="display:flex;"><span>    p.PROMONAME, pr.PRODNAME;
-</span></span></code></pre></div><p>The <strong>ROLLUP</strong> operation here provided a hierarchy of aggregate sales, from specific products under a particular promotion to a total sales figure across all promotions.</p>
-<p>This allowed us to understand which promotions were most effective in driving sales.</p>
-<p><strong>Example: Using CUBE for Multi-Dimensional Analysis</strong></p>
-<p>We also used the <strong>CUBE</strong> operation to create a multi-dimensional view of the data, enabling us to explore all possible combinations of aggregation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
-</span></span><span style="display:flex;"><span>    p.PROMONAME,
-</span></span><span style="display:flex;"><span>    pr.PRODNAME,
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SUM</span>(mv.TOTAL_SALES) <span style="color:#66d9ef">AS</span> TOTAL_SALES
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>
-</span></span><span style="display:flex;"><span>    Promotion_Analysis_mv mv
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
-</span></span><span style="display:flex;"><span>    SH.PRODUCTS pr <span style="color:#66d9ef">ON</span> mv.PROD_ID <span style="color:#f92672">=</span> pr.PROD_ID
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
-</span></span><span style="display:flex;"><span>    SH.PROMOTIONS p <span style="color:#66d9ef">ON</span> mv.PROMO_ID <span style="color:#f92672">=</span> p.PROMO_ID
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">CUBE</span> (p.PROMONAME, pr.PRODNAME)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>
-</span></span><span style="display:flex;"><span>    p.PROMONAME, pr.PRODNAME;
-</span></span></code></pre></div><p>The <strong>CUBE</strong> operation offered a detailed, multi-dimensional aggregation, providing cross-tabulations and allowing us to identify broader patterns across promotions and products.</p>
-<p>This depth of analysis was instrumental in refining promotional strategies and identifying opportunities for bundling products.</p>
-<h3 id="insights-and-recommendations">Insights and Recommendations</h3>
-<p>The insights derived from these multidimensional analyses informed a variety of strategic decisions for &lsquo;OfficeProducts&rsquo;:</p>
-<ul>
-<li>
-<p><em>Promotion Effectiveness</em>: It became clear that some promotions (e.g., Internet promotions) performed significantly better than others. The analysis showed which products benefitted the most from specific promotional types, helping to tailor future marketing efforts.</p>
-</li>
-<li>
-<p><em>Top Products and Sales Channels</em>: Products like the <em>Envoy Ambassador</em> consistently ranked among the best sellers, indicating that these should be prioritised for restocking and perhaps bundled with other items to increase sales.</p>
-</li>
-<li>
-<p><em>Market Focus</em>: The top-performing countries provided a clear indication of where the company should focus its marketing and expansion efforts, while also revealing markets that underperformed and required different strategies.</p>
-</li>
-</ul>
-<h3 id="summary">Summary</h3>
-<p>Multidimensional data analysis is a core feature of any data warehouse, allowing businesses to understand their operations at a deeper level.</p>
-<p>By using <strong>ROLLUP</strong> and <strong>CUBE</strong> operations, we were able to derive valuable insights from our data warehouse for &lsquo;OfficeProducts&rsquo;.</p>
-<p>These tools enabled us to perform complex aggregations and answer critical questions about sales, product performance, and promotional impacts.</p>
-<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
-</div>
-  </article>
-
-    </main>
-
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
-    &copy;  Natasha Smith Portfolio 2025 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
-  </div>
-</footer>
-
-  </body>
-</html>
-
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 4. Multidimensional Data Analysis: Practical Insights. | Natasha Smith Portfolio</title>
+<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog dives into the multidimensional analysis carried out using the data warehouse, highlighting how questions were formulated, data was aggregated, and insights were derived using SQL operations like ROLLUP and CUBE."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project3_images/pr3.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 4. Multidimensional Data Analysis: Practical Insights.</h1><p class=f5>This blog dives into the multidimensional analysis carried out using the data warehouse, highlighting how questions were formulated, data was aggregated, and insights were derived using SQL operations like ROLLUP and CUBE.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project3_images/pr3.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/warehouse-management-system target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>The ultimate purpose of building a data warehouse is to be able to perform powerful and meaningful analyses to derive actionable business insights.</p><p>For the &lsquo;OfficeProducts&rsquo; project, we carried out several forms of multidimensional analysis to answer key business questions related to product sales, customer trends, and promotional effectiveness.</p><p>In this post, I&rsquo;ll explore the practical insights gained through these analyses and how tools like <strong>ROLLUP</strong> and <strong>CUBE</strong> helped extract deeper trends from the data.</p><h3 id=multidimensional-data-analysis>Multidimensional Data Analysis</h3><p>The data warehouse for &lsquo;OfficeProducts&rsquo; enabled us to conduct multidimensional analysis by organising the data in a way that allowed easy aggregation and exploration across various dimensions, such as products, sales channels, clients, and time.</p><p>These analyses helped in understanding sales performance, identifying top-performing products, and exploring the effectiveness of different promotional campaigns.</p><p>The following sections provide a detailed overview of the questions we addressed and the insights derived.</p><p><strong>Question a: Top Countries by Total Sales</strong></p><p>The first analysis involved identifying the top three countries in terms of total sales. By using an aggregate <strong>SUM</strong> function, we were able to rank countries based on their total sales.</p><p>Here is a snippet of the SQL code that facilitated this analysis:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> CountrySales <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SELECT</span> <span style=color:#66d9ef>c</span>.country_iso_code, <span style=color:#66d9ef>c</span>.country_name, <span style=color:#66d9ef>SUM</span>(s.amount_sold) <span style=color:#66d9ef>AS</span> total_sales
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>FROM</span> SH.COUNTRIES <span style=color:#66d9ef>c</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>JOIN</span> SH.CUSTOMERS cust <span style=color:#66d9ef>ON</span> <span style=color:#66d9ef>c</span>.country_id <span style=color:#f92672>=</span> cust.country_id
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>JOIN</span> SH.SALES s <span style=color:#66d9ef>ON</span> cust.cust_id <span style=color:#f92672>=</span> s.cust_id
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> <span style=color:#66d9ef>c</span>.country_iso_code, <span style=color:#66d9ef>c</span>.country_name
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> country_iso_code, country_name, total_sales
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> (
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SELECT</span> country_iso_code, country_name, total_sales,
+</span></span><span style=display:flex><span>           RANK() OVER (<span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span> total_sales <span style=color:#66d9ef>DESC</span>) <span style=color:#66d9ef>AS</span> ranking
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>FROM</span> CountrySales
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> ranking <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>3</span>;
+</span></span></code></pre></div><p>This query highlighted which countries contributed the most to overall sales, providing valuable insight into geographic markets that could be further targeted for promotions or resource allocation.</p><p><strong>Question b: Top-Selling Products by Year</strong></p><p>To understand product trends, we analysed the most sold products in the US for each year from 1998 to 2001.</p><p>This analysis helped identify the popularity of products over time, which in turn informed inventory planning and promotional strategies.</p><p>Below is a portion of the SQL code used for this analysis:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>WITH</span> RankedProducts <span style=color:#66d9ef>AS</span> (
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SELECT</span> t2.calendar_year <span style=color:#66d9ef>AS</span> <span style=color:#66d9ef>year</span>,
+</span></span><span style=display:flex><span>           p2.prod_name,
+</span></span><span style=display:flex><span>           <span style=color:#66d9ef>SUM</span>(s2.quantity_sold) <span style=color:#66d9ef>AS</span> total_quantity,
+</span></span><span style=display:flex><span>           RANK() OVER (PARTITION <span style=color:#66d9ef>BY</span> t2.calendar_year <span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span> <span style=color:#66d9ef>SUM</span>(s2.quantity_sold) <span style=color:#66d9ef>DESC</span>) <span style=color:#66d9ef>AS</span> prod_rank
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>FROM</span> SH.TIMES t2
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>JOIN</span> SH.SALES s2 <span style=color:#66d9ef>ON</span> t2.time_id <span style=color:#f92672>=</span> s2.time_id
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>JOIN</span> SH.CUSTOMERS c2 <span style=color:#66d9ef>ON</span> s2.cust_id <span style=color:#f92672>=</span> c2.cust_id
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>JOIN</span> SH.PRODUCTS p2 <span style=color:#66d9ef>ON</span> s2.prod_id <span style=color:#f92672>=</span> p2.prod_id
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>JOIN</span> SH.COUNTRIES co2 <span style=color:#66d9ef>ON</span> c2.country_id <span style=color:#f92672>=</span> co2.country_id
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>WHERE</span> co2.country_iso_code <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;US&#39;</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>AND</span> t2.calendar_year <span style=color:#66d9ef>BETWEEN</span> <span style=color:#e6db74>&#39;1998&#39;</span> <span style=color:#66d9ef>AND</span> <span style=color:#e6db74>&#39;2001&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> t2.calendar_year, p2.prod_name
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> <span style=color:#66d9ef>year</span>, prod_name, total_quantity
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> RankedProducts
+</span></span><span style=display:flex><span><span style=color:#66d9ef>WHERE</span> prod_rank <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span></code></pre></div><p>This query enabled us to track changes in product popularity and helped us adjust our marketing strategies accordingly.</p><p><strong>Question c: Comprehensive Sales Analysis Using ROLLUP and CUBE</strong></p><p>One of the most advanced analyses we performed involved using <strong>ROLLUP</strong> and <strong>CUBE</strong> operations to uncover trends in product sales across different promotions.</p><p>The <strong>ROLLUP</strong> operation helped aggregate data in a hierarchical manner, from the most detailed level to a grand total, while <strong>CUBE</strong> provided a more granular, multi-dimensional aggregation.</p><p><strong>Example: Using ROLLUP for Aggregation</strong></p><p>Below is an example SQL snippet that shows how we used the <strong>ROLLUP</strong> operation to perform hierarchical aggregations:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    p.PROMONAME,
+</span></span><span style=display:flex><span>    pr.PRODNAME,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SUM</span>(mv.TOTAL_SALES) <span style=color:#66d9ef>AS</span> TOTAL_SALES
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Promotion_Analysis_mv mv
+</span></span><span style=display:flex><span><span style=color:#66d9ef>JOIN</span>
+</span></span><span style=display:flex><span>    SH.PRODUCTS pr <span style=color:#66d9ef>ON</span> mv.PROD_ID <span style=color:#f92672>=</span> pr.PROD_ID
+</span></span><span style=display:flex><span><span style=color:#66d9ef>JOIN</span>
+</span></span><span style=display:flex><span>    SH.PROMOTIONS p <span style=color:#66d9ef>ON</span> mv.PROMO_ID <span style=color:#f92672>=</span> p.PROMO_ID
+</span></span><span style=display:flex><span><span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>ROLLUP</span> (p.PROMONAME, pr.PRODNAME)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span>
+</span></span><span style=display:flex><span>    p.PROMONAME, pr.PRODNAME;
+</span></span></code></pre></div><p>The <strong>ROLLUP</strong> operation here provided a hierarchy of aggregate sales, from specific products under a particular promotion to a total sales figure across all promotions.</p><p>This allowed us to understand which promotions were most effective in driving sales.</p><p><strong>Example: Using CUBE for Multi-Dimensional Analysis</strong></p><p>We also used the <strong>CUBE</strong> operation to create a multi-dimensional view of the data, enabling us to explore all possible combinations of aggregation:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span>
+</span></span><span style=display:flex><span>    p.PROMONAME,
+</span></span><span style=display:flex><span>    pr.PRODNAME,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SUM</span>(mv.TOTAL_SALES) <span style=color:#66d9ef>AS</span> TOTAL_SALES
+</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span>
+</span></span><span style=display:flex><span>    Promotion_Analysis_mv mv
+</span></span><span style=display:flex><span><span style=color:#66d9ef>JOIN</span>
+</span></span><span style=display:flex><span>    SH.PRODUCTS pr <span style=color:#66d9ef>ON</span> mv.PROD_ID <span style=color:#f92672>=</span> pr.PROD_ID
+</span></span><span style=display:flex><span><span style=color:#66d9ef>JOIN</span>
+</span></span><span style=display:flex><span>    SH.PROMOTIONS p <span style=color:#66d9ef>ON</span> mv.PROMO_ID <span style=color:#f92672>=</span> p.PROMO_ID
+</span></span><span style=display:flex><span><span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>CUBE</span> (p.PROMONAME, pr.PRODNAME)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span>
+</span></span><span style=display:flex><span>    p.PROMONAME, pr.PRODNAME;
+</span></span></code></pre></div><p>The <strong>CUBE</strong> operation offered a detailed, multi-dimensional aggregation, providing cross-tabulations and allowing us to identify broader patterns across promotions and products.</p><p>This depth of analysis was instrumental in refining promotional strategies and identifying opportunities for bundling products.</p><h3 id=insights-and-recommendations>Insights and Recommendations</h3><p>The insights derived from these multidimensional analyses informed a variety of strategic decisions for &lsquo;OfficeProducts&rsquo;:</p><ul><li><p><em>Promotion Effectiveness</em>: It became clear that some promotions (e.g., Internet promotions) performed significantly better than others. The analysis showed which products benefitted the most from specific promotional types, helping to tailor future marketing efforts.</p></li><li><p><em>Top Products and Sales Channels</em>: Products like the <em>Envoy Ambassador</em> consistently ranked among the best sellers, indicating that these should be prioritised for restocking and perhaps bundled with other items to increase sales.</p></li><li><p><em>Market Focus</em>: The top-performing countries provided a clear indication of where the company should focus its marketing and expansion efforts, while also revealing markets that underperformed and required different strategies.</p></li></ul><h3 id=summary>Summary</h3><p>Multidimensional data analysis is a core feature of any data warehouse, allowing businesses to understand their operations at a deeper level.</p><p>By using <strong>ROLLUP</strong> and <strong>CUBE</strong> operations, we were able to derive valuable insights from our data warehouse for &lsquo;OfficeProducts&rsquo;.</p><p>These tools enabled us to perform complex aggregations and answer critical questions about sales, product performance, and promotional impacts.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
