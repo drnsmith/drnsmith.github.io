@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI-Powered Recipe Difficulty Classification on Natasha Smith Portfolio</title><link>https://drnsmith.github.io/projects/project1/</link><description>Recent content in AI-Powered Recipe Difficulty Classification on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 09 Apr 2022 10:58:08 -0400</lastBuildDate><atom:link href="https://drnsmith.github.io/projects/project1/index.xml" rel="self" type="application/rss+xml"/><item><title>AI-Powered Recipe Classifier.</title><link>https://drnsmith.github.io/projects/ai-powered-recipe-classifier./</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/ai-powered-recipe-classifier./</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;div style="display: flex; align-items: center; gap: 10px;">
- &lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank" style="text-decoration: none;">
- &lt;img src="https://drnsmith.github.io/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
- &lt;/a>
- &lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank" style="font-weight: bold; color: black;">
- View Project on GitHub
- &lt;/a>
-&lt;/div>
-&lt;h1 id="part-1">PART 1.&lt;/h1>
-&lt;h2 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h2>
-&lt;p>Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill.&lt;/p>
-&lt;p>The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong>Easy, Medium, Hard, and Very Hard&lt;/strong>—using &lt;strong>Natural Language Processing (NLP)&lt;/strong> and &lt;strong>Machine Learning (ML)&lt;/strong>.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI-Powered Recipe Difficulty Classification on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/projects/project1/</link>
+    <description>Recent content in AI-Powered Recipe Difficulty Classification on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 Apr 2022 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/projects/project1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI-Powered Recipe Classifier.</title>
+      <link>http://localhost:1313/projects/ai-powered-recipe-classifier./</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/ai-powered-recipe-classifier./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1&#34;&gt;PART 1.&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill.&lt;/p&gt;&#xA;&lt;p&gt;The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong&gt;Easy, Medium, Hard, and Very Hard&lt;/strong&gt;—using &lt;strong&gt;Natural Language Processing (NLP)&lt;/strong&gt; and &lt;strong&gt;Machine Learning (ML)&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
