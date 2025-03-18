@@ -22,9 +22,12 @@
  View Project on GitHub
  &lt;/a>
 &lt;/div>
+&lt;h2 id="-read-the-paper">📄 Read the Paper:&lt;/h2>
+&lt;p>&lt;a href="https://drnsmith.github.io/papers/project_1_paper.pdf">Click here to view the PDF&lt;/a>&lt;/p>
 &lt;h1 id="part-1">PART 1.&lt;/h1>
 &lt;h2 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h2>
-&lt;p>Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge was to develop a ML model that classifies recipes into four difficulty levels—&lt;strong>Easy, Medium, Hard, and Very Hard&lt;/strong>—using &lt;strong>Natural Language Processing (NLP)&lt;/strong> and &lt;strong>Machine Learning (ML)&lt;/strong>. In this post, I focus on &lt;strong>data collection, cleaning, and pre-processing&lt;/strong>, which lay the foundation for training a robust ML model.&lt;/p></description></item><item><title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.</title><link>https://drnsmith.github.io/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project8_images/pr8.jpg"
+&lt;p>Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill.&lt;/p>
+&lt;p>The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong>Easy, Medium, Hard, and Very Hard&lt;/strong>—using &lt;strong>Natural Language Processing (NLP)&lt;/strong> and &lt;strong>Machine Learning (ML)&lt;/strong>.&lt;/p></description></item><item><title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.</title><link>https://drnsmith.github.io/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>https://drnsmith.github.io/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</guid><description>&lt;figure>&lt;img src="https://drnsmith.github.io/images/project8_images/pr8.jpg"
  alt="Photo by Dom J on Pexels">&lt;figcaption>
  &lt;p>Photo by Dom J on Pexels&lt;/p>
  &lt;/figcaption>

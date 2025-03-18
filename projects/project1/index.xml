@@ -9,6 +9,9 @@
  View Project on GitHub
  &lt;/a>
 &lt;/div>
+&lt;h2 id="-read-the-paper">📄 Read the Paper:&lt;/h2>
+&lt;p>&lt;a href="https://drnsmith.github.io/papers/project_1_paper.pdf">Click here to view the PDF&lt;/a>&lt;/p>
 &lt;h1 id="part-1">PART 1.&lt;/h1>
 &lt;h2 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h2>
-&lt;p>Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge was to develop a ML model that classifies recipes into four difficulty levels—&lt;strong>Easy, Medium, Hard, and Very Hard&lt;/strong>—using &lt;strong>Natural Language Processing (NLP)&lt;/strong> and &lt;strong>Machine Learning (ML)&lt;/strong>. In this post, I focus on &lt;strong>data collection, cleaning, and pre-processing&lt;/strong>, which lay the foundation for training a robust ML model.&lt;/p></description></item></channel></rss>
+&lt;p>Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill.&lt;/p>
+&lt;p>The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong>Easy, Medium, Hard, and Very Hard&lt;/strong>—using &lt;strong>Natural Language Processing (NLP)&lt;/strong> and &lt;strong>Machine Learning (ML)&lt;/strong>.&lt;/p></description></item></channel></rss>
