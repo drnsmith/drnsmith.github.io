@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 1. The Importance of Data Cleaning in Environmental Analysis | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores the challenges of working with messy air quality data, such as missing values and outliers, and demonstrates how effective cleaning techniques, like interpolation and outlier detection, set the stage for accurate pollution predictions.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project9_images/pr9.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 1. The Importance of Data Cleaning in Environmental Analysis
+          </h1>
+          
+            <p class="f5">This blog explores the challenges of working with messy air quality data, such as missing values and outliers, and demonstrates how effective cleaning techniques, like interpolation and outlier detection, set the stage for accurate pollution predictions.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project9_images/pr9.jpg"
+    alt="Photo by Markus Distelrath on Pexels"><figcaption>
+      <p>Photo by Markus Distelrath on Pexels</p>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-the-importance-of-data-cleaning-in-environmental-analysis">PART 1. The Importance of Data Cleaning in Environmental Analysis</h1>
+<p>Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.</p>
+<p>This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.</p>
+<p>When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.</p>
+<p>Imagine trying to build a house with warped bricks and missing mortar. Without proper cleaning, even the best models would struggle to produce meaningful results.</p>
+<p>In this blog, we’ll explore the messy reality of working with air quality data and the critical role data cleaning played in this project.</p>
+<h3 id="1-the-challenges-of-messy-data">1. The Challenges of Messy Data</h3>
+<p>Real-world environmental data comes with inherent complexities:</p>
+<ul>
+<li><em>Missing Values</em>: Monitoring stations often fail to record data consistently due to sensor malfunctions or maintenance issues.</li>
+<li><em>Negative Values</em>: Some datasets included nonsensical negative readings for PM10, likely due to equipment errors.</li>
+<li><em>Outliers</em>: Extreme pollution spikes appeared in the data. Were they genuine events, like fires, or sensor glitches?</li>
+<li><em>Temporal Misalignment</em>: Different datasets (e.g., air quality, weather, traffic) used varied time intervals, making integration difficult.</li>
+</ul>
+<h4 id="the-impact-of-dirty-data">The Impact of Dirty Data</h4>
+<p>Dirty data can lead to inaccurate predictions, misleading insights, and a loss of trust in AI-driven solutions. Cleaning the data wasn’t just a preliminary step—it was a cornerstone of the project’s success.</p>
+<h3 id="2-the-data-cleaning-process">2. The Data Cleaning Process</h3>
+<h4 id="handling-missing-values">Handling Missing Values</h4>
+<p>Missing data is common in environmental datasets. For this project:</p>
+<ul>
+<li><em>Interpolation</em>: Missing PM10 values were filled using linear interpolation, which estimates a value based on neighbouring data points.</li>
+<li><em>Seasonal Averages</em>: For larger gaps, we replaced missing data with seasonal averages to retain temporal trends.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Filling missing values using interpolation</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>interpolate(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linear&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Replacing large gaps with seasonal averages</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>fillna(data<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Month&#39;</span>)[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>transform(<span style="color:#e6db74">&#39;mean&#39;</span>))
+</span></span></code></pre></div><h4 id="removing-negative-values">Removing Negative Values</h4>
+<p>Negative PM10 readings, which are physically impossible, were flagged and removed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Removing negative PM10 values</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data[data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h4 id="identifying-and-handling-outliers">Identifying and Handling Outliers</h4>
+<p>Outliers were identified using the <code>Interquartile Range (IQR)</code> method. Genuine pollution spikes were retained, while anomalies were excluded.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Identifying outliers using IQR</span>
+</span></span><span style="display:flex;"><span>Q1 <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>quantile(<span style="color:#ae81ff">0.25</span>)
+</span></span><span style="display:flex;"><span>Q3 <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>quantile(<span style="color:#ae81ff">0.75</span>)
+</span></span><span style="display:flex;"><span>IQR <span style="color:#f92672">=</span> Q3 <span style="color:#f92672">-</span> Q1
+</span></span><span style="display:flex;"><span>lower_bound <span style="color:#f92672">=</span> Q1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1.5</span> <span style="color:#f92672">*</span> IQR
+</span></span><span style="display:flex;"><span>upper_bound <span style="color:#f92672">=</span> Q3 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.5</span> <span style="color:#f92672">*</span> IQR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filtering out anomalies</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data[(data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&gt;=</span> lower_bound) <span style="color:#f92672">&amp;</span> (data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&lt;=</span> upper_bound)]
+</span></span></code></pre></div><h4 id="aligning-temporal-data">Aligning Temporal Data</h4>
+<p>Air quality data was recorded hourly, while traffic and weather data were recorded at different intervals. To unify these datasets, we resampled them to a common hourly frequency.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Re-sampling traffic and weather data to match PM10 data</span>
+</span></span><span style="display:flex;"><span>traffic_data <span style="color:#f92672">=</span> traffic_data<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;H&#39;</span>)<span style="color:#f92672">.</span>mean()
+</span></span><span style="display:flex;"><span>weather_data <span style="color:#f92672">=</span> weather_data<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;H&#39;</span>)<span style="color:#f92672">.</span>mean()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Merging datasets on timestamp</span>
+</span></span><span style="display:flex;"><span>merged_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(pm10_data, traffic_data, how<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;inner&#39;</span>, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Timestamp&#39;</span>)
+</span></span><span style="display:flex;"><span>merged_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(merged_data, weather_data, how<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;inner&#39;</span>, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Timestamp&#39;</span>)
+</span></span></code></pre></div><h3 id="3-visualising-the-cleaned-data">3. Visualising the Cleaned Data</h3>
+<p>Data cleaning isn’t just about numbers; visualisations help verify the results. For example:</p>
+<ul>
+<li><strong>Time-Series Plots</strong>: Highlighted gaps before and after interpolation.</li>
+<li><strong>Boxplots</strong>: Identified outliers and confirmed their removal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualising PM10 levels before and after cleaning</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(raw_data[<span style="color:#e6db74">&#39;PM10&#39;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Raw Data&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.6</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(cleaned_data[<span style="color:#e6db74">&#39;PM10&#39;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Cleaned Data&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;PM10 Levels: Before vs. After Cleaning&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Time&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;PM10 Concentration&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><figure><img src="/images/project9_images/plot_box.png">
+</figure>
+
+<h3 id="4-reflections-on-the-data-cleaning-process">4. Reflections on the Data Cleaning Process</h3>
+<p><strong>Lessons Learned</strong></p>
+<ul>
+<li><em>Cleaning is Iterative</em>: There’s no one-size-fits-all method; each dataset presented unique challenges.</li>
+<li><em>Context Matters</em>: Understanding the environmental and technical context (e.g., sensor behaviour) was crucial for making informed decisions.</li>
+<li><em>Quality Over Quantity</em>: Sacrificing some data (e.g., excluding large gaps) was better than compromising accuracy.</li>
+</ul>
+<p><strong>Challenges Faced</strong></p>
+<ul>
+<li><em>Judgment Calls</em>: Deciding whether an outlier was genuine or an anomaly required careful analysis.</li>
+<li><em>Time-Intensity</em>: Cleaning the data took longer than anticipated but was essential for downstream modeling.</li>
+</ul>
+<h3 id="5-why-data-cleaning-matters">5. Why Data Cleaning Matters</h3>
+<p>Without clean data, even the most advanced ML models fail to deliver reliable predictions.</p>
+<p>The cleaning process transformed raw, messy inputs into a structured, usable dataset, setting the stage for accurate and actionable insights.</p>
+<h3 id="conclusion-laying-the-foundation-for-success">Conclusion: Laying the Foundation for Success</h3>
+<p>Data cleaning isn’t glamorous, but it’s the unsung hero of any successful ML project. By addressing missing values, outliers, and temporal misalignment, we built a solid foundation for predicting PM10 levels in Auckland.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

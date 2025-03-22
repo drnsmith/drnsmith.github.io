@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>AI-Powered Recipe Assistant: Smart Cooking with AI | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="AI-Powered Recipe Assistant: Generate, Customise, and Save Recipes Using AI.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project14_images/project14.png');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            AI-Powered Recipe Assistant: Smart Cooking with AI
+          </h1>
+          
+            <p class="f5">AI-Powered Recipe Assistant: Generate, Customise, and Save Recipes Using AI.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project14_images/project14.png">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/AI-Assistant-Recipe" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>The <strong>AI-Powered Recipe Assistant</strong> is an interactive tool designed to help users <strong>generate, customise, and save recipes</strong> using AI. It leverages <strong>large language models (LLMs)</strong> to dynamically create recipes based on user-provided ingredients and preferences.</p>
+<p>Built with <strong>Streamlit</strong>, the assistant offers a clean UI where users can:</p>
+<ul>
+<li>Find recipes from a curated database.</li>
+<li>Generate AI-created recipes when no match is found.</li>
+<li>Save and manage favourite recipes.</li>
+</ul>
+<p>This project demonstrates the <strong>fusion of AI, NLP, and data-driven decision-making</strong>, transforming how users interact with recipe recommendations.</p>
+<h3 id="key-features">Key Features</h3>
+<h4 id="1-ingredient-based-recipe-search">1. Ingredient-Based Recipe Search</h4>
+<ul>
+<li>Retrieve <strong>real-world recipes</strong> from a database using simple keyword searches.</li>
+</ul>
+<h4 id="2-ai-generated-recipes">2. AI-Generated Recipes</h4>
+<ul>
+<li>If no recipe is found, the assistant <strong>creates a new one</strong> using <strong>Ollama&rsquo;s Llama3 model</strong>.</li>
+<li>Ensures diversity and flexibility, catering to various dietary preferences.</li>
+</ul>
+<h4 id="3-save--manage-recipes">3. Save &amp; Manage Recipes*</h4>
+<ul>
+<li>Users can <strong>save their favourite recipes</strong> and retrieve them later.</li>
+</ul>
+<h4 id="4-dynamic-ui--real-time-feedback">4. Dynamic UI &amp; Real-Time Feedback</h4>
+<ul>
+<li>Built with <strong>Streamlit</strong>, offering an intuitive experience with real-time updates.</li>
+</ul>
+<h3 id="tech-stack">Tech Stack</h3>
+<ul>
+<li><strong>Frontend:</strong> Streamlit (for the user interface)</li>
+<li><strong>Backend:</strong> Python (FastAPI in future iterations)</li>
+<li><strong>LLMs:</strong> Ollama (Llama3 model)</li>
+<li><strong>Database:</strong> SQLite (for recipe storage)</li>
+<li><strong>Deployment:</strong> GitHub Pages (planned), Docker (future)</li>
+</ul>
+<h3 id="how-it-works">How It Works</h3>
+<h4 id="1-searching-for-a-recipe">1. Searching for a Recipe</h4>
+<p>Users enter ingredients, and the system:</p>
+<ul>
+<li><strong>Looks up a relevant recipe</strong> in the database.</li>
+<li><strong>Displays the recipe</strong> if a match is found.</li>
+<li>If no match, it <strong>suggests generating an AI recipe</strong> instead.</li>
+</ul>
+<h4 id="2-ai-recipe-generation">2. AI Recipe Generation</h4>
+<p>If no recipe is found, an AI-generated recipe is created using <strong>LLMs</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_ai_recipe</span>(ingredients):
+</span></span><span style="display:flex;"><span>    prompt <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Create a detailed recipe using these ingredients: </span><span style="color:#e6db74">{</span>ingredients<span style="color:#e6db74">}</span><span style="color:#e6db74">. Format it as follows:</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    ai_response <span style="color:#f92672">=</span> llm<span style="color:#f92672">.</span>invoke(prompt)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> parse_ai_response(ai_response)
+</span></span></code></pre></div><pre><code>•	The AI structures the recipe with ingredients, instructions, and preparation steps.
+•	Recipes are designed to be human-readable and easy to follow.
+</code></pre>
+<h4 id="3-saving-recipes">3. Saving Recipes</h4>
+<p>Users can save AI-generated or database recipes to their personal collection:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save_recipe</span>(title, ingredients, instructions):
+</span></span><span style="display:flex;"><span>    cursor<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;INSERT INTO saved_recipes (title, ingredients, instructions) VALUES (?, ?, ?)&#34;</span>, 
+</span></span><span style="display:flex;"><span>                   (title, ingredients, instructions))
+</span></span></code></pre></div><pre><code>•	Stored recipes appear under Saved Recipes.
+•	Users can delete unwanted recipes anytime.
+</code></pre>
+<h4 id="challenges--solutions">Challenges &amp; Solutions</h4>
+<ul>
+<li>Ensuring Recipe Diversity
+<strong>Problem</strong>: AI-generated recipes sometimes repeated similar structures.
+<strong>Solution</strong>: Added randomisation and diverse examples to prompts.</li>
+</ul>
+<p>• Efficient Database Search
+<strong>Problem</strong>: Searching millions of recipes for matching ingredients required optimisation.
+<strong>Solution</strong>: Used SQL indexing and caching for faster lookups.</p>
+<p>• Streamlit Button Issues
+<strong>Problem</strong>: The “Find Another Recipe” button initially failed to refresh results.
+<strong>Solution</strong>: Implemented session state tracking to trigger updates.</p>
+<h4 id="future-enhancements">Future Enhancements</h4>
+<ul>
+<li>
+<p><strong>Improve AI Recipe Understanding</strong>:</p>
+<p>• Use embedding models for better ingredient matching.</p>
+<p>• Improve recipe formatting for clarity.</p>
+</li>
+<li>
+<p><strong>API Integration</strong>:</p>
+<p>• Convert into a FastAPI service for recipe generation.</p>
+<p>• Add external APIs for ingredient substitution and nutrition info.</p>
+</li>
+</ul>
+<h4 id="conclusion">Conclusion</h4>
+<p>The AI-Powered Recipe Assistant showcases the power of AI-driven decision-making in daily life. Whether retrieving a classic dish or generating a custom recipe, this tool provides a seamless user experience, blending data, NLP, and automation.</p>
+<p><em>Check out the project on GitHub and connect with me on LinkedIn to discuss AI in food tech!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

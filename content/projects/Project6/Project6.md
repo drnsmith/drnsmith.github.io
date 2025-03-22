@@ -25,14 +25,13 @@ This blog walks through the design, implementation, and key features of this sys
 
 The project involved building a system where a client and server communicate securely to exchange serialised data and files. Key functionalities included:
 
-1. **Data Serialisation**:  
-Transforming Python objects (e.g., dictionaries) into transmittable formats.
+1. *Data Serialisation*: Transforming Python objects (e.g., dictionaries) into transmittable formats.
 
-2. **File Transfer**: Enabling clients to upload and download text files.
+2. *File Transfer*: Enabling clients to upload and download text files.
 
-3. **Encryption and Security**: Protecting data during transfer with encryption and decryption.
+3. *Encryption and Security*: Protecting data during transfer with encryption and decryption.
 
-4. **Multi-Threading**: Allowing the server to handle multiple client requests simultaneously.
+4. *Multi-Threading*: Allowing the server to handle multiple client requests simultaneously.
 
 ### Setting Up Client-Server Communication
 
@@ -117,8 +116,9 @@ with open("upload.txt", "rb") as file:
 with open("received.txt", "wb") as file:
     while chunk := client_socket.recv(1024):
         file.write(chunk)
+```
 
-        4. Encryption and Decryption
+#### 4. Encryption and Decryption
 
 To secure file transfers, encryption was implemented using Python’s cryptography library.
 
@@ -173,24 +173,12 @@ while True:
     thread.start()
 ```
 
-### Challenges and Solutions
+### Challenges, Solutions and Applications
+ - *Data Loss During Transfer*. Issue: Large files caused data to be dropped. *Solution*: Implemented chunk-based file transfer.
 
-**Data Loss During Transfer**:
+ - *Encryption Overhead*. Issue: Encryption slowed down the transfer speed for large files.*Solution*: Optimised encryption with asynchronous I/O.
 
- - Issue: Large files caused data to be dropped.
- - *Solution*: Implemented chunk-based file transfer.
-
-**Encryption Overhead**:
-
- - Issue: Encryption slowed down the transfer speed for large files.
- - *Solution*: Optimised encryption with asynchronous I/O.
-
-**Concurrent Connections**:
-
- - Issue: Multi-threading led to race conditions.
- - *Solution*: Used thread-safe data structures.
-
-### Applications
+ - *Concurrent Connections*: Issue: Multi-threading led to race conditions. *Solution*: Used thread-safe data structures.
 
 This system has applications in:
 
@@ -198,35 +186,23 @@ This system has applications in:
  - *Real-Time Communication*: Chat or messaging systems.
  - *Data Serialisation*: Sharing structured data between systems.
 
-### Future Directions
+### Future Directions and Real-World Applications
 
  - *Multi-Client Support*: Extending to a fully functional multi-client architecture.
  - *Scalability*: Integrating load balancers for handling high traffic.
  - *Improved Encryption*: Using hybrid encryption techniques for enhanced security.
 
-### **Real-World Applications**
-
 The client-server system implemented in this project has versatile applications in various domains:
 
-#### **1. Secure File Transfer Systems**
-- The system can be adapted for secure exchange of sensitive files, such as legal documents or medical records, over a network.
-- **Use Case**: Hospitals transmitting patient records between departments.
+1. *Secure File Transfer Systems*: The system can be adapted for secure exchange of sensitive files, such as legal documents or medical records, over a network. *Use Case*: Hospitals transmitting patient records between departments.
 
-#### **2. Real-Time Communication Platforms**
-- With modifications, the architecture can be used as a foundation for chat applications, collaborative tools, or notification systems.
-- **Use Case**: Messaging apps for internal business communication.
+2. *Real-Time Communication Platforms*: With modifications, the architecture can be used as a foundation for chat applications, collaborative tools, or notification systems. *Use Case*: Messaging apps for internal business communication.
 
-#### **3. Remote Data Sharing**
-- Organisations can leverage the system to serialise and exchange structured data (e.g., JSON, dictionaries) between remote locations.
-- **Use Case**: IoT devices sending telemetry data to centralised servers.
+3. *Remote Data Sharing*: Organisations can leverage the system to serialise and exchange structured data (e.g., JSON, dictionaries) between remote locations. *Use Case*: IoT devices sending telemetry data to centralised servers.
 
-#### **4. Encryption for Security**
-- The encryption module ensures secure transmission, protecting against data breaches and unauthorised access.
-- **Use Case**: Financial institutions exchanging transaction details between servers.
+4. *Encryption for Security:* The encryption module ensures secure transmission, protecting against data breaches and unauthorised access. *Use Case*: Financial institutions exchanging transaction details between servers.
 
-#### **5. Distributed Systems Development**
-- This project provides the groundwork for building distributed systems with multi-client and multi-server architectures.
-- **Use Case**: Scalable cloud services for data processing.
+5. *Distributed Systems Development:* This project provides the groundwork for building distributed systems with multi-client and multi-server architectures. *Use Case*: Scalable cloud services for data processing.
 
 ### Conclusion
 

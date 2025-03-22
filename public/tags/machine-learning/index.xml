@@ -1,390 +1,208 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Machine Learning on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/machine-learning/</link><description>Recent content in Machine Learning on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Building Custom CNN Architectures: From Scratch to Mastery.</title><link>http://localhost:1313/projects/project11/project11_1/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous.&lt;/p>
-&lt;p>But while pre-trained models like ResNet and EfficientNet are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch.&lt;/p>
-&lt;p>In this blog, I’ll explore how to construct a custom CNN tailored for binary classification tasks. Whether you&amp;rsquo;re new to deep learning or looking to deepen your understanding, this guide will help you:&lt;/p></description></item><item><title>PART 1. The Importance of Data Cleaning in Environmental Analysis</title><link>http://localhost:1313/projects/project9/project9_1/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.&lt;/p>
-&lt;p>This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.&lt;/p>
-&lt;p>When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.&lt;/p></description></item><item><title>Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction.</title><link>http://localhost:1313/projects/project8/project8_1/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Have you ever stopped to think about the data behind environmental predictions?&lt;/p>
-&lt;p>We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions.&lt;/p>
-&lt;p>The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.&lt;/p></description></item><item><title>PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</title><link>http://localhost:1313/projects/project10/project10_1/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/project10_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project10_images/pr10.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.&lt;/p>
-&lt;p>Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. This blog explores:&lt;/p></description></item><item><title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.</title><link>http://localhost:1313/projects/project2/project2_1/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.
-I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.&lt;/p></description></item><item><title>Part 1. Building an AI-Powered Recipe Difficulty Classifier: A Journey Through NLP and ML.</title><link>http://localhost:1313/projects/project1/project1_1/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/project1_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;div style="display: flex; align-items: center; gap: 10px;">
- &lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank" style="text-decoration: none;">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
- &lt;/a>
- &lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank" style="font-weight: bold; color: black;">
- View Project on GitHub
- &lt;/a>
-&lt;/div>
-&lt;h2 id="introduction">&lt;strong>Introduction&lt;/strong>&lt;/h2>
-&lt;p>Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge was to develop a ML model that classifies recipes into four difficulty levels—&lt;strong>Easy, Medium, Hard, and Very Hard&lt;/strong>—using &lt;strong>Natural Language Processing (NLP)&lt;/strong> and &lt;strong>Machine Learning (ML)&lt;/strong>. In this post, I focus on &lt;strong>data collection, cleaning, and pre-processing&lt;/strong>, which lay the foundation for training a robust ML model.&lt;/p></description></item><item><title>Part 2. Mastering Data Preparation and Augmentation: Building the Foundation for Better Image Classification Models.</title><link>http://localhost:1313/projects/project11/project11_2/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>The journey to building a high-performing image classification model begins long before training. Data preparation and augmentation are often overlooked but vital steps in ensuring your model learns effectively and generalises well. These processes form the bridge between raw, unstructured data and the structured inputs a machine learning model can use.&lt;/p>
-&lt;p>In this blog, we will:&lt;/p>
-&lt;ul>
-&lt;li>Explore the essential techniques of data pre-processing, including resizing, normalization, and train-test splitting.&lt;/li>
-&lt;li>Learn how data augmentation enhances model generalisation.&lt;/li>
-&lt;li>Discuss strategies for addressing class imbalance to prevent biased models.&lt;/li>
-&lt;li>Show how these steps contribute to real-world applications like medical imaging and fraud detection.&lt;/li>
-&lt;/ul>
-&lt;p>By the end, you’ll have a comprehensive understanding of why data preparation is the cornerstone of machine learning success.&lt;/p></description></item><item><title>PART 2. Understanding the Predictors of Air Pollution</title><link>http://localhost:1313/projects/project9/project9_2/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>What makes air pollution worse?&lt;/p>
-&lt;p>Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.&lt;/p>
-&lt;p>In this blog, we dive into the heart of the Auckland PM10 prediction project: &lt;strong>feature selection&lt;/strong>.&lt;/p></description></item><item><title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.</title><link>http://localhost:1313/projects/project8/project8_2/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Behind every successful machine learning (ML) project is a stage that is equal parts science and art: &lt;strong>Exploratory Data Analysis (EDA)&lt;/strong>.&lt;/p>
-&lt;p>This step is where we uncover the hidden stories in the data, identify patterns, and gain insights that inform the model-building process.&lt;/p>
-&lt;p>When working with air pollution data, EDA plays a vital role in answering key questions:&lt;/p></description></item><item><title>Part 2. From Words to Vectors: Embedding Techniques in Recipe Analysis.</title><link>http://localhost:1313/projects/project2/project2_2/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In a world driven by data, text is the unsung hero that powers everything from search engines to recommendation systems. For a data scientist, textual data isn&amp;rsquo;t just words—it&amp;rsquo;s a goldmine waiting to be unlocked. Recipes, for instance, are more than a collection of instructions. They&amp;rsquo;re narratives of culture, flavour profiles, and culinary creativity. But to analyse them computationally, we must first transform these words into something machines can process: &lt;em>vectors&lt;/em>. In this article, I’ll dive into how text embedding techniques like &lt;strong>TF-IDF&lt;/strong> and &lt;strong>Word2Vec&lt;/strong> can be applied to recipe data. By converting recipes into meaningful numerical representations, we uncover patterns and relationships hidden in the data.&lt;/p></description></item><item><title>Part 2. Exploring Feature Engineering for Recipe Classification: How AI Understands Cooking Complexity.</title><link>http://localhost:1313/projects/project1/project1_2/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/project1_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In ML, features are measurable characteristics or properties that help a model make predictions. In recipe classification, features such as ingredient complexity, cooking techniques, and step count become powerful predictors of recipe difficulty. Feature engineering helps us take unstructured data, such as recipe instructions, and turn it into structured data that the model can understand.&lt;/p>
-&lt;p>For example, a recipe with advanced ingredients (like &amp;ldquo;saffron&amp;rdquo; or &amp;ldquo;truffle oil&amp;rdquo;) is likely to be more challenging than one with everyday items like &amp;ldquo;salt&amp;rdquo; or &amp;ldquo;flour.&amp;rdquo; Similarly, recipes that involve techniques like &amp;ldquo;blanching&amp;rdquo; or &amp;ldquo;flambé&amp;rdquo; tend to require more skill than those involving basic steps like &amp;ldquo;stirring.&amp;rdquo;&lt;/p></description></item><item><title>Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights.</title><link>http://localhost:1313/projects/project11/project11_3/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Accuracy is one of the most common metrics used to evaluate machine learning models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease.&lt;/p>
-&lt;p>This blog aims to expand your understanding of model evaluation by:&lt;/p>
-&lt;ul>
-&lt;li>Exploring precision, recall, specificity, and F1-score to provide deeper insights into model performance.&lt;/li>
-&lt;li>Introducing the &lt;code>Receiver Operating Characteristic (ROC)&lt;/code> curve and AUC for evaluating classification thresholds.&lt;/li>
-&lt;li>Demonstrating these metrics with Python code and visualisations.&lt;/li>
-&lt;/ul>
-&lt;p>By the end, you’ll have the tools to evaluate your models comprehensively, ensuring they meet the demands of real-world challenges.&lt;/p></description></item><item><title>PART 3. Regression Models for Pollution Prediction</title><link>http://localhost:1313/projects/project9/project9_3/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.&lt;/p>
-&lt;p>In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.&lt;/p></description></item><item><title>Part 3. Regression Models for Air Quality Prediction: From Simplicity to Accuracy.</title><link>http://localhost:1313/projects/project8/project8_3/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Predicting air pollution isn’t just about crunching numbers—it’s about finding patterns, building models, and learning how different variables interact with one another.&lt;/p>
-&lt;p>In this blog, I take the first step toward accurate PM10 predictions by exploring regression models. These models form the backbone of many machine learning (ML) projects, providing interpretable results and insights into the relationships between variables.&lt;/p></description></item><item><title>Part 3. Uncovering Themes in Recipes with Topic Modelling.</title><link>http://localhost:1313/projects/project2/project2_3/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Recipes are more than just lists of ingredients and instructions—they encapsulate cultural, dietary, and thematic patterns waiting to be uncovered. In the ever-growing realm of textual data, topic modelling serves as a powerful tool to discover hidden themes and insights.&lt;/p>
-&lt;p>In this blog, I’ll explore how topic modeling techniques, such as Latent Dirichlet Allocation (LDA) and Non-Negative Matrix Factorisation (NMF), help us extract meaningful themes from recipes.&lt;/p></description></item><item><title>PART 3. Choosing the Right Model: Training and Evaluating an AI Recipe Difficulty Classifier</title><link>http://localhost:1313/projects/project1/project1_3/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/project1_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In the previous post, I explored how feature engineering transforms raw recipe data into valuable insights for predicting recipe difficulty. With features like ingredient complexity, technique identification, and step count, my dataset is now ready for the next stage: selecting, training, and evaluating a machine learning model that can classify recipes by difficulty level. Model selection is a crucial step in building a successful classifier. In this post, I’ll walk you through the models I tested, the training process, and the metrics I used to evaluate performance.&lt;/p></description></item><item><title>Part 4. Tackling Overfitting in Deep Learning Models.</title><link>http://localhost:1313/projects/project11/project11_4/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning models have revolutionised machine learning, enabling breakthroughs in image recognition, natural language processing, and more.&lt;/p>
-&lt;p>However, one common challenge that haunts even the most skilled practitioners is overfitting. Overfitting occurs when a model learns the training data too well, including its noise and irrelevant patterns, at the cost of generalising to new, unseen data.&lt;/p>
-&lt;p>Imagine training a model to classify histopathological images of cancer 9as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.&lt;/p></description></item><item><title>PART 4. Neural Networks in Environmental Data Analysis</title><link>http://localhost:1313/projects/project9/project9_4/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.&lt;/p>
-&lt;p>In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.&lt;/p></description></item><item><title>Part 4. Advanced Machine Learning for PM10 Prediction: Random Forest, XGBoost, and More.</title><link>http://localhost:1313/projects/project8/project8_4/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Regression models laid a solid foundation for PM10 prediction, but air pollution is a complex phenomenon influenced by nonlinear and time-dependent factors.&lt;/p>
-&lt;p>To capture these intricacies, advanced machine learning models like neural networks (NNs) and ensemble methods come into play. These models are capable of uncovering patterns and relationships that simpler models might overlook.&lt;/p></description></item><item><title>Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges.</title><link>http://localhost:1313/projects/project2/project2_4/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction-clustering-recipes-based-on-similarity-an-overview-of-techniques-and-challenges">Introduction. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges&lt;/h3>
-&lt;p>Clustering is a powerful unsupervised learning technique that organises data points into groups based on shared features.&lt;/p>
-&lt;p>When applied to recipes, clustering can reveal hidden patterns, such as regional cuisines, ingredient pairings, or common preparation techniques.&lt;/p>
-&lt;p>In this blog, we’ll explore:&lt;/p>
-&lt;ol>
-&lt;li>Clustering methods like K-Means and Hierarchical Clustering.&lt;/li>
-&lt;li>Pre-processing and feature selection for recipe data.&lt;/li>
-&lt;li>Evaluating clusters for meaningfulness.&lt;/li>
-&lt;li>Challenges and lessons learned during clustering experiments.&lt;/li>
-&lt;/ol>
-&lt;h3 id="why-clustering-recipes">Why Clustering Recipes?&lt;/h3>
-&lt;p>Clustering allows us to group recipes into meaningful categories based on similarity. For example:&lt;/p></description></item><item><title>Part 4. Tackling Overfitting in Recipe Difficulty Classification: Lessons Learned and Solutions.</title><link>http://localhost:1313/projects/project1/project1_4/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/project1_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>As I progressed with training my AI-powered recipe classifier, I noticed a common issue creeping in: &lt;em>overfitting&lt;/em>, which happens when a model performs well on the training data but struggles to generalise to new, unseen data. In ML, this can result in poor accuracy on validation or test data. In this blog, I’ll walk you through how I identified overfitting in my model and the steps I took to address it. I’ll also explain the visual clues from training and validation loss/accuracy graphs that helped me recognise this issue.&lt;/p></description></item><item><title>PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</title><link>http://localhost:1313/projects/project9/project9_5/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional machine learning (ML)models often struggle with.&lt;/p>
-&lt;p>In this blog, we delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict PM10 pollution levels in Auckland.&lt;/p></description></item><item><title>Part 5. Evaluating and Selecting the Best Models for PM10 Prediction.</title><link>http://localhost:1313/projects/project8/project8_5/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>After building and testing various machine learning models, the next critical step is evaluating their performance and selecting the best ones for deployment.&lt;/p>
-&lt;p>In this blog, we’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).&lt;/p>
-&lt;p>We’ll also explore hyperparameter tuning for neural networks, leveraging GridSearchCV for optimal performance.&lt;/p></description></item><item><title>Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights.</title><link>http://localhost:1313/projects/project2/project2_5/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction-evaluating-and-interpreting-recipe-clusters-for-meaningful-insights">Introduction. Evaluating and Interpreting Recipe Clusters for Meaningful Insights&lt;/h3>
-&lt;p>Clustering recipes can reveal fascinating patterns, but identifying meaningful clusters is only half the battle.&lt;/p>
-&lt;p>The real challenge lies in evaluating their quality and interpreting their results effectively. Without rigorous evaluation, clusters might lack utility, leading to misleading conclusions.&lt;/p>
-&lt;p>In this blog, we’ll cover:&lt;/p>
-&lt;ol>
-&lt;li>Techniques for evaluating cluster quality.&lt;/li>
-&lt;li>Methods for interpreting recipe clusters.&lt;/li>
-&lt;li>Challenges and insights gained from real-world clustering projects.&lt;/li>
-&lt;/ol>
-&lt;h3 id="why-does-cluster-evaluation-matter">Why Does Cluster Evaluation Matter?&lt;/h3>
-&lt;p>Creating clusters is straightforward, but ensuring they represent meaningful groupings requires evaluation. For recipes, this means asking:&lt;/p></description></item><item><title>Part 5. Interpreting the AI Recipe Classifier with LIME: Making ML Transparent.</title><link>http://localhost:1313/projects/project1/project1_5/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/project1_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In building a recipe difficulty classifier, I wanted to make sure the model&amp;rsquo;s predictions weren’t just accurate but also understandable. For anyone working with ML, especially in fields where transparency is key, model interpretability is crucial. This is where LIME (Local Interpretable Model-Agnostic Explanations) comes in.
-In this blog post, I’ll walk you through how I used LIME to make sense of my classifier’s decisions, ensuring that its predictions are grounded and explainable.&lt;/p></description></item><item><title>Part 6. Mastering Ensembling Techniques: Boosting Model Performance with Stacking and Voting.</title><link>http://localhost:1313/projects/project11/project11_6/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether you’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalization.&lt;/p>
-&lt;p>In this blog, we’ll focus on:&lt;/p>
-&lt;p>The fundamentals of stacking and soft voting.
-Implementing stacking with a meta-model.
-Using soft voting for combined predictions.
-Evaluating ensemble models with metrics like ROC-AUC.
-By the end, you’ll be able to implement and evaluate ensemble methods for your own machine learning projects.&lt;/p></description></item><item><title>PART 6. Comparing Models and Real-World Implications</title><link>http://localhost:1313/projects/project9/project9_6/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Artificial intelligence (AI) and machine learning (ML) are not just tools for academic research—they hold transformative potential for real-world applications.&lt;/p>
-&lt;p>In this final blog, we focus on translating our findings into actionable insights:&lt;/p>
-&lt;ul>
-&lt;li>How can the models and predictions generated in this project help policymakers, urban planners, and individuals?&lt;/li>
-&lt;li>What are the future possibilities for AI in environmental health?&lt;/li>
-&lt;/ul>
-&lt;h3 id="1-the-power-of-predictions">1. The Power of Predictions&lt;/h3>
-&lt;p>&lt;strong>Turning Numbers Into Actions&lt;/strong>&lt;/p></description></item><item><title>Part 6. From Data to Action: What Pollution Data and AI Teach Us About Cleaner Air.</title><link>http://localhost:1313/projects/project8/project8_6/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Predicting PM10 and other pollutants is not just about building models or visualising data—it&amp;rsquo;s about understanding the invisible threats in the air we breathe and finding ways to address them.&lt;/p>
-&lt;p>After exploring data pre-processing, modelling, and evaluation, this final piece reflects on the insights gained and their real-world implications.&lt;/p>
-&lt;p>I’ll discuss how the results from this project—built on advanced AI/ML techniques—can guide better decision-making for policymakers, businesses, and citizens alike.&lt;/p></description></item><item><title>Part 6. Applications of Recipe Topic Modelling and Clustering.</title><link>http://localhost:1313/projects/project2/project2_6/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction-applications-of-recipe-topic-modelling-and-clustering-in-real-life">Introduction. Applications of Recipe Topic Modelling and Clustering in Real Life&lt;/h3>
-&lt;p>Recipes are more than just instructions—they are cultural artifacts, sources of inspiration, and solutions to everyday problems. But as the number of recipes available online grows exponentially, finding the right one can feel overwhelming. That’s where the power of topic modelling and clustering comes into play.&lt;/p>
-&lt;p>These techniques unlock the potential of recipe data, helping users discover, search, and explore recipes in ways that feel intuitive and tailored. In this blog, we’ll explore:&lt;/p></description></item><item><title>Part 6. Deploying an AI Model for Recipe Classification: Bringing the Classifier to Life.</title><link>http://localhost:1313/projects/project1/project1_6/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/project1_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project1_images/pr1.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Once a model that classifies recipes by difficulty level is built and trained , the next challenge is deploying it into a real-world environment. In this blog, we’ll cover the process of moving our trained model from a development setting to a production environment. Deployment enables the model to make predictions and serve users in real-time, opening up possibilities for applications like recipe recommendation engines, cooking assistant apps, or culinary content platforms.&lt;/p></description></item><item><title>Part 7. Building Robust End-to-End Image Classification Pipelines.</title><link>http://localhost:1313/projects/project11/project11_7/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_7/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In the world of machine learning, image classification is one of the most common and impactful applications.&lt;/p>
-&lt;p>From detecting diseases in medical imaging to identifying products in e-commerce, the ability to categorise images accurately has transformed industries.&lt;/p>
-&lt;p>However, building an effective image classification model requires more than just training a neural network—it demands a robust, end-to-end pipeline that can handle the entire process, from raw data to deployment.&lt;/p></description></item><item><title>AI-Powered Recipe Assistant: Smart Cooking with AI</title><link>http://localhost:1313/projects/project14/project14/</link><pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project14/project14/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project14_images/project14.png">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Assistant-Recipe" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>The &lt;strong>AI-Powered Recipe Assistant&lt;/strong> is an interactive tool designed to help users &lt;strong>generate, customise, and save recipes&lt;/strong> using AI. It leverages &lt;strong>large language models (LLMs)&lt;/strong> to dynamically create recipes based on user-provided ingredients and preferences.&lt;/p>
-&lt;p>Built with &lt;strong>Streamlit&lt;/strong>, the assistant offers a clean UI where users can:&lt;/p>
-&lt;ul>
-&lt;li>Find recipes from a curated database.&lt;/li>
-&lt;li>Generate AI-created recipes when no match is found.&lt;/li>
-&lt;li>Save and manage favourite recipes.&lt;/li>
-&lt;/ul>
-&lt;p>This project demonstrates the &lt;strong>fusion of AI, NLP, and data-driven decision-making&lt;/strong>, transforming how users interact with recipe recommendations.&lt;/p></description></item><item><title>Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications</title><link>http://localhost:1313/projects/project11/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect, from understanding CNN components to tackling data augmentation and evaluating model performance. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Part 5. Advanced Regularisation Techniques for CNNs.</title><link>http://localhost:1313/projects/project11/project11_5/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Convolutional Neural Networks (CNNs) have transformed machine learning, excelling in fields like image recognition, object detection, and medical imaging.&lt;/p>
-&lt;p>However, like all machine learning models, CNNs are prone to overfitting, where the model performs well on the training data but struggles to generalise to unseen data. This is where regularisation comes into play.&lt;/p>
-&lt;p>Regularisation techniques are designed to prevent overfitting and improve generalisation, making your CNN robust and reliable.&lt;/p></description></item><item><title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution</title><link>http://localhost:1313/projects/project9/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/</guid><description>&lt;p>This section showcases the various blogs and technical posts related to this project. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK</title><link>http://localhost:1313/projects/project8/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Cancer Detection in Histopathology: The Role of Colour Normalisation in Model Calibration and Performance</title><link>http://localhost:1313/projects/project10/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Decoding Culinary Narratives: Combining advanced NLP techniques (BERT embeddings) with LDA topic modelling</title><link>http://localhost:1313/projects/project2/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>AI-Powered Recipe Difficulty Classification</title><link>http://localhost:1313/projects/project1/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project1/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/machine-learning/</link>
+    <description>Recent content in Machine Learning on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Building Custom CNN Architectures: From Scratch to Mastery.</title>
+      <link>http://localhost:1313/projects/part-1.-building-custom-cnn-architectures-from-scratch-to-mastery./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-building-custom-cnn-architectures-from-scratch-to-mastery./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous.&lt;/p&gt;&#xA;&lt;p&gt;But while pre-trained models like ResNet and EfficientNet are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll explore how to construct a custom CNN tailored for binary classification tasks. Whether you&amp;rsquo;re new to deep learning or looking to deepen your understanding, this guide will help you:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 1. The Importance of Data Cleaning in Environmental Analysis</title>
+      <link>http://localhost:1313/projects/part-1.-the-importance-of-data-cleaning-in-environmental-analysis/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-the-importance-of-data-cleaning-in-environmental-analysis/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.&lt;/p&gt;&#xA;&lt;p&gt;This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.&lt;/p&gt;&#xA;&lt;p&gt;When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction.</title>
+      <link>http://localhost:1313/projects/part-1.-cleaning-the-air-data-pre-processing-for-pm10-prediction./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-cleaning-the-air-data-pre-processing-for-pm10-prediction./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Have you ever stopped to think about the data behind environmental predictions?&lt;/p&gt;&#xA;&lt;p&gt;We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions.&lt;/p&gt;&#xA;&lt;p&gt;The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</title>
+      <link>http://localhost:1313/projects/part-1.-colour-normalisation-in-histopathology.-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-colour-normalisation-in-histopathology.-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.&lt;/p&gt;&#xA;&lt;p&gt;Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. This blog explores:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Classifier.</title>
+      <link>http://localhost:1313/projects/ai-powered-recipe-classifier./</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/ai-powered-recipe-classifier./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1&#34;&gt;PART 1.&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill.&lt;/p&gt;&#xA;&lt;p&gt;The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong&gt;Easy, Medium, Hard, and Very Hard&lt;/strong&gt;—using &lt;strong&gt;Natural Language Processing (NLP)&lt;/strong&gt; and &lt;strong&gt;Machine Learning (ML)&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Mastering Data Preparation and Augmentation: Building the Foundation for Better Image Classification Models.</title>
+      <link>http://localhost:1313/projects/part-2.-mastering-data-preparation-and-augmentation-building-the-foundation-for-better-image-classification-models./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-mastering-data-preparation-and-augmentation-building-the-foundation-for-better-image-classification-models./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;The journey to building a high-performing image classification model begins long before training. Data preparation and augmentation are often overlooked but vital steps in ensuring your model learns effectively and generalises well. These processes form the bridge between raw, unstructured data and the structured inputs a machine learning model can use.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we will:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Explore the essential techniques of data pre-processing, including resizing, normalization, and train-test splitting.&lt;/li&gt;&#xA;&lt;li&gt;Learn how data augmentation enhances model generalisation.&lt;/li&gt;&#xA;&lt;li&gt;Discuss strategies for addressing class imbalance to prevent biased models.&lt;/li&gt;&#xA;&lt;li&gt;Show how these steps contribute to real-world applications like medical imaging and fraud detection.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;By the end, you’ll have a comprehensive understanding of why data preparation is the cornerstone of machine learning success.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 2. Understanding the Predictors of Air Pollution</title>
+      <link>http://localhost:1313/projects/part-2.-understanding-the-predictors-of-air-pollution/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-understanding-the-predictors-of-air-pollution/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;What makes air pollution worse?&lt;/p&gt;&#xA;&lt;p&gt;Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we dive into the heart of the Auckland PM10 prediction project: &lt;strong&gt;feature selection&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.</title>
+      <link>http://localhost:1313/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Behind every successful machine learning (ML) project is a stage that is equal parts science and art: &lt;strong&gt;Exploratory Data Analysis (EDA)&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This step is where we uncover the hidden stories in the data, identify patterns, and gain insights that inform the model-building process.&lt;/p&gt;&#xA;&lt;p&gt;When working with air pollution data, EDA plays a vital role in answering key questions:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights.</title>
+      <link>http://localhost:1313/projects/part-3.-evaluating-model-performance-metrics-beyond-accuracy-for-better-insights./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-evaluating-model-performance-metrics-beyond-accuracy-for-better-insights./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Accuracy is one of the most common metrics used to evaluate machine learning models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease.&lt;/p&gt;&#xA;&lt;p&gt;This blog aims to expand your understanding of model evaluation by:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Exploring precision, recall, specificity, and F1-score to provide deeper insights into model performance.&lt;/li&gt;&#xA;&lt;li&gt;Introducing the &lt;code&gt;Receiver Operating Characteristic (ROC)&lt;/code&gt; curve and AUC for evaluating classification thresholds.&lt;/li&gt;&#xA;&lt;li&gt;Demonstrating these metrics with Python code and visualisations.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;By the end, you’ll have the tools to evaluate your models comprehensively, ensuring they meet the demands of real-world challenges.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 3. Regression Models for Pollution Prediction</title>
+      <link>http://localhost:1313/projects/part-3.-regression-models-for-pollution-prediction/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-regression-models-for-pollution-prediction/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Regression Models for Air Quality Prediction: From Simplicity to Accuracy.</title>
+      <link>http://localhost:1313/projects/part-3.-regression-models-for-air-quality-prediction-from-simplicity-to-accuracy./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-regression-models-for-air-quality-prediction-from-simplicity-to-accuracy./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Predicting air pollution isn’t just about crunching numbers—it’s about finding patterns, building models, and learning how different variables interact with one another.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I take the first step toward accurate PM10 predictions by exploring regression models. These models form the backbone of many machine learning (ML) projects, providing interpretable results and insights into the relationships between variables.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Tackling Overfitting in Deep Learning Models.</title>
+      <link>http://localhost:1313/projects/part-4.-tackling-overfitting-in-deep-learning-models./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-tackling-overfitting-in-deep-learning-models./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning models have revolutionised machine learning, enabling breakthroughs in image recognition, natural language processing, and more.&lt;/p&gt;&#xA;&lt;p&gt;However, one common challenge that haunts even the most skilled practitioners is overfitting. Overfitting occurs when a model learns the training data too well, including its noise and irrelevant patterns, at the cost of generalising to new, unseen data.&lt;/p&gt;&#xA;&lt;p&gt;Imagine training a model to classify histopathological images of cancer 9as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 4. Neural Networks in Environmental Data Analysis</title>
+      <link>http://localhost:1313/projects/part-4.-neural-networks-in-environmental-data-analysis/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-neural-networks-in-environmental-data-analysis/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Advanced Machine Learning for PM10 Prediction: Random Forest, XGBoost, and More.</title>
+      <link>http://localhost:1313/projects/part-4.-advanced-machine-learning-for-pm10-prediction-random-forest-xgboost-and-more./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-advanced-machine-learning-for-pm10-prediction-random-forest-xgboost-and-more./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Regression models laid a solid foundation for PM10 prediction, but air pollution is a complex phenomenon influenced by nonlinear and time-dependent factors.&lt;/p&gt;&#xA;&lt;p&gt;To capture these intricacies, advanced machine learning models like neural networks (NNs) and ensemble methods come into play. These models are capable of uncovering patterns and relationships that simpler models might overlook.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</title>
+      <link>http://localhost:1313/projects/part-5.-exploring-long-short-term-memory-lstm-for-time-series-data/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-exploring-long-short-term-memory-lstm-for-time-series-data/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional machine learning (ML)models often struggle with.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict PM10 pollution levels in Auckland.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Evaluating and Selecting the Best Models for PM10 Prediction.</title>
+      <link>http://localhost:1313/projects/part-5.-evaluating-and-selecting-the-best-models-for-pm10-prediction./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-evaluating-and-selecting-the-best-models-for-pm10-prediction./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;After building and testing various machine learning models, the next critical step is evaluating their performance and selecting the best ones for deployment.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).&lt;/p&gt;&#xA;&lt;p&gt;We’ll also explore hyperparameter tuning for neural networks, leveraging GridSearchCV for optimal performance.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Mastering Ensembling Techniques: Boosting Model Performance with Stacking and Voting.</title>
+      <link>http://localhost:1313/projects/part-6.-mastering-ensembling-techniques-boosting-model-performance-with-stacking-and-voting./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-mastering-ensembling-techniques-boosting-model-performance-with-stacking-and-voting./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether you’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalization.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll focus on:&lt;/p&gt;&#xA;&lt;p&gt;The fundamentals of stacking and soft voting.&#xA;Implementing stacking with a meta-model.&#xA;Using soft voting for combined predictions.&#xA;Evaluating ensemble models with metrics like ROC-AUC.&#xA;By the end, you’ll be able to implement and evaluate ensemble methods for your own machine learning projects.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 6. Comparing Models and Real-World Implications</title>
+      <link>http://localhost:1313/projects/part-6.-comparing-models-and-real-world-implications/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-comparing-models-and-real-world-implications/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Artificial intelligence (AI) and machine learning (ML) are not just tools for academic research—they hold transformative potential for real-world applications.&lt;/p&gt;&#xA;&lt;p&gt;In this final blog, we focus on translating our findings into actionable insights:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How can the models and predictions generated in this project help policymakers, urban planners, and individuals?&lt;/li&gt;&#xA;&lt;li&gt;What are the future possibilities for AI in environmental health?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;1-the-power-of-predictions&#34;&gt;1. The Power of Predictions&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Turning Numbers Into Actions&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. From Data to Action: What Pollution Data and AI Teach Us About Cleaner Air.</title>
+      <link>http://localhost:1313/projects/part-6.-from-data-to-action-what-pollution-data-and-ai-teach-us-about-cleaner-air./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-from-data-to-action-what-pollution-data-and-ai-teach-us-about-cleaner-air./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Predicting PM10 and other pollutants is not just about building models or visualising data—it&amp;rsquo;s about understanding the invisible threats in the air we breathe and finding ways to address them.&lt;/p&gt;&#xA;&lt;p&gt;After exploring data pre-processing, modelling, and evaluation, this final piece reflects on the insights gained and their real-world implications.&lt;/p&gt;&#xA;&lt;p&gt;I’ll discuss how the results from this project—built on advanced AI/ML techniques—can guide better decision-making for policymakers, businesses, and citizens alike.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 7. Building Robust End-to-End Image Classification Pipelines.</title>
+      <link>http://localhost:1313/projects/part-7.-building-robust-end-to-end-image-classification-pipelines./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-7.-building-robust-end-to-end-image-classification-pipelines./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In the world of machine learning, image classification is one of the most common and impactful applications.&lt;/p&gt;&#xA;&lt;p&gt;From detecting diseases in medical imaging to identifying products in e-commerce, the ability to categorise images accurately has transformed industries.&lt;/p&gt;&#xA;&lt;p&gt;However, building an effective image classification model requires more than just training a neural network—it demands a robust, end-to-end pipeline that can handle the entire process, from raw data to deployment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Assistant: Smart Cooking with AI</title>
+      <link>http://localhost:1313/projects/ai-powered-recipe-assistant-smart-cooking-with-ai/</link>
+      <pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/ai-powered-recipe-assistant-smart-cooking-with-ai/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project14_images/project14.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Assistant-Recipe&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;strong&gt;AI-Powered Recipe Assistant&lt;/strong&gt; is an interactive tool designed to help users &lt;strong&gt;generate, customise, and save recipes&lt;/strong&gt; using AI. It leverages &lt;strong&gt;large language models (LLMs)&lt;/strong&gt; to dynamically create recipes based on user-provided ingredients and preferences.&lt;/p&gt;&#xA;&lt;p&gt;Built with &lt;strong&gt;Streamlit&lt;/strong&gt;, the assistant offers a clean UI where users can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Find recipes from a curated database.&lt;/li&gt;&#xA;&lt;li&gt;Generate AI-created recipes when no match is found.&lt;/li&gt;&#xA;&lt;li&gt;Save and manage favourite recipes.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This project demonstrates the &lt;strong&gt;fusion of AI, NLP, and data-driven decision-making&lt;/strong&gt;, transforming how users interact with recipe recommendations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Combining advanced NLP techniques (BERT embeddings) with LDA topic modelling.</title>
+      <link>http://localhost:1313/projects/project2/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications</title>
+      <link>http://localhost:1313/projects/project11/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project11/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect, from understanding CNN components to tackling data augmentation and evaluating model performance. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Advanced Regularisation Techniques for CNNs.</title>
+      <link>http://localhost:1313/projects/part-5.-advanced-regularisation-techniques-for-cnns./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-advanced-regularisation-techniques-for-cnns./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Convolutional Neural Networks (CNNs) have transformed machine learning, excelling in fields like image recognition, object detection, and medical imaging.&lt;/p&gt;&#xA;&lt;p&gt;However, like all machine learning models, CNNs are prone to overfitting, where the model performs well on the training data but struggles to generalise to unseen data. This is where regularisation comes into play.&lt;/p&gt;&#xA;&lt;p&gt;Regularisation techniques are designed to prevent overfitting and improve generalisation, making your CNN robust and reliable.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution</title>
+      <link>http://localhost:1313/projects/project9/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project9/</guid>
+      <description>&lt;p&gt;This section showcases the various blogs and technical posts related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK</title>
+      <link>http://localhost:1313/projects/project8/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project8/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cancer Detection in Histopathology: The Role of Colour Normalisation in Model Calibration and Performance</title>
+      <link>http://localhost:1313/projects/project10/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project10/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Difficulty Classification</title>
+      <link>http://localhost:1313/projects/project1/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project1/</guid>
+      <description>&lt;h2&gt;Read the Paper:&lt;/h2&gt;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;http://localhost:1313/papers/project_1_paper.pdf&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;http://localhost:1313/images/pdf-icon.png&#34; alt=&#34;PDF&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;http://localhost:1313/papers/project_1_paper.pdf&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        Click to View PDF&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

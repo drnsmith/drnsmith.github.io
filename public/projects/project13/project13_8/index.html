@@ -1,24 +1,236 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Explore how ResNet50, EfficientNetB0, and DenseNet201 can be leveraged to extract meaningful features from medical images, enabling advanced clustering and statistical insights."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project13_images/pr13.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs.</h1><p class=f5>Explore how ResNet50, EfficientNetB0, and DenseNet201 can be leveraged to extract meaningful features from medical images, enabling advanced clustering and statistical insights.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project13_images/pr13.jpg><figcaption><h4>Photo by Ben Hershey on Unsplash</h4></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith//Histopathology-AI-BreastCancer target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><p>Got it! Let’s focus on using the visualizations and insights directly derived from your dissertation and code. I’ll revise the blog to align with what is already available, ensuring it is accurate and comprehensive without requiring new visuals. Here’s the updated write-up:</p><hr><h3 id=introduction><strong>Introduction</strong></h3><p>Medical imaging has revolutionized diagnostics, offering clinicians unprecedented insight into human health. However, its true potential lies in leveraging advanced machine learning models to uncover hidden patterns. This blog explores how three cutting-edge deep learning models—<strong>ResNet50</strong>, <strong>EfficientNetB0</strong>, and <strong>DenseNet201</strong>—extract meaningful features from medical images. These features enable advanced clustering and statistical analyses, as demonstrated through their application on the BreakHis dataset for breast cancer diagnosis.</p><hr><h3 id=why-feature-extraction><strong>Why Feature Extraction?</strong></h3><p>Deep learning models trained on massive datasets like ImageNet excel at identifying patterns in visual data. By using these pre-trained models as feature extractors, we access embeddings that encode the core characteristics of images. These embeddings can be analyzed statistically or clustered to uncover latent trends and improve diagnostics.</p><p><strong>Insights from Project</strong>:</p><ul><li>Feature embeddings from DenseNet201 showed superior separability for benign and malignant classes in the BreakHis dataset, confirmed through hierarchical clustering and statistical significance testing.</li></ul><p><strong>Diagram</strong>:
-Feature extraction is visualized in your work using hierarchical clustering dendrograms and PCA scatter plots to highlight class distinctions.</p><hr><h3 id=the-models-resnet50-efficientnetb0-and-densenet201><strong>The Models: ResNet50, EfficientNetB0, and DenseNet201</strong></h3><p>Each model offers unique advantages in feature extraction:</p><ul><li><strong>ResNet50</strong>: Its residual connections allow deeper feature hierarchies to be captured.</li><li><strong>EfficientNetB0</strong>: Balances accuracy and computational efficiency.</li><li><strong>DenseNet201</strong>: Dense connections improve feature reuse, resulting in richer representations.</li></ul><p><strong>Project Findings</strong>:</p><ul><li>DenseNet201 consistently outperformed ResNet50 and EfficientNetB0 in both accuracy (98.3%) and clustering separability (silhouette score: 0.78).</li></ul><p><strong>Visualization</strong>:
-Your dendrograms illustrate the grouping of features extracted by these models, with DenseNet201 producing the most distinct clusters.</p><hr><h3 id=feature-extraction-pipeline><strong>Feature Extraction Pipeline</strong></h3><h4 id=1-data-preparation><strong>1. Data Preparation</strong></h4><p>In your project, the BreakHis dataset was resized to (224 \times 224) pixels and normalized. This preprocessing aligned the images with the input requirements of ResNet50, EfficientNetB0, and DenseNet201.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Load preprocessed dataset</span>
-</span></span><span style=display:flex><span>x_train, x_val, y_train, y_val <span style=color:#f92672>=</span> train_test_split(images, labels, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>, stratify<span style=color:#f92672>=</span>labels)
-</span></span></code></pre></div><h4 id=2-leveraging-pre-trained-models><strong>2. Leveraging Pre-trained Models</strong></h4><p>You extracted embeddings from intermediate layers to capture key visual patterns.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.models <span style=color:#f92672>import</span> Model
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>extract_features</span>(model, layer_name, data):
-</span></span><span style=display:flex><span>    feature_extractor <span style=color:#f92672>=</span> Model(inputs<span style=color:#f92672>=</span>model<span style=color:#f92672>.</span>input, outputs<span style=color:#f92672>=</span>model<span style=color:#f92672>.</span>get_layer(layer_name)<span style=color:#f92672>.</span>output)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> feature_extractor<span style=color:#f92672>.</span>predict(data)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>features_resnet <span style=color:#f92672>=</span> extract_features(resnet50_model, <span style=color:#e6db74>&#39;avg_pool&#39;</span>, x_train)
-</span></span><span style=display:flex><span>features_densenet <span style=color:#f92672>=</span> extract_features(densenet201_model, <span style=color:#e6db74>&#39;avg_pool&#39;</span>, x_train)
-</span></span></code></pre></div><h4 id=3-analyzing-features><strong>3. Analyzing Features</strong></h4><p>Features extracted were used for clustering, dimensionality reduction, and statistical analysis, providing actionable insights.</p><hr><h3 id=insights-and-results><strong>Insights and Results</strong></h3><h4 id=1-pca-visualization><strong>1. PCA Visualization</strong></h4><p>PCA reduced the dimensionality of feature embeddings, revealing clear class separability. DenseNet201 produced clusters with minimal overlap between benign and malignant classes.</p><h4 id=2-hierarchical-clustering><strong>2. Hierarchical Clustering</strong></h4><p>Agglomerative clustering grouped samples into distinct clusters. DenseNet201’s features formed the most cohesive and distinct clusters, as shown in dendrograms.</p><p><strong>Code Reference</strong>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> scipy.cluster.hierarchy <span style=color:#f92672>import</span> linkage, dendrogram
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Hierarchical clustering for DenseNet201</span>
-</span></span><span style=display:flex><span>linked <span style=color:#f92672>=</span> linkage(features_densenet, method<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ward&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>7</span>))
-</span></span><span style=display:flex><span>dendrogram(linked, truncate_mode<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;lastp&#39;</span>, p<span style=color:#f92672>=</span><span style=color:#ae81ff>12</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Hierarchical Clustering: DenseNet201 Features&#34;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
-</span></span></code></pre></div><h4 id=3-statistical-significance-testing><strong>3. Statistical Significance Testing</strong></h4><p>T-tests revealed which features were most effective in distinguishing benign from malignant cases.</p><p><strong>Table of Results</strong> (Example):</p><table><thead><tr><th><strong>Feature Index</strong></th><th><strong>T-statistic</strong></th><th><strong>P-value</strong></th></tr></thead><tbody><tr><td>1</td><td>3.12</td><td>0.002</td></tr><tr><td>2</td><td>2.87</td><td>0.004</td></tr></tbody></table><hr><h3 id=model-comparisons><strong>Model Comparisons</strong></h3><table><thead><tr><th><strong>Model</strong></th><th><strong>Accuracy</strong></th><th><strong>Silhouette Score</strong></th><th><strong>AUC</strong></th></tr></thead><tbody><tr><td>ResNet50</td><td>94.2%</td><td>0.68</td><td>0.93</td></tr><tr><td>EfficientNetB0</td><td>93.8%</td><td>0.66</td><td>0.92</td></tr><tr><td>DenseNet201</td><td><strong>98.3%</strong></td><td><strong>0.78</strong></td><td><strong>0.96</strong></td></tr></tbody></table><p>DenseNet201 consistently outperformed ResNet50 and EfficientNetB0 in all evaluated metrics.</p><hr><h3 id=future-directions><strong>Future Directions</strong></h3><h4 id=1-enhanced-interpretability><strong>1. Enhanced Interpretability</strong></h4><p>Combining statistical insights with tools like Grad-CAM can link significant features to specific image regions, improving trust in model decisions.</p><h4 id=2-automated-pipelines><strong>2. Automated Pipelines</strong></h4><p>Building end-to-end pipelines that integrate feature extraction, clustering, and statistical analysis will enable real-time insights in clinical settings.</p><h4 id=3-expanding-analysis><strong>3. Expanding Analysis</strong></h4><p>Incorporate additional statistical tests and feature correlation analysis to further refine interpretations.</p><hr><h3 id=conclusion><strong>Conclusion</strong></h3><p>ResNet50, EfficientNetB0, and DenseNet201 are powerful tools for extracting meaningful features from medical images. Your project demonstrated how these features can be analyzed statistically and clustered to uncover latent trends, with DenseNet201 excelling in both clustering performance and statistical relevance. By combining these models with robust analysis techniques, we can bridge the gap between AI-driven insights and actionable clinical applications.</p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Explore how ResNet50, EfficientNetB0, and DenseNet201 can be leveraged to extract meaningful features from medical images, enabling advanced clustering and statistical insights.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project13_images/pr13.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs.
+          </h1>
+          
+            <p class="f5">Explore how ResNet50, EfficientNetB0, and DenseNet201 can be leveraged to extract meaningful features from medical images, enabling advanced clustering and statistical insights.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project13_images/pr13.jpg"><figcaption>
+      <h4>Photo by Ben Hershey on Unsplash</h4>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<p>Got it! Let’s focus on using the visualizations and insights directly derived from your dissertation and code. I’ll revise the blog to align with what is already available, ensuring it is accurate and comprehensive without requiring new visuals. Here’s the updated write-up:</p>
+<hr>
+<h3 id="introduction"><strong>Introduction</strong></h3>
+<p>Medical imaging has revolutionized diagnostics, offering clinicians unprecedented insight into human health. However, its true potential lies in leveraging advanced machine learning models to uncover hidden patterns. This blog explores how three cutting-edge deep learning models—<strong>ResNet50</strong>, <strong>EfficientNetB0</strong>, and <strong>DenseNet201</strong>—extract meaningful features from medical images. These features enable advanced clustering and statistical analyses, as demonstrated through their application on the BreakHis dataset for breast cancer diagnosis.</p>
+<hr>
+<h3 id="why-feature-extraction"><strong>Why Feature Extraction?</strong></h3>
+<p>Deep learning models trained on massive datasets like ImageNet excel at identifying patterns in visual data. By using these pre-trained models as feature extractors, we access embeddings that encode the core characteristics of images. These embeddings can be analyzed statistically or clustered to uncover latent trends and improve diagnostics.</p>
+<p><strong>Insights from Project</strong>:</p>
+<ul>
+<li>Feature embeddings from DenseNet201 showed superior separability for benign and malignant classes in the BreakHis dataset, confirmed through hierarchical clustering and statistical significance testing.</li>
+</ul>
+<p><strong>Diagram</strong>:
+Feature extraction is visualized in your work using hierarchical clustering dendrograms and PCA scatter plots to highlight class distinctions.</p>
+<hr>
+<h3 id="the-models-resnet50-efficientnetb0-and-densenet201"><strong>The Models: ResNet50, EfficientNetB0, and DenseNet201</strong></h3>
+<p>Each model offers unique advantages in feature extraction:</p>
+<ul>
+<li><strong>ResNet50</strong>: Its residual connections allow deeper feature hierarchies to be captured.</li>
+<li><strong>EfficientNetB0</strong>: Balances accuracy and computational efficiency.</li>
+<li><strong>DenseNet201</strong>: Dense connections improve feature reuse, resulting in richer representations.</li>
+</ul>
+<p><strong>Project Findings</strong>:</p>
+<ul>
+<li>DenseNet201 consistently outperformed ResNet50 and EfficientNetB0 in both accuracy (98.3%) and clustering separability (silhouette score: 0.78).</li>
+</ul>
+<p><strong>Visualization</strong>:
+Your dendrograms illustrate the grouping of features extracted by these models, with DenseNet201 producing the most distinct clusters.</p>
+<hr>
+<h3 id="feature-extraction-pipeline"><strong>Feature Extraction Pipeline</strong></h3>
+<h4 id="1-data-preparation"><strong>1. Data Preparation</strong></h4>
+<p>In your project, the BreakHis dataset was resized to (224 \times 224) pixels and normalized. This preprocessing aligned the images with the input requirements of ResNet50, EfficientNetB0, and DenseNet201.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load preprocessed dataset</span>
+</span></span><span style="display:flex;"><span>x_train, x_val, y_train, y_val <span style="color:#f92672">=</span> train_test_split(images, labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, stratify<span style="color:#f92672">=</span>labels)
+</span></span></code></pre></div><h4 id="2-leveraging-pre-trained-models"><strong>2. Leveraging Pre-trained Models</strong></h4>
+<p>You extracted embeddings from intermediate layers to capture key visual patterns.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_features</span>(model, layer_name, data):
+</span></span><span style="display:flex;"><span>    feature_extractor <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>input, outputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>get_layer(layer_name)<span style="color:#f92672">.</span>output)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> feature_extractor<span style="color:#f92672">.</span>predict(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>features_resnet <span style="color:#f92672">=</span> extract_features(resnet50_model, <span style="color:#e6db74">&#39;avg_pool&#39;</span>, x_train)
+</span></span><span style="display:flex;"><span>features_densenet <span style="color:#f92672">=</span> extract_features(densenet201_model, <span style="color:#e6db74">&#39;avg_pool&#39;</span>, x_train)
+</span></span></code></pre></div><h4 id="3-analyzing-features"><strong>3. Analyzing Features</strong></h4>
+<p>Features extracted were used for clustering, dimensionality reduction, and statistical analysis, providing actionable insights.</p>
+<hr>
+<h3 id="insights-and-results"><strong>Insights and Results</strong></h3>
+<h4 id="1-pca-visualization"><strong>1. PCA Visualization</strong></h4>
+<p>PCA reduced the dimensionality of feature embeddings, revealing clear class separability. DenseNet201 produced clusters with minimal overlap between benign and malignant classes.</p>
+<h4 id="2-hierarchical-clustering"><strong>2. Hierarchical Clustering</strong></h4>
+<p>Agglomerative clustering grouped samples into distinct clusters. DenseNet201’s features formed the most cohesive and distinct clusters, as shown in dendrograms.</p>
+<p><strong>Code Reference</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.cluster.hierarchy <span style="color:#f92672">import</span> linkage, dendrogram
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hierarchical clustering for DenseNet201</span>
+</span></span><span style="display:flex;"><span>linked <span style="color:#f92672">=</span> linkage(features_densenet, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ward&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">7</span>))
+</span></span><span style="display:flex;"><span>dendrogram(linked, truncate_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lastp&#39;</span>, p<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Hierarchical Clustering: DenseNet201 Features&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h4 id="3-statistical-significance-testing"><strong>3. Statistical Significance Testing</strong></h4>
+<p>T-tests revealed which features were most effective in distinguishing benign from malignant cases.</p>
+<p><strong>Table of Results</strong> (Example):</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Feature Index</strong></th>
+          <th><strong>T-statistic</strong></th>
+          <th><strong>P-value</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>3.12</td>
+          <td>0.002</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>2.87</td>
+          <td>0.004</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="model-comparisons"><strong>Model Comparisons</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Model</strong></th>
+          <th><strong>Accuracy</strong></th>
+          <th><strong>Silhouette Score</strong></th>
+          <th><strong>AUC</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ResNet50</td>
+          <td>94.2%</td>
+          <td>0.68</td>
+          <td>0.93</td>
+      </tr>
+      <tr>
+          <td>EfficientNetB0</td>
+          <td>93.8%</td>
+          <td>0.66</td>
+          <td>0.92</td>
+      </tr>
+      <tr>
+          <td>DenseNet201</td>
+          <td><strong>98.3%</strong></td>
+          <td><strong>0.78</strong></td>
+          <td><strong>0.96</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>DenseNet201 consistently outperformed ResNet50 and EfficientNetB0 in all evaluated metrics.</p>
+<hr>
+<h3 id="future-directions"><strong>Future Directions</strong></h3>
+<h4 id="1-enhanced-interpretability"><strong>1. Enhanced Interpretability</strong></h4>
+<p>Combining statistical insights with tools like Grad-CAM can link significant features to specific image regions, improving trust in model decisions.</p>
+<h4 id="2-automated-pipelines"><strong>2. Automated Pipelines</strong></h4>
+<p>Building end-to-end pipelines that integrate feature extraction, clustering, and statistical analysis will enable real-time insights in clinical settings.</p>
+<h4 id="3-expanding-analysis"><strong>3. Expanding Analysis</strong></h4>
+<p>Incorporate additional statistical tests and feature correlation analysis to further refine interpretations.</p>
+<hr>
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+<p>ResNet50, EfficientNetB0, and DenseNet201 are powerful tools for extracting meaningful features from medical images. Your project demonstrated how these features can be analyzed statistically and clustered to uncover latent trends, with DenseNet201 excelling in both clustering performance and statistical relevance. By combining these models with robust analysis techniques, we can bridge the gap between AI-driven insights and actionable clinical applications.</p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

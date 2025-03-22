@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Solving a 4x4 Letter Placement Puzzle Using Genetic Algorithms. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Explore the fascinating application of Genetic Algorithms to solve a 4x4 letter placement puzzle. How evolutionary principles such as mutation, crossover, and selection can be leveraged to optimise a challenging combinatorial problem.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project7_images/pr7.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Solving a 4x4 Letter Placement Puzzle Using Genetic Algorithms.
+          </h1>
+          
+            <p class="f5">Explore the fascinating application of Genetic Algorithms to solve a 4x4 letter placement puzzle. How evolutionary principles such as mutation, crossover, and selection can be leveraged to optimise a challenging combinatorial problem.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project7_images/pr7.jpg"
+    alt="Photo by Magda Ehlers on Pexels"><figcaption>
+      <p>Photo by Magda Ehlers on Pexels</p>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Solving-a-4x4-Letter-Placement-Puzzle-Using-Genetic-Algorithms" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Combinatorial optimisation problems, like puzzles and scheduling tasks, often have large solution spaces that make them challenging to solve using traditional methods. This project leverages <strong>Genetic Algorithms (GAs)</strong>, a nature-inspired optimisation technique, to solve a <strong>4x4 letter placement puzzle</strong>. The puzzle requires arranging letters in a grid while meeting specific constraints. This blog will explore the problem definition, the design of the Genetic Algorithm, key challenges faced, and how the solution was evaluated.</p>
+<h3 id="problem-definition">Problem Definition</h3>
+<p>The objective of the puzzle is to arrange 16 unique letters in a 4x4 grid such that the resulting rows and columns satisfy given constraints. These constraints are usually based on pre-defined rules about letter placement, adjacency, or sequences.</p>
+<h4 id="key-constraints">Key Constraints</h4>
+<ol>
+<li>Each letter must appear exactly once in the grid.</li>
+<li>The placement of certain letters may depend on their neighbors.</li>
+<li>Certain rows or columns must form valid words or patterns.</li>
+</ol>
+<p>This is a classic example of a <strong>combinatorial optimisation problem</strong> due to the vast number of possible arrangements (16! ≈ 2.09 × 10¹³ permutations).</p>
+<h3 id="why-genetic-algorithms">Why Genetic Algorithms?</h3>
+<p>Traditional brute force approaches are computationally infeasible for problems with such large solution spaces.</p>
+<p><strong>Genetic Algorithms (GAs)</strong> mimic the process of natural selection to evolve better solutions over generations. They are particularly suited for:</p>
+<ol>
+<li>Large, complex search spaces.</li>
+<li>Problems with no straightforward mathematical solution.</li>
+<li>Scenarios where approximate solutions are acceptable.</li>
+</ol>
+<h3 id="designing-the-genetic-algorithm">Designing the Genetic Algorithm</h3>
+<p>A <strong>Genetic Algorithm</strong> operates using populations of candidate solutions. Each solution is evaluated against a fitness function, and the best solutions are used to create the next generation through processes like selection, crossover, and mutation.</p>
+<h4 id="1-representation-of-solutions">1. Representation of Solutions</h4>
+<p>In this puzzle, a solution (or individual) is represented as a <strong>4x4 grid</strong> of letters:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;B&#39;</span>, <span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;D&#39;</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;E&#39;</span>, <span style="color:#e6db74">&#39;F&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span>, <span style="color:#e6db74">&#39;H&#39;</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;I&#39;</span>, <span style="color:#e6db74">&#39;J&#39;</span>, <span style="color:#e6db74">&#39;K&#39;</span>, <span style="color:#e6db74">&#39;L&#39;</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;M&#39;</span>, <span style="color:#e6db74">&#39;N&#39;</span>, <span style="color:#e6db74">&#39;O&#39;</span>, <span style="color:#e6db74">&#39;P&#39;</span>]
+</span></span></code></pre></div><h4 id="2-initial-population">2. Initial Population</h4>
+<p>The initial population is generated randomly, ensuring that each grid contains all 16 letters without repetition.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_initial_population</span>(population_size):
+</span></span><span style="display:flex;"><span>    population <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    letters <span style="color:#f92672">=</span> list(<span style="color:#e6db74">&#34;ABCDEFGHIJKLMNOP&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(population_size):
+</span></span><span style="display:flex;"><span>        random<span style="color:#f92672">.</span>shuffle(letters)
+</span></span><span style="display:flex;"><span>        individual <span style="color:#f92672">=</span> [letters[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">4</span>)]
+</span></span><span style="display:flex;"><span>        population<span style="color:#f92672">.</span>append(individual)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> population
+</span></span></code></pre></div><h4 id="3-fitness-function">3. Fitness Function</h4>
+<p>The fitness function evaluates how well a solution satisfies the constraints:</p>
+<ul>
+<li><em>Penalty for duplicate letters</em>: Ensures each letter appears exactly once.</li>
+<li><em>Penalty for invalid rows/columns</em>: Encourages solutions that meet adjacency or sequence constraints.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fitness</span>(individual):
+</span></span><span style="display:flex;"><span>    score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Example: Penalty for duplicate letters</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> individual:
+</span></span><span style="display:flex;"><span>        score <span style="color:#f92672">-=</span> len(row) <span style="color:#f92672">-</span> len(set(row))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add penalties for constraint violations (custom logic)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> score
+</span></span></code></pre></div><h4 id="4-selection">4. Selection</h4>
+<p>The <strong>tournament</strong> selection method was used, where a subset of individuals is chosen, and the one with the best fitness is selected for reproduction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">select_parents</span>(population, fitness_scores):
+</span></span><span style="display:flex;"><span>    parents <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(len(population)):
+</span></span><span style="display:flex;"><span>        tournament <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>sample(list(zip(population, fitness_scores)), <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        winner <span style="color:#f92672">=</span> max(tournament, key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: x[<span style="color:#ae81ff">1</span>])[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        parents<span style="color:#f92672">.</span>append(winner)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> parents
+</span></span></code></pre></div><h4 id="5-crossover">5. Crossover</h4>
+<p><strong>Crossover</strong> combines parts of two parents to create new offspring. A row-wise crossover was used in this project.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">crossover</span>(parent1, parent2):
+</span></span><span style="display:flex;"><span>    crossover_point <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    child <span style="color:#f92672">=</span> parent1[:crossover_point] <span style="color:#f92672">+</span> parent2[crossover_point:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> child
+</span></span></code></pre></div><h4 id="6-mutation">6. Mutation</h4>
+<p><strong>Mutation</strong> introduces random changes to offspring, maintaining diversity in the population. For example, two letters in the grid can be swapped.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mutate</span>(individual):
+</span></span><span style="display:flex;"><span>    row1, col1 <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    row2, col2 <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    individual[row1][col1], individual[row2][col2] <span style="color:#f92672">=</span> individual[row2][col2], individual[row1][col1]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> individual
+</span></span></code></pre></div><h3 id="results-and-performance">Results and Performance</h3>
+<p>After running the Genetic Algorithm for 500 generations, the algorithm converged to a solution that satisfied all constraints with minimal violations. Key metrics include:</p>
+<ul>
+<li><em>Convergence Speed</em>: The algorithm reached a near-optimal solution within 100 generations.</li>
+<li><em>Solution Quality</em>: Achieved a fitness score of 0 (no violations).</li>
+</ul>
+<h4 id="python-code-final-execution">Python Code: Final Execution</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>population <span style="color:#f92672">=</span> generate_initial_population(<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> generation <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">500</span>):
+</span></span><span style="display:flex;"><span>    fitness_scores <span style="color:#f92672">=</span> [fitness(ind) <span style="color:#66d9ef">for</span> ind <span style="color:#f92672">in</span> population]
+</span></span><span style="display:flex;"><span>    parents <span style="color:#f92672">=</span> select_parents(population, fitness_scores)
+</span></span><span style="display:flex;"><span>    next_population <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(parents), <span style="color:#ae81ff">2</span>):
+</span></span><span style="display:flex;"><span>        child1 <span style="color:#f92672">=</span> crossover(parents[i], parents[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        child2 <span style="color:#f92672">=</span> crossover(parents[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], parents[i])
+</span></span><span style="display:flex;"><span>        next_population<span style="color:#f92672">.</span>append(mutate(child1))
+</span></span><span style="display:flex;"><span>        next_population<span style="color:#f92672">.</span>append(mutate(child2))
+</span></span><span style="display:flex;"><span>    population <span style="color:#f92672">=</span> next_population
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>best_solution <span style="color:#f92672">=</span> max(population, key<span style="color:#f92672">=</span>fitness)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Best Solution:&#34;</span>, best_solution)
+</span></span></code></pre></div><h3 id="challenges-faced">Challenges Faced</h3>
+<ul>
+<li>
+<p><strong>Premature Convergence</strong>:</p>
+</li>
+<li>
+<p>Issue: The population became homogeneous too early.</p>
+</li>
+<li>
+<p><em>Solution</em>: Introduced higher mutation rates to maintain diversity.</p>
+</li>
+</ul>
+<p><strong>Fitness Function Complexity</strong>:</p>
+<ul>
+<li>Issue: Designing an effective fitness function was non-trivial.</li>
+<li><em>Solution</em>: Incrementally added constraints and tuned penalties.</li>
+</ul>
+<p><strong>Execution Time</strong>:</p>
+<ul>
+<li>Issue: Higher population sizes increased runtime.</li>
+<li><em>Solution</em>: Optimised by parallelising fitness evaluations.</li>
+</ul>
+<h3 id="applications-of-genetic-algorithms">Applications of Genetic Algorithms</h3>
+<p>This project highlights the versatility of Genetic Algorithms for solving combinatorial problems. Other potential applications include:</p>
+<ul>
+<li><em>Schedulling</em>: Optimising work schedules or resource allocation.</li>
+<li><em>Route Optimisation</em>: Solving traveling salesman or logistics problems.</li>
+<li><em>Game Design</em>: AI for solving puzzles or generating levels.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The Genetic Algorithm successfully solved the 4x4 letter placement puzzle by mimicking evolutionary principles.</p>
+<p>This project demonstrates the power of GAs in tackling complex optimisation problems where traditional methods fall short.</p>
+<p>By iteratively evolving better solutions, GAs provide a robust framework for solving real-world challenges.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

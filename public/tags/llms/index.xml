@@ -1,16 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LLMs on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/llms/</link><description>Recent content in LLMs on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/llms/index.xml" rel="self" type="application/rss+xml"/><item><title>AI-Powered Recipe Assistant: Smart Cooking with AI</title><link>http://localhost:1313/projects/project14/project14/</link><pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project14/project14/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project14_images/project14.png">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/AI-Assistant-Recipe" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>The &lt;strong>AI-Powered Recipe Assistant&lt;/strong> is an interactive tool designed to help users &lt;strong>generate, customise, and save recipes&lt;/strong> using AI. It leverages &lt;strong>large language models (LLMs)&lt;/strong> to dynamically create recipes based on user-provided ingredients and preferences.&lt;/p>
-&lt;p>Built with &lt;strong>Streamlit&lt;/strong>, the assistant offers a clean UI where users can:&lt;/p>
-&lt;ul>
-&lt;li>Find recipes from a curated database.&lt;/li>
-&lt;li>Generate AI-created recipes when no match is found.&lt;/li>
-&lt;li>Save and manage favourite recipes.&lt;/li>
-&lt;/ul>
-&lt;p>This project demonstrates the &lt;strong>fusion of AI, NLP, and data-driven decision-making&lt;/strong>, transforming how users interact with recipe recommendations.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LLMs on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/llms/</link>
+    <description>Recent content in LLMs on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/llms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI-Powered Recipe Assistant: Smart Cooking with AI</title>
+      <link>http://localhost:1313/projects/ai-powered-recipe-assistant-smart-cooking-with-ai/</link>
+      <pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/ai-powered-recipe-assistant-smart-cooking-with-ai/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project14_images/project14.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Assistant-Recipe&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;strong&gt;AI-Powered Recipe Assistant&lt;/strong&gt; is an interactive tool designed to help users &lt;strong&gt;generate, customise, and save recipes&lt;/strong&gt; using AI. It leverages &lt;strong&gt;large language models (LLMs)&lt;/strong&gt; to dynamically create recipes based on user-provided ingredients and preferences.&lt;/p&gt;&#xA;&lt;p&gt;Built with &lt;strong&gt;Streamlit&lt;/strong&gt;, the assistant offers a clean UI where users can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Find recipes from a curated database.&lt;/li&gt;&#xA;&lt;li&gt;Generate AI-created recipes when no match is found.&lt;/li&gt;&#xA;&lt;li&gt;Save and manage favourite recipes.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This project demonstrates the &lt;strong&gt;fusion of AI, NLP, and data-driven decision-making&lt;/strong&gt;, transforming how users interact with recipe recommendations.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

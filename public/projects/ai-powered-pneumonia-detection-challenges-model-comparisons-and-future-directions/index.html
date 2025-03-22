@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>AI-Powered Pneumonia Detection: Challenges, Model Comparisons, and Future Directions | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This project explores the intersection of deep learning and medical imaging, focusing on pneumonia detection using CNNs (Convolutional Neural Networks). From dataset challenges and pre-processing techniques to model performance comparisons and evaluation metrics, this project documents the end-to-end journey of building an AI-powered pneumonia detection system. Key insights include data augmentation for model generalisation, a manual CNN vs. VGG16 comparison, and an in-depth look at sensitivity, specificity, and diagnostic accuracy. Finally, we explore the future of AI in medical imaging, discussing the potential impact and challenges in real-world clinical settings.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project5_images/pr5.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            AI-Powered Pneumonia Detection: Challenges, Model Comparisons, and Future Directions
+          </h1>
+          
+            <p class="f5">This project explores the intersection of deep learning and medical imaging, focusing on pneumonia detection using CNNs (Convolutional Neural Networks). From dataset challenges and pre-processing techniques to model performance comparisons and evaluation metrics, this project documents the end-to-end journey of building an AI-powered pneumonia detection system. Key insights include data augmentation for model generalisation, a manual CNN vs. VGG16 comparison, and an in-depth look at sensitivity, specificity, and diagnostic accuracy. Finally, we explore the future of AI in medical imaging, discussing the potential impact and challenges in real-world clinical settings.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project5_images/pr5.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-challenges-in-medical-imaging-datasets">PART 1. Challenges in Medical Imaging Datasets</h1>
+<p>Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges. In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like <strong>dataset imbalance</strong> and <strong>small validation sets</strong>, which can hinder model performance. This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.</p>
+<h3 id="dataset-overview">Dataset Overview</h3>
+<p>The dataset consisted of labelled chest X-ray images classified as:</p>
+<ul>
+<li>
+<p><strong>Normal</strong></p>
+</li>
+<li>
+<p><strong>Pneumonia</strong> (further divided into bacterial and viral pneumonia).</p>
+</li>
+</ul>
+<h4 id="key-challenges">Key Challenges</h4>
+<ol>
+<li><em>Class Imbalance</em>:
+<ul>
+<li>The dataset had significantly more images for pneumonia cases than for normal cases, potentially biasing the model.</li>
+</ul>
+</li>
+<li><em>Small Validation Set</em>:
+<ul>
+<li>The original split provided a limited number of images for validation, making it difficult to assess generalisation.</li>
+</ul>
+</li>
+</ol>
+<h3 id="handling-class-imbalance">Handling Class Imbalance</h3>
+<p>To mitigate class imbalance, we used <strong>resampling techniques</strong>:</p>
+<ul>
+<li><strong>Oversampling</strong>: Increasing the number of samples in the minority class.</li>
+<li><strong>Undersampling</strong>: Reducing the number of samples in the majority class.</li>
+</ul>
+<h4 id="python-code-re-sampling-dataset">Python Code: Re-sampling Dataset</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils <span style="color:#f92672">import</span> resample
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Resampling images for the &#39;Normal&#39; class</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resample_images</span>(class_dir, target_count):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Re-samples images for a given class directory.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    class_dir (str): Path to the class folder (e.g., &#39;train/Normal&#39;).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    target_count (int): Desired number of images for the class.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    None
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    images <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(class_dir)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(images) <span style="color:#f92672">&lt;</span> target_count:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Oversampling: Duplicate random images</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> len(images) <span style="color:#f92672">&lt;</span> target_count:
+</span></span><span style="display:flex;"><span>            img_to_duplicate <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>choice(images)
+</span></span><span style="display:flex;"><span>            src_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(class_dir, img_to_duplicate)
+</span></span><span style="display:flex;"><span>            dst_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(class_dir, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;copy_</span><span style="color:#e6db74">{</span>len(images)<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>img_to_duplicate<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            shutil<span style="color:#f92672">.</span>copy(src_path, dst_path)
+</span></span><span style="display:flex;"><span>            images<span style="color:#f92672">.</span>append(dst_path)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Class already has </span><span style="color:#e6db74">{</span>len(images)<span style="color:#e6db74">}</span><span style="color:#e6db74"> images. No oversampling needed.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Resample &#39;Normal&#39; class to match the &#39;Pneumonia&#39; class size</span>
+</span></span><span style="display:flex;"><span>resample_images(<span style="color:#e6db74">&#34;train/Normal&#34;</span>, target_count<span style="color:#f92672">=</span><span style="color:#ae81ff">4000</span>)
+</span></span></code></pre></div><h3 id="resplitting-the-dataset">Resplitting the Dataset</h3>
+<p>The dataset was resplit to ensure sufficient images in the validation and test sets, enhancing model evaluation.</p>
+<h4 id="python-code-splitting-dataset">Python Code: Splitting Dataset</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Splitting the &#39;Pneumonia&#39; class</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">split_class_images</span>(class_dir, val_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Splits class images into train, validation, and test sets.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    class_dir (str): Path to the class folder (e.g., &#39;data/Pneumonia&#39;).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    val_size (float): Proportion of images for validation.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    test_size (float): Proportion of images for testing.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    None
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    images <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(class_dir)
+</span></span><span style="display:flex;"><span>    train_images, temp_images <span style="color:#f92672">=</span> train_test_split(images, test_size<span style="color:#f92672">=</span>(val_size <span style="color:#f92672">+</span> test_size))
+</span></span><span style="display:flex;"><span>    val_images, test_images <span style="color:#f92672">=</span> train_test_split(temp_images, test_size<span style="color:#f92672">=</span>test_size <span style="color:#f92672">/</span> (val_size <span style="color:#f92672">+</span> test_size))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> img <span style="color:#f92672">in</span> train_images:
+</span></span><span style="display:flex;"><span>        shutil<span style="color:#f92672">.</span>move(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(class_dir, img), <span style="color:#e6db74">&#34;train/Pneumonia/&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> img <span style="color:#f92672">in</span> val_images:
+</span></span><span style="display:flex;"><span>        shutil<span style="color:#f92672">.</span>move(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(class_dir, img), <span style="color:#e6db74">&#34;val/Pneumonia/&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> img <span style="color:#f92672">in</span> test_images:
+</span></span><span style="display:flex;"><span>        shutil<span style="color:#f92672">.</span>move(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(class_dir, img), <span style="color:#e6db74">&#34;test/Pneumonia/&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Split images for Pneumonia class</span>
+</span></span><span style="display:flex;"><span>split_class_images(<span style="color:#e6db74">&#34;data/Pneumonia&#34;</span>, val_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+</span></span></code></pre></div><h3 id="balancing-validation-and-test-sets">Balancing Validation and Test Sets</h3>
+<p>Ensuring balanced datasets in validation and test splits helped achieve more reliable performance metrics. This was done by monitoring the class distribution after splitting.</p>
+<h4 id="python-code-checking-class-distribution">Python Code: Checking Class Distribution</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> Counter
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_distribution</span>(dir_path):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Checks class distribution in a dataset directory.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dir_path (str): Path to the dataset directory (e.g., &#39;val&#39;).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Class counts.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    class_counts <span style="color:#f92672">=</span> Counter([folder <span style="color:#66d9ef">for</span> folder <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(dir_path)])
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Class Distribution:&#34;</span>, class_counts)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> class_counts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check validation set distribution</span>
+</span></span><span style="display:flex;"><span>check_distribution(<span style="color:#e6db74">&#34;val&#34;</span>)
+</span></span></code></pre></div><h3 id="results-of-pre-processing">Results of Pre-processing</h3>
+<ul>
+<li>
+<p><em>Balanced Classes</em>: After resampling, both &lsquo;Normal&rsquo; and &lsquo;Pneumonia&rsquo; classes had approximately equal representation in training, validation, and test sets.</p>
+</li>
+<li>
+<p><em>Improved Evaluation</em>: Resplitting ensured that validation and test datasets reflected real-world distributions, reducing overfitting.</p>
+</li>
+</ul>
+<h3 id="challenges-in-pre-processing">Challenges in Pre-processing</h3>
+<ul>
+<li>
+<p><em>Risk of Overfitting</em>: Oversampling increases the likelihood of overfitting, especially with small datasets. <em>Solution</em>: Complement oversampling with data augmentation.</p>
+</li>
+<li>
+<p><em>Resource Constraints</em>: Resampling large datasets can strain storage and computational resources. <em>Solution</em>: Optimise code for batch processing and utilise cloud storage if necessary.</p>
+</li>
+</ul>
+<h4 id="concluding-thoughts">Concluding Thoughts</h4>
+<p>Addressing challenges in medical imaging datasets is critical for building reliable deep learning models. By balancing class distributions and resplitting datasets, we improved the quality of training and evaluation for pneumonia detection.</p>
+<h1 id="part-2-boosting-model-generalisation-with-data-augmentation">PART 2. Boosting Model Generalisation with Data Augmentation</h1>
+<p>Deep learning (DL) models often struggle with overfitting, especially when trained on limited datasets. To overcome this challenge in our pneumonia detection project, we used <strong>data augmentation</strong> (DA) techniques to artificially expand the training dataset.</p>
+<p>DA techniques, such as <em>rotations, scaling, flipping, and zooming</em>, helped improve the model&rsquo;s generalisation to unseen chest X-ray images. In this part I explain the DA techniques we applied, provide with demonstrates the snippets of Python code used, and highlight how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.</p>
+<h3 id="why-data-augmentation">Why Data Augmentation?</h3>
+<p>Medical imaging datasets, including chest X-rays, often have limited samples due to privacy concerns and collection difficulties. This leads to:</p>
+<ul>
+<li><em>Overfitting</em>: Models learn noise instead of generalisable patterns.</li>
+<li><em>Bias</em>: Models may struggle with unseen data due to lack of variability in the training set.</li>
+</ul>
+<p>DA tackles these issues by generating diverse versions of existing images, effectively increasing the dataset size and variability.</p>
+<h3 id="techniques-used">Techniques Used</h3>
+<ul>
+<li><em>Rotation</em>: Randomly rotates images within a specified range (e.g., ±15°).</li>
+<li><em>Scaling</em>: Enlarges or shrinks images, simulating distance variations.</li>
+<li><em>Horizontal Flipping</em>: Mirrors images horizontally to introduce spatial diversity.</li>
+<li><em>Zooming</em>: Randomly zooms into or out of an image.</li>
+<li><em>Shifting</em>: Translates images along the X and Y axes.</li>
+</ul>
+<p>We used TensorFlow&rsquo;s <code>ImageDataGenerator</code> to apply augmentation during training.</p>
+<h4 id="python-code-da-setup">Python Code: DA Setup</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define augmentation parameters</span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    shear_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nearest&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load training images and apply augmentation</span>
+</span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;train&#34;</span>,
+</span></span><span style="display:flex;"><span>    target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>),
+</span></span><span style="display:flex;"><span>    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>,
+</span></span><span style="display:flex;"><span>    class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h3 id="visualisation-of-augmented-images">Visualisation of Augmented Images</h3>
+<p>Visualising augmented images helps ensure the transformations are realistic and meaningful.</p>
+<h4 id="python-code-visualising-augmented-images">Python Code: Visualising Augmented Images</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load a single image from the training directory</span>
+</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;train/Normal/normal_sample.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>imread(img_path)
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>expand_dims(img, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate augmented images</span>
+</span></span><span style="display:flex;"><span>augmented_images <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(img, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot augmented images</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">9</span>):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    batch <span style="color:#f92672">=</span> next(augmented_images)
+</span></span><span style="display:flex;"><span>    augmented_img <span style="color:#f92672">=</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(augmented_img<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#34;uint8&#34;</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#34;off&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>suptitle(<span style="color:#e6db74">&#34;Augmented Images&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="impact-of-augmentation-on-model-performance">Impact of Augmentation on Model Performance</h3>
+<p>DA significantly improved the generalisation capabilities of both models:</p>
+<p><strong>Manual CNN</strong>:</p>
+<ul>
+<li>Training accuracy: 95%</li>
+<li>Validation accuracy: 87% (without augmentation) → 91% (with augmentation)</li>
+</ul>
+<p><strong>VGG16</strong>:</p>
+<ul>
+<li>Training accuracy: 97%</li>
+<li>Validation accuracy: 89% (without augmentation) → 93% (with augmentation)</li>
+</ul>
+<figure><img src="/images/confusion_matrix.png">
+</figure>
+
+<h3 id="challenges-with-augmentation">Challenges with Augmentation</h3>
+<ul>
+<li>
+<p><em>Computational Overhead</em>: Augmentation increases training time as new images are generated on the fly. <em>Solution</em>: Use GPU acceleration to speed up the process.</p>
+</li>
+<li>
+<p><em>Over-Augmentation</em>: Excessive transformations may distort critical features in medical images.
+<em>Solution</em>: Restrict parameters like rotation and zoom to realistic ranges.</p>
+</li>
+</ul>
+<h4 id="concluding-thoughts-1">Concluding Thoughts</h4>
+<p>DA proved to be a powerful tool for enhancing model performance in this pneumonia detection project. By introducing variability in the training dataset, we improved the generalisation of both the manual CNN and the pre-trained VGG16 models.</p>
+<h1 id="part-3-manual-cnn-vs-pre-trained-vgg16-a-comparative-analysis">PART 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis</h1>
+<p>Deep learning provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models. In this part, I compare the performance of a <strong>manual CNN</strong> and the <em>VGG16</em> pre-trained model for pneumonia detection.</p>
+<p>While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of <strong>transfer learning</strong> with its pre-trained <em>ImageNet</em> weights. This comparative analysis explores their architectures, training strategies, and results.</p>
+<h3 id="manual-cnn-tailored-for-the-dataset">Manual CNN: Tailored for the Dataset</h3>
+<p>The manually designed CNN aimed to strike a balance between simplicity and performance. It consisted of convolutional layers for feature extraction, pooling layers for down-sampling, and dense layers for classification. Architecture:</p>
+<ul>
+<li><em>Convolution Layers</em>: Extract features like edges and textures.</li>
+<li><em>MaxPooling Layers</em>: Reduce spatial dimensions and computational complexity.</li>
+<li><em>Dense Layers</em>: Combine extracted features for classification.</li>
+</ul>
+<h4 id="python-code-manual-cnn-architecture">Python Code: Manual CNN Architecture</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_manual_cnn</span>(input_shape):
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>        Conv2D(<span style="color:#ae81ff">32</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;relu&#34;</span>, input_shape<span style="color:#f92672">=</span>input_shape),
+</span></span><span style="display:flex;"><span>        MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)),
+</span></span><span style="display:flex;"><span>        Conv2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>        MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)),
+</span></span><span style="display:flex;"><span>        Flatten(),
+</span></span><span style="display:flex;"><span>        Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>        Dropout(<span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>        Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sigmoid&#34;</span>)
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise model</span>
+</span></span><span style="display:flex;"><span>manual_cnn <span style="color:#f92672">=</span> build_manual_cnn((<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>manual_cnn<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><ol>
+<li>Strengths</li>
+</ol>
+<ul>
+<li><em>Lightweight</em>: Fewer parameters compared to large pre-trained models.</li>
+<li><em>Flexibility</em>: Architecture tailored to chest X-ray data.</li>
+</ul>
+<ol start="2">
+<li>Limitations</li>
+</ol>
+<ul>
+<li><em>Learning from Scratch</em>: Lacks the knowledge pre-trained on large datasets like <em>ImageNet</em>.</li>
+<li><em>Longer Training Time</em>: Requires more epochs to converge.</li>
+</ul>
+<h3 id="vgg16-transfer-learning-in-action">VGG16: Transfer Learning in Action</h3>
+<p>VGG16 is a popular pre-trained CNN that has demonstrated strong performance in image classification tasks. By freezing its convolutional layers, we leveraged its pre-trained weights for feature extraction while fine-tuning the dense layers for pneumonia detection. Architecture:</p>
+<ul>
+<li><em>Feature Extraction Layers</em>: Pre-trained convolutional layers from VGG16.</li>
+<li><em>Dense Layers</em>: Custom layers added for binary classification.</li>
+</ul>
+<h4 id="python-code-vgg16-model">Python Code: VGG16 Model</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> VGG16
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Flatten, Dense, Dropout
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_vgg16</span>(input_shape):
+</span></span><span style="display:flex;"><span>    base_model <span style="color:#f92672">=</span> VGG16(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;imagenet&#34;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>input_shape)
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>        base_model,
+</span></span><span style="display:flex;"><span>        Flatten(),
+</span></span><span style="display:flex;"><span>        Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>        Dropout(<span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>        Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sigmoid&#34;</span>)
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>    base_model<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>  <span style="color:#75715e"># Freeze pre-trained layers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise model</span>
+</span></span><span style="display:flex;"><span>vgg16_model <span style="color:#f92672">=</span> build_vgg16((<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>vgg16_model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><ol>
+<li>Strengths</li>
+</ol>
+<ul>
+<li><em>Transfer Learning</em>: Pre-trained weights accelerate training and improve accuracy.</li>
+<li><em>Feature Richness</em>: Extracts high-level features from images.</li>
+</ul>
+<ol start="2">
+<li>Limitations</li>
+</ol>
+<ul>
+<li><em>Heavy Architecture</em>: High computational requirements.</li>
+<li><em>Over-fitting Risk</em>: Fine-tuning dense layers requires careful monitoring.</li>
+</ul>
+<h4 id="training-strategies">Training Strategies</h4>
+<p>Both models were trained on the augmented dataset with the same optimiser, learning rate, and number of epochs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> Adam
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Data augmentation</span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rescale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span><span style="color:#f92672">/</span><span style="color:#ae81ff">255</span>,
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(<span style="color:#e6db74">&#34;train&#34;</span>, target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>), batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>val_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(<span style="color:#e6db74">&#34;val&#34;</span>, target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>), batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compile and train the model</span>
+</span></span><span style="display:flex;"><span>manual_cnn<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>Adam(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>), loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary_crossentropy&#34;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;accuracy&#34;</span>])
+</span></span><span style="display:flex;"><span>vgg16_model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>Adam(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>), loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary_crossentropy&#34;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;accuracy&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train models</span>
+</span></span><span style="display:flex;"><span>manual_cnn<span style="color:#f92672">.</span>fit(train_generator, validation_data<span style="color:#f92672">=</span>val_generator, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>vgg16_model<span style="color:#f92672">.</span>fit(train_generator, validation_data<span style="color:#f92672">=</span>val_generator, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><h4 id="comparison-of-results">Comparison of Results</h4>
+<figure><img src="/images/performance.png">
+</figure>
+
+<ul>
+<li>
+<p><em>Training Speed</em>: Manual CNN converged more slowly compared to VGG16.</p>
+</li>
+<li>
+<p><em>Accuracy</em>: VGG16 outperformed the manual CNN by 2% in validation accuracy.</p>
+</li>
+<li>
+<p><em>Recall</em>: VGG16 achieved higher recall, crucial for detecting pneumonia cases with minimal false negatives.</p>
+</li>
+</ul>
+<h4 id="key-takeaways">Key Takeaways</h4>
+<ol>
+<li><em>Manual CNN</em>:</li>
+</ol>
+<ul>
+<li>Lightweight and effective for datasets with limited computational resources.</li>
+<li>Requires more training time and careful tuning.</li>
+</ul>
+<ol start="2">
+<li><em>VGG16</em>:</li>
+</ol>
+<ul>
+<li>Transfer learning provides a significant performance boost.</li>
+<li>Ideal for medical imaging projects with access to powerful hardware.</li>
+</ul>
+<h4 id="concluding-thoughts-2">Concluding Thoughts</h4>
+<p>Both models demonstrated strong performance, but VGG16’s transfer learning capabilities gave it a slight edge in accuracy and recall. However, the manual CNN remains a viable alternative for scenarios with limited computational resources or hardware constraints.</p>
+<h1 id="part-4-evaluating-cnn-models-for-pneumonia-detection">PART 4. Evaluating CNN Models for Pneumonia Detection</h1>
+<p>Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy. Metrics like <strong>precision</strong>, <strong>recall</strong>, and <strong>F1-score</strong> provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection. In this part, I explore how our models—<em>Manual CNN</em> and <em>VGG16</em> — were evaluated and highlights the role of confusion matrices in understanding their performance.</p>
+<h3 id="metrics-for-evaluation">Metrics for Evaluation</h3>
+<ol>
+<li>
+<p><em>Accuracy</em>: The percentage of correctly classified samples.</p>
+<ul>
+<li>Formula: <code>(TP + TN) / (TP + TN + FP + FN)</code></li>
+</ul>
+</li>
+<li>
+<p><em>Precision</em>: Measures the accuracy of positive predictions.</p>
+<ul>
+<li>Formula: <code>TP / (TP + FP)</code></li>
+</ul>
+</li>
+<li>
+<p><em>Recall (Sensitivity)</em>: Measures how well the model identifies positive cases (critical for medical diagnostics).</p>
+<ul>
+<li>Formula: <code>TP / (TP + FN)</code></li>
+</ul>
+</li>
+<li>
+<p><em>F1-Score</em>: The harmonic mean of precision and recall.</p>
+<ul>
+<li>Formula: <code>2 * (Precision * Recall) / (Precision + Recall)</code></li>
+</ul>
+</li>
+<li>
+<p><em>Confusion Matrix</em>: A table that summarises the counts of true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN).</p>
+</li>
+</ol>
+<h4 id="python-code-model-evaluation">Python Code: Model Evaluation</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report, confusion_matrix
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">evaluate_model</span>(model, test_dir):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Evaluates the model on the test dataset and generates a confusion matrix.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    datagen <span style="color:#f92672">=</span> ImageDataGenerator(rescale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span><span style="color:#f92672">/</span><span style="color:#ae81ff">255</span>)
+</span></span><span style="display:flex;"><span>    test_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(
+</span></span><span style="display:flex;"><span>        test_dir,
+</span></span><span style="display:flex;"><span>        target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>),
+</span></span><span style="display:flex;"><span>        batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>,
+</span></span><span style="display:flex;"><span>        shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Predictions and ground truth</span>
+</span></span><span style="display:flex;"><span>    predictions <span style="color:#f92672">=</span> (model<span style="color:#f92672">.</span>predict(test_generator) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#34;int32&#34;</span>)
+</span></span><span style="display:flex;"><span>    y_true <span style="color:#f92672">=</span> test_generator<span style="color:#f92672">.</span>classes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Classification report</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Classification Report:&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(classification_report(y_true, predictions, target_names<span style="color:#f92672">=</span>test_generator<span style="color:#f92672">.</span>class_indices<span style="color:#f92672">.</span>keys()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Confusion matrix</span>
+</span></span><span style="display:flex;"><span>    cm <span style="color:#f92672">=</span> confusion_matrix(y_true, predictions)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>    sns<span style="color:#f92672">.</span>heatmap(cm, annot<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, fmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;d&#34;</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Blues&#34;</span>,
+</span></span><span style="display:flex;"><span>                xticklabels<span style="color:#f92672">=</span>test_generator<span style="color:#f92672">.</span>class_indices<span style="color:#f92672">.</span>keys(),
+</span></span><span style="display:flex;"><span>                yticklabels<span style="color:#f92672">=</span>test_generator<span style="color:#f92672">.</span>class_indices<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Confusion Matrix&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Predicted&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Actual&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> model_training <span style="color:#f92672">import</span> build_manual_cnn  <span style="color:#75715e"># Import the model architecture</span>
+</span></span><span style="display:flex;"><span>manual_cnn <span style="color:#f92672">=</span> build_manual_cnn(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>manual_cnn<span style="color:#f92672">.</span>load_weights(<span style="color:#e6db74">&#34;path_to_manual_cnn_weights.h5&#34;</span>)  <span style="color:#75715e"># Load the trained weights</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>evaluate_model(manual_cnn, <span style="color:#e6db74">&#34;test&#34;</span>)
+</span></span></code></pre></div><h4 id="results">Results</h4>
+<figure><img src="/images/results.png">
+</figure>
+
+<h3 id="key-observations">Key Observations</h3>
+<p><em>Manual CNN</em>:</p>
+<ul>
+<li>High precision but slightly lower recall.</li>
+<li>Missed a few positive cases (false negatives), which is critical in medical diagnostics.</li>
+</ul>
+<p><em>VGG16</em>:</p>
+<ul>
+<li>Slightly better performance across all metrics.</li>
+<li>Higher recall reduced false negatives, making it better suited for pneumonia detection.</li>
+</ul>
+<h3 id="challenges-in-evaluation">Challenges in Evaluation</h3>
+<ul>
+<li><em>Class Imbalance</em>: Imbalanced test data can skew metrics. <em>Solution</em>: Use balanced datasets for evaluation or weighted metrics.</li>
+<li><em>Interpretation of Metrics</em>: Precision and recall trade-offs must be carefully analysed. <em>Solution</em>: Prioritise recall for medical applications to minimise missed cases.</li>
+<li><em>Threshold Tuning</em>: A fixed threshold (e.g., 0.5) may not work optimally for all models. <em>Solution</em>: Experiment with threshold values to maximise recall without sacrificing precision.</li>
+</ul>
+<h4 id="concluding-thoughts-3">Concluding Thoughts</h4>
+<p>Model evaluation provided crucial insights into the performance of our CNN models. While both models performed well, VGG16&rsquo;s higher recall made it the preferred choice for pneumonia detection, as it minimises the risk of missing positive cases.</p>
+<h1 id="part-5-insights-from-sensitivity-and-specificity-analysis-in-pneumonia-detection">PART 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection</h1>
+<p>When evaluating AI models for medical diagnostics, metrics like <strong>sensitivity</strong> and <strong>specificity</strong> are crucial. Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.</p>
+<p>For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential. In this part, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.</p>
+<h3 id="understanding-sensitivity-and-specificity">Understanding Sensitivity and Specificity</h3>
+<ol>
+<li>
+<p><em>Sensitivity (Recall)</em>: Measures the model&rsquo;s ability to correctly identify positive cases (patients with pneumonia).</p>
+<ul>
+<li><em>Formula</em>: <code>Sensitivity = TP / (TP + FN)</code></li>
+<li>High sensitivity reduces false negatives, which is critical for timely diagnosis and treatment.</li>
+</ul>
+</li>
+<li>
+<p><em>Specificity</em>: Measures the model&rsquo;s ability to correctly identify negative cases (healthy patients).</p>
+<ul>
+<li><em>Formula</em>: <code>Specificity = TN / (TN + FP)</code></li>
+<li>High specificity reduces false positives, ensuring healthy patients are not misdiagnosed.</li>
+</ul>
+</li>
+</ol>
+<h3 id="why-these-metrics-matter-in-pneumonia-detection">Why These Metrics Matter in Pneumonia Detection</h3>
+<ol>
+<li>
+<p><strong>Sensitivity Prioritisation</strong>:</p>
+<ul>
+<li>Missing a pneumonia case (false negative) can lead to delayed treatment and severe outcomes.</li>
+<li>High sensitivity ensures most pneumonia cases are detected.</li>
+</ul>
+</li>
+<li>
+<p><strong>Balancing Specificity</strong>:</p>
+<ul>
+<li>While high sensitivity is critical, specificity ensures resources are not wasted on unnecessary follow-ups for false positives.</li>
+</ul>
+</li>
+</ol>
+<h3 id="python-code-calculating-sensitivity-and-specificity">Python Code: Calculating Sensitivity and Specificity</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_sensitivity_specificity</span>(confusion_matrix):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculates sensitivity and specificity from a confusion matrix.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    confusion_matrix (ndarray): 2x2 confusion matrix [[TN, FP], [FN, TP]].
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Sensitivity and specificity values.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    TN, FP, FN, TP <span style="color:#f92672">=</span> confusion_matrix<span style="color:#f92672">.</span>ravel()
+</span></span><span style="display:flex;"><span>    sensitivity <span style="color:#f92672">=</span> TP <span style="color:#f92672">/</span> (TP <span style="color:#f92672">+</span> FN)
+</span></span><span style="display:flex;"><span>    specificity <span style="color:#f92672">=</span> TN <span style="color:#f92672">/</span> (TN <span style="color:#f92672">+</span> FP)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;Sensitivity&#34;</span>: sensitivity, <span style="color:#e6db74">&#34;Specificity&#34;</span>: specificity}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example confusion matrices</span>
+</span></span><span style="display:flex;"><span>manual_cnn_cm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">15</span>], [<span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">260</span>]])
+</span></span><span style="display:flex;"><span>vgg16_cm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">210</span>, <span style="color:#ae81ff">10</span>], [<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">270</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate metrics</span>
+</span></span><span style="display:flex;"><span>manual_metrics <span style="color:#f92672">=</span> calculate_sensitivity_specificity(manual_cnn_cm)
+</span></span><span style="display:flex;"><span>vgg16_metrics <span style="color:#f92672">=</span> calculate_sensitivity_specificity(vgg16_cm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Manual CNN Metrics:&#34;</span>, manual_metrics)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;VGG16 Metrics:&#34;</span>, vgg16_metrics)
+</span></span></code></pre></div><p>Output:
+<em>For Manual CNN</em>:</p>
+<ul>
+<li>Sensitivity: 91.2%</li>
+<li>Specificity: 93.0%</li>
+</ul>
+<p><em>For VGG16</em>:</p>
+<ul>
+<li>Sensitivity: 93.1%</li>
+<li>Specificity: 95.5%</li>
+</ul>
+<h4 id="performance-comparison">Performance Comparison</h4>
+<p><em>Manual CNN</em>:</p>
+<ul>
+<li>Strength: Balanced performance with reasonable sensitivity and specificity.</li>
+<li>Limitation: Slightly lower sensitivity could lead to missed pneumonia cases.</li>
+</ul>
+<p><em>VGG16</em>:</p>
+<ul>
+<li>Strength: Higher sensitivity reduces false negatives, making it more reliable for detecting pneumonia.</li>
+<li>Limitation: Marginally lower specificity compared to manual CNN.</li>
+</ul>
+<p>Balancing sensitivity and specificity is key in medical diagnostics:</p>
+<ul>
+<li>
+<p><em>High Sensitivity</em>: Essential for critical conditions like pneumonia, where missing a positive case can have life-threatening consequences. Prioritise recall over precision.</p>
+</li>
+<li>
+<p><em>High Specificity</em>: Reduces false positives, minimising unnecessary stress, costs, and resource usage.Important in resource-limited settings.</p>
+</li>
+</ul>
+<h4 id="visualising-the-trade-offs">Visualising the Trade-offs</h4>
+<p>We used the Receiver Operating Characteristic (ROC) curve to visualise the sensitivity-specificity trade-off across different thresholds.</p>
+<h4 id="python-code-roc-curve">Python Code: ROC Curve</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_curve, auc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_roc_curve</span>(model, test_generator):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Plots the ROC curve for a given model and test data.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    y_true <span style="color:#f92672">=</span> test_generator<span style="color:#f92672">.</span>classes
+</span></span><span style="display:flex;"><span>    y_pred <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(test_generator)<span style="color:#f92672">.</span>ravel()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fpr, tpr, _ <span style="color:#f92672">=</span> roc_curve(y_true, y_pred)
+</span></span><span style="display:flex;"><span>    roc_auc <span style="color:#f92672">=</span> auc(fpr, tpr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot(fpr, tpr, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ROC curve (area = </span><span style="color:#e6db74">{</span>roc_auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gray&#34;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;False Positive Rate (1 - Specificity)&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;True Positive Rate (Sensitivity)&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;ROC Curve&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lower right&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage with VGG16 model</span>
+</span></span><span style="display:flex;"><span>plot_roc_curve(vgg16_model, test_generator)
+</span></span></code></pre></div><h4 id="key-takeaways-1">Key Takeaways</h4>
+<ol>
+<li>VGG16 Outperforms:</li>
+</ol>
+<ul>
+<li>The higher sensitivity and <code>ROC AUC</code> score make VGG16 a better choice for pneumonia detection.</li>
+<li>Reduces false negatives, ensuring more pneumonia cases are caught.</li>
+</ul>
+<ol start="2">
+<li>Manual CNN is Reliable:</li>
+</ol>
+<ul>
+<li>Offers a balanced approach, with decent sensitivity and specificity.</li>
+<li>Suitable for scenarios with resource constraints.</li>
+</ul>
+<h4 id="concluding-thoughts-4">Concluding Thoughts</h4>
+<p>Sensitivity and specificity are critical metrics in evaluating AI models for medical imaging. While both the Manual CNN and VGG16 demonstrated strong performance, VGG16’s superior sensitivity makes it the preferred choice for pneumonia detection, prioritising patient safety.</p>
+<h1 id="part-6-future-directions-for-ai-assisted-medical-imaging">PART 6. Future Directions for AI-Assisted Medical Imaging</h1>
+<p>AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project.
+However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery. In this part, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.</p>
+<h3 id="1-improving-model-performance">1. Improving Model Performance</h3>
+<h4 id="a-multimodal-learning">a. Multimodal Learning</h4>
+<p>Future models could integrate multiple data types (e.g., imaging, clinical notes, and patient history) to improve diagnostic accuracy.</p>
+<ul>
+<li>Example: Combining X-ray images with patient demographics or blood test results.</li>
+<li>Impact: Provides a holistic view for more accurate diagnosis.</li>
+</ul>
+<h4 id="b-advanced-architectures">b. Advanced Architectures</h4>
+<p>Emerging architectures like Vision Transformers (ViT) and hybrid models could outperform traditional CNNs by better capturing global features in images.</p>
+<ul>
+<li><strong>Vision Transformers</strong>:
+<ul>
+<li>Use self-attention mechanisms for image classification.</li>
+<li>Suitable for large datasets and complex features.</li>
+</ul>
+</li>
+</ul>
+<h4 id="c-real-time-analysis">c. Real-Time Analysis</h4>
+<p>Deploying lightweight models on edge devices (e.g., hospital machines) can enable real-time diagnostics. <em>Example</em>: On-device pneumonia detection for portable X-ray machines.</p>
+<h4 id="python-code-example-of-hybrid-model">Python Code: Example of Hybrid Model</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> ResNet50
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Flatten
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hybrid Model with ResNet50 backbone</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_hybrid_model</span>(input_shape):
+</span></span><span style="display:flex;"><span>    base_model <span style="color:#f92672">=</span> ResNet50(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;imagenet&#34;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>input_shape)
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>        base_model,
+</span></span><span style="display:flex;"><span>        Flatten(),
+</span></span><span style="display:flex;"><span>        Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;relu&#34;</span>),
+</span></span><span style="display:flex;"><span>        Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sigmoid&#34;</span>)
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>    base_model<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>  <span style="color:#75715e"># Freeze pre-trained layers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise model</span>
+</span></span><span style="display:flex;"><span>hybrid_model <span style="color:#f92672">=</span> build_hybrid_model((<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>hybrid_model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><h3 id="2-deployment-challenges">2. Deployment Challenges</h3>
+<p><em>Data Privacy and Security:</em> Patient data must remain secure and anonymised to comply with regulations like GDPR and HIPAA. <em>Solution</em>: Use federated learning to train models across distributed datasets without transferring sensitive data.</p>
+<p><em>Generalisation to Diverse Populations:</em> AI models often struggle with data from populations or imaging devices different from the training dataset. <em>Solution</em>: Continuously retrain and validate models on diverse datasets.</p>
+<p><em>Infrastructure Limitations:</em> Deploying AI in resource-limited settings (e.g., rural hospitals) requires lightweight models and affordable hardware. <em>Solution</em>: Optimise models for edge devices and cloud-based inference.</p>
+<h3 id="3-ethical-considerations">3. Ethical Considerations</h3>
+<p><em>Transparency</em>: AI models should provide interpretable outputs to assist clinicians in decision-making. <em>Example</em>: Visualising heatmaps over X-ray images to show regions influencing predictions.</p>
+<p><em>Bias in AI Models</em>: Training datasets may reflect biases, such as under-representation of certain demographic groups. <em>Solution</em>: Perform bias audits and balance datasets during training.</p>
+<p><em>Accountability:</em> Define clear protocols for responsibility when AI models make incorrect predictions. <em>Solution</em>: AI systems should augment, not replace, human decision-making.</p>
+<h4 id="python-code-explainability-with-grad-cam">Python Code: Explainability with Grad-CAM</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_gradcam</span>(model, img_array, last_conv_layer_name):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Generates Grad-CAM for a given image and model.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    grad_model <span style="color:#f92672">=</span> Model(
+</span></span><span style="display:flex;"><span>        inputs<span style="color:#f92672">=</span>[model<span style="color:#f92672">.</span>input],
+</span></span><span style="display:flex;"><span>        outputs<span style="color:#f92672">=</span>[model<span style="color:#f92672">.</span>get_layer(last_conv_layer_name)<span style="color:#f92672">.</span>output, model<span style="color:#f92672">.</span>output]
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        conv_outputs, predictions <span style="color:#f92672">=</span> grad_model(img_array)
+</span></span><span style="display:flex;"><span>        loss <span style="color:#f92672">=</span> predictions[:, <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    grads <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(loss, conv_outputs)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    weights <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(grads, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>    cam <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(conv_outputs[<span style="color:#ae81ff">0</span>], weights)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Normalise and display Grad-CAM</span>
+</span></span><span style="display:flex;"><span>    cam <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>maximum(cam, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    cam <span style="color:#f92672">=</span> cam <span style="color:#f92672">/</span> cam<span style="color:#f92672">.</span>max()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(cam, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jet&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage</span>
+</span></span><span style="display:flex;"><span>generate_gradcam(model<span style="color:#f92672">=</span>vgg16_model, img_array<span style="color:#f92672">=</span>test_image, last_conv_layer_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;block5_conv3&#34;</span>)
+</span></span></code></pre></div><h4 id="4-scalling-ai-solutions-globally">4. Scalling AI Solutions Globally</h4>
+<p><em>Cloud-Based AI Services</em>: Cloud platforms like AWS and Google Cloud allow hospitals to access AI models without investing in local infrastructure.</p>
+<p><em>Collaboration Across Institutions</em>: Sharing anonymised data and models between healthcare providers accelerates progress and improves model robustness.</p>
+<p><em>AI for Early Screening:</em> Scalable AI models can provide early screening tools in low-resource settings, reducing diagnostic delays.</p>
+<h3 id="5-research-and-innovation-areas">5. Research and Innovation Areas</h3>
+<ul>
+<li><em>Few-Shot Learning</em>: Train models with limited labelled data, reducing reliance on large datasets.</li>
+<li><em>Self-Supervised Learning</em>: Leverage unlabelled medical data for pre-training, improving generalisation.</li>
+<li><em>Multilingual Models</em>: Incorporate diverse medical terminologies to support global deployment.</li>
+</ul>
+<h4 id="concluding-thoughts-5">Concluding Thoughts</h4>
+<p>AI holds immense potential to revolutionise medical imaging, offering faster, more accurate, and scalable diagnostic tools. However, achieving this vision requires addressing challenges like data privacy, model bias, and infrastructure limitations. By integrating ethical frameworks and advancing AI research, we can ensure that AI becomes a reliable and equitable tool in global healthcare.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

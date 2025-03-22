@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="A step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project10_images/pr10.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model
+          </h1>
+          
+            <p class="f5">A step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project10_images/pr10.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer.</p>
+<p><strong>DenseNet201</strong>, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse.</p>
+<p>This blog provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. Topics covered include:</p>
+<ul>
+<li>DenseNet201’s architecture.</li>
+<li>Transfer learning with pretrained weights.</li>
+<li>Customisation and fine-tuning of the model for medical imaging tasks.</li>
+</ul>
+<h2 id="densenet201-architecture"><strong>DenseNet201 Architecture</strong></h2>
+<p>DenseNet201 is a CNN that uses &ldquo;dense connectivity,&rdquo; where each layer receives input from all preceding layers. This unique design:</p>
+<ul>
+<li>Encourages feature reuse, reducing the number of parameters.</li>
+<li>Improves gradient flow during training, especially in deep networks.</li>
+</ul>
+<p>DenseNet201 is ideal for histopathology because it can capture complex patterns in tissue morphology and structure.</p>
+<h2 id="building-the-model"><strong>Building the Model</strong></h2>
+<h3 id="step-1-load-the-pretrained-base-model"><strong>Step 1: Load the Pretrained Base Model</strong></h3>
+<p>We start with the <strong>DenseNet201</strong> model pretrained on ImageNet, leveraging its knowledge of general features like edges and textures.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> DenseNet201
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_base_model</span>(input_shape):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Load the DenseNet201 base model with pretrained ImageNet weights.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    base_model <span style="color:#f92672">=</span> DenseNet201(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;imagenet&#39;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>input_shape)
+</span></span><span style="display:flex;"><span>    base_model<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>  <span style="color:#75715e"># Freeze base layers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> base_model
+</span></span></code></pre></div><h3 id="step-2-add-a-custom-classification-head"><strong>Step 2: Add a Custom Classification Head</strong></h3>
+<p>We replace DenseNet201’s top layers with a custom head tailored for binary classification (benign vs malignant). The head includes:</p>
+<ul>
+<li><strong>GlobalAveragePooling2D</strong>: Reduces spatial dimensions.</li>
+<li><strong>Dense Layers</strong>: Fully connected layers for feature extraction.</li>
+<li><strong>Dropout</strong>: Prevents overfitting.</li>
+<li><strong>Softmax Output</strong>: Predicts probabilities for benign and malignant classes.</li>
+</ul>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> GlobalAveragePooling2D, Dense, Dropout
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_classification_head</span>(base_model, num_classes):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Add a custom classification head to the DenseNet201 base model.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> base_model<span style="color:#f92672">.</span>output
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> GlobalAveragePooling2D()(x)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> Dropout(<span style="color:#ae81ff">0.5</span>)(x)  <span style="color:#75715e"># Regularisation</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>)(x)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> Dropout(<span style="color:#ae81ff">0.5</span>)(x)
+</span></span><span style="display:flex;"><span>    predictions <span style="color:#f92672">=</span> Dense(num_classes, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>base_model<span style="color:#f92672">.</span>input, outputs<span style="color:#f92672">=</span>predictions)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span></code></pre></div><h3 id="step-3-compile-the-model"><strong>Step 3: Compile the Model</strong></h3>
+<p>The model is compiled with the Adam optimiser, categorical crossentropy loss, and accuracy as the evaluation metric.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> Adam
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compile_model</span>(model):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Compile the DenseNet201 model.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>Adam(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>),
+</span></span><span style="display:flex;"><span>                  loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;categorical_crossentropy&#39;</span>,
+</span></span><span style="display:flex;"><span>                  metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span></code></pre></div><h3 id="fine-tuning-the-model">Fine-Tuning the Model</h3>
+<p>Once the custom head is trained, we unfreeze the base DenseNet201 layers and fine-tune them on the histopathology dataset. Fine-tuning adjusts the pretrained weights to better suit the target domain.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fine_tune_model</span>(model, fine_tune_at):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Fine-tune the DenseNet201 model by unfreezing layers.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> layer <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>layers[:fine_tune_at]:
+</span></span><span style="display:flex;"><span>        layer<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> layer <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>layers[fine_tune_at:]:
+</span></span><span style="display:flex;"><span>        layer<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span></code></pre></div><h3 id="training-the-model">Training the Model</h3>
+<h4 id="dataset">Dataset</h4>
+<p>We used the BreakHis dataset, which contains benign and malignant histopathology images. Images were preprocessed with data augmentation to enhance variability.</p>
+<h4 id="training-pipeline">Training Pipeline</h4>
+<p>Train the custom head while freezing the DenseNet201 base.
+Fine-tune the entire model by unfreezing layers.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> load_base_model(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> add_classification_head(model, num_classes<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> compile_model(model)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the custom head</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fine-tune the model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> fine_tune_model(model, fine_tune_at<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)  <span style="color:#75715e"># Unfreeze layers after index 300</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span></code></pre></div><h3 id="evaluation">Evaluation</h3>
+<p>The model was evaluated on a separate test set using the following metrics:</p>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction correctness.</li>
+<li><strong>Sensitivity (Recall)</strong>: Ability to identify malignant samples.</li>
+<li><strong>Specificity</strong>: Ability to avoid false positives.</li>
+</ul>
+<h3 id="results">Results</h3>
+<figure><img src="/images/project10_images/results10_3.png">
+</figure>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>Building and fine-tuning DenseNet201 demonstrates its power in handling complex medical imaging tasks. By leveraging transfer learning and a customised classification head, the model achieved high accuracy in classifying histopathology images.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

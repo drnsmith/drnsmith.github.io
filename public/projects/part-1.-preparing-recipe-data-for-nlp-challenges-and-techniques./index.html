@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="I delve into the essential steps of preparing recipe data for NLP tasks. From handling unique challenges in recipe data, like ingredient variations and measurement units, to tokenising, lemmatising, and transforming text with TF-IDF, each step is designed to clean and structure the data for effective clustering and topic modelling.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project2_images/pr2.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.
+          </h1>
+          
+            <p class="f5">I delve into the essential steps of preparing recipe data for NLP tasks. From handling unique challenges in recipe data, like ingredient variations and measurement units, to tokenising, lemmatising, and transforming text with TF-IDF, each step is designed to clean and structure the data for effective clustering and topic modelling.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project2_images/pr2.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-preparing-recipe-data-for-nlp-challenges-and-techniques">Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.</h1>
+<h3 id="introduction">Introduction</h3>
+<p>Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.
+I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.</p>
+<p>In this post, I&rsquo;ll guide you through my process for turning this raw data into a dataset ready for NLP analysis, breaking down each key step, and discussing the unique challenges encountered along the way.</p>
+<h3 id="understanding-the-recipe-data-challenges">Understanding the Recipe Data Challenges</h3>
+<p>Recipe datasets present unique challenges. Here are some specifics I encountered and how they shaped my approach to data preparation:</p>
+<ul>
+<li><em>Measurement Units and Variations</em>: Ingredients are often listed with measurements, such as “1 cup flour” or “200g sugar.” These details can vary widely, requiring a way to standardise and simplify them.</li>
+<li><em>Ingredient Synonyms</em>: Different recipes may refer to the same ingredient by various names (e.g., “bell pepper” vs. “capsicum”). Addressing these variations is essential for consistent analysis.</li>
+<li><em>Contextual Words in Cooking Steps</em>: Cooking steps often contain complex instructions that can vary in wording but mean the same thing. Pre-processing has to be thorough to ensure these are handled correctly.</li>
+</ul>
+<p>These unique elements required a custom approach to text pre-processing, focusing on standardising ingredient names and measurements while retaining relevant information.</p>
+<h3 id="step-1-basic-data-cleaning-and-handling-missing-values">Step 1: Basic Data Cleaning and Handling Missing Values</h3>
+<p>With these challenges in mind, the first step was to clean the dataset and handle any missing values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load dataset</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;recipes.csv&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check for missing values</span>
+</span></span><span style="display:flex;"><span>print(data<span style="color:#f92672">.</span>isnull()<span style="color:#f92672">.</span>sum())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Drop rows with missing critical fields</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>dropna(subset<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;ingredients&#39;</span>, <span style="color:#e6db74">&#39;steps&#39;</span>])
+</span></span></code></pre></div><p>I identified and removed rows with missing values for the ingredients or steps fields, as these are key to building recipe topics. For more extensive datasets, other imputation techniques could be applied, but removing incomplete rows was ideal here to preserve data quality.</p>
+<h3 id="step-2-text-pre-processing---tokenisation-and-normalisation">Step 2: Text Pre-processing - Tokenisation and Normalisation</h3>
+<p>Next, I pre-processed the text data by tokenising it, converting everything to lowercase, and removing special characters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.corpus <span style="color:#f92672">import</span> stopwords
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.tokenize <span style="color:#f92672">import</span> word_tokenize
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define a pre-processing function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess_text</span>(text):
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> text<span style="color:#f92672">.</span>lower()  <span style="color:#75715e"># Convert to lowercase</span>
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;[^a-zA-Z\s]&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, text)  <span style="color:#75715e"># Remove special characters</span>
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> word_tokenize(text)  <span style="color:#75715e"># Tokenize text</span>
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> [word <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> tokens <span style="color:#66d9ef">if</span> word <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> stopwords<span style="color:#f92672">.</span>words(<span style="color:#e6db74">&#39;english&#39;</span>)]  <span style="color:#75715e"># Remove stop words</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tokens
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply to ingredients and steps</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ingredients&#39;</span>]<span style="color:#f92672">.</span>apply(preprocess_text)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;steps&#39;</span>]<span style="color:#f92672">.</span>apply(preprocess_text)
+</span></span></code></pre></div><p>Each recipe was tokenised to isolate meaningful words and exclude common words (stop words) that don&rsquo;t add much value. Tokenisation is essential here because it breaks down sentences into words, allowing us to analyse the frequency and importance of each word in context.</p>
+<h3 id="step-3-lemmatization-for-ingredient-and-step-uniformity">Step 3: Lemmatization for Ingredient and Step Uniformity</h3>
+<p>With tokenised data, the next step was lemmatization, which reduces words to their base or dictionary form. This step is especially useful for recipes because it reduces word variations, creating more consistency across the data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.stem <span style="color:#f92672">import</span> WordNetLemmatizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize lemmatizer</span>
+</span></span><span style="display:flex;"><span>lemmatizer <span style="color:#f92672">=</span> WordNetLemmatizer()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define a function to lemmatize tokens</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lemmatize_tokens</span>(tokens):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [lemmatizer<span style="color:#f92672">.</span>lemmatize(token) <span style="color:#66d9ef">for</span> token <span style="color:#f92672">in</span> tokens]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply lemmatization</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>]<span style="color:#f92672">.</span>apply(lemmatize_tokens)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>]<span style="color:#f92672">.</span>apply(lemmatize_tokens)
+</span></span></code></pre></div><p>Lemmatization helped to group similar words under a single form (e.g., “cooking” and “cook”), making it easier to identify common themes in the recipes.</p>
+<h3 id="step-4-vectorising-text-with-tf-idf">Step 4: Vectorising Text with TF-IDF</h3>
+<p>The next step was to convert the text data into numerical form, which is necessary for clustering. I used <strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong>, a technique that highlights unique words in each recipe.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize TF-IDF Vectorizer</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(max_features<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Vectorize ingredients and steps</span>
+</span></span><span style="display:flex;"><span>ingredients_tfidf <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x)))
+</span></span><span style="display:flex;"><span>steps_tfidf <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x)))
+</span></span></code></pre></div><p>TF-IDF helped to weigh each term’s importance within each recipe, providing a rich representation of each recipe’s unique characteristics.</p>
+<h3 id="step-5-combining-ingredients-and-steps-for-analysis">Step 5: Combining Ingredients and Steps for Analysis</h3>
+<p>To get a holistic view of each recipe, I combined the processed ingredients and steps data. This allowed me to capture both aspects of each recipe in a single feature space, which enhanced the clustering and topic modelling steps that followed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Combine ingredients and steps</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;combined_text&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>]
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;combined_text&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;combined_text&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x))
+</span></span></code></pre></div><p>This combined representation provided a comprehensive view of each recipe, incorporating both what ingredients are used and how they’re used.</p>
+<h3 id="step-6-potential-applications-of-pre-processed-data">Step 6: Potential Applications of Pre-processed Data</h3>
+<p>After all pre-processing steps, the data was ready for analysis. Here’s how each step contributes to downstream NLP tasks:</p>
+<ul>
+<li><em>Topic Modelling</em>: The clean, tokenised text allows algorithms like <strong>LDA (Latent Dirichlet Allocation)</strong> to identify coherent topics within the recipes.</li>
+<li><em>Clustering</em>: By creating TF-IDF vectors, each recipe is represented as a numerical vector, making it suitable for clustering algorithms.</li>
+<li><em>Recommendation Systems</em>: Using topic clusters, a recommendation system could suggest recipes based on users’ previous preferences.</li>
+</ul>
+<h3 id="summing-up-this-part">Summing up this part,</h3>
+<p>Pre-processing the recipe data takes time, but each step is crucial in creating a dataset ready for ML. These techniques transformed unstructured recipe text into structured data, making it possible to discover themes and clusters in the data.</p>
+<h1 id="part-2-from-words-to-vectors-embedding-techniques-in-recipe-analysis">Part 2. From Words to Vectors: Embedding Techniques in Recipe Analysis.</h1>
+<h3 id="introduction-1">Introduction</h3>
+<p>In a world driven by data, text is the unsung hero that powers everything from search engines to recommendation systems. For a data scientist, textual data isn&rsquo;t just words—it&rsquo;s a goldmine waiting to be unlocked. Recipes, for instance, are more than a collection of instructions. They&rsquo;re narratives of culture, flavour profiles, and culinary creativity. But to analyse them computationally, we must first transform these words into something machines can process: <em>vectors</em>. In this article, I’ll dive into how text embedding techniques like <strong>TF-IDF</strong> and <strong>Word2Vec</strong> can be applied to recipe data. By converting recipes into meaningful numerical representations, we uncover patterns and relationships hidden in the data.</p>
+<h3 id="the-challenge-text-to-numbers">The Challenge: Text to Numbers</h3>
+<p>At its core, Natural Language Processing (NLP) involves converting unstructured text into structured data. Machines don’t understand words the way we do—they understand numbers. Hence, embedding techniques are crucial in bridging this gap. In this project, I leveraged a combination of <strong>TF-IDF</strong> and <strong>Word2Vec</strong> to transform raw text into feature-rich vectors.</p>
+<h3 id="tf-idf-the-foundation-of-text-representation">TF-IDF: The Foundation of Text Representation</h3>
+<p>TF-IDF, or <strong>Term Frequency-Inverse Document Frequency</strong>, is a statistical measure that captures the importance of a word in a document relative to a collection of documents (corpus). It’s calculated as:</p>
+<p>TF-IDF(w) = TF(w) × IDF(w)</p>
+<p>Where:</p>
+<ul>
+<li><strong>TF(w)</strong>: How often the word appears in the document.</li>
+<li><strong>IDF(w)</strong>: The inverse frequency of the word across all documents in the corpus.</li>
+</ul>
+<p>In recipe analysis, TF-IDF helped me identify key ingredients or instructions that define a particular recipe while discounting commonly used words like &ldquo;mix&rdquo; or &ldquo;add.&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample corpus of recipe instructions</span>
+</span></span><span style="display:flex;"><span>corpus <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Preheat oven to 350 degrees. Mix flour and sugar.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Boil water and add pasta. Cook until tender.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Chop onions and sauté with garlic in olive oil.&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise TF-IDF Vectorizer</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(stop_words<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;english&#39;</span>)
+</span></span><span style="display:flex;"><span>tfidf_matrix <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(corpus)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># View TF-IDF Scores</span>
+</span></span><span style="display:flex;"><span>feature_names <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>get_feature_names_out()
+</span></span><span style="display:flex;"><span>tfidf_scores <span style="color:#f92672">=</span> tfidf_matrix<span style="color:#f92672">.</span>toarray()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print the results</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> doc_idx, doc_scores <span style="color:#f92672">in</span> enumerate(tfidf_scores):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Document </span><span style="color:#e6db74">{</span>doc_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> word_idx, score <span style="color:#f92672">in</span> enumerate(doc_scores):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> score <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;  </span><span style="color:#e6db74">{</span>feature_names[word_idx]<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">:</span><span style="color:#e6db74">.4f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>This output reveals the weight of each term in the recipes, allowing us to pinpoint ingredients or steps that differentiate one recipe from another.</p>
+<h3 id="word2vec-capturing-semantic-relationships">Word2Vec: Capturing Semantic Relationships</h3>
+<p>While TF-IDF treats each word as independent, <strong>Word2Vec</strong> takes it a step further by capturing the semantic relationships between words. Using neural networks, Word2Vec maps words to dense vector spaces where semantically similar words are closer together. For example:</p>
+<ul>
+<li>“Flour” and “sugar” might have similar embeddings because they frequently appear together in baking recipes.</li>
+<li>“Boil” and “sauté” might cluster together due to their shared context in cooking.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.models <span style="color:#f92672">import</span> Word2Vec
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Tokenized corpus of recipe instructions</span>
+</span></span><span style="display:flex;"><span>tokenized_corpus <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;preheat&#34;</span>, <span style="color:#e6db74">&#34;oven&#34;</span>, <span style="color:#e6db74">&#34;mix&#34;</span>, <span style="color:#e6db74">&#34;flour&#34;</span>, <span style="color:#e6db74">&#34;sugar&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;boil&#34;</span>, <span style="color:#e6db74">&#34;water&#34;</span>, <span style="color:#e6db74">&#34;add&#34;</span>, <span style="color:#e6db74">&#34;pasta&#34;</span>, <span style="color:#e6db74">&#34;cook&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;chop&#34;</span>, <span style="color:#e6db74">&#34;onions&#34;</span>, <span style="color:#e6db74">&#34;sauté&#34;</span>, <span style="color:#e6db74">&#34;garlic&#34;</span>, <span style="color:#e6db74">&#34;olive&#34;</span>, <span style="color:#e6db74">&#34;oil&#34;</span>]
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train Word2Vec model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Word2Vec(sentences<span style="color:#f92672">=</span>tokenized_corpus, vector_size<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Get vector for the word &#34;sugar&#34;</span>
+</span></span><span style="display:flex;"><span>vector_sugar <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>wv[<span style="color:#e6db74">&#39;sugar&#39;</span>]
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Vector for &#39;sugar&#39;:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>vector_sugar<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Find similar words to &#34;sugar&#34;</span>
+</span></span><span style="display:flex;"><span>similar_words <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>wv<span style="color:#f92672">.</span>most_similar(<span style="color:#e6db74">&#34;sugar&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Words similar to &#39;sugar&#39;: </span><span style="color:#e6db74">{</span>similar_words<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>This approach provides richer, context-aware representations that allow us to group recipes by style, ingredient similarity, or preparation method.</p>
+<h3 id="clustering-recipes-using-word-embeddings">Clustering Recipes Using Word Embeddings</h3>
+<p>Once I transformed recipe text into vectors, I can perform clustering to identify patterns. For instance, recipes with similar ingredients or cooking techniques naturally group together. To visualise these clusters, I used <code>t-SNE (t-distributed Stochastic Neighbor Embedding)</code>, a technique for reducing high-dimensional data into two dimensions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.manifold <span style="color:#f92672">import</span> TSNE
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reduce Word2Vec embeddings to 2D for visualization</span>
+</span></span><span style="display:flex;"><span>word_vectors <span style="color:#f92672">=</span> [model<span style="color:#f92672">.</span>wv[word] <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>wv<span style="color:#f92672">.</span>index_to_key]
+</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>reduced_vectors <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(word_vectors)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot the results</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, word <span style="color:#f92672">in</span> enumerate(model<span style="color:#f92672">.</span>wv<span style="color:#f92672">.</span>index_to_key):
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>scatter(reduced_vectors[i, <span style="color:#ae81ff">0</span>], reduced_vectors[i, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>text(reduced_vectors[i, <span style="color:#ae81ff">0</span>], reduced_vectors[i, <span style="color:#ae81ff">1</span>], word)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;t-SNE Visualization of Word Embeddings&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="insights-from-recipe-embeddings">Insights from Recipe Embeddings</h3>
+<p>By analysing the clustered embeddings, I uncovered:</p>
+<ul>
+<li>Recipes grouped by cuisine type (e.g., Italian pasta dishes vs. French pastries).</li>
+<li>Ingredients that frequently co-occur, revealing flavor pairings.
+Variations in cooking styles, such as baking vs. frying.</li>
+</ul>
+<p>These insights not only improve recipe recommendations but also pave the way for personalized cooking guides.</p>
+<h3 id="challenges-and-future-directions">Challenges and Future Directions</h3>
+<p>While embedding techniques unlock valuable insights, they come with challenges:</p>
+<ul>
+<li><em>Computational Costs</em>: Training Word2Vec or similar models requires significant resources.</li>
+<li><em>Contextual Limitations</em>: While static embeddings like Word2Vec are powerful, they don’t capture word meanings in different contexts (e.g., “oil” as an ingredient vs. “oil” as a verb).</li>
+</ul>
+<p>Future work could explore contextual embeddings like <code>BERT</code> to overcome these limitations and integrate image data for a multimodal analysis of recipes.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Text embedding techniques are transforming how we analyse unstructured data. In the realm of recipe analysis, they allowed me to move beyond simple keyword matching to uncover deeper patterns and relationships. By turning words into vectors, I made text machine-readable and also unlocked its full potential for discovery and innovation. Whether you&rsquo;re a data scientist working with textual data or a curious foodie, embedding techniques offer a new lens to explore the culinary world.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+<h1 id="part-3-uncovering-themes-in-recipes-with-topic-modelling">Part 3. Uncovering Themes in Recipes with Topic Modelling.</h1>
+<h3 id="introduction-2">Introduction</h3>
+<p>Recipes are more than just lists of ingredients and instructions—they encapsulate cultural, dietary, and thematic patterns waiting to be uncovered. In the ever-growing realm of textual data, topic modelling serves as a powerful tool to discover hidden themes and insights.</p>
+<p>In this blog, I’ll explore how topic modeling techniques, such as Latent Dirichlet Allocation (LDA) and Non-Negative Matrix Factorisation (NMF), help us extract meaningful themes from recipes.</p>
+<p>We’ll delve into the step-by-step process, discuss tuning and evaluation using coherence scores, and demonstrate how these methods bring latent patterns to the surface. All examples and code are drawn from the original analysis in our project.</p>
+<h3 id="what-is-topic-modelling">What Is Topic Modelling?</h3>
+<p>Topic modelling is an unsupervised machine learning technique used to identify themes or topics within a collection of documents.</p>
+<p>For recipes, topics can represent categories like cuisines (e.g., Italian or Indian), dietary preferences (e.g., vegetarian, keto), or cooking methods (e.g., baking, grilling).</p>
+<h3 id="two-of-the-most-commonly-used-methods-are">Two of the most commonly used methods are:</h3>
+<ul>
+<li><em>Latent Dirichlet Allocation (LDA)</em>: A probabilistic model that assumes documents are mixtures of topics and that topics are distributions over words.</li>
+<li><em>Non-Negative Matrix Factorisation (NMF)</em>: A matrix decomposition technique that provides an additive, parts-based representation of data.</li>
+</ul>
+<h3 id="pre-processing-the-data">Pre-processing the Data</h3>
+<p>Before applying topic modelling, the recipe text requires pre-processing. Here’s the sequence of steps followed:</p>
+<ul>
+<li><em>Tokenisation</em>: Splitting the text into individual words.</li>
+<li><em>Removing Stop Words</em>: Filtering out common words (e.g., &ldquo;the,&rdquo; &ldquo;and&rdquo;) that don’t contribute to the analysis.</li>
+<li><em>Lemmatisation</em>: Reducing words to their root forms (e.g., &ldquo;cooking&rdquo; → &ldquo;cook&rdquo;).</li>
+<li><em>TF-IDF Vectorisation</em>: Converting the text into numerical format using Term Frequency-Inverse Document Frequency to weigh important terms more heavily.</li>
+</ul>
+<h3 id="code-example-pre-processing">Code Example: Pre-processing</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.corpus <span style="color:#f92672">import</span> stopwords
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.tokenize <span style="color:#f92672">import</span> word_tokenize
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.stem <span style="color:#f92672">import</span> WordNetLemmatizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize lemmatizer and stop words</span>
+</span></span><span style="display:flex;"><span>lemmatizer <span style="color:#f92672">=</span> WordNetLemmatizer()
+</span></span><span style="display:flex;"><span>stop_words <span style="color:#f92672">=</span> set(stopwords<span style="color:#f92672">.</span>words(<span style="color:#e6db74">&#39;english&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample preprocessing function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess</span>(text):
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> word_tokenize(text<span style="color:#f92672">.</span>lower())
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> [lemmatizer<span style="color:#f92672">.</span>lemmatize(word) <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> tokens <span style="color:#66d9ef">if</span> word<span style="color:#f92672">.</span>isalnum() <span style="color:#f92672">and</span> word <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> stop_words]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(tokens)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply to recipe data</span>
+</span></span><span style="display:flex;"><span>recipes_cleaned <span style="color:#f92672">=</span> [preprocess(recipe) <span style="color:#66d9ef">for</span> recipe <span style="color:#f92672">in</span> recipes_raw]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TF-IDF vectorization</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(max_df<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, min_df<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, stop_words<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;english&#39;</span>)
+</span></span><span style="display:flex;"><span>tfidf_matrix <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(recipes_cleaned)
+</span></span></code></pre></div><h3 id="applying-topic-modelling">Applying Topic Modelling</h3>
+<ol>
+<li>Latent Dirichlet Allocation (LDA)
+LDA assigns words to topics probabilistically. Each document (recipe) can belong to multiple topics, with a distribution over the identified themes.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> LatentDirichletAllocation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize and fit LDA model</span>
+</span></span><span style="display:flex;"><span>lda <span style="color:#f92672">=</span> LatentDirichletAllocation(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>lda<span style="color:#f92672">.</span>fit(tfidf_matrix)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display top words per topic</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">display_topics</span>(model, feature_names, no_top_words):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> topic_idx, topic <span style="color:#f92672">in</span> enumerate(model<span style="color:#f92672">.</span>components_):
+</span></span><span style="display:flex;"><span>        top_words <span style="color:#f92672">=</span> [feature_names[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> topic<span style="color:#f92672">.</span>argsort()[<span style="color:#f92672">-</span>no_top_words:]]
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Topic </span><span style="color:#e6db74">{</span>topic_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(top_words)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>display_topics(lda, vectorizer<span style="color:#f92672">.</span>get_feature_names_out(), <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><p>Example Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Topic 0</span>: <span style="color:#ae81ff">chicken garlic onion salt pepper bake</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Topic 1</span>: <span style="color:#ae81ff">chocolate sugar butter cake vanilla</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">Topic 2</span>: <span style="color:#ae81ff">pasta tomato basil parmesan olive</span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><ol start="2">
+<li>Non-Negative Matrix Factorisation (NMF)</li>
+</ol>
+<p>Unlike LDA, NMF relies on matrix decomposition to identify latent topics. It’s particularly useful when speed or interpretability is a priority.</p>
+<h3 id="code-example-nmf-implementation">Code Example: NMF Implementation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Copy code
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> NMF
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize and fit NMF model</span>
+</span></span><span style="display:flex;"><span>nmf <span style="color:#f92672">=</span> NMF(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>nmf<span style="color:#f92672">.</span>fit(tfidf_matrix)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display top words per topic</span>
+</span></span><span style="display:flex;"><span>display_topics(nmf, vectorizer<span style="color:#f92672">.</span>get_feature_names_out(), <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><h3 id="evaluating-and-tuning-the-models">Evaluating and Tuning the Models</h3>
+<p>Topic models require fine-tuning to balance coherence and coverage. Key steps include:</p>
+<ul>
+<li><em>Coherence Score</em>: Measures the interpretability of topics by evaluating the semantic similarity of top words within each topic.</li>
+<li><em>Number of Topics (k)</em>: Experimenting with different values of k (number of topics) to identify the optimal model.</li>
+<li><em>Hyperparameters</em>: Adjusting parameters like learning rate, topic distribution priors (LDA), or regularization (NMF).</li>
+</ul>
+<h3 id="code-example-calculating-coherence">Code Example: Calculating Coherence</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.models <span style="color:#f92672">import</span> CoherenceModel
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.corpora <span style="color:#f92672">import</span> Dictionary
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.matutils <span style="color:#f92672">import</span> Sparse2Corpus
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert TF-IDF matrix to Gensim corpus</span>
+</span></span><span style="display:flex;"><span>corpus <span style="color:#f92672">=</span> Sparse2Corpus(tfidf_matrix, documents_columns<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>dictionary <span style="color:#f92672">=</span> Dictionary<span style="color:#f92672">.</span>from_corpus(corpus, id2word<span style="color:#f92672">=</span>dict(enumerate(vectorizer<span style="color:#f92672">.</span>get_feature_names_out())))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate coherence for LDA model</span>
+</span></span><span style="display:flex;"><span>lda_coherence <span style="color:#f92672">=</span> CoherenceModel(model<span style="color:#f92672">=</span>lda, texts<span style="color:#f92672">=</span>recipes_cleaned, dictionary<span style="color:#f92672">=</span>dictionary, coherence<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;c_v&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Coherence Score: </span><span style="color:#e6db74">{</span>lda_coherence<span style="color:#f92672">.</span>get_coherence()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="insights-from-topic-modelling">Insights from Topic Modelling</h3>
+<p>Using LDA and NMF, the following insights emerged from the recipe data:</p>
+<ul>
+<li><em>Cuisine Themes</em>: Topics often aligned with distinct cuisines, such as Italian or Mexican.</li>
+<li><em>Dietary Preferences</em>: Certain topics highlighted vegan, keto, or gluten-free recipes.</li>
+<li><em>Cooking Techniques</em>: Methods like baking, grilling, or stir-frying emerged as recurring themes.</li>
+</ul>
+<p>These findings not only validated the relevance of topic modeling but also provided actionable insights for recipe categorisation, recommendation systems, and culinary trend analysis.</p>
+<h3 id="conclusion-1">Conclusion</h3>
+<p>Topic modelling offers a lens to uncover hidden themes in recipe data, transforming unstructured text into actionable insights.</p>
+<p>Whether it’s using LDA to identify nuanced themes or NMF for faster analysis, the choice of technique depends on the specific requirements of the project.</p>
+<p>By tuning and evaluating models with coherence scores, we ensure meaningful outputs that resonate with real-world applications.</p>
+<p>From enhancing recommendation engines to enabling trend analysis, topic modelling has proven invaluable in understanding the culinary world.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+<h1 id="part-4-clustering-recipes-based-on-similarity-an-overview-of-techniques-and-challenges">Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges.</h1>
+<h3 id="introduction-3">Introduction</h3>
+<p>Clustering is a powerful unsupervised learning technique that organises data points into groups based on shared features.</p>
+<p>When applied to recipes, clustering can reveal hidden patterns, such as regional cuisines, ingredient pairings, or common preparation techniques.</p>
+<p>In this blog, we’ll explore:</p>
+<ol>
+<li>Clustering methods like K-Means and Hierarchical Clustering.</li>
+<li>Pre-processing and feature selection for recipe data.</li>
+<li>Evaluating clusters for meaningfulness.</li>
+<li>Challenges and lessons learned during clustering experiments.</li>
+</ol>
+<h3 id="why-clustering-recipes">Why Clustering Recipes?</h3>
+<p>Clustering allows us to group recipes into meaningful categories based on similarity. For example:</p>
+<ul>
+<li><strong>Cuisine Identification:</strong> Grouping recipes by regional influences (e.g., Italian, Asian).</li>
+<li><strong>Dietary Patterns:</strong> Identifying clusters based on health-focused recipes (e.g., vegan, keto).</li>
+<li><strong>Ingredient Analysis:</strong> Understanding ingredient combinations across recipes.</li>
+</ul>
+<h3 id="pre-processing-recipe-data-for-clustering">Pre-processing Recipe Data for Clustering</h3>
+<p>To effectively cluster recipes, pre-processing steps are crucial. In this project, this included:</p>
+<ol>
+<li><strong>Text Tokenisation:</strong> Breaking down recipe descriptions into meaningful words.</li>
+<li><strong>Vectorisation:</strong> Using techniques like TF-IDF or embeddings to convert text into numerical data.</li>
+<li><strong>Feature Selection:</strong> Focusing on essential elements, such as key ingredients or cooking methods.</li>
+</ol>
+<p>Here’s a code snippet showing how recipes were vectorised using TF-IDF:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample recipe descriptions</span>
+</span></span><span style="display:flex;"><span>recipe_texts <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Chicken curry with rice&#34;</span>, <span style="color:#e6db74">&#34;Vegan pasta with tomato sauce&#34;</span>, <span style="color:#e6db74">&#34;Grilled salmon with herbs&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TF-IDF vectorization</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(max_features<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>recipe_vectors <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(recipe_texts)
+</span></span></code></pre></div><h3 id="clustering-techniques">Clustering Techniques</h3>
+<h3 id="1-k-means-clustering">1. K-Means Clustering</h3>
+<p>K-Means is a popular clustering algorithm that groups data points by minimising the distance between points in the same cluster.</p>
+<p>Steps:</p>
+<ul>
+<li>Define the number of clusters (k).</li>
+<li>Assign each recipe to the nearest cluster center.</li>
+<li>Update cluster centers until convergence.</li>
+</ul>
+<p>Here’s how I applied K-Means in this project:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply K-Means with 3 clusters</span>
+</span></span><span style="display:flex;"><span>kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>clusters <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>fit_predict(recipe_vectors)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print cluster assignments</span>
+</span></span><span style="display:flex;"><span>print(clusters)
+</span></span></code></pre></div><h3 id="challenges">Challenges:</h3>
+<ul>
+<li><em>Choosing the Right k</em>: Selecting the number of clusters required testing different values using metrics like the Elbow Method.</li>
+<li><em>Sparse Data</em>: Recipe data often has sparse features, making it harder to define clear clusters.</li>
+</ul>
+<h3 id="2-hierarchical-clustering">2. Hierarchical Clustering</h3>
+<p>Hierarchical Clustering creates a tree-like structure (dendrogram) to visualize cluster relationships.</p>
+<p>Steps:</p>
+<ul>
+<li>Compute distances between data points.</li>
+<li>Merge points iteratively based on similarity.</li>
+</ul>
+<p>Here’s a sample implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.cluster.hierarchy <span style="color:#f92672">import</span> dendrogram, linkage
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hierarchical clustering</span>
+</span></span><span style="display:flex;"><span>linked <span style="color:#f92672">=</span> linkage(recipe_vectors<span style="color:#f92672">.</span>toarray(), method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ward&#39;</span>)
+</span></span><span style="display:flex;"><span>dendrogram(linked)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="advantages">Advantages:</h3>
+<ul>
+<li>Does not require predefining the number of clusters.</li>
+<li>Provides a visual representation of cluster relationships.</li>
+</ul>
+<h3 id="challenges-1">Challenges:</h3>
+<ul>
+<li>Computationally expensive for large datasets.</li>
+<li>Requires domain knowledge to interpret dendrograms effectively.</li>
+</ul>
+<h3 id="evaluating-clustering-results">Evaluating Clustering Results</h3>
+<p>I evaluated clusters using:</p>
+<ul>
+<li><em>Silhouette Score</em>: Measures how similar a recipe is to its own cluster compared to others.</li>
+<li><em>Manual Inspection</em>: Reviewing sample recipes from each cluster to assess meaningfulness.</li>
+</ul>
+<p>Here’s how I calculated the silhouette score:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> silhouette_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate clustering</span>
+</span></span><span style="display:flex;"><span>score <span style="color:#f92672">=</span> silhouette_score(recipe_vectors, clusters)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Silhouette Score: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="key-lessons-learned">Key Lessons Learned</h3>
+<ul>
+<li><em>Feature Quality Matters</em>: The choice of features (e.g., ingredients vs. cooking steps) significantly impacts clustering results.</li>
+<li><em>Iterative Tuning</em>: Fine-tuning parameters like the number of clusters is critical for meaningful groupings.</li>
+<li><em>Context is Key</em>: Domain knowledge helps interpret clusters effectively.</li>
+</ul>
+<h3 id="final-thoughts">Final Thoughts</h3>
+<p>Clustering recipes offers fascinating insights into culinary data, but it also comes with challenges like sparse data and parameter tuning.</p>
+<p>By leveraging techniques like K-Means and Hierarchical Clustering, and carefully evaluating results, we can uncover valuable themes and patterns in recipes.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+<h1 id="part-5-evaluating-and-interpreting-recipe-clusters-for-meaningful-insights">Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights.</h1>
+<h3 id="introduction-4">Introduction</h3>
+<p>Clustering recipes can reveal fascinating patterns, but identifying meaningful clusters is only half the battle.</p>
+<p>The real challenge lies in evaluating their quality and interpreting their results effectively. Without rigorous evaluation, clusters might lack utility, leading to misleading conclusions.</p>
+<p>In this blog, we’ll cover:</p>
+<ol>
+<li>Techniques for evaluating cluster quality.</li>
+<li>Methods for interpreting recipe clusters.</li>
+<li>Challenges and insights gained from real-world clustering projects.</li>
+</ol>
+<h3 id="why-does-cluster-evaluation-matter">Why Does Cluster Evaluation Matter?</h3>
+<p>Creating clusters is straightforward, but ensuring they represent meaningful groupings requires evaluation. For recipes, this means asking:</p>
+<ul>
+<li>Are clusters cohesive and distinct?</li>
+<li>Do clusters align with culinary logic (e.g., cuisines, ingredient combinations)?</li>
+<li>Can the clusters provide actionable insights?</li>
+</ul>
+<h3 id="techniques-for-evaluating-clusters">Techniques for Evaluating Clusters</h3>
+<h3 id="1-silhouette-score">1. Silhouette Score</h3>
+<p>The silhouette score measures how similar a recipe is to its assigned cluster compared to other clusters. It ranges from -1 to 1, where:</p>
+<ul>
+<li><strong>1:</strong> Perfect cohesion within the cluster.</li>
+<li><strong>0:</strong> Overlap between clusters.</li>
+<li><strong>-1:</strong> Poor assignment (likely noise).</li>
+</ul>
+<p>Here’s how I calculated the silhouette score for recipe clusters:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> silhouette_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compute silhouette score</span>
+</span></span><span style="display:flex;"><span>score <span style="color:#f92672">=</span> silhouette_score(recipe_vectors, clusters)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Silhouette Score: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p><strong>Use Case</strong>: During clustering experiments, silhouette scores helped us identify the optimal number of clusters.</p>
+<h3 id="2-coherence-measures">2. Coherence Measures</h3>
+<p>Coherence measures assess the interpretability of clusters by analysing the similarity of terms or features within each cluster.</p>
+<p>For <em>topic modelling</em> (e.g., LDA), coherence scores quantify how well words in a topic relate to each other.
+For <em>recipe clustering</em>, this could involve measuring the semantic similarity of key ingredients or cooking methods.</p>
+<p><strong>Key Challenge</strong>: Coherence scores require careful tuning of feature extraction methods to capture the nuances of recipe data.</p>
+<h3 id="3-manual-inspection">3. Manual Inspection</h3>
+<p>Automated metrics are valuable, but manual inspection remains indispensable for evaluating recipe clusters. This involves:</p>
+<ul>
+<li>Sampling recipes from each cluster.
+Checking for logical groupings (e.g., similar cuisines or ingredient profiles).</li>
+<li>Collaborating with culinary experts for domain insights.
+Example: A cluster containing “Pasta with Tomato Sauce” and “Lasagna” suggests cohesion, while a mix of “Pasta” and “Chocolate Cake” might indicate poor clustering.</li>
+</ul>
+<h3 id="interpreting-recipe-clusters">Interpreting Recipe Clusters</h3>
+<p>Interpreting clusters requires understanding their practical relevance. For recipes, this could mean identifying:</p>
+<ul>
+<li><em>Cuisine Groups</em>: Groupings like Italian, Asian, or Mediterranean cuisines.</li>
+<li><em>Dietary Patterns</em>: Clusters representing vegan, keto, or gluten-free recipes.</li>
+<li><em>Cooking Techniques</em>: Categories based on methods like baking, grilling, or steaming.</li>
+</ul>
+<h3 id="visualising-clusters">Visualising Clusters</h3>
+<p>Visualisation helps make sense of high-dimensional data. Techniques like t-SNE or PCA reduce dimensionality, enabling clear visualizations of cluster separations.</p>
+<p>Here’s an example using t-SNE:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.manifold <span style="color:#f92672">import</span> TSNE
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform t-SNE</span>
+</span></span><span style="display:flex;"><span>tsne <span style="color:#f92672">=</span> TSNE(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>reduced_data <span style="color:#f92672">=</span> tsne<span style="color:#f92672">.</span>fit_transform(recipe_vectors<span style="color:#f92672">.</span>toarray())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot clusters</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(reduced_data[:, <span style="color:#ae81ff">0</span>], reduced_data[:, <span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span>clusters, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;viridis&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>colorbar()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>Visualisations often reveal overlaps or outliers that might not be evident from metrics alone.</p>
+<h3 id="challenges-in-recipe-cluster-interpretation">Challenges in Recipe Cluster Interpretation</h3>
+<h3 id="1-ambiguity-in-features">1. Ambiguity in Features</h3>
+<p>Recipes often share overlapping features (e.g., “chicken curry” and “chicken salad” both include chicken), making it difficult to distinguish clusters based solely on ingredients.</p>
+<h3 id="2-domain-specific-knowledge">2. Domain-Specific Knowledge</h3>
+<p>Interpreting clusters without culinary expertise can lead to false assumptions. For example, a cluster labeled as “Asian cuisine” might actually combine unrelated dishes due to shared ingredients like soy sauce or rice.</p>
+<h3 id="3-sparse-data">3. Sparse Data</h3>
+<p>Sparse feature vectors, especially in TF-IDF-based clustering, can dilute the relationships between recipes, leading to clusters that are hard to interpret.</p>
+<h3 id="lessons-learned">Lessons Learned</h3>
+<ul>
+<li><em>Combine Metrics and Manual Evaluation</em>: Automated metrics like silhouette and coherence scores provide a starting point but must be paired with manual inspection for practical insights.</li>
+<li><em>Engage Domain Experts</em>: Culinary expertise adds depth to interpretations, ensuring clusters align with real-world culinary logic.</li>
+<li><em>Iterate and Refine</em>: Cluster evaluation is an iterative process. Refining features, adjusting parameters, and reevaluating are essential steps.</li>
+</ul>
+<h3 id="final-thoughts-1">Final Thoughts</h3>
+<p>Evaluating and interpreting recipe clusters goes beyond calculating scores—it’s about connecting the output to meaningful insights. By combining metrics, visualisations, and domain expertise, you can ensure your clusters tell a story worth exploring.</p>
+<h1 id="part-6-applications-of-recipe-topic-modelling-and-clustering">Part 6. Applications of Recipe Topic Modelling and Clustering.</h1>
+<h3 id="introduction-5">Introduction</h3>
+<p>Recipes are more than just instructions—they are cultural artifacts, sources of inspiration, and solutions to everyday problems. But as the number of recipes available online grows exponentially, finding the right one can feel overwhelming. That’s where the power of topic modelling and clustering comes into play.</p>
+<p>These techniques unlock the potential of recipe data, helping users discover, search, and explore recipes in ways that feel intuitive and tailored. In this blog, we’ll explore:</p>
+<ol>
+<li>The practical applications of recipe clustering and topic modelling.</li>
+<li>How these methods enhance user experiences.</li>
+<li>Examples of their implementation in real-world scenarios.</li>
+</ol>
+<h3 id="why-topic-modelling-and-clustering-matter-in-recipe-analysis">Why Topic Modelling and Clustering Matter in Recipe Analysis</h3>
+<p>Imagine browsing a massive recipe database. How do you sift through thousands of options to find something that suits your mood, dietary needs, or ingredients on hand?</p>
+<p>Traditional search engines rely on keywords, but they fall short in capturing nuanced preferences like &ldquo;light Asian-inspired dinners&rdquo; or &ldquo;quick keto desserts.&rdquo;</p>
+<p>That’s where clustering and topic modelling excel. These techniques group recipes by shared themes, allowing users to:</p>
+<ul>
+<li>Explore recipes by cuisine, diet, or occasion.</li>
+<li>Discover unexpected but relevant options.</li>
+<li>Receive personalised recommendations based on preferences.</li>
+</ul>
+<h3 id="real-life-applications-of-recipe-topic-modelling-and-clustering">Real-Life Applications of Recipe Topic Modelling and Clustering</h3>
+<h3 id="1-personalised-recipe-recommendations">1. Personalised Recipe Recommendations</h3>
+<p>One of the most impactful applications is creating personalised recommendations. By analysing user preferences—ingredients, cooking styles, dietary restrictions—clustering models can suggest recipes tailored to individual tastes.</p>
+<p>For instance:</p>
+<ul>
+<li><strong>Scenario:</strong> A user frequently searches for vegetarian recipes with a focus on quick preparation.</li>
+<li><strong>Solution:</strong> The system clusters recipes into categories like &ldquo;Quick Vegetarian Dinners&rdquo; or &ldquo;Easy Plant-Based Snacks&rdquo; and recommends options from these groups.</li>
+</ul>
+<h3 id="2-themed-meal-planning">2. Themed Meal Planning</h3>
+<p>Clustering enables users to plan meals around specific themes:</p>
+<ul>
+<li><strong>Seasonal Themes:</strong> Recipes grouped by summer, winter, or festive occasions.</li>
+<li><strong>Cuisines:</strong> Explore clusters like &ldquo;Italian Comfort Food&rdquo; or &ldquo;Japanese Street Eats.&rdquo;</li>
+<li><strong>Dietary Needs:</strong> Plan meals for keto, vegan, or gluten-free diets.</li>
+</ul>
+<p>This application helps users curate cohesive meal plans, making it easier to stick to dietary goals or plan for special events.</p>
+<h3 id="3-enhanced-recipe-discovery">3. Enhanced Recipe Discovery</h3>
+<p>Topic modelling organises recipes by abstract themes rather than explicit keywords. For example:</p>
+<ul>
+<li>A topic might represent &ldquo;spicy and savory dishes,&rdquo; including recipes from diverse cuisines like Indian curries, Mexican tacos, and Korean kimchi stew.</li>
+<li>Users exploring this topic can discover recipes they might not have considered otherwise.</li>
+</ul>
+<p>This approach inspires creativity and helps users break out of their cooking routines.</p>
+<h3 id="4-simplified-search">4. Simplified Search</h3>
+<p>Instead of relying solely on keyword-based searches, clustering and topic modelling simplify the search process:</p>
+<ul>
+<li><strong>Example:</strong> Searching &ldquo;easy desserts&rdquo; could surface a cluster of &ldquo;5-Ingredient Desserts,&rdquo; &ldquo;No-Bake Treats,&rdquo; and &ldquo;Quick Cakes.&rdquo;</li>
+<li>Users navigate structured groupings rather than sifting through unrelated results.</li>
+</ul>
+<p>This structured approach makes finding recipes faster and more enjoyable.</p>
+<h3 id="5-recipe-recommender-systems">5. Recipe Recommender Systems</h3>
+<p>Using clustering and topic modelling, recommendation systems become more sophisticated:</p>
+<ul>
+<li>Pairing recipes based on themes: If a user likes &ldquo;chocolate lava cake,&rdquo; the system might suggest &ldquo;molten caramel brownies&rdquo; or &ldquo;peanut butter soufflé.&rdquo;</li>
+<li>Offering complementary meal ideas: A &ldquo;Pasta Alfredo&rdquo; cluster might suggest side dishes like garlic bread or Caesar salad.</li>
+</ul>
+<p>These recommendations enhance user satisfaction and engagement, especially for culinary platforms.</p>
+<h3 id="how-it-works-insights-from-our-project">How It Works: Insights from Our Project</h3>
+<p>In this analysis, we used topic modelling (LDA) and clustering techniques (K-Means) to group recipes by themes and similarities. Here’s a simplified example of the pipeline:</p>
+<ol>
+<li>
+<p><strong>Data Pre-processing:</strong></p>
+<ul>
+<li>Extract key features like ingredients, cooking methods, and cuisine types.</li>
+<li>Use TF-IDF or embedding techniques to create numerical representations of recipes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Topic Modelling:</strong></p>
+<ul>
+<li>Apply LDA to uncover themes. For instance, a topic might represent &ldquo;spicy and savory dishes&rdquo; based on high-probability words like &ldquo;chili,&rdquo; &ldquo;pepper,&rdquo; and &ldquo;garlic.&rdquo;</li>
+</ul>
+</li>
+<li>
+<p><strong>Clustering:</strong></p>
+<ul>
+<li>Use K-Means to group recipes into clusters based on their feature vectors. A cluster might represent &ldquo;Quick Dinner Recipes&rdquo; or &ldquo;Healthy Breakfast Ideas.&rdquo;</li>
+</ul>
+</li>
+<li>
+<p><strong>Evaluation:</strong></p>
+<ul>
+<li>Assess the coherence and interpretability of clusters and topics.</li>
+<li>Perform manual inspections to ensure results align with culinary logic.</li>
+</ul>
+</li>
+</ol>
+<h3 id="real-world-challenges">Real-World Challenges</h3>
+<ul>
+<li>
+<p><em>Overlap Between Clusters</em>: Recipes often belong to multiple categories. For instance, a &ldquo;Vegan Lasagna&rdquo; might fit under &ldquo;Italian Cuisine,&rdquo; &ldquo;Vegan Recipes,&rdquo; and &ldquo;Comfort Foods.&rdquo; Addressing these overlaps requires nuanced clustering techniques.</p>
+</li>
+<li>
+<p><em>Sparse Data</em>: Ingredient lists and descriptions can vary widely, making it challenging to capture meaningful similarities. Feature engineering plays a critical role in mitigating this issue.</p>
+</li>
+<li>
+<p><em>User Diversity</em>: Different users have different preferences. Balancing the generality of clusters with personalisation is an ongoing challenge.</p>
+</li>
+</ul>
+<h2 id="future-directions">Future Directions</h2>
+<p>The applications of clustering and topic modelling extend beyond recipe discovery. Potential future uses include:</p>
+<ul>
+<li><strong>Dynamic Meal Recommendations:</strong> Adapting suggestions based on changing user preferences or seasonal trends.</li>
+<li><strong>Interactive Interfaces:</strong> Allowing users to explore clusters visually, selecting recipes based on overlapping categories.</li>
+<li><strong>Nutritional Insights:</strong> Grouping recipes by calorie count or macronutrient composition for health-conscious users.</li>
+</ul>
+<h2 id="final-thoughts-2">Final Thoughts</h2>
+<p>Recipe clustering and topic modelling go beyond simplifying searches—they transform how we interact with culinary data. Whether it’s creating personalised recommendations, simplifying meal planning, or inspiring creativity, these techniques make recipe exploration more intuitive and enjoyable.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

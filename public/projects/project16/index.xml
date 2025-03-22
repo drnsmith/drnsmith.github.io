@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Feature Engineering &amp; Deployment for Personalised Diagnostics on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/projects/project16/</link>
+    <description>Recent content in Feature Engineering &amp; Deployment for Personalised Diagnostics on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jul 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/projects/project16/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Black Box to Bedside: Feature Analysis and Deployment of AI in Personalised Breast Cancer Care</title>
+      <link>http://localhost:1313/projects/from-black-box-to-bedside-feature-analysis-and-deployment-of-ai-in-personalised-breast-cancer-care/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/from-black-box-to-bedside-feature-analysis-and-deployment-of-ai-in-personalised-breast-cancer-care/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project16_images/pr16.jpg&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;h4&gt;Photo by Ben Hershey on Unsplash&lt;/h4&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith//Histopathology-AI-BreastCancer&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-8-unveiling-hidden-patterns-feature-extraction-with-pre-trained-cnns&#34;&gt;Part 8. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs.&lt;/h1&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Medical imaging has revolutionized diagnostics, offering clinicians unprecedented insight into human health. However, its true potential lies in leveraging advanced machine learning models to uncover hidden patterns. This blog explores how three cutting-edge deep learning models—&lt;strong&gt;ResNet50&lt;/strong&gt;, &lt;strong&gt;EfficientNetB0&lt;/strong&gt;, and &lt;strong&gt;DenseNet201&lt;/strong&gt;—extract meaningful features from medical images. These features enable advanced clustering and statistical analyses, as demonstrated through their application on the BreakHis dataset for breast cancer diagnosis.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

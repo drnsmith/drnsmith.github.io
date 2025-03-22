@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep Learning Models on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/deep-learning-models/</link>
+    <description>Recent content in Deep Learning Models on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jul 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/deep-learning-models/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Precision by Design: Building Deep Learning Models for Breast Cancer Histopathology</title>
+      <link>http://localhost:1313/projects/precision-by-design-building-deep-learning-models-for-breast-cancer-histopathology/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/precision-by-design-building-deep-learning-models-for-breast-cancer-histopathology/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project13_images/pr13.jpg&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;h4&gt;Photo by Ben Hershey on Unsplash&lt;/h4&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith//Histopathology-AI-BreastCancer&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-transforming-breast-cancer-diagnosis-with-deep-learning-the-future-of-ai-in-histopathology-innovations-and-challenges&#34;&gt;Part 1. Transforming Breast Cancer Diagnosis with Deep Learning. The Future of AI in Histopathology: Innovations and Challenges&lt;/h1&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;The field of histopathology is witnessing a paradigm shift with the integration of artificial intelligence (AI) and deep learning (DL). This blog delves into a research project that explores advanced deep learning techniques to enhance breast cancer diagnosis using histopathology images (HIs). The project, based on the BreakHis dataset, leverages state-of-the-art convolutional neural networks (CNNs), ensemble methods, and interpretability tools such as Grad-CAM and LIME. These innovations aim to address critical challenges in clinical applications, including class imbalance, model reliability, and diagnostic accuracy.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

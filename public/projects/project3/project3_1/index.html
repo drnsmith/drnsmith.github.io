@@ -1,19 +1,179 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 1. Building a Data Warehouse: Technical Implementation and Challenges. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores the technical details of building a data warehouse, covering the schema design, the ETL process, implementation in Oracle, and optimisation techniques. It provides foundational insights into the technical challenges, decisions, and lessons learned throughout the process of constructing an efficient data warehouse."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project3_images/pr3.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 1. Building a Data Warehouse: Technical Implementation and Challenges.</h1><p class=f5>This blog explores the technical details of building a data warehouse, covering the schema design, the ETL process, implementation in Oracle, and optimisation techniques. It provides foundational insights into the technical challenges, decisions, and lessons learned throughout the process of constructing an efficient data warehouse.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project3_images/pr3.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/warehouse-management-system target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>In today&rsquo;s data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW).</p><p>In this blog post, I&rsquo;ll walk through the technical journey of building a data warehouse for a company named &lsquo;OfficeProducts&rsquo;, including some of the core challenges faced and how they were addressed.</p><p>This blog is written for those curious about the behind-the-scenes of data integration, schema design, and technical problem-solving involved in creating a functional data warehouse.</p><h3 id=step-1-designing-the-data-warehouse-schema>Step 1: Designing the Data Warehouse Schema</h3><p>The foundation of any data warehouse is its schema. For &lsquo;OfficeProducts&rsquo;, we designed a Snowflake Schema to organise and centralise sales and product information efficiently.</p><p>This schema design revolved around a Transactional Fact Table that holds the transactional data, along with several dimension tables to provide contextual information for each sale. These dimension tables include data on products, clients, sales channels, suppliers, and dates.</p><p>The Snowflake Schema was chosen specifically for its ability to normalise data and reduce redundancy, which enhances query performance.</p><p>The fact table connects to dimension tables through primary and foreign keys. For example, the PRODUCT ID column serves as a foreign key that links transactions to product details in the <strong>DIM PRODUCT</strong> dimension table.</p><p>The use of <strong>VARCHAR</strong> data types for ID columns was an important decision, offering the benefit of flexibility when dealing with multiple data sources.</p><p>While using <strong>VARCHAR</strong> helps maintain adaptability across different sources, it does come with challenges, such as potential data errors or slower searches compared to integer columns.</p><p>Nevertheless, it was selected for its balance of compatibility and performance.</p><h3 id=step-2-etl-process-overview>Step 2: ETL Process Overview</h3><p>The next crucial component of building the data warehouse is the ETL process — <strong>Extract, Transform, and Load</strong>. This is where data from various sources is consolidated into a unified format for easy querying.</p><p>In the &lsquo;OfficeProducts&rsquo; project, the ETL process involved extracting data from two main files: the <strong>Datastream</strong> and <strong>Masterdata</strong> files.</p><p>The <strong>Datastream</strong> file contained transactional information such as product IDs, client IDs, channels, and dates. Meanwhile, the <strong>Masterdata</strong> file contained detailed product and supplier information.</p><p>After extraction, the data underwent transformation, which included joining tables on common keys like <strong>PRODUCT ID</strong> to create a holistic dataset ready for analysis.</p><p>Finally, the loading phase brought the transformed data into the data warehouse using <em>Oracle SQL</em>. During this phase, we created indexes on foreign keys to optimise retrieval speed when querying the data.</p><p>For instance, indexes on columns like <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, and <strong>CHANNEL ID</strong> helped enhance query efficiency by reducing the time taken to access related data.</p><p>Below is an example snippet of SQL used to create one of the dimension tables:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> DIMPRODUCT (
-</span></span><span style=display:flex><span>    PRODUCT_ID VARCHAR2(<span style=color:#ae81ff>6</span>) <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>,
-</span></span><span style=display:flex><span>    PRODUCT_NAME VARCHAR2(<span style=color:#ae81ff>30</span>),
-</span></span><span style=display:flex><span>    SUPPLIER_ID VARCHAR2(<span style=color:#ae81ff>5</span>),
-</span></span><span style=display:flex><span>    PRICE NUMBER(<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>2</span>),
-</span></span><span style=display:flex><span>    BRAND_NAME VARCHAR2(<span style=color:#ae81ff>30</span>),
-</span></span><span style=display:flex><span>    WEIGHT VARCHAR2(<span style=color:#ae81ff>20</span>),
-</span></span><span style=display:flex><span>    COLOR VARCHAR2(<span style=color:#ae81ff>20</span>),
-</span></span><span style=display:flex><span>    AVAILABILITY_STATUS VARCHAR2(<span style=color:#ae81ff>10</span>)
-</span></span><span style=display:flex><span>);
-</span></span></code></pre></div><p>This SQL snippet shows how the <strong>DIM PRODUCT</strong> dimension table was structured, capturing product and supplier data in a normalised form.</p><p>By defining primary keys and establishing clear relationships, we made the data model consistent and easy to use for future analysis.</p><h3 id=challenges-encountered>Challenges Encountered</h3><p>Building the data warehouse wasn’t without its challenges. Below are some of the primary issues we faced and how we tackled them:</p><ul><li><p><em>Handling Data Variety and Quality</em>: One of the major challenges was integrating data from multiple sources with different data types and formats. Using <strong>VARCHAR</strong> for <strong>ID</strong> columns helped to normalise the structure across sources, but ensuring consistency in data quality was an ongoing effort.</p></li><li><p><em>Performance Optimisation</em>: Query performance became critical as the volume of data increased. To address this, we used a combination of indexing and partitioning to speed up data retrieval. The <strong>ROLLUP</strong> and <strong>CUBE SQL</strong> operations were also used to aggregate data efficiently, which allowed for deeper analysis into product sales and promotional impacts.</p></li><li><p><em>Data Consistency and Referential Integrity</em>: Maintaining referential integrity was another challenge, as multiple dimension tables were linked to the fact table. We had to be cautious in ensuring foreign key relationships were properly established and indexed to prevent data anomalies.</p></li></ul><h3 id=implementation-in-oracle>Implementation in Oracle</h3><p>The final data warehouse was implemented using Oracle, aligning with client requirements. Oracle provided a stable environment for handling complex queries and aggregations.</p><p>Moreover, <em>materialised views</em> were used for efficient querying of large datasets, which helped reduce query times during reporting.</p><p>For example, the materialised view was built to speed up sales analysis queries:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> MATERIALIZED <span style=color:#66d9ef>VIEW</span> Promotion_Analysis_mv
-</span></span><span style=display:flex><span>BUILD <span style=color:#66d9ef>IMMEDIATE</span>
-</span></span><span style=display:flex><span>REFRESH COMPLETE
-</span></span><span style=display:flex><span><span style=color:#66d9ef>AS</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> s.PROMO_ID, s.PROD_ID, <span style=color:#66d9ef>SUM</span>(s.AMOUNT_SOLD) <span style=color:#66d9ef>AS</span> TOTAL_SALES
-</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> SH.SALES s
-</span></span><span style=display:flex><span><span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> s.PROMO_ID, s.PROD_ID;
-</span></span></code></pre></div><p>This SQL snippet shows how the <strong>Promotion Analysis</strong> materialised view was designed to aggregate sales data by promotion and product, which made querying faster and more efficient for analysts.</p><h3 id=lessons-learned>Lessons Learned</h3><p>Building a data warehouse for &lsquo;OfficeProducts&rsquo; was a learning-rich experience, especially when it came to balancing schema design complexity with performance requirements. Some key lessons include:</p><ul><li><p><em>Schema Choice Matters</em>: Choosing the right schema type (like the Snowflake Schema) can significantly impact both the efficiency and scalability of a data warehouse.</p></li><li><p><em>ETL is More Than Just Loading Data</em>: A well-planned ETL process can streamline operations and reduce errors when integrating diverse data sources.</p></li><li><p><em>Optimising for Performance</em>: Creating indexes and materialised views can make a huge difference when dealing with large-scale data, especially for frequent queries.</p></li></ul><h3 id=conclusion>Conclusion</h3><p>Building a data warehouse is both an art and a science. It involves careful planning, attention to data quality, and a deep understanding of how data will be used to derive insights.</p><p>For &lsquo;OfficeProducts&rsquo;, the data warehouse is not just a storage solution but a strategic tool that enables more informed business decisions.</p><p>I hope this technical journey provides some insight into the complexities and considerations involved in building a data warehouse from scratch.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 1. Building a Data Warehouse: Technical Implementation and Challenges. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores the technical details of building a data warehouse, covering the schema design, the ETL process, implementation in Oracle, and optimisation techniques. It provides foundational insights into the technical challenges, decisions, and lessons learned throughout the process of constructing an efficient data warehouse.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project3_images/pr3.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 1. Building a Data Warehouse: Technical Implementation and Challenges.
+          </h1>
+          
+            <p class="f5">This blog explores the technical details of building a data warehouse, covering the schema design, the ETL process, implementation in Oracle, and optimisation techniques. It provides foundational insights into the technical challenges, decisions, and lessons learned throughout the process of constructing an efficient data warehouse.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project3_images/pr3.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In today&rsquo;s data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW).</p>
+<p>In this blog post, I&rsquo;ll walk through the technical journey of building a data warehouse for a company named &lsquo;OfficeProducts&rsquo;, including some of the core challenges faced and how they were addressed.</p>
+<p>This blog is written for those curious about the behind-the-scenes of data integration, schema design, and technical problem-solving involved in creating a functional data warehouse.</p>
+<h3 id="step-1-designing-the-data-warehouse-schema">Step 1: Designing the Data Warehouse Schema</h3>
+<p>The foundation of any data warehouse is its schema. For &lsquo;OfficeProducts&rsquo;, we designed a Snowflake Schema to organise and centralise sales and product information efficiently.</p>
+<p>This schema design revolved around a Transactional Fact Table that holds the transactional data, along with several dimension tables to provide contextual information for each sale. These dimension tables include data on products, clients, sales channels, suppliers, and dates.</p>
+<p>The Snowflake Schema was chosen specifically for its ability to normalise data and reduce redundancy, which enhances query performance.</p>
+<p>The fact table connects to dimension tables through primary and foreign keys. For example, the PRODUCT ID column serves as a foreign key that links transactions to product details in the <strong>DIM PRODUCT</strong> dimension table.</p>
+<p>The use of <strong>VARCHAR</strong> data types for ID columns was an important decision, offering the benefit of flexibility when dealing with multiple data sources.</p>
+<p>While using <strong>VARCHAR</strong> helps maintain adaptability across different sources, it does come with challenges, such as potential data errors or slower searches compared to integer columns.</p>
+<p>Nevertheless, it was selected for its balance of compatibility and performance.</p>
+<h3 id="step-2-etl-process-overview">Step 2: ETL Process Overview</h3>
+<p>The next crucial component of building the data warehouse is the ETL process — <strong>Extract, Transform, and Load</strong>. This is where data from various sources is consolidated into a unified format for easy querying.</p>
+<p>In the &lsquo;OfficeProducts&rsquo; project, the ETL process involved extracting data from two main files: the <strong>Datastream</strong> and <strong>Masterdata</strong> files.</p>
+<p>The <strong>Datastream</strong> file contained transactional information such as product IDs, client IDs, channels, and dates. Meanwhile, the <strong>Masterdata</strong> file contained detailed product and supplier information.</p>
+<p>After extraction, the data underwent transformation, which included joining tables on common keys like <strong>PRODUCT ID</strong> to create a holistic dataset ready for analysis.</p>
+<p>Finally, the loading phase brought the transformed data into the data warehouse using <em>Oracle SQL</em>. During this phase, we created indexes on foreign keys to optimise retrieval speed when querying the data.</p>
+<p>For instance, indexes on columns like <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, and <strong>CHANNEL ID</strong> helped enhance query efficiency by reducing the time taken to access related data.</p>
+<p>Below is an example snippet of SQL used to create one of the dimension tables:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> DIMPRODUCT (
+</span></span><span style="display:flex;"><span>    PRODUCT_ID VARCHAR2(<span style="color:#ae81ff">6</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    PRODUCT_NAME VARCHAR2(<span style="color:#ae81ff">30</span>),
+</span></span><span style="display:flex;"><span>    SUPPLIER_ID VARCHAR2(<span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>    PRICE NUMBER(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    BRAND_NAME VARCHAR2(<span style="color:#ae81ff">30</span>),
+</span></span><span style="display:flex;"><span>    WEIGHT VARCHAR2(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    COLOR VARCHAR2(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    AVAILABILITY_STATUS VARCHAR2(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>This SQL snippet shows how the <strong>DIM PRODUCT</strong> dimension table was structured, capturing product and supplier data in a normalised form.</p>
+<p>By defining primary keys and establishing clear relationships, we made the data model consistent and easy to use for future analysis.</p>
+<h3 id="challenges-encountered">Challenges Encountered</h3>
+<p>Building the data warehouse wasn’t without its challenges. Below are some of the primary issues we faced and how we tackled them:</p>
+<ul>
+<li>
+<p><em>Handling Data Variety and Quality</em>: One of the major challenges was integrating data from multiple sources with different data types and formats. Using <strong>VARCHAR</strong> for <strong>ID</strong> columns helped to normalise the structure across sources, but ensuring consistency in data quality was an ongoing effort.</p>
+</li>
+<li>
+<p><em>Performance Optimisation</em>: Query performance became critical as the volume of data increased. To address this, we used a combination of indexing and partitioning to speed up data retrieval. The <strong>ROLLUP</strong> and <strong>CUBE SQL</strong> operations were also used to aggregate data efficiently, which allowed for deeper analysis into product sales and promotional impacts.</p>
+</li>
+<li>
+<p><em>Data Consistency and Referential Integrity</em>: Maintaining referential integrity was another challenge, as multiple dimension tables were linked to the fact table. We had to be cautious in ensuring foreign key relationships were properly established and indexed to prevent data anomalies.</p>
+</li>
+</ul>
+<h3 id="implementation-in-oracle">Implementation in Oracle</h3>
+<p>The final data warehouse was implemented using Oracle, aligning with client requirements. Oracle provided a stable environment for handling complex queries and aggregations.</p>
+<p>Moreover, <em>materialised views</em> were used for efficient querying of large datasets, which helped reduce query times during reporting.</p>
+<p>For example, the materialised view was built to speed up sales analysis queries:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> MATERIALIZED <span style="color:#66d9ef">VIEW</span> Promotion_Analysis_mv
+</span></span><span style="display:flex;"><span>BUILD <span style="color:#66d9ef">IMMEDIATE</span>
+</span></span><span style="display:flex;"><span>REFRESH COMPLETE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> s.PROMO_ID, s.PROD_ID, <span style="color:#66d9ef">SUM</span>(s.AMOUNT_SOLD) <span style="color:#66d9ef">AS</span> TOTAL_SALES
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> SH.SALES s
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> s.PROMO_ID, s.PROD_ID;
+</span></span></code></pre></div><p>This SQL snippet shows how the <strong>Promotion Analysis</strong> materialised view was designed to aggregate sales data by promotion and product, which made querying faster and more efficient for analysts.</p>
+<h3 id="lessons-learned">Lessons Learned</h3>
+<p>Building a data warehouse for &lsquo;OfficeProducts&rsquo; was a learning-rich experience, especially when it came to balancing schema design complexity with performance requirements. Some key lessons include:</p>
+<ul>
+<li>
+<p><em>Schema Choice Matters</em>: Choosing the right schema type (like the Snowflake Schema) can significantly impact both the efficiency and scalability of a data warehouse.</p>
+</li>
+<li>
+<p><em>ETL is More Than Just Loading Data</em>: A well-planned ETL process can streamline operations and reduce errors when integrating diverse data sources.</p>
+</li>
+<li>
+<p><em>Optimising for Performance</em>: Creating indexes and materialised views can make a huge difference when dealing with large-scale data, especially for frequent queries.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Building a data warehouse is both an art and a science. It involves careful planning, attention to data quality, and a deep understanding of how data will be used to derive insights.</p>
+<p>For &lsquo;OfficeProducts&rsquo;, the data warehouse is not just a storage solution but a strategic tool that enables more informed business decisions.</p>
+<p>I hope this technical journey provides some insight into the complexities and considerations involved in building a data warehouse from scratch.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 2. Designing Dense Neural Networks: Lessons from Fashion MNIST. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Explore how to build dense neural networks for image classification tasks. This blog delves into activation functions, architecture design, and optimising performance.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project12_images/pr12.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 2. Designing Dense Neural Networks: Lessons from Fashion MNIST.
+          </h1>
+          
+            <p class="f5">Explore how to build dense neural networks for image classification tasks. This blog delves into activation functions, architecture design, and optimising performance.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project12_images/pr12.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Designing neural networks (NNs) is an art as much as it is a science. When faced with the challenge of classifying Fashion MNIST images, I needed a lightweight yet powerful architecture to handle the complexity of apparel images. Dense neural networks, with their fully connected layers, were the perfect choice for this task.</p>
+<p>In this blog, we’ll walk through:</p>
+<ul>
+<li>How dense neural networks work and their role in image classification.</li>
+<li>Designing an efficient architecture using activation functions and layers.</li>
+<li>Practical lessons learned while optimising performance with Fashion MNIST.</li>
+</ul>
+<p>By the end, you’ll have a clear roadmap to build your own dense networks for image classification tasks.
+Let’s dive in!</p>
+<h3 id="technical-explanation">Technical Explanation</h3>
+<h4 id="what-is-a-dense-neural-network">What is a Dense Neural Network?</h4>
+<p>Dense layers are the backbone of most NNs. Each neuron in a dense layer connects to every neuron in the previous layer, enabling the network to learn complex representations of the data.</p>
+<p>For image classification, dense layers translate features extracted by convolutional or pooling layers into class probabilities. While CNNs are often the star, dense layers are where the final decisions are made.</p>
+<p>Dense NNs were the perfect choice for this task because they excel at learning complex, high-level patterns from data. Here&rsquo;s why they fit well for Fashion MNIST:</p>
+<ul>
+<li><strong>Fully Connected Layers Capture Global Patterns</strong>
+Dense layers connect every neuron to every neuron in the previous layer, enabling the model to synthesise high-level features from the input data.</li>
+</ul>
+<p>This characteristic makes them ideal for tasks like classifying Fashion MNIST, where the relationships between pixels are crucial for identifying apparel categories like shirts, trousers, and sneakers.</p>
+<ul>
+<li>
+<p><strong>Simple and Versatile Architecture</strong>
+Dense layers are straightforward and don’t rely on task-specific assumptions like convolutions (which assume spatial relationships). This simplicity makes them a versatile starting point for datasets like Fashion MNIST, especially for benchmarking models or learning neural network fundamentals.</p>
+</li>
+<li>
+<p><strong>Reducing Dimensionality</strong>
+Fashion MNIST images are 28x28 pixels, resulting in 784 input features when flattened. Dense layers effectively condense this high-dimensional data into smaller, more meaningful representations by learning weighted connections. This process reduces noise and highlights features that contribute most to classification.</p>
+</li>
+<li>
+<p><strong>Balance Between Simplicity and Performance</strong>
+While convolutional layers are more efficient for image-specific tasks, dense layers strike a balance between computational simplicity and classification performance.</p>
+</li>
+</ul>
+<p>For Fashion MNIST, which has relatively small images and balanced classes, dense networks perform well without the complexity of convolutional architectures.</p>
+<ul>
+<li><strong>Transferability of Knowledge</strong>
+Dense networks generalise well across various types of data. Building a dense NN for Fashion MNIST lays a solid foundation for tackling more complex datasets or tasks, making it an excellent learning tool for both beginners and experienced practitioners.</li>
+</ul>
+<p>Dense layers make the final decisions in a NN because they serve as the fully connected layers that consolidate all extracted features into meaningful predictions. Here’s how they accomplish this:</p>
+<ul>
+<li><strong>Aggregating Features</strong>
+Before reaching the dense layers, a CNN extracts spatial features like edges, textures, and shapes using convolutional and pooling layers.</li>
+</ul>
+<p>However, these extracted features are still abstract and need to be connected to specific outputs.
+Dense layers combine these features, weighting their importance, and translate them into predictions.</p>
+<p><strong>Example</strong>: For Fashion MNIST, convolutional layers might identify textures like &ldquo;stripes&rdquo; or &ldquo;solidity&rdquo;,but the dense layer determines whether these belong to a &ldquo;T-shirt&rdquo; or a &ldquo;Dress&rdquo; by aggregating the features.</p>
+<ul>
+<li><strong>Fully Connected Neurons</strong>
+Each neuron in a dense layer connects to every neuron in the previous layer. This ensures the network has access to all the extracted features, regardless of where they were found in the image.</li>
+</ul>
+<p><em>Why It’s Important:</em></p>
+<ul>
+<li>
+<p>Spatial features extracted by CNNs (like an edge in the top-left corner of an image) might be relevant for multiple classes. Dense layers bring this global context into the decision-making process.</p>
+</li>
+<li>
+<p><strong>Mapping Features to Classes</strong>
+Dense layers assign weights to features to determine their relevance for each class. This step ensures the network outputs class probabilities.</p>
+</li>
+</ul>
+<p><strong>Softmax Activation</strong>: The final dense layer uses the softmax activation function to map the aggregated features into probabilities for each class.</p>
+<p>For Fashion MNIST, this layer outputs a probability distribution across 10 categories (e.g., 0.6 for &ldquo;Sneaker,&rdquo; 0.3 for &ldquo;Sandal&rdquo;).</p>
+<ul>
+<li><strong>Learning Decision Boundaries</strong>
+Dense layers refine the feature space into decision boundaries. By assigning weights and biases during training, these layers learn to separate data points belonging to different classes.</li>
+</ul>
+<p><strong>Example</strong>: A dense layer might determine that a &ldquo;Sneaker&rdquo; is characterised by low curvature (from pooling layers) and high edge intensity (from convolutional layers). It uses these attributes to assign higher probabilities to the correct class.</p>
+<p><em>Why This Matters</em>
+Dense layers act as the decision-makers in a network:</p>
+<ul>
+<li>They synthesise all the high-level features extracted by CNNs.</li>
+<li>They produce final predictions by mapping features to classes.</li>
+<li>They are trainable layers that optimise the final output by minimising the loss.</li>
+</ul>
+<p>A lightweight architecture was essential for classifying Fashion MNIST images because it offers several practical and technical advantages:</p>
+<ul>
+<li><strong>1. Computational Efficiency</strong>
+Fashion MNIST images are relatively small (28x28 pixels) and grayscale. Using a lightweight architecture ensures efficient processing without overcomplicating the model.</li>
+</ul>
+<p>Overly complex architectures would unnecessarily increase computation time and memory usage for a problem that doesn&rsquo;t require heavy resources.</p>
+<p><strong>Why It Matters</strong>: A lightweight model trains faster, uses less memory, and can run on standard hardware, making it accessible for experimentation and practical deployment.</p>
+<ul>
+<li><strong>2. Avoiding Overfitting</strong>
+Simpler models are less prone to overfitting, especially on smaller datasets.</li>
+</ul>
+<p>Fashion MNIST has 60,000 training images, which is sufficient for dense networks but not large enough to justify deeper or more complex architectures like <code>ResNet</code> or <code>EfficientNet</code>.</p>
+<p><strong>Why It Matters</strong>: Lightweight architectures force the model to focus on generalisable patterns rather than memorising data.</p>
+<ul>
+<li><strong>3. Balancing Performance and Complexity</strong>
+Dense networks are inherently simpler than CNNs because they do not include convolutional layers for feature extraction. This simplicity makes dense architectures lightweight and easier to train.</li>
+</ul>
+<p>For Fashion MNIST, a dense network strikes the right balance between computational efficiency and classification accuracy.</p>
+<p><strong>Why It Matters</strong>: Lightweight architectures allow quicker iterations and experimentation without sacrificing performance, making them perfect for prototyping.</p>
+<ul>
+<li><strong>4. Real-World Deployment</strong>
+Lightweight models are easier to deploy in real-world scenarios, such as mobile devices or edge computing. While Fashion MNIST is a benchmark dataset, the principles of lightweight design apply to production use cases where efficiency is critical.</li>
+</ul>
+<p><strong>Why It Matters</strong>: A model that performs well and is resource-efficient can scale better in practical applications.</p>
+<p><strong>5. Building a Foundation</strong>
+Fashion MNIST is often used as an entry point for learning NNs. A lightweight model serves as a simple yet effective foundation for understanding and experimenting with dense architectures before moving to more complex models.</p>
+<p><strong>Why It Matters</strong>: A lightweight design helps in building intuition about neural networks without overwhelming computational complexity.</p>
+<h3 id="building-a-dense-network-for-fashion-mnist">Building a Dense Network for Fashion MNIST</h3>
+<p>Fashion MNIST images are 28x28 grayscale pixels, and our dense network should be designed to process this flattened input. Here&rsquo;s the architecture we used:</p>
+<ul>
+<li><em>Flatten Layer</em>: Converts the 2D image into a 1D array of 784 pixels.</li>
+<li><em>Hidden Dense Layers</em>: Capture patterns and features from the data.</li>
+<li><em>Output Layer</em>: Outputs probabilities for the 10 classes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Flatten
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Build the model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    Flatten(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">28</span>)),           <span style="color:#75715e"># Flatten the 28x28 input</span>
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),           <span style="color:#75715e"># Hidden layer with 128 neurons</span>
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)          <span style="color:#75715e"># Output layer with 10 classes</span>
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compile the model</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, 
+</span></span><span style="display:flex;"><span>              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, 
+</span></span><span style="display:flex;"><span>              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, validation_split<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+</span></span></code></pre></div><h3 id="choosing-the-right-activation-functions">Choosing the Right Activation Functions</h3>
+<p>Activation functions determine how neurons &ldquo;fire&rdquo; and pass information to the next layer. For this task:</p>
+<ul>
+<li><em>ReLU (Rectified Linear Unit)</em>: Fast and computationally efficient, perfect for hidden layers.</li>
+<li><em>Softmax</em>: Converts the output into probabilities, ideal for multi-class classification.</li>
+</ul>
+<p><strong>Why ReLU?</strong>
+<code>ReLU</code> solves the vanishing gradient problem, making training faster and more effective. In contrast, <code>Sigmoid</code> and <code>Tanh</code>, while useful in specific cases, can struggle with large datasets due to slower convergence.</p>
+<h3 id="lessons-from-optimisation">Lessons from Optimisation</h3>
+<ul>
+<li>
+<p><em>Batch Size and Epochs</em>:
+Smaller batch sizes (32–64) often balance training speed with generalisation. Training for 10–20 epochs typically produces reliable results without overfitting.</p>
+</li>
+<li>
+<p><em>Validation Split</em>:
+Using 20% of the data for validation ensures the model generalises well to unseen data.</p>
+</li>
+<li>
+<p><em>Learning Rate</em>:
+The Adam optimiser, with its adaptive learning rate, simplifies hyperparameter tuning and ensures faster convergence.</p>
+</li>
+</ul>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<p>Dense NNs are versatile and extend far beyond Fashion MNIST.</p>
+<h4 id="product-categorisation-in-retail">Product Categorisation in Retail</h4>
+<p>Classify product images for e-commerce platforms, automating inventory management and search functionalities.</p>
+<h4 id="medical-imaging">Medical Imaging</h4>
+<p>Dense layers complement convolutional architectures in identifying features in X-rays, MRIs, and histopathology slides.</p>
+<h4 id="document-classification">Document Classification</h4>
+<p>Dense networks shine in text-based tasks like identifying document categories or extracting sentiments when paired with embedding layers.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Dense NNs may seem simple, but their potential is immense. By carefully selecting activation functions, layer sizes, and hyperparameters, you can build models that generalise well and achieve high accuracy on tasks like Fashion MNIST.</p>
+<p>Now it’s your turn—experiment with architectures, tweak the hyperparameters, and see what works best for your dataset. And don’t forget: the best designs come from iteration and learning.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

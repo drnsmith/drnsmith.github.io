@@ -1,7 +1,9 @@
-baseURL = 'http://localhost:1313/'
+baseURL = "https://drnsmith.github.io/"
 languageCode = 'en-us'
 title = 'Natasha Smith Portfolio'
 theme = 'ananke'
+[permalinks]
+  projects = "/projects/:slug/"
 
 [menu]
   [[menu.main]]
@@ -30,3 +32,4 @@ theme = 'ananke'
       unsafe = true
 
 buildFuture = true
+

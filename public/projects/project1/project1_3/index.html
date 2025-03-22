@@ -1,57 +1,214 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PART 3. Choosing the Right Model: Training and Evaluating an AI Recipe Difficulty Classifier | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="I explore different machine learning models and their effectiveness in classifying recipe difficulty levels. In this blog, I talk about the process of model selection, hyperparameter tuning, and evaluation metrics, sharing insights into which models performed best and why."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project1_images/pr1.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">PART 3. Choosing the Right Model: Training and Evaluating an AI Recipe Difficulty Classifier</h1><p class=f5>I explore different machine learning models and their effectiveness in classifying recipe difficulty levels. In this blog, I talk about the process of model selection, hyperparameter tuning, and evaluation metrics, sharing insights into which models performed best and why.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project1_images/pr1.jpg></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/AI-Recipe-Classifier target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>In the previous post, I explored how feature engineering transforms raw recipe data into valuable insights for predicting recipe difficulty. With features like ingredient complexity, technique identification, and step count, my dataset is now ready for the next stage: selecting, training, and evaluating a machine learning model that can classify recipes by difficulty level. Model selection is a crucial step in building a successful classifier. In this post, I’ll walk you through the models I tested, the training process, and the metrics I used to evaluate performance.</p><h3 id=why-model-selection-matters>Why Model Selection Matters</h3><p>Choosing the right model is essential because each algorithm handles data differently.
-A model that works well with structured numeric data might struggle with text-heavy datasets, while a model that excels with large datasets might not perform as well on smaller ones. For this project, I tested several popular classification models:</p><ul><li>Naive Bayes (NB)</li><li>Support Vector Machines (SVM)</li><li>Random Forest (RF)</li></ul><p>Each model has unique strengths, and I wanted to determine which was best suited to handle the mixture of numerical and textual features in our recipe dataset.</p><h3 id=model-testing-and-selection-process>Model Testing and Selection Process</h3><h3 id=step-1-splitting-the-data>Step 1: Splitting the Data</h3><p>To ensure our model performs well on unseen data, I split the dataset into training and test sets. The training set helps the model learn patterns, while the test set evaluates its generalisation.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> train_test_split
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Define features (X) and target (y)</span>
-</span></span><span style=display:flex><span>X <span style=color:#f92672>=</span> data[[<span style=color:#e6db74>&#34;ingredient_complexity&#34;</span>, <span style=color:#e6db74>&#34;step_count&#34;</span>, <span style=color:#e6db74>&#34;technique_complexity&#34;</span>]]
-</span></span><span style=display:flex><span>y <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#34;difficulty&#34;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Split the data into training and test sets</span>
-</span></span><span style=display:flex><span>X_train, X_test, y_train, y_test <span style=color:#f92672>=</span> train_test_split(X, y, test_size<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
-</span></span></code></pre></div><h3 id=step-2-testing-different-models>Step 2: Testing Different Models</h3><p>Each model has its own advantages, and I wanted to explore which one would be the best fit for the recipe classification task.</p><ul><li>NB Classifier</li></ul><p>The NB classifier is simple, fast, and works well for text-heavy datasets, but it assumes feature independence, which might not hold for our features.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.naive_bayes <span style=color:#f92672>import</span> MultinomialNB
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> accuracy_score
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Initialize and train the Naive Bayes model</span>
-</span></span><span style=display:flex><span>nb_model <span style=color:#f92672>=</span> MultinomialNB()
-</span></span><span style=display:flex><span>nb_model<span style=color:#f92672>.</span>fit(X_train, y_train)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Predict and evaluate</span>
-</span></span><span style=display:flex><span>nb_pred <span style=color:#f92672>=</span> nb_model<span style=color:#f92672>.</span>predict(X_test)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Naive Bayes Accuracy:&#34;</span>, accuracy_score(y_test, nb_pred))
-</span></span></code></pre></div><ul><li>SVM</li></ul><p>SVM are powerful for classification tasks and perform well on smaller datasets, though they can be slower with larger data.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.svm <span style=color:#f92672>import</span> SVC
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Initialize and train the SVM model</span>
-</span></span><span style=display:flex><span>svm_model <span style=color:#f92672>=</span> SVC(kernel<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;linear&#34;</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
-</span></span><span style=display:flex><span>svm_model<span style=color:#f92672>.</span>fit(X_train, y_train)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Predict and evaluate</span>
-</span></span><span style=display:flex><span>svm_pred <span style=color:#f92672>=</span> svm_model<span style=color:#f92672>.</span>predict(X_test)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;SVM Accuracy:&#34;</span>, accuracy_score(y_test, svm_pred))
-</span></span></code></pre></div><ul><li>RF Classifier</li></ul><p>RF is an ensemble method that combines multiple decision trees, making it robust against overfitting and effective for our mixed data types.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.ensemble <span style=color:#f92672>import</span> RandomForestClassifier
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Initialise and train the Random Forest model</span>
-</span></span><span style=display:flex><span>rf_model <span style=color:#f92672>=</span> RandomForestClassifier(n_estimators<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>, max_depth<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
-</span></span><span style=display:flex><span>rf_model<span style=color:#f92672>.</span>fit(X_train, y_train)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Predict and evaluate</span>
-</span></span><span style=display:flex><span>rf_pred <span style=color:#f92672>=</span> rf_model<span style=color:#f92672>.</span>predict(X_test)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Random Forest Accuracy:&#34;</span>, accuracy_score(y_test, rf_pred))
-</span></span></code></pre></div><p>After testing these models, the RF classifier emerged as the most accurate for our dataset, with high accuracy and robustness to overfitting.</p><p>It was also flexible enough to handle the mix of numeric and text-derived features.</p><h3 id=model-training-and-hyperparameter-tuning>Model Training and Hyperparameter Tuning</h3><p>Once I selected RF, I fine-tuned its hyperparameters to optimise performance.Hyperparameters control aspects of the model, such as the number of trees in the forest or the maximum depth of each tree.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.model_selection <span style=color:#f92672>import</span> GridSearchCV
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Set up hyperparameter grid</span>
-</span></span><span style=display:flex><span>param_grid <span style=color:#f92672>=</span> {
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;n_estimators&#34;</span>: [<span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>150</span>],
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;max_depth&#34;</span>: [<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>30</span>],
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Initialize Grid Search for Random Forest</span>
-</span></span><span style=display:flex><span>grid_search <span style=color:#f92672>=</span> GridSearchCV(estimator<span style=color:#f92672>=</span>RandomForestClassifier(random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>), param_grid<span style=color:#f92672>=</span>param_grid, cv<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>, scoring<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;accuracy&#34;</span>)
-</span></span><span style=display:flex><span>grid_search<span style=color:#f92672>.</span>fit(X_train, y_train)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Best parameters</span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Best Hyperparameters:&#34;</span>, grid_search<span style=color:#f92672>.</span>best_params_)
-</span></span></code></pre></div><p>The grid search revealed the optimal combination of hyperparameters for my model, further boosting accuracy.</p><h3 id=evaluating-model-performance>Evaluating Model Performance</h3><p>With the final RF model trained, it’s time to evaluate its performance. I used several metrics to assess its accuracy and predictive power:</p><ul><li><em>Accuracy</em>: The percentage of correct predictions.</li><li><em>Precision</em>: The proportion of true positives out of all positive predictions.</li><li><em>Recall:</em> The proportion of true positives out of all actual positives.</li><li><em>F1-Score</em>: The harmonic mean of precision and recall, balancing both metrics.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Generate a classification report</span>
-</span></span><span style=display:flex><span>print(classification_report(y_test, rf_pred))
-</span></span></code></pre></div><h3 id=understanding-the-metrics>Understanding the Metrics</h3><p><em>Accuracy</em> is useful for getting an overall sense of the model’s correctness.</p><p><em>Precision</em> is especially important when we want to minimise false positives, which might be useful in recommending recipes based on ease or complexity.</p><p><em>Recall</em> helps understand how well the model catches recipes within each difficulty class.</p><p><em>F1-Score</em> provides a balance, especially helpful in cases of data imbalance.</p><h3 id=key-takeaways>Key Takeaways</h3><p>Here’s what I learned from model selection and evaluation:</p><ul><li>RF outperformed Naive Bayes and SVM, handling the mix of numerical and textual data with ease.</li><li>Hyperparameter tuning further optimised my model, resulting in an accuracy of approximately 85%.</li><li>Evaluation metrics like precision and recall gave us a deeper understanding of the model’s performance across each difficulty level.</li></ul><h3 id=conclusion>Conclusion</h3><p>Selecting and training the right model was a crucial part of this recipe difficulty classifier. Through careful testing and tuning, I developed a robust model that accurately classifies recipes by difficulty. This classifier now has the potential to enhance user experiences on cooking platforms, helping chefs of all levels find recipes suited to their skill.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 3. Choosing the Right Model: Training and Evaluating an AI Recipe Difficulty Classifier | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="I explore different machine learning models and their effectiveness in classifying recipe difficulty levels. In this blog, I talk about the process of model selection, hyperparameter tuning, and evaluation metrics, sharing insights into which models performed best and why.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project1_images/pr1.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 3. Choosing the Right Model: Training and Evaluating an AI Recipe Difficulty Classifier
+          </h1>
+          
+            <p class="f5">I explore different machine learning models and their effectiveness in classifying recipe difficulty levels. In this blog, I talk about the process of model selection, hyperparameter tuning, and evaluation metrics, sharing insights into which models performed best and why.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project1_images/pr1.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In the previous post, I explored how feature engineering transforms raw recipe data into valuable insights for predicting recipe difficulty. With features like ingredient complexity, technique identification, and step count, my dataset is now ready for the next stage: selecting, training, and evaluating a machine learning model that can classify recipes by difficulty level. Model selection is a crucial step in building a successful classifier. In this post, I’ll walk you through the models I tested, the training process, and the metrics I used to evaluate performance.</p>
+<h3 id="why-model-selection-matters">Why Model Selection Matters</h3>
+<p>Choosing the right model is essential because each algorithm handles data differently.
+A model that works well with structured numeric data might struggle with text-heavy datasets, while a model that excels with large datasets might not perform as well on smaller ones. For this project, I tested several popular classification models:</p>
+<ul>
+<li>Naive Bayes (NB)</li>
+<li>Support Vector Machines (SVM)</li>
+<li>Random Forest (RF)</li>
+</ul>
+<p>Each model has unique strengths, and I wanted to determine which was best suited to handle the mixture of numerical and textual features in our recipe dataset.</p>
+<h3 id="model-testing-and-selection-process">Model Testing and Selection Process</h3>
+<h3 id="step-1-splitting-the-data">Step 1: Splitting the Data</h3>
+<p>To ensure our model performs well on unseen data, I split the dataset into training and test sets. The training set helps the model learn patterns, while the test set evaluates its generalisation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define features (X) and target (y)</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> data[[<span style="color:#e6db74">&#34;ingredient_complexity&#34;</span>, <span style="color:#e6db74">&#34;step_count&#34;</span>, <span style="color:#e6db74">&#34;technique_complexity&#34;</span>]]
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;difficulty&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Split the data into training and test sets</span>
+</span></span><span style="display:flex;"><span>X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span></code></pre></div><h3 id="step-2-testing-different-models">Step 2: Testing Different Models</h3>
+<p>Each model has its own advantages, and I wanted to explore which one would be the best fit for the recipe classification task.</p>
+<ul>
+<li>NB Classifier</li>
+</ul>
+<p>The NB classifier is simple, fast, and works well for text-heavy datasets, but it assumes feature independence, which might not hold for our features.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.naive_bayes <span style="color:#f92672">import</span> MultinomialNB
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> accuracy_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize and train the Naive Bayes model</span>
+</span></span><span style="display:flex;"><span>nb_model <span style="color:#f92672">=</span> MultinomialNB()
+</span></span><span style="display:flex;"><span>nb_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>nb_pred <span style="color:#f92672">=</span> nb_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Naive Bayes Accuracy:&#34;</span>, accuracy_score(y_test, nb_pred))
+</span></span></code></pre></div><ul>
+<li>SVM</li>
+</ul>
+<p>SVM are powerful for classification tasks and perform well on smaller datasets, though they can be slower with larger data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.svm <span style="color:#f92672">import</span> SVC
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize and train the SVM model</span>
+</span></span><span style="display:flex;"><span>svm_model <span style="color:#f92672">=</span> SVC(kernel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linear&#34;</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>svm_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>svm_pred <span style="color:#f92672">=</span> svm_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;SVM Accuracy:&#34;</span>, accuracy_score(y_test, svm_pred))
+</span></span></code></pre></div><ul>
+<li>RF Classifier</li>
+</ul>
+<p>RF is an ensemble method that combines multiple decision trees, making it robust against overfitting and effective for our mixed data types.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> RandomForestClassifier
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialise and train the Random Forest model</span>
+</span></span><span style="display:flex;"><span>rf_model <span style="color:#f92672">=</span> RandomForestClassifier(n_estimators<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, max_depth<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>rf_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>rf_pred <span style="color:#f92672">=</span> rf_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Random Forest Accuracy:&#34;</span>, accuracy_score(y_test, rf_pred))
+</span></span></code></pre></div><p>After testing these models, the RF classifier emerged as the most accurate for our dataset, with high accuracy and robustness to overfitting.</p>
+<p>It was also flexible enough to handle the mix of numeric and text-derived features.</p>
+<h3 id="model-training-and-hyperparameter-tuning">Model Training and Hyperparameter Tuning</h3>
+<p>Once I selected RF, I fine-tuned its hyperparameters to optimise performance.Hyperparameters control aspects of the model, such as the number of trees in the forest or the maximum depth of each tree.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> GridSearchCV
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set up hyperparameter grid</span>
+</span></span><span style="display:flex;"><span>param_grid <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;n_estimators&#34;</span>: [<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">150</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;max_depth&#34;</span>: [<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>],
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize Grid Search for Random Forest</span>
+</span></span><span style="display:flex;"><span>grid_search <span style="color:#f92672">=</span> GridSearchCV(estimator<span style="color:#f92672">=</span>RandomForestClassifier(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>), param_grid<span style="color:#f92672">=</span>param_grid, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, scoring<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;accuracy&#34;</span>)
+</span></span><span style="display:flex;"><span>grid_search<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Best parameters</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Best Hyperparameters:&#34;</span>, grid_search<span style="color:#f92672">.</span>best_params_)
+</span></span></code></pre></div><p>The grid search revealed the optimal combination of hyperparameters for my model, further boosting accuracy.</p>
+<h3 id="evaluating-model-performance">Evaluating Model Performance</h3>
+<p>With the final RF model trained, it’s time to evaluate its performance. I used several metrics to assess its accuracy and predictive power:</p>
+<ul>
+<li><em>Accuracy</em>: The percentage of correct predictions.</li>
+<li><em>Precision</em>: The proportion of true positives out of all positive predictions.</li>
+<li><em>Recall:</em> The proportion of true positives out of all actual positives.</li>
+<li><em>F1-Score</em>: The harmonic mean of precision and recall, balancing both metrics.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate a classification report</span>
+</span></span><span style="display:flex;"><span>print(classification_report(y_test, rf_pred))
+</span></span></code></pre></div><h3 id="understanding-the-metrics">Understanding the Metrics</h3>
+<p><em>Accuracy</em> is useful for getting an overall sense of the model’s correctness.</p>
+<p><em>Precision</em> is especially important when we want to minimise false positives, which might be useful in recommending recipes based on ease or complexity.</p>
+<p><em>Recall</em> helps understand how well the model catches recipes within each difficulty class.</p>
+<p><em>F1-Score</em> provides a balance, especially helpful in cases of data imbalance.</p>
+<h3 id="key-takeaways">Key Takeaways</h3>
+<p>Here’s what I learned from model selection and evaluation:</p>
+<ul>
+<li>RF outperformed Naive Bayes and SVM, handling the mix of numerical and textual data with ease.</li>
+<li>Hyperparameter tuning further optimised my model, resulting in an accuracy of approximately 85%.</li>
+<li>Evaluation metrics like precision and recall gave us a deeper understanding of the model’s performance across each difficulty level.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Selecting and training the right model was a crucial part of this recipe difficulty classifier. Through careful testing and tuning, I developed a robust model that accurately classifies recipes by difficulty. This classifier now has the potential to enhance user experiences on cooking platforms, helping chefs of all levels find recipes suited to their skill.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

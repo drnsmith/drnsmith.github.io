@@ -1,57 +1,220 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation? | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Investigate whether data augmentation can effectively replace colour normalisation in histopathology image analysis."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project10_images/pr10.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</h1><p class=f5>Investigate whether data augmentation can effectively replace colour normalisation in histopathology image analysis.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project10_images/pr10.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.</p><p>Traditionally, <strong>Colour Normalisation (CN)</strong> has been the gold standard for handling variability in histopathology images. However, advancements in <strong>Data Augmentation (DA)</strong> techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.</p><p>This blog investigates:</p><ul><li>The fundamentals of data augmentation.</li><li>Key augmentation techniques for histopathology.</li><li>A comparative analysis of DA and CN workflows using a DenseNet201 model.</li></ul><h2 id=what-is-data-augmentation><strong>What is Data Augmentation?</strong></h2><p><strong>Data augmentation</strong> artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.</p><h3 id=key-benefits-of-da><strong>Key Benefits of DA</strong></h3><ul><li><strong>Improved Generalisation:</strong> DA exposes the model to diverse scenarios, making it robust to unseen data.</li><li><strong>Simplified Workflows:</strong> Unlike CN, DA requires no reference images or domain-specific pre-processing.</li><li><strong>Enhanced Scalability:</strong> DA is easy to implement across datasets with varying staining protocols.</li></ul><h2 id=key-data-augmentation-techniques><strong>Key Data Augmentation Techniques</strong></h2><h3 id=1-random-rotation><strong>1. Random Rotation</strong></h3><p>Randomly rotates an image within a specified degree range, helping the model handle differently oriented samples.</p><p><strong>Code Snippet:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.preprocessing.image <span style=color:#f92672>import</span> ImageDataGenerator
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(rotation_range<span style=color:#f92672>=</span><span style=color:#ae81ff>45</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>augment_rotation</span>(image):
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Augments an image with random rotation.
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> image<span style=color:#f92672>.</span>reshape((<span style=color:#ae81ff>1</span>,) <span style=color:#f92672>+</span> image<span style=color:#f92672>.</span>shape)  <span style=color:#75715e># Reshape to add batch dimension</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> batch <span style=color:#f92672>in</span> datagen<span style=color:#f92672>.</span>flow(image, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> batch[<span style=color:#ae81ff>0</span>]
-</span></span></code></pre></div><h3 id=2-horizontal-and-vertical-flipping><strong>2. Horizontal and Vertical Flipping</strong></h3><p>Flips the image across its axes to prevent the model from overfitting to spatial biases.</p><p><strong>Code Snippet:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(horizontal_flip<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, vertical_flip<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>augment_flip</span>(image):
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Augments an image with horizontal and vertical flips.
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> image<span style=color:#f92672>.</span>reshape((<span style=color:#ae81ff>1</span>,) <span style=color:#f92672>+</span> image<span style=color:#f92672>.</span>shape)  <span style=color:#75715e># Reshape to add batch dimension</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> batch <span style=color:#f92672>in</span> datagen<span style=color:#f92672>.</span>flow(image, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> batch[<span style=color:#ae81ff>0</span>]
-</span></span></code></pre></div><h3 id=3-random-zoom><strong>3. Random Zoom</strong></h3><p>Zooming in or out simulates features at different scales, enhancing scale invariance.</p><p><strong>Code Snippet:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(zoom_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>augment_zoom</span>(image):
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Augments an image with random zooming.
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> image<span style=color:#f92672>.</span>reshape((<span style=color:#ae81ff>1</span>,) <span style=color:#f92672>+</span> image<span style=color:#f92672>.</span>shape)  <span style=color:#75715e># Reshape to add batch dimension</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> batch <span style=color:#f92672>in</span> datagen<span style=color:#f92672>.</span>flow(image, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> batch[<span style=color:#ae81ff>0</span>]
-</span></span></code></pre></div><h3 id=4-brightness-adjustment><strong>4. Brightness Adjustment</strong></h3><p>Alters the brightness of the image to simulate varying lighting conditions.</p><p><strong>Code Snippet:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(brightness_range<span style=color:#f92672>=</span>[<span style=color:#ae81ff>0.8</span>, <span style=color:#ae81ff>1.2</span>])
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>augment_brightness</span>(image):
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Augments an image by adjusting brightness.
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> image<span style=color:#f92672>.</span>reshape((<span style=color:#ae81ff>1</span>,) <span style=color:#f92672>+</span> image<span style=color:#f92672>.</span>shape)  <span style=color:#75715e># Reshape to add batch dimension</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> batch <span style=color:#f92672>in</span> datagen<span style=color:#f92672>.</span>flow(image, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> batch[<span style=color:#ae81ff>0</span>]
-</span></span></code></pre></div><h3 id=experimental-setup>Experimental Setup</h3><p>To evaluate whether DA can replace CN, we trained a DenseNet201 model on the BreakHis dataset under two scenarios:</p><ul><li><strong>With Colour Normalisation + Limited DA</strong>: Images were normalised using CBN or CD, with minimal augmentation applied.</li><li><strong>With Extensive DA Only</strong>: No CN was performed, but the dataset was extensively augmented using the techniques above.</li></ul><h4 id=evaluation-metrics>Evaluation Metrics</h4><ul><li><strong>Accuracy</strong>: Overall prediction correctness.</li><li><strong>Sensitivity (Recall)</strong>: How well the model identifies positive cases (e.g., malignant tissue).</li><li><strong>Specificity</strong>: How well the model avoids false positives.</li><li><strong>F1 Score</strong>: Balances precision and recall.</li><li><strong>ROC-AUC</strong>: Measures the trade-off between sensitivity and specificity.</li></ul><h3 id=results>Results</h3><figure><img src=/images/project10_images/results10_1.png></figure><h4 id=insights>Insights</h4><p><strong>Extensive DA outperformed CN in all metrics:</strong></p><ul><li>DA’s broader variability helped the model generalise better.</li><li>The simplicity of DA workflows reduced computational overhead.</li><li>CN remains valuable for domains requiring strict standardisation but adds complexity compared to DA.</li></ul><h3 id=code-integration>Code Integration</h3><p>Here’s how you can integrate multiple augmentation techniques into a preprocessing pipeline:</p><p><strong>Combined Augmentation Pipeline:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(
-</span></span><span style=display:flex><span>    rotation_range<span style=color:#f92672>=</span><span style=color:#ae81ff>45</span>,
-</span></span><span style=display:flex><span>    horizontal_flip<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
-</span></span><span style=display:flex><span>    vertical_flip<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
-</span></span><span style=display:flex><span>    zoom_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>,
-</span></span><span style=display:flex><span>    brightness_range<span style=color:#f92672>=</span>[<span style=color:#ae81ff>0.8</span>, <span style=color:#ae81ff>1.2</span>]
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>augment_pipeline</span>(image):
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Applies a combination of augmentations to an image.
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> image<span style=color:#f92672>.</span>reshape((<span style=color:#ae81ff>1</span>,) <span style=color:#f92672>+</span> image<span style=color:#f92672>.</span>shape)  <span style=color:#75715e># Reshape to add batch dimension</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> batch <span style=color:#f92672>in</span> datagen<span style=color:#f92672>.</span>flow(image, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>):
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> batch[<span style=color:#ae81ff>0</span>]
-</span></span></code></pre></div><h3 id=conclusion>Conclusion</h3><p>Data augmentation offers a compelling alternative to colour normalisation, simplifying workflows and improving model performance. By introducing variability in training data, DA enhances robustness, making it an excellent choice for scalable medical imaging pipelines.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation? | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Investigate whether data augmentation can effectively replace colour normalisation in histopathology image analysis.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project10_images/pr10.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?
+          </h1>
+          
+            <p class="f5">Investigate whether data augmentation can effectively replace colour normalisation in histopathology image analysis.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project10_images/pr10.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.</p>
+<p>Traditionally, <strong>Colour Normalisation (CN)</strong> has been the gold standard for handling variability in histopathology images. However, advancements in <strong>Data Augmentation (DA)</strong> techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.</p>
+<p>This blog investigates:</p>
+<ul>
+<li>The fundamentals of data augmentation.</li>
+<li>Key augmentation techniques for histopathology.</li>
+<li>A comparative analysis of DA and CN workflows using a DenseNet201 model.</li>
+</ul>
+<h2 id="what-is-data-augmentation"><strong>What is Data Augmentation?</strong></h2>
+<p><strong>Data augmentation</strong> artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.</p>
+<h3 id="key-benefits-of-da"><strong>Key Benefits of DA</strong></h3>
+<ul>
+<li><strong>Improved Generalisation:</strong> DA exposes the model to diverse scenarios, making it robust to unseen data.</li>
+<li><strong>Simplified Workflows:</strong> Unlike CN, DA requires no reference images or domain-specific pre-processing.</li>
+<li><strong>Enhanced Scalability:</strong> DA is easy to implement across datasets with varying staining protocols.</li>
+</ul>
+<h2 id="key-data-augmentation-techniques"><strong>Key Data Augmentation Techniques</strong></h2>
+<h3 id="1-random-rotation"><strong>1. Random Rotation</strong></h3>
+<p>Randomly rotates an image within a specified degree range, helping the model handle differently oriented samples.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_rotation</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image with random rotation.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="2-horizontal-and-vertical-flipping"><strong>2. Horizontal and Vertical Flipping</strong></h3>
+<p>Flips the image across its axes to prevent the model from overfitting to spatial biases.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_flip</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image with horizontal and vertical flips.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="3-random-zoom"><strong>3. Random Zoom</strong></h3>
+<p>Zooming in or out simulates features at different scales, enhancing scale invariance.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_zoom</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image with random zooming.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="4-brightness-adjustment"><strong>4. Brightness Adjustment</strong></h3>
+<p>Alters the brightness of the image to simulate varying lighting conditions.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(brightness_range<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1.2</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_brightness</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image by adjusting brightness.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="experimental-setup">Experimental Setup</h3>
+<p>To evaluate whether DA can replace CN, we trained a DenseNet201 model on the BreakHis dataset under two scenarios:</p>
+<ul>
+<li><strong>With Colour Normalisation + Limited DA</strong>: Images were normalised using CBN or CD, with minimal augmentation applied.</li>
+<li><strong>With Extensive DA Only</strong>: No CN was performed, but the dataset was extensively augmented using the techniques above.</li>
+</ul>
+<h4 id="evaluation-metrics">Evaluation Metrics</h4>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction correctness.</li>
+<li><strong>Sensitivity (Recall)</strong>: How well the model identifies positive cases (e.g., malignant tissue).</li>
+<li><strong>Specificity</strong>: How well the model avoids false positives.</li>
+<li><strong>F1 Score</strong>: Balances precision and recall.</li>
+<li><strong>ROC-AUC</strong>: Measures the trade-off between sensitivity and specificity.</li>
+</ul>
+<h3 id="results">Results</h3>
+<figure><img src="/images/project10_images/results10_1.png">
+</figure>
+
+<h4 id="insights">Insights</h4>
+<p><strong>Extensive DA outperformed CN in all metrics:</strong></p>
+<ul>
+<li>DA’s broader variability helped the model generalise better.</li>
+<li>The simplicity of DA workflows reduced computational overhead.</li>
+<li>CN remains valuable for domains requiring strict standardisation but adds complexity compared to DA.</li>
+</ul>
+<h3 id="code-integration">Code Integration</h3>
+<p>Here’s how you can integrate multiple augmentation techniques into a preprocessing pipeline:</p>
+<p><strong>Combined Augmentation Pipeline:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    brightness_range<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1.2</span>]
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_pipeline</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Applies a combination of augmentations to an image.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="conclusion">Conclusion</h3>
+<p>Data augmentation offers a compelling alternative to colour normalisation, simplifying workflows and improving model performance. By introducing variability in training data, DA enhances robustness, making it an excellent choice for scalable medical imaging pipelines.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

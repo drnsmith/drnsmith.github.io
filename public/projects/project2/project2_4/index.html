@@ -1,30 +1,207 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Explore how clustering techniques group recipes based on shared characteristics, unlocking insights into cuisines, ingredients, and cooking methods. This blog provides an overview of approaches like K-Means and Hierarchical Clustering, explaining their application in recipe analysis and the challenges faced."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project2_images/pr2.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges.</h1><p class=f5>Explore how clustering techniques group recipes based on shared characteristics, unlocking insights into cuisines, ingredients, and cooking methods. This blog provides an overview of approaches like K-Means and Hierarchical Clustering, explaining their application in recipe analysis and the challenges faced.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project2_images/pr2.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction-clustering-recipes-based-on-similarity-an-overview-of-techniques-and-challenges>Introduction. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges</h3><p>Clustering is a powerful unsupervised learning technique that organises data points into groups based on shared features.</p><p>When applied to recipes, clustering can reveal hidden patterns, such as regional cuisines, ingredient pairings, or common preparation techniques.</p><p>In this blog, we’ll explore:</p><ol><li>Clustering methods like K-Means and Hierarchical Clustering.</li><li>Pre-processing and feature selection for recipe data.</li><li>Evaluating clusters for meaningfulness.</li><li>Challenges and lessons learned during clustering experiments.</li></ol><h3 id=why-clustering-recipes>Why Clustering Recipes?</h3><p>Clustering allows us to group recipes into meaningful categories based on similarity. For example:</p><ul><li><strong>Cuisine Identification:</strong> Grouping recipes by regional influences (e.g., Italian, Asian).</li><li><strong>Dietary Patterns:</strong> Identifying clusters based on health-focused recipes (e.g., vegan, keto).</li><li><strong>Ingredient Analysis:</strong> Understanding ingredient combinations across recipes.</li></ul><h3 id=pre-processing-recipe-data-for-clustering>Pre-processing Recipe Data for Clustering</h3><p>To effectively cluster recipes, pre-processing steps are crucial. In this project, this included:</p><ol><li><strong>Text Tokenisation:</strong> Breaking down recipe descriptions into meaningful words.</li><li><strong>Vectorisation:</strong> Using techniques like TF-IDF or embeddings to convert text into numerical data.</li><li><strong>Feature Selection:</strong> Focusing on essential elements, such as key ingredients or cooking methods.</li></ol><p>Here’s a code snippet showing how recipes were vectorised using TF-IDF:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Sample recipe descriptions</span>
-</span></span><span style=display:flex><span>recipe_texts <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;Chicken curry with rice&#34;</span>, <span style=color:#e6db74>&#34;Vegan pasta with tomato sauce&#34;</span>, <span style=color:#e6db74>&#34;Grilled salmon with herbs&#34;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># TF-IDF vectorization</span>
-</span></span><span style=display:flex><span>vectorizer <span style=color:#f92672>=</span> TfidfVectorizer(max_features<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>)
-</span></span><span style=display:flex><span>recipe_vectors <span style=color:#f92672>=</span> vectorizer<span style=color:#f92672>.</span>fit_transform(recipe_texts)
-</span></span></code></pre></div><h3 id=clustering-techniques>Clustering Techniques</h3><h3 id=1-k-means-clustering>1. K-Means Clustering</h3><p>K-Means is a popular clustering algorithm that groups data points by minimising the distance between points in the same cluster.</p><p>Steps:</p><ul><li>Define the number of clusters (k).</li><li>Assign each recipe to the nearest cluster center.</li><li>Update cluster centers until convergence.</li></ul><p>Here’s how I applied K-Means in this project:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.cluster <span style=color:#f92672>import</span> KMeans
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Apply K-Means with 3 clusters</span>
-</span></span><span style=display:flex><span>kmeans <span style=color:#f92672>=</span> KMeans(n_clusters<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
-</span></span><span style=display:flex><span>clusters <span style=color:#f92672>=</span> kmeans<span style=color:#f92672>.</span>fit_predict(recipe_vectors)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Print cluster assignments</span>
-</span></span><span style=display:flex><span>print(clusters)
-</span></span></code></pre></div><h3 id=challenges>Challenges:</h3><ul><li><em>Choosing the Right k</em>: Selecting the number of clusters required testing different values using metrics like the Elbow Method.</li><li><em>Sparse Data</em>: Recipe data often has sparse features, making it harder to define clear clusters.</li></ul><h3 id=2-hierarchical-clustering>2. Hierarchical Clustering</h3><p>Hierarchical Clustering creates a tree-like structure (dendrogram) to visualize cluster relationships.</p><p>Steps:</p><ul><li>Compute distances between data points.</li><li>Merge points iteratively based on similarity.</li></ul><p>Here’s a sample implementation:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> scipy.cluster.hierarchy <span style=color:#f92672>import</span> dendrogram, linkage
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Hierarchical clustering</span>
-</span></span><span style=display:flex><span>linked <span style=color:#f92672>=</span> linkage(recipe_vectors<span style=color:#f92672>.</span>toarray(), method<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ward&#39;</span>)
-</span></span><span style=display:flex><span>dendrogram(linked)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
-</span></span></code></pre></div><h3 id=advantages>Advantages:</h3><ul><li>Does not require predefining the number of clusters.</li><li>Provides a visual representation of cluster relationships.</li></ul><h3 id=challenges-1>Challenges:</h3><ul><li>Computationally expensive for large datasets.</li><li>Requires domain knowledge to interpret dendrograms effectively.</li></ul><h3 id=evaluating-clustering-results>Evaluating Clustering Results</h3><p>I evaluated clusters using:</p><ul><li><em>Silhouette Score</em>: Measures how similar a recipe is to its own cluster compared to others.</li><li><em>Manual Inspection</em>: Reviewing sample recipes from each cluster to assess meaningfulness.</li></ul><p>Here’s how I calculated the silhouette score:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> silhouette_score
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Evaluate clustering</span>
-</span></span><span style=display:flex><span>score <span style=color:#f92672>=</span> silhouette_score(recipe_vectors, clusters)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Silhouette Score: </span><span style=color:#e6db74>{</span>score<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
-</span></span></code></pre></div><h3 id=key-lessons-learned>Key Lessons Learned</h3><ul><li><em>Feature Quality Matters</em>: The choice of features (e.g., ingredients vs. cooking steps) significantly impacts clustering results.</li><li><em>Iterative Tuning</em>: Fine-tuning parameters like the number of clusters is critical for meaningful groupings.</li><li><em>Context is Key</em>: Domain knowledge helps interpret clusters effectively.</li></ul><h3 id=final-thoughts>Final Thoughts</h3><p>Clustering recipes offers fascinating insights into culinary data, but it also comes with challenges like sparse data and parameter tuning.</p><p>By leveraging techniques like K-Means and Hierarchical Clustering, and carefully evaluating results, we can uncover valuable themes and patterns in recipes.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Explore how clustering techniques group recipes based on shared characteristics, unlocking insights into cuisines, ingredients, and cooking methods. This blog provides an overview of approaches like K-Means and Hierarchical Clustering, explaining their application in recipe analysis and the challenges faced.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project2_images/pr2.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges.
+          </h1>
+          
+            <p class="f5">Explore how clustering techniques group recipes based on shared characteristics, unlocking insights into cuisines, ingredients, and cooking methods. This blog provides an overview of approaches like K-Means and Hierarchical Clustering, explaining their application in recipe analysis and the challenges faced.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project2_images/pr2.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction-clustering-recipes-based-on-similarity-an-overview-of-techniques-and-challenges">Introduction. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges</h3>
+<p>Clustering is a powerful unsupervised learning technique that organises data points into groups based on shared features.</p>
+<p>When applied to recipes, clustering can reveal hidden patterns, such as regional cuisines, ingredient pairings, or common preparation techniques.</p>
+<p>In this blog, we’ll explore:</p>
+<ol>
+<li>Clustering methods like K-Means and Hierarchical Clustering.</li>
+<li>Pre-processing and feature selection for recipe data.</li>
+<li>Evaluating clusters for meaningfulness.</li>
+<li>Challenges and lessons learned during clustering experiments.</li>
+</ol>
+<h3 id="why-clustering-recipes">Why Clustering Recipes?</h3>
+<p>Clustering allows us to group recipes into meaningful categories based on similarity. For example:</p>
+<ul>
+<li><strong>Cuisine Identification:</strong> Grouping recipes by regional influences (e.g., Italian, Asian).</li>
+<li><strong>Dietary Patterns:</strong> Identifying clusters based on health-focused recipes (e.g., vegan, keto).</li>
+<li><strong>Ingredient Analysis:</strong> Understanding ingredient combinations across recipes.</li>
+</ul>
+<h3 id="pre-processing-recipe-data-for-clustering">Pre-processing Recipe Data for Clustering</h3>
+<p>To effectively cluster recipes, pre-processing steps are crucial. In this project, this included:</p>
+<ol>
+<li><strong>Text Tokenisation:</strong> Breaking down recipe descriptions into meaningful words.</li>
+<li><strong>Vectorisation:</strong> Using techniques like TF-IDF or embeddings to convert text into numerical data.</li>
+<li><strong>Feature Selection:</strong> Focusing on essential elements, such as key ingredients or cooking methods.</li>
+</ol>
+<p>Here’s a code snippet showing how recipes were vectorised using TF-IDF:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample recipe descriptions</span>
+</span></span><span style="display:flex;"><span>recipe_texts <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Chicken curry with rice&#34;</span>, <span style="color:#e6db74">&#34;Vegan pasta with tomato sauce&#34;</span>, <span style="color:#e6db74">&#34;Grilled salmon with herbs&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TF-IDF vectorization</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(max_features<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>recipe_vectors <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(recipe_texts)
+</span></span></code></pre></div><h3 id="clustering-techniques">Clustering Techniques</h3>
+<h3 id="1-k-means-clustering">1. K-Means Clustering</h3>
+<p>K-Means is a popular clustering algorithm that groups data points by minimising the distance between points in the same cluster.</p>
+<p>Steps:</p>
+<ul>
+<li>Define the number of clusters (k).</li>
+<li>Assign each recipe to the nearest cluster center.</li>
+<li>Update cluster centers until convergence.</li>
+</ul>
+<p>Here’s how I applied K-Means in this project:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply K-Means with 3 clusters</span>
+</span></span><span style="display:flex;"><span>kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>clusters <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>fit_predict(recipe_vectors)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print cluster assignments</span>
+</span></span><span style="display:flex;"><span>print(clusters)
+</span></span></code></pre></div><h3 id="challenges">Challenges:</h3>
+<ul>
+<li><em>Choosing the Right k</em>: Selecting the number of clusters required testing different values using metrics like the Elbow Method.</li>
+<li><em>Sparse Data</em>: Recipe data often has sparse features, making it harder to define clear clusters.</li>
+</ul>
+<h3 id="2-hierarchical-clustering">2. Hierarchical Clustering</h3>
+<p>Hierarchical Clustering creates a tree-like structure (dendrogram) to visualize cluster relationships.</p>
+<p>Steps:</p>
+<ul>
+<li>Compute distances between data points.</li>
+<li>Merge points iteratively based on similarity.</li>
+</ul>
+<p>Here’s a sample implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.cluster.hierarchy <span style="color:#f92672">import</span> dendrogram, linkage
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hierarchical clustering</span>
+</span></span><span style="display:flex;"><span>linked <span style="color:#f92672">=</span> linkage(recipe_vectors<span style="color:#f92672">.</span>toarray(), method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ward&#39;</span>)
+</span></span><span style="display:flex;"><span>dendrogram(linked)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="advantages">Advantages:</h3>
+<ul>
+<li>Does not require predefining the number of clusters.</li>
+<li>Provides a visual representation of cluster relationships.</li>
+</ul>
+<h3 id="challenges-1">Challenges:</h3>
+<ul>
+<li>Computationally expensive for large datasets.</li>
+<li>Requires domain knowledge to interpret dendrograms effectively.</li>
+</ul>
+<h3 id="evaluating-clustering-results">Evaluating Clustering Results</h3>
+<p>I evaluated clusters using:</p>
+<ul>
+<li><em>Silhouette Score</em>: Measures how similar a recipe is to its own cluster compared to others.</li>
+<li><em>Manual Inspection</em>: Reviewing sample recipes from each cluster to assess meaningfulness.</li>
+</ul>
+<p>Here’s how I calculated the silhouette score:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> silhouette_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate clustering</span>
+</span></span><span style="display:flex;"><span>score <span style="color:#f92672">=</span> silhouette_score(recipe_vectors, clusters)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Silhouette Score: </span><span style="color:#e6db74">{</span>score<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="key-lessons-learned">Key Lessons Learned</h3>
+<ul>
+<li><em>Feature Quality Matters</em>: The choice of features (e.g., ingredients vs. cooking steps) significantly impacts clustering results.</li>
+<li><em>Iterative Tuning</em>: Fine-tuning parameters like the number of clusters is critical for meaningful groupings.</li>
+<li><em>Context is Key</em>: Domain knowledge helps interpret clusters effectively.</li>
+</ul>
+<h3 id="final-thoughts">Final Thoughts</h3>
+<p>Clustering recipes offers fascinating insights into culinary data, but it also comes with challenges like sparse data and parameter tuning.</p>
+<p>By leveraging techniques like K-Means and Hierarchical Clustering, and carefully evaluating results, we can uncover valuable themes and patterns in recipes.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

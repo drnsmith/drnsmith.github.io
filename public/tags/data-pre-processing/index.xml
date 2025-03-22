@@ -1,95 +1,82 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Data Pre-Processing on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/data-pre-processing/</link><description>Recent content in Data Pre-Processing on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 05 Jun 2024 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/data-pre-processing/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Building Custom CNN Architectures: From Scratch to Mastery.</title><link>http://localhost:1313/projects/project11/project11_1/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous.&lt;/p>
-&lt;p>But while pre-trained models like ResNet and EfficientNet are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch.&lt;/p>
-&lt;p>In this blog, I’ll explore how to construct a custom CNN tailored for binary classification tasks. Whether you&amp;rsquo;re new to deep learning or looking to deepen your understanding, this guide will help you:&lt;/p></description></item><item><title>PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</title><link>http://localhost:1313/projects/project10/project10_1/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/project10_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project10_images/pr10.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.&lt;/p>
-&lt;p>Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. This blog explores:&lt;/p></description></item><item><title>Part 2. Mastering Data Preparation and Augmentation: Building the Foundation for Better Image Classification Models.</title><link>http://localhost:1313/projects/project11/project11_2/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>The journey to building a high-performing image classification model begins long before training. Data preparation and augmentation are often overlooked but vital steps in ensuring your model learns effectively and generalises well. These processes form the bridge between raw, unstructured data and the structured inputs a machine learning model can use.&lt;/p>
-&lt;p>In this blog, we will:&lt;/p>
-&lt;ul>
-&lt;li>Explore the essential techniques of data pre-processing, including resizing, normalization, and train-test splitting.&lt;/li>
-&lt;li>Learn how data augmentation enhances model generalisation.&lt;/li>
-&lt;li>Discuss strategies for addressing class imbalance to prevent biased models.&lt;/li>
-&lt;li>Show how these steps contribute to real-world applications like medical imaging and fraud detection.&lt;/li>
-&lt;/ul>
-&lt;p>By the end, you’ll have a comprehensive understanding of why data preparation is the cornerstone of machine learning success.&lt;/p></description></item><item><title>Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights.</title><link>http://localhost:1313/projects/project11/project11_3/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Accuracy is one of the most common metrics used to evaluate machine learning models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease.&lt;/p>
-&lt;p>This blog aims to expand your understanding of model evaluation by:&lt;/p>
-&lt;ul>
-&lt;li>Exploring precision, recall, specificity, and F1-score to provide deeper insights into model performance.&lt;/li>
-&lt;li>Introducing the &lt;code>Receiver Operating Characteristic (ROC)&lt;/code> curve and AUC for evaluating classification thresholds.&lt;/li>
-&lt;li>Demonstrating these metrics with Python code and visualisations.&lt;/li>
-&lt;/ul>
-&lt;p>By the end, you’ll have the tools to evaluate your models comprehensively, ensuring they meet the demands of real-world challenges.&lt;/p></description></item><item><title>Part 4. Tackling Overfitting in Deep Learning Models.</title><link>http://localhost:1313/projects/project11/project11_4/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning models have revolutionised machine learning, enabling breakthroughs in image recognition, natural language processing, and more.&lt;/p>
-&lt;p>However, one common challenge that haunts even the most skilled practitioners is overfitting. Overfitting occurs when a model learns the training data too well, including its noise and irrelevant patterns, at the cost of generalising to new, unseen data.&lt;/p>
-&lt;p>Imagine training a model to classify histopathological images of cancer 9as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.&lt;/p></description></item><item><title>Part 6. Mastering Ensembling Techniques: Boosting Model Performance with Stacking and Voting.</title><link>http://localhost:1313/projects/project11/project11_6/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether you’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalization.&lt;/p>
-&lt;p>In this blog, we’ll focus on:&lt;/p>
-&lt;p>The fundamentals of stacking and soft voting.
-Implementing stacking with a meta-model.
-Using soft voting for combined predictions.
-Evaluating ensemble models with metrics like ROC-AUC.
-By the end, you’ll be able to implement and evaluate ensemble methods for your own machine learning projects.&lt;/p></description></item><item><title>Part 7. Building Robust End-to-End Image Classification Pipelines.</title><link>http://localhost:1313/projects/project11/project11_7/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_7/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In the world of machine learning, image classification is one of the most common and impactful applications.&lt;/p>
-&lt;p>From detecting diseases in medical imaging to identifying products in e-commerce, the ability to categorise images accurately has transformed industries.&lt;/p>
-&lt;p>However, building an effective image classification model requires more than just training a neural network—it demands a robust, end-to-end pipeline that can handle the entire process, from raw data to deployment.&lt;/p></description></item><item><title>Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications</title><link>http://localhost:1313/projects/project11/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect, from understanding CNN components to tackling data augmentation and evaluating model performance. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Part 5. Advanced Regularisation Techniques for CNNs.</title><link>http://localhost:1313/projects/project11/project11_5/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project11/project11_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project11_images/pr11.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Convolutional Neural Networks (CNNs) have transformed machine learning, excelling in fields like image recognition, object detection, and medical imaging.&lt;/p>
-&lt;p>However, like all machine learning models, CNNs are prone to overfitting, where the model performs well on the training data but struggles to generalise to unseen data. This is where regularisation comes into play.&lt;/p>
-&lt;p>Regularisation techniques are designed to prevent overfitting and improve generalisation, making your CNN robust and reliable.&lt;/p></description></item><item><title>Cancer Detection in Histopathology: The Role of Colour Normalisation in Model Calibration and Performance</title><link>http://localhost:1313/projects/project10/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Pre-Processing on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/data-pre-processing/</link>
+    <description>Recent content in Data Pre-Processing on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Jun 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data-pre-processing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Building Custom CNN Architectures: From Scratch to Mastery.</title>
+      <link>http://localhost:1313/projects/part-1.-building-custom-cnn-architectures-from-scratch-to-mastery./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-building-custom-cnn-architectures-from-scratch-to-mastery./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous.&lt;/p&gt;&#xA;&lt;p&gt;But while pre-trained models like ResNet and EfficientNet are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll explore how to construct a custom CNN tailored for binary classification tasks. Whether you&amp;rsquo;re new to deep learning or looking to deepen your understanding, this guide will help you:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</title>
+      <link>http://localhost:1313/projects/part-1.-colour-normalisation-in-histopathology.-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-colour-normalisation-in-histopathology.-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.&lt;/p&gt;&#xA;&lt;p&gt;Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. This blog explores:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Mastering Data Preparation and Augmentation: Building the Foundation for Better Image Classification Models.</title>
+      <link>http://localhost:1313/projects/part-2.-mastering-data-preparation-and-augmentation-building-the-foundation-for-better-image-classification-models./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-mastering-data-preparation-and-augmentation-building-the-foundation-for-better-image-classification-models./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;The journey to building a high-performing image classification model begins long before training. Data preparation and augmentation are often overlooked but vital steps in ensuring your model learns effectively and generalises well. These processes form the bridge between raw, unstructured data and the structured inputs a machine learning model can use.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we will:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Explore the essential techniques of data pre-processing, including resizing, normalization, and train-test splitting.&lt;/li&gt;&#xA;&lt;li&gt;Learn how data augmentation enhances model generalisation.&lt;/li&gt;&#xA;&lt;li&gt;Discuss strategies for addressing class imbalance to prevent biased models.&lt;/li&gt;&#xA;&lt;li&gt;Show how these steps contribute to real-world applications like medical imaging and fraud detection.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;By the end, you’ll have a comprehensive understanding of why data preparation is the cornerstone of machine learning success.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights.</title>
+      <link>http://localhost:1313/projects/part-3.-evaluating-model-performance-metrics-beyond-accuracy-for-better-insights./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-evaluating-model-performance-metrics-beyond-accuracy-for-better-insights./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Accuracy is one of the most common metrics used to evaluate machine learning models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease.&lt;/p&gt;&#xA;&lt;p&gt;This blog aims to expand your understanding of model evaluation by:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Exploring precision, recall, specificity, and F1-score to provide deeper insights into model performance.&lt;/li&gt;&#xA;&lt;li&gt;Introducing the &lt;code&gt;Receiver Operating Characteristic (ROC)&lt;/code&gt; curve and AUC for evaluating classification thresholds.&lt;/li&gt;&#xA;&lt;li&gt;Demonstrating these metrics with Python code and visualisations.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;By the end, you’ll have the tools to evaluate your models comprehensively, ensuring they meet the demands of real-world challenges.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Tackling Overfitting in Deep Learning Models.</title>
+      <link>http://localhost:1313/projects/part-4.-tackling-overfitting-in-deep-learning-models./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-tackling-overfitting-in-deep-learning-models./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning models have revolutionised machine learning, enabling breakthroughs in image recognition, natural language processing, and more.&lt;/p&gt;&#xA;&lt;p&gt;However, one common challenge that haunts even the most skilled practitioners is overfitting. Overfitting occurs when a model learns the training data too well, including its noise and irrelevant patterns, at the cost of generalising to new, unseen data.&lt;/p&gt;&#xA;&lt;p&gt;Imagine training a model to classify histopathological images of cancer 9as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Mastering Ensembling Techniques: Boosting Model Performance with Stacking and Voting.</title>
+      <link>http://localhost:1313/projects/part-6.-mastering-ensembling-techniques-boosting-model-performance-with-stacking-and-voting./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-mastering-ensembling-techniques-boosting-model-performance-with-stacking-and-voting./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether you’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalization.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll focus on:&lt;/p&gt;&#xA;&lt;p&gt;The fundamentals of stacking and soft voting.&#xA;Implementing stacking with a meta-model.&#xA;Using soft voting for combined predictions.&#xA;Evaluating ensemble models with metrics like ROC-AUC.&#xA;By the end, you’ll be able to implement and evaluate ensemble methods for your own machine learning projects.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 7. Building Robust End-to-End Image Classification Pipelines.</title>
+      <link>http://localhost:1313/projects/part-7.-building-robust-end-to-end-image-classification-pipelines./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-7.-building-robust-end-to-end-image-classification-pipelines./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In the world of machine learning, image classification is one of the most common and impactful applications.&lt;/p&gt;&#xA;&lt;p&gt;From detecting diseases in medical imaging to identifying products in e-commerce, the ability to categorise images accurately has transformed industries.&lt;/p&gt;&#xA;&lt;p&gt;However, building an effective image classification model requires more than just training a neural network—it demands a robust, end-to-end pipeline that can handle the entire process, from raw data to deployment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications</title>
+      <link>http://localhost:1313/projects/project11/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project11/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect, from understanding CNN components to tackling data augmentation and evaluating model performance. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Advanced Regularisation Techniques for CNNs.</title>
+      <link>http://localhost:1313/projects/part-5.-advanced-regularisation-techniques-for-cnns./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-advanced-regularisation-techniques-for-cnns./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Convolutional Neural Networks (CNNs) have transformed machine learning, excelling in fields like image recognition, object detection, and medical imaging.&lt;/p&gt;&#xA;&lt;p&gt;However, like all machine learning models, CNNs are prone to overfitting, where the model performs well on the training data but struggles to generalise to unseen data. This is where regularisation comes into play.&lt;/p&gt;&#xA;&lt;p&gt;Regularisation techniques are designed to prevent overfitting and improve generalisation, making your CNN robust and reliable.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cancer Detection in Histopathology: The Role of Colour Normalisation in Model Calibration and Performance</title>
+      <link>http://localhost:1313/projects/project10/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project10/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

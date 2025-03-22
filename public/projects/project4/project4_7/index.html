@@ -1,46 +1,205 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 7. Overcoming Challenges in Sentiment Analysis. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores the key challenges in sentiment analysis, including handling sarcasm, dynamic language, and biased data. We discuss solutions and strategies to improve the accuracy of sentiment extraction in large-scale datasets."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project4_images/pr4.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 7. Overcoming Challenges in Sentiment Analysis.</h1><p class=f5>This blog explores the key challenges in sentiment analysis, including handling sarcasm, dynamic language, and biased data. We discuss solutions and strategies to improve the accuracy of sentiment extraction in large-scale datasets.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project4_images/pr4.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results.</p><p>In this blog, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.</p><h3 id=key-challenges-in-sentiment-analysis>Key Challenges in Sentiment Analysis</h3><h4 id=1-sarcasm-and-context-dependency>1. Sarcasm and Context Dependency</h4><ul><li>Tweets like <em>&ldquo;Oh great, another Tesla delay. Just what we needed!&rdquo;</em> express negative sentiment despite containing positive words like &ldquo;great.&rdquo;</li><li>Contextual understanding is essential for accurate classification.</li></ul><p><em>Solution</em>:</p><ul><li>Use <strong>pre-trained transformer models</strong> like BERT, which consider the context of words in a sentence.</li><li>Fine-tune models on a dataset annotated specifically for sarcasm detection.</li></ul><h4 id=python-code-using-bert-for-context-aware-sentiment-analysis>Python Code: Using BERT for Context-Aware Sentiment Analysis</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> transformers <span style=color:#f92672>import</span> pipeline
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Load sentiment analysis pipeline with a transformer model</span>
-</span></span><span style=display:flex><span>sentiment_pipeline <span style=color:#f92672>=</span> pipeline(<span style=color:#e6db74>&#34;sentiment-analysis&#34;</span>, model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;nlptown/bert-base-multilingual-uncased-sentiment&#34;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Analyze a sarcastic tweet</span>
-</span></span><span style=display:flex><span>tweet <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Oh great, another Tesla delay. Just what we needed!&#34;</span>
-</span></span><span style=display:flex><span>result <span style=color:#f92672>=</span> sentiment_pipeline(tweet)
-</span></span><span style=display:flex><span>print(result)
-</span></span></code></pre></div><h4 id=2-dynamic-and-informal-language>2. Dynamic and Informal Language</h4><p>Social media is rife with abbreviations (e.g., &ldquo;lol,&rdquo; &ldquo;btw&rdquo;) and slang, which standard lexicons may not recognise.</p><p><em>Solution</em>:</p><ul><li>Continuously update lexicons or train models on domain-specific data.</li><li>Use embedding-based methods like Word2Vec to capture semantic relationships between words, even for slang.</li></ul><h4 id=python-code-expanding-lexicons>Python Code: Expanding Lexicons</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Example of adding slang to a sentiment lexicon</span>
-</span></span><span style=display:flex><span>afinn_lexicon <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;great&#34;</span>: <span style=color:#ae81ff>3</span>, <span style=color:#e6db74>&#34;amazing&#34;</span>: <span style=color:#ae81ff>4</span>, <span style=color:#e6db74>&#34;lol&#34;</span>: <span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>, <span style=color:#e6db74>&#34;btw&#34;</span>: <span style=color:#ae81ff>0</span>}
-</span></span><span style=display:flex><span>custom_slang <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;fire&#34;</span>: <span style=color:#ae81ff>4</span>, <span style=color:#e6db74>&#34;lit&#34;</span>: <span style=color:#ae81ff>3</span>, <span style=color:#e6db74>&#34;meh&#34;</span>: <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>}
-</span></span><span style=display:flex><span>afinn_lexicon<span style=color:#f92672>.</span>update(custom_slang)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Updated Lexicon:&#34;</span>, afinn_lexicon)
-</span></span></code></pre></div><h4 id=3-evolving-sentiment-over-time>3. Evolving Sentiment Over Time</h4><p>Words may shift in meaning; for instance, &ldquo;disruptive&rdquo; can be positive (innovation) or negative (chaos) depending on context and time.
-Solution:</p><p>Use dynamic embeddings that evolve with time, such as Temporal Word Embeddings.</p><h4 id=python-code-time-sensitive-embeddings-with-gensim>Python Code: Time-Sensitive Embeddings with Gensim</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> gensim.models <span style=color:#f92672>import</span> Word2Vec
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Example: Training embeddings on tweets from different time periods</span>
-</span></span><span style=display:flex><span>tweets_2020 <span style=color:#f92672>=</span> [[<span style=color:#e6db74>&#34;tesla&#34;</span>, <span style=color:#e6db74>&#34;amazing&#34;</span>, <span style=color:#e6db74>&#34;innovation&#34;</span>], [<span style=color:#e6db74>&#34;stock&#34;</span>, <span style=color:#e6db74>&#34;crash&#34;</span>, <span style=color:#e6db74>&#34;bad&#34;</span>]]
-</span></span><span style=display:flex><span>tweets_2022 <span style=color:#f92672>=</span> [[<span style=color:#e6db74>&#34;tesla&#34;</span>, <span style=color:#e6db74>&#34;delay&#34;</span>, <span style=color:#e6db74>&#34;disappointing&#34;</span>], [<span style=color:#e6db74>&#34;stock&#34;</span>, <span style=color:#e6db74>&#34;rise&#34;</span>, <span style=color:#e6db74>&#34;profit&#34;</span>]]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>model_2020 <span style=color:#f92672>=</span> Word2Vec(sentences<span style=color:#f92672>=</span>tweets_2020, vector_size<span style=color:#f92672>=</span><span style=color:#ae81ff>50</span>, window<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>, min_count<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, workers<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>)
-</span></span><span style=display:flex><span>model_2022 <span style=color:#f92672>=</span> Word2Vec(sentences<span style=color:#f92672>=</span>tweets_2022, vector_size<span style=color:#f92672>=</span><span style=color:#ae81ff>50</span>, window<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>, min_count<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, workers<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;2020 &#39;tesla&#39;:&#34;</span>, model_2020<span style=color:#f92672>.</span>wv[<span style=color:#e6db74>&#34;tesla&#34;</span>])
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;2022 &#39;tesla&#39;:&#34;</span>, model_2022<span style=color:#f92672>.</span>wv[<span style=color:#e6db74>&#34;tesla&#34;</span>])
-</span></span></code></pre></div><h4 id=4-biased-or-noisy-data>4. Biased or Noisy Data</h4><p>Sentiment analysis may reflect biases present in the dataset, such as an overrepresentation of certain companies or demographics.</p><p><em>Solution</em>:</p><ul><li>Use data augmentation to balance datasets.</li><li>Implement bias detection algorithms to flag and mitigate skewed results.</li></ul><h4 id=python-code-balancing-datasets>Python Code: Balancing Datasets</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.utils <span style=color:#f92672>import</span> resample
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Example: Balancing positive and negative sentiment counts</span>
-</span></span><span style=display:flex><span>positive_tweets <span style=color:#f92672>=</span> df[df[<span style=color:#e6db74>&#34;sentiment&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;positive&#34;</span>]
-</span></span><span style=display:flex><span>negative_tweets <span style=color:#f92672>=</span> df[df[<span style=color:#e6db74>&#34;sentiment&#34;</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;negative&#34;</span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Resample the minority class</span>
-</span></span><span style=display:flex><span>negative_tweets_upsampled <span style=color:#f92672>=</span> resample(negative_tweets, replace<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, n_samples<span style=color:#f92672>=</span>len(positive_tweets), random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Combine and shuffle the dataset</span>
-</span></span><span style=display:flex><span>balanced_df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>concat([positive_tweets, negative_tweets_upsampled])<span style=color:#f92672>.</span>sample(frac<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>print(balanced_df[<span style=color:#e6db74>&#34;sentiment&#34;</span>]<span style=color:#f92672>.</span>value_counts())
-</span></span></code></pre></div><h3 id=lessons-learned>Lessons Learned</h3><ul><li><p><em>Sarcasm Requires Context</em>:
-Leveraging context-aware models like transformers significantly improves performance for nuanced expressions.</p></li><li><p><em>Dynamic Language Needs Updating</em>:
-Periodic retraining on fresh datasets ensures that models stay relevant to evolving language patterns.</p></li><li><p><em>Bias Detection is Essential</em>:
-Proactively identifying and correcting biases ensures fairness and reliability in sentiment analysis.</p></li></ul><h4 id=future-directions>Future Directions</h4><p>To further address these challenges:</p><ul><li><em>Multimodal Sentiment Analysis</em>: Incorporate images or videos for richer context.</li><li><em>Real-Time Sentiment Analysis</em>: Apply streaming frameworks like <em>Apache Kafka</em> for dynamic sentiment updates.</li><li><em>Ethical Considerations</em>: Develop transparent, interpretable models to foster trust in AI-driven sentiment analysis.</li></ul><h3 id=conclusion>Conclusion</h3><p>Sentiment analysis is a powerful tool but requires careful handling of its inherent challenges. By addressing issues like sarcasm, slang, and biases, we can improve the accuracy and reliability of sentiment extraction. As language evolves, so too must our models and approaches, ensuring they remain robust in dynamic environments.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 7. Overcoming Challenges in Sentiment Analysis. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores the key challenges in sentiment analysis, including handling sarcasm, dynamic language, and biased data. We discuss solutions and strategies to improve the accuracy of sentiment extraction in large-scale datasets.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project4_images/pr4.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 7. Overcoming Challenges in Sentiment Analysis.
+          </h1>
+          
+            <p class="f5">This blog explores the key challenges in sentiment analysis, including handling sarcasm, dynamic language, and biased data. We discuss solutions and strategies to improve the accuracy of sentiment extraction in large-scale datasets.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results.</p>
+<p>In this blog, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.</p>
+<h3 id="key-challenges-in-sentiment-analysis">Key Challenges in Sentiment Analysis</h3>
+<h4 id="1-sarcasm-and-context-dependency">1. Sarcasm and Context Dependency</h4>
+<ul>
+<li>Tweets like <em>&ldquo;Oh great, another Tesla delay. Just what we needed!&rdquo;</em> express negative sentiment despite containing positive words like &ldquo;great.&rdquo;</li>
+<li>Contextual understanding is essential for accurate classification.</li>
+</ul>
+<p><em>Solution</em>:</p>
+<ul>
+<li>Use <strong>pre-trained transformer models</strong> like BERT, which consider the context of words in a sentence.</li>
+<li>Fine-tune models on a dataset annotated specifically for sarcasm detection.</li>
+</ul>
+<h4 id="python-code-using-bert-for-context-aware-sentiment-analysis">Python Code: Using BERT for Context-Aware Sentiment Analysis</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> transformers <span style="color:#f92672">import</span> pipeline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load sentiment analysis pipeline with a transformer model</span>
+</span></span><span style="display:flex;"><span>sentiment_pipeline <span style="color:#f92672">=</span> pipeline(<span style="color:#e6db74">&#34;sentiment-analysis&#34;</span>, model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nlptown/bert-base-multilingual-uncased-sentiment&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Analyze a sarcastic tweet</span>
+</span></span><span style="display:flex;"><span>tweet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Oh great, another Tesla delay. Just what we needed!&#34;</span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> sentiment_pipeline(tweet)
+</span></span><span style="display:flex;"><span>print(result)
+</span></span></code></pre></div><h4 id="2-dynamic-and-informal-language">2. Dynamic and Informal Language</h4>
+<p>Social media is rife with abbreviations (e.g., &ldquo;lol,&rdquo; &ldquo;btw&rdquo;) and slang, which standard lexicons may not recognise.</p>
+<p><em>Solution</em>:</p>
+<ul>
+<li>Continuously update lexicons or train models on domain-specific data.</li>
+<li>Use embedding-based methods like Word2Vec to capture semantic relationships between words, even for slang.</li>
+</ul>
+<h4 id="python-code-expanding-lexicons">Python Code: Expanding Lexicons</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example of adding slang to a sentiment lexicon</span>
+</span></span><span style="display:flex;"><span>afinn_lexicon <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;great&#34;</span>: <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#34;amazing&#34;</span>: <span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#34;lol&#34;</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;btw&#34;</span>: <span style="color:#ae81ff">0</span>}
+</span></span><span style="display:flex;"><span>custom_slang <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;fire&#34;</span>: <span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#34;lit&#34;</span>: <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#34;meh&#34;</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>}
+</span></span><span style="display:flex;"><span>afinn_lexicon<span style="color:#f92672">.</span>update(custom_slang)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Updated Lexicon:&#34;</span>, afinn_lexicon)
+</span></span></code></pre></div><h4 id="3-evolving-sentiment-over-time">3. Evolving Sentiment Over Time</h4>
+<p>Words may shift in meaning; for instance, &ldquo;disruptive&rdquo; can be positive (innovation) or negative (chaos) depending on context and time.
+Solution:</p>
+<p>Use dynamic embeddings that evolve with time, such as Temporal Word Embeddings.</p>
+<h4 id="python-code-time-sensitive-embeddings-with-gensim">Python Code: Time-Sensitive Embeddings with Gensim</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.models <span style="color:#f92672">import</span> Word2Vec
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Training embeddings on tweets from different time periods</span>
+</span></span><span style="display:flex;"><span>tweets_2020 <span style="color:#f92672">=</span> [[<span style="color:#e6db74">&#34;tesla&#34;</span>, <span style="color:#e6db74">&#34;amazing&#34;</span>, <span style="color:#e6db74">&#34;innovation&#34;</span>], [<span style="color:#e6db74">&#34;stock&#34;</span>, <span style="color:#e6db74">&#34;crash&#34;</span>, <span style="color:#e6db74">&#34;bad&#34;</span>]]
+</span></span><span style="display:flex;"><span>tweets_2022 <span style="color:#f92672">=</span> [[<span style="color:#e6db74">&#34;tesla&#34;</span>, <span style="color:#e6db74">&#34;delay&#34;</span>, <span style="color:#e6db74">&#34;disappointing&#34;</span>], [<span style="color:#e6db74">&#34;stock&#34;</span>, <span style="color:#e6db74">&#34;rise&#34;</span>, <span style="color:#e6db74">&#34;profit&#34;</span>]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model_2020 <span style="color:#f92672">=</span> Word2Vec(sentences<span style="color:#f92672">=</span>tweets_2020, vector_size<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>model_2022 <span style="color:#f92672">=</span> Word2Vec(sentences<span style="color:#f92672">=</span>tweets_2022, vector_size<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;2020 &#39;tesla&#39;:&#34;</span>, model_2020<span style="color:#f92672">.</span>wv[<span style="color:#e6db74">&#34;tesla&#34;</span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;2022 &#39;tesla&#39;:&#34;</span>, model_2022<span style="color:#f92672">.</span>wv[<span style="color:#e6db74">&#34;tesla&#34;</span>])
+</span></span></code></pre></div><h4 id="4-biased-or-noisy-data">4. Biased or Noisy Data</h4>
+<p>Sentiment analysis may reflect biases present in the dataset, such as an overrepresentation of certain companies or demographics.</p>
+<p><em>Solution</em>:</p>
+<ul>
+<li>Use data augmentation to balance datasets.</li>
+<li>Implement bias detection algorithms to flag and mitigate skewed results.</li>
+</ul>
+<h4 id="python-code-balancing-datasets">Python Code: Balancing Datasets</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils <span style="color:#f92672">import</span> resample
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Balancing positive and negative sentiment counts</span>
+</span></span><span style="display:flex;"><span>positive_tweets <span style="color:#f92672">=</span> df[df[<span style="color:#e6db74">&#34;sentiment&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;positive&#34;</span>]
+</span></span><span style="display:flex;"><span>negative_tweets <span style="color:#f92672">=</span> df[df[<span style="color:#e6db74">&#34;sentiment&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;negative&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Resample the minority class</span>
+</span></span><span style="display:flex;"><span>negative_tweets_upsampled <span style="color:#f92672">=</span> resample(negative_tweets, replace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, n_samples<span style="color:#f92672">=</span>len(positive_tweets), random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Combine and shuffle the dataset</span>
+</span></span><span style="display:flex;"><span>balanced_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([positive_tweets, negative_tweets_upsampled])<span style="color:#f92672">.</span>sample(frac<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(balanced_df[<span style="color:#e6db74">&#34;sentiment&#34;</span>]<span style="color:#f92672">.</span>value_counts())
+</span></span></code></pre></div><h3 id="lessons-learned">Lessons Learned</h3>
+<ul>
+<li>
+<p><em>Sarcasm Requires Context</em>:
+Leveraging context-aware models like transformers significantly improves performance for nuanced expressions.</p>
+</li>
+<li>
+<p><em>Dynamic Language Needs Updating</em>:
+Periodic retraining on fresh datasets ensures that models stay relevant to evolving language patterns.</p>
+</li>
+<li>
+<p><em>Bias Detection is Essential</em>:
+Proactively identifying and correcting biases ensures fairness and reliability in sentiment analysis.</p>
+</li>
+</ul>
+<h4 id="future-directions">Future Directions</h4>
+<p>To further address these challenges:</p>
+<ul>
+<li><em>Multimodal Sentiment Analysis</em>: Incorporate images or videos for richer context.</li>
+<li><em>Real-Time Sentiment Analysis</em>: Apply streaming frameworks like <em>Apache Kafka</em> for dynamic sentiment updates.</li>
+<li><em>Ethical Considerations</em>: Develop transparent, interpretable models to foster trust in AI-driven sentiment analysis.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Sentiment analysis is a powerful tool but requires careful handling of its inherent challenges. By addressing issues like sarcasm, slang, and biases, we can improve the accuracy and reliability of sentiment extraction. As language evolves, so too must our models and approaches, ensuring they remain robust in dynamic environments.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

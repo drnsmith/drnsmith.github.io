@@ -1,47 +1,213 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 5. Latent Themes in Tweets: Topic Modelling with LDA. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores topic modelling with Latent Dirichlet Allocation (LDA) to uncover hidden themes in tweets about NASDAQ companies. By applying LDA on cleaned Twitter data, the project revealed insights into recurring topics such as product launches, stock performance, and CEO-driven narratives."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project4_images/pr4.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 5. Latent Themes in Tweets: Topic Modelling with LDA.</h1><p class=f5>This blog explores topic modelling with Latent Dirichlet Allocation (LDA) to uncover hidden themes in tweets about NASDAQ companies. By applying LDA on cleaned Twitter data, the project revealed insights into recurring topics such as product launches, stock performance, and CEO-driven narratives.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project4_images/pr4.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. <strong>Latent Dirichlet Allocation (LDA)</strong>, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.</p><p>In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions.</p><p>This blog provides a step-by-step walkthrough of applying LDA on cleaned Twitter data, with Python code snippets and examples of the insights gained.</p><h3 id=step-1-preparing-data-for-topic-modelling>*Step 1: Preparing Data for Topic Modelling</h3><p>Topic modelling requires pre-processed data where text is tokenised and filtered for meaningful words. We used the cleaned tweets from earlier preprocessing steps.</p><h4 id=python-code-tokenising-and-vectorising-tweets>Python Code: Tokenising and Vectorising Tweets</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> CountVectorizer
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Example cleaned tweets</span>
-</span></span><span style=display:flex><span>cleaned_tweets <span style=color:#f92672>=</span> [
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;tesla new model amazing&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;apple stock overvalued&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;tesla cars future innovation&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;apple iphone release announcement&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;tesla delays disappointment&#34;</span>
-</span></span><span style=display:flex><span>]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Create a CountVectorizer</span>
-</span></span><span style=display:flex><span>vectorizer <span style=color:#f92672>=</span> CountVectorizer(max_df<span style=color:#f92672>=</span><span style=color:#ae81ff>0.95</span>, min_df<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, stop_words<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;english&#34;</span>)
-</span></span><span style=display:flex><span>dtm <span style=color:#f92672>=</span> vectorizer<span style=color:#f92672>.</span>fit_transform(cleaned_tweets)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Print feature names and document-term matrix shape</span>
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Features:&#34;</span>, vectorizer<span style=color:#f92672>.</span>get_feature_names_out())
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Document-Term Matrix Shape:&#34;</span>, dtm<span style=color:#f92672>.</span>shape)
-</span></span></code></pre></div><h3 id=step-2-building-the-lda-model>Step 2: Building the LDA Model</h3><p>Using the document-term matrix (DTM) generated above, we trained an LDA model with a specified number of topics. The model identifies clusters of words that form coherent topics.</p><h4 id=python-code-applying-lda>Python Code: Applying LDA</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.decomposition <span style=color:#f92672>import</span> LatentDirichletAllocation
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Train LDA model</span>
-</span></span><span style=display:flex><span>lda <span style=color:#f92672>=</span> LatentDirichletAllocation(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>)
-</span></span><span style=display:flex><span>lda<span style=color:#f92672>.</span>fit(dtm)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Print topics and their top words</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>print_topics</span>(model, feature_names, n_top_words):
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> topic_idx, topic <span style=color:#f92672>in</span> enumerate(model<span style=color:#f92672>.</span>components_):
-</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Topic #</span><span style=color:#e6db74>{</span>topic_idx <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:#e6db74>}</span><span style=color:#e6db74>:&#34;</span>)
-</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>&#34; &#34;</span><span style=color:#f92672>.</span>join([feature_names[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> topic<span style=color:#f92672>.</span>argsort()[:<span style=color:#f92672>-</span>n_top_words <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>:<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]]))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Print top words for each topic</span>
-</span></span><span style=display:flex><span>print_topics(lda, vectorizer<span style=color:#f92672>.</span>get_feature_names_out(), n_top_words<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>)
-</span></span></code></pre></div><p>Output:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>
-</span></span><span style=display:flex><span>Topic <span style=color:#75715e>#1: tesla model innovation cars future</span>
-</span></span><span style=display:flex><span>Topic <span style=color:#75715e>#2: apple stock iphone release announcement</span>
-</span></span><span style=display:flex><span>Topic <span style=color:#75715e>#3: tesla delays disappointment future</span>
-</span></span></code></pre></div><h3 id=step-3-visualising-topics>Step 3: Visualising Topics</h3><p>Visualising the distribution of topics in tweets helps identify their prevalence. Libraries like <code>pyLDAvis</code> provide interactive tools for exploring LDA results.</p><h4 id=python-code-visualising-topics>Python Code: Visualising Topics</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pyLDAvis
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pyLDAvis.sklearn
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Visualize LDA model</span>
-</span></span><span style=display:flex><span>pyLDAvis<span style=color:#f92672>.</span>enable_notebook()
-</span></span><span style=display:flex><span>panel <span style=color:#f92672>=</span> pyLDAvis<span style=color:#f92672>.</span>sklearn<span style=color:#f92672>.</span>prepare(lda, dtm, vectorizer)
-</span></span><span style=display:flex><span>pyLDAvis<span style=color:#f92672>.</span>save_html(panel, <span style=color:#e6db74>&#34;lda_visualization.html&#34;</span>)
-</span></span></code></pre></div><p>The visualisation provides:</p><ul><li>Topic Proportions: The relative size of each topic.</li><li>Top Words: Frequently occurring words in each topic.</li><li>Document Association: Tweets associated with each topic.</li></ul><h3 id=insights-from-lda>Insights from LDA</h3><ol><li>Product Launches:</li></ol><ul><li>Words like &ldquo;release,&rdquo; &ldquo;announcement,&rdquo; and &ldquo;iphone&rdquo; dominated one topic, reflecting excitement around product launches.</li></ul><ol start=2><li>Stock Performance:</li></ol><ul><li>Words like &ldquo;stock,&rdquo; &ldquo;overvalued,&rdquo; and &ldquo;future&rdquo; highlighted discussions on market performance and valuations.</li></ul><ol start=3><li>CEO-Driven Narratives:</li></ol><ul><li>Tesla’s topics were centered on &ldquo;innovation,&rdquo; &ldquo;delays,&rdquo; and &ldquo;disappointment,&rdquo; revealing the polarizing nature of Elon Musk’s leadership.</li></ul><h3 id=challenges-in-topic-modelling>Challenges in Topic Modelling</h3><ol><li>Choosing the Number of Topics:</li></ol><ul><li>Selecting the optimal number of topics (<code>n_components</code>) requires experimentation.</li></ul><p><em>Solution</em>: Use metrics like coherence scores or manual evaluation.</p><ol start=2><li>Interpreting Ambiguous Topics:</li></ol><ul><li>Some topics may overlap or lack clear boundaries.</li></ul><p><em>Solution</em>: Combine LDA results with domain knowledge for better interpretation.</p><ol start=3><li>Noise in Text:</li></ol><ul><li>Despite pre-processing, some irrelevant terms may still appear.</li></ul><p><em>Solution</em>: Refine stop word lists and pre-processing steps.</p><h3 id=conclusion>Conclusion</h3><p>Latent Dirichlet Allocation (LDA) offered valuable insights into the themes driving public discourse on NASDAQ companies. By uncovering hidden patterns, we gained a deeper understanding of the topics influencing sentiment trends, such as product launches, market discussions, and CEO narratives.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 5. Latent Themes in Tweets: Topic Modelling with LDA. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores topic modelling with Latent Dirichlet Allocation (LDA) to uncover hidden themes in tweets about NASDAQ companies. By applying LDA on cleaned Twitter data, the project revealed insights into recurring topics such as product launches, stock performance, and CEO-driven narratives.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project4_images/pr4.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 5. Latent Themes in Tweets: Topic Modelling with LDA.
+          </h1>
+          
+            <p class="f5">This blog explores topic modelling with Latent Dirichlet Allocation (LDA) to uncover hidden themes in tweets about NASDAQ companies. By applying LDA on cleaned Twitter data, the project revealed insights into recurring topics such as product launches, stock performance, and CEO-driven narratives.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. <strong>Latent Dirichlet Allocation (LDA)</strong>, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.</p>
+<p>In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions.</p>
+<p>This blog provides a step-by-step walkthrough of applying LDA on cleaned Twitter data, with Python code snippets and examples of the insights gained.</p>
+<h3 id="step-1-preparing-data-for-topic-modelling">*Step 1: Preparing Data for Topic Modelling</h3>
+<p>Topic modelling requires pre-processed data where text is tokenised and filtered for meaningful words. We used the cleaned tweets from earlier preprocessing steps.</p>
+<h4 id="python-code-tokenising-and-vectorising-tweets">Python Code: Tokenising and Vectorising Tweets</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> CountVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example cleaned tweets</span>
+</span></span><span style="display:flex;"><span>cleaned_tweets <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tesla new model amazing&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;apple stock overvalued&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tesla cars future innovation&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;apple iphone release announcement&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tesla delays disappointment&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a CountVectorizer</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> CountVectorizer(max_df<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, min_df<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, stop_words<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;english&#34;</span>)
+</span></span><span style="display:flex;"><span>dtm <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(cleaned_tweets)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print feature names and document-term matrix shape</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Features:&#34;</span>, vectorizer<span style="color:#f92672">.</span>get_feature_names_out())
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Document-Term Matrix Shape:&#34;</span>, dtm<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><h3 id="step-2-building-the-lda-model">Step 2: Building the LDA Model</h3>
+<p>Using the document-term matrix (DTM) generated above, we trained an LDA model with a specified number of topics. The model identifies clusters of words that form coherent topics.</p>
+<h4 id="python-code-applying-lda">Python Code: Applying LDA</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> LatentDirichletAllocation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train LDA model</span>
+</span></span><span style="display:flex;"><span>lda <span style="color:#f92672">=</span> LatentDirichletAllocation(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>lda<span style="color:#f92672">.</span>fit(dtm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print topics and their top words</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_topics</span>(model, feature_names, n_top_words):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> topic_idx, topic <span style="color:#f92672">in</span> enumerate(model<span style="color:#f92672">.</span>components_):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Topic #</span><span style="color:#e6db74">{</span>topic_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join([feature_names[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> topic<span style="color:#f92672">.</span>argsort()[:<span style="color:#f92672">-</span>n_top_words <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print top words for each topic</span>
+</span></span><span style="display:flex;"><span>print_topics(lda, vectorizer<span style="color:#f92672">.</span>get_feature_names_out(), n_top_words<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Topic <span style="color:#75715e">#1: tesla model innovation cars future</span>
+</span></span><span style="display:flex;"><span>Topic <span style="color:#75715e">#2: apple stock iphone release announcement</span>
+</span></span><span style="display:flex;"><span>Topic <span style="color:#75715e">#3: tesla delays disappointment future</span>
+</span></span></code></pre></div><h3 id="step-3-visualising-topics">Step 3: Visualising Topics</h3>
+<p>Visualising the distribution of topics in tweets helps identify their prevalence. Libraries like <code>pyLDAvis</code> provide interactive tools for exploring LDA results.</p>
+<h4 id="python-code-visualising-topics">Python Code: Visualising Topics</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyLDAvis
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyLDAvis.sklearn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualize LDA model</span>
+</span></span><span style="display:flex;"><span>pyLDAvis<span style="color:#f92672">.</span>enable_notebook()
+</span></span><span style="display:flex;"><span>panel <span style="color:#f92672">=</span> pyLDAvis<span style="color:#f92672">.</span>sklearn<span style="color:#f92672">.</span>prepare(lda, dtm, vectorizer)
+</span></span><span style="display:flex;"><span>pyLDAvis<span style="color:#f92672">.</span>save_html(panel, <span style="color:#e6db74">&#34;lda_visualization.html&#34;</span>)
+</span></span></code></pre></div><p>The visualisation provides:</p>
+<ul>
+<li>Topic Proportions: The relative size of each topic.</li>
+<li>Top Words: Frequently occurring words in each topic.</li>
+<li>Document Association: Tweets associated with each topic.</li>
+</ul>
+<h3 id="insights-from-lda">Insights from LDA</h3>
+<ol>
+<li>Product Launches:</li>
+</ol>
+<ul>
+<li>Words like &ldquo;release,&rdquo; &ldquo;announcement,&rdquo; and &ldquo;iphone&rdquo; dominated one topic, reflecting excitement around product launches.</li>
+</ul>
+<ol start="2">
+<li>Stock Performance:</li>
+</ol>
+<ul>
+<li>Words like &ldquo;stock,&rdquo; &ldquo;overvalued,&rdquo; and &ldquo;future&rdquo; highlighted discussions on market performance and valuations.</li>
+</ul>
+<ol start="3">
+<li>CEO-Driven Narratives:</li>
+</ol>
+<ul>
+<li>Tesla’s topics were centered on &ldquo;innovation,&rdquo; &ldquo;delays,&rdquo; and &ldquo;disappointment,&rdquo; revealing the polarizing nature of Elon Musk’s leadership.</li>
+</ul>
+<h3 id="challenges-in-topic-modelling">Challenges in Topic Modelling</h3>
+<ol>
+<li>Choosing the Number of Topics:</li>
+</ol>
+<ul>
+<li>Selecting the optimal number of topics (<code>n_components</code>) requires experimentation.</li>
+</ul>
+<p><em>Solution</em>: Use metrics like coherence scores or manual evaluation.</p>
+<ol start="2">
+<li>Interpreting Ambiguous Topics:</li>
+</ol>
+<ul>
+<li>Some topics may overlap or lack clear boundaries.</li>
+</ul>
+<p><em>Solution</em>: Combine LDA results with domain knowledge for better interpretation.</p>
+<ol start="3">
+<li>Noise in Text:</li>
+</ol>
+<ul>
+<li>Despite pre-processing, some irrelevant terms may still appear.</li>
+</ul>
+<p><em>Solution</em>: Refine stop word lists and pre-processing steps.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Latent Dirichlet Allocation (LDA) offered valuable insights into the themes driving public discourse on NASDAQ companies. By uncovering hidden patterns, we gained a deeper understanding of the topics influencing sentiment trends, such as product launches, market discussions, and CEO narratives.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

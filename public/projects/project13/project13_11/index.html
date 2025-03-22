@@ -1,47 +1,233 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 11. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Learn about the computational and practical hurdles in deploying AI for clinical use and how to overcome them effectively."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project13_images/pr13.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 11. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description.</h1><p class=f5>Learn about the computational and practical hurdles in deploying AI for clinical use and how to overcome them effectively.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project13_images/pr13.jpg><figcaption><h4>Photo by Ben Hershey on Unsplash</h4></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith//Histopathology-AI-BreastCancer target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Deploying AI models for clinical use, particularly in breast cancer diagnosis, is a multi-faceted challenge. My project on the BreakHis dataset highlighted several computational and practical hurdles, such as optimising resource usage, addressing class imbalance, and ensuring model compatibility with real-world clinical workflows. This blog explores these challenges and the solutions implemented in my work, including specific metrics, code snippets, and insights.</p><hr><h3 id=challenges-in-deploying-ai-models-for-clinical-use><strong>Challenges in Deploying AI Models for Clinical Use</strong></h3><h4 id=1-computational-resource-constraints><strong>1. Computational Resource Constraints</strong></h4><p>High-resolution images in the BreakHis dataset (224x224 pixels) and deep models like <code>ResNet50</code> and <code>DenseNet201</code> require significant computational resources. Training and inference on such models can strain hardware, particularly in resource-constrained clinical settings.</p><p><strong>Metrics from Project</strong>:</p><ul><li>Training time per epoch: ~12 minutes on a single GPU.</li><li>Memory usage: ~8 GB for model inference on large batches.</li></ul><p><strong>Solution</strong>:</p><ul><li><strong>GPU Optimisation</strong>: Enabled efficient memory management to ensure smooth training.</li><li><strong>Model Optimisation</strong>: Applied <code>TensorFlow Lite</code> for quantising the model for edge deployment, reducing inference time without compromising accuracy.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> tensorflow <span style=color:#66d9ef>as</span> tf
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Convert a saved model to TensorFlow Lite with quantisation</span>
-</span></span><span style=display:flex><span>converter <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>lite<span style=color:#f92672>.</span>TFLiteConverter<span style=color:#f92672>.</span>from_saved_model(<span style=color:#e6db74>&#34;saved_model_path&#34;</span>)
-</span></span><span style=display:flex><span>converter<span style=color:#f92672>.</span>optimizations <span style=color:#f92672>=</span> [tf<span style=color:#f92672>.</span>lite<span style=color:#f92672>.</span>Optimize<span style=color:#f92672>.</span>DEFAULT]
-</span></span><span style=display:flex><span>quantized_model <span style=color:#f92672>=</span> converter<span style=color:#f92672>.</span>convert()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Save the optimised model</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> open(<span style=color:#e6db74>&#34;quantized_model.tflite&#34;</span>, <span style=color:#e6db74>&#34;wb&#34;</span>) <span style=color:#66d9ef>as</span> f:
-</span></span><span style=display:flex><span>    f<span style=color:#f92672>.</span>write(quantized_model)
-</span></span></code></pre></div><hr><h4 id=2-dataset-imbalance-and-augmentation><strong>2. Dataset Imbalance and Augmentation</strong></h4><p>In the BreakHis dataset, malignant cases constituted 69% of the data, leading to potential bias in predictions. Augmentation techniques like flipping, rotation, and scaling were implemented to balance the dataset and improve generalisation.</p><p><strong>Key Metrics</strong>:</p><ul><li>Post-augmentation class balance: Benign (45%) vs. Malignant (55%).</li><li>Model sensitivity on benign cases improved from 78% to 91%.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.preprocessing.image <span style=color:#f92672>import</span> ImageDataGenerator
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Apply data augmentation for balanced training</span>
-</span></span><span style=display:flex><span>datagen <span style=color:#f92672>=</span> ImageDataGenerator(
-</span></span><span style=display:flex><span>    rotation_range<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>,
-</span></span><span style=display:flex><span>    width_shift_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>,
-</span></span><span style=display:flex><span>    height_shift_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>,
-</span></span><span style=display:flex><span>    zoom_range<span style=color:#f92672>=</span><span style=color:#ae81ff>0.3</span>,
-</span></span><span style=display:flex><span>    horizontal_flip<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
-</span></span><span style=display:flex><span>    fill_mode<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;nearest&#34;</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>augmented_data <span style=color:#f92672>=</span> datagen<span style=color:#f92672>.</span>flow(x_train, y_train, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>)
-</span></span></code></pre></div><hr><h4 id=3-interpretability-and-trust><strong>3. Interpretability and Trust</strong></h4><p>Clinicians require interpretable predictions to trust AI models. In my project, Grad-CAM visualisations were employed to highlight the regions of histopathological images that influenced model decisions.</p><p><strong>Metrics</strong>:</p><ul><li>Visualisation clarity: 90% of Grad-CAM overlays matched areas of interest.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> tensorflow <span style=color:#66d9ef>as</span> tf
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.models <span style=color:#f92672>import</span> Model
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Grad-CAM implementation</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>grad_cam</span>(model, img_array, last_conv_layer_name, pred_index<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
-</span></span><span style=display:flex><span>    grad_model <span style=color:#f92672>=</span> Model(inputs<span style=color:#f92672>=</span>model<span style=color:#f92672>.</span>inputs, outputs<span style=color:#f92672>=</span>[model<span style=color:#f92672>.</span>get_layer(last_conv_layer_name)<span style=color:#f92672>.</span>output, model<span style=color:#f92672>.</span>output])
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>with</span> tf<span style=color:#f92672>.</span>GradientTape() <span style=color:#66d9ef>as</span> tape:
-</span></span><span style=display:flex><span>        conv_outputs, predictions <span style=color:#f92672>=</span> grad_model(img_array)
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> pred_index <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span>:
-</span></span><span style=display:flex><span>            pred_index <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>argmax(predictions[<span style=color:#ae81ff>0</span>])
-</span></span><span style=display:flex><span>        loss <span style=color:#f92672>=</span> predictions[:, pred_index]
-</span></span><span style=display:flex><span>    grads <span style=color:#f92672>=</span> tape<span style=color:#f92672>.</span>gradient(loss, conv_outputs)
-</span></span><span style=display:flex><span>    pooled_grads <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>reduce_mean(grads, axis<span style=color:#f92672>=</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>))
-</span></span><span style=display:flex><span>    conv_outputs <span style=color:#f92672>=</span> conv_outputs[<span style=color:#ae81ff>0</span>]
-</span></span><span style=display:flex><span>    heatmap <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>reduce_mean(tf<span style=color:#f92672>.</span>multiply(pooled_grads, conv_outputs), axis<span style=color:#f92672>=-</span><span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>    heatmap <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>maximum(heatmap, <span style=color:#ae81ff>0</span>) <span style=color:#f92672>/</span> tf<span style=color:#f92672>.</span>math<span style=color:#f92672>.</span>reduce_max(heatmap)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> heatmap
-</span></span></code></pre></div><hr><h4 id=4-scalability-and-deployment><strong>4. Scalability and Deployment</strong></h4><p>Scalable deployment was achieved using <code>TensorFlow Serving</code>, allowing seamless integration with clinical systems. Docker containers ensured portability and ease of deployment across different hospital infrastructures.</p><p><strong>Key Metrics</strong>:</p><ul><li>Inference time: Reduced from 1.5 seconds to 0.8 seconds per image.</li><li>Deployment environment compatibility: Achieved using Docker with TensorFlow Serving.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Docker command to deploy model with TensorFlow Serving</span>
-</span></span><span style=display:flex><span>docker run -p 8501:8501 --name<span style=color:#f92672>=</span>tf_model_serving --mount type<span style=color:#f92672>=</span>bind,source<span style=color:#f92672>=</span>/path/to/saved_model,target<span style=color:#f92672>=</span>/models/model -e MODEL_NAME<span style=color:#f92672>=</span>model -t tensorflow/serving
-</span></span></code></pre></div><hr><h3 id=breakhis-dataset-deployment><strong>BreakHis Dataset Deployment</strong></h3><h4 id=deployment-workflow><strong>Deployment Workflow</strong>:</h4><ol><li><strong>Model Optimisation</strong>: Quantised deep learning models for efficient inference.</li><li><strong>Augmented Training</strong>: Balanced the dataset using data augmentation techniques.</li><li><strong>Interpretability</strong>: Integrated Grad-CAM for explainable predictions.</li></ol><h4 id=performance-improvements><strong>Performance Improvements</strong>:</h4><table><thead><tr><th><strong>Metric</strong></th><th><strong>Pre-Deployment</strong></th><th><strong>Post-Deployment</strong></th></tr></thead><tbody><tr><td>Sensitivity (Benign)</td><td>78%</td><td>91%</td></tr><tr><td>Specificity</td><td>88%</td><td>94%</td></tr><tr><td>Inference Time</td><td>1.5s</td><td>0.8s</td></tr><tr><td>Trust Score</td><td>-</td><td>4.5/5</td></tr></tbody></table><hr><h3 id=conclusion><strong>Conclusion</strong></h3><p>Deploying AI models for breast cancer diagnosis involves addressing challenges like resource optimisation, class imbalance, and interpretability.
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 11. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Learn about the computational and practical hurdles in deploying AI for clinical use and how to overcome them effectively.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project13_images/pr13.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 11. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description.
+          </h1>
+          
+            <p class="f5">Learn about the computational and practical hurdles in deploying AI for clinical use and how to overcome them effectively.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project13_images/pr13.jpg"><figcaption>
+      <h4>Photo by Ben Hershey on Unsplash</h4>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Deploying AI models for clinical use, particularly in breast cancer diagnosis, is a multi-faceted challenge. My project on the BreakHis dataset highlighted several computational and practical hurdles, such as optimising resource usage, addressing class imbalance, and ensuring model compatibility with real-world clinical workflows. This blog explores these challenges and the solutions implemented in my work, including specific metrics, code snippets, and insights.</p>
+<hr>
+<h3 id="challenges-in-deploying-ai-models-for-clinical-use"><strong>Challenges in Deploying AI Models for Clinical Use</strong></h3>
+<h4 id="1-computational-resource-constraints"><strong>1. Computational Resource Constraints</strong></h4>
+<p>High-resolution images in the BreakHis dataset (224x224 pixels) and deep models like <code>ResNet50</code> and <code>DenseNet201</code> require significant computational resources. Training and inference on such models can strain hardware, particularly in resource-constrained clinical settings.</p>
+<p><strong>Metrics from Project</strong>:</p>
+<ul>
+<li>Training time per epoch: ~12 minutes on a single GPU.</li>
+<li>Memory usage: ~8 GB for model inference on large batches.</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li><strong>GPU Optimisation</strong>: Enabled efficient memory management to ensure smooth training.</li>
+<li><strong>Model Optimisation</strong>: Applied <code>TensorFlow Lite</code> for quantising the model for edge deployment, reducing inference time without compromising accuracy.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert a saved model to TensorFlow Lite with quantisation</span>
+</span></span><span style="display:flex;"><span>converter <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>lite<span style="color:#f92672">.</span>TFLiteConverter<span style="color:#f92672">.</span>from_saved_model(<span style="color:#e6db74">&#34;saved_model_path&#34;</span>)
+</span></span><span style="display:flex;"><span>converter<span style="color:#f92672">.</span>optimizations <span style="color:#f92672">=</span> [tf<span style="color:#f92672">.</span>lite<span style="color:#f92672">.</span>Optimize<span style="color:#f92672">.</span>DEFAULT]
+</span></span><span style="display:flex;"><span>quantized_model <span style="color:#f92672">=</span> converter<span style="color:#f92672">.</span>convert()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the optimised model</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;quantized_model.tflite&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(quantized_model)
+</span></span></code></pre></div><hr>
+<h4 id="2-dataset-imbalance-and-augmentation"><strong>2. Dataset Imbalance and Augmentation</strong></h4>
+<p>In the BreakHis dataset, malignant cases constituted 69% of the data, leading to potential bias in predictions. Augmentation techniques like flipping, rotation, and scaling were implemented to balance the dataset and improve generalisation.</p>
+<p><strong>Key Metrics</strong>:</p>
+<ul>
+<li>Post-augmentation class balance: Benign (45%) vs. Malignant (55%).</li>
+<li>Model sensitivity on benign cases improved from 78% to 91%.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply data augmentation for balanced training</span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nearest&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>augmented_data <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(x_train, y_train, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span></code></pre></div><hr>
+<h4 id="3-interpretability-and-trust"><strong>3. Interpretability and Trust</strong></h4>
+<p>Clinicians require interpretable predictions to trust AI models. In my project, Grad-CAM visualisations were employed to highlight the regions of histopathological images that influenced model decisions.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li>Visualisation clarity: 90% of Grad-CAM overlays matched areas of interest.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Grad-CAM implementation</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad_cam</span>(model, img_array, last_conv_layer_name, pred_index<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    grad_model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>inputs, outputs<span style="color:#f92672">=</span>[model<span style="color:#f92672">.</span>get_layer(last_conv_layer_name)<span style="color:#f92672">.</span>output, model<span style="color:#f92672">.</span>output])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        conv_outputs, predictions <span style="color:#f92672">=</span> grad_model(img_array)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> pred_index <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>            pred_index <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>argmax(predictions[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>        loss <span style="color:#f92672">=</span> predictions[:, pred_index]
+</span></span><span style="display:flex;"><span>    grads <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(loss, conv_outputs)
+</span></span><span style="display:flex;"><span>    pooled_grads <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(grads, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    conv_outputs <span style="color:#f92672">=</span> conv_outputs[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>multiply(pooled_grads, conv_outputs), axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>maximum(heatmap, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">/</span> tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>reduce_max(heatmap)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> heatmap
+</span></span></code></pre></div><hr>
+<h4 id="4-scalability-and-deployment"><strong>4. Scalability and Deployment</strong></h4>
+<p>Scalable deployment was achieved using <code>TensorFlow Serving</code>, allowing seamless integration with clinical systems. Docker containers ensured portability and ease of deployment across different hospital infrastructures.</p>
+<p><strong>Key Metrics</strong>:</p>
+<ul>
+<li>Inference time: Reduced from 1.5 seconds to 0.8 seconds per image.</li>
+<li>Deployment environment compatibility: Achieved using Docker with TensorFlow Serving.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Docker command to deploy model with TensorFlow Serving</span>
+</span></span><span style="display:flex;"><span>docker run -p 8501:8501 --name<span style="color:#f92672">=</span>tf_model_serving --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span>/path/to/saved_model,target<span style="color:#f92672">=</span>/models/model -e MODEL_NAME<span style="color:#f92672">=</span>model -t tensorflow/serving
+</span></span></code></pre></div><hr>
+<h3 id="breakhis-dataset-deployment"><strong>BreakHis Dataset Deployment</strong></h3>
+<h4 id="deployment-workflow"><strong>Deployment Workflow</strong>:</h4>
+<ol>
+<li><strong>Model Optimisation</strong>: Quantised deep learning models for efficient inference.</li>
+<li><strong>Augmented Training</strong>: Balanced the dataset using data augmentation techniques.</li>
+<li><strong>Interpretability</strong>: Integrated Grad-CAM for explainable predictions.</li>
+</ol>
+<h4 id="performance-improvements"><strong>Performance Improvements</strong>:</h4>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Metric</strong></th>
+          <th><strong>Pre-Deployment</strong></th>
+          <th><strong>Post-Deployment</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Sensitivity (Benign)</td>
+          <td>78%</td>
+          <td>91%</td>
+      </tr>
+      <tr>
+          <td>Specificity</td>
+          <td>88%</td>
+          <td>94%</td>
+      </tr>
+      <tr>
+          <td>Inference Time</td>
+          <td>1.5s</td>
+          <td>0.8s</td>
+      </tr>
+      <tr>
+          <td>Trust Score</td>
+          <td>-</td>
+          <td>4.5/5</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+<p>Deploying AI models for breast cancer diagnosis involves addressing challenges like resource optimisation, class imbalance, and interpretability.
 By leveraging techniques such as model quantisation, data augmentation, and Grad-CAM visualisations, my project successfully navigated these hurdles.
-These solutions not only improved performance metrics but also enhanced trust and usability in clinical settings, paving the way for impactful AI applications in healthcare.</p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+These solutions not only improved performance metrics but also enhanced trust and usability in clinical settings, paving the way for impactful AI applications in healthcare.</p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

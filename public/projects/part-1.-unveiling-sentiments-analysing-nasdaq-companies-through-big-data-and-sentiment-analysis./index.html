@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores how Big Data and sentiment analysis were used to analyse over 4 million tweets about NASDAQ companies. Leveraging Python, the AFINN lexicon, and distributed processing with MapReduce, the analysis uncovered patterns in public sentiment, including Tesla&#39;s polarising reputation and the dominance of neutral discourse.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project4_images/pr4.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis.
+          </h1>
+          
+            <p class="f5">This blog explores how Big Data and sentiment analysis were used to analyse over 4 million tweets about NASDAQ companies. Leveraging Python, the AFINN lexicon, and distributed processing with MapReduce, the analysis uncovered patterns in public sentiment, including Tesla&#39;s polarising reputation and the dominance of neutral discourse.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project4_images/pr4.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-unveiling-sentiments-analysing-nasdaq-companies-through-big-data-and-sentiment-analysis">Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis.</h1>
+<h3 id="introduction">Introduction</h3>
+<p>In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts.</p>
+<p>Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment. This blog dissects a technical project that analysed tweets related to NASDAQ-listed companies, including giants like Apple, Tesla, and Microsoft, over a five-year span (2015–2020).</p>
+<p>By leveraging Big Data tools and sentiment analysis techniques, we uncover fascinating insights into the dynamics of public discourse.</p>
+<h3 id="the-dataset"><strong>The Dataset</strong></h3>
+<p>Our analysis relied on a publicly available dataset from <a href="https://www.kaggle.com/datasets/omermetinn/tweets-about-the-top-companies-from-2015-to-2020?select=Company.csv">Kaggle</a>, containing over 4 million tweets tagged with ticker symbols of NASDAQ companies. These tweets included metadata such as:</p>
+<ul>
+<li><strong>Tweet ID</strong>: Unique identifier for each tweet.</li>
+<li><strong>Text</strong>: The actual tweet content.</li>
+<li><strong>Ticker Symbol</strong>: The company identifier (e.g., $AAPL for Apple).</li>
+<li><strong>Timestamp</strong>: Date and time of the tweet.</li>
+</ul>
+<p>This dataset served as the foundation for sentiment analysis, allowing us to explore how companies were perceived over time.</p>
+<h3 id="step-1-data-cleaning-and-pre-processing"><strong>Step 1: Data Cleaning and Pre-processing</strong></h3>
+<p>Social media data, while abundant, is messy. Tweets often contain URLs, user mentions, emojis, and inconsistent formatting. The first step was to clean this data to extract meaningful textual information for analysis.</p>
+<h4 id="key-pre-processing-steps"><strong>Key Pre-processing Steps</strong></h4>
+<ol>
+<li>
+<p><strong>Removing URLs and Mentions</strong>: Non-informative elements like hyperlinks (<code>https://...</code>) and user mentions (<code>@username</code>) were eliminated.</p>
+</li>
+<li>
+<p><strong>Converting to Lowercase</strong>: Standardising text case to avoid redundancy (e.g., <code>Apple</code> and <code>apple</code> being treated as different words).</p>
+</li>
+<li>
+<p><strong>Removing Stop Words</strong>: Common words like &ldquo;and,&rdquo; &ldquo;is,&rdquo; and &ldquo;the&rdquo; that don&rsquo;t contribute to sentiment were filtered out.</p>
+</li>
+<li>
+<p><strong>Tokenisation</strong>: Splitting text into individual words for detailed analysis.</p>
+</li>
+</ol>
+<h4 id="python-code-data-cleaning"><strong>Python Code: Data Cleaning</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.corpus <span style="color:#f92672">import</span> stopwords
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.tokenize <span style="color:#f92672">import</span> word_tokenize
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load stop words</span>
+</span></span><span style="display:flex;"><span>stop_words <span style="color:#f92672">=</span> set(stopwords<span style="color:#f92672">.</span>words(<span style="color:#e6db74">&#39;english&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clean_tweet</span>(tweet):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Remove URLs</span>
+</span></span><span style="display:flex;"><span>    tweet <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;http\S+|www\S+|https\S+&#34;</span>, <span style="color:#e6db74">&#39;&#39;</span>, tweet, flags<span style="color:#f92672">=</span>re<span style="color:#f92672">.</span>MULTILINE)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Remove user mentions</span>
+</span></span><span style="display:flex;"><span>    tweet <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;@\w+&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, tweet)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Remove special characters, numbers, and punctuations</span>
+</span></span><span style="display:flex;"><span>    tweet <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\w*\d\w*&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, tweet)
+</span></span><span style="display:flex;"><span>    tweet <span style="color:#f92672">=</span> tweet<span style="color:#f92672">.</span>translate(str<span style="color:#f92672">.</span>maketrans(<span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, string<span style="color:#f92672">.</span>punctuation))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Lowercase the text</span>
+</span></span><span style="display:flex;"><span>    tweet <span style="color:#f92672">=</span> tweet<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Tokenize and remove stop words</span>
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> word_tokenize(tweet)
+</span></span><span style="display:flex;"><span>    filtered_tokens <span style="color:#f92672">=</span> [word <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> tokens <span style="color:#66d9ef">if</span> word <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> stop_words]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(filtered_tokens)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage</span>
+</span></span><span style="display:flex;"><span>sample_tweet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;@Tesla&#39;s new model is amazing! Visit https://tesla.com for more info.&#34;</span>
+</span></span><span style="display:flex;"><span>cleaned_tweet <span style="color:#f92672">=</span> clean_tweet(sample_tweet)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Cleaned Tweet:&#34;</span>, cleaned_tweet)
+</span></span></code></pre></div><h3 id="step-2-sentiment-analysis">Step 2: Sentiment Analysis</h3>
+<p>Sentiment analysis deciphers the emotional tone behind textual data, categorising it as positive, negative, or neutral. For this project, we adopted the <strong>AFINN lexicon</strong>, a list of English words rated by sentiment polarity. Words are assigned scores between -5 (most negative) and 5 (most positive).</p>
+<h4 id="python-code-sentiment-calculation">Python Code: Sentiment Calculation</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> afinn <span style="color:#f92672">import</span> Afinn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>afinn <span style="color:#f92672">=</span> Afinn()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">analyze_sentiment</span>(tweet):
+</span></span><span style="display:flex;"><span>    score <span style="color:#f92672">=</span> afinn<span style="color:#f92672">.</span>score(tweet)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> score <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;positive&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> score <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;negative&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;neutral&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage</span>
+</span></span><span style="display:flex;"><span>tweet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tesla&#39;s innovation is groundbreaking!&#34;</span>
+</span></span><span style="display:flex;"><span>sentiment <span style="color:#f92672">=</span> analyze_sentiment(tweet)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Sentiment:&#34;</span>, sentiment)
+</span></span></code></pre></div><h3 id="step-3-distributed-data-processing">Step 3: Distributed Data Processing</h3>
+<p>Given the size of the dataset (4.3 million tweets), we leveraged <strong>MapReduce</strong> to process the data in a distributed fashion. <strong>MapReduce</strong> splits tasks across multiple nodes, enabling parallel processing of large datasets.</p>
+<h4 id="map-phase-sentiment-classification">Map Phase: Sentiment Classification</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mapper_sentiment</span>(line):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Split the input line to extract tweet components</span>
+</span></span><span style="display:flex;"><span>    tweet_id, tweet, ticker <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Analyze sentiment</span>
+</span></span><span style="display:flex;"><span>    sentiment <span style="color:#f92672">=</span> analyze_sentiment(tweet)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Emit tweet ID, ticker symbol, and sentiment</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (tweet_id, ticker, sentiment)
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><h3 id="step-4-visualisation">Step 4: Visualisation</h3>
+<p>Visualisation transforms raw numbers into compelling narratives. Using <code>Matplotlib</code>, we created:</p>
+<ul>
+<li><em>Pie Charts</em>: To display overall sentiment distribution.</li>
+<li><em>Bar Charts</em>: For comparing sentiment across companies.</li>
+<li><em>Word Clouds</em>: Highlighting the most frequent words for each sentiment.</li>
+</ul>
+<h4 id="python-code-sentiment-distribution">Python Code: Sentiment Distribution</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example sentiment counts</span>
+</span></span><span style="display:flex;"><span>sentiment_counts <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;positive&#39;</span>: <span style="color:#ae81ff">5000</span>, <span style="color:#e6db74">&#39;neutral&#39;</span>: <span style="color:#ae81ff">7000</span>, <span style="color:#e6db74">&#39;negative&#39;</span>: <span style="color:#ae81ff">2000</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plotting</span>
+</span></span><span style="display:flex;"><span>labels <span style="color:#f92672">=</span> sentiment_counts<span style="color:#f92672">.</span>keys()
+</span></span><span style="display:flex;"><span>sizes <span style="color:#f92672">=</span> sentiment_counts<span style="color:#f92672">.</span>values()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>pie(sizes, labels<span style="color:#f92672">=</span>labels, autopct<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%1.1f%%</span><span style="color:#e6db74">&#39;</span>, startangle<span style="color:#f92672">=</span><span style="color:#ae81ff">140</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Sentiment Distribution&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="key-findings">Key Findings</h3>
+<h4 id="1-neutral-sentiments-dominate">1. Neutral Sentiments Dominate</h4>
+<p>Most tweets expressed factual or informational content, with neutral sentiments outnumbering both positive and negative ones.</p>
+<h4 id="tesla-a-polarising-entity">Tesla: A Polarising Entity</h4>
+<p>Tesla received the highest positive sentiments but also significant negative mentions, reflecting its polarising influence in the public eye.</p>
+<h4 id="frequent-topics">Frequent Topics</h4>
+<p>Topic modelling revealed recurring themes such as:</p>
+<ul>
+<li>Product launches (e.g., new iPhone models).</li>
+<li>CEO-driven discussions (e.g., Elon Musk&rsquo;s tweets).</li>
+<li>Financial performance updates.</li>
+</ul>
+<h3 id="challenges-and-limitations">Challenges and Limitations</h3>
+<ul>
+<li>
+<h4 id="sarcasm-and-context">Sarcasm and Context</h4>
+</li>
+</ul>
+<p>Lexicon-based sentiment analysis struggles to interpret sarcasm or contextual subtleties in tweets.</p>
+<ul>
+<li>
+<h4 id="dynamic-language">Dynamic Language</h4>
+</li>
+</ul>
+<p>Constant evolution of social media slang and abbreviations makes it challenging to maintain an up-to-date lexicon.</p>
+<ul>
+<li>
+<h4 id="bias-in-data">Bias in Data</h4>
+</li>
+</ul>
+<p>Twitter users may not represent a fully unbiased sample of public opinion, especially for financial topics.</p>
+<h4 id="next-steps">Next Steps</h4>
+<p>To refine this analysis, future steps could include:</p>
+<ul>
+<li><em>Machine Learning Models</em>: Employing techniques like Naive Bayes or deep learning for nuanced sentiment classification.</li>
+<li><em>Multimodal Analysis</em>: Incorporating images or videos associated with tweets for a richer understanding.</li>
+<li><em>Real-time Analysis</em>: Transitioning from batch processing to real-time sentiment tracking for dynamic insights.</li>
+</ul>
+<h4 id="conclusion">Conclusion</h4>
+<p>This project exemplifies the power of combining Big Data tools like MapReduce with Python’s flexibility for text analysis. By unlocking the sentiment behind millions of tweets, we gain valuable insights into market trends, public perception, and corporate influence.</p>
+<h1 id="part-2-scalling-sentiment-analysis-with-mapreduce">Part 2. Scalling Sentiment Analysis with MapReduce</h1>
+<h3 id="introduction-1">Introduction</h3>
+<p>Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern.</p>
+<p>To address this, we employed <strong>MapReduce</strong>, a distributed data processing model that enables parallel computation across multiple nodes.</p>
+<p>This blog walks through the implementation of <strong>MapReduce</strong> for sentiment analysis, focusing on how it handles data at scale. We&rsquo;ll include examples of mappers and reducers with Python code to explain the workflow.</p>
+<h3 id="what-is-mapreduce">What is MapReduce?</h3>
+<p><strong>MapReduce</strong> is a programming model designed to process large datasets by splitting tasks into two main phases:</p>
+<ol>
+<li>
+<p><strong>Mapping</strong>: Processes data in parallel, emitting key-value pairs.</p>
+</li>
+<li>
+<p><strong>Reducing</strong>: Aggregates the results of mapping to produce a final output.</p>
+</li>
+</ol>
+<p>In this project, <strong>MapReduce</strong> helped analyse millions of tweets by distributing sentiment classification tasks across multiple nodes.</p>
+<h3 id="step-1-map-phase">Step 1: Map Phase</h3>
+<p>The mapper processes each tweet to:</p>
+<ol>
+<li>Extract metadata (e.g., Tweet ID, text, ticker symbol).</li>
+<li>Compute sentiment using the AFINN lexicon.</li>
+<li>Emit a key-value pair for each tweet:<br>
+<code>Key: Company ticker, Value: Sentiment (positive/neutral/negative).</code></li>
+</ol>
+<h4 id="python-code-mapper">Python Code: Mapper</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mapper_sentiment</span>(line):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Processes a single tweet and emits the sentiment.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    line (str): Tab-separated tweet data (Tweet ID, Text, Ticker).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    tuple: (Ticker, Sentiment)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Split the line into components</span>
+</span></span><span style="display:flex;"><span>    tweet_id, tweet, ticker <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Analyze sentiment using the AFINN lexicon</span>
+</span></span><span style="display:flex;"><span>    sentiment <span style="color:#f92672">=</span> analyze_sentiment(tweet)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Emit ticker symbol and sentiment as key-value pair</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (ticker, sentiment)
+</span></span></code></pre></div><h3 id="step-2-reduce-phase">Step 2: Reduce Phase</h3>
+<p>The reducer aggregates the sentiments by company, counting the number of positive, neutral, and negative tweets for each ticker.</p>
+<h4 id="python-code-reducer">Python Code: Reducer</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> defaultdict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reducer_sentiment</span>(key, values):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Aggregates sentiments for a given company.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    key (str): Company ticker symbol.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    values (list): List of sentiments (positive/neutral/negative).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Sentiment counts for the ticker.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    sentiment_counts <span style="color:#f92672">=</span> defaultdict(int)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Count each sentiment</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> sentiment <span style="color:#f92672">in</span> values:
+</span></span><span style="display:flex;"><span>        sentiment_counts[sentiment] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Emit ticker and aggregated counts</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {key: dict(sentiment_counts)}
+</span></span></code></pre></div><h3 id="step-3-integrating-mapreduce">Step 3: Integrating MapReduce</h3>
+<p>With the <strong>mapper</strong> and <strong>reducer</strong> defined, the next step involves integrating them into a distributed environment.</p>
+<p>In practice, this would involve a framework like <strong>Hadoop</strong> or <strong>Spark</strong>. For demonstration, here’s a simplified Python implementation of the <strong>MapReduce</strong> workflow:</p>
+<h4 id="python-code-mapreduce-workflow">Python Code: MapReduce Workflow</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mapreduce</span>(data, mapper, reducer):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Simulates the MapReduce process.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    data (list): List of tab-separated tweet data.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    mapper (function): Mapper function.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    reducer (function): Reducer function.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dict: Aggregated sentiment counts for each ticker.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Map phase</span>
+</span></span><span style="display:flex;"><span>    intermediate <span style="color:#f92672">=</span> defaultdict(list)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> data:
+</span></span><span style="display:flex;"><span>        key, value <span style="color:#f92672">=</span> mapper(line)
+</span></span><span style="display:flex;"><span>        intermediate[key]<span style="color:#f92672">.</span>append(value)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Reduce phase</span>
+</span></span><span style="display:flex;"><span>    results <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> key, values <span style="color:#f92672">in</span> intermediate<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>        results<span style="color:#f92672">.</span>update(reducer(key, values))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> results
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example dataset (tab-separated: Tweet ID, Text, Ticker)</span>
+</span></span><span style="display:flex;"><span>sample_data <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;1</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Tesla is amazing!</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">TSLA&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;2</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Apple stock is overvalued.</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">AAPL&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;3</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Tesla cars are the future.</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">TSLA&#34;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run MapReduce</span>
+</span></span><span style="display:flex;"><span>results <span style="color:#f92672">=</span> mapreduce(sample_data, mapper_sentiment, reducer_sentiment)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Sentiment Analysis Results:&#34;</span>, results)
+</span></span></code></pre></div><h3 id="results">Results</h3>
+<p>For the sample dataset:</p>
+<p>Input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Copy code
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>    Tesla <span style="color:#66d9ef">is</span> amasing!        TSLA
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>    Apple stock <span style="color:#66d9ef">is</span> overvalued. AAPL
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>    Tesla cars are the future. TSLA
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;TSLA&#34;</span>: {<span style="color:#f92672">&#34;positive&#34;</span>: <span style="color:#ae81ff">2</span>, <span style="color:#f92672">&#34;neutral&#34;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&#34;negative&#34;</span>: <span style="color:#ae81ff">0</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;AAPL&#34;</span>: {<span style="color:#f92672">&#34;positive&#34;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&#34;neutral&#34;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&#34;negative&#34;</span>: <span style="color:#ae81ff">1</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This demonstrates how <strong>MapReduce</strong> aggregates results efficiently, even for large datasets.</p>
+<h4 id="benefits-of-mapreduce">Benefits of MapReduce</h4>
+<ul>
+<li>
+<p><em>Scalability</em>:
+Processes data across multiple nodes, enabling efficient handling of large datasets.</p>
+</li>
+<li>
+<p><em>Fault Tolerance</em>:
+Ensures continuity by re-executing failed tasks on other nodes.</p>
+</li>
+<li>
+<p><em>Simplicity</em>:
+The mapper and reducer logic focus on specific tasks, abstracting the complexity of distributed execution.</p>
+</li>
+</ul>
+<h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<ul>
+<li><strong>Skewed Data:</strong>
+Uneven distribution of tweets among nodes can cause bottlenecks.</li>
+</ul>
+<p><em>Solution</em>: Use partitioners to balance data load.</p>
+<ul>
+<li><strong>Complex Sentiment Analysis</strong>:
+Context-dependent expressions (e.g., sarcasm) can be misclassified.</li>
+</ul>
+<p><em>Solution</em>: Enhance lexicon-based approaches with machine learning models.</p>
+<ul>
+<li><strong>Memory Constraints</strong>:
+Large intermediate results can overwhelm memory.</li>
+</ul>
+<p><em>Solution</em>: Use combiners to aggregate results locally before the reduce phase.</p>
+<h3 id="conclusion-1">Conclusion</h3>
+<p><strong>MapReduce</strong> proved invaluable for processing millions of tweets efficiently, enabling us to scale sentiment analysis for large datasets. By distributing tasks, it transformed what could have been a challenging computational problem into a manageable workflow.</p>
+<h1 id="part-3-visualising-market-sentiments-with-hive-and-kibana">Part 3. Visualising Market Sentiments with Hive and Kibana</h1>
+<h3 id="introduction-2">Introduction</h3>
+<p>Data visualisation bridges the gap between raw data and actionable insights.</p>
+<p>After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers.</p>
+<p>Using <strong>Hive</strong> for data aggregation and <strong>Kibana</strong> for visualisation, we uncovered trends in public discourse around NASDAQ companies.</p>
+<p>This blog walks through the process of aggregating data with <strong>Hive</strong> and creating interactive dashboards in <strong>Kibana</strong>, complete with code snippets and visual examples.</p>
+<h3 id="step-1-aggregating-data-with-hive">Step 1: Aggregating Data with Hive</h3>
+<p>Hive simplifies querying and analysing large datasets stored in distributed systems like <strong>Hadoop</strong>. For this project, Hive was used to summarise sentiment counts for each company.</p>
+<h4 id="hive-query-sentiment-aggregation">Hive Query: Sentiment Aggregation</h4>
+<p>Below is the <code>HiveQL</code> query to count positive, neutral, and negative tweets for each company:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> sentiment_counts <span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> 
+</span></span><span style="display:flex;"><span>    company_ticker,
+</span></span><span style="display:flex;"><span>    sentiment,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">count</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> 
+</span></span><span style="display:flex;"><span>    tweets_sentiment
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> 
+</span></span><span style="display:flex;"><span>    company_ticker, sentiment;
+</span></span></code></pre></div><h4 id="explanation">Explanation:</h4>
+<p><code>tweets_sentiment</code>: A table containing processed tweet data with columns for company ticker and sentiment.</p>
+<p><em>COUNT(</em>)*: Counts the number of tweets for each sentiment category.</p>
+<p><em>GROUP BY</em>: Groups the data by company ticker and sentiment.</p>
+<p>The resulting table, <code>sentiment_counts</code>, provides a concise summary of sentiment distribution for each company.</p>
+<h3 id="step-2-exporting-data-for-visualisation">Step 2: Exporting Data for Visualisation</h3>
+<p>Once the aggregated data was prepared, it was exported from Hive in a format compatible with Kibana (e.g., <code>JSON</code> or <code>CSV</code>). Here’s how the export process was handled:</p>
+<h4 id="hive-export-command">Hive Export Command</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> OVERWRITE DIRECTORY <span style="color:#e6db74">&#39;/path/to/output&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ROW</span> FORMAT DELIMITED
+</span></span><span style="display:flex;"><span>FIELDS TERMINATED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;,&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sentiment_counts;
+</span></span></code></pre></div><p>The exported file was then ingested into <strong>Elasticsearch</strong>, the backend for Kibana, enabling real-time visualisation.</p>
+<h3 id="step-3-creating-dashboards-in-kibana">Step 3: Creating Dashboards in Kibana</h3>
+<p><em>Kibana</em> provides a powerful interface for building interactive dashboards. For this project, we used Kibana to create:</p>
+<ul>
+<li><em>Pie Charts</em>: To visualise sentiment distribution by company.</li>
+<li><em>Bar Charts</em>: For comparing sentiments across companies.</li>
+<li><em>Heatmaps</em>: To show sentiment trends over time.
+<figure><img src="/images/project4_images/3.png">
+</figure>
+
+<figure><img src="/images/project4_images/4.png">
+</figure>
+</li>
+</ul>
+<h3 id="results-1">Results</h3>
+<p>Visualisations helped uncover key insights:</p>
+<ul>
+<li><em>Tesla&rsquo;s Polarising Sentiment</em>: Tesla had the highest positive and negative sentiments, reflecting its polarising reputation.</li>
+<li><em>Neutral Sentiments Dominate</em>: Across companies, neutral sentiments were the most common, indicating informational content.</li>
+<li><em>Temporal Trends</em>: Peaks in sentiment activity corresponded to significant events like product launches or earnings calls.</li>
+</ul>
+<h3 id="challenges-and-solutions-1">Challenges and Solutions</h3>
+<ul>
+<li><em>Data Volume</em>: Large datasets required optimised queries in Hive.</li>
+</ul>
+<p><em>Solution</em>: Use partitioning and indexing to speed up queries.</p>
+<ul>
+<li><em>Visualisation Complexity</em>: Balancing detail and clarity in dashboards.</li>
+</ul>
+<p><em>Solution</em>: Iteratively refine visualisations based on user feedback.</p>
+<ul>
+<li><em>Integration with Elasticsearch</em>: Ensuring smooth ingestion of Hive exports.</li>
+</ul>
+<p><em>Solution</em>: Validate data formats and field mappings before ingestion.</p>
+<h3 id="conclusion-2">Conclusion</h3>
+<p>By combining <strong>Hive</strong> for data aggregation and <strong>Kibana</strong> for visualisation, we transformed millions of tweets into meaningful insights. The interactive dashboards allowed stakeholders to explore sentiment trends and make data-driven decisions with ease.</p>
+<h1 id="part-4-word-clouds-in-action-decoding-public-opinion-on-nasdaq-companies">Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies</h1>
+<h3 id="introduction-3">Introduction</h3>
+<p>While numerical analysis reveals overarching trends, visual representations like <strong>word clouds</strong> provide an intuitive way to explore the most frequently used terms in a dataset.</p>
+<p>For this project, word clouds were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. These insights complemented the sentiment analysis, offering a richer understanding of public opinion.</p>
+<p>This blog covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.</p>
+<h3 id="step-1-preparing-data-for-word-clouds">Step 1: Preparing Data for Word Clouds</h3>
+<p>The first step in creating word clouds is to extract the text data corresponding to each sentiment category (positive, neutral, negative). Using the cleaned tweets from our dataset, we grouped text by sentiment.</p>
+<h4 id="python-code-grouping-tweets-by-sentiment">Python Code: Grouping Tweets by Sentiment</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Sample DataFrame with cleaned tweets and sentiments</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;cleaned_tweet&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tesla new model amazing&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;apple stock overvalued&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tesla cars future&#34;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sentiment&#34;</span>: [<span style="color:#e6db74">&#34;positive&#34;</span>, <span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#e6db74">&#34;positive&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Group tweets by sentiment</span>
+</span></span><span style="display:flex;"><span>grouped_tweets <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#34;sentiment&#34;</span>)[<span style="color:#e6db74">&#34;cleaned_tweet&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join(x))<span style="color:#f92672">.</span>reset_index()
+</span></span><span style="display:flex;"><span>print(grouped_tweets)
+</span></span></code></pre></div><h3 id="step-2-generating-word-clouds">Step 2: Generating Word Clouds</h3>
+<p>Using the <code>WordCloud</code> library in Python, we generated word clouds for each sentiment. This visualised the most frequently mentioned words, with their size reflecting their frequency in the text.</p>
+<h4 id="python-code-creating-word-clouds">Python Code: Creating Word Clouds</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> wordcloud <span style="color:#f92672">import</span> WordCloud
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_word_cloud</span>(text, title):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Generates and displays a word cloud.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    text (str): Input text for the word cloud.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    title (str): Title of the word cloud.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    wordcloud <span style="color:#f92672">=</span> WordCloud(width<span style="color:#f92672">=</span><span style="color:#ae81ff">800</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">400</span>, background_color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>)<span style="color:#f92672">.</span>generate(text)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>imshow(wordcloud, interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bilinear&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>axis(<span style="color:#e6db74">&#34;off&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(title, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate word clouds for each sentiment</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _, row <span style="color:#f92672">in</span> grouped_tweets<span style="color:#f92672">.</span>iterrows():
+</span></span><span style="display:flex;"><span>    generate_word_cloud(row[<span style="color:#e6db74">&#34;cleaned_tweet&#34;</span>], <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Word Cloud for </span><span style="color:#e6db74">{</span>row[<span style="color:#e6db74">&#39;sentiment&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> Tweets&#34;</span>)
+</span></span></code></pre></div><p><figure><img src="/images/project4_images/1.png">
+</figure>
+
+<figure><img src="/images/project4_images/2.png">
+</figure>
+</p>
+<h4 id="step-3-insights-from-word-clouds">Step 3: Insights from Word Clouds</h4>
+<p><strong>Positive Tweets</strong></p>
+<ul>
+<li>Common words: &ldquo;amazing,&rdquo; &ldquo;future,&rdquo; &ldquo;innovation.&rdquo;</li>
+<li>Insight: Positive tweets often celebrated new products, innovative technology, and optimistic visions.</li>
+</ul>
+<p><strong>Negative Tweets</strong></p>
+<ul>
+<li>Common words: &ldquo;overvalued,&rdquo; &ldquo;disappointed,&rdquo; &ldquo;delay.&rdquo;</li>
+<li>Insight: Negative tweets highlighted dissatisfaction with stock valuations, product delays, or unmet expectations.</li>
+</ul>
+<p><strong>Neutral Tweets</strong></p>
+<ul>
+<li>Common words: &ldquo;earnings,&rdquo; &ldquo;release,&rdquo; &ldquo;announcement.&rdquo;</li>
+<li>Insight: Neutral tweets focused on factual updates, such as financial performance and product releases.</li>
+</ul>
+<h4 id="impact-of-word-clouds">Impact of Word Clouds</h4>
+<p>Word clouds added a qualitative layer to our analysis by:</p>
+<ul>
+<li><em>Revealing Context</em>: Highlighting the topics driving positive or negative sentiments.</li>
+<li><em>Identifying Trends</em>: Frequently mentioned terms pointed to recurring themes, such as product launches or stock discussions.</li>
+<li><em>Enhancing Interpretability</em>: Providing a visual summary of large text datasets.</li>
+</ul>
+<h3 id="challenges-and-solutions-2">Challenges and Solutions</h3>
+<ul>
+<li><em>Overwhelming Common Words</em>: Words like &ldquo;Tesla&rdquo; or &ldquo;Apple&rdquo; dominated the clouds.</li>
+</ul>
+<p><em>Solution</em>: Use custom stop word lists to filter out company names.</p>
+<ul>
+<li><em>Ambiguity in Terms</em>: Words like &ldquo;delay&rdquo; could have different connotations depending on context.</li>
+</ul>
+<p><em>Solution</em>: Combine word clouds with topic modelling for deeper insights.</p>
+<ul>
+<li><em>Limited Detail</em>: Word clouds alone do not convey the full sentiment behind the words.</li>
+</ul>
+<p><em>Solution</em>: Use them as a complementary tool alongside quantitative analysis.</p>
+<h3 id="conclusion-3">Conclusion</h3>
+<p>Word clouds proved to be a valuable tool for decoding public opinion, offering intuitive and impactful visualisations of frequently mentioned terms. By pairing word clouds with sentiment-specific filtering, we gained additional context to our quantitative findings.</p>
+<h1 id="part-5-latent-themes-in-tweets-topic-modelling-with-lda">Part 5. Latent Themes in Tweets: Topic Modelling with LDA</h1>
+<h3 id="introduction-4">Introduction</h3>
+<p>Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. <strong>Latent Dirichlet Allocation (LDA)</strong>, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.</p>
+<p>In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions.</p>
+<p>This blog provides a step-by-step walkthrough of applying LDA on cleaned Twitter data, with Python code snippets and examples of the insights gained.</p>
+<h3 id="step-1-preparing-data-for-topic-modelling">*Step 1: Preparing Data for Topic Modelling</h3>
+<p>Topic modelling requires pre-processed data where text is tokenised and filtered for meaningful words. We used the cleaned tweets from earlier preprocessing steps.</p>
+<h4 id="python-code-tokenising-and-vectorising-tweets">Python Code: Tokenising and Vectorising Tweets</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> CountVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example cleaned tweets</span>
+</span></span><span style="display:flex;"><span>cleaned_tweets <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tesla new model amazing&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;apple stock overvalued&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tesla cars future innovation&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;apple iphone release announcement&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;tesla delays disappointment&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a CountVectorizer</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> CountVectorizer(max_df<span style="color:#f92672">=</span><span style="color:#ae81ff">0.95</span>, min_df<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, stop_words<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;english&#34;</span>)
+</span></span><span style="display:flex;"><span>dtm <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(cleaned_tweets)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print feature names and document-term matrix shape</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Features:&#34;</span>, vectorizer<span style="color:#f92672">.</span>get_feature_names_out())
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Document-Term Matrix Shape:&#34;</span>, dtm<span style="color:#f92672">.</span>shape)
+</span></span></code></pre></div><h3 id="step-2-building-the-lda-model">Step 2: Building the LDA Model</h3>
+<p>Using the document-term matrix (DTM) generated above, we trained an LDA model with a specified number of topics. The model identifies clusters of words that form coherent topics.</p>
+<h4 id="python-code-applying-lda">Python Code: Applying LDA</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> LatentDirichletAllocation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train LDA model</span>
+</span></span><span style="display:flex;"><span>lda <span style="color:#f92672">=</span> LatentDirichletAllocation(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>lda<span style="color:#f92672">.</span>fit(dtm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print topics and their top words</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_topics</span>(model, feature_names, n_top_words):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> topic_idx, topic <span style="color:#f92672">in</span> enumerate(model<span style="color:#f92672">.</span>components_):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Topic #</span><span style="color:#e6db74">{</span>topic_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">.</span>join([feature_names[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> topic<span style="color:#f92672">.</span>argsort()[:<span style="color:#f92672">-</span>n_top_words <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print top words for each topic</span>
+</span></span><span style="display:flex;"><span>print_topics(lda, vectorizer<span style="color:#f92672">.</span>get_feature_names_out(), n_top_words<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Topic <span style="color:#75715e">#1: tesla model innovation cars future</span>
+</span></span><span style="display:flex;"><span>Topic <span style="color:#75715e">#2: apple stock iphone release announcement</span>
+</span></span><span style="display:flex;"><span>Topic <span style="color:#75715e">#3: tesla delays disappointment future</span>
+</span></span></code></pre></div><h3 id="step-3-visualising-topics">Step 3: Visualising Topics</h3>
+<p>Visualising the distribution of topics in tweets helps identify their prevalence. Libraries like <code>pyLDAvis</code> provide interactive tools for exploring LDA results.</p>
+<h4 id="python-code-visualising-topics">Python Code: Visualising Topics</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyLDAvis
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pyLDAvis.sklearn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualize LDA model</span>
+</span></span><span style="display:flex;"><span>pyLDAvis<span style="color:#f92672">.</span>enable_notebook()
+</span></span><span style="display:flex;"><span>panel <span style="color:#f92672">=</span> pyLDAvis<span style="color:#f92672">.</span>sklearn<span style="color:#f92672">.</span>prepare(lda, dtm, vectorizer)
+</span></span><span style="display:flex;"><span>pyLDAvis<span style="color:#f92672">.</span>save_html(panel, <span style="color:#e6db74">&#34;lda_visualization.html&#34;</span>)
+</span></span></code></pre></div><p>The visualisation provides:</p>
+<ul>
+<li>Topic Proportions: The relative size of each topic.</li>
+<li>Top Words: Frequently occurring words in each topic.</li>
+<li>Document Association: Tweets associated with each topic.</li>
+</ul>
+<h3 id="insights-from-lda">Insights from LDA</h3>
+<ol>
+<li>Product Launches:</li>
+</ol>
+<ul>
+<li>Words like &ldquo;release,&rdquo; &ldquo;announcement,&rdquo; and &ldquo;iphone&rdquo; dominated one topic, reflecting excitement around product launches.</li>
+</ul>
+<ol start="2">
+<li>Stock Performance:</li>
+</ol>
+<ul>
+<li>Words like &ldquo;stock,&rdquo; &ldquo;overvalued,&rdquo; and &ldquo;future&rdquo; highlighted discussions on market performance and valuations.</li>
+</ul>
+<ol start="3">
+<li>CEO-Driven Narratives:</li>
+</ol>
+<ul>
+<li>Tesla’s topics were centered on &ldquo;innovation,&rdquo; &ldquo;delays,&rdquo; and &ldquo;disappointment,&rdquo; revealing the polarizing nature of Elon Musk’s leadership.</li>
+</ul>
+<h3 id="challenges-in-topic-modelling">Challenges in Topic Modelling</h3>
+<ol>
+<li>Choosing the Number of Topics:</li>
+</ol>
+<ul>
+<li>Selecting the optimal number of topics (<code>n_components</code>) requires experimentation.</li>
+</ul>
+<p><em>Solution</em>: Use metrics like coherence scores or manual evaluation.</p>
+<ol start="2">
+<li>Interpreting Ambiguous Topics:</li>
+</ol>
+<ul>
+<li>Some topics may overlap or lack clear boundaries.</li>
+</ul>
+<p><em>Solution</em>: Combine LDA results with domain knowledge for better interpretation.</p>
+<ol start="3">
+<li>Noise in Text:</li>
+</ol>
+<ul>
+<li>Despite pre-processing, some irrelevant terms may still appear.</li>
+</ul>
+<p><em>Solution</em>: Refine stop word lists and pre-processing steps.</p>
+<h3 id="conclusion-4">Conclusion</h3>
+<p>Latent Dirichlet Allocation (LDA) offered valuable insights into the themes driving public discourse on NASDAQ companies. By uncovering hidden patterns, we gained a deeper understanding of the topics influencing sentiment trends, such as product launches, market discussions, and CEO narratives.</p>
+<h1 id="part-6-sentiment-trends-insights-by-company-and-year">Part 6. Sentiment Trends: Insights by Company and Year</h1>
+<h3 id="introduction-5">Introduction</h3>
+<p>Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this blog, we analyze sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualized longitudinal sentiment patterns, highlighting their value for investors and analysts.</p>
+<h3 id="step-1-aggregating-sentiment-by-date"><strong>Step 1: Aggregating Sentiment by Date</strong></h3>
+<p>The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.</p>
+<h4 id="python-code-aggregating-sentiments"><strong>Python Code: Aggregating Sentiments</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example DataFrame with tweets, sentiment, and dates</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;date&#34;</span>: [<span style="color:#e6db74">&#34;2022-01-01&#34;</span>, <span style="color:#e6db74">&#34;2022-01-01&#34;</span>, <span style="color:#e6db74">&#34;2022-01-02&#34;</span>, <span style="color:#e6db74">&#34;2022-01-02&#34;</span>, <span style="color:#e6db74">&#34;2022-01-02&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;company_ticker&#34;</span>: [<span style="color:#e6db74">&#34;TSLA&#34;</span>, <span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>, <span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;sentiment&#34;</span>: [<span style="color:#e6db74">&#34;positive&#34;</span>, <span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#e6db74">&#34;neutral&#34;</span>, <span style="color:#e6db74">&#34;positive&#34;</span>, <span style="color:#e6db74">&#34;negative&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Group data by date, company, and sentiment</span>
+</span></span><span style="display:flex;"><span>sentiment_trends <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>groupby([<span style="color:#e6db74">&#34;date&#34;</span>, <span style="color:#e6db74">&#34;company_ticker&#34;</span>, <span style="color:#e6db74">&#34;sentiment&#34;</span>])<span style="color:#f92672">.</span>size()<span style="color:#f92672">.</span>reset_index(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;count&#34;</span>)
+</span></span><span style="display:flex;"><span>print(sentiment_trends)
+</span></span><span style="display:flex;"><span>Output:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>yaml
+</span></span><span style="display:flex;"><span>Copy code
+</span></span><span style="display:flex;"><span>         date company_ticker sentiment  count
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span>           AAPL  negative      <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span>           TSLA  positive      <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>           AAPL  positive      <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>           TSLA  negative      <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">2022</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>           TSLA   neutral      <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="step-2-visualising-sentiment-trends">Step 2: Visualising Sentiment Trends</h3>
+<p>To visualise sentiment trends, we plotted sentiment counts for each company over time. This helped identify peaks and shifts corresponding to key events.</p>
+<h4 id="python-code-plotting-sentiment-trends">Python Code: Plotting Sentiment Trends</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filter data for a specific company (e.g., Tesla)</span>
+</span></span><span style="display:flex;"><span>tesla_data <span style="color:#f92672">=</span> sentiment_trends[sentiment_trends[<span style="color:#e6db74">&#34;company_ticker&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;TSLA&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pivot data for easier plotting</span>
+</span></span><span style="display:flex;"><span>pivot_data <span style="color:#f92672">=</span> tesla_data<span style="color:#f92672">.</span>pivot(index<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>, columns<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentiment&#34;</span>, values<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;count&#34;</span>)<span style="color:#f92672">.</span>fillna(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot sentiment trends</span>
+</span></span><span style="display:flex;"><span>pivot_data<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;line&#34;</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Sentiment Trends for Tesla Over Time&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Date&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Tweet Count&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Sentiment&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><figure><img src="/images/project4_images/5.png">
+</figure>
+
+<p>If there are irregularities in tweet counts year over year, it
+might indicate inconsistencies in how the data was collected
+or recorded. For instance, a sudden drop in one year might
+mean data loss or issues with data collection that year.</p>
+<p>This variation across the years I noticed might be indicative of
+multiple factors. For example, specific events or news in a
+particular year might lead to increased tweeting activity.</p>
+<p>The variations might reflect the changing behavior or engagement
+level of Twitter users. Also, any changes in the platform’s
+algorithms, policies, or features might influence user activity.
+Broader societal, economic, or technological changes might
+also play a role.</p>
+<h3 id="step-3-key-insights">Step 3: Key Insights</h3>
+<p><strong>1. Tesla’s Sentiment Peaks</strong>:</p>
+<ul>
+<li>Positive Sentiment Spikes: Corresponded to major announcements like product launches or stock splits.</li>
+<li>Negative Sentiment Spikes: Related to delays or controversial tweets by Elon Musk.</li>
+</ul>
+<p><strong>2. Apple’s Consistent Sentiment</strong>:</p>
+<ul>
+<li>Sentiment remained stable over time, with minor fluctuations around earnings reports and product releases.</li>
+</ul>
+<p><strong>3. Seasonal Trends</strong>:</p>
+<ul>
+<li>Certain months (e.g., Q4) showed higher activity due to events like holiday season promotions or year-end financial updates.</li>
+</ul>
+<h3 id="step-4-annotating-significant-events">Step 4: Annotating Significant Events</h3>
+<p>To provide context, significant events were overlaid on the sentiment trends.</p>
+<h4 id="python-code-adding-annotations">Python Code: Adding Annotations</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Annotate significant events on the Tesla plot</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(pivot_data<span style="color:#f92672">.</span>index, pivot_data[<span style="color:#e6db74">&#34;positive&#34;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Positive&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;green&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(pivot_data<span style="color:#f92672">.</span>index, pivot_data[<span style="color:#e6db74">&#34;negative&#34;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Negative&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Annotate key events</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Product Launch&#34;</span>, xy<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-02&#34;</span>, <span style="color:#ae81ff">5</span>), xytext<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-05&#34;</span>, <span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>             arrowprops<span style="color:#f92672">=</span>dict(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>, arrowstyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-&gt;&#34;</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>annotate(<span style="color:#e6db74">&#34;Controversial Tweet&#34;</span>, xy<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-07&#34;</span>, <span style="color:#ae81ff">3</span>), xytext<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;2022-01-10&#34;</span>, <span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>             arrowprops<span style="color:#f92672">=</span>dict(facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>, arrowstyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-&gt;&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Tesla Sentiment Trends with Annotations&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Date&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Tweet Count&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="challenges-in-sentiment-trend-analysis">Challenges in Sentiment Trend Analysis</h3>
+<p><strong>Event Correlation:</strong></p>
+<ul>
+<li>Establishing a direct link between sentiment spikes and events required external data sources (e.g., news articles).</li>
+</ul>
+<p><em>Solution</em>: Integrate APIs to fetch event metadata.</p>
+<p><strong>Outliers in Data</strong>:</p>
+<ul>
+<li>Certain days showed unusually high sentiment counts due to bot activity.</li>
+</ul>
+<p><em>Solution</em>: Apply anomaly detection to filter out extreme outliers.</p>
+<p><strong>Granularity</strong>:</p>
+<ul>
+<li>Daily aggregation may miss trends visible at finer granularity (e.g., hourly).</li>
+</ul>
+<p><em>Solution</em>: Allow flexible time windows for analysis.</p>
+<h3 id="conclusion-5">Conclusion</h3>
+<p>Sentiment trend analysis revealed how public opinion evolves over time, reflecting the impact of market events and company announcements. By identifying key moments of sentiment change, this analysis provided actionable insights for stakeholders.</p>
+<h1 id="part-7-overcoming-challenges-in-sentiment-analysis">Part 7. Overcoming Challenges in Sentiment Analysis</h1>
+<h3 id="introduction-6">Introduction</h3>
+<p>Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results.</p>
+<p>In this blog, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.</p>
+<h3 id="key-challenges-in-sentiment-analysis">Key Challenges in Sentiment Analysis</h3>
+<h4 id="1-sarcasm-and-context-dependency">1. Sarcasm and Context Dependency</h4>
+<ul>
+<li>Tweets like <em>&ldquo;Oh great, another Tesla delay. Just what we needed!&rdquo;</em> express negative sentiment despite containing positive words like &ldquo;great.&rdquo;</li>
+<li>Contextual understanding is essential for accurate classification.</li>
+</ul>
+<p><em>Solution</em>:</p>
+<ul>
+<li>Use <strong>pre-trained transformer models</strong> like BERT, which consider the context of words in a sentence.</li>
+<li>Fine-tune models on a dataset annotated specifically for sarcasm detection.</li>
+</ul>
+<h4 id="python-code-using-bert-for-context-aware-sentiment-analysis">Python Code: Using BERT for Context-Aware Sentiment Analysis</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> transformers <span style="color:#f92672">import</span> pipeline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load sentiment analysis pipeline with a transformer model</span>
+</span></span><span style="display:flex;"><span>sentiment_pipeline <span style="color:#f92672">=</span> pipeline(<span style="color:#e6db74">&#34;sentiment-analysis&#34;</span>, model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nlptown/bert-base-multilingual-uncased-sentiment&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Analyze a sarcastic tweet</span>
+</span></span><span style="display:flex;"><span>tweet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Oh great, another Tesla delay. Just what we needed!&#34;</span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> sentiment_pipeline(tweet)
+</span></span><span style="display:flex;"><span>print(result)
+</span></span></code></pre></div><h4 id="2-dynamic-and-informal-language">2. Dynamic and Informal Language</h4>
+<p>Social media is rife with abbreviations (e.g., &ldquo;lol,&rdquo; &ldquo;btw&rdquo;) and slang, which standard lexicons may not recognise.</p>
+<p><em>Solution</em>:</p>
+<ul>
+<li>Continuously update lexicons or train models on domain-specific data.</li>
+<li>Use embedding-based methods like Word2Vec to capture semantic relationships between words, even for slang.</li>
+</ul>
+<h4 id="python-code-expanding-lexicons">Python Code: Expanding Lexicons</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example of adding slang to a sentiment lexicon</span>
+</span></span><span style="display:flex;"><span>afinn_lexicon <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;great&#34;</span>: <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#34;amazing&#34;</span>: <span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#34;lol&#34;</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;btw&#34;</span>: <span style="color:#ae81ff">0</span>}
+</span></span><span style="display:flex;"><span>custom_slang <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;fire&#34;</span>: <span style="color:#ae81ff">4</span>, <span style="color:#e6db74">&#34;lit&#34;</span>: <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#34;meh&#34;</span>: <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>}
+</span></span><span style="display:flex;"><span>afinn_lexicon<span style="color:#f92672">.</span>update(custom_slang)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Updated Lexicon:&#34;</span>, afinn_lexicon)
+</span></span></code></pre></div><h4 id="3-evolving-sentiment-over-time">3. Evolving Sentiment Over Time</h4>
+<p>Words may shift in meaning; for instance, &ldquo;disruptive&rdquo; can be positive (innovation) or negative (chaos) depending on context and time.
+Solution:</p>
+<p>Use dynamic embeddings that evolve with time, such as Temporal Word Embeddings.</p>
+<h4 id="python-code-time-sensitive-embeddings-with-gensim">Python Code: Time-Sensitive Embeddings with Gensim</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> gensim.models <span style="color:#f92672">import</span> Word2Vec
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Training embeddings on tweets from different time periods</span>
+</span></span><span style="display:flex;"><span>tweets_2020 <span style="color:#f92672">=</span> [[<span style="color:#e6db74">&#34;tesla&#34;</span>, <span style="color:#e6db74">&#34;amazing&#34;</span>, <span style="color:#e6db74">&#34;innovation&#34;</span>], [<span style="color:#e6db74">&#34;stock&#34;</span>, <span style="color:#e6db74">&#34;crash&#34;</span>, <span style="color:#e6db74">&#34;bad&#34;</span>]]
+</span></span><span style="display:flex;"><span>tweets_2022 <span style="color:#f92672">=</span> [[<span style="color:#e6db74">&#34;tesla&#34;</span>, <span style="color:#e6db74">&#34;delay&#34;</span>, <span style="color:#e6db74">&#34;disappointing&#34;</span>], [<span style="color:#e6db74">&#34;stock&#34;</span>, <span style="color:#e6db74">&#34;rise&#34;</span>, <span style="color:#e6db74">&#34;profit&#34;</span>]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model_2020 <span style="color:#f92672">=</span> Word2Vec(sentences<span style="color:#f92672">=</span>tweets_2020, vector_size<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>model_2022 <span style="color:#f92672">=</span> Word2Vec(sentences<span style="color:#f92672">=</span>tweets_2022, vector_size<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, window<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;2020 &#39;tesla&#39;:&#34;</span>, model_2020<span style="color:#f92672">.</span>wv[<span style="color:#e6db74">&#34;tesla&#34;</span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;2022 &#39;tesla&#39;:&#34;</span>, model_2022<span style="color:#f92672">.</span>wv[<span style="color:#e6db74">&#34;tesla&#34;</span>])
+</span></span></code></pre></div><h4 id="4-biased-or-noisy-data">4. Biased or Noisy Data</h4>
+<p>Sentiment analysis may reflect biases present in the dataset, such as an overrepresentation of certain companies or demographics.</p>
+<p><em>Solution</em>:</p>
+<ul>
+<li>Use data augmentation to balance datasets.</li>
+<li>Implement bias detection algorithms to flag and mitigate skewed results.</li>
+</ul>
+<h4 id="python-code-balancing-datasets">Python Code: Balancing Datasets</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils <span style="color:#f92672">import</span> resample
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example: Balancing positive and negative sentiment counts</span>
+</span></span><span style="display:flex;"><span>positive_tweets <span style="color:#f92672">=</span> df[df[<span style="color:#e6db74">&#34;sentiment&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;positive&#34;</span>]
+</span></span><span style="display:flex;"><span>negative_tweets <span style="color:#f92672">=</span> df[df[<span style="color:#e6db74">&#34;sentiment&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;negative&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Resample the minority class</span>
+</span></span><span style="display:flex;"><span>negative_tweets_upsampled <span style="color:#f92672">=</span> resample(negative_tweets, replace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, n_samples<span style="color:#f92672">=</span>len(positive_tweets), random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Combine and shuffle the dataset</span>
+</span></span><span style="display:flex;"><span>balanced_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat([positive_tweets, negative_tweets_upsampled])<span style="color:#f92672">.</span>sample(frac<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(balanced_df[<span style="color:#e6db74">&#34;sentiment&#34;</span>]<span style="color:#f92672">.</span>value_counts())
+</span></span></code></pre></div><h3 id="lessons-learned">Lessons Learned</h3>
+<ul>
+<li>
+<p><em>Sarcasm Requires Context</em>:
+Leveraging context-aware models like transformers significantly improves performance for nuanced expressions.</p>
+</li>
+<li>
+<p><em>Dynamic Language Needs Updating</em>:
+Periodic retraining on fresh datasets ensures that models stay relevant to evolving language patterns.</p>
+</li>
+<li>
+<p><em>Bias Detection is Essential</em>:
+Proactively identifying and correcting biases ensures fairness and reliability in sentiment analysis.</p>
+</li>
+</ul>
+<h4 id="future-directions">Future Directions</h4>
+<p>To further address these challenges:</p>
+<ul>
+<li><em>Multimodal Sentiment Analysis</em>: Incorporate images or videos for richer context.</li>
+<li><em>Real-Time Sentiment Analysis</em>: Apply streaming frameworks like <em>Apache Kafka</em> for dynamic sentiment updates.</li>
+<li><em>Ethical Considerations</em>: Develop transparent, interpretable models to foster trust in AI-driven sentiment analysis.</li>
+</ul>
+<h3 id="conclusion-6">Conclusion</h3>
+<p>Sentiment analysis is a powerful tool but requires careful handling of its inherent challenges. By addressing issues like sarcasm, slang, and biases, we can improve the accuracy and reliability of sentiment extraction. As language evolves, so too must our models and approaches, ensuring they remain robust in dynamic environments.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

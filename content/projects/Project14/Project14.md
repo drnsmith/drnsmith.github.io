@@ -28,17 +28,17 @@ This project demonstrates the **fusion of AI, NLP, and data-driven decision-maki
 
 ### Key Features  
 
-1. **Ingredient-Based Recipe Search**  
+#### 1. Ingredient-Based Recipe Search 
 - Retrieve **real-world recipes** from a database using simple keyword searches.  
 
-2. **AI-Generated Recipes**  
+#### 2. AI-Generated Recipes 
 - If no recipe is found, the assistant **creates a new one** using **Ollama's Llama3 model**.  
 - Ensures diversity and flexibility, catering to various dietary preferences.  
 
-3. **Save & Manage Recipes**  
+#### 3. Save & Manage Recipes* 
 - Users can **save their favourite recipes** and retrieve them later.  
 
-4. **Dynamic UI & Real-Time Feedback**  
+#### 4. Dynamic UI & Real-Time Feedback  
 - Built with **Streamlit**, offering an intuitive experience with real-time updates.  
 
 

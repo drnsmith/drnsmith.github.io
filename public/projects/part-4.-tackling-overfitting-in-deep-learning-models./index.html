@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 4. Tackling Overfitting in Deep Learning Models. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Overfitting is a common challenge in deep learning, where models perform well on training data but fail to generalise to unseen data. This blog explains how to detect overfitting and explores strategies to address it, including regularisation techniques, dropout, and early stopping.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project11_images/pr11.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 4. Tackling Overfitting in Deep Learning Models.
+          </h1>
+          
+            <p class="f5">Overfitting is a common challenge in deep learning, where models perform well on training data but fail to generalise to unseen data. This blog explains how to detect overfitting and explores strategies to address it, including regularisation techniques, dropout, and early stopping.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project11_images/pr11.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Deep learning models have revolutionised machine learning, enabling breakthroughs in image recognition, natural language processing, and more.</p>
+<p>However, one common challenge that haunts even the most skilled practitioners is overfitting. Overfitting occurs when a model learns the training data too well, including its noise and irrelevant patterns, at the cost of generalising to new, unseen data.</p>
+<p>Imagine training a model to classify histopathological images of cancer 9as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.</p>
+<p>In this blog, I’ll delve into:</p>
+<ul>
+<li>What overfitting is and how to detect it.</li>
+<li>Key strategies to prevent overfitting, including regularisation techniques, dropout, early stopping, and data augmentation.</li>
+<li>Practical, real-world applications of these methods to build robust deep learning models.</li>
+</ul>
+<h3 id="technical-explanation">Technical Explanation</h3>
+<h4 id="what-is-overfitting">What is Overfitting?</h4>
+<p>Overfitting happens when a model becomes overly complex relative to the amount of training data. It optimises its performance on the training dataset at the expense of generalisation to unseen data.</p>
+<p><strong>Indicators of Overfitting</strong>:</p>
+<ul>
+<li>Training Loss Drops, Validation Loss Increases:</li>
+</ul>
+<p>During training, the model achieves lower training loss, but validation loss stagnates or rises.</p>
+<ul>
+<li>Accuracy Divergence:</li>
+</ul>
+<p>High accuracy on the training set but significantly lower accuracy on validation/test sets.</p>
+<h3 id="strategies-to-address-overfitting">Strategies to Address Overfitting</h3>
+<h4 id="dropout">Dropout</h4>
+<p>Dropout is used in your model as a regularisation technique. It randomly sets a fraction of the input units to zero during training, which helps prevent the model from relying too heavily on specific neurons.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Dropout layers in the model architecture</span>
+</span></span><span style="display:flex;"><span>ldam_model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.4</span>))  <span style="color:#75715e"># After the third convolutional layer</span>
+</span></span><span style="display:flex;"><span>ldam_model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.2</span>))  <span style="color:#75715e"># After the fourth convolutional layer</span>
+</span></span></code></pre></div><p>In my model, dropout with rates of 0.4 and 0.2 is applied after specific convolutional layers. This ensures that the network learns robust patterns rather than memorising the training data.</p>
+<h4 id="regularisation-with-class-weights">Regularisation with Class Weights</h4>
+<p>Regularisation helps address overfitting by penalising the model for biasing its predictions towards the majority class. In my model, class weights are used to balance the training process.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Class weights calculation</span>
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> {i: n_samples <span style="color:#f92672">/</span> (n_classes <span style="color:#f92672">*</span> class_counts[i]) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n_classes)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Passing class weights during model training</span>
+</span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> cw_model<span style="color:#f92672">.</span>fit(
+</span></span><span style="display:flex;"><span>    datagen<span style="color:#f92672">.</span>flow(training_images, training_labels, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>),
+</span></span><span style="display:flex;"><span>    validation_data<span style="color:#f92672">=</span>(val_images, val_labels),
+</span></span><span style="display:flex;"><span>    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    callbacks<span style="color:#f92672">=</span>[early_stop, rlrp],
+</span></span><span style="display:flex;"><span>    verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    class_weight<span style="color:#f92672">=</span>class_weights
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>Class Weights in My Code:
+<code>{0: 1.58, 1: 0.73}</code></p>
+<p>These weights ensure that the model does not overly prioritise the majority class (malignant cases) while neglecting the minority class (benign cases).</p>
+<h4 id="learning-rate-scheduling">Learning Rate Scheduling</h4>
+<p>Learning rate scheduling is used in my model to gradually reduce the learning rate during training. This prevents the model from overshooting the optimal weights and allows for finer adjustments as training progresses.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Learning rate schedulling</span>
+</span></span><span style="display:flex;"><span>lr_schedule <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>schedules<span style="color:#f92672">.</span>InverseTimeDecay(
+</span></span><span style="display:flex;"><span>    initial_learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>,
+</span></span><span style="display:flex;"><span>    decay_steps<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    decay_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    staircase<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>The learning rate starts at 0.001 and decreases over time, ensuring smoother convergence during training.</p>
+<h4 id="early-stopping">Early Stopping</h4>
+<p>Early stopping halts training when the validation loss stops improving, preventing the model from overfitting on the training data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Early stopping callback</span>
+</span></span><span style="display:flex;"><span>early_stop <span style="color:#f92672">=</span> EarlyStopping(monitor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;val_loss&#39;</span>, patience<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>In my model, training will stop after 5 epochs of no improvement in validation loss, saving computational resources and reducing overfitting.</p>
+<h4 id="data-augmentation">Data Augmentation</h4>
+<p>Data augmentation artificially increases the diversity of the training data by applying random transformations like rotations, flips, and zooms. This helps the model generalise better to unseen data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    shear_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>Augmented images are generated during training, exposing the model to diverse views of the data, making it more robust to real-world variations.</p>
+<figure><img src="/images/project11_images/training_validation_accuracy.png">
+</figure>
+
+<figure><img src="/images/project11_images/training_validation_loss.png">
+</figure>
+
+<p><strong>Observations:</strong></p>
+<ul>
+<li>Training/Validation Loss:</li>
+</ul>
+<p>The training loss steadily decreases over the epochs, which is expected as the model continues to learn patterns in the training data. Validation loss decreases initially, indicating improved performance on unseen data. However, after a certain number of epochs (~25-30), the validation loss stabilises and starts to fluctuate slightly. This could suggest overfitting, where the model begins to memorise the training data rather than generalising.</p>
+<p><strong>Insights:</strong>
+The gap between training and validation loss is relatively small, which indicates that the applied techniques (dropout, regularisation, etc.) are effective in reducing overfitting. Early stopping could have been triggered around epoch 30 to avoid unnecessary training beyond the optimal point.</p>
+<ul>
+<li>Training/Validaton Accuracy:</li>
+</ul>
+<p>Training accuracy improves consistently over the epochs, reaching close to 90%. Validation accuracy lags behind training accuracy initially, which is expected. Both metrics improve steadily, but a divergence is noticeable toward the later epochs (~30-40), suggesting that the model starts overfitting.</p>
+<p><strong>Insights:</strong>
+The upward trend in validation accuracy shows the model generalises well for most of the training duration. Techniques like early stopping and learning rate scheduling likely helped delay the onset of overfitting.</p>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<p>In tasks like <strong>cancer diagnosis</strong> using histopathological images, overfitting is a significant challenge due to the small dataset sizes. The use of dropout and data augmentation helps reduce overfitting, ensuring the model generalises well to unseen cases.</p>
+<p>In <strong>fraud detection</strong> systems, overfitting can result in a model that performs well on past data but fails to identify new fraud patterns. Techniques like early stopping and class weights applied in your code create robust models that adapt to evolving fraud tactics.</p>
+<p>In tasks like <strong>sentiment analysis</strong>, overfitting on specific words or phrases is common. Dropout and regularisation techniques, as used in your model, can prevent memorisation of spurious patterns, enhancing generalisation.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Overfitting is a common but solvable challenge in deep learning. By using strategies like dropout, regularisation, learning rate scheduling, early stopping, and data augmentation you can build models that strike a balance between learning and generalisation.</p>
+<p>Detecting overfitting early through validation metrics and visualisations ensures your model performs well on unseen data. By applying these techniques, you’ll not only improve your model’s performance but also build trust in its ability to generalise to real-world scenarios.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

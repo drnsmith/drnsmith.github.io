@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This project explores the intersection of machine learning and histopathology, focusing on improving medical image analysis through colour normalisation, data augmentation, and deep learning models. It begins by addressing staining variability in histopathology slides and assessing whether data augmentation can replace traditional pre-processing. The project then progresses to building and fine-tuning a DenseNet201 model for cancer detection, tackling class imbalance, and evaluating model performance using calibration techniques. The final insights provide a foundation for developing reliable AI-driven diagnostic tools in healthcare.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project10_images/pr10.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology
+          </h1>
+          
+            <p class="f5">This project explores the intersection of machine learning and histopathology, focusing on improving medical image analysis through colour normalisation, data augmentation, and deep learning models. It begins by addressing staining variability in histopathology slides and assessing whether data augmentation can replace traditional pre-processing. The project then progresses to building and fine-tuning a DenseNet201 model for cancer detection, tackling class imbalance, and evaluating model performance using calibration techniques. The final insights provide a foundation for developing reliable AI-driven diagnostic tools in healthcare.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project10_images/pr10.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-colour-normalisation-in-histopathology-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology">PART 1. Colour Normalisation in Histopathology. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</h1>
+<p>Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.</p>
+<p>Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. This blog explores:</p>
+<ul>
+<li>Why CN is essential in histopathology.</li>
+<li>Key CN techniques, including <strong>Channel-Based Normalisation (CBN)</strong>, <strong>Color Deconvolution (CD)</strong>, and <strong>CLAHE</strong>.</li>
+<li>Practical Python code snippets for implementation.</li>
+</ul>
+<h2 id="why-colour-normalisation-is-essential"><strong>Why Colour Normalisation is Essential</strong></h2>
+<p>Inconsistent staining can obscure the patterns ML models rely on, leading to reduced performance. CN addresses this by:</p>
+<ul>
+<li>Reducing variability caused by different staining protocols.</li>
+<li>Standardising colour properties, enabling models to focus on relevant features.</li>
+</ul>
+<h3 id="experimental-objective"><strong>Experimental Objective</strong></h3>
+<p>To evaluate the impact of CN on histopathology workflows, I compared the following techniques:</p>
+<ol>
+<li><strong>Channel-Based Normalisation (CBN)</strong></li>
+<li><strong>Color Deconvolution (CD)</strong></li>
+<li><strong>CLAHE (Contrast Limited Adaptive Histogram Equalisation)</strong></li>
+<li>Baseline (No CN applied)</li>
+</ol>
+<p>The results provide insights into which CN technique is most effective in improving ML model performance.</p>
+<h2 id="key-colour-normalisation-techniques"><strong>Key Colour Normalisation Techniques</strong></h2>
+<h3 id="1-channel-based-normalisation-cbn"><strong>1. Channel-Based Normalisation (CBN)</strong></h3>
+<p>CBN adjusts each RGB channel of an image to match the mean and standard deviation of a reference image. This is effective for handling uniform staining variability.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">channel_based_normalisation</span>(image, reference_image):
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>    reference <span style="color:#f92672">=</span> reference_image<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Split channels for both images</span>
+</span></span><span style="display:flex;"><span>    img_channels <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>split(image)
+</span></span><span style="display:flex;"><span>    ref_channels <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>split(reference)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Normalise each channel</span>
+</span></span><span style="display:flex;"><span>    norm_channels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> img_channel, ref_channel <span style="color:#f92672">in</span> zip(img_channels, ref_channels):
+</span></span><span style="display:flex;"><span>        norm_channel <span style="color:#f92672">=</span> (img_channel <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>mean(img_channel)) <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>std(img_channel)
+</span></span><span style="display:flex;"><span>        norm_channel <span style="color:#f92672">=</span> norm_channel <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>std(ref_channel) <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>mean(ref_channel)
+</span></span><span style="display:flex;"><span>        norm_channels<span style="color:#f92672">.</span>append(norm_channel)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cv2<span style="color:#f92672">.</span>merge(norm_channels)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>uint8)
+</span></span></code></pre></div><h3 id="2-color-deconvolution-cd"><strong>2. Color Deconvolution (CD)</strong></h3>
+<p>CD separates stains into distinct channels (e.g., Hematoxylin and Eosin), allowing targeted adjustments. This method is ideal for slides with multiple dyes.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> skimage.color <span style="color:#f92672">import</span> rgb2hed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">color_deconvolution</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Perform color deconvolution to separate stains.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns the Hematoxylin (H), Eosin (E), and DAB (D) channels.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    hed <span style="color:#f92672">=</span> rgb2hed(image)
+</span></span><span style="display:flex;"><span>    h, e, d <span style="color:#f92672">=</span> hed[:, :, <span style="color:#ae81ff">0</span>], hed[:, :, <span style="color:#ae81ff">1</span>], hed[:, :, <span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> h, e, d
+</span></span></code></pre></div><p><strong>Visualisation Example:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Assuming `image` is loaded as a NumPy array</span>
+</span></span><span style="display:flex;"><span>h, e, d <span style="color:#f92672">=</span> color_deconvolution(image)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Hematoxylin (H)&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(h, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Eosin (E)&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(e, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;DAB (D)&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(d, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="3-clahe-contrast-limited-adaptive-histogram-equalisation"><strong>3. CLAHE (Contrast Limited Adaptive Histogram Equalisation)</strong></h3>
+<p>CLAHE enhances image contrast, particularly in low-light regions, improving feature detection for ML models.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">apply_clahe</span>(image, clip_limit<span style="color:#f92672">=</span><span style="color:#ae81ff">2.0</span>, tile_grid_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>)):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Apply CLAHE to improve image contrast.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    lab <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(image, cv2<span style="color:#f92672">.</span>COLOR_BGR2LAB)  <span style="color:#75715e"># Convert to LAB color space</span>
+</span></span><span style="display:flex;"><span>    l, a, b <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>split(lab)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Apply CLAHE to the L channel</span>
+</span></span><span style="display:flex;"><span>    clahe <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>createCLAHE(clipLimit<span style="color:#f92672">=</span>clip_limit, tileGridSize<span style="color:#f92672">=</span>tile_grid_size)
+</span></span><span style="display:flex;"><span>    l_clahe <span style="color:#f92672">=</span> clahe<span style="color:#f92672">.</span>apply(l)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Merge the channels back</span>
+</span></span><span style="display:flex;"><span>    lab_clahe <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>merge((l_clahe, a, b))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cv2<span style="color:#f92672">.</span>cvtColor(lab_clahe, cv2<span style="color:#f92672">.</span>COLOR_LAB2BGR)
+</span></span></code></pre></div><p><strong>Results</strong>
+The following experiments compared the performance of a DenseNet201 model trained with different CN techniques:</p>
+<ul>
+<li>Baseline (No CN): ~85% accuracy.</li>
+<li>CBN: ~88% accuracy.</li>
+<li>CD: ~90% accuracy.</li>
+<li>CLAHE: ~89% accuracy.</li>
+</ul>
+<p><strong>Insights:</strong></p>
+<p>CD outperformed other techniques, suggesting it is best suited for slides with distinct stains.
+CLAHE was effective for low-contrast images but added computational overhead.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Colour normalisation is a vital preprocessing step in medical imaging. By reducing staining variability, techniques like CBN, CD, and CLAHE ensure ML models focus on disease-relevant features. However, the choice of technique should be guided by the specific dataset and computational constraints.</p>
+<h1 id="part-2-data-augmentation-as-a-robustness-strategy-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation">PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</h1>
+<h3 id="introduction">Introduction</h3>
+<p>Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.</p>
+<p>Traditionally, <strong>Colour Normalisation (CN)</strong> has been the gold standard for handling variability in histopathology images. However, advancements in <strong>Data Augmentation (DA)</strong> techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.</p>
+<p>This blog investigates:</p>
+<ul>
+<li>The fundamentals of data augmentation.</li>
+<li>Key augmentation techniques for histopathology.</li>
+<li>A comparative analysis of DA and CN workflows using a DenseNet201 model.</li>
+</ul>
+<h2 id="what-is-data-augmentation"><strong>What is Data Augmentation?</strong></h2>
+<p><strong>Data augmentation</strong> artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.</p>
+<h3 id="key-benefits-of-da"><strong>Key Benefits of DA</strong></h3>
+<ul>
+<li><strong>Improved Generalisation:</strong> DA exposes the model to diverse scenarios, making it robust to unseen data.</li>
+<li><strong>Simplified Workflows:</strong> Unlike CN, DA requires no reference images or domain-specific pre-processing.</li>
+<li><strong>Enhanced Scalability:</strong> DA is easy to implement across datasets with varying staining protocols.</li>
+</ul>
+<h2 id="key-data-augmentation-techniques"><strong>Key Data Augmentation Techniques</strong></h2>
+<h3 id="1-random-rotation"><strong>1. Random Rotation</strong></h3>
+<p>Randomly rotates an image within a specified degree range, helping the model handle differently oriented samples.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_rotation</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image with random rotation.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="2-horizontal-and-vertical-flipping"><strong>2. Horizontal and Vertical Flipping</strong></h3>
+<p>Flips the image across its axes to prevent the model from overfitting to spatial biases.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_flip</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image with horizontal and vertical flips.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="3-random-zoom"><strong>3. Random Zoom</strong></h3>
+<p>Zooming in or out simulates features at different scales, enhancing scale invariance.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_zoom</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image with random zooming.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="4-brightness-adjustment"><strong>4. Brightness Adjustment</strong></h3>
+<p>Alters the brightness of the image to simulate varying lighting conditions.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(brightness_range<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1.2</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_brightness</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Augments an image by adjusting brightness.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="experimental-setup">Experimental Setup</h3>
+<p>To evaluate whether DA can replace CN, we trained a DenseNet201 model on the BreakHis dataset under two scenarios:</p>
+<ul>
+<li><strong>With Colour Normalisation + Limited DA</strong>: Images were normalised using CBN or CD, with minimal augmentation applied.</li>
+<li><strong>With Extensive DA Only</strong>: No CN was performed, but the dataset was extensively augmented using the techniques above.</li>
+</ul>
+<h4 id="evaluation-metrics">Evaluation Metrics</h4>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction correctness.</li>
+<li><strong>Sensitivity (Recall)</strong>: How well the model identifies positive cases (e.g., malignant tissue).</li>
+<li><strong>Specificity</strong>: How well the model avoids false positives.</li>
+<li><strong>F1 Score</strong>: Balances precision and recall.</li>
+<li><strong>ROC-AUC</strong>: Measures the trade-off between sensitivity and specificity.</li>
+</ul>
+<h3 id="results">Results</h3>
+<figure><img src="/images/project10_images/results10_1.png">
+</figure>
+
+<h4 id="insights">Insights</h4>
+<p><strong>Extensive DA outperformed CN in all metrics:</strong></p>
+<ul>
+<li>DA’s broader variability helped the model generalise better.</li>
+<li>The simplicity of DA workflows reduced computational overhead.</li>
+<li>CN remains valuable for domains requiring strict standardisation but adds complexity compared to DA.</li>
+</ul>
+<h3 id="code-integration">Code Integration</h3>
+<p>Here’s how you can integrate multiple augmentation techniques into a preprocessing pipeline:</p>
+<p><strong>Combined Augmentation Pipeline:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">45</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    brightness_range<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1.2</span>]
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_pipeline</span>(image):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Applies a combination of augmentations to an image.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">1</span>,) <span style="color:#f92672">+</span> image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># Reshape to add batch dimension</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> batch <span style="color:#f92672">in</span> datagen<span style="color:#f92672">.</span>flow(image, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="conclusion-1">Conclusion</h3>
+<p>Data augmentation offers a compelling alternative to colour normalisation, simplifying workflows and improving model performance. By introducing variability in training data, DA enhances robustness, making it an excellent choice for scalable medical imaging pipelines.</p>
+<h1 id="part-3-building-and-fine-tuning-densenet201-for-histopathology-leveraging-deep-learning-for-cancer-detection-building-a-densenet201-model">PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model</h1>
+<h3 id="introduction-1">Introduction</h3>
+<p>Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer.</p>
+<p><strong>DenseNet201</strong>, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse.</p>
+<p>This blog provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. Topics covered include:</p>
+<ul>
+<li>DenseNet201’s architecture.</li>
+<li>Transfer learning with pretrained weights.</li>
+<li>Customisation and fine-tuning of the model for medical imaging tasks.</li>
+</ul>
+<h2 id="densenet201-architecture"><strong>DenseNet201 Architecture</strong></h2>
+<p>DenseNet201 is a CNN that uses &ldquo;dense connectivity,&rdquo; where each layer receives input from all preceding layers. This unique design:</p>
+<ul>
+<li>Encourages feature reuse, reducing the number of parameters.</li>
+<li>Improves gradient flow during training, especially in deep networks.</li>
+</ul>
+<p>DenseNet201 is ideal for histopathology because it can capture complex patterns in tissue morphology and structure.</p>
+<h2 id="building-the-model"><strong>Building the Model</strong></h2>
+<h3 id="step-1-load-the-pretrained-base-model"><strong>Step 1: Load the Pretrained Base Model</strong></h3>
+<p>We start with the <strong>DenseNet201</strong> model pretrained on ImageNet, leveraging its knowledge of general features like edges and textures.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> DenseNet201
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_base_model</span>(input_shape):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Load the DenseNet201 base model with pretrained ImageNet weights.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    base_model <span style="color:#f92672">=</span> DenseNet201(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;imagenet&#39;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>input_shape)
+</span></span><span style="display:flex;"><span>    base_model<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>  <span style="color:#75715e"># Freeze base layers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> base_model
+</span></span></code></pre></div><h3 id="step-2-add-a-custom-classification-head"><strong>Step 2: Add a Custom Classification Head</strong></h3>
+<p>We replace DenseNet201’s top layers with a custom head tailored for binary classification (benign vs malignant). The head includes:</p>
+<ul>
+<li><strong>GlobalAveragePooling2D</strong>: Reduces spatial dimensions.</li>
+<li><strong>Dense Layers</strong>: Fully connected layers for feature extraction.</li>
+<li><strong>Dropout</strong>: Prevents overfitting.</li>
+<li><strong>Softmax Output</strong>: Predicts probabilities for benign and malignant classes.</li>
+</ul>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> GlobalAveragePooling2D, Dense, Dropout
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_classification_head</span>(base_model, num_classes):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Add a custom classification head to the DenseNet201 base model.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> base_model<span style="color:#f92672">.</span>output
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> GlobalAveragePooling2D()(x)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> Dropout(<span style="color:#ae81ff">0.5</span>)(x)  <span style="color:#75715e"># Regularisation</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>)(x)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> Dropout(<span style="color:#ae81ff">0.5</span>)(x)
+</span></span><span style="display:flex;"><span>    predictions <span style="color:#f92672">=</span> Dense(num_classes, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>base_model<span style="color:#f92672">.</span>input, outputs<span style="color:#f92672">=</span>predictions)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span></code></pre></div><h3 id="step-3-compile-the-model"><strong>Step 3: Compile the Model</strong></h3>
+<p>The model is compiled with the Adam optimiser, categorical crossentropy loss, and accuracy as the evaluation metric.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> Adam
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compile_model</span>(model):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Compile the DenseNet201 model.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>Adam(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>),
+</span></span><span style="display:flex;"><span>                  loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;categorical_crossentropy&#39;</span>,
+</span></span><span style="display:flex;"><span>                  metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span></code></pre></div><h3 id="fine-tuning-the-model">Fine-Tuning the Model</h3>
+<p>Once the custom head is trained, we unfreeze the base DenseNet201 layers and fine-tune them on the histopathology dataset. Fine-tuning adjusts the pretrained weights to better suit the target domain.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fine_tune_model</span>(model, fine_tune_at):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Fine-tune the DenseNet201 model by unfreezing layers.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> layer <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>layers[:fine_tune_at]:
+</span></span><span style="display:flex;"><span>        layer<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> layer <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>layers[fine_tune_at:]:
+</span></span><span style="display:flex;"><span>        layer<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
+</span></span></code></pre></div><h3 id="training-the-model">Training the Model</h3>
+<h4 id="dataset">Dataset</h4>
+<p>We used the BreakHis dataset, which contains benign and malignant histopathology images. Images were preprocessed with data augmentation to enhance variability.</p>
+<h4 id="training-pipeline">Training Pipeline</h4>
+<p>Train the custom head while freezing the DenseNet201 base.
+Fine-tune the entire model by unfreezing layers.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> load_base_model(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> add_classification_head(model, num_classes<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> compile_model(model)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the custom head</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fine-tune the model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> fine_tune_model(model, fine_tune_at<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)  <span style="color:#75715e"># Unfreeze layers after index 300</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span></code></pre></div><h3 id="evaluation">Evaluation</h3>
+<p>The model was evaluated on a separate test set using the following metrics:</p>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction correctness.</li>
+<li><strong>Sensitivity (Recall)</strong>: Ability to identify malignant samples.</li>
+<li><strong>Specificity</strong>: Ability to avoid false positives.</li>
+</ul>
+<h3 id="results-1">Results</h3>
+<figure><img src="/images/project10_images/results10_3.png">
+</figure>
+
+<h3 id="conclusion-2">Conclusion</h3>
+<p>Building and fine-tuning DenseNet201 demonstrates its power in handling complex medical imaging tasks. By leveraging transfer learning and a customised classification head, the model achieved high accuracy in classifying histopathology images.</p>
+<h1 id="part-4-addressing-class-imbalance-in-medical-image-datasets-tackling-class-imbalance-in-histopathology-strategies-and-insights">PART 4. Addressing Class Imbalance in Medical Image Datasets. Tackling Class Imbalance in Histopathology: Strategies and Insights</h1>
+<h3 id="introduction-2">Introduction</h3>
+<p>In medical imaging datasets like histopathology, class imbalance is a common and critical challenge. For instance, datasets may contain significantly more benign samples than malignant ones, making it harder for models to learn to detect the minority class accurately. This can lead to poor sensitivity (recall), which is especially problematic in healthcare where identifying true positives is critical.</p>
+<p>In this blog, we explore:</p>
+<ul>
+<li>The challenges of class imbalance.</li>
+<li>Strategies to address imbalance, including oversampling, class weighting, and targeted augmentation.</li>
+<li>The impact of these strategies on the performance of a DenseNet201 model.</li>
+</ul>
+<h2 id="why-class-imbalance-matters"><strong>Why Class Imbalance Matters</strong></h2>
+<p>When classes are imbalanced, machine learning models tend to favour the majority class, resulting in:</p>
+<ul>
+<li><strong>High accuracy but low sensitivity:</strong> The model predicts benign cases well but misses malignant ones.</li>
+<li><strong>Bias towards majority class:</strong> The model struggles to generalise for the minority class.</li>
+</ul>
+<p>For medical applications, this bias can have serious consequences, such as failing to detect cancer.</p>
+<h2 id="strategies-to-address-class-imbalance"><strong>Strategies to Address Class Imbalance</strong></h2>
+<h3 id="1-oversampling-the-minority-class"><strong>1. Oversampling the Minority Class</strong></h3>
+<p>Oversampling involves duplicating samples from the minority class to balance the dataset. This strategy increases representation without altering the dataset’s overall structure.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> imblearn.over_sampling <span style="color:#f92672">import</span> RandomOverSampler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">oversample_data</span>(X, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Oversample the minority class to balance the dataset.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    oversampler <span style="color:#f92672">=</span> RandomOverSampler(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>    X_resampled, y_resampled <span style="color:#f92672">=</span> oversampler<span style="color:#f92672">.</span>fit_resample(X, y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> X_resampled, y_resampled
+</span></span></code></pre></div><h3 id="2-class-weights"><strong>2. Class Weights</strong></h3>
+<p>Assigning higher weights to the minority class ensures the model penalises misclassification of minority samples more heavily during training.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils.class_weight <span style="color:#f92672">import</span> compute_class_weight
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_class_weights</span>(y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculate class weights to address imbalance.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    class_weights <span style="color:#f92672">=</span> compute_class_weight(class_weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;balanced&#39;</span>, classes<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>unique(y), y<span style="color:#f92672">=</span>y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dict(enumerate(class_weights))
+</span></span></code></pre></div><h4 id="integration-into-training">Integration into Training:</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> calculate_class_weights(y_train)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, class_weight<span style="color:#f92672">=</span>class_weights)
+</span></span></code></pre></div><h3 id="3-targeted-data-augmentation"><strong>3. Targeted Data Augmentation</strong></h3>
+<p>Applying data augmentation selectively to the minority class increases its representation while introducing variability to prevent overfitting.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_minority_class</span>(X, y, target_class):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Apply augmentations only to the minority class.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    augmented_images <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    augmented_labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> image, label <span style="color:#f92672">in</span> zip(X, y):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> label <span style="color:#f92672">==</span> target_class:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>):  <span style="color:#75715e"># Generate 5 augmentations per image</span>
+</span></span><span style="display:flex;"><span>                augmented_images<span style="color:#f92672">.</span>append(augment_pipeline(image))
+</span></span><span style="display:flex;"><span>                augmented_labels<span style="color:#f92672">.</span>append(label)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array(augmented_images), np<span style="color:#f92672">.</span>array(augmented_labels)
+</span></span></code></pre></div><h3 id="experimental-setup-1">Experimental Setup</h3>
+<h4 id="dataset-1">Dataset</h4>
+<p>The BreakHis dataset was used, containing a class imbalance between benign and malignant samples.</p>
+<h4 id="experiment-design">Experiment Design</h4>
+<p>DenseNet201 was trained under three scenarios:</p>
+<ol>
+<li>Baseline (no class imbalance handling).</li>
+<li>With oversampling.</li>
+<li>With class weighting and targeted augmentation.</li>
+</ol>
+<h4 id="evaluation-metrics-1">Evaluation Metrics</h4>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction correctness.</li>
+<li><strong>Sensitivity (Recall)</strong>: Ability to identify malignant samples.</li>
+<li><strong>Specificity</strong>: Ability to avoid false positives.</li>
+<li><strong>F1 Score</strong>: Balances precision and recall.</li>
+</ul>
+<h3 id="results-2">Results</h3>
+<figure><img src="/images/project10_images/results10_4.png">
+</figure>
+
+<h3 id="insights-1">Insights</h3>
+<ul>
+<li>Oversampling improved sensitivity significantly but risked overfitting due to duplicate samples.</li>
+<li>Class weighting combined with targeted augmentation delivered the best results by improving sensitivity and specificity without overfitting.</li>
+<li>Sensitivity is a critical metric in medical imaging, as failing to detect malignant samples can have serious consequences.</li>
+</ul>
+<h3 id="conclusion-3">Conclusion</h3>
+<p>Class imbalance is a significant hurdle in medical imaging. By leveraging oversampling, class weighting, and targeted augmentation, we demonstrated that models like DenseNet201 can effectively handle imbalanced datasets while improving sensitivity and overall performance.</p>
+<h1 id="part-5-evaluation-and-calibration-building-trust-in-medical-ai-models">PART 5. Evaluation and Calibration: Building Trust in Medical AI Models</h1>
+<h3 id="introduction-3">Introduction</h3>
+<p>Deep learning models are increasingly used in critical domains like healthcare. However, high accuracy alone doesn’t guarantee a model’s reliability.</p>
+<p>For medical AI systems, evaluation and calibration are key to building trust, ensuring fair predictions, and avoiding costly mistakes.</p>
+<p>In this blog, we’ll explore:</p>
+<ul>
+<li>The importance of model calibration.</li>
+<li>Key metrics: <strong>F1-score</strong>, <strong>Brier score loss</strong>, <strong>ROC-AUC</strong>, and <strong>confusion matrices</strong>.</li>
+<li>How to visualise and measure calibration using calibration curves.</li>
+</ul>
+<h3 id="why-model-calibration-and-evaluation-matter">Why Model Calibration and Evaluation Matter</h3>
+<p>Medical imaging models often predict probabilities (e.g., &ldquo;90% chance of malignancy&rdquo;). But probability alone isn’t useful unless it reflects reality. For instance:</p>
+<ul>
+<li>If a model predicts &ldquo;90% malignant&rdquo; for 10 images, then approximately 9 of those should indeed be malignant for the model to be calibrated.</li>
+<li>Miscalibration can lead to overconfident predictions, causing false positives or negatives—both critical in healthcare.</li>
+</ul>
+<p>In addition to calibration, evaluating key metrics like F1-score, ROC-AUC, and Brier score loss provides a holistic understanding of model performance.</p>
+<h3 id="key-metrics-explained">Key Metrics Explained</h3>
+<h4 id="1-calibration-curve"><strong>1. Calibration Curve</strong></h4>
+<p>A calibration curve plots predicted probabilities against actual outcomes. Perfectly calibrated models produce a diagonal line. Deviations indicate over- or under-confidence.</p>
+<p><strong>Code for Calibration Curve:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.calibration <span style="color:#f92672">import</span> calibration_curve
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_calibration_curve</span>(y_true, y_prob, n_bins<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Plot the calibration curve for model predictions.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    prob_true, prob_pred <span style="color:#f92672">=</span> calibration_curve(y_true, y_prob, n_bins<span style="color:#f92672">=</span>n_bins)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot(prob_pred, prob_true, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;o&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Model Calibration&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Perfect Calibration&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Mean Predicted Probability&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Fraction of Positives&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Calibration Curve&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h4 id="2-f1-score"><strong>2. F1-Score</strong></h4>
+<p>The F1-score balances precision (correct positive predictions) and recall (ability to find all positive cases). It’s crucial when classes are imbalanced.</p>
+<p><strong>Code for F1-Score Calculation:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> f1_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_f1_score</span>(y_true, y_pred):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculate the F1-score.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> f1_score(y_true, y_pred)
+</span></span></code></pre></div><h4 id="3-brier-score-loss"><strong>3. Brier Score Loss</strong></h4>
+<p>Brier score measures the accuracy of predicted probabilities. A lower score indicates better calibration.</p>
+<p><strong>Code for Brier Score Loss:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> brier_score_loss
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_brier_score</span>(y_true, y_prob):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculate the Brier score loss.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> brier_score_loss(y_true, y_prob)
+</span></span></code></pre></div><h4 id="4-roc-auc"><strong>4. ROC-AUC</strong></h4>
+<p>The Receiver Operating Characteristic - Area Under Curve (ROC-AUC) measures a model&rsquo;s ability to distinguish between classes.</p>
+<p><strong>Code for ROC-AUC Calculation:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_auc_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_roc_auc</span>(y_true, y_prob):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculate ROC-AUC score.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> roc_auc_score(y_true, y_prob)
+</span></span></code></pre></div><h4 id="5-confusion-matrix"><strong>5. Confusion Matrix</strong></h4>
+<p>The confusion matrix summarises true positives, true negatives, false positives, and false negatives, giving a complete view of model errors.</p>
+<p><strong>Code for Confusion Matrix Visualisation:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> confusion_matrix, ConfusionMatrixDisplay
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_confusion_matrix</span>(y_true, y_pred, class_names):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Plot the confusion matrix.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    cm <span style="color:#f92672">=</span> confusion_matrix(y_true, y_pred)
+</span></span><span style="display:flex;"><span>    disp <span style="color:#f92672">=</span> ConfusionMatrixDisplay(confusion_matrix<span style="color:#f92672">=</span>cm, display_labels<span style="color:#f92672">=</span>class_names)
+</span></span><span style="display:flex;"><span>    disp<span style="color:#f92672">.</span>plot(cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>Blues)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Confusion Matrix&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="application-to-medical-ai">Application to Medical AI</h3>
+<p>When applied to a DenseNet201 model for histopathology, these techniques revealed:</p>
+<ul>
+<li><strong>Calibration Curve</strong>: The model was slightly overconfident, which we addressed using temperature scaling.</li>
+<li><strong>F1-Score</strong>: An optimised F1-score ensured balance between precision and recall, crucial for detecting malignant cases.</li>
+<li><strong>Brier Score Loss</strong>: Indicated well-calibrated probabilities after adjustments.</li>
+<li><strong>ROC-AUC</strong>: Achieved high separation capability between benign and malignant cases.</li>
+<li><strong>Confusion Matrix</strong>: Helped visualise false negatives (missed cancers) and false positives (unnecessary interventions).</li>
+</ul>
+<h3 id="conclusion-4">Conclusion</h3>
+<p>Model evaluation and calibration are not just technical add-ons—they’re essential to deploying trustworthy AI in critical fields like healthcare. By using metrics like F1-score, Brier score loss, and calibration curves, you can ensure your model is both accurate and reliable, paving the way for impactful, ethical AI systems.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

@@ -1,44 +1,216 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 4. Evaluating CNN Models for Pneumonia Detection. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog explores how the CNN models for pneumonia detection were evaluated using metrics like precision, recall, F1-score, and confusion matrices. A detailed analysis highlights their strengths and limitations."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project5_images/pr5.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 4. Evaluating CNN Models for Pneumonia Detection.</h1><p class=f5>This blog explores how the CNN models for pneumonia detection were evaluated using metrics like precision, recall, F1-score, and confusion matrices. A detailed analysis highlights their strengths and limitations.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project5_images/pr5.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/pneumonia-detection-CNN target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.</p><p>Metrics like <strong>precision</strong>, <strong>recall</strong>, and <strong>F1-score</strong> provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection.</p><p>This blog explores how our models—<strong>Manual CNN</strong> and <strong>VGG16</strong>—were evaluated and highlights the role of confusion matrices in understanding their performance.</p><h3 id=metrics-for-evaluation>Metrics for Evaluation</h3><ol><li><p><strong>Accuracy</strong>: The percentage of correctly classified samples.</p><ul><li>Formula: <code>(TP + TN) / (TP + TN + FP + FN)</code></li></ul></li><li><p><strong>Precision</strong>: Measures the accuracy of positive predictions.</p><ul><li>Formula: <code>TP / (TP + FP)</code></li></ul></li><li><p><strong>Recall (Sensitivity)</strong>: Measures how well the model identifies positive cases (critical for medical diagnostics).</p><ul><li>Formula: <code>TP / (TP + FN)</code></li></ul></li><li><p><strong>F1-Score</strong>: The harmonic mean of precision and recall.</p><ul><li>Formula: <code>2 * (Precision * Recall) / (Precision + Recall)</code></li></ul></li><li><p><strong>Confusion Matrix</strong>: A table that summarizes the counts of true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN).</p></li></ol><h4 id=python-code-model-evaluation>Python Code: Model Evaluation</h4><h4 id=generate-metrics-and-confusion-matrix>Generate Metrics and Confusion Matrix</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.metrics <span style=color:#f92672>import</span> classification_report, confusion_matrix
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> seaborn <span style=color:#66d9ef>as</span> sns
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>evaluate_model</span>(model, test_dir):
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Evaluates the model on the test dataset and generates a confusion matrix.
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    datagen <span style=color:#f92672>=</span> ImageDataGenerator(rescale<span style=color:#f92672>=</span><span style=color:#ae81ff>1.</span><span style=color:#f92672>/</span><span style=color:#ae81ff>255</span>)
-</span></span><span style=display:flex><span>    test_generator <span style=color:#f92672>=</span> datagen<span style=color:#f92672>.</span>flow_from_directory(
-</span></span><span style=display:flex><span>        test_dir,
-</span></span><span style=display:flex><span>        target_size<span style=color:#f92672>=</span>(<span style=color:#ae81ff>150</span>, <span style=color:#ae81ff>150</span>),
-</span></span><span style=display:flex><span>        batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
-</span></span><span style=display:flex><span>        class_mode<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;binary&#34;</span>,
-</span></span><span style=display:flex><span>        shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>
-</span></span><span style=display:flex><span>    )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># Predictions and ground truth</span>
-</span></span><span style=display:flex><span>    predictions <span style=color:#f92672>=</span> (model<span style=color:#f92672>.</span>predict(test_generator) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.5</span>)<span style=color:#f92672>.</span>astype(<span style=color:#e6db74>&#34;int32&#34;</span>)
-</span></span><span style=display:flex><span>    y_true <span style=color:#f92672>=</span> test_generator<span style=color:#f92672>.</span>classes
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># Classification report</span>
-</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Classification Report:&#34;</span>)
-</span></span><span style=display:flex><span>    print(classification_report(y_true, predictions, target_names<span style=color:#f92672>=</span>test_generator<span style=color:#f92672>.</span>class_indices<span style=color:#f92672>.</span>keys()))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e># Confusion matrix</span>
-</span></span><span style=display:flex><span>    cm <span style=color:#f92672>=</span> confusion_matrix(y_true, predictions)
-</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>6</span>))
-</span></span><span style=display:flex><span>    sns<span style=color:#f92672>.</span>heatmap(cm, annot<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, fmt<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;d&#34;</span>, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Blues&#34;</span>,
-</span></span><span style=display:flex><span>                xticklabels<span style=color:#f92672>=</span>test_generator<span style=color:#f92672>.</span>class_indices<span style=color:#f92672>.</span>keys(),
-</span></span><span style=display:flex><span>                yticklabels<span style=color:#f92672>=</span>test_generator<span style=color:#f92672>.</span>class_indices<span style=color:#f92672>.</span>keys())
-</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;Confusion Matrix&#34;</span>)
-</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#34;Predicted&#34;</span>)
-</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>ylabel(<span style=color:#e6db74>&#34;Actual&#34;</span>)
-</span></span><span style=display:flex><span>    plt<span style=color:#f92672>.</span>show()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Example usage</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> model_training <span style=color:#f92672>import</span> build_manual_cnn  <span style=color:#75715e># Import the model architecture</span>
-</span></span><span style=display:flex><span>manual_cnn <span style=color:#f92672>=</span> build_manual_cnn(input_shape<span style=color:#f92672>=</span>(<span style=color:#ae81ff>150</span>, <span style=color:#ae81ff>150</span>, <span style=color:#ae81ff>3</span>))
-</span></span><span style=display:flex><span>manual_cnn<span style=color:#f92672>.</span>load_weights(<span style=color:#e6db74>&#34;path_to_manual_cnn_weights.h5&#34;</span>)  <span style=color:#75715e># Load the trained weights</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>evaluate_model(manual_cnn, <span style=color:#e6db74>&#34;test&#34;</span>)
-</span></span></code></pre></div><h4 id=results>Results</h4><figure><img src=/images/project5_images/results.png></figure><h3 id=key-observations>Key Observations</h3><h4 id=manual-cnn>Manual CNN:</h4><ul><li>High precision but slightly lower recall.</li><li>Missed a few positive cases (false negatives), which is critical in medical diagnostics.</li></ul><h4 id=vgg16>VGG16:</h4><ul><li>Slightly better performance across all metrics.</li><li>Higher recall reduced false negatives, making it better suited for pneumonia detection.</li></ul><h3 id=challenges-in-evaluation>Challenges in Evaluation</h3><h4 id=class-imbalance>Class Imbalance:</h4><ul><li>Imbalanced test data can skew metrics.</li><li><em>Solution</em>: Use balanced datasets for evaluation or weighted metrics.</li></ul><h4 id=interpretation-of-metrics>Interpretation of Metrics:</h4><ul><li>Precision and recall trade-offs must be carefully analysed.</li><li><em>Solution</em>: Prioritise recall for medical applications to minimise missed cases.</li></ul><h4 id=threshold-tuning>Threshold Tuning:</h4><ul><li>A fixed threshold (e.g., 0.5) may not work optimally for all models.</li><li><em>Solution</em>: Experiment with threshold values to maximise recall without sacrificing precision.</li></ul><h3 id=conclusion>Conclusion</h3><p>Model evaluation provided crucial insights into the performance of our CNN models. While both models performed well, VGG16&rsquo;s higher recall made it the preferred choice for pneumonia detection, as it minimises the risk of missing positive cases.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 4. Evaluating CNN Models for Pneumonia Detection. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog explores how the CNN models for pneumonia detection were evaluated using metrics like precision, recall, F1-score, and confusion matrices. A detailed analysis highlights their strengths and limitations.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project5_images/pr5.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 4. Evaluating CNN Models for Pneumonia Detection.
+          </h1>
+          
+            <p class="f5">This blog explores how the CNN models for pneumonia detection were evaluated using metrics like precision, recall, F1-score, and confusion matrices. A detailed analysis highlights their strengths and limitations.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project5_images/pr5.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+</a>
+<h3 id="introduction">Introduction</h3>
+<p>Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.</p>
+<p>Metrics like <strong>precision</strong>, <strong>recall</strong>, and <strong>F1-score</strong> provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection.</p>
+<p>This blog explores how our models—<strong>Manual CNN</strong> and <strong>VGG16</strong>—were evaluated and highlights the role of confusion matrices in understanding their performance.</p>
+<h3 id="metrics-for-evaluation">Metrics for Evaluation</h3>
+<ol>
+<li>
+<p><strong>Accuracy</strong>: The percentage of correctly classified samples.</p>
+<ul>
+<li>Formula: <code>(TP + TN) / (TP + TN + FP + FN)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Precision</strong>: Measures the accuracy of positive predictions.</p>
+<ul>
+<li>Formula: <code>TP / (TP + FP)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Recall (Sensitivity)</strong>: Measures how well the model identifies positive cases (critical for medical diagnostics).</p>
+<ul>
+<li>Formula: <code>TP / (TP + FN)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>F1-Score</strong>: The harmonic mean of precision and recall.</p>
+<ul>
+<li>Formula: <code>2 * (Precision * Recall) / (Precision + Recall)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Confusion Matrix</strong>: A table that summarizes the counts of true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN).</p>
+</li>
+</ol>
+<h4 id="python-code-model-evaluation">Python Code: Model Evaluation</h4>
+<h4 id="generate-metrics-and-confusion-matrix">Generate Metrics and Confusion Matrix</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report, confusion_matrix
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">evaluate_model</span>(model, test_dir):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Evaluates the model on the test dataset and generates a confusion matrix.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    datagen <span style="color:#f92672">=</span> ImageDataGenerator(rescale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span><span style="color:#f92672">/</span><span style="color:#ae81ff">255</span>)
+</span></span><span style="display:flex;"><span>    test_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(
+</span></span><span style="display:flex;"><span>        test_dir,
+</span></span><span style="display:flex;"><span>        target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>),
+</span></span><span style="display:flex;"><span>        batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;binary&#34;</span>,
+</span></span><span style="display:flex;"><span>        shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Predictions and ground truth</span>
+</span></span><span style="display:flex;"><span>    predictions <span style="color:#f92672">=</span> (model<span style="color:#f92672">.</span>predict(test_generator) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#34;int32&#34;</span>)
+</span></span><span style="display:flex;"><span>    y_true <span style="color:#f92672">=</span> test_generator<span style="color:#f92672">.</span>classes
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Classification report</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Classification Report:&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(classification_report(y_true, predictions, target_names<span style="color:#f92672">=</span>test_generator<span style="color:#f92672">.</span>class_indices<span style="color:#f92672">.</span>keys()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Confusion matrix</span>
+</span></span><span style="display:flex;"><span>    cm <span style="color:#f92672">=</span> confusion_matrix(y_true, predictions)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>    sns<span style="color:#f92672">.</span>heatmap(cm, annot<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, fmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;d&#34;</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Blues&#34;</span>,
+</span></span><span style="display:flex;"><span>                xticklabels<span style="color:#f92672">=</span>test_generator<span style="color:#f92672">.</span>class_indices<span style="color:#f92672">.</span>keys(),
+</span></span><span style="display:flex;"><span>                yticklabels<span style="color:#f92672">=</span>test_generator<span style="color:#f92672">.</span>class_indices<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Confusion Matrix&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Predicted&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Actual&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example usage</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> model_training <span style="color:#f92672">import</span> build_manual_cnn  <span style="color:#75715e"># Import the model architecture</span>
+</span></span><span style="display:flex;"><span>manual_cnn <span style="color:#f92672">=</span> build_manual_cnn(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>manual_cnn<span style="color:#f92672">.</span>load_weights(<span style="color:#e6db74">&#34;path_to_manual_cnn_weights.h5&#34;</span>)  <span style="color:#75715e"># Load the trained weights</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>evaluate_model(manual_cnn, <span style="color:#e6db74">&#34;test&#34;</span>)
+</span></span></code></pre></div><h4 id="results">Results</h4>
+<figure><img src="/images/project5_images/results.png">
+</figure>
+
+<h3 id="key-observations">Key Observations</h3>
+<h4 id="manual-cnn">Manual CNN:</h4>
+<ul>
+<li>High precision but slightly lower recall.</li>
+<li>Missed a few positive cases (false negatives), which is critical in medical diagnostics.</li>
+</ul>
+<h4 id="vgg16">VGG16:</h4>
+<ul>
+<li>Slightly better performance across all metrics.</li>
+<li>Higher recall reduced false negatives, making it better suited for pneumonia detection.</li>
+</ul>
+<h3 id="challenges-in-evaluation">Challenges in Evaluation</h3>
+<h4 id="class-imbalance">Class Imbalance:</h4>
+<ul>
+<li>Imbalanced test data can skew metrics.</li>
+<li><em>Solution</em>: Use balanced datasets for evaluation or weighted metrics.</li>
+</ul>
+<h4 id="interpretation-of-metrics">Interpretation of Metrics:</h4>
+<ul>
+<li>Precision and recall trade-offs must be carefully analysed.</li>
+<li><em>Solution</em>: Prioritise recall for medical applications to minimise missed cases.</li>
+</ul>
+<h4 id="threshold-tuning">Threshold Tuning:</h4>
+<ul>
+<li>A fixed threshold (e.g., 0.5) may not work optimally for all models.</li>
+<li><em>Solution</em>: Experiment with threshold values to maximise recall without sacrificing precision.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Model evaluation provided crucial insights into the performance of our CNN models. While both models performed well, VGG16&rsquo;s higher recall made it the preferred choice for pneumonia detection, as it minimises the risk of missing positive cases.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

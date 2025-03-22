@@ -16,11 +16,7 @@ title: "Solving a 4x4 Letter Placement Puzzle Using Genetic Algorithms."
 
 ### Introduction
 
-Combinatorial optimisation problems, like puzzles and scheduling tasks, often have large solution spaces that make them challenging to solve using traditional methods. 
-
-This project leverages **Genetic Algorithms (GAs)**, a nature-inspired optimisation technique, to solve a **4x4 letter placement puzzle**. The puzzle requires arranging letters in a grid while meeting specific constraints.
-
-This blog will explore the problem definition, the design of the Genetic Algorithm, key challenges faced, and how the solution was evaluated.
+Combinatorial optimisation problems, like puzzles and scheduling tasks, often have large solution spaces that make them challenging to solve using traditional methods. This project leverages **Genetic Algorithms (GAs)**, a nature-inspired optimisation technique, to solve a **4x4 letter placement puzzle**. The puzzle requires arranging letters in a grid while meeting specific constraints. This blog will explore the problem definition, the design of the Genetic Algorithm, key challenges faced, and how the solution was evaluated.
 
 ### Problem Definition
 

@@ -14,9 +14,7 @@ weight: 8
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
 
-Got it! Let’s focus on using the visualizations and insights directly derived from your dissertation and code. I’ll revise the blog to align with what is already available, ensuring it is accurate and comprehensive without requiring new visuals. Here’s the updated write-up:
 
----
 
 ### **Introduction**
 

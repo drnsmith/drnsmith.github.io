@@ -1,185 +1,138 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deep Learning on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/deep-learning/</link><description>Recent content in Deep Learning on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Sep 2024 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/deep-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning.</title><link>http://localhost:1313/projects/project12/project12_1/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project12/project12_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project12_images/pr12.jpg">
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts.&lt;/p>
-&lt;p>But here’s the thing—MNIST is old news. It’s solved, overused, and no longer representative of real-world challenges. Fashion MNIST is a modern, robust alternative that brings fresh complexity to the table.&lt;/p>
-&lt;p>Fashion MNIST is a game-changer. With its focus on apparel images like shirts, sneakers, and dresses, it mirrors the kind of messy, nuanced data we deal with today.&lt;/p></description></item><item><title>PART 1. The Importance of Data Cleaning in Environmental Analysis</title><link>http://localhost:1313/projects/project9/project9_1/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.&lt;/p>
-&lt;p>This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.&lt;/p>
-&lt;p>When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.&lt;/p></description></item><item><title>Part 1. Challenges in Medical Imaging Datasets.</title><link>http://localhost:1313/projects/project5/project5_1/</link><pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges.&lt;/p>
-&lt;p>In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong>dataset imbalance&lt;/strong> and &lt;strong>small validation sets&lt;/strong>, which can hinder model performance.&lt;/p>
-&lt;p>This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p></description></item><item><title>Part 2. Boosting Model Generalisation with Data Augmentation.</title><link>http://localhost:1313/projects/project5/project5_2/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.&lt;/p>
-&lt;p>To overcome this challenge in our pneumonia detection project, we used &lt;strong>data augmentation&lt;/strong> (DA) techniques to artificially expand the training dataset.&lt;/p>
-&lt;p>DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&amp;rsquo;s generalisation to unseen chest X-ray images.&lt;/p>
-&lt;p>This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.&lt;/p></description></item><item><title>PART 2. Understanding the Predictors of Air Pollution</title><link>http://localhost:1313/projects/project9/project9_2/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>What makes air pollution worse?&lt;/p>
-&lt;p>Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.&lt;/p>
-&lt;p>In this blog, we dive into the heart of the Auckland PM10 prediction project: &lt;strong>feature selection&lt;/strong>.&lt;/p></description></item><item><title>PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</title><link>http://localhost:1313/projects/project10/project10_2/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/project10_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project10_images/pr10.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.&lt;/p>
-&lt;p>Traditionally, &lt;strong>Colour Normalisation (CN)&lt;/strong> has been the gold standard for handling variability in histopathology images. However, advancements in &lt;strong>Data Augmentation (DA)&lt;/strong> techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.&lt;/p>
-&lt;p>This blog investigates:&lt;/p>
-&lt;ul>
-&lt;li>The fundamentals of data augmentation.&lt;/li>
-&lt;li>Key augmentation techniques for histopathology.&lt;/li>
-&lt;li>A comparative analysis of DA and CN workflows using a DenseNet201 model.&lt;/li>
-&lt;/ul>
-&lt;h2 id="what-is-data-augmentation">&lt;strong>What is Data Augmentation?&lt;/strong>&lt;/h2>
-&lt;p>&lt;strong>Data augmentation&lt;/strong> artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.&lt;/p></description></item><item><title>Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis.</title><link>http://localhost:1313/projects/project5/project5_3/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning (DL) provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models.&lt;/p>
-&lt;p>In this blog, we compare the performance of a &lt;strong>manual CNN&lt;/strong> and the &lt;strong>VGG16 pre-trained model&lt;/strong> for pneumonia detection.&lt;/p>
-&lt;p>While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of transfer learning with its pre-trained &lt;strong>ImageNet&lt;/strong> weights.&lt;/p>
-&lt;p>This comparative analysis explores their architectures, training strategies, and results.&lt;/p></description></item><item><title>PART 3. Regression Models for Pollution Prediction</title><link>http://localhost:1313/projects/project9/project9_3/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.&lt;/p>
-&lt;p>In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.&lt;/p></description></item><item><title>PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model</title><link>http://localhost:1313/projects/project10/project10_3/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/project10_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project10_images/pr10.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer.&lt;/p>
-&lt;p>&lt;strong>DenseNet201&lt;/strong>, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse.&lt;/p>
-&lt;p>This blog provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. Topics covered include:&lt;/p></description></item><item><title>Part 4. Evaluating CNN Models for Pneumonia Detection.</title><link>http://localhost:1313/projects/project5/project5_4/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.&lt;/p>
-&lt;p>Metrics like &lt;strong>precision&lt;/strong>, &lt;strong>recall&lt;/strong>, and &lt;strong>F1-score&lt;/strong> provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection.&lt;/p>
-&lt;p>This blog explores how our models—&lt;strong>Manual CNN&lt;/strong> and &lt;strong>VGG16&lt;/strong>—were evaluated and highlights the role of confusion matrices in understanding their performance.&lt;/p>
-&lt;h3 id="metrics-for-evaluation">Metrics for Evaluation&lt;/h3>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;strong>Accuracy&lt;/strong>: The percentage of correctly classified samples.&lt;/p></description></item><item><title>PART 4. Neural Networks in Environmental Data Analysis</title><link>http://localhost:1313/projects/project9/project9_4/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.&lt;/p>
-&lt;p>In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.&lt;/p></description></item><item><title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</title><link>http://localhost:1313/projects/project5/project5_5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>When evaluating AI models for medical diagnostics, metrics like &lt;strong>sensitivity&lt;/strong> and &lt;strong>specificity&lt;/strong> are crucial.&lt;/p>
-&lt;p>Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.&lt;/p>
-&lt;p>For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.&lt;/p>
-&lt;p>In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.&lt;/p></description></item><item><title>PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</title><link>http://localhost:1313/projects/project9/project9_5/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional machine learning (ML)models often struggle with.&lt;/p>
-&lt;p>In this blog, we delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict PM10 pollution levels in Auckland.&lt;/p></description></item><item><title>Part 6. Future Directions for AI-Assisted Medical Imaging.</title><link>http://localhost:1313/projects/project5/project5_6/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project.&lt;/p>
-&lt;p>However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery.&lt;/p>
-&lt;p>In this blog, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.&lt;/p></description></item><item><title>PART 6. Comparing Models and Real-World Implications</title><link>http://localhost:1313/projects/project9/project9_6/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/project9_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project9_images/pr9.jpg"
- alt="Photo by Markus Distelrath on Pexels">&lt;figcaption>
- &lt;p>Photo by Markus Distelrath on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Artificial intelligence (AI) and machine learning (ML) are not just tools for academic research—they hold transformative potential for real-world applications.&lt;/p>
-&lt;p>In this final blog, we focus on translating our findings into actionable insights:&lt;/p>
-&lt;ul>
-&lt;li>How can the models and predictions generated in this project help policymakers, urban planners, and individuals?&lt;/li>
-&lt;li>What are the future possibilities for AI in environmental health?&lt;/li>
-&lt;/ul>
-&lt;h3 id="1-the-power-of-predictions">1. The Power of Predictions&lt;/h3>
-&lt;p>&lt;strong>Turning Numbers Into Actions&lt;/strong>&lt;/p></description></item><item><title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks</title><link>http://localhost:1313/projects/project5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Building Robust CNN Pipelines for Fashion MNIST: From Data to Deployment</title><link>http://localhost:1313/projects/project12/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project12/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution</title><link>http://localhost:1313/projects/project9/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project9/</guid><description>&lt;p>This section showcases the various blogs and technical posts related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep Learning on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/deep-learning/</link>
+    <description>Recent content in Deep Learning on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Sep 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning.</title>
+      <link>http://localhost:1313/projects/part-1.-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning./</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts.&lt;/p&gt;&#xA;&lt;p&gt;But here’s the thing—MNIST is old news. It’s solved, overused, and no longer representative of real-world challenges. Fashion MNIST is a modern, robust alternative that brings fresh complexity to the table.&lt;/p&gt;&#xA;&lt;p&gt;Fashion MNIST is a game-changer. With its focus on apparel images like shirts, sneakers, and dresses, it mirrors the kind of messy, nuanced data we deal with today.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 1. The Importance of Data Cleaning in Environmental Analysis</title>
+      <link>http://localhost:1313/projects/part-1.-the-importance-of-data-cleaning-in-environmental-analysis/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-the-importance-of-data-cleaning-in-environmental-analysis/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data is often called the backbone of machine learning, but in the real world, data is rarely clean or ready for use.&lt;/p&gt;&#xA;&lt;p&gt;This is especially true for environmental data, where missing values, outliers, and inconsistencies are common.&lt;/p&gt;&#xA;&lt;p&gt;When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 1. Challenges in Medical Imaging Datasets.</title>
+      <link>http://localhost:1313/projects/part-1.-challenges-in-medical-imaging-datasets./</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-challenges-in-medical-imaging-datasets./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges.&lt;/p&gt;&#xA;&lt;p&gt;In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong&gt;dataset imbalance&lt;/strong&gt; and &lt;strong&gt;small validation sets&lt;/strong&gt;, which can hinder model performance.&lt;/p&gt;&#xA;&lt;p&gt;This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Boosting Model Generalisation with Data Augmentation.</title>
+      <link>http://localhost:1313/projects/part-2.-boosting-model-generalisation-with-data-augmentation./</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-boosting-model-generalisation-with-data-augmentation./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.&lt;/p&gt;&#xA;&lt;p&gt;To overcome this challenge in our pneumonia detection project, we used &lt;strong&gt;data augmentation&lt;/strong&gt; (DA) techniques to artificially expand the training dataset.&lt;/p&gt;&#xA;&lt;p&gt;DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&amp;rsquo;s generalisation to unseen chest X-ray images.&lt;/p&gt;&#xA;&lt;p&gt;This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 2. Understanding the Predictors of Air Pollution</title>
+      <link>http://localhost:1313/projects/part-2.-understanding-the-predictors-of-air-pollution/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-understanding-the-predictors-of-air-pollution/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;What makes air pollution worse?&lt;/p&gt;&#xA;&lt;p&gt;Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we dive into the heart of the Auckland PM10 prediction project: &lt;strong&gt;feature selection&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</title>
+      <link>http://localhost:1313/projects/part-2.-data-augmentation-as-a-robustness-strategy.-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-data-augmentation-as-a-robustness-strategy.-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.&lt;/p&gt;&#xA;&lt;p&gt;Traditionally, &lt;strong&gt;Colour Normalisation (CN)&lt;/strong&gt; has been the gold standard for handling variability in histopathology images. However, advancements in &lt;strong&gt;Data Augmentation (DA)&lt;/strong&gt; techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.&lt;/p&gt;&#xA;&lt;p&gt;This blog investigates:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The fundamentals of data augmentation.&lt;/li&gt;&#xA;&lt;li&gt;Key augmentation techniques for histopathology.&lt;/li&gt;&#xA;&lt;li&gt;A comparative analysis of DA and CN workflows using a DenseNet201 model.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;what-is-data-augmentation&#34;&gt;&lt;strong&gt;What is Data Augmentation?&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Data augmentation&lt;/strong&gt; artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis.</title>
+      <link>http://localhost:1313/projects/part-3.-manual-cnn-vs.-pre-trained-vgg16-a-comparative-analysis./</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-manual-cnn-vs.-pre-trained-vgg16-a-comparative-analysis./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning (DL) provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we compare the performance of a &lt;strong&gt;manual CNN&lt;/strong&gt; and the &lt;strong&gt;VGG16 pre-trained model&lt;/strong&gt; for pneumonia detection.&lt;/p&gt;&#xA;&lt;p&gt;While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of transfer learning with its pre-trained &lt;strong&gt;ImageNet&lt;/strong&gt; weights.&lt;/p&gt;&#xA;&lt;p&gt;This comparative analysis explores their architectures, training strategies, and results.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 3. Regression Models for Pollution Prediction</title>
+      <link>http://localhost:1313/projects/part-3.-regression-models-for-pollution-prediction/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-regression-models-for-pollution-prediction/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model</title>
+      <link>http://localhost:1313/projects/part-3.-building-and-fine-tuning-densenet201-for-histopathology.-leveraging-deep-learning-for-cancer-detection-building-a-densenet201-model/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-building-and-fine-tuning-densenet201-for-histopathology.-leveraging-deep-learning-for-cancer-detection-building-a-densenet201-model/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;DenseNet201&lt;/strong&gt;, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse.&lt;/p&gt;&#xA;&lt;p&gt;This blog provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. Topics covered include:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Evaluating CNN Models for Pneumonia Detection.</title>
+      <link>http://localhost:1313/projects/part-4.-evaluating-cnn-models-for-pneumonia-detection./</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-evaluating-cnn-models-for-pneumonia-detection./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.&lt;/p&gt;&#xA;&lt;p&gt;Metrics like &lt;strong&gt;precision&lt;/strong&gt;, &lt;strong&gt;recall&lt;/strong&gt;, and &lt;strong&gt;F1-score&lt;/strong&gt; provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection.&lt;/p&gt;&#xA;&lt;p&gt;This blog explores how our models—&lt;strong&gt;Manual CNN&lt;/strong&gt; and &lt;strong&gt;VGG16&lt;/strong&gt;—were evaluated and highlights the role of confusion matrices in understanding their performance.&lt;/p&gt;&#xA;&lt;h3 id=&#34;metrics-for-evaluation&#34;&gt;Metrics for Evaluation&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Accuracy&lt;/strong&gt;: The percentage of correctly classified samples.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 4. Neural Networks in Environmental Data Analysis</title>
+      <link>http://localhost:1313/projects/part-4.-neural-networks-in-environmental-data-analysis/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-neural-networks-in-environmental-data-analysis/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</title>
+      <link>http://localhost:1313/projects/part-5.-insights-from-sensitivity-and-specificity-analysis-in-pneumonia-detection./</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-insights-from-sensitivity-and-specificity-analysis-in-pneumonia-detection./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;When evaluating AI models for medical diagnostics, metrics like &lt;strong&gt;sensitivity&lt;/strong&gt; and &lt;strong&gt;specificity&lt;/strong&gt; are crucial.&lt;/p&gt;&#xA;&lt;p&gt;Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.&lt;/p&gt;&#xA;&lt;p&gt;For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</title>
+      <link>http://localhost:1313/projects/part-5.-exploring-long-short-term-memory-lstm-for-time-series-data/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-exploring-long-short-term-memory-lstm-for-time-series-data/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional machine learning (ML)models often struggle with.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict PM10 pollution levels in Auckland.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Future Directions for AI-Assisted Medical Imaging.</title>
+      <link>http://localhost:1313/projects/part-6.-future-directions-for-ai-assisted-medical-imaging./</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-future-directions-for-ai-assisted-medical-imaging./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;&lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project.&lt;/p&gt;&#xA;&lt;p&gt;However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 6. Comparing Models and Real-World Implications</title>
+      <link>http://localhost:1313/projects/part-6.-comparing-models-and-real-world-implications/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-comparing-models-and-real-world-implications/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Artificial intelligence (AI) and machine learning (ML) are not just tools for academic research—they hold transformative potential for real-world applications.&lt;/p&gt;&#xA;&lt;p&gt;In this final blog, we focus on translating our findings into actionable insights:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How can the models and predictions generated in this project help policymakers, urban planners, and individuals?&lt;/li&gt;&#xA;&lt;li&gt;What are the future possibilities for AI in environmental health?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;1-the-power-of-predictions&#34;&gt;1. The Power of Predictions&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Turning Numbers Into Actions&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks</title>
+      <link>http://localhost:1313/projects/project5/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project5/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Building Robust CNN Pipelines for Fashion MNIST: From Data to Deployment</title>
+      <link>http://localhost:1313/projects/project12/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project12/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution</title>
+      <link>http://localhost:1313/projects/project9/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project9/</guid>
+      <description>&lt;p&gt;This section showcases the various blogs and technical posts related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

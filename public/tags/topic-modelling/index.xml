@@ -1,147 +1,75 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Topic Modelling on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/topic-modelling/</link><description>Recent content in Topic Modelling on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 25 Aug 2024 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/topic-modelling/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis.</title><link>http://localhost:1313/projects/project4/project4_1/</link><pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts.&lt;/p>
-&lt;p>Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment. This blog dissects a technical project that analysed tweets related to NASDAQ-listed companies, including giants like Apple, Tesla, and Microsoft, over a five-year span (2015–2020).&lt;/p></description></item><item><title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.</title><link>http://localhost:1313/projects/project2/project2_1/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.
-I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.&lt;/p></description></item><item><title>Part 2. Scalling Sentiment Analysis with MapReduce.</title><link>http://localhost:1313/projects/project4/project4_2/</link><pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern.&lt;/p>
-&lt;p>To address this, we employed &lt;strong>MapReduce&lt;/strong>, a distributed data processing model that enables parallel computation across multiple nodes.&lt;/p>
-&lt;p>This blog walks through the implementation of &lt;strong>MapReduce&lt;/strong> for sentiment analysis, focusing on how it handles data at scale. We&amp;rsquo;ll include examples of mappers and reducers with Python code to explain the workflow.&lt;/p></description></item><item><title>Part 2. From Words to Vectors: Embedding Techniques in Recipe Analysis.</title><link>http://localhost:1313/projects/project2/project2_2/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In a world driven by data, text is the unsung hero that powers everything from search engines to recommendation systems. For a data scientist, textual data isn&amp;rsquo;t just words—it&amp;rsquo;s a goldmine waiting to be unlocked. Recipes, for instance, are more than a collection of instructions. They&amp;rsquo;re narratives of culture, flavour profiles, and culinary creativity. But to analyse them computationally, we must first transform these words into something machines can process: &lt;em>vectors&lt;/em>. In this article, I’ll dive into how text embedding techniques like &lt;strong>TF-IDF&lt;/strong> and &lt;strong>Word2Vec&lt;/strong> can be applied to recipe data. By converting recipes into meaningful numerical representations, we uncover patterns and relationships hidden in the data.&lt;/p></description></item><item><title>Part 3. Visualising Market Sentiments with Hive and Kibana.</title><link>http://localhost:1313/projects/project4/project4_3/</link><pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Data visualisation bridges the gap between raw data and actionable insights.&lt;/p>
-&lt;p>After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers.&lt;/p>
-&lt;p>Using &lt;strong>Hive&lt;/strong> for data aggregation and &lt;strong>Kibana&lt;/strong> for visualisation, we uncovered trends in public discourse around NASDAQ companies.&lt;/p>
-&lt;p>This blog walks through the process of aggregating data with &lt;strong>Hive&lt;/strong> and creating interactive dashboards in &lt;strong>Kibana&lt;/strong>, complete with code snippets and visual examples.&lt;/p></description></item><item><title>Part 3. Uncovering Themes in Recipes with Topic Modelling.</title><link>http://localhost:1313/projects/project2/project2_3/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Recipes are more than just lists of ingredients and instructions—they encapsulate cultural, dietary, and thematic patterns waiting to be uncovered. In the ever-growing realm of textual data, topic modelling serves as a powerful tool to discover hidden themes and insights.&lt;/p>
-&lt;p>In this blog, I’ll explore how topic modeling techniques, such as Latent Dirichlet Allocation (LDA) and Non-Negative Matrix Factorisation (NMF), help us extract meaningful themes from recipes.&lt;/p></description></item><item><title>Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies.</title><link>http://localhost:1313/projects/project4/project4_4/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>While numerical analysis reveals overarching trends, visual representations like &lt;strong>word clouds&lt;/strong> provide an intuitive way to explore the most frequently used terms in a dataset.&lt;/p>
-&lt;p>For this project, word clouds were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. These insights complemented the sentiment analysis, offering a richer understanding of public opinion.&lt;/p>
-&lt;p>This blog covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.&lt;/p></description></item><item><title>Part 4. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges.</title><link>http://localhost:1313/projects/project2/project2_4/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction-clustering-recipes-based-on-similarity-an-overview-of-techniques-and-challenges">Introduction. Clustering Recipes Based on Similarity: An Overview of Techniques and Challenges&lt;/h3>
-&lt;p>Clustering is a powerful unsupervised learning technique that organises data points into groups based on shared features.&lt;/p>
-&lt;p>When applied to recipes, clustering can reveal hidden patterns, such as regional cuisines, ingredient pairings, or common preparation techniques.&lt;/p>
-&lt;p>In this blog, we’ll explore:&lt;/p>
-&lt;ol>
-&lt;li>Clustering methods like K-Means and Hierarchical Clustering.&lt;/li>
-&lt;li>Pre-processing and feature selection for recipe data.&lt;/li>
-&lt;li>Evaluating clusters for meaningfulness.&lt;/li>
-&lt;li>Challenges and lessons learned during clustering experiments.&lt;/li>
-&lt;/ol>
-&lt;h3 id="why-clustering-recipes">Why Clustering Recipes?&lt;/h3>
-&lt;p>Clustering allows us to group recipes into meaningful categories based on similarity. For example:&lt;/p></description></item><item><title>Part 5. Latent Themes in Tweets: Topic Modelling with LDA.</title><link>http://localhost:1313/projects/project4/project4_5/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. &lt;strong>Latent Dirichlet Allocation (LDA)&lt;/strong>, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.&lt;/p>
-&lt;p>In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions.&lt;/p></description></item><item><title>Part 5. Evaluating and Interpreting Recipe Clusters for Meaningful Insights.</title><link>http://localhost:1313/projects/project2/project2_5/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction-evaluating-and-interpreting-recipe-clusters-for-meaningful-insights">Introduction. Evaluating and Interpreting Recipe Clusters for Meaningful Insights&lt;/h3>
-&lt;p>Clustering recipes can reveal fascinating patterns, but identifying meaningful clusters is only half the battle.&lt;/p>
-&lt;p>The real challenge lies in evaluating their quality and interpreting their results effectively. Without rigorous evaluation, clusters might lack utility, leading to misleading conclusions.&lt;/p>
-&lt;p>In this blog, we’ll cover:&lt;/p>
-&lt;ol>
-&lt;li>Techniques for evaluating cluster quality.&lt;/li>
-&lt;li>Methods for interpreting recipe clusters.&lt;/li>
-&lt;li>Challenges and insights gained from real-world clustering projects.&lt;/li>
-&lt;/ol>
-&lt;h3 id="why-does-cluster-evaluation-matter">Why Does Cluster Evaluation Matter?&lt;/h3>
-&lt;p>Creating clusters is straightforward, but ensuring they represent meaningful groupings requires evaluation. For recipes, this means asking:&lt;/p></description></item><item><title>Part 6. Sentiment Trends: Insights by Company and Year.</title><link>http://localhost:1313/projects/project4/project4_6/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this blog, we analyze sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualized longitudinal sentiment patterns, highlighting their value for investors and analysts.&lt;/p>
-&lt;hr>
-&lt;h3 id="step-1-aggregating-sentiment-by-date">&lt;strong>Step 1: Aggregating Sentiment by Date&lt;/strong>&lt;/h3>
-&lt;p>The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.&lt;/p></description></item><item><title>Part 6. Applications of Recipe Topic Modelling and Clustering.</title><link>http://localhost:1313/projects/project2/project2_6/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/project2_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project2_images/pr2.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction-applications-of-recipe-topic-modelling-and-clustering-in-real-life">Introduction. Applications of Recipe Topic Modelling and Clustering in Real Life&lt;/h3>
-&lt;p>Recipes are more than just instructions—they are cultural artifacts, sources of inspiration, and solutions to everyday problems. But as the number of recipes available online grows exponentially, finding the right one can feel overwhelming. That’s where the power of topic modelling and clustering comes into play.&lt;/p>
-&lt;p>These techniques unlock the potential of recipe data, helping users discover, search, and explore recipes in ways that feel intuitive and tailored. In this blog, we’ll explore:&lt;/p></description></item><item><title>Part 7. Overcoming Challenges in Sentiment Analysis.</title><link>http://localhost:1313/projects/project4/project4_7/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/project4_7/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project4_images/pr4.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results.&lt;/p>
-&lt;p>In this blog, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.&lt;/p>
-&lt;h3 id="key-challenges-in-sentiment-analysis">Key Challenges in Sentiment Analysis&lt;/h3>
-&lt;h4 id="1-sarcasm-and-context-dependency">1. Sarcasm and Context Dependency&lt;/h4>
-&lt;ul>
-&lt;li>Tweets like &lt;em>&amp;ldquo;Oh great, another Tesla delay. Just what we needed!&amp;rdquo;&lt;/em> express negative sentiment despite containing positive words like &amp;ldquo;great.&amp;rdquo;&lt;/li>
-&lt;li>Contextual understanding is essential for accurate classification.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;em>Solution&lt;/em>:&lt;/p></description></item><item><title>Sentiment Speaks: Analysing Twitter Discourse on NASDAQ Companies</title><link>http://localhost:1313/projects/project4/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project4/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item><item><title>Decoding Culinary Narratives: Combining advanced NLP techniques (BERT embeddings) with LDA topic modelling</title><link>http://localhost:1313/projects/project2/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project2/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Topic Modelling on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/topic-modelling/</link>
+    <description>Recent content in Topic Modelling on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Feb 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/topic-modelling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decoding Market Sentiments: Analysing NASDAQ Companies with Big Data and NLP.</title>
+      <link>http://localhost:1313/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-unveiling-sentiments-analysing-nasdaq-companies-through-big-data-and-sentiment-analysis&#34;&gt;PART 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis&lt;/h1&gt;&#xA;&lt;p&gt;In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts. Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment. This blog dissects a technical project that analysed tweets related to NASDAQ-listed companies, including giants like Apple, Tesla, and Microsoft, over a five-year span (2015–2020). By leveraging Big Data tools and sentiment analysis techniques, we uncover fascinating insights into the dynamics of public discourse.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 2. Scalling Sentiment Analysis with MapReduce.</title>
+      <link>http://localhost:1313/projects/part-2.-scalling-sentiment-analysis-with-mapreduce./</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-scalling-sentiment-analysis-with-mapreduce./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern.&lt;/p&gt;&#xA;&lt;p&gt;To address this, we employed &lt;strong&gt;MapReduce&lt;/strong&gt;, a distributed data processing model that enables parallel computation across multiple nodes.&lt;/p&gt;&#xA;&lt;p&gt;This blog walks through the implementation of &lt;strong&gt;MapReduce&lt;/strong&gt; for sentiment analysis, focusing on how it handles data at scale. We&amp;rsquo;ll include examples of mappers and reducers with Python code to explain the workflow.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 3. Visualising Market Sentiments with Hive and Kibana.</title>
+      <link>http://localhost:1313/projects/part-3.-visualising-market-sentiments-with-hive-and-kibana./</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-visualising-market-sentiments-with-hive-and-kibana./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data visualisation bridges the gap between raw data and actionable insights.&lt;/p&gt;&#xA;&lt;p&gt;After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers.&lt;/p&gt;&#xA;&lt;p&gt;Using &lt;strong&gt;Hive&lt;/strong&gt; for data aggregation and &lt;strong&gt;Kibana&lt;/strong&gt; for visualisation, we uncovered trends in public discourse around NASDAQ companies.&lt;/p&gt;&#xA;&lt;p&gt;This blog walks through the process of aggregating data with &lt;strong&gt;Hive&lt;/strong&gt; and creating interactive dashboards in &lt;strong&gt;Kibana&lt;/strong&gt;, complete with code snippets and visual examples.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies.</title>
+      <link>http://localhost:1313/projects/part-4.-word-clouds-in-action-decoding-public-opinion-on-nasdaq-companies./</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-4.-word-clouds-in-action-decoding-public-opinion-on-nasdaq-companies./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;While numerical analysis reveals overarching trends, visual representations like &lt;strong&gt;word clouds&lt;/strong&gt; provide an intuitive way to explore the most frequently used terms in a dataset.&lt;/p&gt;&#xA;&lt;p&gt;For this project, word clouds were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. These insights complemented the sentiment analysis, offering a richer understanding of public opinion.&lt;/p&gt;&#xA;&lt;p&gt;This blog covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 5. Latent Themes in Tweets: Topic Modelling with LDA.</title>
+      <link>http://localhost:1313/projects/part-5.-latent-themes-in-tweets-topic-modelling-with-lda./</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-5.-latent-themes-in-tweets-topic-modelling-with-lda./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. &lt;strong&gt;Latent Dirichlet Allocation (LDA)&lt;/strong&gt;, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.&lt;/p&gt;&#xA;&lt;p&gt;In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 6. Sentiment Trends: Insights by Company and Year.</title>
+      <link>http://localhost:1313/projects/part-6.-sentiment-trends-insights-by-company-and-year./</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-6.-sentiment-trends-insights-by-company-and-year./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this blog, we analyze sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualized longitudinal sentiment patterns, highlighting their value for investors and analysts.&lt;/p&gt;&#xA;&lt;h3 id=&#34;step-1-aggregating-sentiment-by-date&#34;&gt;&lt;strong&gt;Step 1: Aggregating Sentiment by Date&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;p&gt;The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Part 7. Overcoming Challenges in Sentiment Analysis.</title>
+      <link>http://localhost:1313/projects/part-7.-overcoming-challenges-in-sentiment-analysis./</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-7.-overcoming-challenges-in-sentiment-analysis./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.&lt;/p&gt;&#xA;&lt;h3 id=&#34;key-challenges-in-sentiment-analysis&#34;&gt;Key Challenges in Sentiment Analysis&lt;/h3&gt;&#xA;&lt;h4 id=&#34;1-sarcasm-and-context-dependency&#34;&gt;1. Sarcasm and Context Dependency&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Tweets like &lt;em&gt;&amp;ldquo;Oh great, another Tesla delay. Just what we needed!&amp;rdquo;&lt;/em&gt; express negative sentiment despite containing positive words like &amp;ldquo;great.&amp;rdquo;&lt;/li&gt;&#xA;&lt;li&gt;Contextual understanding is essential for accurate classification.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;em&gt;Solution&lt;/em&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Combining advanced NLP techniques (BERT embeddings) with LDA topic modelling.</title>
+      <link>http://localhost:1313/projects/project2/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project2/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sentiment Speaks: Analysing Twitter Discourse on NASDAQ Companies</title>
+      <link>http://localhost:1313/projects/project4/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project4/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

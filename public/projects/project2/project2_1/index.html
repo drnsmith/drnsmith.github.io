@@ -1,51 +1,189 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="I delve into the essential steps of preparing recipe data for natural language processing tasks. From handling unique challenges in recipe data, like ingredient variations and measurement units, to tokenising, lemmatising, and transforming text with TF-IDF, each step is designed to clean and structure the data for effective clustering and topic modelling."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project2_images/pr2.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.</h1><p class=f5>I delve into the essential steps of preparing recipe data for natural language processing tasks. From handling unique challenges in recipe data, like ingredient variations and measurement units, to tokenising, lemmatising, and transforming text with TF-IDF, each step is designed to clean and structure the data for effective clustering and topic modelling.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project2_images/pr2.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.
-I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.</p><p>In this post, I&rsquo;ll guide you through my process for turning this raw data into a dataset ready for NLP analysis, breaking down each key step, and discussing the unique challenges encountered along the way.</p><h3 id=understanding-the-recipe-data-challenges>Understanding the Recipe Data Challenges</h3><p>Recipe datasets present unique challenges. Here are some specifics I encountered and how they shaped my approach to data preparation:</p><ul><li><em>Measurement Units and Variations</em>: Ingredients are often listed with measurements, such as “1 cup flour” or “200g sugar.” These details can vary widely, requiring a way to standardise and simplify them.</li><li><em>Ingredient Synonyms</em>: Different recipes may refer to the same ingredient by various names (e.g., “bell pepper” vs. “capsicum”). Addressing these variations is essential for consistent analysis.</li><li><em>Contextual Words in Cooking Steps</em>: Cooking steps often contain complex instructions that can vary in wording but mean the same thing. Pre-processing has to be thorough to ensure these are handled correctly.</li></ul><p>These unique elements required a custom approach to text pre-processing, focusing on standardising ingredient names and measurements while retaining relevant information.</p><h3 id=step-1-basic-data-cleaning-and-handling-missing-values>Step 1: Basic Data Cleaning and Handling Missing Values</h3><p>With these challenges in mind, the first step was to clean the dataset and handle any missing values.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Load dataset</span>
-</span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(<span style=color:#e6db74>&#39;recipes.csv&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Check for missing values</span>
-</span></span><span style=display:flex><span>print(data<span style=color:#f92672>.</span>isnull()<span style=color:#f92672>.</span>sum())
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Drop rows with missing critical fields</span>
-</span></span><span style=display:flex><span>data <span style=color:#f92672>=</span> data<span style=color:#f92672>.</span>dropna(subset<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#39;ingredients&#39;</span>, <span style=color:#e6db74>&#39;steps&#39;</span>])
-</span></span></code></pre></div><p>I identified and removed rows with missing values for the ingredients or steps fields, as these are key to building recipe topics. For more extensive datasets, other imputation techniques could be applied, but removing incomplete rows was ideal here to preserve data quality.</p><h3 id=step-2-text-pre-processing---tokenisation-and-normalisation>Step 2: Text Pre-processing - Tokenisation and Normalisation</h3><p>Next, I pre-processed the text data by tokenising it, converting everything to lowercase, and removing special characters.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> re
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> nltk.corpus <span style=color:#f92672>import</span> stopwords
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> nltk.tokenize <span style=color:#f92672>import</span> word_tokenize
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Define a pre-processing function</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>preprocess_text</span>(text):
-</span></span><span style=display:flex><span>    text <span style=color:#f92672>=</span> text<span style=color:#f92672>.</span>lower()  <span style=color:#75715e># Convert to lowercase</span>
-</span></span><span style=display:flex><span>    text <span style=color:#f92672>=</span> re<span style=color:#f92672>.</span>sub(<span style=color:#e6db74>r</span><span style=color:#e6db74>&#39;[^a-zA-Z\s]&#39;</span>, <span style=color:#e6db74>&#39;&#39;</span>, text)  <span style=color:#75715e># Remove special characters</span>
-</span></span><span style=display:flex><span>    tokens <span style=color:#f92672>=</span> word_tokenize(text)  <span style=color:#75715e># Tokenize text</span>
-</span></span><span style=display:flex><span>    tokens <span style=color:#f92672>=</span> [word <span style=color:#66d9ef>for</span> word <span style=color:#f92672>in</span> tokens <span style=color:#66d9ef>if</span> word <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> stopwords<span style=color:#f92672>.</span>words(<span style=color:#e6db74>&#39;english&#39;</span>)]  <span style=color:#75715e># Remove stop words</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> tokens
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Apply to ingredients and steps</span>
-</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;ingredients_processed&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;ingredients&#39;</span>]<span style=color:#f92672>.</span>apply(preprocess_text)
-</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;steps_processed&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;steps&#39;</span>]<span style=color:#f92672>.</span>apply(preprocess_text)
-</span></span></code></pre></div><p>Each recipe was tokenised to isolate meaningful words and exclude common words (stop words) that don&rsquo;t add much value. Tokenisation is essential here because it breaks down sentences into words, allowing us to analyse the frequency and importance of each word in context.</p><h3 id=step-3-lemmatization-for-ingredient-and-step-uniformity>Step 3: Lemmatization for Ingredient and Step Uniformity</h3><p>With tokenised data, the next step was lemmatization, which reduces words to their base or dictionary form. This step is especially useful for recipes because it reduces word variations, creating more consistency across the data.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> nltk.stem <span style=color:#f92672>import</span> WordNetLemmatizer
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Initialize lemmatizer</span>
-</span></span><span style=display:flex><span>lemmatizer <span style=color:#f92672>=</span> WordNetLemmatizer()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Define a function to lemmatize tokens</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lemmatize_tokens</span>(tokens):
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [lemmatizer<span style=color:#f92672>.</span>lemmatize(token) <span style=color:#66d9ef>for</span> token <span style=color:#f92672>in</span> tokens]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Apply lemmatization</span>
-</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;ingredients_processed&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;ingredients_processed&#39;</span>]<span style=color:#f92672>.</span>apply(lemmatize_tokens)
-</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;steps_processed&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;steps_processed&#39;</span>]<span style=color:#f92672>.</span>apply(lemmatize_tokens)
-</span></span></code></pre></div><p>Lemmatization helped to group similar words under a single form (e.g., “cooking” and “cook”), making it easier to identify common themes in the recipes.</p><h3 id=step-4-vectorising-text-with-tf-idf>Step 4: Vectorising Text with TF-IDF</h3><p>The next step was to convert the text data into numerical form, which is necessary for clustering. I used <strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong>, a technique that highlights unique words in each recipe.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.feature_extraction.text <span style=color:#f92672>import</span> TfidfVectorizer
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Initialize TF-IDF Vectorizer</span>
-</span></span><span style=display:flex><span>vectorizer <span style=color:#f92672>=</span> TfidfVectorizer(max_features<span style=color:#f92672>=</span><span style=color:#ae81ff>1000</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Vectorize ingredients and steps</span>
-</span></span><span style=display:flex><span>ingredients_tfidf <span style=color:#f92672>=</span> vectorizer<span style=color:#f92672>.</span>fit_transform(data[<span style=color:#e6db74>&#39;ingredients_processed&#39;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: <span style=color:#e6db74>&#39; &#39;</span><span style=color:#f92672>.</span>join(x)))
-</span></span><span style=display:flex><span>steps_tfidf <span style=color:#f92672>=</span> vectorizer<span style=color:#f92672>.</span>fit_transform(data[<span style=color:#e6db74>&#39;steps_processed&#39;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: <span style=color:#e6db74>&#39; &#39;</span><span style=color:#f92672>.</span>join(x)))
-</span></span></code></pre></div><p>TF-IDF helped to weigh each term’s importance within each recipe, providing a rich representation of each recipe’s unique characteristics.</p><h3 id=step-5-combining-ingredients-and-steps-for-analysis>Step 5: Combining Ingredients and Steps for Analysis</h3><p>To get a holistic view of each recipe, I combined the processed ingredients and steps data. This allowed me to capture both aspects of each recipe in a single feature space, which enhanced the clustering and topic modelling steps that followed.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Combine ingredients and steps</span>
-</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;combined_text&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;ingredients_processed&#39;</span>] <span style=color:#f92672>+</span> data[<span style=color:#e6db74>&#39;steps_processed&#39;</span>]
-</span></span><span style=display:flex><span>data[<span style=color:#e6db74>&#39;combined_text&#39;</span>] <span style=color:#f92672>=</span> data[<span style=color:#e6db74>&#39;combined_text&#39;</span>]<span style=color:#f92672>.</span>apply(<span style=color:#66d9ef>lambda</span> x: <span style=color:#e6db74>&#39; &#39;</span><span style=color:#f92672>.</span>join(x))
-</span></span></code></pre></div><p>This combined representation provided a comprehensive view of each recipe, incorporating both what ingredients are used and how they’re used.</p><h3 id=step-6-potential-applications-of-pre-processed-data>Step 6: Potential Applications of Pre-processed Data</h3><p>After all pre-processing steps, the data was ready for analysis. Here’s how each step contributes to downstream NLP tasks:</p><ul><li><em>Topic Modelling</em>: The clean, tokenised text allows algorithms like <strong>LDA (Latent Dirichlet Allocation)</strong> to identify coherent topics within the recipes.</li><li><em>Clustering</em>: By creating TF-IDF vectors, each recipe is represented as a numerical vector, making it suitable for clustering algorithms.</li><li><em>Recommendation Systems</em>: Using topic clusters, a recommendation system could suggest recipes based on users’ previous preferences.</li></ul><h3 id=conclusion>Conclusion</h3><p>Pre-processing the recipe data takes time, but each step is crucial in creating a dataset ready for ML. These techniques transformed unstructured recipe text into structured data, making it possible to discover themes and clusters in the data.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="I delve into the essential steps of preparing recipe data for natural language processing tasks. From handling unique challenges in recipe data, like ingredient variations and measurement units, to tokenising, lemmatising, and transforming text with TF-IDF, each step is designed to clean and structure the data for effective clustering and topic modelling.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project2_images/pr2.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.
+          </h1>
+          
+            <p class="f5">I delve into the essential steps of preparing recipe data for natural language processing tasks. From handling unique challenges in recipe data, like ingredient variations and measurement units, to tokenising, lemmatising, and transforming text with TF-IDF, each step is designed to clean and structure the data for effective clustering and topic modelling.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project2_images/pr2.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.
+I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.</p>
+<p>In this post, I&rsquo;ll guide you through my process for turning this raw data into a dataset ready for NLP analysis, breaking down each key step, and discussing the unique challenges encountered along the way.</p>
+<h3 id="understanding-the-recipe-data-challenges">Understanding the Recipe Data Challenges</h3>
+<p>Recipe datasets present unique challenges. Here are some specifics I encountered and how they shaped my approach to data preparation:</p>
+<ul>
+<li><em>Measurement Units and Variations</em>: Ingredients are often listed with measurements, such as “1 cup flour” or “200g sugar.” These details can vary widely, requiring a way to standardise and simplify them.</li>
+<li><em>Ingredient Synonyms</em>: Different recipes may refer to the same ingredient by various names (e.g., “bell pepper” vs. “capsicum”). Addressing these variations is essential for consistent analysis.</li>
+<li><em>Contextual Words in Cooking Steps</em>: Cooking steps often contain complex instructions that can vary in wording but mean the same thing. Pre-processing has to be thorough to ensure these are handled correctly.</li>
+</ul>
+<p>These unique elements required a custom approach to text pre-processing, focusing on standardising ingredient names and measurements while retaining relevant information.</p>
+<h3 id="step-1-basic-data-cleaning-and-handling-missing-values">Step 1: Basic Data Cleaning and Handling Missing Values</h3>
+<p>With these challenges in mind, the first step was to clean the dataset and handle any missing values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load dataset</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;recipes.csv&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check for missing values</span>
+</span></span><span style="display:flex;"><span>print(data<span style="color:#f92672">.</span>isnull()<span style="color:#f92672">.</span>sum())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Drop rows with missing critical fields</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>dropna(subset<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;ingredients&#39;</span>, <span style="color:#e6db74">&#39;steps&#39;</span>])
+</span></span></code></pre></div><p>I identified and removed rows with missing values for the ingredients or steps fields, as these are key to building recipe topics. For more extensive datasets, other imputation techniques could be applied, but removing incomplete rows was ideal here to preserve data quality.</p>
+<h3 id="step-2-text-pre-processing---tokenisation-and-normalisation">Step 2: Text Pre-processing - Tokenisation and Normalisation</h3>
+<p>Next, I pre-processed the text data by tokenising it, converting everything to lowercase, and removing special characters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.corpus <span style="color:#f92672">import</span> stopwords
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.tokenize <span style="color:#f92672">import</span> word_tokenize
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define a pre-processing function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess_text</span>(text):
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> text<span style="color:#f92672">.</span>lower()  <span style="color:#75715e"># Convert to lowercase</span>
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;[^a-zA-Z\s]&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, text)  <span style="color:#75715e"># Remove special characters</span>
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> word_tokenize(text)  <span style="color:#75715e"># Tokenize text</span>
+</span></span><span style="display:flex;"><span>    tokens <span style="color:#f92672">=</span> [word <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> tokens <span style="color:#66d9ef">if</span> word <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> stopwords<span style="color:#f92672">.</span>words(<span style="color:#e6db74">&#39;english&#39;</span>)]  <span style="color:#75715e"># Remove stop words</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tokens
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply to ingredients and steps</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ingredients&#39;</span>]<span style="color:#f92672">.</span>apply(preprocess_text)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;steps&#39;</span>]<span style="color:#f92672">.</span>apply(preprocess_text)
+</span></span></code></pre></div><p>Each recipe was tokenised to isolate meaningful words and exclude common words (stop words) that don&rsquo;t add much value. Tokenisation is essential here because it breaks down sentences into words, allowing us to analyse the frequency and importance of each word in context.</p>
+<h3 id="step-3-lemmatization-for-ingredient-and-step-uniformity">Step 3: Lemmatization for Ingredient and Step Uniformity</h3>
+<p>With tokenised data, the next step was lemmatization, which reduces words to their base or dictionary form. This step is especially useful for recipes because it reduces word variations, creating more consistency across the data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> nltk.stem <span style="color:#f92672">import</span> WordNetLemmatizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize lemmatizer</span>
+</span></span><span style="display:flex;"><span>lemmatizer <span style="color:#f92672">=</span> WordNetLemmatizer()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define a function to lemmatize tokens</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lemmatize_tokens</span>(tokens):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [lemmatizer<span style="color:#f92672">.</span>lemmatize(token) <span style="color:#66d9ef">for</span> token <span style="color:#f92672">in</span> tokens]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply lemmatization</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>]<span style="color:#f92672">.</span>apply(lemmatize_tokens)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>]<span style="color:#f92672">.</span>apply(lemmatize_tokens)
+</span></span></code></pre></div><p>Lemmatization helped to group similar words under a single form (e.g., “cooking” and “cook”), making it easier to identify common themes in the recipes.</p>
+<h3 id="step-4-vectorising-text-with-tf-idf">Step 4: Vectorising Text with TF-IDF</h3>
+<p>The next step was to convert the text data into numerical form, which is necessary for clustering. I used <strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong>, a technique that highlights unique words in each recipe.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.feature_extraction.text <span style="color:#f92672">import</span> TfidfVectorizer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize TF-IDF Vectorizer</span>
+</span></span><span style="display:flex;"><span>vectorizer <span style="color:#f92672">=</span> TfidfVectorizer(max_features<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Vectorize ingredients and steps</span>
+</span></span><span style="display:flex;"><span>ingredients_tfidf <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x)))
+</span></span><span style="display:flex;"><span>steps_tfidf <span style="color:#f92672">=</span> vectorizer<span style="color:#f92672">.</span>fit_transform(data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x)))
+</span></span></code></pre></div><p>TF-IDF helped to weigh each term’s importance within each recipe, providing a rich representation of each recipe’s unique characteristics.</p>
+<h3 id="step-5-combining-ingredients-and-steps-for-analysis">Step 5: Combining Ingredients and Steps for Analysis</h3>
+<p>To get a holistic view of each recipe, I combined the processed ingredients and steps data. This allowed me to capture both aspects of each recipe in a single feature space, which enhanced the clustering and topic modelling steps that followed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Combine ingredients and steps</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;combined_text&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;ingredients_processed&#39;</span>] <span style="color:#f92672">+</span> data[<span style="color:#e6db74">&#39;steps_processed&#39;</span>]
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;combined_text&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;combined_text&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(x))
+</span></span></code></pre></div><p>This combined representation provided a comprehensive view of each recipe, incorporating both what ingredients are used and how they’re used.</p>
+<h3 id="step-6-potential-applications-of-pre-processed-data">Step 6: Potential Applications of Pre-processed Data</h3>
+<p>After all pre-processing steps, the data was ready for analysis. Here’s how each step contributes to downstream NLP tasks:</p>
+<ul>
+<li><em>Topic Modelling</em>: The clean, tokenised text allows algorithms like <strong>LDA (Latent Dirichlet Allocation)</strong> to identify coherent topics within the recipes.</li>
+<li><em>Clustering</em>: By creating TF-IDF vectors, each recipe is represented as a numerical vector, making it suitable for clustering algorithms.</li>
+<li><em>Recommendation Systems</em>: Using topic clusters, a recommendation system could suggest recipes based on users’ previous preferences.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Pre-processing the recipe data takes time, but each step is crucial in creating a dataset ready for ML. These techniques transformed unstructured recipe text into structured data, making it possible to discover themes and clusters in the data.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

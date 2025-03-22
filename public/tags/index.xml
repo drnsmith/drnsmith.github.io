@@ -1,1 +1,607 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/</link><description>Recent content in Tags on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>AI</title><link>http://localhost:1313/tags/ai/</link><pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/ai/</guid><description/></item><item><title>LLMs</title><link>http://localhost:1313/tags/llms/</link><pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/llms/</guid><description/></item><item><title>Machine Learning</title><link>http://localhost:1313/tags/machine-learning/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/machine-learning/</guid><description/></item><item><title>Python</title><link>http://localhost:1313/tags/python/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/python/</guid><description/></item><item><title>Streamlit</title><link>http://localhost:1313/tags/streamlit/</link><pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/streamlit/</guid><description/></item><item><title>Chest X-Ray Analysis</title><link>http://localhost:1313/tags/chest-x-ray-analysis/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/chest-x-ray-analysis/</guid><description/></item><item><title>CNNs</title><link>http://localhost:1313/tags/cnns/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/cnns/</guid><description/></item><item><title>Computer Vision</title><link>http://localhost:1313/tags/computer-vision/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/computer-vision/</guid><description/></item><item><title>Deep Learning</title><link>http://localhost:1313/tags/deep-learning/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/deep-learning/</guid><description/></item><item><title>Healthcare AI</title><link>http://localhost:1313/tags/healthcare-ai/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/healthcare-ai/</guid><description/></item><item><title>Image Classification</title><link>http://localhost:1313/tags/image-classification/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/image-classification/</guid><description/></item><item><title>Medical Imaging</title><link>http://localhost:1313/tags/medical-imaging/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/medical-imaging/</guid><description/></item><item><title>Neural Networks</title><link>http://localhost:1313/tags/neural-networks/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/neural-networks/</guid><description/></item><item><title>Pneumonia Detection</title><link>http://localhost:1313/tags/pneumonia-detection/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/pneumonia-detection/</guid><description/></item><item><title>VGG16</title><link>http://localhost:1313/tags/vgg16/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/vgg16/</guid><description/></item><item><title>Big Data</title><link>http://localhost:1313/tags/big-data/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/big-data/</guid><description/></item><item><title>Data Visualisation</title><link>http://localhost:1313/tags/data-visualisation/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/data-visualisation/</guid><description/></item><item><title>MapReduce</title><link>http://localhost:1313/tags/mapreduce/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/mapreduce/</guid><description/></item><item><title>NASDAQ</title><link>http://localhost:1313/tags/nasdaq/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/nasdaq/</guid><description/></item><item><title>Natural Language Processing</title><link>http://localhost:1313/tags/natural-language-processing/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/natural-language-processing/</guid><description/></item><item><title>Sentiment Analysis</title><link>http://localhost:1313/tags/sentiment-analysis/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/sentiment-analysis/</guid><description/></item><item><title>Social Media Mining</title><link>http://localhost:1313/tags/social-media-mining/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/social-media-mining/</guid><description/></item><item><title>Topic Modelling</title><link>http://localhost:1313/tags/topic-modelling/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/topic-modelling/</guid><description/></item><item><title>Twitter Analytics</title><link>http://localhost:1313/tags/twitter-analytics/</link><pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/twitter-analytics/</guid><description/></item><item><title>AI in Healthcare</title><link>http://localhost:1313/tags/ai-in-healthcare/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/ai-in-healthcare/</guid><description/></item><item><title>Artificial Intelligence</title><link>http://localhost:1313/tags/artificial-intelligence/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/artificial-intelligence/</guid><description/></item><item><title>Breast Cancer Diagnosis</title><link>http://localhost:1313/tags/breast-cancer-diagnosis/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/breast-cancer-diagnosis/</guid><description/></item><item><title>Class Imbalance</title><link>http://localhost:1313/tags/class-imbalance/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/class-imbalance/</guid><description/></item><item><title>Deep Learning Applications</title><link>http://localhost:1313/tags/deep-learning-applications/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/deep-learning-applications/</guid><description/></item><item><title>DenseNet</title><link>http://localhost:1313/tags/densenet/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/densenet/</guid><description/></item><item><title>EfficientNet</title><link>http://localhost:1313/tags/efficientnet/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/efficientnet/</guid><description/></item><item><title>Feature Space Analysis</title><link>http://localhost:1313/tags/feature-space-analysis/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/feature-space-analysis/</guid><description/></item><item><title>Healthtech Innovations</title><link>http://localhost:1313/tags/healthtech-innovations/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/healthtech-innovations/</guid><description/></item><item><title>Histopathology Analysis</title><link>http://localhost:1313/tags/histopathology-analysis/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/histopathology-analysis/</guid><description/></item><item><title>Medical AI Solutions</title><link>http://localhost:1313/tags/medical-ai-solutions/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/medical-ai-solutions/</guid><description/></item><item><title>Model Interpretability</title><link>http://localhost:1313/tags/model-interpretability/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/model-interpretability/</guid><description/></item><item><title>ResNet</title><link>http://localhost:1313/tags/resnet/</link><pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/resnet/</guid><description/></item><item><title>Activation Functions</title><link>http://localhost:1313/tags/activation-functions/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/activation-functions/</guid><description/></item><item><title>Data Pre-Processing</title><link>http://localhost:1313/tags/data-pre-processing/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/data-pre-processing/</guid><description/></item><item><title>Deep Learning Basics</title><link>http://localhost:1313/tags/deep-learning-basics/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/deep-learning-basics/</guid><description/></item><item><title>Dense Layers</title><link>http://localhost:1313/tags/dense-layers/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/dense-layers/</guid><description/></item><item><title>Histopathology</title><link>http://localhost:1313/tags/histopathology/</link><pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/histopathology/</guid><description/></item><item><title>Air Quality Prediction</title><link>http://localhost:1313/tags/air-quality-prediction/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/air-quality-prediction/</guid><description/></item><item><title>Environmental Data Science</title><link>http://localhost:1313/tags/environmental-data-science/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/environmental-data-science/</guid><description/></item><item><title>LSTM</title><link>http://localhost:1313/tags/lstm/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/lstm/</guid><description/></item><item><title>Multi-Layer Perceptrons</title><link>http://localhost:1313/tags/multi-layer-perceptrons/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/multi-layer-perceptrons/</guid><description/></item><item><title>PM10 Forecasting</title><link>http://localhost:1313/tags/pm10-forecasting/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/pm10-forecasting/</guid><description/></item><item><title>Policy Decision Support</title><link>http://localhost:1313/tags/policy-decision-support/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/policy-decision-support/</guid><description/></item><item><title>Time Series Analysis</title><link>http://localhost:1313/tags/time-series-analysis/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/time-series-analysis/</guid><description/></item><item><title>Urban Analytics</title><link>http://localhost:1313/tags/urban-analytics/</link><pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/urban-analytics/</guid><description/></item><item><title>Air Pollution Prediction</title><link>http://localhost:1313/tags/air-pollution-prediction/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/air-pollution-prediction/</guid><description/></item><item><title>Data Preprocessing</title><link>http://localhost:1313/tags/data-preprocessing/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/data-preprocessing/</guid><description/></item><item><title>Feature Engineering</title><link>http://localhost:1313/tags/feature-engineering/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/feature-engineering/</guid><description/></item><item><title>Business Intelligence</title><link>http://localhost:1313/tags/business-intelligence/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/business-intelligence/</guid><description/></item><item><title>Data Engineering</title><link>http://localhost:1313/tags/data-engineering/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/data-engineering/</guid><description/></item><item><title>Data Modelling</title><link>http://localhost:1313/tags/data-modelling/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/data-modelling/</guid><description/></item><item><title>Data Warehouse</title><link>http://localhost:1313/tags/data-warehouse/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/data-warehouse/</guid><description/></item><item><title>Enterprise Data Management</title><link>http://localhost:1313/tags/enterprise-data-management/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/enterprise-data-management/</guid><description/></item><item><title>ETL</title><link>http://localhost:1313/tags/etl/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/etl/</guid><description/></item><item><title>Multidimensional Analysis</title><link>http://localhost:1313/tags/multidimensional-analysis/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/multidimensional-analysis/</guid><description/></item><item><title>Oracle Database</title><link>http://localhost:1313/tags/oracle-database/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/oracle-database/</guid><description/></item><item><title>Snowflake Schema</title><link>http://localhost:1313/tags/snowflake-schema/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/snowflake-schema/</guid><description/></item><item><title>SQL</title><link>http://localhost:1313/tags/sql/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/sql/</guid><description/></item><item><title>Genetic Algorithms</title><link>http://localhost:1313/tags/genetic-algorithms/</link><pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/genetic-algorithms/</guid><description/></item><item><title>Optimisation</title><link>http://localhost:1313/tags/optimisation/</link><pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/optimisation/</guid><description/></item><item><title>DenseNet201</title><link>http://localhost:1313/tags/densenet201/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/densenet201/</guid><description/></item><item><title>Home</title><link>http://localhost:1313/tags/home/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/home/</guid><description/></item><item><title>Transfer Learning</title><link>http://localhost:1313/tags/transfer-learning/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/transfer-learning/</guid><description/></item><item><title>BERT Embeddings</title><link>http://localhost:1313/tags/bert-embeddings/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/bert-embeddings/</guid><description/></item><item><title>Content Recommendation</title><link>http://localhost:1313/tags/content-recommendation/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/content-recommendation/</guid><description/></item><item><title>Culinary Data Science</title><link>http://localhost:1313/tags/culinary-data-science/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/culinary-data-science/</guid><description/></item><item><title>LDA Topic Modelling</title><link>http://localhost:1313/tags/lda-topic-modelling/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/lda-topic-modelling/</guid><description/></item><item><title>NLP Applications</title><link>http://localhost:1313/tags/nlp-applications/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/nlp-applications/</guid><description/></item><item><title>Recipe Analysis</title><link>http://localhost:1313/tags/recipe-analysis/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/recipe-analysis/</guid><description/></item><item><title>Text Clustering</title><link>http://localhost:1313/tags/text-clustering/</link><pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/text-clustering/</guid><description/></item><item><title>Network Programming</title><link>http://localhost:1313/tags/network-programming/</link><pubDate>Mon, 20 Mar 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/network-programming/</guid><description/></item><item><title>AI in Cooking</title><link>http://localhost:1313/tags/ai-in-cooking/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/ai-in-cooking/</guid><description/></item><item><title>LIME Interpretability</title><link>http://localhost:1313/tags/lime-interpretability/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/lime-interpretability/</guid><description/></item><item><title>Python for Machine Learning</title><link>http://localhost:1313/tags/python-for-machine-learning/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/python-for-machine-learning/</guid><description/></item><item><title>Random Forest</title><link>http://localhost:1313/tags/random-forest/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/random-forest/</guid><description/></item><item><title>Recipe Classification</title><link>http://localhost:1313/tags/recipe-classification/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/recipe-classification/</guid><description/></item><item><title>Text Processing</title><link>http://localhost:1313/tags/text-processing/</link><pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate><guid>http://localhost:1313/tags/text-processing/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>http://localhost:1313/tags/ai/</link>
+      <pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLMs</title>
+      <link>http://localhost:1313/tags/llms/</link>
+      <pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/llms/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Machine Learning</title>
+      <link>http://localhost:1313/tags/machine-learning/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/tags/python/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Streamlit</title>
+      <link>http://localhost:1313/tags/streamlit/</link>
+      <pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI in Cooking</title>
+      <link>http://localhost:1313/tags/ai-in-cooking/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/ai-in-cooking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>BERT Embeddings</title>
+      <link>http://localhost:1313/tags/bert-embeddings/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/bert-embeddings/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Content Recommendation</title>
+      <link>http://localhost:1313/tags/content-recommendation/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/content-recommendation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Culinary Data Science</title>
+      <link>http://localhost:1313/tags/culinary-data-science/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/culinary-data-science/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LDA Topic Modelling</title>
+      <link>http://localhost:1313/tags/lda-topic-modelling/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/lda-topic-modelling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Natural Language Processing</title>
+      <link>http://localhost:1313/tags/natural-language-processing/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/natural-language-processing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NLP Applications</title>
+      <link>http://localhost:1313/tags/nlp-applications/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/nlp-applications/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recipe Analysis</title>
+      <link>http://localhost:1313/tags/recipe-analysis/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/recipe-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Text Clustering</title>
+      <link>http://localhost:1313/tags/text-clustering/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/text-clustering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TF-IDF</title>
+      <link>http://localhost:1313/tags/tf-idf/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/tf-idf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Topic Modelling</title>
+      <link>http://localhost:1313/tags/topic-modelling/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/topic-modelling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Word Embeddings</title>
+      <link>http://localhost:1313/tags/word-embeddings/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/word-embeddings/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Word2Vec</title>
+      <link>http://localhost:1313/tags/word2vec/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/word2vec/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Chest X-Ray Analysis</title>
+      <link>http://localhost:1313/tags/chest-x-ray-analysis/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/chest-x-ray-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CNNs</title>
+      <link>http://localhost:1313/tags/cnns/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/cnns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Computer Vision</title>
+      <link>http://localhost:1313/tags/computer-vision/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/computer-vision/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deep Learning</title>
+      <link>http://localhost:1313/tags/deep-learning/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Healthcare AI</title>
+      <link>http://localhost:1313/tags/healthcare-ai/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/healthcare-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Image Classification</title>
+      <link>http://localhost:1313/tags/image-classification/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/image-classification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medical Imaging</title>
+      <link>http://localhost:1313/tags/medical-imaging/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/medical-imaging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Neural Networks</title>
+      <link>http://localhost:1313/tags/neural-networks/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/neural-networks/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pneumonia Detection</title>
+      <link>http://localhost:1313/tags/pneumonia-detection/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/pneumonia-detection/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VGG16</title>
+      <link>http://localhost:1313/tags/vgg16/</link>
+      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/vgg16/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Big Data</title>
+      <link>http://localhost:1313/tags/big-data/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/big-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Visualisation</title>
+      <link>http://localhost:1313/tags/data-visualisation/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/data-visualisation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MapReduce</title>
+      <link>http://localhost:1313/tags/mapreduce/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/mapreduce/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NASDAQ</title>
+      <link>http://localhost:1313/tags/nasdaq/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/nasdaq/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sentiment Analysis</title>
+      <link>http://localhost:1313/tags/sentiment-analysis/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/sentiment-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Social Media Mining</title>
+      <link>http://localhost:1313/tags/social-media-mining/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/social-media-mining/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Twitter Analytics</title>
+      <link>http://localhost:1313/tags/twitter-analytics/</link>
+      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/twitter-analytics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI in Healthcare</title>
+      <link>http://localhost:1313/tags/ai-in-healthcare/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/ai-in-healthcare/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Artificial Intelligence</title>
+      <link>http://localhost:1313/tags/artificial-intelligence/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/artificial-intelligence/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Breast Cancer Diagnosis</title>
+      <link>http://localhost:1313/tags/breast-cancer-diagnosis/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/breast-cancer-diagnosis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Class Imbalance</title>
+      <link>http://localhost:1313/tags/class-imbalance/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/class-imbalance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deep Learning Applications</title>
+      <link>http://localhost:1313/tags/deep-learning-applications/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/deep-learning-applications/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DenseNet</title>
+      <link>http://localhost:1313/tags/densenet/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/densenet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>EfficientNet</title>
+      <link>http://localhost:1313/tags/efficientnet/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/efficientnet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Feature Space Analysis</title>
+      <link>http://localhost:1313/tags/feature-space-analysis/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/feature-space-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Healthtech Innovations</title>
+      <link>http://localhost:1313/tags/healthtech-innovations/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/healthtech-innovations/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Histopathology Analysis</title>
+      <link>http://localhost:1313/tags/histopathology-analysis/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/histopathology-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medical AI Solutions</title>
+      <link>http://localhost:1313/tags/medical-ai-solutions/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/medical-ai-solutions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Model Interpretability</title>
+      <link>http://localhost:1313/tags/model-interpretability/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/model-interpretability/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ResNet</title>
+      <link>http://localhost:1313/tags/resnet/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/resnet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Activation Functions</title>
+      <link>http://localhost:1313/tags/activation-functions/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/activation-functions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Pre-Processing</title>
+      <link>http://localhost:1313/tags/data-pre-processing/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/data-pre-processing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deep Learning Basics</title>
+      <link>http://localhost:1313/tags/deep-learning-basics/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/deep-learning-basics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dense Layers</title>
+      <link>http://localhost:1313/tags/dense-layers/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/dense-layers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Histopathology</title>
+      <link>http://localhost:1313/tags/histopathology/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/histopathology/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Air Quality Prediction</title>
+      <link>http://localhost:1313/tags/air-quality-prediction/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/air-quality-prediction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Environmental Data Science</title>
+      <link>http://localhost:1313/tags/environmental-data-science/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/environmental-data-science/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LSTM</title>
+      <link>http://localhost:1313/tags/lstm/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/lstm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Multi-Layer Perceptrons</title>
+      <link>http://localhost:1313/tags/multi-layer-perceptrons/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/multi-layer-perceptrons/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PM10 Forecasting</title>
+      <link>http://localhost:1313/tags/pm10-forecasting/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/pm10-forecasting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Policy Decision Support</title>
+      <link>http://localhost:1313/tags/policy-decision-support/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/policy-decision-support/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Time Series Analysis</title>
+      <link>http://localhost:1313/tags/time-series-analysis/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/time-series-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Urban Analytics</title>
+      <link>http://localhost:1313/tags/urban-analytics/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/urban-analytics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Air Pollution Prediction</title>
+      <link>http://localhost:1313/tags/air-pollution-prediction/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/air-pollution-prediction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Preprocessing</title>
+      <link>http://localhost:1313/tags/data-preprocessing/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/data-preprocessing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Feature Engineering</title>
+      <link>http://localhost:1313/tags/feature-engineering/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/feature-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Business Intelligence</title>
+      <link>http://localhost:1313/tags/business-intelligence/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/business-intelligence/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Engineering</title>
+      <link>http://localhost:1313/tags/data-engineering/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/data-engineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Modelling</title>
+      <link>http://localhost:1313/tags/data-modelling/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/data-modelling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Warehouse</title>
+      <link>http://localhost:1313/tags/data-warehouse/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/data-warehouse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Enterprise Data Management</title>
+      <link>http://localhost:1313/tags/enterprise-data-management/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/enterprise-data-management/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ETL</title>
+      <link>http://localhost:1313/tags/etl/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/etl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Multidimensional Analysis</title>
+      <link>http://localhost:1313/tags/multidimensional-analysis/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/multidimensional-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Oracle Database</title>
+      <link>http://localhost:1313/tags/oracle-database/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/oracle-database/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Snowflake Schema</title>
+      <link>http://localhost:1313/tags/snowflake-schema/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/snowflake-schema/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SQL</title>
+      <link>http://localhost:1313/tags/sql/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/sql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Genetic Algorithms</title>
+      <link>http://localhost:1313/tags/genetic-algorithms/</link>
+      <pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/genetic-algorithms/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Optimisation</title>
+      <link>http://localhost:1313/tags/optimisation/</link>
+      <pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/optimisation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DenseNet201</title>
+      <link>http://localhost:1313/tags/densenet201/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/densenet201/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Home</title>
+      <link>http://localhost:1313/tags/home/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/home/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Transfer Learning</title>
+      <link>http://localhost:1313/tags/transfer-learning/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/transfer-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network Programming</title>
+      <link>http://localhost:1313/tags/network-programming/</link>
+      <pubDate>Mon, 20 Mar 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/network-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LIME Interpretability</title>
+      <link>http://localhost:1313/tags/lime-interpretability/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/lime-interpretability/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python for Machine Learning</title>
+      <link>http://localhost:1313/tags/python-for-machine-learning/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/python-for-machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Random Forest</title>
+      <link>http://localhost:1313/tags/random-forest/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/random-forest/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recipe Classification</title>
+      <link>http://localhost:1313/tags/recipe-classification/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/recipe-classification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Text Processing</title>
+      <link>http://localhost:1313/tags/text-processing/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/text-processing/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

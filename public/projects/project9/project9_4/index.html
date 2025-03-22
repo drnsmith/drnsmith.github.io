@@ -1,43 +1,205 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PART 4. Neural Networks in Environmental Data Analysis | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Explore the application of Multi-Layer Perceptrons (MLP) for pollution prediction, including hyperparameter tuning and why neural networks outperformed regression models in capturing complex patterns."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project9_images/pr9.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">PART 4. Neural Networks in Environmental Data Analysis</h1><p class=f5>Explore the application of Multi-Layer Perceptrons (MLP) for pollution prediction, including hyperparameter tuning and why neural networks outperformed regression models in capturing complex patterns.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project9_images/pr9.jpg alt="Photo by Markus Distelrath on Pexels"><figcaption><p>Photo by Markus Distelrath on Pexels</p></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/Pollution-Prediction-Auckland target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.</p><p>In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.</p><h3 id=1-why-neural-networks>1. Why Neural Networks?</h3><p><strong>Addressing Non-Linearity</strong></p><p>Air pollution data is influenced by a mix of factors—traffic volume, weather, and even time of day. These relationships aren’t always linear. NNs excel at capturing non-linear patterns, making them ideal for predicting PM10 levels.</p><p><strong>Sequential Dependencies</strong></p><p>Air quality data has strong temporal patterns. NNs, especially recurrent architectures like Long Short-Term Memory (LSTM), can process sequential data, identifying trends and seasonality over time.</p><h3 id=2-the-neural-network-models-used>2. The Neural Network Models Used</h3><h4 id=multi-layer-perceptron-mlp>Multi-Layer Perceptron (MLP)</h4><p>The Multi-Layer Perceptron was the first NN architecture we implemented. It’s a feedforward network, meaning data flows in one direction—from inputs to outputs—through hidden layers.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.neural_network <span style=color:#f92672>import</span> MLPRegressor
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Define MLP parameters</span>
-</span></span><span style=display:flex><span>mlp_model <span style=color:#f92672>=</span> MLPRegressor(
-</span></span><span style=display:flex><span>    hidden_layer_sizes<span style=color:#f92672>=</span>(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>50</span>),
-</span></span><span style=display:flex><span>    activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>,
-</span></span><span style=display:flex><span>    max_iter<span style=color:#f92672>=</span><span style=color:#ae81ff>2000</span>,
-</span></span><span style=display:flex><span>    random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>42</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Train the model</span>
-</span></span><span style=display:flex><span>mlp_model<span style=color:#f92672>.</span>fit(X_train, y_train)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Predict and evaluate</span>
-</span></span><span style=display:flex><span>mlp_predictions <span style=color:#f92672>=</span> mlp_model<span style=color:#f92672>.</span>predict(X_test)
-</span></span><span style=display:flex><span>rmse_mlp <span style=color:#f92672>=</span> mean_squared_error(y_test, mlp_predictions, squared<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;MLP RMSE: </span><span style=color:#e6db74>{</span>rmse_mlp<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
-</span></span></code></pre></div><h4 id=long-short-term-memory-lstm>Long Short-Term Memory (LSTM)</h4><p>LSTM networks were used to model sequential dependencies in PM10 data. Unlike MLP, LSTMs can “remember” patterns over time, making them ideal for time-series predictions.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> keras.models <span style=color:#f92672>import</span> Sequential
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> keras.layers <span style=color:#f92672>import</span> LSTM, Dense
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Define LSTM model</span>
-</span></span><span style=display:flex><span>lstm_model <span style=color:#f92672>=</span> Sequential()
-</span></span><span style=display:flex><span>lstm_model<span style=color:#f92672>.</span>add(LSTM(<span style=color:#ae81ff>50</span>, input_shape<span style=color:#f92672>=</span>(X_train<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>1</span>], X_train<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>2</span>])))
-</span></span><span style=display:flex><span>lstm_model<span style=color:#f92672>.</span>add(Dense(<span style=color:#ae81ff>1</span>))
-</span></span><span style=display:flex><span>lstm_model<span style=color:#f92672>.</span>compile(optimizer<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;adam&#39;</span>, loss<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;mse&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Train the model</span>
-</span></span><span style=display:flex><span>lstm_model<span style=color:#f92672>.</span>fit(X_train, y_train, epochs<span style=color:#f92672>=</span><span style=color:#ae81ff>50</span>, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>, validation_data<span style=color:#f92672>=</span>(X_test, y_test), verbose<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Predict and evaluate</span>
-</span></span><span style=display:flex><span>lstm_predictions <span style=color:#f92672>=</span> lstm_model<span style=color:#f92672>.</span>predict(X_test)
-</span></span><span style=display:flex><span>rmse_lstm <span style=color:#f92672>=</span> mean_squared_error(y_test, lstm_predictions, squared<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;LSTM RMSE: </span><span style=color:#e6db74>{</span>rmse_lstm<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
-</span></span></code></pre></div><h3 id=3-preparing-the-data-for-neural-networks>3. Preparing the Data for Neural Networks</h3><p>NNs require specific data preparation steps to perform optimally:</p><ul><li><em>Feature Scaling</em> NNs are sensitive to the scale of input data. All features were normaliSed to ensure uniformity.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardScaler
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>scaler <span style=color:#f92672>=</span> StandardScaler()
-</span></span><span style=display:flex><span>X_train_scaled <span style=color:#f92672>=</span> scaler<span style=color:#f92672>.</span>fit_transform(X_train)
-</span></span><span style=display:flex><span>X_test_scaled <span style=color:#f92672>=</span> scaler<span style=color:#f92672>.</span>transform(X_test)
-</span></span></code></pre></div><p>Reshaping for LSTM LSTM models expect input data to have three dimensions: <strong>samples</strong>, <strong>timesteps</strong>, and <strong>features</strong>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Reshape data for LSTM</span>
-</span></span><span style=display:flex><span>X_train_lstm <span style=color:#f92672>=</span> X_train_scaled<span style=color:#f92672>.</span>reshape((X_train_scaled<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>], <span style=color:#ae81ff>1</span>, X_train_scaled<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>1</span>]))
-</span></span><span style=display:flex><span>X_test_lstm <span style=color:#f92672>=</span> X_test_scaled<span style=color:#f92672>.</span>reshape((X_test_scaled<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>], <span style=color:#ae81ff>1</span>, X_test_scaled<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>1</span>]))
-</span></span></code></pre></div><h3 id=4-results-and-observations>4. Results and Observations</h3><h4 id=multi-layer-perceptron>Multi-Layer Perceptron</h4><p>The MLP model performed well but struggled with sequential dependencies. It provided good general predictions but missed certain spikes in PM10 levels.</p><h4 id=long-short-term-memory>Long Short-Term Memory</h4><p>The LSTM model excelled at predicting both general trends and sudden spikes, making it the most accurate model for this project.</p><p>It captured the time-dependent nature of PM10 levels, particularly during rush hours and seasonal changes.</p><h4 id=performance-comparison>Performance Comparison</h4><p>The table below summarizes the RMSE and MAE for both models:</p><figure><img src=/images/project9_images/results2.png></figure><h4 id=insights-gained-from-nns>Insights Gained from NNs</h4><ul><li><p><em>Temporal Trends</em>: The LSTM model revealed that PM10 levels spiked during weekday mornings and evenings, aligning with rush-hour traffic.</p></li><li><p><em>Seasonality</em>: Winter months showed consistently higher PM10 levels due to stagnant air conditions.</p></li><li><p><em>Impactful Predictors Features</em> like traffic volume and wind speed emerged as the most significant predictors, reinforcing the findings from regression models.</p></li></ul><h3 id=5-reflections-on-nns>5. Reflections on NNs</h3><p><strong>Advantages</strong></p><ul><li>Captured non-linear relationships and sequential dependencies.</li><li>Provided actionable insights into temporal trends and pollution hotspots.</li></ul><p><strong>Challenges</strong></p><ul><li><em>Computational Complexity</em>: Training LSTM models required significant processing power and time.</li><li><em>Hyperparameter Tuning</em>: Finding the optimal architecture and parameters for NNs was time-intensive.</li><li>*Data Pre-processing8: Scaling and reshaping the data added extra steps to the workflow.</li></ul><h2 id=conclusion-a-leap-forward-with-nns>Conclusion: A Leap Forward with NNs</h2><p>NNs, particularly LSTMs, proved to be a game-changer in predicting PM10 levels in Auckland. They not only improved prediction accuracy but also provided deeper insights into the temporal and seasonal dynamics of air pollution.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 4. Neural Networks in Environmental Data Analysis | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Explore the application of Multi-Layer Perceptrons (MLP) for pollution prediction, including hyperparameter tuning and why neural networks outperformed regression models in capturing complex patterns.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project9_images/pr9.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 4. Neural Networks in Environmental Data Analysis
+          </h1>
+          
+            <p class="f5">Explore the application of Multi-Layer Perceptrons (MLP) for pollution prediction, including hyperparameter tuning and why neural networks outperformed regression models in capturing complex patterns.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project9_images/pr9.jpg"
+    alt="Photo by Markus Distelrath on Pexels"><figcaption>
+      <p>Photo by Markus Distelrath on Pexels</p>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.</p>
+<p>In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.</p>
+<h3 id="1-why-neural-networks">1. Why Neural Networks?</h3>
+<p><strong>Addressing Non-Linearity</strong></p>
+<p>Air pollution data is influenced by a mix of factors—traffic volume, weather, and even time of day. These relationships aren’t always linear. NNs excel at capturing non-linear patterns, making them ideal for predicting PM10 levels.</p>
+<p><strong>Sequential Dependencies</strong></p>
+<p>Air quality data has strong temporal patterns. NNs, especially recurrent architectures like Long Short-Term Memory (LSTM), can process sequential data, identifying trends and seasonality over time.</p>
+<h3 id="2-the-neural-network-models-used">2. The Neural Network Models Used</h3>
+<h4 id="multi-layer-perceptron-mlp">Multi-Layer Perceptron (MLP)</h4>
+<p>The Multi-Layer Perceptron was the first NN architecture we implemented. It’s a feedforward network, meaning data flows in one direction—from inputs to outputs—through hidden layers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.neural_network <span style="color:#f92672">import</span> MLPRegressor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define MLP parameters</span>
+</span></span><span style="display:flex;"><span>mlp_model <span style="color:#f92672">=</span> MLPRegressor(
+</span></span><span style="display:flex;"><span>    hidden_layer_sizes<span style="color:#f92672">=</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>,
+</span></span><span style="display:flex;"><span>    max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>,
+</span></span><span style="display:flex;"><span>    random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>mlp_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>mlp_predictions <span style="color:#f92672">=</span> mlp_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_mlp <span style="color:#f92672">=</span> mean_squared_error(y_test, mlp_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;MLP RMSE: </span><span style="color:#e6db74">{</span>rmse_mlp<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="long-short-term-memory-lstm">Long Short-Term Memory (LSTM)</h4>
+<p>LSTM networks were used to model sequential dependencies in PM10 data. Unlike MLP, LSTMs can “remember” patterns over time, making them ideal for time-series predictions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> keras.layers <span style="color:#f92672">import</span> LSTM, Dense
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define LSTM model</span>
+</span></span><span style="display:flex;"><span>lstm_model <span style="color:#f92672">=</span> Sequential()
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>add(LSTM(<span style="color:#ae81ff">50</span>, input_shape<span style="color:#f92672">=</span>(X_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>], X_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>])))
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mse&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>fit(X_train, y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, validation_data<span style="color:#f92672">=</span>(X_test, y_test), verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>lstm_predictions <span style="color:#f92672">=</span> lstm_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_lstm <span style="color:#f92672">=</span> mean_squared_error(y_test, lstm_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;LSTM RMSE: </span><span style="color:#e6db74">{</span>rmse_lstm<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="3-preparing-the-data-for-neural-networks">3. Preparing the Data for Neural Networks</h3>
+<p>NNs require specific data preparation steps to perform optimally:</p>
+<ul>
+<li><em>Feature Scaling</em> NNs are sensitive to the scale of input data. All features were normaliSed to ensure uniformity.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> StandardScaler()
+</span></span><span style="display:flex;"><span>X_train_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>fit_transform(X_train)
+</span></span><span style="display:flex;"><span>X_test_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>transform(X_test)
+</span></span></code></pre></div><p>Reshaping for LSTM LSTM models expect input data to have three dimensions: <strong>samples</strong>, <strong>timesteps</strong>, and <strong>features</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Reshape data for LSTM</span>
+</span></span><span style="display:flex;"><span>X_train_lstm <span style="color:#f92672">=</span> X_train_scaled<span style="color:#f92672">.</span>reshape((X_train_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>, X_train_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>X_test_lstm <span style="color:#f92672">=</span> X_test_scaled<span style="color:#f92672">.</span>reshape((X_test_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>, X_test_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]))
+</span></span></code></pre></div><h3 id="4-results-and-observations">4. Results and Observations</h3>
+<h4 id="multi-layer-perceptron">Multi-Layer Perceptron</h4>
+<p>The MLP model performed well but struggled with sequential dependencies. It provided good general predictions but missed certain spikes in PM10 levels.</p>
+<h4 id="long-short-term-memory">Long Short-Term Memory</h4>
+<p>The LSTM model excelled at predicting both general trends and sudden spikes, making it the most accurate model for this project.</p>
+<p>It captured the time-dependent nature of PM10 levels, particularly during rush hours and seasonal changes.</p>
+<h4 id="performance-comparison">Performance Comparison</h4>
+<p>The table below summarizes the RMSE and MAE for both models:</p>
+<figure><img src="/images/project9_images/results2.png">
+</figure>
+
+<h4 id="insights-gained-from-nns">Insights Gained from NNs</h4>
+<ul>
+<li>
+<p><em>Temporal Trends</em>: The LSTM model revealed that PM10 levels spiked during weekday mornings and evenings, aligning with rush-hour traffic.</p>
+</li>
+<li>
+<p><em>Seasonality</em>: Winter months showed consistently higher PM10 levels due to stagnant air conditions.</p>
+</li>
+<li>
+<p><em>Impactful Predictors Features</em> like traffic volume and wind speed emerged as the most significant predictors, reinforcing the findings from regression models.</p>
+</li>
+</ul>
+<h3 id="5-reflections-on-nns">5. Reflections on NNs</h3>
+<p><strong>Advantages</strong></p>
+<ul>
+<li>Captured non-linear relationships and sequential dependencies.</li>
+<li>Provided actionable insights into temporal trends and pollution hotspots.</li>
+</ul>
+<p><strong>Challenges</strong></p>
+<ul>
+<li><em>Computational Complexity</em>: Training LSTM models required significant processing power and time.</li>
+<li><em>Hyperparameter Tuning</em>: Finding the optimal architecture and parameters for NNs was time-intensive.</li>
+<li>*Data Pre-processing8: Scaling and reshaping the data added extra steps to the workflow.</li>
+</ul>
+<h2 id="conclusion-a-leap-forward-with-nns">Conclusion: A Leap Forward with NNs</h2>
+<p>NNs, particularly LSTMs, proved to be a game-changer in predicting PM10 levels in Auckland. They not only improved prediction accuracy but also provided deeper insights into the temporal and seasonal dynamics of air pollution.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

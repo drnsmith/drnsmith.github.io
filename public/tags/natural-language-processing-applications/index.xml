@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Natural Language Processing Applications on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/natural-language-processing-applications/</link>
+    <description>Recent content in Natural Language Processing Applications on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Apr 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/natural-language-processing-applications/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.</title>
+      <link>http://localhost:1313/projects/part-1.-preparing-recipe-data-for-nlp-challenges-and-techniques./</link>
+      <pubDate>Sun, 09 Apr 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-1.-preparing-recipe-data-for-nlp-challenges-and-techniques./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-preparing-recipe-data-for-nlp-challenges-and-techniques&#34;&gt;Part 1. Preparing Recipe Data for NLP: Challenges and Techniques.&lt;/h1&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Data preparation is one of the most crucial steps in any ML or natural language processing (NLP) project. For this project, I started with raw recipe text data, which contained a lot of unstructured information, like ingredient lists and cooking steps.&#xA;I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

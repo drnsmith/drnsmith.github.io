@@ -1,28 +1,236 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 6. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="Learn how techniques like Grad-CAM and LIME bring interpretability to AI models, ensuring transparency in critical medical imaging tasks."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project13_images/pr13.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 6. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis.</h1><p class=f5>Learn how techniques like Grad-CAM and LIME bring interpretability to AI models, ensuring transparency in critical medical imaging tasks.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src=/images/project13_images/pr13.jpg><figcaption><h4>Photo by Ben Hershey on Unsplash</h4></figcaption></figure><p><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/AI-Recipe-Classifier target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>In the ever-evolving field of AI, deep learning (DL) has emerged as a transformative force, reshaping industries and driving innovation. In medical imaging, where precision and interpretability are critical, advanced techniques like Grad-CAM (Gradient-weighted Class Activation Mapping) and LIME (Local Interpretable Model-agnostic Explanations) are becoming essential tools for understanding how models make decisions.</p><p>This project leverages Grad-CAM and LIME to explain predictions made by cutting-edge deep learning models like <code>ResNet50</code>, <code>EfficientNetB0</code>, and <code>DenseNet201</code> for breast cancer diagnosis. By visualising what a model &ldquo;sees&rdquo; and validating its decision-making process, we bridge the gap between AI&rsquo;s technical prowess and the human trust required for adoption in critical healthcare settings.</p><h3 id=problem-statement>Problem Statement</h3><p>Despite the remarkable accuracy of DL models in diagnosing diseases like breast cancer, the lack of interpretability often limits their acceptance in clinical environments. Medical practitioners need to understand why a model makes a specific prediction. Without this transparency, integrating AI into real-world decision-making becomes a challenge.</p><p>This project addresses the need for interpretability by:</p><ul><li>Applying Grad-CAM to highlight regions in histopathology images that most influence the model&rsquo;s predictions.</li><li>Using LIME to validate and explain predictions at a local feature level.</li></ul><h3 id=technical-approach>Technical Approach</h3><p>The methodology is built on two pillars: advanced CNN architectures and interpretable AI techniques.</p><ol><li><strong>Deep Learning Models</strong>:</li></ol><ul><li><code>ResNet50</code>: A residual neural network known for handling vanishing gradients in deep architectures.</li><li><code>EfficientNetB0</code>: A computationally efficient model that scales depth, width, and resolution optimally.</li><li><code>DenseNet201</code>: A densely connected network ensuring better gradient flow and feature reuse.</li></ul><ol start=2><li><strong>Grad-CAM</strong>:</li></ol><p>Grad-CAM generates heatmaps overlayed on input images to show which regions contribute most to a specific prediction. This technique helps interpret CNNs by visualising their focus during classification.</p><ol start=3><li><strong>LIME</strong>:</li></ol><p>LIME perturbs input data and observes changes in output, providing feature-level explanations of predictions. It offers a localised, human-readable explanation of the model’s decision-making process.</p><h3 id=implementation-details>Implementation Details</h3><p>The code is structured into three main phases.</p><p><strong>1. Data Loading and Pre-processing</strong>:</p><p>The data is pre-processed into tensors and split into training and testing sets. Images are resized to match the input dimensions of the chosen architectures.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.preprocessing.image <span style=color:#f92672>import</span> load_img, img_to_array
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>img_path <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/path/to/image&#34;</span>
-</span></span><span style=display:flex><span>img <span style=color:#f92672>=</span> load_img(img_path, target_size<span style=color:#f92672>=</span>(<span style=color:#ae81ff>224</span>, <span style=color:#ae81ff>224</span>))
-</span></span><span style=display:flex><span>img_array <span style=color:#f92672>=</span> img_to_array(img) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255.0</span>
-</span></span></code></pre></div><p><strong>2. Model Selection and Training</strong>:</p><p>Pre-trained models from <code>keras.applications</code> are fine-tuned for breast cancer diagnosis.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> tensorflow.keras.applications <span style=color:#f92672>import</span> ResNet50
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> ResNet50(weights<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;imagenet&#34;</span>, include_top<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>, input_shape<span style=color:#f92672>=</span>(<span style=color:#ae81ff>224</span>, <span style=color:#ae81ff>224</span>, <span style=color:#ae81ff>3</span>))
-</span></span></code></pre></div><p><strong>3. Grad-CAM Implementation</strong>:</p><p>Grad-CAM is implemented to visualise the activations in the last convolutional layers.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_gradcam_heatmap</span>(model, img_array, last_conv_layer_name):
-</span></span><span style=display:flex><span>    grad_model <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>keras<span style=color:#f92672>.</span>models<span style=color:#f92672>.</span>Model([model<span style=color:#f92672>.</span>inputs], [model<span style=color:#f92672>.</span>get_layer(last_conv_layer_name)<span style=color:#f92672>.</span>output, model<span style=color:#f92672>.</span>output])
-</span></span><span style=display:flex><span>    <span style=color:#75715e># Compute gradients</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>with</span> tf<span style=color:#f92672>.</span>GradientTape() <span style=color:#66d9ef>as</span> tape:
-</span></span><span style=display:flex><span>        conv_output, predictions <span style=color:#f92672>=</span> grad_model(img_array)
-</span></span><span style=display:flex><span>        predicted_class <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>argmax(predictions[<span style=color:#ae81ff>0</span>])
-</span></span><span style=display:flex><span>        class_channel <span style=color:#f92672>=</span> predictions[:, predicted_class]
-</span></span><span style=display:flex><span>    <span style=color:#75715e># Get gradients</span>
-</span></span><span style=display:flex><span>    grads <span style=color:#f92672>=</span> tape<span style=color:#f92672>.</span>gradient(class_channel, conv_output)
-</span></span><span style=display:flex><span>    pooled_grads <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>reduce_mean(grads, axis<span style=color:#f92672>=</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>))
-</span></span><span style=display:flex><span>    heatmap <span style=color:#f92672>=</span> conv_output[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>@</span> pooled_grads[<span style=color:#f92672>...</span>, tf<span style=color:#f92672>.</span>newaxis]
-</span></span><span style=display:flex><span>    heatmap <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>squeeze(heatmap)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> heatmap<span style=color:#f92672>.</span>numpy()
-</span></span></code></pre></div><p><strong>4. LIME Implementation</strong>:</p><p>LIME interprets the predictions by perturbing the image and observing output changes.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> lime <span style=color:#f92672>import</span> lime_image
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>explainer <span style=color:#f92672>=</span> lime_image<span style=color:#f92672>.</span>LimeImageExplainer()
-</span></span><span style=display:flex><span>explanation <span style=color:#f92672>=</span> explainer<span style=color:#f92672>.</span>explain_instance(img_array[<span style=color:#ae81ff>0</span>], model<span style=color:#f92672>.</span>predict)
-</span></span></code></pre></div><p><strong>5. Visualisation</strong>:</p><p>Grad-CAM heatmaps are overlaid on original images to interpret focus regions, while LIME visualisations validate the features influencing predictions.</p><h3 id=results>Results</h3><p>The project achieved notable outcomes:</p><ol><li><strong>Grad-CAM</strong>:</li></ol><p>Generated clear heatmaps showing that models focused on tumour-specific regions in histopathology slides, ensuring decision reliability.<figure><img src=/images/project13_images/grad.png><figcaption><h4>Grad-CAM heatmaps for malignant histopathology image across ResNet50, EfficientNetB0, and DenseNet201 models.</h4></figcaption></figure></p><p>The ground truth label is <em>Malignant</em>, and predictions across models reveal key differences in interpretability:</p><ul><li><p><code>ResNet50</code>: Grad-CAM at <code>conv2_block3_out</code> focuses sharply on regions containing dense nuclei clusters, correctly predicting the image as malignant.
-At <code>conv3_block4_out</code>, <code>ResNet50</code> continues to emphasize areas of diagnostic importance, reinforcing its prediction of malignancy.</p></li><li><p><code>EfficientNetB0</code>: At <code>block3a_expand_activation</code>, <code>EfficientNetB0</code> diffuses its focus, spreading across less specific regions and misclassifying the image as benign. Similar behaviour is observed at <code>block6a_expand_activation</code>, indicating possible generalisation issues with this architecture for malignant samples.</p></li><li><p><code>DenseNet201</code>: Visualisations from <code>conv2_block3_concat</code> and <code>conv4_block6_concat</code> suggest <code>DenseNet201</code> struggles with maintaining specificity. Like <code>EfficientNetB0</code>, it classifies the sample as benign.</p></li></ul><p>Grad-CAM analysis highlights the following:</p><ul><li><strong>Model Strengths</strong>: <code>ResNet50</code> demonstrates superior focus and specificity for detecting malignancy, which aligns with its accurate predictions.</li><li><strong>Model Limitations</strong>: <code>EfficientNetB0</code> and <code>DenseNet201</code> distribute attention broadly, leading to misclassification.</li><li><strong>Architectural Impact</strong>: Grad-CAM visualisations underscore the differences in feature extraction and utilisation among architectures, shedding light on areas for improvement.</li></ul><ol start=2><li><strong>LIME</strong>:<figure><img src=/images/project13_images/lime.png><figcaption><h4>LIME visualisations for malignant histopathology image using ResNet50, EfficientNetB0, and DenseNet201 models.</h4></figcaption></figure><figure><img src=/images/project13_images/original.png><figcaption><h4>Original histopathology image of a malignant case (Index: 3091)</h4></figcaption></figure></li></ol><p>Demonstrated consistency between feature importance and medical expectations, further validating model outputs. LIME explanations provide a granular understanding of feature importance at the pixel level.</p><ul><li><code>ResNet50</code>: Regions in yellow indicate areas crucial for classification, focusing on cellular clusters.</li><li><code>EfficientNetB0</code>: Similar focus as ResNet50 but with additional spread across the image.</li><li><code>DenseNet201</code>: Combines focused and diffused explanations, highlighting key cellular features.</li></ul><p>To sum up, <code>ResNet50</code> showed superior interpretability and accuracy compared to EfficientNetB0 and DenseNet201, making it the preferred choice for deployment.</p><h3 id=conclusion-and-insights>Conclusion and Insights</h3><p>This project underscores the importance of interpretable AI in critical fields like healthcare. By combining Grad-CAM and LIME, we offer a robust framework to validate and explain model predictions, instilling trust among medical practitioners.</p><h4 id=key-takeaways>Key Takeaways:</h4><ul><li>Grad-CAM excels in highlighting class-specific regions, while LIME offers feature-level explanations.</li><li>Interpretability tools are as crucial as model performance in domains requiring high accountability.</li></ul><h4 id=future-work>Future Work</h4><ul><li><em>Automated Feedback Loops</em>: Integrating Grad-CAM and LIME explanations into model retraining for continuous improvement.</li><li><em>Broader Dataset Analysis</em>: Expanding the dataset to include diverse histopathology images.</li><li><em>Hybrid Interpretability</em>: Combining Grad-CAM with other saliency methods for deeper insights.</li></ul><h4 id=final-note>Final Note</h4><p>Interpretable AI is the bridge between cutting-edge technology and real-world application. This project serves as a stepping stone toward trustworthy AI solutions in healthcare, setting a precedent for integrating explainability into AI pipelines.</p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 6. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Learn how techniques like Grad-CAM and LIME bring interpretability to AI models, ensuring transparency in critical medical imaging tasks.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project13_images/pr13.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 6. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis.
+          </h1>
+          
+            <p class="f5">Learn how techniques like Grad-CAM and LIME bring interpretability to AI models, ensuring transparency in critical medical imaging tasks.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project13_images/pr13.jpg"><figcaption>
+      <h4>Photo by Ben Hershey on Unsplash</h4>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/AI-Recipe-Classifier" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In the ever-evolving field of AI, deep learning (DL) has emerged as a transformative force, reshaping industries and driving innovation. In medical imaging, where precision and interpretability are critical, advanced techniques like Grad-CAM (Gradient-weighted Class Activation Mapping) and LIME (Local Interpretable Model-agnostic Explanations) are becoming essential tools for understanding how models make decisions.</p>
+<p>This project leverages Grad-CAM and LIME to explain predictions made by cutting-edge deep learning models like <code>ResNet50</code>, <code>EfficientNetB0</code>, and <code>DenseNet201</code> for breast cancer diagnosis. By visualising what a model &ldquo;sees&rdquo; and validating its decision-making process, we bridge the gap between AI&rsquo;s technical prowess and the human trust required for adoption in critical healthcare settings.</p>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>Despite the remarkable accuracy of DL models in diagnosing diseases like breast cancer, the lack of interpretability often limits their acceptance in clinical environments. Medical practitioners need to understand why a model makes a specific prediction. Without this transparency, integrating AI into real-world decision-making becomes a challenge.</p>
+<p>This project addresses the need for interpretability by:</p>
+<ul>
+<li>Applying Grad-CAM to highlight regions in histopathology images that most influence the model&rsquo;s predictions.</li>
+<li>Using LIME to validate and explain predictions at a local feature level.</li>
+</ul>
+<h3 id="technical-approach">Technical Approach</h3>
+<p>The methodology is built on two pillars: advanced CNN architectures and interpretable AI techniques.</p>
+<ol>
+<li><strong>Deep Learning Models</strong>:</li>
+</ol>
+<ul>
+<li><code>ResNet50</code>: A residual neural network known for handling vanishing gradients in deep architectures.</li>
+<li><code>EfficientNetB0</code>: A computationally efficient model that scales depth, width, and resolution optimally.</li>
+<li><code>DenseNet201</code>: A densely connected network ensuring better gradient flow and feature reuse.</li>
+</ul>
+<ol start="2">
+<li><strong>Grad-CAM</strong>:</li>
+</ol>
+<p>Grad-CAM generates heatmaps overlayed on input images to show which regions contribute most to a specific prediction. This technique helps interpret CNNs by visualising their focus during classification.</p>
+<ol start="3">
+<li><strong>LIME</strong>:</li>
+</ol>
+<p>LIME perturbs input data and observes changes in output, providing feature-level explanations of predictions. It offers a localised, human-readable explanation of the model’s decision-making process.</p>
+<h3 id="implementation-details">Implementation Details</h3>
+<p>The code is structured into three main phases.</p>
+<p><strong>1. Data Loading and Pre-processing</strong>:</p>
+<p>The data is pre-processed into tensors and split into training and testing sets. Images are resized to match the input dimensions of the chosen architectures.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> load_img, img_to_array
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/path/to/image&#34;</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> load_img(img_path, target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>))
+</span></span><span style="display:flex;"><span>img_array <span style="color:#f92672">=</span> img_to_array(img) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+</span></span></code></pre></div><p><strong>2. Model Selection and Training</strong>:</p>
+<p>Pre-trained models from <code>keras.applications</code> are fine-tuned for breast cancer diagnosis.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> ResNet50
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> ResNet50(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;imagenet&#34;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>))
+</span></span></code></pre></div><p><strong>3. Grad-CAM Implementation</strong>:</p>
+<p>Grad-CAM is implemented to visualise the activations in the last convolutional layers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_gradcam_heatmap</span>(model, img_array, last_conv_layer_name):
+</span></span><span style="display:flex;"><span>    grad_model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>Model([model<span style="color:#f92672">.</span>inputs], [model<span style="color:#f92672">.</span>get_layer(last_conv_layer_name)<span style="color:#f92672">.</span>output, model<span style="color:#f92672">.</span>output])
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Compute gradients</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        conv_output, predictions <span style="color:#f92672">=</span> grad_model(img_array)
+</span></span><span style="display:flex;"><span>        predicted_class <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>argmax(predictions[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>        class_channel <span style="color:#f92672">=</span> predictions[:, predicted_class]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get gradients</span>
+</span></span><span style="display:flex;"><span>    grads <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(class_channel, conv_output)
+</span></span><span style="display:flex;"><span>    pooled_grads <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(grads, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> conv_output[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">@</span> pooled_grads[<span style="color:#f92672">...</span>, tf<span style="color:#f92672">.</span>newaxis]
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>squeeze(heatmap)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> heatmap<span style="color:#f92672">.</span>numpy()
+</span></span></code></pre></div><p><strong>4. LIME Implementation</strong>:</p>
+<p>LIME interprets the predictions by perturbing the image and observing output changes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> lime <span style="color:#f92672">import</span> lime_image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>explainer <span style="color:#f92672">=</span> lime_image<span style="color:#f92672">.</span>LimeImageExplainer()
+</span></span><span style="display:flex;"><span>explanation <span style="color:#f92672">=</span> explainer<span style="color:#f92672">.</span>explain_instance(img_array[<span style="color:#ae81ff">0</span>], model<span style="color:#f92672">.</span>predict)
+</span></span></code></pre></div><p><strong>5. Visualisation</strong>:</p>
+<p>Grad-CAM heatmaps are overlaid on original images to interpret focus regions, while LIME visualisations validate the features influencing predictions.</p>
+<h3 id="results">Results</h3>
+<p>The project achieved notable outcomes:</p>
+<ol>
+<li><strong>Grad-CAM</strong>:</li>
+</ol>
+<p>Generated clear heatmaps showing that models focused on tumour-specific regions in histopathology slides, ensuring decision reliability.
+<figure><img src="/images/project13_images/grad.png"><figcaption>
+      <h4>Grad-CAM heatmaps for malignant histopathology image across ResNet50, EfficientNetB0, and DenseNet201 models.</h4>
+    </figcaption>
+</figure>
+</p>
+<p>The ground truth label is <em>Malignant</em>, and predictions across models reveal key differences in interpretability:</p>
+<ul>
+<li>
+<p><code>ResNet50</code>: Grad-CAM at <code>conv2_block3_out</code> focuses sharply on regions containing dense nuclei clusters, correctly predicting the image as malignant.
+At <code>conv3_block4_out</code>, <code>ResNet50</code> continues to emphasize areas of diagnostic importance, reinforcing its prediction of malignancy.</p>
+</li>
+<li>
+<p><code>EfficientNetB0</code>: At <code>block3a_expand_activation</code>, <code>EfficientNetB0</code> diffuses its focus, spreading across less specific regions and misclassifying the image as benign. Similar behaviour is observed at <code>block6a_expand_activation</code>, indicating possible generalisation issues with this architecture for malignant samples.</p>
+</li>
+<li>
+<p><code>DenseNet201</code>: Visualisations from <code>conv2_block3_concat</code> and <code>conv4_block6_concat</code> suggest <code>DenseNet201</code> struggles with maintaining specificity. Like <code>EfficientNetB0</code>, it classifies the sample as benign.</p>
+</li>
+</ul>
+<p>Grad-CAM analysis highlights the following:</p>
+<ul>
+<li><strong>Model Strengths</strong>: <code>ResNet50</code> demonstrates superior focus and specificity for detecting malignancy, which aligns with its accurate predictions.</li>
+<li><strong>Model Limitations</strong>: <code>EfficientNetB0</code> and <code>DenseNet201</code> distribute attention broadly, leading to misclassification.</li>
+<li><strong>Architectural Impact</strong>: Grad-CAM visualisations underscore the differences in feature extraction and utilisation among architectures, shedding light on areas for improvement.</li>
+</ul>
+<ol start="2">
+<li><strong>LIME</strong>:
+<figure><img src="/images/project13_images/lime.png"><figcaption>
+      <h4>LIME visualisations for malignant histopathology image using ResNet50, EfficientNetB0, and DenseNet201 models.</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/project13_images/original.png"><figcaption>
+      <h4>Original histopathology image of a malignant case (Index: 3091)</h4>
+    </figcaption>
+</figure>
+</li>
+</ol>
+<p>Demonstrated consistency between feature importance and medical expectations, further validating model outputs. LIME explanations provide a granular understanding of feature importance at the pixel level.</p>
+<ul>
+<li><code>ResNet50</code>: Regions in yellow indicate areas crucial for classification, focusing on cellular clusters.</li>
+<li><code>EfficientNetB0</code>: Similar focus as ResNet50 but with additional spread across the image.</li>
+<li><code>DenseNet201</code>: Combines focused and diffused explanations, highlighting key cellular features.</li>
+</ul>
+<p>To sum up, <code>ResNet50</code> showed superior interpretability and accuracy compared to EfficientNetB0 and DenseNet201, making it the preferred choice for deployment.</p>
+<h3 id="conclusion-and-insights">Conclusion and Insights</h3>
+<p>This project underscores the importance of interpretable AI in critical fields like healthcare. By combining Grad-CAM and LIME, we offer a robust framework to validate and explain model predictions, instilling trust among medical practitioners.</p>
+<h4 id="key-takeaways">Key Takeaways:</h4>
+<ul>
+<li>Grad-CAM excels in highlighting class-specific regions, while LIME offers feature-level explanations.</li>
+<li>Interpretability tools are as crucial as model performance in domains requiring high accountability.</li>
+</ul>
+<h4 id="future-work">Future Work</h4>
+<ul>
+<li><em>Automated Feedback Loops</em>: Integrating Grad-CAM and LIME explanations into model retraining for continuous improvement.</li>
+<li><em>Broader Dataset Analysis</em>: Expanding the dataset to include diverse histopathology images.</li>
+<li><em>Hybrid Interpretability</em>: Combining Grad-CAM with other saliency methods for deeper insights.</li>
+</ul>
+<h4 id="final-note">Final Note</h4>
+<p>Interpretable AI is the bridge between cutting-edge technology and real-world application. This project serves as a stepping stone toward trustworthy AI solutions in healthcare, setting a precedent for integrating explainability into AI pipelines.</p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

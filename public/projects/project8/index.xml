@@ -1,77 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK on Natasha Smith Portfolio</title><link>http://localhost:1313/projects/project8/</link><description>Recent content in Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 20 Nov 2023 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/projects/project8/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction.</title><link>http://localhost:1313/projects/project8/project8_1/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_1/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Have you ever stopped to think about the data behind environmental predictions?&lt;/p>
-&lt;p>We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions.&lt;/p>
-&lt;p>The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.&lt;/p></description></item><item><title>Part 2. Exploring the Data: Understanding PM10 and Its Impact Through EDA.</title><link>http://localhost:1313/projects/project8/project8_2/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_2/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Behind every successful machine learning (ML) project is a stage that is equal parts science and art: &lt;strong>Exploratory Data Analysis (EDA)&lt;/strong>.&lt;/p>
-&lt;p>This step is where we uncover the hidden stories in the data, identify patterns, and gain insights that inform the model-building process.&lt;/p>
-&lt;p>When working with air pollution data, EDA plays a vital role in answering key questions:&lt;/p></description></item><item><title>Part 3. Regression Models for Air Quality Prediction: From Simplicity to Accuracy.</title><link>http://localhost:1313/projects/project8/project8_3/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_3/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Predicting air pollution isn’t just about crunching numbers—it’s about finding patterns, building models, and learning how different variables interact with one another.&lt;/p>
-&lt;p>In this blog, I take the first step toward accurate PM10 predictions by exploring regression models. These models form the backbone of many machine learning (ML) projects, providing interpretable results and insights into the relationships between variables.&lt;/p></description></item><item><title>Part 4. Advanced Machine Learning for PM10 Prediction: Random Forest, XGBoost, and More.</title><link>http://localhost:1313/projects/project8/project8_4/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_4/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Regression models laid a solid foundation for PM10 prediction, but air pollution is a complex phenomenon influenced by nonlinear and time-dependent factors.&lt;/p>
-&lt;p>To capture these intricacies, advanced machine learning models like neural networks (NNs) and ensemble methods come into play. These models are capable of uncovering patterns and relationships that simpler models might overlook.&lt;/p></description></item><item><title>Part 5. Evaluating and Selecting the Best Models for PM10 Prediction.</title><link>http://localhost:1313/projects/project8/project8_5/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_5/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>After building and testing various machine learning models, the next critical step is evaluating their performance and selecting the best ones for deployment.&lt;/p>
-&lt;p>In this blog, we’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error).&lt;/p>
-&lt;p>We’ll also explore hyperparameter tuning for neural networks, leveraging GridSearchCV for optimal performance.&lt;/p></description></item><item><title>Part 6. From Data to Action: What Pollution Data and AI Teach Us About Cleaner Air.</title><link>http://localhost:1313/projects/project8/project8_6/</link><pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project8/project8_6/</guid><description>&lt;figure>&lt;img src="http://localhost:1313/images/project8_images/pr8.jpg"
- alt="Photo by Dom J on Pexels">&lt;figcaption>
- &lt;p>Photo by Dom J on Pexels&lt;/p>
- &lt;/figcaption>
-&lt;/figure>
-
-&lt;p>&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/PM-London-Pollution" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Predicting PM10 and other pollutants is not just about building models or visualising data—it&amp;rsquo;s about understanding the invisible threats in the air we breathe and finding ways to address them.&lt;/p>
-&lt;p>After exploring data pre-processing, modelling, and evaluation, this final piece reflects on the insights gained and their real-world implications.&lt;/p>
-&lt;p>I’ll discuss how the results from this project—built on advanced AI/ML techniques—can guide better decision-making for policymakers, businesses, and citizens alike.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/projects/project8/</link>
+    <description>Recent content in Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Nov 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/projects/project8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI and Air Quality: Predicting Pollution for a Cleaner Future.</title>
+      <link>http://localhost:1313/projects/ai-and-air-quality-predicting-pollution-for-a-cleaner-future./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/ai-and-air-quality-predicting-pollution-for-a-cleaner-future./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-cleaning-the-air-data-pre-processing-for-pm10-prediction&#34;&gt;Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction&lt;/h1&gt;&#xA;&lt;p&gt;Have you ever stopped to think about the data behind environmental predictions? We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions. The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,59 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oracle Database on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/oracle-database/</link><description>Recent content in Oracle Database on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 09 Nov 2023 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/oracle-database/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Building a Data Warehouse: Technical Implementation and Challenges.</title><link>http://localhost:1313/projects/project3/project3_1/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/project3_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project3_images/pr3.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In today&amp;rsquo;s data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW).&lt;/p>
-&lt;p>In this blog post, I&amp;rsquo;ll walk through the technical journey of building a data warehouse for a company named &amp;lsquo;OfficeProducts&amp;rsquo;, including some of the core challenges faced and how they were addressed.&lt;/p></description></item><item><title>Part 2. Source Data and ETL Process Explained.</title><link>http://localhost:1313/projects/project3/project3_2/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/project3_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project3_images/pr3.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In every data warehouse project, a critical step involves understanding the source data and developing an effective ETL process to consolidate that data.&lt;/p>
-&lt;p>For &amp;lsquo;OfficeProducts&amp;rsquo;, the source data was primarily gathered from two main files: the &lt;strong>Datastream&lt;/strong> file and the &lt;strong>Masterdata&lt;/strong> file. These two files formed the backbone of the entire data warehouse, feeding the transactional and product-related information necessary for meaningful analysis.&lt;/p></description></item><item><title>Part 3. Designing the Snowflake Schema for Efficient Data Analysis.</title><link>http://localhost:1313/projects/project3/project3_3/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/project3_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project3_images/pr3.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>In the world of data warehousing, choosing the right schema is a pivotal decision that determines the efficiency of the entire project.&lt;/p>
-&lt;p>For &amp;lsquo;OfficeProducts&amp;rsquo;, we opted for a &lt;strong>Snowflake Schema&lt;/strong> to create a streamlined and high-performing data warehouse.&lt;/p>
-&lt;p>This schema design allowed us to effectively reduce redundancy, maintain data integrity, and improve overall query performance, making it ideal for deep analysis of sales and product performance data.&lt;/p></description></item><item><title>Part 4. Multidimensional Data Analysis: Practical Insights.</title><link>http://localhost:1313/projects/project3/project3_4/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/project3_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project3_images/pr3.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>The ultimate purpose of building a data warehouse is to be able to perform powerful and meaningful analyses to derive actionable business insights.&lt;/p>
-&lt;p>For the &amp;lsquo;OfficeProducts&amp;rsquo; project, we carried out several forms of multidimensional analysis to answer key business questions related to product sales, customer trends, and promotional effectiveness.&lt;/p>
-&lt;p>In this post, I&amp;rsquo;ll explore the practical insights gained through these analyses and how tools like &lt;strong>ROLLUP&lt;/strong> and &lt;strong>CUBE&lt;/strong> helped extract deeper trends from the data.&lt;/p></description></item><item><title>Part 5. Sales Channels Performance and Promotions: Lessons Learned.</title><link>http://localhost:1313/projects/project3/project3_5/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/project3_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project3_images/pr3.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Sales channel performance and promotional effectiveness are key aspects that drive business success.&lt;/p>
-&lt;p>For &amp;lsquo;OfficeProducts&amp;rsquo;, understanding which channels contributed the most to overall sales and evaluating how promotions influenced sales trends were crucial.&lt;/p>
-&lt;p>This blog post will walk you through how we analysed sales performance across various channels and promotions using the data warehouse, and the insights we gained from these analyses.&lt;/p></description></item><item><title>Part 6. Recommendations for Management and Business Insights.</title><link>http://localhost:1313/projects/project3/project3_6/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/project3_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project3_images/pr3.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Data-driven insights play a crucial role in helping businesses make informed decisions that align with market dynamics.&lt;/p>
-&lt;p>For &amp;lsquo;OfficeProducts&amp;rsquo;, the analysis conducted using the data warehouse provided several valuable insights that translated into actionable recommendations for management.&lt;/p>
-&lt;p>In this post, I&amp;rsquo;ll cover key strategies derived from the data, including &lt;strong>sales trends, promotion effectiveness&lt;/strong>, and &lt;strong>bundling opportunities&lt;/strong>, which were designed to help &amp;lsquo;OfficeProducts&amp;rsquo; optimise its business performance.&lt;/p></description></item><item><title>Data Warehouse Design and Multidimensional Analysis for OfficeProducts</title><link>http://localhost:1313/projects/project3/</link><pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project3/</guid><description>&lt;p>This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oracle Database on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/oracle-database/</link>
+    <description>Recent content in Oracle Database on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Nov 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/oracle-database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building and Optimising a Data Warehouse: From Design to Business Insights.</title>
+      <link>http://localhost:1313/projects/building-and-optimising-a-data-warehouse-from-design-to-business-insights./</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/building-and-optimising-a-data-warehouse-from-design-to-business-insights./</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project3_images/pr3.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/warehouse-management-system&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-building-a-data-warehouse-technical-implementation-and-challenges&#34;&gt;PART 1. Building a Data Warehouse: Technical Implementation and Challenges&lt;/h1&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW). In this part, I&amp;rsquo;ll walk through the technical journey of building a data warehouse for a company named &amp;lsquo;OfficeProducts&amp;rsquo;, including some of the core challenges faced and how they were addressed.&#xA;This blog is written for those curious about the behind-the-scenes of data integration, schema design, and technical problem-solving involved in creating a functional data warehouse.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Warehouse Design and Multidimensional Analysis for OfficeProducts</title>
+      <link>http://localhost:1313/projects/project3/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/project3/</guid>
+      <description>&lt;p&gt;This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

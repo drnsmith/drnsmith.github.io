@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PART 4. Addressing Class Imbalance in Medical Image Datasets. Tackling Class Imbalance in Histopathology: Strategies and Insights | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Explore strategies to address class imbalance in medical image datasets and their impact on model performance.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project10_images/pr10.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            PART 4. Addressing Class Imbalance in Medical Image Datasets. Tackling Class Imbalance in Histopathology: Strategies and Insights
+          </h1>
+          
+            <p class="f5">Explore strategies to address class imbalance in medical image datasets and their impact on model performance.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project10_images/pr10.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In medical imaging datasets like histopathology, class imbalance is a common and critical challenge. For instance, datasets may contain significantly more benign samples than malignant ones, making it harder for models to learn to detect the minority class accurately. This can lead to poor sensitivity (recall), which is especially problematic in healthcare where identifying true positives is critical.</p>
+<p>In this blog, we explore:</p>
+<ul>
+<li>The challenges of class imbalance.</li>
+<li>Strategies to address imbalance, including oversampling, class weighting, and targeted augmentation.</li>
+<li>The impact of these strategies on the performance of a DenseNet201 model.</li>
+</ul>
+<h2 id="why-class-imbalance-matters"><strong>Why Class Imbalance Matters</strong></h2>
+<p>When classes are imbalanced, machine learning models tend to favour the majority class, resulting in:</p>
+<ul>
+<li><strong>High accuracy but low sensitivity:</strong> The model predicts benign cases well but misses malignant ones.</li>
+<li><strong>Bias towards majority class:</strong> The model struggles to generalise for the minority class.</li>
+</ul>
+<p>For medical applications, this bias can have serious consequences, such as failing to detect cancer.</p>
+<h2 id="strategies-to-address-class-imbalance"><strong>Strategies to Address Class Imbalance</strong></h2>
+<h3 id="1-oversampling-the-minority-class"><strong>1. Oversampling the Minority Class</strong></h3>
+<p>Oversampling involves duplicating samples from the minority class to balance the dataset. This strategy increases representation without altering the dataset’s overall structure.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> imblearn.over_sampling <span style="color:#f92672">import</span> RandomOverSampler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">oversample_data</span>(X, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Oversample the minority class to balance the dataset.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    oversampler <span style="color:#f92672">=</span> RandomOverSampler(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>    X_resampled, y_resampled <span style="color:#f92672">=</span> oversampler<span style="color:#f92672">.</span>fit_resample(X, y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> X_resampled, y_resampled
+</span></span></code></pre></div><h3 id="2-class-weights"><strong>2. Class Weights</strong></h3>
+<p>Assigning higher weights to the minority class ensures the model penalises misclassification of minority samples more heavily during training.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils.class_weight <span style="color:#f92672">import</span> compute_class_weight
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_class_weights</span>(y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Calculate class weights to address imbalance.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    class_weights <span style="color:#f92672">=</span> compute_class_weight(class_weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;balanced&#39;</span>, classes<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>unique(y), y<span style="color:#f92672">=</span>y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dict(enumerate(class_weights))
+</span></span></code></pre></div><h4 id="integration-into-training">Integration into Training:</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> calculate_class_weights(y_train)
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, class_weight<span style="color:#f92672">=</span>class_weights)
+</span></span></code></pre></div><h3 id="3-targeted-data-augmentation"><strong>3. Targeted Data Augmentation</strong></h3>
+<p>Applying data augmentation selectively to the minority class increases its representation while introducing variability to prevent overfitting.</p>
+<p><strong>Code Snippet:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_minority_class</span>(X, y, target_class):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Apply augmentations only to the minority class.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    augmented_images <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    augmented_labels <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> image, label <span style="color:#f92672">in</span> zip(X, y):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> label <span style="color:#f92672">==</span> target_class:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>):  <span style="color:#75715e"># Generate 5 augmentations per image</span>
+</span></span><span style="display:flex;"><span>                augmented_images<span style="color:#f92672">.</span>append(augment_pipeline(image))
+</span></span><span style="display:flex;"><span>                augmented_labels<span style="color:#f92672">.</span>append(label)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array(augmented_images), np<span style="color:#f92672">.</span>array(augmented_labels)
+</span></span></code></pre></div><h3 id="experimental-setup">Experimental Setup</h3>
+<h4 id="dataset">Dataset</h4>
+<p>The BreakHis dataset was used, containing a class imbalance between benign and malignant samples.</p>
+<h4 id="experiment-design">Experiment Design</h4>
+<p>DenseNet201 was trained under three scenarios:</p>
+<ol>
+<li>Baseline (no class imbalance handling).</li>
+<li>With oversampling.</li>
+<li>With class weighting and targeted augmentation.</li>
+</ol>
+<h4 id="evaluation-metrics">Evaluation Metrics</h4>
+<ul>
+<li><strong>Accuracy</strong>: Overall prediction correctness.</li>
+<li><strong>Sensitivity (Recall)</strong>: Ability to identify malignant samples.</li>
+<li><strong>Specificity</strong>: Ability to avoid false positives.</li>
+<li><strong>F1 Score</strong>: Balances precision and recall.</li>
+</ul>
+<h3 id="results">Results</h3>
+<figure><img src="/images/project10_images/results10_4.png">
+</figure>
+
+<h3 id="insights">Insights</h3>
+<ul>
+<li>Oversampling improved sensitivity significantly but risked overfitting due to duplicate samples.</li>
+<li>Class weighting combined with targeted augmentation delivered the best results by improving sensitivity and specificity without overfitting.</li>
+<li>Sensitivity is a critical metric in medical imaging, as failing to detect malignant samples can have serious consequences.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Class imbalance is a significant hurdle in medical imaging. By leveraging oversampling, class weighting, and targeted augmentation, we demonstrated that models like DenseNet201 can effectively handle imbalanced datasets while improving sensitivity and overall performance.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

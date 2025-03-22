@@ -1,28 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Transfer Learning on Natasha Smith Portfolio</title><link>http://localhost:1313/tags/transfer-learning/</link><description>Recent content in Transfer Learning on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 12 May 2023 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/tags/transfer-learning/index.xml" rel="self" type="application/rss+xml"/><item><title>PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</title><link>http://localhost:1313/projects/project10/project10_2/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/project10_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project10_images/pr10.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.&lt;/p>
-&lt;p>Traditionally, &lt;strong>Colour Normalisation (CN)&lt;/strong> has been the gold standard for handling variability in histopathology images. However, advancements in &lt;strong>Data Augmentation (DA)&lt;/strong> techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.&lt;/p>
-&lt;p>This blog investigates:&lt;/p>
-&lt;ul>
-&lt;li>The fundamentals of data augmentation.&lt;/li>
-&lt;li>Key augmentation techniques for histopathology.&lt;/li>
-&lt;li>A comparative analysis of DA and CN workflows using a DenseNet201 model.&lt;/li>
-&lt;/ul>
-&lt;h2 id="what-is-data-augmentation">&lt;strong>What is Data Augmentation?&lt;/strong>&lt;/h2>
-&lt;p>&lt;strong>Data augmentation&lt;/strong> artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.&lt;/p></description></item><item><title>PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model</title><link>http://localhost:1313/projects/project10/project10_3/</link><pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project10/project10_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project10_images/pr10.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer.&lt;/p>
-&lt;p>&lt;strong>DenseNet201&lt;/strong>, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse.&lt;/p>
-&lt;p>This blog provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. Topics covered include:&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Transfer Learning on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/transfer-learning/</link>
+    <description>Recent content in Transfer Learning on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 May 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/transfer-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PART 2. Data Augmentation as a Robustness Strategy. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</title>
+      <link>http://localhost:1313/projects/part-2.-data-augmentation-as-a-robustness-strategy.-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-2.-data-augmentation-as-a-robustness-strategy.-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Pre-processing is the backbone of any machine learning (ML) pipeline, especially in medical imaging, where accuracy and reliability are paramount.&lt;/p&gt;&#xA;&lt;p&gt;Traditionally, &lt;strong&gt;Colour Normalisation (CN)&lt;/strong&gt; has been the gold standard for handling variability in histopathology images. However, advancements in &lt;strong&gt;Data Augmentation (DA)&lt;/strong&gt; techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.&lt;/p&gt;&#xA;&lt;p&gt;This blog investigates:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The fundamentals of data augmentation.&lt;/li&gt;&#xA;&lt;li&gt;Key augmentation techniques for histopathology.&lt;/li&gt;&#xA;&lt;li&gt;A comparative analysis of DA and CN workflows using a DenseNet201 model.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;what-is-data-augmentation&#34;&gt;&lt;strong&gt;What is Data Augmentation?&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Data augmentation&lt;/strong&gt; artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PART 3. Building and Fine-Tuning DenseNet201 for Histopathology. Leveraging Deep Learning for Cancer Detection: Building a DenseNet201 Model</title>
+      <link>http://localhost:1313/projects/part-3.-building-and-fine-tuning-densenet201-for-histopathology.-leveraging-deep-learning-for-cancer-detection-building-a-densenet201-model/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/part-3.-building-and-fine-tuning-densenet201-for-histopathology.-leveraging-deep-learning-for-cancer-detection-building-a-densenet201-model/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;DenseNet201&lt;/strong&gt;, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse.&lt;/p&gt;&#xA;&lt;p&gt;This blog provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. Topics covered include:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

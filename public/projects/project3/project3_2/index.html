@@ -1,19 +1,182 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Part 2. Source Data and ETL Process Explained. | Natasha Smith Portfolio</title>
-<meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="This blog dives into the different data sources used in the 'OfficeProducts' data warehouse project, the ETL (Extract, Transform, Load) process, and the challenges faced during data integration. Learn how the data from multiple sources was merged to create a unified structure that powers deeper business insights."><meta name=generator content="Hugo 0.142.0"><link rel=stylesheet href=/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css><link rel=stylesheet href=/css/custom.css></head><body class="ma0 avenir bg-near-white"><nav class="pa3 pa4-ns flex justify-end items-center"><ul class="list flex ma0 pa0"><li class=ml3><a class="link dim dark-gray f5" href=/>Home</a></li><li class=ml3><a class="link dim dark-gray f5" href=/about/>About</a></li><li class=ml3><a class="link dim dark-gray f5" href=/projects/>Projects</a></li><li class=ml3><a class="link dim dark-gray f5" href=/contact/>Contact</a></li></ul></nav><header class=page-header style=background-image:url(/images/project3_images/pr3.jpg);background-size:cover;background-position:50%;height:400px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center><div style=background-color:rgba(0,0,0,.4);padding:1rem;border-radius:4px><h1 class="f1 athelas mt3 mb1">Part 2. Source Data and ETL Process Explained.</h1><p class=f5>This blog dives into the different data sources used in the 'OfficeProducts' data warehouse project, the ETL (Extract, Transform, Load) process, and the challenges faced during data integration. Learn how the data from multiple sources was merged to create a unified structure that powers deeper business insights.</p></div></header><main class=pb7 role=main><article class="mw8 center ph3"><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src=/images/project3_images/pr3.jpg></figure><strong>View Project on GitHub</strong>:</p><a href=https://github.com/drnsmith/warehouse-management-system target=_blank><img src=/images/github.png alt=GitHub style=width:40px;height:40px;vertical-align:middle></a><h3 id=introduction>Introduction</h3><p>In every data warehouse project, a critical step involves understanding the source data and developing an effective ETL process to consolidate that data.</p><p>For &lsquo;OfficeProducts&rsquo;, the source data was primarily gathered from two main files: the <strong>Datastream</strong> file and the <strong>Masterdata</strong> file. These two files formed the backbone of the entire data warehouse, feeding the transactional and product-related information necessary for meaningful analysis.</p><h3 id=understanding-the-source-data>Understanding the Source Data</h3><ul><li><strong>Datastream File</strong></li></ul><p>The Datastream file provides transactional data with attributes like:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>TRANSACTION</span> ID: <span style=color:#66d9ef>Unique</span> identifier <span style=color:#66d9ef>for</span> <span style=color:#66d9ef>each</span> <span style=color:#66d9ef>transaction</span>.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>PRODUCT ID: Identifies the product involved <span style=color:#66d9ef>in</span> <span style=color:#66d9ef>each</span> sale.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>CLIENT ID <span style=color:#66d9ef>and</span> CLIENT NAME: Details about the client making the purchase.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>CHANNEL ID <span style=color:#66d9ef>and</span> CHANNEL <span style=color:#66d9ef>DESC</span>: Information about the sales channel (e.<span style=color:#66d9ef>g</span>., direct sales, online, partner).
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>DATE <span style=color:#66d9ef>and</span> QUANTITY: The date <span style=color:#66d9ef>of</span> the <span style=color:#66d9ef>transaction</span> <span style=color:#66d9ef>and</span> the number <span style=color:#66d9ef>of</span> products sold.
-</span></span></code></pre></div><ul><li><strong>Masterdata File</strong></li></ul><p>The Masterdata file provides the master information about products, such as:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>PRODUCT ID: <span style=color:#66d9ef>Unique</span> identifier <span style=color:#66d9ef>for</span> <span style=color:#66d9ef>each</span> product, used <span style=color:#66d9ef>to</span> <span style=color:#66d9ef>match</span> <span style=color:#66d9ef>with</span> transactional <span style=color:#66d9ef>data</span>.
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>PRODUCT NAME, SUPPLIER ID, SUPPLIER NAME, PRICE: Information that enriches the analysis <span style=color:#66d9ef>with</span> details <span style=color:#66d9ef>like</span> pricing <span style=color:#66d9ef>and</span> supplier <span style=color:#66d9ef>data</span>.
-</span></span></code></pre></div><p>These files were complementary—the <strong>Datastream</strong> file held dynamic, transaction-specific information, while the <strong>Masterdata</strong> file enriched that information with static details about products and suppliers.</p><h3 id=step-by-step-etl-process>Step-by-Step ETL Process</h3><ul><li><strong>Extract</strong></li></ul><p>In the extraction phase, data was pulled from both the <strong>Datastream</strong> and <strong>Masterdata</strong> files.</p><p>The focus during this step was on ensuring that all the necessary data was extracted without loss or corruption, as the quality of this data would directly impact the accuracy of all subsequent analyses.</p><ul><li><strong>Transform</strong></li></ul><p>The transformation phase was critical in ensuring consistency and usability of the data.</p><p>We needed to join tables based on common identifiers, such as <strong>PRODUCT ID</strong>, to create a unified view of sales that linked each transaction with product and client details. Additionally, some of the specific transformations included:</p><ul><li><p><em>Data Cleaning</em>: Handling missing values and ensuring consistent formats for fields like IDs and dates.</p></li><li><p><em>Data Enrichment</em>: Adding calculated fields such as <strong>TOTAL SALE</strong> by multiplying QUANTITY with PRICE.</p></li></ul><p>Below is an example of the transformation logic used to join data from the two files:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>SELECT</span> d.TRANSACTION_ID, m.PRODUCT_NAME, d.CLIENT_NAME, d.QUANTITY, (d.QUANTITY <span style=color:#f92672>*</span> m.PRICE) <span style=color:#66d9ef>AS</span> TOTAL_SALE
-</span></span><span style=display:flex><span><span style=color:#66d9ef>FROM</span> DATASTREAM d
-</span></span><span style=display:flex><span><span style=color:#66d9ef>JOIN</span> MASTERDATA m <span style=color:#66d9ef>ON</span> d.PRODUCT_ID <span style=color:#f92672>=</span> m.PRODUCT_ID;
-</span></span></code></pre></div><p>This snippet illustrates how the product details from the <strong>Masterdata</strong> file were joined to the transactions from the <strong>Datastream</strong> file, creating a unified structure that allowed for comprehensive sales analysis.</p><ul><li><strong>Load</strong></li></ul><p>The final step was loading the transformed data into the Oracle data warehouse.</p><p>During the loading phase, indexes were created on key columns like <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, and <strong>CHANNEL ID</strong>.</p><p>These indexes were instrumental in ensuring the warehouse could handle large queries efficiently and provide results promptly.</p><p>Below is an example of a load command used to create one of the indexes:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>INDEX</span> IDX_PRODUCT_ID <span style=color:#66d9ef>ON</span> FACT_TRANSACTIONS(PRODUCT_ID);
-</span></span></code></pre></div><p>This command helps to speed up queries involving <strong>PRODUCT ID</strong>, which was frequently used in aggregations and joins.</p><h3 id=challenges-faced-during-integration>Challenges Faced During Integration</h3><ul><li><p><em>Data Quality Issues</em>: Ensuring data quality was a major challenge. The extracted data had missing values and inconsistent formats, which required thorough cleaning and transformation steps. The use of <strong>VARCHAR</strong> for ID columns added flexibility but also introduced potential data entry inconsistencies.</p></li><li><p><em>Schema Normalisation</em>: With the <em>Snowflake Schema</em>, the aim was to minimise redundancy. However, achieving this required careful planning during the transformation phase to ensure all tables were properly normalised while maintaining referential integrity.</p></li><li><p>Handling Large Data Volumes: As the volume of transactional data increased, optimising the ETL workflow became essential. The use of indexes and materialised views was key in ensuring efficient querying and performance.</p></li></ul><h3 id=importance-of-etl-for-unified-data-structure>Importance of ETL for Unified Data Structure</h3><p>The ETL process played a vital role in creating a single source of truth. By combining data from different sources, transforming it to meet quality standards, and loading it into a data warehouse, the &lsquo;OfficeProducts&rsquo; data warehouse became a reliable tool for strategic decision-making. The data could now be queried with ease, enabling detailed analyses of sales trends, client behavior, and product performance.</p><h3 id=conclusion>Conclusion</h3><p>Building a robust ETL process is the backbone of any data warehouse project.</p><p>For &lsquo;OfficeProducts&rsquo;, this ETL process helped convert disparate data sources into a cohesive, analysable format, ultimately delivering insights that could drive better business strategies.</p><p>By understanding the challenges and solutions involved in ETL, you can better appreciate the importance of well-integrated, high-quality data for any data-driven organisation.</p><p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=http://localhost:1313/>&copy; Natasha Smith Portfolio 2025</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Part 2. Source Data and ETL Process Explained. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This blog dives into the different data sources used in the &#39;OfficeProducts&#39; data warehouse project, the ETL (Extract, Transform, Load) process, and the challenges faced during data integration. Learn how the data from multiple sources was merged to create a unified structure that powers deeper business insights.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project3_images/pr3.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Part 2. Source Data and ETL Process Explained.
+          </h1>
+          
+            <p class="f5">This blog dives into the different data sources used in the &#39;OfficeProducts&#39; data warehouse project, the ETL (Extract, Transform, Load) process, and the challenges faced during data integration. Learn how the data from multiple sources was merged to create a unified structure that powers deeper business insights.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><p><figure><img src="/images/project3_images/pr3.jpg">
+</figure>
+
+<strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h3 id="introduction">Introduction</h3>
+<p>In every data warehouse project, a critical step involves understanding the source data and developing an effective ETL process to consolidate that data.</p>
+<p>For &lsquo;OfficeProducts&rsquo;, the source data was primarily gathered from two main files: the <strong>Datastream</strong> file and the <strong>Masterdata</strong> file. These two files formed the backbone of the entire data warehouse, feeding the transactional and product-related information necessary for meaningful analysis.</p>
+<h3 id="understanding-the-source-data">Understanding the Source Data</h3>
+<ul>
+<li><strong>Datastream File</strong></li>
+</ul>
+<p>The Datastream file provides transactional data with attributes like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TRANSACTION</span> ID: <span style="color:#66d9ef">Unique</span> identifier <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">each</span> <span style="color:#66d9ef">transaction</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PRODUCT ID: Identifies the product involved <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">each</span> sale.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CLIENT ID <span style="color:#66d9ef">and</span> CLIENT NAME: Details about the client making the purchase.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CHANNEL ID <span style="color:#66d9ef">and</span> CHANNEL <span style="color:#66d9ef">DESC</span>: Information about the sales channel (e.<span style="color:#66d9ef">g</span>., direct sales, online, partner).
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DATE <span style="color:#66d9ef">and</span> QUANTITY: The date <span style="color:#66d9ef">of</span> the <span style="color:#66d9ef">transaction</span> <span style="color:#66d9ef">and</span> the number <span style="color:#66d9ef">of</span> products sold.
+</span></span></code></pre></div><ul>
+<li><strong>Masterdata File</strong></li>
+</ul>
+<p>The Masterdata file provides the master information about products, such as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>PRODUCT ID: <span style="color:#66d9ef">Unique</span> identifier <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">each</span> product, used <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">match</span> <span style="color:#66d9ef">with</span> transactional <span style="color:#66d9ef">data</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PRODUCT NAME, SUPPLIER ID, SUPPLIER NAME, PRICE: Information that enriches the analysis <span style="color:#66d9ef">with</span> details <span style="color:#66d9ef">like</span> pricing <span style="color:#66d9ef">and</span> supplier <span style="color:#66d9ef">data</span>.
+</span></span></code></pre></div><p>These files were complementary—the <strong>Datastream</strong> file held dynamic, transaction-specific information, while the <strong>Masterdata</strong> file enriched that information with static details about products and suppliers.</p>
+<h3 id="step-by-step-etl-process">Step-by-Step ETL Process</h3>
+<ul>
+<li><strong>Extract</strong></li>
+</ul>
+<p>In the extraction phase, data was pulled from both the <strong>Datastream</strong> and <strong>Masterdata</strong> files.</p>
+<p>The focus during this step was on ensuring that all the necessary data was extracted without loss or corruption, as the quality of this data would directly impact the accuracy of all subsequent analyses.</p>
+<ul>
+<li><strong>Transform</strong></li>
+</ul>
+<p>The transformation phase was critical in ensuring consistency and usability of the data.</p>
+<p>We needed to join tables based on common identifiers, such as <strong>PRODUCT ID</strong>, to create a unified view of sales that linked each transaction with product and client details. Additionally, some of the specific transformations included:</p>
+<ul>
+<li>
+<p><em>Data Cleaning</em>: Handling missing values and ensuring consistent formats for fields like IDs and dates.</p>
+</li>
+<li>
+<p><em>Data Enrichment</em>: Adding calculated fields such as <strong>TOTAL SALE</strong> by multiplying QUANTITY with PRICE.</p>
+</li>
+</ul>
+<p>Below is an example of the transformation logic used to join data from the two files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> d.TRANSACTION_ID, m.PRODUCT_NAME, d.CLIENT_NAME, d.QUANTITY, (d.QUANTITY <span style="color:#f92672">*</span> m.PRICE) <span style="color:#66d9ef">AS</span> TOTAL_SALE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> DATASTREAM d
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span> MASTERDATA m <span style="color:#66d9ef">ON</span> d.PRODUCT_ID <span style="color:#f92672">=</span> m.PRODUCT_ID;
+</span></span></code></pre></div><p>This snippet illustrates how the product details from the <strong>Masterdata</strong> file were joined to the transactions from the <strong>Datastream</strong> file, creating a unified structure that allowed for comprehensive sales analysis.</p>
+<ul>
+<li><strong>Load</strong></li>
+</ul>
+<p>The final step was loading the transformed data into the Oracle data warehouse.</p>
+<p>During the loading phase, indexes were created on key columns like <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, and <strong>CHANNEL ID</strong>.</p>
+<p>These indexes were instrumental in ensuring the warehouse could handle large queries efficiently and provide results promptly.</p>
+<p>Below is an example of a load command used to create one of the indexes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> IDX_PRODUCT_ID <span style="color:#66d9ef">ON</span> FACT_TRANSACTIONS(PRODUCT_ID);
+</span></span></code></pre></div><p>This command helps to speed up queries involving <strong>PRODUCT ID</strong>, which was frequently used in aggregations and joins.</p>
+<h3 id="challenges-faced-during-integration">Challenges Faced During Integration</h3>
+<ul>
+<li>
+<p><em>Data Quality Issues</em>: Ensuring data quality was a major challenge. The extracted data had missing values and inconsistent formats, which required thorough cleaning and transformation steps. The use of <strong>VARCHAR</strong> for ID columns added flexibility but also introduced potential data entry inconsistencies.</p>
+</li>
+<li>
+<p><em>Schema Normalisation</em>: With the <em>Snowflake Schema</em>, the aim was to minimise redundancy. However, achieving this required careful planning during the transformation phase to ensure all tables were properly normalised while maintaining referential integrity.</p>
+</li>
+<li>
+<p>Handling Large Data Volumes: As the volume of transactional data increased, optimising the ETL workflow became essential. The use of indexes and materialised views was key in ensuring efficient querying and performance.</p>
+</li>
+</ul>
+<h3 id="importance-of-etl-for-unified-data-structure">Importance of ETL for Unified Data Structure</h3>
+<p>The ETL process played a vital role in creating a single source of truth. By combining data from different sources, transforming it to meet quality standards, and loading it into a data warehouse, the &lsquo;OfficeProducts&rsquo; data warehouse became a reliable tool for strategic decision-making. The data could now be queried with ease, enabling detailed analyses of sales trends, client behavior, and product performance.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Building a robust ETL process is the backbone of any data warehouse project.</p>
+<p>For &lsquo;OfficeProducts&rsquo;, this ETL process helped convert disparate data sources into a cohesive, analysable format, ultimately delivering insights that could drive better business strategies.</p>
+<p>By understanding the challenges and solutions involved in ETL, you can better appreciate the importance of well-integrated, high-quality data for any data-driven organisation.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

@@ -1,68 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks on Natasha Smith Portfolio</title><link>http://localhost:1313/projects/project5/</link><description>Recent content in AI-Driven Pneumonia Detection Using Convolutional Neural Networks on Natasha Smith Portfolio</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Sep 2024 10:58:08 -0400</lastBuildDate><atom:link href="http://localhost:1313/projects/project5/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 1. Challenges in Medical Imaging Datasets.</title><link>http://localhost:1313/projects/project5/project5_1/</link><pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_1/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
- &lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges.&lt;/p>
-&lt;p>In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong>dataset imbalance&lt;/strong> and &lt;strong>small validation sets&lt;/strong>, which can hinder model performance.&lt;/p>
-&lt;p>This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p></description></item><item><title>Part 2. Boosting Model Generalisation with Data Augmentation.</title><link>http://localhost:1313/projects/project5/project5_2/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_2/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning (DL) models often struggle with over-fitting, especially when trained on limited datasets.&lt;/p>
-&lt;p>To overcome this challenge in our pneumonia detection project, we used &lt;strong>data augmentation&lt;/strong> (DA) techniques to artificially expand the training dataset.&lt;/p>
-&lt;p>DA techniques, such as rotations, scaling, flipping, and zooming, helped improve the model&amp;rsquo;s generalisation to unseen chest X-ray images.&lt;/p>
-&lt;p>This blog explains the DA techniques applied, demonstrates the Python code used, and highlights how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.&lt;/p></description></item><item><title>Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis.</title><link>http://localhost:1313/projects/project5/project5_3/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_3/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Deep learning (DL) provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models.&lt;/p>
-&lt;p>In this blog, we compare the performance of a &lt;strong>manual CNN&lt;/strong> and the &lt;strong>VGG16 pre-trained model&lt;/strong> for pneumonia detection.&lt;/p>
-&lt;p>While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of transfer learning with its pre-trained &lt;strong>ImageNet&lt;/strong> weights.&lt;/p>
-&lt;p>This comparative analysis explores their architectures, training strategies, and results.&lt;/p></description></item><item><title>Part 4. Evaluating CNN Models for Pneumonia Detection.</title><link>http://localhost:1313/projects/project5/project5_4/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_4/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy.&lt;/p>
-&lt;p>Metrics like &lt;strong>precision&lt;/strong>, &lt;strong>recall&lt;/strong>, and &lt;strong>F1-score&lt;/strong> provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection.&lt;/p>
-&lt;p>This blog explores how our models—&lt;strong>Manual CNN&lt;/strong> and &lt;strong>VGG16&lt;/strong>—were evaluated and highlights the role of confusion matrices in understanding their performance.&lt;/p>
-&lt;h3 id="metrics-for-evaluation">Metrics for Evaluation&lt;/h3>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;strong>Accuracy&lt;/strong>: The percentage of correctly classified samples.&lt;/p></description></item><item><title>Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection.</title><link>http://localhost:1313/projects/project5/project5_5/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_5/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>When evaluating AI models for medical diagnostics, metrics like &lt;strong>sensitivity&lt;/strong> and &lt;strong>specificity&lt;/strong> are crucial.&lt;/p>
-&lt;p>Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases.&lt;/p>
-&lt;p>For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential.&lt;/p>
-&lt;p>In this blog, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.&lt;/p></description></item><item><title>Part 6. Future Directions for AI-Assisted Medical Imaging.</title><link>http://localhost:1313/projects/project5/project5_6/</link><pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate><guid>http://localhost:1313/projects/project5/project5_6/</guid><description>&lt;p>&lt;figure>&lt;img src="http://localhost:1313/images/project5_images/pr5.jpg">
-&lt;/figure>
-
-&lt;strong>View Project on GitHub&lt;/strong>:&lt;/p>
-&lt;a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
- &lt;img src="http://localhost:1313/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-&lt;/a>
-&lt;h3 id="introduction">Introduction&lt;/h3>
-&lt;p>AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project.&lt;/p>
-&lt;p>However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery.&lt;/p>
-&lt;p>In this blog, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/projects/project5/</link>
+    <description>Recent content in AI-Driven Pneumonia Detection Using Convolutional Neural Networks on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Mar 2025 14:35:19 +1300</lastBuildDate>
+    <atom:link href="http://localhost:1313/projects/project5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI-Powered Pneumonia Detection: Challenges, Model Comparisons, and Future Directions</title>
+      <link>http://localhost:1313/projects/ai-powered-pneumonia-detection-challenges-model-comparisons-and-future-directions/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/ai-powered-pneumonia-detection-challenges-model-comparisons-and-future-directions/</guid>
+      <description>&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-challenges-in-medical-imaging-datasets&#34;&gt;PART 1. Challenges in Medical Imaging Datasets&lt;/h1&gt;&#xA;&lt;p&gt;Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges. In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong&gt;dataset imbalance&lt;/strong&gt; and &lt;strong&gt;small validation sets&lt;/strong&gt;, which can hinder model performance. This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
