@@ -1,6 +1,6 @@
 ---
 date: 2023-11-20T10:58:08-04:00
-description: "This project leverages machine learning to predict PM10 pollution levels, tackling challenges like missing data, feature engineering, and model selection. Through a structured pipeline—from data pre-processing and exploratory analysis to advanced regression and ensemble models—it identifies key pollution drivers and enhances forecasting accuracy. The final phase transforms model predictions into actionable insights, supporting data-driven environmental policy and urban air quality improvements."
+description: "This project leverages machine learning to predict PM10 pollution levels in London (UK), tackling challenges like missing data, feature engineering, and model selection. Through a structured pipeline—from data pre-processing and exploratory analysis to advanced regression and ensemble models—it identifies key pollution drivers and enhances forecasting accuracy. The final phase transforms model predictions into actionable insights, supporting data-driven environmental policy and urban air quality improvements."
 image: "/images/project8_images/pr8.jpg"
 tags: ["Machine Learning", "Environmental Data Science", "Air Pollution Prediction", "PM10 Forecasting", "Urban Analytics", "Time Series Analysis", "Feature Engineering", "Neural Networks", "Data Preprocessing", "Policy Decision Support"]
 title: "AI and Air Quality: Predicting Pollution for a Cleaner Future."
@@ -30,9 +30,7 @@ When I first started working with environmental data, I was amased by how much i
 
 #### Missing Data
 
-One of the biggest challenges I faced was dealing with missing values. Imagine trying to predict the pollution level for a city based on incomplete data—missing temperature readings, unrecorded pollutant levels, or even entire days without data. In some cases, I could find gaps of several hours or days in the data. These gaps needed to be handled with care to avoid distorting the predictions.
-
-So, how do we deal with missing data? The approach I took was a combination of:
+One of the biggest challenges I faced was dealing with missing values. Imagine trying to predict the pollution level for a city based on incomplete data—missing temperature readings, unrecorded pollutant levels, or even entire days without data. In some cases, I could find gaps of several hours or days in the data. These gaps needed to be handled with care to avoid distorting the predictions. So, how do we deal with missing data? The approach I took was a combination of:
 
  - **Interpolation**: Estimating the missing values based on surrounding data points.
  - **Exclusion**: In cases where gaps were too large or could distort the overall trends, I excluded that data.
@@ -41,14 +39,12 @@ While it’s not perfect, it’s a compromise that ensures the model remains acc
 
 #### Outliers
 
-Outliers are another problem in environmental datasets. 
+Outliers are another problem in environmental datasets. An outlier in air quality data could be a sudden spike in pollution levels due to a sensor malfunction, or it could represent a real pollution event like a nearby fire or industrial accident. The challenge is figuring out which is which. 
 
-An outlier in air quality data could be a sudden spike in pollution levels due to a sensor malfunction, or it could represent a real pollution event like a nearby fire or industrial accident. The challenge is figuring out which is which. In some cases, I used statistical methods, like Interquartile Range (IQR), to detect and remove outliers that were too extreme to be real.  But I also made judgment calls. Some spikes might be significant enough to keep in the dataset, while others were obvious sensor errors that needed to be discarded.
+In some cases, I used statistical methods, like Interquartile Range (IQR), to detect and remove outliers that were too extreme to be real.  But I also made judgment calls. Some spikes might be significant enough to keep in the dataset, while others were obvious sensor errors that needed to be discarded.
 
 ####  Irregularities in the Data
-Environmental data is also inconsistent. 
-
-Different air quality stations report data at different times, or even use different methods to record measurements. This means that some of the data might not align correctly, making it difficult to perform meaningful analysis. 
+Environmental data is also inconsistent. Different air quality stations report data at different times, or even use different methods to record measurements. This means that some of the data might not align correctly, making it difficult to perform meaningful analysis. 
 
 For example, one station might measure PM10 levels every 15 minutes, while another station might do so every hour. To handle this, I had to standardise the time intervals and make sure the data was aligned across different stations.
 
@@ -91,9 +87,7 @@ data.interpolate(method='linear', inplace=True)
 
 #### Outlier Detection
 
-For outliers, I used the **IQR method** to identify and remove extreme values. 
-
-The IQR is a measure of statistical dispersion, and outliers can be defined as any values outside the range of [Q1 - 1.5 * IQR, Q3 + 1.5 * IQR] (where Q1 and Q3 are the first and third quartiles).
+For outliers, I used the **IQR method** to identify and remove extreme values. The IQR is a measure of statistical dispersion, and outliers can be defined as any values outside the range of [Q1 - 1.5 * IQR, Q3 + 1.5 * IQR] (where Q1 and Q3 are the first and third quartiles).
 
 ```python
 
@@ -131,7 +125,7 @@ scaler = StandardScaler()
 data[['PM10', 'Temperature', 'WindSpeed']] = scaler.fit_transform(data[['PM10', 'Temperature', 'WindSpeed']])
 ```
 
-### Why Data Preprocessing Matters
+### Why Data Pre-processing Matters
 
 Effective data pre-processing is a critical step in any ML project, but it’s particularly important when dealing with environmental data. If you don't clean your data, the models you build might fail to capture important patterns, or worse, they might produce inaccurate predictions that could mislead decision-makers.
 
@@ -139,9 +133,7 @@ In our case, cleaning the air (the data) was essential to making accurate predic
 
 ### Summary: Data Is the Foundation for Clean Air
 
-As we’ve seen, cleaning data isn’t a glamorous task, but it’s one of the most important steps in any ML project. 
-
-By properly handling messy environmental data, we can build robust models that predict PM10 levels with greater accuracy, providing decision-makers with the insights they need to improve air quality and public health.
+As we’ve seen, cleaning data isn’t a glamorous task, but it’s one of the most important steps in any ML project. By properly handling messy environmental data, we can build robust models that predict PM10 levels with greater accuracy, providing decision-makers with the insights they need to improve air quality and public health.
 
 So, next time you breathe in a breath of fresh air, remember—it’s not just the air you’re breathing, but the data behind it that helps us make it cleaner.
 
@@ -197,7 +189,7 @@ print(result_table)
 
 By analySing PM10, therefore, I address a broader range of pollution sources, providing actionable insights for mitigating air quality issues in urban areas.
 
-### 1. Starting with the Basics
+#### 1. Starting with the Basics
 
 The first step in EDA is getting a sense of the data. After cleaning the dataset in the pre-processing phase, I began by summarising the key statistics and visualising the distributions of variables.
 
@@ -214,7 +206,7 @@ This revealed a lot about the data:
  - PM10 levels varied significantly, with occasional spikes that hinted at outliers or pollution events.
  - Weather variables like temperature and wind speed showed consistent ranges, confirming the reliability of the sensors.
 
-### 2. Visualising PM10 Levels
+#### 2. Visualising PM10 Levels
  - *Histogram of PM10 Levels*
 
 To understand the distribution of PM10 levels, I plotted a histogram. This helped identify whether the data was skewed or normally distributed.
@@ -233,7 +225,7 @@ plt.show()
 
 The histogram revealed a right-skewed distribution, meaning that while most pollution levels were moderate, there were occasional high pollution events. These spikes required further investigation to determine their causes.
 
-*Time-Series Plot*
+ - *Time-Series Plot*
 
 Next, I plotted PM10 levels over time to identify any trends or recurring patterns.
 
@@ -253,7 +245,7 @@ This visualisation highlighted some clear trends:
  - *Seasonal variations*: PM10 levels tended to rise during the winter months, likely due to heating systems and stagnant air.
  - *Daily fluctuations*: There were spikes in the morning and evening, coinciding with rush hour traffic.
 
-### 3. Correlation Analysis: The Key to PM10 Insights
+#### 3. Correlation Analysis: The Key to PM10 Insights
 
 A major highlight of the EDA process was the correlation heatmap, which provided a comprehensive look at how PM10 is related to other variables. The heatmap below shows the correlations among pollutants, weather variables, and PM10 levels.
 
@@ -275,7 +267,7 @@ A major highlight of the EDA process was the correlation heatmap, which provided
 
 The heatmap also helped identify which variables might be redundant or less informative, guiding the feature selection process for modelling.
 
-### 4. Uncovering Patterns and Trends
+#### 4. Uncovering Patterns and Trends
 
 #### Daily and Seasonal Trends
 
@@ -321,7 +313,7 @@ plt.show()
 
 The scatter plot showed a clear upward trend, confirming that traffic is a major contributor to pollution levels.
 
-### 5. Feature Selection Insights
+#### 5. Feature Selection Insights
 
 EDA isn’t just about understanding the data; it also informs which features to include in the model. From my analysis, the following features stood out as critical for predicting PM10 levels:
 
@@ -330,7 +322,7 @@ EDA isn’t just about understanding the data; it also informs which features to
  - *Wind Speed*: Disperses pollutants, reducing PM10 levels.
  - *Time-Based Features*: Seasonal and daily trends are essential for capturing recurring patterns.
 
-### 6. Challenges Encountered During EDA
+#### 6. Challenges Encountered During EDA
 
 While EDA is a powerful tool, it’s not without challenges:
 
@@ -341,9 +333,7 @@ While EDA is a powerful tool, it’s not without challenges:
 #### Why EDA Matters
 
 EDA isn’t just a box to tick off before modelling—it’s where you understand your data’s story. 
-For this PM10 prediction project, EDA uncovered the key drivers of air pollution, highlighted patterns worth modeling, and ensured the dataset was ready for machine learning algorithms.
-
-By the end of the EDA phase, I had a clear roadmap for the next steps. With the insights gained, I could confidently move forward to build models that predict PM10 levels with accuracy and reliability.
+For this PM10 prediction project, EDA uncovered the key drivers of air pollution, highlighted patterns worth modeling, and ensured the dataset was ready for ML algorithms. By the end of the EDA phase, I had a clear roadmap for the next steps. With the insights gained, I could confidently move forward to build models that predict PM10 levels with accuracy and reliability.
 
 ### Summary: From Data to Insights
 
@@ -499,13 +489,11 @@ Building regression models was not without its challenges:
 Regression models provided valuable insights into the factors driving PM10 levels and set the stage for more advanced machine learning approaches. From identifying the key contributors like traffic and weather to tackling challenges like multicollinearity, this phase laid the groundwork for accurate air quality predictions.
 
 # Part 4. Advanced Machine Learning for PM10 Prediction: Random Forest, XGBoost, and More
-Regression models laid a solid foundation for PM10 prediction, but air pollution is a complex phenomenon influenced by nonlinear and time-dependent factors. To capture these intricacies, advanced machine learning models like neural networks (NNs) and ensemble methods come into play. 
+Regression models laid a solid foundation for PM10 prediction, but air pollution is a complex phenomenon influenced by nonlinear and time-dependent factors. To capture these intricacies, advanced ML models like neural networks (NNs) and ensemble methods come into play. 
 
-These models are capable of uncovering patterns and relationships that simpler models might overlook. In this part, I’ll explore how advanced methods such as **Random Forest**, **Gradient Boosting**, and **Long Short-Term Memory (LSTM)** networks were employed to predict PM10 levels with greater accuracy. 
+These models are capable of uncovering patterns and relationships that simpler models might overlook. In this part, I’ll explore how I employed advanced methods, such as **Random Forest**, **Gradient Boosting**, and **Long Short-Term Memory (LSTM)**, to predict PM10 levels with greater accuracy. I’ll also discuss their strengths, limitations, and the unique insights they offered into the dynamics of air pollution.
 
-I’ll also discuss their strengths, limitations, and the unique insights they offered into the dynamics of air pollution.
-
-### 1. Ensemble Methods: Random Forest and Gradient Boosting
+### 1. Ensemble Methods
 #### Random Forest
 
 `Random Forest` is an ensemble method that builds multiple decision trees and averages their predictions. It reduces over-fitting and improves accuracy by leveraging the wisdom of the crowd.
@@ -550,14 +538,10 @@ print(f"Gradient Boosting - MAE: {gb_mae}")
  - `Gradient Boosting` excelled at capturing complex patterns but required careful tuning of hyperparameters like learning rate and number of trees.
  - Both models outperformed simpler regression techniques, particularly in predicting pollution spikes.
 
-### 2. Neural Networks: A Deep Dive
+### 2. Neural Networks
 #### The Need for Neural Networks
 
-While ensemble methods are powerful, they struggle with time-series data, where patterns evolve over time. Enter NNs, particularly `Long Short-Term Memory (LSTM)` networks, which are designed to handle sequential data.
-
-#### Implementing LSTM for PM10 Prediction
-
-LSTM networks, a type of recurrent neural network (RNN), can "remember" patterns across long sequences, making them ideal for predicting hourly or daily PM10 levels.
+While ensemble methods are powerful, they struggle with time-series data, where patterns evolve over time. Enter NNs, particularly `Long Short-Term Memory (LSTM)` networks, which are designed to handle sequential data. LSTM networks, a type of recurrent neural network (RNN), can "remember" patterns across long sequences, making them ideal for predicting hourly or daily PM10 levels.
 
 ```python
 
@@ -595,7 +579,7 @@ To evaluate the effectiveness of the models, we compared their `Mean Absolute Er
  - `LSTM`: Outperformed all other models by leveraging time-series data, capturing daily and seasonal trends effectively.
 
 
-### Challenges of Advanced Models
+#### Challenges of Advanced Models
 
 While advanced models offer superior performance, they come with their own set of challenges:
 
@@ -603,7 +587,7 @@ While advanced models offer superior performance, they come with their own set o
  - *Hyperparameter Tuning*: Models like `Gradient Boosting` and `LSTM` are sensitive to hyperparameters, requiring extensive experimentation to optimize.
  - *Interpretability*: Unlike regression models, NNs operate as black boxes, making it harder to explain their predictions.
 
-### Lessons Learned
+#### Lessons Learned
 
 Working with advanced models highlighted the importance of:
 
@@ -611,21 +595,19 @@ Working with advanced models highlighted the importance of:
  - *Model Stacking*: Combining the strengths of different models (e.g., Random Forest + LSTM) could further enhance predictions.
  - *Domain Knowledg**: Understanding the environmental factors affecting PM10 helped guide feature selection and model interpretation.
 
-### Summary
+#### Summary
 
-Advanced models like Random Forest, Gradient Boosting, and LSTM pushed the boundaries of what we could achieve in predicting PM10 levels. By leveraging these techniques, we not only improved accuracy but also gained deeper insights into the factors driving air pollution.
+Advanced models like Random Forest, Gradient Boosting, and LSTM pushed the boundaries of what we could achieve in predicting PM10 levels. By leveraging these techniques, not only I improved accuracy but also gained deeper insights into the factors driving air pollution.
 
 # Part 5. Evaluating and Selecting the Best Models for PM10 Prediction
-After building and testing various ML models, the next critical step is evaluating their performance and selecting the best ones for deployment. 
-
-In this part, I’ll compare models using rigorous metrics like RMSE (Root Mean Squared Error) and MAE (Mean Absolute Error). We’ll also explore hyperparameter tuning for neural networks, leveraging **GridSearchCV** for optimal performance.
+After building and testing various ML models, the next critical step is evaluating their performance and selecting the best ones for deployment. In this part, I’ll compare models using rigorous metrics like **RMSE (Root Mean Squared Error)** and **MAE (Mean Absolute Error)**. I’ll also explore hyperparameter tuning for neural networks, leveraging **GridSearchCV** for optimal performance.
 
 ### The Need for Systematic Evaluation and Evaluating Multiple Models
 
 With several models—Linear **Regression, Random Forest, Gradient Boosting, XGBoost, Ridge, Lasso, and Neural Networks** — it’s essential to evaluate them fairly. I used:
 
  - *Cross-validation*: To ensure models perform consistently across different data splits.
- - *Scoring metrics*: RMSE for penalising large errors and MAE for measuring average error magnitude.
+ - *Scoring metrics*: `RMSE` for penalising large errors and `MAE` for measuring average error magnitude.
 
 I evaluated six models initially using cross-validation and computed `RMSE` and `MAE` for each:
 

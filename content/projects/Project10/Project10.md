@@ -14,10 +14,8 @@ weight: 1
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
 
-# PART 1. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology
-Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.
-
-Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. 
+# Part 1. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology
+Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models. Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures. 
 
 ### Why Colour Normalisation is Essential
 Inconsistent staining can obscure the patterns ML models rely on, leading to reduced performance. CN addresses this by:
@@ -131,7 +129,7 @@ CLAHE was effective for low-contrast images but added computational overhead.
 Colour normalisation is a vital pre-processing step in medical imaging. By reducing staining variability, techniques like CBN, CD, and CLAHE ensure ML models focus on disease-relevant features. However, the choice of technique should be guided by the specific dataset and computational constraints.
 
 
-# PART 2. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?
+# Part 2. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?
 
 Pre-processing is the backbone of any ML pipeline, especially in medical imaging, where accuracy and reliability are paramount. Traditionally, CN has been the gold standard for handling variability in histopathology images. However, advancements in **Data Augmentation (DA)** techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.
 
@@ -245,9 +243,8 @@ def augment_pipeline(image):
 #### Summary
 Data augmentation offers a compelling alternative to colour normalisation, simplifying workflows and improving model performance. By introducing variability in training data, DA enhances robustness, making it an excellent choice for scalable medical imaging pipelines.
 
-# PART 3. Building and Fine-Tuning DenseNet201 for Cancer Detection
-
-Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer. **DenseNet201**, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse. This part provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories. 
+# Part 3. Building and Fine-Tuning DenseNet201 for Cancer Detection
+DL has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer. **DenseNet201**, a state-of-the-art CNN, is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse. This part provides a step-by-step guide to building and fine-tuning a `DenseNet201` model for classifying histopathology images into benign and malignant categories. 
 
 ### DenseNet201 Architecture
 `DenseNet201` is a CNN that uses "dense connectivity," where each layer receives input from all preceding layers. This unique design:
@@ -257,8 +254,8 @@ Deep learning has revolutionised medical imaging, enabling precise and reliable 
 `DenseNet201` is ideal for histopathology because it can capture complex patterns in tissue morphology and structure.
 
 ### Building the Model
-#### Load the Pre-trained Base Model**
-We start with the **DenseNet201** model pretrained on ImageNet, leveraging its knowledge of general features like edges and textures.
+#### Load the Pre-trained Base Model
+I start with the **DenseNet201** model pretrained on ImageNet, leveraging its knowledge of general features like edges and textures.
 
 ```python
 from tensorflow.keras.applications import DenseNet201
@@ -272,8 +269,8 @@ def load_base_model(input_shape):
     return base_model
 ```
 
-#### Add a Custom Classification Head**
-We replace DenseNet201’s top layers with a custom head tailored for binary classification (benign vs malignant). The head includes:
+#### Add a Custom Classification Head
+I replace DenseNet201’s top layers with a custom head tailored for binary classification (benign vs malignant). The `head` includes:
 
  - *GlobalAveragePooling2D*: Reduces spatial dimensions.
  - *Dense Layers*: Fully connected layers for feature extraction.
@@ -316,7 +313,7 @@ def compile_model(model):
 ```
 
 #### Fine-Tuning the Model
-Once the custom head is trained, we unfreeze the base DenseNet201 layers and fine-tune them on the histopathology dataset. Fine-tuning adjusts the pre-trained weights to better suit the target domain.
+Once the custom head is trained, I unfreeze the base `DenseNet201` layers and fine-tune them on the histopathology dataset. Fine-tuning adjusts the pre-trained weights to better suit the target domain.
 
 ```python
 
@@ -333,7 +330,7 @@ def fine_tune_model(model, fine_tune_at):
 
 ### Training the Model
 
-I used the BreakHis dataset, which contains benign and malignant histopathology images. Images were preprocessed with data augmentation to enhance variability. I trained the custom head while freezing the DenseNet201 base. I fine-tuned the entire model by unfreezing layers.
+I used the `BreakHis dataset`, which contains benign and malignant histopathology images. Images were pre-processed with data augmentation to enhance variability. I trained the custom head while freezing the `DenseNet201 base`. I fine-tuned the entire model by unfreezing layers.
 
 ```python
 
@@ -361,7 +358,7 @@ The model was evaluated on a separate test set using the following metrics:
 #### Summary
 Building and fine-tuning DenseNet201 demonstrates its power in handling complex medical imaging tasks. By leveraging transfer learning and a customised classification head, the model achieved high accuracy in classifying histopathology images.
 
-# PART 4. Addressing Class Imbalance in Histopathology: Strategies and Insights
+# Part 4. Addressing Class Imbalance in Histopathology: Strategies and Insights
 
 In medical imaging datasets like histopathology, class imbalance is a common and critical challenge. For instance, datasets may contain significantly more benign samples than malignant ones, making it harder for models to learn to detect the minority class accurately. This can lead to poor sensitivity (recall), which is especially problematic in healthcare where identifying true positives is critical.
 
@@ -370,7 +367,7 @@ In this part, I explore:
 - Strategies to address imbalance, including oversampling, class weighting, and targeted augmentation.
 - The impact of these strategies on the performance of a DenseNet201 model.
 
-### **Why Class Imbalance Matters**
+### Why Class Imbalance Matters
 When classes are imbalanced, ML models tend to favour the majority class, resulting in:
 - *High accuracy but low sensitivity:* The model predicts benign cases well but misses malignant ones.
 - *Bias towards majority class:* The model struggles to generalise for the minority class.
@@ -417,7 +414,7 @@ class_weights = calculate_class_weights(y_train)
 model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=10, class_weight=class_weights)
 ```
 
-#### 3. Targeted Data Augmentation**
+#### 3. Targeted Data Augmentation
 Applying data augmentation selectively to the minority class increases its representation while introducing variability to prevent overfitting.
 
 ```python
@@ -458,11 +455,9 @@ DenseNet201 was trained under three scenarios:
 #### Summary
 Class imbalance is a significant hurdle in medical imaging. By leveraging oversampling, class weighting, and targeted augmentation, I demonstrated that models like DenseNet201 can effectively handle imbalanced datasets while improving sensitivity and overall performance.
 
-# PART 5. Evaluation and Calibration: Building Trust in Medical AI Models
+# Part 5. Evaluation and Calibration: Building Trust in Medical AI Models
 
-Deep learning models are increasingly used in critical domains like healthcare. However, high accuracy alone doesn’t guarantee a model’s reliability. For medical AI systems, evaluation and calibration are key to building trust, ensuring fair predictions, and avoiding costly mistakes.
-
-In this part, I'll explore:
+DL models are increasingly used in critical domains like healthcare. However, high accuracy alone doesn’t guarantee a model’s reliability. For medical AI systems, evaluation and calibration are key to building trust, ensuring fair predictions, and avoiding costly mistakes. In this part, I'll explore:
 
  - The importance of model calibration.
  - Key metrics: **F1-score**, **Brier score loss**, **ROC-AUC**, and **confusion matrices**.

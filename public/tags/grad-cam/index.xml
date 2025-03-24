@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grad-CAM on Natasha Smith Portfolio</title>
+    <link>http://localhost:1313/tags/grad-cam/</link>
+    <description>Recent content in Grad-CAM on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jul 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/grad-cam/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Black Box to Bedside: Making AI Reliable and Interpretable in Cancer Diagnosis</title>
+      <link>http://localhost:1313/projects/from-black-box-to-bedside-making-ai-reliable-and-interpretable-in-cancer-diagnosis/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/projects/from-black-box-to-bedside-making-ai-reliable-and-interpretable-in-cancer-diagnosis/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/project15_images/pr15.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith//Histopathology-AI-BreastCancer&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;http://localhost:1313/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-why-ai-calibration-is-critical-for-reliable-breast-cancer-diagnosis&#34;&gt;Part 1. Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis&lt;/h1&gt;&#xA;&lt;p&gt;AI-powered tools are revolutionising healthcare by providing fast, accurate, and scalable diagnostic solutions. In breast cancer diagnosis, deep learning (DL) models, particularly Convolutional Neural Networks (CNNs), have shown remarkable promise. However, a highly accurate model is not necessarily a reliable one. This is where &lt;strong&gt;AI calibration&lt;/strong&gt; plays a critical role—ensuring that a model’s predicted probabilities align closely with the actual likelihood of events, making predictions more interpretable and trustworthy. In this blog, I explore the importance of model calibration in healthcare and delve into techniques like &lt;strong&gt;Platt Scaling&lt;/strong&gt; and &lt;strong&gt;Isotonic Regression&lt;/strong&gt; to improve the reliability of AI predictions in breast cancer diagnostics.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

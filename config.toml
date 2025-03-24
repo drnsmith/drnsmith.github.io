@@ -33,3 +33,6 @@ theme = 'ananke'
 
 buildFuture = true
 
+
+  [markup.math]
+    enable = true

@@ -83,9 +83,8 @@
 <a href="https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning" target="_blank">
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
-<h1 id="part-1-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology">PART 1. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</h1>
-<p>Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models.</p>
-<p>Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures.</p>
+<h1 id="part-1-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology">Part 1. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology</h1>
+<p>Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models. Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures.</p>
 <h3 id="why-colour-normalisation-is-essential">Why Colour Normalisation is Essential</h3>
 <p>Inconsistent staining can obscure the patterns ML models rely on, leading to reduced performance. CN addresses this by:</p>
 <ul>
@@ -185,7 +184,7 @@
 CLAHE was effective for low-contrast images but added computational overhead.</p>
 <h4 id="summary">Summary</h4>
 <p>Colour normalisation is a vital pre-processing step in medical imaging. By reducing staining variability, techniques like CBN, CD, and CLAHE ensure ML models focus on disease-relevant features. However, the choice of technique should be guided by the specific dataset and computational constraints.</p>
-<h1 id="part-2-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation">PART 2. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</h1>
+<h1 id="part-2-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation">Part 2. Simplifying Pre-processing: Can Data Augmentation Replace Colour Normalisation?</h1>
 <p>Pre-processing is the backbone of any ML pipeline, especially in medical imaging, where accuracy and reliability are paramount. Traditionally, CN has been the gold standard for handling variability in histopathology images. However, advancements in <strong>Data Augmentation (DA)</strong> techniques have opened the door to alternative workflows that promise simplicity without sacrificing performance.</p>
 <h3 id="what-is-data-augmentation">What is Data Augmentation?</h3>
 <p><em>Data augmentation</em> artificially increases the size and diversity of a dataset by applying transformations to existing images. These transformations simulate variations the model might encounter in real-world data, improving its ability to generalise. Key Benefits of DA include</p>
@@ -288,8 +287,8 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> batch[<span style="color:#ae81ff">0</span>]
 </span></span></code></pre></div><h4 id="summary-1">Summary</h4>
 <p>Data augmentation offers a compelling alternative to colour normalisation, simplifying workflows and improving model performance. By introducing variability in training data, DA enhances robustness, making it an excellent choice for scalable medical imaging pipelines.</p>
-<h1 id="part-3-building-and-fine-tuning-densenet201-for-cancer-detection">PART 3. Building and Fine-Tuning DenseNet201 for Cancer Detection</h1>
-<p>Deep learning has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer. <strong>DenseNet201</strong>, a state-of-the-art convolutional neural network (CNN), is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse. This part provides a step-by-step guide to building and fine-tuning a DenseNet201 model for classifying histopathology images into benign and malignant categories.</p>
+<h1 id="part-3-building-and-fine-tuning-densenet201-for-cancer-detection">Part 3. Building and Fine-Tuning DenseNet201 for Cancer Detection</h1>
+<p>DL has revolutionised medical imaging, enabling precise and reliable detection of diseases like cancer. <strong>DenseNet201</strong>, a state-of-the-art CNN, is particularly suited for histopathology image classification due to its dense connectivity and efficient feature reuse. This part provides a step-by-step guide to building and fine-tuning a <code>DenseNet201</code> model for classifying histopathology images into benign and malignant categories.</p>
 <h3 id="densenet201-architecture">DenseNet201 Architecture</h3>
 <p><code>DenseNet201</code> is a CNN that uses &ldquo;dense connectivity,&rdquo; where each layer receives input from all preceding layers. This unique design:</p>
 <ul>
@@ -298,8 +297,8 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 </ul>
 <p><code>DenseNet201</code> is ideal for histopathology because it can capture complex patterns in tissue morphology and structure.</p>
 <h3 id="building-the-model">Building the Model</h3>
-<h4 id="load-the-pre-trained-base-model">Load the Pre-trained Base Model**</h4>
-<p>We start with the <strong>DenseNet201</strong> model pretrained on ImageNet, leveraging its knowledge of general features like edges and textures.</p>
+<h4 id="load-the-pre-trained-base-model">Load the Pre-trained Base Model</h4>
+<p>I start with the <strong>DenseNet201</strong> model pretrained on ImageNet, leveraging its knowledge of general features like edges and textures.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> DenseNet201
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_base_model</span>(input_shape):
@@ -309,8 +308,8 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 </span></span><span style="display:flex;"><span>    base_model <span style="color:#f92672">=</span> DenseNet201(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;imagenet&#39;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>input_shape)
 </span></span><span style="display:flex;"><span>    base_model<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>  <span style="color:#75715e"># Freeze base layers</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> base_model
-</span></span></code></pre></div><h4 id="add-a-custom-classification-head">Add a Custom Classification Head**</h4>
-<p>We replace DenseNet201’s top layers with a custom head tailored for binary classification (benign vs malignant). The head includes:</p>
+</span></span></code></pre></div><h4 id="add-a-custom-classification-head">Add a Custom Classification Head</h4>
+<p>I replace DenseNet201’s top layers with a custom head tailored for binary classification (benign vs malignant). The <code>head</code> includes:</p>
 <ul>
 <li><em>GlobalAveragePooling2D</em>: Reduces spatial dimensions.</li>
 <li><em>Dense Layers</em>: Fully connected layers for feature extraction.</li>
@@ -346,7 +345,7 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 </span></span><span style="display:flex;"><span>                  metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
 </span></span></code></pre></div><h4 id="fine-tuning-the-model">Fine-Tuning the Model</h4>
-<p>Once the custom head is trained, we unfreeze the base DenseNet201 layers and fine-tune them on the histopathology dataset. Fine-tuning adjusts the pre-trained weights to better suit the target domain.</p>
+<p>Once the custom head is trained, I unfreeze the base <code>DenseNet201</code> layers and fine-tune them on the histopathology dataset. Fine-tuning adjusts the pre-trained weights to better suit the target domain.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fine_tune_model</span>(model, fine_tune_at):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
@@ -358,7 +357,7 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 </span></span><span style="display:flex;"><span>        layer<span style="color:#f92672">.</span>trainable <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
 </span></span></code></pre></div><h3 id="training-the-model">Training the Model</h3>
-<p>I used the BreakHis dataset, which contains benign and malignant histopathology images. Images were preprocessed with data augmentation to enhance variability. I trained the custom head while freezing the DenseNet201 base. I fine-tuned the entire model by unfreezing layers.</p>
+<p>I used the <code>BreakHis dataset</code>, which contains benign and malignant histopathology images. Images were pre-processed with data augmentation to enhance variability. I trained the custom head while freezing the <code>DenseNet201 base</code>. I fine-tuned the entire model by unfreezing layers.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> load_base_model(input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>))
 </span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> add_classification_head(model, num_classes<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
@@ -382,7 +381,7 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 
 <h4 id="summary-2">Summary</h4>
 <p>Building and fine-tuning DenseNet201 demonstrates its power in handling complex medical imaging tasks. By leveraging transfer learning and a customised classification head, the model achieved high accuracy in classifying histopathology images.</p>
-<h1 id="part-4-addressing-class-imbalance-in-histopathology-strategies-and-insights">PART 4. Addressing Class Imbalance in Histopathology: Strategies and Insights</h1>
+<h1 id="part-4-addressing-class-imbalance-in-histopathology-strategies-and-insights">Part 4. Addressing Class Imbalance in Histopathology: Strategies and Insights</h1>
 <p>In medical imaging datasets like histopathology, class imbalance is a common and critical challenge. For instance, datasets may contain significantly more benign samples than malignant ones, making it harder for models to learn to detect the minority class accurately. This can lead to poor sensitivity (recall), which is especially problematic in healthcare where identifying true positives is critical.</p>
 <p>In this part, I explore:</p>
 <ul>
@@ -390,7 +389,7 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 <li>Strategies to address imbalance, including oversampling, class weighting, and targeted augmentation.</li>
 <li>The impact of these strategies on the performance of a DenseNet201 model.</li>
 </ul>
-<h3 id="why-class-imbalance-matters"><strong>Why Class Imbalance Matters</strong></h3>
+<h3 id="why-class-imbalance-matters">Why Class Imbalance Matters</h3>
 <p>When classes are imbalanced, ML models tend to favour the majority class, resulting in:</p>
 <ul>
 <li><em>High accuracy but low sensitivity:</em> The model predicts benign cases well but misses malignant ones.</li>
@@ -425,7 +424,7 @@ CLAHE was effective for low-contrast images but added computational overhead.</p
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> calculate_class_weights(y_train)
 </span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, class_weight<span style="color:#f92672">=</span>class_weights)
-</span></span></code></pre></div><h4 id="3-targeted-data-augmentation">3. Targeted Data Augmentation**</h4>
+</span></span></code></pre></div><h4 id="3-targeted-data-augmentation">3. Targeted Data Augmentation</h4>
 <p>Applying data augmentation selectively to the minority class increases its representation while introducing variability to prevent overfitting.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">augment_minority_class</span>(X, y, target_class):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
@@ -464,9 +463,8 @@ DenseNet201 was trained under three scenarios:</p>
 </ul>
 <h4 id="summary-3">Summary</h4>
 <p>Class imbalance is a significant hurdle in medical imaging. By leveraging oversampling, class weighting, and targeted augmentation, I demonstrated that models like DenseNet201 can effectively handle imbalanced datasets while improving sensitivity and overall performance.</p>
-<h1 id="part-5-evaluation-and-calibration-building-trust-in-medical-ai-models">PART 5. Evaluation and Calibration: Building Trust in Medical AI Models</h1>
-<p>Deep learning models are increasingly used in critical domains like healthcare. However, high accuracy alone doesn’t guarantee a model’s reliability. For medical AI systems, evaluation and calibration are key to building trust, ensuring fair predictions, and avoiding costly mistakes.</p>
-<p>In this part, I&rsquo;ll explore:</p>
+<h1 id="part-5-evaluation-and-calibration-building-trust-in-medical-ai-models">Part 5. Evaluation and Calibration: Building Trust in Medical AI Models</h1>
+<p>DL models are increasingly used in critical domains like healthcare. However, high accuracy alone doesn’t guarantee a model’s reliability. For medical AI systems, evaluation and calibration are key to building trust, ensuring fair predictions, and avoiding costly mistakes. In this part, I&rsquo;ll explore:</p>
 <ul>
 <li>The importance of model calibration.</li>
 <li>Key metrics: <strong>F1-score</strong>, <strong>Brier score loss</strong>, <strong>ROC-AUC</strong>, and <strong>confusion matrices</strong>.</li>

@@ -6,8 +6,78 @@
     <description>Recent content in Tags on Natasha Smith Portfolio</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 22 Mar 2025 10:58:08 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI in Clinical Practice</title>
+      <link>http://localhost:1313/tags/ai-in-clinical-practice/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/ai-in-clinical-practice/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI Model Deployment</title>
+      <link>http://localhost:1313/tags/ai-model-deployment/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/ai-model-deployment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Breast Cancer Imaging</title>
+      <link>http://localhost:1313/tags/breast-cancer-imaging/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/breast-cancer-imaging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Clustering</title>
+      <link>http://localhost:1313/tags/clustering/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/clustering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CNN Feature Space</title>
+      <link>http://localhost:1313/tags/cnn-feature-space/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/cnn-feature-space/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deep Learning for Healthcare</title>
+      <link>http://localhost:1313/tags/deep-learning-for-healthcare/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/deep-learning-for-healthcare/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Feature Extraction</title>
+      <link>http://localhost:1313/tags/feature-extraction/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/feature-extraction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Histopathology Analysis</title>
+      <link>http://localhost:1313/tags/histopathology-analysis/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/histopathology-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Personalised Diagnostics</title>
+      <link>http://localhost:1313/tags/personalised-diagnostics/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/personalised-diagnostics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Statistical Analysis</title>
+      <link>http://localhost:1313/tags/statistical-analysis/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/statistical-analysis/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AI</title>
       <link>http://localhost:1313/tags/ai/</link>
@@ -32,7 +102,7 @@
     <item>
       <title>Python</title>
       <link>http://localhost:1313/tags/python/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/python/</guid>
       <description></description>
     </item>
@@ -135,121 +205,51 @@
       <description></description>
     </item>
     <item>
-      <title>Chest X-Ray Analysis</title>
-      <link>http://localhost:1313/tags/chest-x-ray-analysis/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/chest-x-ray-analysis/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CNNs</title>
-      <link>http://localhost:1313/tags/cnns/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/cnns/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Computer Vision</title>
-      <link>http://localhost:1313/tags/computer-vision/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/computer-vision/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Deep Learning</title>
-      <link>http://localhost:1313/tags/deep-learning/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/deep-learning/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Healthcare AI</title>
-      <link>http://localhost:1313/tags/healthcare-ai/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/healthcare-ai/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Image Classification</title>
-      <link>http://localhost:1313/tags/image-classification/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/image-classification/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Medical Imaging</title>
-      <link>http://localhost:1313/tags/medical-imaging/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/medical-imaging/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Neural Networks</title>
-      <link>http://localhost:1313/tags/neural-networks/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/neural-networks/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Pneumonia Detection</title>
-      <link>http://localhost:1313/tags/pneumonia-detection/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/pneumonia-detection/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>VGG16</title>
-      <link>http://localhost:1313/tags/vgg16/</link>
-      <pubDate>Fri, 20 Sep 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/vgg16/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Big Data</title>
       <link>http://localhost:1313/tags/big-data/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/big-data/</guid>
       <description></description>
     </item>
     <item>
       <title>Data Visualisation</title>
       <link>http://localhost:1313/tags/data-visualisation/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/data-visualisation/</guid>
       <description></description>
     </item>
     <item>
       <title>MapReduce</title>
       <link>http://localhost:1313/tags/mapreduce/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/mapreduce/</guid>
       <description></description>
     </item>
     <item>
       <title>NASDAQ</title>
       <link>http://localhost:1313/tags/nasdaq/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/nasdaq/</guid>
       <description></description>
     </item>
     <item>
       <title>Sentiment Analysis</title>
       <link>http://localhost:1313/tags/sentiment-analysis/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Social Media Mining</title>
       <link>http://localhost:1313/tags/social-media-mining/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/social-media-mining/</guid>
       <description></description>
     </item>
     <item>
       <title>Twitter Analytics</title>
       <link>http://localhost:1313/tags/twitter-analytics/</link>
-      <pubDate>Sun, 25 Aug 2024 10:58:08 -0400</pubDate>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/twitter-analytics/</guid>
       <description></description>
     </item>
@@ -261,17 +261,31 @@
       <description></description>
     </item>
     <item>
-      <title>Artificial Intelligence</title>
-      <link>http://localhost:1313/tags/artificial-intelligence/</link>
+      <title>AI Model Calibration</title>
+      <link>http://localhost:1313/tags/ai-model-calibration/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/artificial-intelligence/</guid>
+      <guid>http://localhost:1313/tags/ai-model-calibration/</guid>
       <description></description>
     </item>
     <item>
-      <title>Breast Cancer Diagnosis</title>
-      <link>http://localhost:1313/tags/breast-cancer-diagnosis/</link>
+      <title>AI Trust</title>
+      <link>http://localhost:1313/tags/ai-trust/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/breast-cancer-diagnosis/</guid>
+      <guid>http://localhost:1313/tags/ai-trust/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AUC</title>
+      <link>http://localhost:1313/tags/auc/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/auc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Breast Cancer Detection</title>
+      <link>http://localhost:1313/tags/breast-cancer-detection/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/breast-cancer-detection/</guid>
       <description></description>
     </item>
     <item>
@@ -282,66 +296,108 @@
       <description></description>
     </item>
     <item>
-      <title>Deep Learning Applications</title>
-      <link>http://localhost:1313/tags/deep-learning-applications/</link>
+      <title>CNN Architecture</title>
+      <link>http://localhost:1313/tags/cnn-architecture/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/deep-learning-applications/</guid>
+      <guid>http://localhost:1313/tags/cnn-architecture/</guid>
       <description></description>
     </item>
     <item>
-      <title>DenseNet</title>
-      <link>http://localhost:1313/tags/densenet/</link>
+      <title>Computer Vision</title>
+      <link>http://localhost:1313/tags/computer-vision/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/densenet/</guid>
+      <guid>http://localhost:1313/tags/computer-vision/</guid>
       <description></description>
     </item>
     <item>
-      <title>EfficientNet</title>
-      <link>http://localhost:1313/tags/efficientnet/</link>
+      <title>Data Augmentation</title>
+      <link>http://localhost:1313/tags/data-augmentation/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/efficientnet/</guid>
+      <guid>http://localhost:1313/tags/data-augmentation/</guid>
       <description></description>
     </item>
     <item>
-      <title>Feature Space Analysis</title>
-      <link>http://localhost:1313/tags/feature-space-analysis/</link>
+      <title>Deep Learning Models</title>
+      <link>http://localhost:1313/tags/deep-learning-models/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/feature-space-analysis/</guid>
+      <guid>http://localhost:1313/tags/deep-learning-models/</guid>
       <description></description>
     </item>
     <item>
-      <title>Healthtech Innovations</title>
-      <link>http://localhost:1313/tags/healthtech-innovations/</link>
+      <title>Ensemble Learning</title>
+      <link>http://localhost:1313/tags/ensemble-learning/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/healthtech-innovations/</guid>
+      <guid>http://localhost:1313/tags/ensemble-learning/</guid>
       <description></description>
     </item>
     <item>
-      <title>Histopathology Analysis</title>
-      <link>http://localhost:1313/tags/histopathology-analysis/</link>
+      <title>Explainable AI</title>
+      <link>http://localhost:1313/tags/explainable-ai/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/histopathology-analysis/</guid>
+      <guid>http://localhost:1313/tags/explainable-ai/</guid>
       <description></description>
     </item>
     <item>
-      <title>Medical AI Solutions</title>
-      <link>http://localhost:1313/tags/medical-ai-solutions/</link>
+      <title>Grad-CAM</title>
+      <link>http://localhost:1313/tags/grad-cam/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/medical-ai-solutions/</guid>
+      <guid>http://localhost:1313/tags/grad-cam/</guid>
       <description></description>
     </item>
     <item>
-      <title>Model Interpretability</title>
-      <link>http://localhost:1313/tags/model-interpretability/</link>
+      <title>Histopathology</title>
+      <link>http://localhost:1313/tags/histopathology/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/model-interpretability/</guid>
+      <guid>http://localhost:1313/tags/histopathology/</guid>
       <description></description>
     </item>
     <item>
-      <title>ResNet</title>
-      <link>http://localhost:1313/tags/resnet/</link>
+      <title>Interpretable Deep Learning</title>
+      <link>http://localhost:1313/tags/interpretable-deep-learning/</link>
       <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/resnet/</guid>
+      <guid>http://localhost:1313/tags/interpretable-deep-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LIME</title>
+      <link>http://localhost:1313/tags/lime/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/lime/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medical AI Ethics</title>
+      <link>http://localhost:1313/tags/medical-ai-ethics/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/medical-ai-ethics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medical Imaging</title>
+      <link>http://localhost:1313/tags/medical-imaging/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/medical-imaging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Model Evaluation</title>
+      <link>http://localhost:1313/tags/model-evaluation/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/model-evaluation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sensitivity</title>
+      <link>http://localhost:1313/tags/sensitivity/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/sensitivity/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Specificity</title>
+      <link>http://localhost:1313/tags/specificity/</link>
+      <pubDate>Wed, 17 Jul 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/specificity/</guid>
       <description></description>
     </item>
     <item>
@@ -359,6 +415,13 @@
       <description></description>
     </item>
     <item>
+      <title>Deep Learning</title>
+      <link>http://localhost:1313/tags/deep-learning/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Deep Learning Basics</title>
       <link>http://localhost:1313/tags/deep-learning-basics/</link>
       <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
@@ -373,10 +436,17 @@
       <description></description>
     </item>
     <item>
-      <title>Histopathology</title>
-      <link>http://localhost:1313/tags/histopathology/</link>
+      <title>Image Classification</title>
+      <link>http://localhost:1313/tags/image-classification/</link>
       <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/histopathology/</guid>
+      <guid>http://localhost:1313/tags/image-classification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Neural Networks</title>
+      <link>http://localhost:1313/tags/neural-networks/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/neural-networks/</guid>
       <description></description>
     </item>
     <item>
@@ -527,6 +597,41 @@
       <description></description>
     </item>
     <item>
+      <title>Chest X-Ray Analysis</title>
+      <link>http://localhost:1313/tags/chest-x-ray-analysis/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/chest-x-ray-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CNNs</title>
+      <link>http://localhost:1313/tags/cnns/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/cnns/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Healthcare AI</title>
+      <link>http://localhost:1313/tags/healthcare-ai/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/healthcare-ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pneumonia Detection</title>
+      <link>http://localhost:1313/tags/pneumonia-detection/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/pneumonia-detection/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VGG16</title>
+      <link>http://localhost:1313/tags/vgg16/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>http://localhost:1313/tags/vgg16/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Genetic Algorithms</title>
       <link>http://localhost:1313/tags/genetic-algorithms/</link>
       <pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate>
@@ -538,27 +643,6 @@
       <link>http://localhost:1313/tags/optimisation/</link>
       <pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate>
       <guid>http://localhost:1313/tags/optimisation/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>DenseNet201</title>
-      <link>http://localhost:1313/tags/densenet201/</link>
-      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/densenet201/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Home</title>
-      <link>http://localhost:1313/tags/home/</link>
-      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/home/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Transfer Learning</title>
-      <link>http://localhost:1313/tags/transfer-learning/</link>
-      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
-      <guid>http://localhost:1313/tags/transfer-learning/</guid>
       <description></description>
     </item>
     <item>

@@ -83,16 +83,15 @@
 <a href="https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST" target="_blank">
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
-<h1 id="partt-1-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning">PARTt 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning</h1>
-<p>You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts. But here’s the thing — <strong>MNIST</strong> is old news. It’s solved, overused, and no longer representative of real-world challenges. <strong>Fashion MNIST</strong> is a modern, robust alternative that brings fresh complexity to the table.</p>
+<h1 id="part-1-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning">Part 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning</h1>
+<p>You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts. But here’s the thing — MNIST is old news. It’s solved, overused, and no longer representative of real-world challenges. <strong>Fashion MNIST</strong> is a modern, robust alternative that brings fresh complexity to the table.</p>
 <p>Fashion MNIST is a game-changer. With its focus on apparel images like shirts, sneakers, and dresses, it mirrors the kind of messy, nuanced data we deal with today. Whether you’re a budding data scientist or a seasoned researcher, Fashion MNIST offers a sandbox to hone your skills and push the boundaries of what’s possible.</p>
-<p>In this blog, we’ll unravel the story of Fashion MNIST. You’ll learn:</p>
+<p>In this part, I’ll unravel the story of <code>Fashion MNIST</code>. You’ll learn:</p>
 <ul>
 <li>What makes it unique compared to its predecessor.</li>
 <li>How to load, visualise, and pre-process the dataset.</li>
 <li>Why it’s become the go-to benchmark for image classification.</li>
 </ul>
-<p>Let’s dive in.</p>
 <h3 id="what-is-fashion-mnist">What is Fashion MNIST?</h3>
 <p>Fashion MNIST, created by <em>Zalando Research</em>, is a dataset of grayscale images representing 10 clothing categories. Each image is 28x28 pixels and labeled with one of 10 classes, including T-shirts, trousers, dresses, and more.</p>
 <p>But why replace MNIST?</p>
@@ -185,17 +184,14 @@ Start with a simple Convolutional Neural Network (CNN) to classify the images.</
 </ul>
 <h4 id="summary">Summary</h4>
 <p>Fashion MNIST isn’t just a dataset; it’s a tool for the modern machine learning practitioner. It bridges the gap between the simplicity of MNIST and the complexity of real-world data, making it an invaluable resource for developing and testing image classification pipelines. Whether you’re exploring NNs for the first time or fine-tuning your skills as a seasoned researcher, Fashion MNIST has something to offer.</p>
-<h1 id="part-2-designing-dense-neural-networks-lessons-from-fashion-mnist">PART 2. Designing Dense Neural Networks: Lessons from Fashion MNIST</h1>
-<p>Designing neural networks (NNs) is an art as much as it is a science. When faced with the challenge of classifying Fashion MNIST images, I needed a lightweight yet powerful architecture to handle the complexity of apparel images. Dense NNs, with their fully connected layers, were the perfect choice for this task. In this part, we’ll walk through:</p>
+<h1 id="part-2-designing-dense-neural-networks-lessons-from-fashion-mnist">Part 2. Designing Dense Neural Networks: Lessons from Fashion MNIST</h1>
+<p>Designing neural networks (NNs) is an art as much as it is a science. When faced with the challenge of classifying Fashion MNIST images, I needed a lightweight yet powerful architecture to handle the complexity of apparel images. Dense NNs, with their fully connected layers, were the perfect choice for this task. In this part, I’ll walk you through:</p>
 <ul>
 <li>How dense NNs work and their role in image classification.</li>
 <li>Designing an efficient architecture using activation functions and layers.</li>
 <li>Practical lessons learned while optimising performance with Fashion MNIST.</li>
 </ul>
-<p>By the end, you’ll have a clear roadmap to build your own dense networks for image classification tasks.</p>
-<p>Let’s dive in!</p>
-<h3 id="technical-explanation-1">Technical Explanation</h3>
-<h4 id="what-is-a-dense-neural-network">What is a Dense Neural Network?</h4>
+<h3 id="technical-explanation-what-is-a-dense-neural-network">Technical Explanation: What is a Dense Neural Network?</h3>
 <p>Dense layers are the backbone of most NNs. Each neuron in a dense layer connects to every neuron in the previous layer, enabling the network to learn complex representations of the data. For image classification, dense layers translate features extracted by convolutional or pooling layers into class probabilities. While CNNs are often the star, dense layers are where the final decisions are made. Dense NNs were the perfect choice for this task because they excel at learning complex, high-level patterns from data.</p>
 <p>Here&rsquo;s why they fit well for Fashion MNIST:</p>
 <ul>
@@ -223,10 +219,10 @@ Start with a simple Convolutional Neural Network (CNN) to classify the images.</
 <ul>
 <li><em>Fully Connected Neurons:</em> Each neuron in a dense layer connects to every neuron in the previous layer. This ensures the network has access to all the extracted features, regardless of where they were found in the image.</li>
 </ul>
-<p>Why It’s Important?</p>
+<p><strong>Why It’s Important?</strong></p>
 <ul>
 <li>
-<p>Spatial features extracted by CNNs (like an edge in the top-left corner of an image) might be relevant for multiple classes. Dense layers bring this global context into the decision-making process.</p>
+<p><em>Spatial features</em> extracted by CNNs (like an edge in the top-left corner of an image) might be relevant for multiple classes. Dense layers bring this global context into the decision-making process.</p>
 </li>
 <li>
 <p><em>Mapping Features to Classes:</em> Dense layers assign weights to features to determine their relevance for each class. This step ensures the network outputs class probabilities.</p>
@@ -240,8 +236,7 @@ Start with a simple Convolutional Neural Network (CNN) to classify the images.</
 <li><em>Learning Decision Boundaries:</em> Dense layers refine the feature space into decision boundaries. By assigning weights and biases during training, these layers learn to separate data points belonging to different classes.</li>
 </ul>
 <p>A dense layer might determine that a &ldquo;Sneaker&rdquo; is characterised by low curvature (from pooling layers) and high edge intensity (from convolutional layers). It uses these attributes to assign higher probabilities to the correct class.</p>
-<p>Why This Matters?
-Dense layers act as the decision-makers in a network:</p>
+<p><strong>Why This Matters?</strong> Dense layers act as the decision-makers in a network:</p>
 <ul>
 <li>They synthesise all the high-level features extracted by CNNs.</li>
 <li>They produce final predictions by mapping features to classes.</li>
@@ -252,30 +247,25 @@ Dense layers act as the decision-makers in a network:</p>
 <li><em>Computational Efficiency</em>: Fashion MNIST images are relatively small (28x28 pixels) and grayscale. Using a lightweight architecture ensures efficient processing without overcomplicating the model.</li>
 </ol>
 <p>Overly complex architectures would unnecessarily increase computation time and memory usage for a problem that doesn&rsquo;t require heavy resources.</p>
-<p>Why It Matters?</p>
-<p>A lightweight model trains faster, uses less memory, and can run on standard hardware, making it accessible for experimentation and practical deployment.</p>
+<p><strong>Why It Matters?</strong> A lightweight model trains faster, uses less memory, and can run on standard hardware, making it accessible for experimentation and practical deployment.</p>
 <ol start="2">
 <li><em>Avoiding Overfitting:</em> Simpler models are less prone to overfitting, especially on smaller datasets.</li>
 </ol>
 <p>Fashion MNIST has 60,000 training images, which is sufficient for dense networks but not large enough to justify deeper or more complex architectures like <code>ResNet</code> or <code>EfficientNet</code>.</p>
-<p>Why It Matters?</p>
-<p>Lightweight architectures force the model to focus on generalisable patterns rather than memorising data.</p>
+<p><strong>Why It Matters?</strong> Lightweight architectures force the model to focus on generalisable patterns rather than memorising data.</p>
 <ol start="3">
 <li><em>Balancing Performance and Complexity:</em> Dense networks are inherently simpler than CNNs because they do not include convolutional layers for feature extraction. This simplicity makes dense architectures lightweight and easier to train.</li>
 </ol>
 <p>For Fashion MNIST, a dense network strikes the right balance between computational efficiency and classification accuracy.</p>
-<p>Why It Matters?</p>
-<p>Lightweight architectures allow quicker iterations and experimentation without sacrificing performance, making them perfect for prototyping.</p>
+<p><strong>Why It Matters?</strong> Lightweight architectures allow quicker iterations and experimentation without sacrificing performance, making them perfect for prototyping.</p>
 <ol start="4">
 <li><em>Real-World Deployment:</em> Lightweight models are easier to deploy in real-world scenarios, such as mobile devices or edge computing. While Fashion MNIST is a benchmark dataset, the principles of lightweight design apply to production use cases where efficiency is critical.</li>
 </ol>
-<p>Why It Matters?</p>
-<p>A model that performs well and is resource-efficient can scale better in practical applications.</p>
+<p><strong>Why It Matters?</strong> A model that performs well and is resource-efficient can scale better in practical applications.</p>
 <ol start="5">
 <li><em>Building a Foundation:</em> Fashion MNIST is often used as an entry point for learning NNs. A lightweight model serves as a simple yet effective foundation for understanding and experimenting with dense architectures before moving to more complex models.</li>
 </ol>
-<p>Why It Matters?</p>
-<p>A lightweight design helps in building intuition about neural networks without overwhelming computational complexity.</p>
+<p><strong>Why It Matters?</strong> A lightweight design helps in building intuition about neural networks without overwhelming computational complexity.</p>
 <h3 id="building-a-dense-network-for-fashion-mnist">Building a Dense Network for Fashion MNIST</h3>
 <p>Fashion MNIST images are <code>28x28 grayscale pixels</code>, and our dense network should be designed to process this flattened input. Here&rsquo;s the architecture we used:</p>
 <ul>
@@ -306,8 +296,7 @@ Dense layers act as the decision-makers in a network:</p>
 <li><em>ReLU (Rectified Linear Unit)</em>: Fast and computationally efficient, perfect for hidden layers.</li>
 <li><em>Softmax</em>: Converts the output into probabilities, ideal for multi-class classification.</li>
 </ul>
-<p>Why ReLU?</p>
-<p><code>ReLU</code> solves the vanishing gradient problem, making training faster and more effective. In contrast, <code>Sigmoid</code> and <code>Tanh</code>, while useful in specific cases, can struggle with large datasets due to slower convergence.</p>
+<p><strong>Why ReLU?</strong> It solves the vanishing gradient problem, making training faster and more effective. In contrast, <code>Sigmoid</code> and <code>Tanh</code>, while useful in specific cases, can struggle with large datasets due to slower convergence.</p>
 <h4 id="lessons-from-optimisation">Lessons from Optimisation</h4>
 <ul>
 <li>
@@ -320,7 +309,7 @@ Dense layers act as the decision-makers in a network:</p>
 <p><em>Learning Rate</em>: The <code>Adam optimiser</code>, with its adaptive learning rate, simplifies hyperparameter tuning and ensures faster convergence.</p>
 </li>
 </ul>
-<h3 id="real-world-applications-1">Real-World Applications</h3>
+<h4 id="real-world-applications-1">Real-World Applications</h4>
 <p>Dense NNs are versatile and extend far beyond Fashion MNIST.</p>
 <ul>
 <li>
@@ -336,32 +325,23 @@ Dense layers act as the decision-makers in a network:</p>
 <h4 id="summary-1">Summary</h4>
 <p>Dense NNs may seem simple, but their potential is immense. By carefully selecting activation functions, layer sizes, and hyperparameters, you can build models that generalise well and achieve high accuracy on tasks like Fashion MNIST. Now it’s your turn—experiment with architectures, tweak the hyperparameters, and see what works best for your dataset. And don’t forget: the best designs come from iteration and learning.</p>
 <h1 id="part-3-relu-vs-sigmoid-which-activation-function-wins-on-fashion-mnist">PART 3. ReLU vs Sigmoid: Which Activation Function Wins on Fashion MNIST?</h1>
-<p>When building neural networks (NNs), the activation function you choose can make or break your model. It’s the part of the network that decides whether a neuron &ldquo;fires&rdquo; and passes information forward. For years, <strong>Sigmoid</strong> was the go-to activation function, but then <strong>ReLU</strong> came along, revolutionising deep learning with its simplicity and effectiveness. But how do these activation functions stack up against each other in practice?</p>
-<p>In this part, we’ll:</p>
+<p>When building NNs, the activation function you choose can make or break your model. It’s the part of the network that decides whether a neuron &ldquo;fires&rdquo; and passes information forward. For years, <strong>Sigmoid</strong> was the go-to activation function, but then <strong>ReLU</strong> came along, revolutionising deep learning with its simplicity and effectiveness. But how do these activation functions stack up against each other in practice?</p>
+<p>In this part, I’ll:</p>
 <ul>
 <li>Explore the key differences between <code>ReLU</code> and <code>Sigmoid</code>.</li>
 <li>Compare their impact on training dense neural networks using Fashion MNIST.</li>
 <li>Share practical insights and results from experiments with both.</li>
 </ul>
-<p>By the end, you’ll know which activation function to use and why.</p>
-<p>Let’s dive in!</p>
-<h3 id="technical-explanation-2">Technical Explanation</h3>
-<h4 id="what-are-activation-functions">What Are Activation Functions?</h4>
+<h3 id="technical-explanation-what-are-activation-functions">Technical Explanation: What Are Activation Functions?</h3>
 <p>Activation functions introduce non-linearity into a NN, enabling it to learn complex patterns. Without them, the network would behave like a linear regression model, no matter how many layers it had. Two of the most common activation functions are:</p>
-<ol>
-<li><em>Sigmoid Activation Function</em>: Squashes input values to a range between 0 and 1, making it useful for probabilistic outputs.</li>
-</ol>
-<p>[
-\sigma(x) = \frac{1}{1 + e^{-x}}
-]</p>
-<p>However, Sigmoid has drawbacks, including vanishing gradients for large or small input values, leading to slower learning.</p>
-<ol start="2">
-<li><em>ReLU (Rectified Linear Unit)</em>: Outputs the input value if it’s positive; otherwise, it outputs zero.</li>
-</ol>
-<p>[
-f(x) = \max(0, x)
-]</p>
-<p>ReLU is computationally efficient and avoids the vanishing gradient problem for positive inputs, making it the default choice in modern DL.</p>
+<ul>
+<li>
+<p><em>Sigmoid Activation Function</em>: Squashes input values to a range between 0 and 1, making it useful for probabilistic outputs. However, <code>Sigmoid</code> has drawbacks, including vanishing gradients for large or small input values, leading to slower learning.</p>
+</li>
+<li>
+<p><em>ReLU (Rectified Linear Unit)</em>: Outputs the input value if it’s positive; otherwise, it outputs zero. <code>ReLU</code> is computationally efficient and avoids the vanishing gradient problem for positive inputs, making it the default choice in modern DL.</p>
+</li>
+</ul>
 <h4 id="comparing-relu-and-sigmoid-on-fashion-mnist">Comparing ReLU and Sigmoid on Fashion MNIST</h4>
 <p>To evaluate these activation functions, I trained two dense NNs on Fashion MNIST. The architecture and hyperparameters were identical except for the activation functions in the hidden layers:</p>
 <p><strong>Model 1 (ReLU):</strong></p>
@@ -393,12 +373,10 @@ f(x) = \max(0, x)
 </span></span><span style="display:flex;"><span>])
 </span></span><span style="display:flex;"><span>model_sigmoid<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
 </span></span></code></pre></div><h3 id="experimental-results">Experimental Results</h3>
-<ol>
-<li>With Sigmoid:
+<p>With <strong>Sigmoid</strong>:
 <figure><img src="/images/sigmond.png">
 </figure>
-</li>
-</ol>
+</p>
 <p>With <strong>ReLU:</strong>
 <figure><img src="/images/relu.png">
 </figure>
@@ -410,10 +388,7 @@ f(x) = \max(0, x)
 <li>Train Loss: 2.1737</li>
 <li>Test Loss: 2.1664</li>
 </ul>
-<p>The Sigmoid activation function has challenges with gradient saturation, especially when the inputs are large or small, leading to slower learning and potentially lower performance. The test and training accuracy are quite close, suggesting that while the model doesn&rsquo;t overfit, it struggles to learn effectively from the data.</p>
-<ol start="2">
-<li>With ReLU</li>
-</ol>
+<p>The <code>Sigmoid</code> activation function has challenges with gradient saturation, especially when the inputs are large or small, leading to slower learning and potentially lower performance. The test and training accuracy are quite close, suggesting that while the model doesn&rsquo;t overfit, it struggles to learn effectively from the data.</p>
 <p><em>ReLU Model Performance:</em></p>
 <ul>
 <li>Training Accuracy: ~76.54%</li>
@@ -421,14 +396,14 @@ f(x) = \max(0, x)
 <li>Train Loss: 0.7040</li>
 <li>Test Loss: 0.7047</li>
 </ul>
-<p>ReLU significantly outperforms Sigmoid, with much higher training and test accuracy. The test and training loss are closely aligned, indicating good generalisation without overfitting.
-The ReLU activation function avoids gradient saturation, making it better suited for deeper networks and image classification tasks.</p>
+<p><code>ReLU</code> significantly outperforms <code>Sigmoid</code>, with much higher training and test accuracy. The test and training loss are closely aligned, indicating good generalisation without overfitting.
+The <code>ReLU</code> activation function avoids gradient saturation, making it better suited for deeper networks and image classification tasks.</p>
 <h3 id="understanding-dataset-complexity-and-model-architecture">Understanding Dataset Complexity and Model Architecture</h3>
 <p>When it comes to choosing an activation function, the dataset&rsquo;s complexity and the model architecture play a crucial role. In our experiment with Fashion MNIST, a dataset of medium complexity, the Sigmoid activation function struggled to deliver high performance. The primary reason? <strong>Gradient saturation</strong>.</p>
-<p>Sigmoid compresses input values into a narrow range [0, 1], which can lead to vanishing gradients during backpropagation. This limitation becomes especially noticeable in deeper networks or datasets that require the model to capture subtle variations, such as differentiating between classes like &ldquo;Shirt&rdquo; and &ldquo;Pullover&rdquo; in Fashion MNIST.</p>
-<p>On the other hand, the ReLU activation function allowed the model to learn and adapt effectively. Unlike Sigmoid, ReLU outputs the input directly if it&rsquo;s positive, avoiding gradient saturation and enabling faster learning. This ability is especially useful for datasets like Fashion MNIST, where capturing spatial patterns and hierarchical features is essential for classification.</p>
-<h4 id="why-modern-deep-learning-favors-relu-and-lessons-learned">Why Modern Deep Learning Favors ReLU and Lessons Learned</h4>
-<p>ReLU has become the default choice in modern DL architectures, and for good reasons:</p>
+<p><code>Sigmoid</code> compresses input values into a narrow range [0, 1], which can lead to vanishing gradients during backpropagation. This limitation becomes especially noticeable in deeper networks or datasets that require the model to capture subtle variations, such as differentiating between classes like &ldquo;Shirt&rdquo; and &ldquo;Pullover&rdquo; in Fashion MNIST.</p>
+<p>On the other hand, the <code>ReLU</code> activation function allowed the model to learn and adapt effectively. Unlike <code>Sigmoid</code>, <code>ReLU</code> outputs the input directly if it&rsquo;s positive, avoiding gradient saturation and enabling faster learning. This ability is especially useful for datasets like Fashion MNIST, where capturing spatial patterns and hierarchical features is essential for classification.</p>
+<h3 id="why-modern-deep-learning-favors-relu-and-lessons-learned">Why Modern Deep Learning Favors ReLU and Lessons Learned</h3>
+<p><code>ReLU</code> has become the default choice in modern DL architectures, and for good reasons:</p>
 <ul>
 <li><em>Computational Efficiency</em>: ReLU involves a simple comparison operation, making it computationally lighter than <code>Sigmoid</code> or <code>Tanh</code>.</li>
 <li><em>Effective Gradient Flow</em>: By preserving positive gradients, ReLU avoids the bottleneck of vanishing gradients, enabling deeper networks to train effectively.</li>
@@ -443,30 +418,27 @@ The ReLU activation function avoids gradient saturation, making it better suited
 <p>In real-world scenarios, modern DL architectures like ResNet, VGG, and EfficientNet almost exclusively use ReLU (or its variants like Leaky ReLU). This adoption reflects its ability to scale with increasing dataset size and model depth, making it indispensable for building robust image classification systems.</p>
 <p>By understanding these trade-offs, we can make informed choices that align with the dataset&rsquo;s complexity and the goals of our machine learning pipeline.</p>
 <h3 id="real-world-applications-2">Real-World Applications</h3>
-<p>When to Use ReLU?</p>
-<p>ReLU is the standard for hidden layers in modern neural networks, especially in:</p>
+<p><strong>When to Use ReLU?</strong> ReLU is the standard for hidden layers in modern neural networks, especially in:</p>
 <ul>
-<li><strong>Image Classification</strong>: Handles complex, high-dimensional data like Fashion MNIST.</li>
-<li><strong>Deep Architectures</strong>: Prevents vanishing gradients in networks with many layers.</li>
+<li><em>Image Classification</em>: Handles complex, high-dimensional data like Fashion MNIST.</li>
+<li><em>Deep Architectures</em>: Prevents vanishing gradients in networks with many layers.</li>
 </ul>
-<p>When to Use Sigmoid?</p>
-<p>Sigmoid is still useful in specific scenarios, such as:</p>
+<p><strong>When to Use Sigmoid?</strong> Sigmoid is still useful in specific scenarios, such as:</p>
 <ul>
-<li><strong>Binary Classification</strong>: Output layer for tasks requiring probabilities between 0 and 1.</li>
-<li><strong>Shallow Networks</strong>: Can perform well when model depth is limited.</li>
+<li><em>Binary Classification</em>: Output layer for tasks requiring probabilities between 0 and 1.</li>
+<li><em>Shallow Networks</em>: Can perform well when model depth is limited.</li>
 </ul>
 <h4 id="summary-2">Summary</h4>
 <p>Choosing the right activation function can dramatically affect your model’s performance. For Fashion MNIST, ReLU was the clear winner, offering faster training, better accuracy, and smoother loss convergence. While Sigmoid has its place in certain use cases, it struggles with modern datasets and deep architectures. The lesson? Start with ReLU for hidden layers, and reserve Sigmoid for specific needs like binary classification.</p>
-<h1 id="part-4-hyperparameter-tuning-for-neural-networks-the-fashion-mnist-approach">PART 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach</h1>
-<p>When training neural networks (NNs), every parameter matters. Hyperparameters like learning rate and batch size aren’t learned by the model—they’re chosen by you. These settings can make or break your model’s performance. But how do you find the right combination? In this part, I’ll take you through my experience fine-tuning hyperparameters for a NN trained on the Fashion MNIST dataset. We’ll cover:</p>
+<h1 id="part-4-hyperparameter-tuning-for-neural-networks-the-fashion-mnist-approach">Part 4. Hyperparameter Tuning for Neural Networks: The Fashion MNIST Approach</h1>
+<p>When training NNs, every parameter matters. Hyperparameters like learning rate and batch size aren’t learned by the model—they’re chosen by you. These settings can make or break your model’s performance. But how do you find the right combination? In this part, I’ll take you through my experience fine-tuning hyperparameters for a NN trained on the Fashion MNIST dataset. In this part, I’ll cover:</p>
 <ul>
 <li>How learning rate impacts convergence.</li>
 <li>Why batch size can influence both speed and stability.</li>
 <li>The importance of regularisation techniques like dropout to prevent overfitting.</li>
 <li>Interpreting precision, recall, and F1-score to evaluate model performance.</li>
 </ul>
-<h3 id="technical-explanation-3">Technical Explanation</h3>
-<h4 id="the-starting-point">The Starting Point</h4>
+<h3 id="technical-explanation-the-starting-point">Technical Explanation: The Starting Point</h3>
 <p>I built a simple but effective NN to classify images in the Fashion MNIST dataset. The network consisted of:</p>
 <ul>
 <li>A <strong>Flatten</strong> layer to prepare the input data.</li>
@@ -487,7 +459,7 @@ The ReLU activation function avoids gradient saturation, making it better suited
 </span></span><span style="display:flex;"><span>])
 </span></span></code></pre></div><p>With the base model defined, the challenge was to optimise its performance by tuning hyperparameters.</p>
 <ul>
-<li><strong>1. Learning Rate: Finding the Sweet Spot:</strong>
+<li><strong>Learning Rate: Finding the Sweet Spot:</strong>
 The learning rate determines how much the model adjusts during training. Too high, and the model overshoots the optimal point. Too low, and training takes forever. I used the <code>SGD optimiser</code> and set the learning rate to <code>0.01</code>. This value offered a balance between stability and speed. The model converged efficiently without oscillating or plateauing.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers <span style="color:#f92672">import</span> SGD
@@ -496,7 +468,7 @@ The learning rate determines how much the model adjusts during training. Too hig
 </span></span><span style="display:flex;"><span>              loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sparse_categorical_crossentropy&#39;</span>, 
 </span></span><span style="display:flex;"><span>              metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
 </span></span></code></pre></div><ul>
-<li><strong>2. Batch Size: Balancing Speed and Stability:</strong>
+<li><strong>Batch Size: Balancing Speed and Stability:</strong>
 The batch size controls how many samples the model processes before updating weights. Smaller batch sizes can result in noisier gradients, while larger batches provide more stable updates but consume more memory. I chose a batch size of <code>1000</code>, which was a practical choice for my computational setup. It allowed the model to process the data efficiently without overwhelming memory.</li>
 </ul>
 <p>The batch size of 1000 worked well, offering smooth training and good validation performance.</p>
@@ -505,7 +477,7 @@ The batch size controls how many samples the model processes before updating wei
 </span></span><span style="display:flex;"><span>                    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, 
 </span></span><span style="display:flex;"><span>                    validation_data<span style="color:#f92672">=</span>(test_images, test_labels))
 </span></span></code></pre></div><ul>
-<li><strong>3. Regularisation Done Right: Dropout:</strong>
+<li><strong>Regularisation Done Right: Dropout:</strong>
 Regularisation is essential to prevent overfitting, especially when dealing with relatively simple datasets like Fashion MNIST. I used dropout layers in my architecture, which randomly deactivate a fraction of neurons during training, forcing the network to learn more robust features.</li>
 </ul>
 <p>The addition of dropout layers reduced overfitting, as evidenced by a smaller gap between training and validation accuracy.</p>
@@ -536,7 +508,7 @@ Regularisation is essential to prevent overfitting, especially when dealing with
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Sandal&#39;</span>, <span style="color:#e6db74">&#39;Shirt&#39;</span>, <span style="color:#e6db74">&#39;Sneaker&#39;</span>, <span style="color:#e6db74">&#39;Bag&#39;</span>, <span style="color:#e6db74">&#39;Ankle boot&#39;</span>
 </span></span><span style="display:flex;"><span>])
 </span></span><span style="display:flex;"><span>print(report)
-</span></span></code></pre></div><p>Results from My Project:
+</span></span></code></pre></div><p><strong>Results</strong>
 <figure><img src="/images/results.png">
 </figure>
 </p>
@@ -555,18 +527,18 @@ Regularisation is essential to prevent overfitting, especially when dealing with
 </ul>
 <h4 id="summary-3">Summary</h4>
 <p>Hyperparameter tuning is an art and a science. In my project, optimising learning rate and batch size improved both speed and accuracy. Adding dropout reduced overfitting, while precision, recall, and F1-score highlighted the model’s strengths and areas for improvement. If you’re training a NN, take the time to tune hyperparameters, evaluate with meaningful metrics, and incorporate regularisation. Your model—and your future projects—will thank you.</p>
-<h1 id="part-5-train-test-and-validation-strategies-for-reliable-results-how-thoughtful-data-splitting-practices-ensure-consistent-performance-in-machine-learning-pipelines">PART 5. Train-Test and Validation Strategies for Reliable Results: How thoughtful data splitting practices ensure consistent performance in machine learning pipelines</h1>
+<h1 id="part-5-train-test-and-validation-strategies-for-reliable-results">Part 5. Train-Test and Validation Strategies for Reliable Results</h1>
 <p>ML models are only as good as the data they’re trained on. But even the best dataset won’t save you if your data splits are flawed. Splitting data into training, validation, and test sets seems straightforward, but small mistakes can lead to big problems like overfitting, underfitting, or unreliable performance metrics.</p>
 <p>You have a perfectly balanced dataset. Every class is equally represented, and it seems like splitting the data into training, testing, and validation sets should be a no-brainer. But even with balanced datasets like Fashion MNIST, thoughtful splitting is critical to ensure fair evaluation, reproducibility, and proper generalisation.</p>
 <p>In this part, I’ll walk you through my approach to splitting the Fashion MNIST dataset. We’ll cover why train-test and validation splits matter, even for balanced datasets, and how these strategies set the foundation for building reliable models.</p>
-<h3 id="technical-explanation-4">Technical Explanation</h3>
+<h3 id="technical-explanation-1">Technical Explanation</h3>
 <ul>
-<li><strong>1. Train-Test Splits for Balanced Datasets</strong>
+<li><strong>1. Train-Test Splits for Balanced Datasets:</strong>
 Although Fashion MNIST is inherently balanced, splitting the dataset still requires care to maintain equal representation of all classes across training and testing sets. A haphazard split could inadvertently introduce biases or create subtle imbalances due to random sampling.</li>
 </ul>
-<p>Why Train-Test Splits Matter?</p>
+<p><strong>Why Train-Test Splits Matter?</strong></p>
 <p>The test set is your final measure of success. It should represent the dataset&rsquo;s overall distribution as closely as possible to provide reliable evaluation metrics.</p>
-<p><strong>Implementation in My Project:</strong></p>
+<p><strong>Implementation:</strong></p>
 <p>Using <code>train_test_split</code> from <code>scikit-learn</code> ensured that the split maintained the original dataset&rsquo;s balance:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
@@ -585,13 +557,13 @@ Although Fashion MNIST is inherently balanced, splitting the dataset still requi
 </span></span><span style="display:flex;"><span>)
 </span></span></code></pre></div><p>This ensures a balanced and consistent representation of all classes in both the training and testing sets.</p>
 <ul>
-<li><strong>2. Validation Data Splits</strong>
+<li><strong>2. Validation Data Splits:</strong>
 While the test set evaluates the final model, a validation set helps monitor the model’s generalisation during training. Without a validation split, you risk overfitting, as the model’s performance is only evaluated on training data.</li>
 </ul>
-<p>How Validation Splits Work?</p>
+<p><strong>How Validation Splits Work?</strong></p>
 <p>During training, a portion of the training data is reserved for validation. The model never sees this data during training, making it a proxy for how the model generalises to unseen data.</p>
-<p><strong>Implementation in My Project:</strong></p>
-<p>In my Fashion MNIST pipeline, I used Keras’s <code>validation_split</code> parameter to reserve 20% of the training data for validation:</p>
+<p><strong>Implementation:</strong></p>
+<p>I used Keras’s <code>validation_split</code> parameter to reserve 20% of the training data for validation.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Validation split during training</span>
 </span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(
 </span></span><span style="display:flex;"><span>    train_images, train_labels,
@@ -606,7 +578,7 @@ While the test set evaluates the final model, a validation set helps monitor the
 <li><em>Validation Guides Training</em>: A validation split helps identify overfitting or underfitting, guiding decisions like adjusting dropout rates or learning rates.</li>
 <li><em>Reproducibility is Critical</em>: Consistently using a random seed (<code>random_state=42</code>) ensures reproducible splits, a cornerstone of scientific rigor.</li>
 </ul>
-<h3 id="real-world-applications-4">Real-World Applications</h3>
+<h4 id="real-world-applications-4">Real-World Applications</h4>
 <ul>
 <li>
 <p><em>Educational Benchmarks:</em> Fashion MNIST is often used as a benchmark for teaching ML. Proper data splits ensure reproducible experiments, making it easier for learners to compare their results with existing benchmarks.</p>
@@ -618,30 +590,20 @@ While the test set evaluates the final model, a validation set helps monitor the
 <p><em>Building Reusable Pipelines:</em> By designing reproducible splits and monitoring validation performance, you create robust pipelines that can be reused across similar datasets or tasks.</p>
 </li>
 </ul>
-<p>###3 Summary
-Even with balanced datasets like Fashion MNIST, thoughtful data splitting is essential for building reliable ML pipelines. Train-test splits ensure fair and consistent evaluation, while validation splits provide crucial feedback during training to guide model development.</p>
-<p>In my project, these strategies helped me build a model that generalised well without overfitting, laying the foundation for robust performance. When working on your next project, don’t underestimate the power of proper data splits. They might just be the unsung heroes of your machine learning pipeline.</p>
-<h1 id="part-6-simplicity-and-control-in-optimising-neural-networks-the-stochastic-gradient-descent-optimiser-and-its-role-in-fine-tuning-neural-networks">PART 6. Simplicity and Control in Optimising Neural Networks: The Stochastic Gradient Descent optimiser and its role in fine-tuning neural networks</h1>
+<h4 id="summary-4">Summary</h4>
+<p>Even with balanced datasets like Fashion MNIST, thoughtful data splitting is essential for building reliable ML pipelines. Train-test splits ensure fair and consistent evaluation, while validation splits provide crucial feedback during training to guide model development.</p>
+<p>In my project, these strategies helped me build a model that generalised well without overfitting, laying the foundation for robust performance. When working on your next project, don’t underestimate the power of proper data splits. They might just be the unsung heroes of your ML pipeline.</p>
+<h1 id="part-6-the-stochastic-gradient-descent-optimiser-and-its-role-in-fine-tuning-neural-networks">Part 6. The Stochastic Gradient Descent optimiser and its role in fine-tuning neural networks</h1>
 <p>Training a NN requires more than just a good dataset or an effective architecture—it requires the right optimiser. <strong>Stochastic Gradient Descent (SGD)</strong> is a staple of DL. In my Fashion MNIST project, I used <code>SGD</code> to optimise a dense NN. Why? Because simplicity doesn’t just work—it excels, especially when resources are limited or interpretability is key. In this part, we’ll explore:</p>
 <ul>
-<li>How <code>SGD</code> works and its role in NN training.</li>
-<li>Why I chose <code>SGD</code> over more complex optimisers.</li>
-<li>Practical lessons learned from using <code>SGD</code> on Fashion MNIST.</li>
+<li>How SGD works and its role in NN training.</li>
+<li>Why I chose SGD over more complex optimisers.</li>
+<li>Practical lessons learned from using SGD on Fashion MNIST.</li>
 </ul>
-<h3 id="technical-explanation-5">Technical Explanation</h3>
-<h4 id="what-is-sgd">What is SGD?</h4>
-<p>SGD, or Stochastic Gradient Descent, is the simplest and most widely used optimisation algorithm for training ML models. It works by updating the model&rsquo;s weights to minimise the loss function, one small step at a time. Here’s the formula:</p>
-<p>[
-\theta_{t+1} = \theta_t - \eta \cdot \nabla_\theta J(\theta)
-]</p>
-<p>Where:</p>
-<ul>
-<li>( \theta_t ): Current model parameters (weights).</li>
-<li>( \eta ): Learning rate, which controls the step size.</li>
-<li>( \nabla_\theta J(\theta) ): Gradient of the loss function with respect to the parameters.</li>
-</ul>
-<p>Why Stochastic?</p>
-<p>Unlike traditional Gradient Descent, which computes gradients over the entire dataset, <code>SGD</code> updates weights for each mini-batch of data. This speeds up training and adds variability that can help escape local minima.</p>
+<h3 id="technical-explanation-what-is-sgd">Technical Explanation: What is SGD?</h3>
+<p>SGD, or Stochastic Gradient Descent, is the simplest and most widely used optimisation algorithm for training ML models. It works by updating the model&rsquo;s weights to minimise the loss function, one small step at a time.</p>
+<p><strong>Why Stochastic?</strong></p>
+<p>Unlike traditional <code>Gradient Descent</code>, which computes gradients over the entire dataset, <code>SGD</code> updates weights for each mini-batch of data. This speeds up training and adds variability that can help escape local minima.</p>
 <h4 id="learning-rate-the-key-to-effective-optimisation">Learning Rate: The Key to Effective Optimisation</h4>
 <p>The learning rate is a critical parameter in <code>SGD</code>. It controls how much the model adjusts during each update.</p>
 <ul>
@@ -666,7 +628,7 @@ Even with balanced datasets like Fashion MNIST, thoughtful data splitting is ess
 <p><em>Metrics</em>: Accuracy to evaluate performance.</p>
 </li>
 </ul>
-<h4 id="why-choose-sgd">Why Choose SGD?</h4>
+<p><strong>Why Choose SGD?</strong></p>
 <p><code>SGD</code> may not always be the fastest optimiser, but it offers unique advantages:</p>
 <ul>
 <li>
@@ -714,30 +676,18 @@ Here’s how SGD performed in my Fashion MNIST project:</p>
 <p><em>Research and Interpretability:</em> In research, where interpretability and reproducibility matter, SGD offers a reliable and transparent optimisation method.</p>
 </li>
 </ul>
-<h4 id="summary-4">Summary</h4>
+<h4 id="summary-5">Summary</h4>
 <p>SGD may not be the flashiest optimisation algorithm, but its reliability, simplicity, and resource efficiency make it a foundational tool in ML. It provided a robust starting point for training dense NNs, delivering solid results with minimal complexity.</p>
 <p>When should you use SGD? Anytime you want a lightweight, interpretable optimiser for tasks where generalisation and resource constraints matter. And when you’ve mastered it, you’ll have a deeper appreciation for the fancier optimisers that build upon its principles.</p>
 <h1 id="part-7-the-power-of-sparse-categorical-crossentropy-a-guide-to-understanding-loss-functions-for-multi-class-classification">Part 7. The Power of Sparse Categorical Crossentropy: A guide to understanding loss functions for multi-class classification</h1>
-<p>Choosing the right loss function is one of the most critical decisions when building a NN. For multi-class classification tasks, like predicting clothing categories in Fashion MNIST, the <strong>sparse categorical crossentropy (SCC)</strong> loss function is often the go-to solution. But what makes it so effective? This blog dives into:</p>
+<p>Choosing the right loss function is one of the most critical decisions when building a NN. For multi-class classification tasks, like predicting clothing categories in Fashion MNIST, the <strong>sparse categorical crossentropy (SCC)</strong> loss function is often the go-to solution. But what makes it so effective? In this part I&rsquo;ll dive into:</p>
 <ul>
 <li>What sparse <code>categorical crossentropy</code> is and how it works.</li>
 <li>Why it’s the ideal choice for tasks involving multiple classes.</li>
 <li>How to implement it efficiently in <code>TensorFlow/Keras</code>.</li>
 </ul>
-<p>By the end, you’ll have a solid understanding of this loss function and when to use it in your own projects.</p>
-<h3 id="technical-explanation-6">Technical Explanation</h3>
-<h4 id="what-is-sparse-categorical-crossentropy">What is Sparse Categorical Crossentropy?</h4>
-<p><code>SCC</code> measures the difference between the true labels and the predicted probabilities across all classes. Unlike standard categorical crossentropy, it assumes labels are provided as integers (e.g., class indices) rather than one-hot encoded vectors. The loss function is defined as:</p>
-<p>[
-L(y, \hat{y}) = -\frac{1}{N} \sum_{i=1}^{N} \log(\hat{y}_{i}[y_i])
-]</p>
-<p>Where:</p>
-<ul>
-<li>( N ): Number of samples in the batch.</li>
-<li>( y_i ): True class index for the ( i^{th} ) sample.</li>
-<li>( \hat{y}_{i}[y_i] ): Predicted probability for the true class.</li>
-</ul>
-<p>In simpler terms:</p>
+<h3 id="technical-explanation-what-is-sparse-categorical-crossentropy">Technical Explanation: What is Sparse Categorical Crossentropy?</h3>
+<p><code>SCC</code> measures the difference between the true labels and the predicted probabilities across all classes. Unlike standard categorical crossentropy, it assumes labels are provided as integers (e.g., class indices) rather than one-hot encoded vectors. In simpler terms:</p>
 <ul>
 <li>
 <p>SCC calculates how far the predicted probabilities deviate from the true class. It penalises incorrect predictions more severely, pushing the model to adjust weights in the right direction.</p>
@@ -746,15 +696,15 @@ L(y, \hat{y}) = -\frac{1}{N} \sum_{i=1}^{N} \log(\hat{y}_{i}[y_i])
 <p>SCC does not require <strong>one-hot encoded labels</strong>. Instead, it expects integer class indices, making it more memory-efficient. It’s not a binary classification loss function. For binary tasks, use binary crossentropy instead.</p>
 </li>
 </ul>
-<h4 id="why-use-sparse-categorical-crossentropy">Why Use Sparse Categorical Crossentropy?</h4>
+<p><strong>Why Use Sparse Categorical Crossentropy?</strong></p>
 <ul>
 <li><em>Efficient Handling of Class Labels:</em> Sparse categorical crossentropy works directly with integer labels, saving the extra computational step of converting them into one-hot encoded vectors.</li>
 </ul>
-<p>For example, instead of transforming y = [0, 2, 1] into:</p>
+<p>For example, instead of transforming y = [0, 2, 1] into</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>[[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], 
 </span></span><span style="display:flex;"><span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], 
 </span></span><span style="display:flex;"><span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]]
-</span></span></code></pre></div><p>You can use the original integer labels, simplifying preprocessing.</p>
+</span></span></code></pre></div><p>you can use the original integer labels, simplifying pre-processing.</p>
 <ul>
 <li>
 <p><em>Pairs Seamlessly with Softmax:</em> The loss function pairs perfectly with the softmax activation function, which outputs a probability distribution across classes. The function evaluates how well these predicted probabilities align with the true class.</p>
@@ -801,20 +751,18 @@ L(y, \hat{y}) = -\frac{1}{N} \sum_{i=1}^{N} \log(\hat{y}_{i}[y_i])
 <li>If your dataset contains highly imbalanced classes, consider adding class weights to address bias.</li>
 <li>For binary classification tasks, binary crossentropy is more appropriate.</li>
 </ul>
-<h4 id="summary-5">Summary</h4>
-<p>Sparse categorical crossentropy is an elegant and efficient loss function for multi-class classification tasks. Its ability to work directly with integer labels and pair seamlessly with softmax makes it an indispensable tool in any data scientist’s toolkit. In this project, SCC simplified pre-processing, enabled efficient learning, and ensured the model focused on improving predictions for the correct class.</p>
-<p>If you’re working on a multi-class classification problem, this loss function should be your starting point. It’s easy to implement, computationally efficient, and perfectly suited for tasks like image classification.</p>
-<h1 id="part-8-trial-and-error-in-neural-network-training-lessons-from-fashion-mnist">PART 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST</h1>
-<p>Training neural networks (NNs) is a lot like navigating uncharted waters. No matter how much preparation or theoretical knowledge you have, it’s the experiments — and the inevitable mistakes—that shape your skills. As a data scientist working on Fashion MNIST, a dataset of 28x28 grayscale images representing 10 clothing categories, I realised that building effective models requires more than just writing code; it demands iteration, debugging, and adaptability.</p>
-<p>In this blog, I’ll share:</p>
+<h4 id="summary-6">Summary</h4>
+<p>Sparse categorical crossentropy is an elegant and efficient loss function for multi-class classification tasks. Its ability to work directly with integer labels and pair seamlessly with softmax makes it an indispensable tool in any data scientist’s toolkit.</p>
+<p>In this project, SCC simplified pre-processing, enabled efficient learning, and ensured the model focused on improving predictions for the correct class. If you’re working on a multi-class classification problem, this loss function should be your starting point. It’s easy to implement, computationally efficient, and perfectly suited for tasks like image classification.</p>
+<h1 id="part-8-trial-and-error-in-neural-network-training-lessons-from-fashion-mnist">Part 8. Trial and Error in Neural Network Training: Lessons from Fashion MNIST</h1>
+<p>Training NNs is a lot like navigating uncharted waters. No matter how much preparation or theoretical knowledge you have, it’s the experiments — and the inevitable mistakes—that shape your skills. As a data scientist working on Fashion MNIST, a dataset of <code>28x28 grayscale</code> images representing 10 clothing categories, I realised that building effective models requires more than just writing code; it demands iteration, debugging, and adaptability.</p>
+<p>In this final part, I’ll share:</p>
 <ul>
 <li>How trial and error play a key role in refining NNs.</li>
 <li>Practical strategies for debugging during model training.</li>
 <li>Actionable lessons I learned from the common pitfalls I faced while training a neural network on Fashion MNIST.</li>
 </ul>
-<p>If you’ve ever been stuck staring at poor model performance, wondering where things went wrong, read on.</p>
-<h3 id="technical-explanation-7">Technical Explanation</h3>
-<h4 id="the-importance-of-experimentation">The Importance of Experimentation</h4>
+<h3 id="technical-explanation-the-importance-of-experimentation">Technical Explanation: The Importance of Experimentation</h3>
 <p>DL doesn’t come with a one-size-fits-all solution. Building an effective model often means experimenting with different architectures, hyperparameters, and pre-processing techniques.</p>
 <p>Here’s why trial and error is so vital:</p>
 <ul>
@@ -890,7 +838,7 @@ L(y, \hat{y}) = -\frac{1}{N} \sum_{i=1}^{N} \log(\hat{y}_{i}[y_i])
 <p><em>Building Robust Deployment Pipelines:</em> Overfitting and validation issues often surface when moving from research to production. Techniques like dropout and incremental experimentation mitigate these risks.</p>
 </li>
 </ul>
-<h4 id="summary-6">Summary</h4>
+<h4 id="summary-7">Summary</h4>
 <p>Training NNs involves navigating a landscape of trial and error. From overfitting and learning rate adjustments to understanding the importance of validation splits, the lessons learned from Fashion MNIST are invaluable for anyone building ML models. Key takeaways:</p>
 <ul>
 <li>Overfitting is inevitable without proper regularisation. Dropout is your ally.</li>

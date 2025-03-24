@@ -148,9 +148,9 @@ Before diving into the specifics, let’s address the “why.” Data preparatio
  - *Generalisation improves*: Techniques like augmentation create a diverse dataset, reducing the risk of overfitting.
 
 ### Key Techniques in Data Preparation
- - 1. Loading and Pre-processing Images
+ - 1. **Loading and Pre-processing Images**
 
-**Reading Images**: Each image I loaded and resised to a standard dimension of `224x224` pixels to ensure consistency across the dataset. `OpenCV` and `TensorFlow` libraries were used for this task. I created a function to load and pre-process the images:
+*Reading Images*: Each image I loaded and resised to a standard dimension of `224x224` pixels to ensure consistency across the dataset. `OpenCV` and `TensorFlow` libraries were used for this task. I created a function to load and pre-process the images:
 
 ```python
 import cv2
@@ -171,9 +171,9 @@ def load_images_from_folder(folder, label):
 benign_data = load_images_from_folder(benign_dir, label=0)
 malignant_data = load_images_from_folder(malignant_dir, label=1)
 ```
- - 2. Data Splitting
+ - 2. **Data Splitting**
 
-**Train-Test Split**: I split the dataset into training, validation, and test sets with an `80-10-10` ratio. I used the `train_test_split` function from `sklearn`.
+*Train-Test Split*: I split the dataset into training, validation, and test sets with an `80-10-10` ratio. I used the `train_test_split` function from `sklearn`.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -193,7 +193,7 @@ print(f"Validation set size: {len(X_val)}")
 print(f"Test set size: {len(X_test)}")
 ```
 
- - 3. Resizing and Normalising Images
+ - 3. **Resizing and Normalising Images:**
 Images captured from real-world sources often come in varying sizes and resolutions. Resizing ensures uniformity, while normalisation scales pixel values to [0, 1], preventing large gradients that could slow training.
 
 ```python
@@ -206,8 +206,7 @@ def preprocess_image(image, target_size=(224, 224)):
     return normalized_image
 ```
 
- - 4. Data Augmentation
-**Data augmentation** artificially increases dataset size by creating variations of existing images. Common transformations include:
+ - 4. **Data augmentation:** artificially increases dataset size by creating variations of existing images. Common transformations include:
 
  - *Rotation*: Simulates different orientations.
  - *Flipping*: Improves robustness to mirrored inputs.
@@ -227,11 +226,11 @@ augmented_examples = [datagen.random_transform(train_images[0]) for _ in range(5
 
 {{< figure src="/images/examples.png">}}
 
- - 5. Handling Class Imbalance
+ - 5. **Handling Class Imbalance:**
 In datasets with skewed class distributions, models tend to favour the majority class. 
 {{< figure src="/images/split.png">}}
 
-**Oversampling with Data Augmentation**: I applied data augmentation to the minority class (benign images) to artificially increase its representation in the training data. This ensures the model is exposed to more diverse examples from the smaller class without altering the original dataset.
+ - *Oversampling with Data Augmentation*: I applied data augmentation to the minority class (benign images) to artificially increase its representation in the training data. This ensures the model is exposed to more diverse examples from the smaller class without altering the original dataset.
 
 ```python
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -294,7 +293,7 @@ roc_auc = roc_auc_score(y_test, y_pred)
 print(f"ROC-AUC: {roc_auc:.2f}")
 ```
 
-***Key Points***: The F1-score balances precision and recall, especially important for the minority class. `ROC-AUC` provides a comprehensive measure of the model’s ability to distinguish between classes.
+**Key Points**: The F1-score balances precision and recall, especially important for the minority class. `ROC-AUC` provides a comprehensive measure of the model’s ability to distinguish between classes.
 
 
 #### Summary
@@ -313,105 +312,23 @@ Accuracy is one of the most common metrics used to evaluate ML models, but it’
  - Demonstrate these metrics with Python code and visualisations.
 
 
-### Technical Explanation
-### Why Accuracy Isn’t Always Enough
-Accuracy simply measures the percentage of correct predictions:
+### Technical Explanation: Why Accuracy Isn’t Always Enough
 
-\\[
-\\text{Accuracy} = \\frac{\\text{True Positives} + \\text{True Negatives}}{\\text{Total Predictions}}
-\\]
-
-While useful in balanced datasets, accuracy fails when the data is imbalanced. For example:
+1. **Accuracy:** simply measures the percentage of correct predictions over total number of predictions. While useful in balanced datasets, accuracy fails when the data is imbalanced. For example:
 - Dataset: 90% benign, 10% malignant.
 - Model predicts all cases as benign.
 - **Accuracy = 90%, but the model identifies zero malignant cases.**
 
 This is where other metrics come into play.
 
-#### Specificity
+2. **Specificity**: measures the ability of a model to correctly identify true negatives (negative cases that are correctly classified as negative). High specificity ensures the model avoids falsely classifying negative cases as positive. This is especially crucial in medical diagnostics, where a false positive can lead to unnecessary treatments and anxiety for patients.
 
-Measures the ability of a model to correctly identify true negatives (negative cases that are correctly classified as negative). It is calculated as:
+3. **Precision:** focuses on the proportion of true positive predictions out of all positive predictions. High precision means the model avoids false alarms. It is critical in applications like spam detection or cancer diagnosis, where false positives can be costly.
 
-\[
-\text{Specificity} = \frac{\text{True Negatives}}{\text{True Negatives} + \text{False Positives}}
-\]
-
-**Key Insight**: High specificity ensures the model avoids falsely classifying negative cases as positive. This is especially crucial in medical diagnostics, where a false positive can lead to unnecessary treatments and anxiety for patients.
-
-**Example**:
-- True Negatives (TN): 90
-- False Positives (FP): 10
-\[
-\text{Specificity} = \frac{90}{90+10} = 0.9
-\]
+4. **Recall:** measures the proportion of actual positives correctly identified. High recall ensures the model captures as many true positives as possible. This is crucial in medical diagnostics where missing a positive case (false negative) can have serious consequences.
 
 
-#### Precision
-
-Focuses on the proportion of true positive predictions out of all positive predictions:
-
-\\[
-\\text{Precision} = \\frac{\\text{True Positives}}{\\text{True Positives} + \\text{False Positives}}
-\\]
-
-**Key Insight**: High precision means the model avoids false alarms. It is critical in applications like spam detection or cancer diagnosis, where false positives can be costly.
-
-**Example**:
-- True Positives (TP): 80
-- False Positives (FP): 20
-\\[
-\\text{Precision} = \\frac{80}{80+20} = 0.8
-\\]
-
-#### Recall
-
-Measures the proportion of actual positives correctly identified:
-
-\\[
-\\text{Recall} = \\frac{\\text{True Positives}}{\\text{True Positives} + \\text{False Negatives}}
-\\]
-
-**Key Insight**: High recall ensures the model captures as many true positives as possible. This is crucial in medical diagnostics where missing a positive case (false negative) can have serious consequences.
-
-**Example**:
-- True Positives (TP): 80
-- False Negatives (FN): 20
-\\[
-\\text{Recall} = \\frac{80}{80+20} = 0.8
-\\]
-
-#### F1-Score
-
-Provides a balance between precision and recall:
-
-\\[
-\\text{F1-Score} = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}}
-\\]
-
-**Key Insight**: Use F1-score when there’s an uneven class distribution and you need a single metric that balances false positives and false negatives.
-
-**Example**:
-- Precision: 0.8
-- Recall: 0.8
-\\[
-\\text{F1-Score} = 2 \\cdot \\frac{0.8 \\cdot 0.8}{0.8 + 0.8} = 0.8
-\\]
-
-
-#### ROC-AUC (Receiver Operating Characteristic - Area Under Curve)
-
-Evaluates the model's ability to distinguish between classes at various threshold settings. 
-
-The **ROC Curve** plots:
-- **True Positive Rate (TPR)**: Same as recall.
-- **False Positive Rate (FPR)**: 
-
-\\[
-\\text{FPR} = \\frac{\\text{False Positives}}{\\text{False Positives} + \\text{True Negatives}}
-\\]
-
-**Key Insight**: AUC values range from 0.5 (random guessing) to 1 (perfect classification). Higher AUC indicates better model performance.
-
+5. **F1-Score:** provides a balance between precision and recall. Use F1-score when there’s an uneven class distribution and you need a single metric that balances false positives and false negatives.
 
 ```python
 from sklearn.metrics import precision_score, recall_score
@@ -426,7 +343,8 @@ print(f"Precision: {precision:.2f}")
 print(f"Recall: {recall:.2f}")
 ```
 
-**The Area Under the Curve (AUC)** quantifies the ROC curve. An AUC of 1.0 represents a perfect model, while 0.5 indicates random guessing.
+6. **ROC-AUC (Receiver Operating Characteristic - Area Under Curve):** evaluates the model's ability to distinguish between classes at various threshold settings. **The Area Under the Curve (AUC)** quantifies the ROC curve. An AUC of 1.0 represents a perfect model, while 0.5 indicates random guessing. AUC values range from 0.5 (random guessing) to 1 (perfect classification). Higher AUC indicates better model performance.
+
 
 ```python
 from sklearn.metrics import roc_curve, roc_auc_score
@@ -502,7 +420,7 @@ DL models have revolutionised ML, enabling breakthroughs in image recognition, n
 
 Imagine training a model to classify histopathological images of cancer (as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.
 
-In this PART, I’ll talk about:
+In this part, I’ll talk about:
 
  - What overfitting is and how to detect it.
  - Key strategies to prevent overfitting, including regularisation techniques, dropout, early stopping, and data augmentation.
@@ -638,16 +556,7 @@ In this part, I will:
 CNNs often have millions of parameters due to their complex architectures, making them susceptible to overfitting. Regularisation combats this by introducing constraints or additional information to the learning process. This ensures the model focuses on essential patterns rather than noise in the data.
 
 ### Advanced Regularisation Techniques
-
-#### L1 and L2 Regularisation
-**L1 Regularization (Lasso):** L1 regularisation penalises the sum of the absolute values of the weights:
-
-\[
-\text{Loss}_{\text{L1}} = \text{Loss}_{\text{Original}} + \lambda \sum_{i} |w_i|
-\]
-
-- Encourages sparsity by driving less important weights to zero.
-- Useful for feature selection in CNNs.
+**L1 Regularisation (Lasso):** penalises the sum of the absolute values of the weights. It encourages sparsity by driving less important weights to zero; and is useful for feature selection in CNNs.
 
 ```python
 from tensorflow.keras.models import Sequential
@@ -661,29 +570,9 @@ model = Sequential([
 ])
 ```
 
-**L2 Regularisation (Ridge):** L2 regularisation penalises the sum of the squared weights:
+**L2 Regularisation (Ridge):** penalises the sum of the squared weights. It encourages smaller weights, reducing the model’s sensitivity to individual parameters.
 
-\[
-\text{Loss}_{\text{L2}} = \text{Loss}_{\text{Original}} + \lambda \sum_{i} w_i^2
-\]
-
-- Encourages smaller weights, reducing the model’s sensitivity to individual parameters.
-
-#### Batch Normalisation
-
-Normalises the inputs of each layer during training, stabilising learning and reducing the dependence on initialisation. It also acts as an implicit regularzer by reducing internal covariate shift.
-
-\[
-\hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}
-\]
-
-Where:
-- \( \mu \): Mean of the current mini-batch.
-- \( \sigma^2 \): Variance of the current mini-batch.
-- \( \epsilon \): Small constant to avoid division by zero.
-
-- Accelerates training by allowing higher learning rates.
-- Reduces the need for dropout in some cases.
+**Batch Normalisation:** normalises the inputs of each layer during training, stabilising learning and reducing the dependence on initialisation. It also acts as an implicit regularzer by reducing internal covariate shift. It accelerates training by allowing higher learning rates; and reduces the need for dropout in some cases.
 
 ```python
 from tensorflow.keras.layers import BatchNormalization
@@ -696,13 +585,7 @@ model = Sequential([
     Dense(10, activation='softmax')
 ])
 ```
-#### Learning Rate Schedulling
-
-Dynamically adjusts the learning rate during training to improve convergence and prevent overfitting. The inverse time decay schedule, for example, reduces the learning rate as training progresses:
-
-\[
-\text{Learning Rate} = \frac{\text{Initial Rate}}{1 + \text{Decay Rate} \cdot \text{Epochs}}
-\]
+**Learning Rate Schedulling:** dynamically adjusts the learning rate during training to improve convergence and prevent overfitting. The inverse time decay schedule, for example, reduces the learning rate as training progresses.
 
 ```python
 from tensorflow.keras.optimizers.schedules import InverseTimeDecay
@@ -721,15 +604,12 @@ This schedule starts with a learning rate of `0.001` and decreases it over time 
 Regularisation techniques like dropout and batch normalisation are crucial in medical imaging tasks, where datasets are often small. These methods ensure the CNN generalises well and avoids overfitting, enabling accurate diagnoses.
 
 For example,
-
  - Histopathological image classification of cancer cells using L2 regularisation and dropout.
-
 
 #### Autonomous Vehicles
 CNNs used in autonomous vehicles must generalise across varied lighting and weather conditions. Data augmentation plays a critical role in creating robust models capable of handling real-world variability.
 
 For example,
-
  - Augmenting road scene datasets with brightness shifts, rotations, and flips.
 
 
@@ -741,7 +621,7 @@ Advanced regularisation techniques like L1/L2 regularisation, batch normalisatio
 
 # Part 6. Mastering Ensembling Techniques: Boosting Model Performance with Stacking and Voting
 
-No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether we’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalisation. In this PART, i’ll focus on:
+No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether we’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalisation. In this part, I’ll focus on:
 
  - The fundamentals of stacking and soft voting.
  - Implementing stacking with a meta-model.
@@ -816,18 +696,9 @@ The balance between precision and recall, reflected in the high F1 score (96.04%
 
 These results validate the efficacy of using a stacking ensemble method in scenarios where you have multiple predictive models, each with its own approach to handling class imbalances or other dataset-specific challenges. It demonstrates the power of combining these models to leverage their individual strengths and mitigate their weaknesses.
 
-### Real-World Applications
-#### Medical Diagnostics:
+#### Real-World Applications
 
-Ensemble models can combine predictions from CNNs trained on different features of medical images, improving diagnostic accuracy.
-
-#### Fraud Detection:
-
-Stacking meta-models can combine predictions from various algorithms (e.g., decision trees, SVMs) to identify fraudulent transactions more effectively.
-
-#### Customer Segmentation:
-
-Soft voting ensembles improve segmentation by leveraging multiple clustering or classification algorithms.
+For example, in **Medical Diagnostics**, ensemble models can combine predictions from CNNs trained on different features of medical images, improving diagnostic accuracy. In **Fraud Detection**, stacking meta-models can combine predictions from various algorithms (e.g., decision trees, SVMs) to identify fraudulent transactions more effectively. In **Customer Segmentation**, soft voting ensembles improve segmentation by leveraging multiple clustering or classification algorithms.
 
 #### Summary
  - Ensembling techniques like stacking and voting improve model performance by leveraging the strengths of multiple models.
@@ -961,14 +832,7 @@ app.run(host='0.0.0.0', port=5000)
  - Monitoring tools like Prometheus can be added to track model usage and accuracy over time.
 
 ### Real-World Applications
-#### Medical Diagnostics
-End-to-end pipelines are crucial in medical imaging, where models classify X-rays, CT scans, or histopathological slides. Robust pre-processing (e.g., normalising intensities) and monitoring in production ensure accuracy in life-critical applications.
-
-#### Retail and E-Commerce
-Image classification pipelines help e-commerce platforms automatically tag products based on images, improving inventory management and search relevance.
-
-#### Autonomous Vehicles
-In autonomous driving, image classification models identify traffic signs, pedestrians, and obstacles. Real-time deployment ensures reliable and timely predictions under varying conditions.
+In **Medical Diagnostics**, end-to-end pipelines are crucial in medical imaging, where models classify X-rays, CT scans, or histopathological slides. Robust pre-processing (e.g., normalising intensities) and monitoring in production ensure accuracy in life-critical applications. In **Retail and E-Commerce**, image classification pipelines help e-commerce platforms automatically tag products based on images, improving inventory management and search relevance. In **Autonomous Vehicles/Driving**, image classification models identify traffic signs, pedestrians, and obstacles. Real-time deployment ensures reliable and timely predictions under varying conditions.
 
 #### Summary
 Building an end-to-end image classification pipeline involves more than just training a model. From robust data preparation to careful evaluation and seamless deployment, every step plays a crucial role in ensuring the pipeline’s effectiveness. By implementing these practices, you can handle real-world challenges confidently and build scalable, production-ready systems.

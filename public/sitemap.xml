@@ -2,179 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/projects/beyond-accuracy-feature-insights-and-deployment-of-ai-in-breast-cancer-care/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</loc>
     <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-transforming-breast-cancer-diagnosis-with-deep-learning.-the-future-of-ai-in-histopathology-innovations-and-challenges./</loc>
+    <loc>http://localhost:1313/projects/from-black-box-to-bedside-making-ai-reliable-and-interpretable-in-cancer-diagnosis/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-building-custom-cnn-architectures-from-scratch-to-mastery./</loc>
+    <loc>http://localhost:1313/projects/precision-by-design-building-deep-learning-models-for-breast-cancer-histopathology/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projects/fashion-mnist-demystified-building-and-optimising-neural-networks-from-the-ground-up/</loc>
     <lastmod>2024-06-05T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning./</loc>
+    <loc>http://localhost:1313/projects/mastering-deep-learning-for-medical-imaging-from-custom-cnns-to-full-pipelines/</loc>
     <lastmod>2024-06-05T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-the-importance-of-data-cleaning-in-environmental-analysis/</loc>
+    <loc>http://localhost:1313/projects/deep-learning-for-air-quality-prediction-from-data-cleaning-to-lstms./</loc>
     <lastmod>2024-02-03T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-cleaning-the-air-data-pre-processing-for-pm10-prediction./</loc>
+    <loc>http://localhost:1313/projects/ai-and-air-quality-predicting-pollution-for-a-cleaner-future./</loc>
     <lastmod>2023-11-20T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/projects/building-and-optimising-a-data-warehouse-from-design-to-business-insights./</loc>
     <lastmod>2023-11-09T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-challenges-in-medical-imaging-datasets./</loc>
-    <lastmod>2023-09-12T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/projects/ai-powered-pneumonia-detection-challenges-model-comparisons-and-future-directions/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-1.-colour-normalisation-in-histopathology.-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology/</loc>
+    <loc>http://localhost:1313/projects/ai-in-histopathology-enhancing-medical-image-analysis-with-deep-learning/</loc>
     <lastmod>2023-05-12T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/ai-powered-recipe-classifier./</loc>
+    <loc>http://localhost:1313/projects/project1/</loc>
     <lastmod>2022-04-09T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/projects/from-words-to-vectors-embedding-techniques-in-recipe-analysis-a-deep-dive-into-text-representation-in-ai-models/</loc>
     <lastmod>2025-02-20T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-boosting-model-generalisation-with-data-augmentation./</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/ai-in-clinical-practice/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-scalling-sentiment-analysis-with-mapreduce./</loc>
-    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/ai-model-deployment/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-handling-class-imbalance-in-medical-imaging-a-deep-learning-perspective./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/breast-cancer-imaging/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-designing-dense-neural-networks-lessons-from-fashion-mnist./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/clustering/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-mastering-data-preparation-and-augmentation-building-the-foundation-for-better-image-classification-models./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/cnn-feature-space/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-understanding-the-predictors-of-air-pollution/</loc>
-    <lastmod>2024-02-03T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/deep-learning-for-healthcare/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-exploring-the-data-understanding-pm10-and-its-impact-through-eda./</loc>
-    <lastmod>2023-11-20T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/projects/project16/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-2.-data-augmentation-as-a-robustness-strategy.-simplifying-pre-processing-can-data-augmentation-replace-colour-normalisation/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/feature-extraction/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-3.-manual-cnn-vs.-pre-trained-vgg16-a-comparative-analysis./</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/histopathology-analysis/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-3.-visualising-market-sentiments-with-hive-and-kibana./</loc>
-    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-3.-choosing-the-best-cnn-architecture-for-breast-cancer-detection-how-ensemble-models-improve-breast-cancer-detection-with-ai./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/personalised-diagnostics/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-3.-evaluating-model-performance-metrics-beyond-accuracy-for-better-insights./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/projects/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-3.-relu-vs-sigmoid-which-activation-function-wins-on-fashion-mnist/</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/statistical-analysis/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-3.-regression-models-for-pollution-prediction/</loc>
-    <lastmod>2024-02-03T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-3.-regression-models-for-air-quality-prediction-from-simplicity-to-accuracy./</loc>
-    <lastmod>2023-11-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-3.-building-and-fine-tuning-densenet201-for-histopathology.-leveraging-deep-learning-for-cancer-detection-building-a-densenet201-model/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-evaluating-cnn-models-for-pneumonia-detection./</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-word-clouds-in-action-decoding-public-opinion-on-nasdaq-companies./</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-boosting-ai-performance-data-augmentation-for-histopathological-imaging./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-hyperparameter-tuning-for-neural-networks-the-fashion-mnist-approach./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-tackling-overfitting-in-deep-learning-models./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-neural-networks-in-environmental-data-analysis/</loc>
-    <lastmod>2024-02-03T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-advanced-machine-learning-for-pm10-prediction-random-forest-xgboost-and-more./</loc>
-    <lastmod>2023-11-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-4.-addressing-class-imbalance-in-medical-image-datasets.-tackling-class-imbalance-in-histopathology-strategies-and-insights/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-insights-from-sensitivity-and-specificity-analysis-in-pneumonia-detection./</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-latent-themes-in-tweets-topic-modelling-with-lda./</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-why-ai-calibration-is-critical-for-reliable-breast-cancer-diagnosis./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-perfecting-data-splits-train-test-and-validation-strategies-for-reliable-results.-how-thoughtful-data-splitting-practices-ensure-consistent-performance-in-machine-learning-pipelines./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-exploring-long-short-term-memory-lstm-for-time-series-data/</loc>
-    <lastmod>2024-02-03T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-evaluating-and-selecting-the-best-models-for-pm10-prediction./</loc>
-    <lastmod>2023-11-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-5.-evaluation-and-calibration-building-trust-in-medical-ai-models/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-future-directions-for-ai-assisted-medical-imaging./</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-sentiment-trends-insights-by-company-and-year./</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-making-ai-transparent-grad-cam-and-lime-in-medical-image-analysis./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-mastering-ensembling-techniques-boosting-model-performance-with-stacking-and-voting./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-simplicity-and-control-in-optimising-neural-networks-the-stochastic-gradient-descent-optimiser-and-its-role-in-fine-tuning-neural-networks./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-comparing-models-and-real-world-implications/</loc>
-    <lastmod>2024-02-03T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-6.-from-data-to-action-what-pollution-data-and-ai-teach-us-about-cleaner-air./</loc>
-    <lastmod>2023-11-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-7.-overcoming-challenges-in-sentiment-analysis./</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-7.-evaluating-ai-models-for-healthcare-beyond-accuracy./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-7.-building-robust-end-to-end-image-classification-pipelines./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-7.-the-power-of-sparse-categorical-crossentropy-a-guide-to-understanding-loss-functions-for-multi-class-classification./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-8.-unveiling-hidden-patterns-feature-extraction-with-pre-trained-cnns./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-8.-trial-and-error-in-neural-network-training-lessons-from-fashion-mnist/</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-9.-clustering-breast-cancer-features-an-innovative-approach-using-cnns./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-10.-enhancing-interpretability-in-cnns-statistical-insights-from-breast-cancer-data./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/part-11.-deploying-ai-models-for-breast-cancer-diagnosis-challenges-and-solutions-description./</loc>
-    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-03-22T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ai/</loc>
     <lastmod>2025-03-20T10:58:08-04:00</lastmod>
@@ -188,19 +95,10 @@
     <loc>http://localhost:1313/tags/machine-learning/</loc>
     <lastmod>2025-03-20T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-03-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/</loc>
-    <lastmod>2025-03-20T10:58:08-04:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/python/</loc>
     <lastmod>2025-03-20T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/streamlit/</loc>
-    <lastmod>2025-03-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-03-20T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ai-in-cooking/</loc>
@@ -245,103 +143,97 @@
     <loc>http://localhost:1313/tags/word2vec/</loc>
     <lastmod>2025-02-20T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project5/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/chest-x-ray-analysis/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/cnns/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/computer-vision/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/deep-learning/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/healthcare-ai/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/image-classification/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/medical-imaging/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/neural-networks/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/pneumonia-detection/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/vgg16/</loc>
-    <lastmod>2024-09-20T10:58:08-04:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/big-data/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/data-visualisation/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/mapreduce/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/nasdaq/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/sentiment-analysis/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/projects/project4/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/social-media-mining/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/twitter-analytics/</loc>
-    <lastmod>2024-08-25T10:58:08-04:00</lastmod>
+    <lastmod>2024-08-10T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projects/project13/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/ai-in-healthcare/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/artificial-intelligence/</loc>
+    <loc>http://localhost:1313/tags/ai-model-calibration/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/breast-cancer-diagnosis/</loc>
+    <loc>http://localhost:1313/tags/ai-trust/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/auc/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/breast-cancer-detection/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/class-imbalance/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/deep-learning-applications/</loc>
+    <loc>http://localhost:1313/tags/cnn-architecture/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/densenet/</loc>
+    <loc>http://localhost:1313/tags/computer-vision/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/data-augmentation/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/efficientnet/</loc>
+    <loc>http://localhost:1313/tags/deep-learning-models/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/feature-space-analysis/</loc>
+    <loc>http://localhost:1313/tags/ensemble-learning/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/healthtech-innovations/</loc>
+    <loc>http://localhost:1313/tags/explainable-ai/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/histopathology-analysis/</loc>
+    <loc>http://localhost:1313/tags/grad-cam/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/medical-ai-solutions/</loc>
+    <loc>http://localhost:1313/tags/histopathology/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/model-interpretability/</loc>
+    <loc>http://localhost:1313/tags/interpretable-deep-learning/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/resnet/</loc>
+    <loc>http://localhost:1313/tags/lime/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project13/</loc>
+    <loc>http://localhost:1313/tags/medical-ai-ethics/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/medical-imaging/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/model-evaluation/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/sensitivity/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/specificity/</loc>
+    <lastmod>2024-07-17T10:58:08-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projects/project15/</loc>
     <lastmod>2024-07-17T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/activation-functions/</loc>
@@ -353,20 +245,23 @@
     <loc>http://localhost:1313/tags/data-pre-processing/</loc>
     <lastmod>2024-06-05T10:58:08-04:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/deep-learning/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/deep-learning-basics/</loc>
     <lastmod>2024-06-05T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/dense-layers/</loc>
     <lastmod>2024-06-05T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/histopathology/</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/image-classification/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/projects/project11/</loc>
     <lastmod>2024-06-05T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/part-5.-advanced-regularisation-techniques-for-cnns./</loc>
-    <lastmod>2024-06-05T10:58:08-04:00</lastmod>
+    <loc>http://localhost:1313/tags/neural-networks/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/air-quality-prediction/</loc>
     <lastmod>2024-02-03T10:58:08-04:00</lastmod>
@@ -440,6 +335,24 @@
     <loc>http://localhost:1313/tags/sql/</loc>
     <lastmod>2023-11-09T10:58:08-04:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/projects/project5/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/chest-x-ray-analysis/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/cnns/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/healthcare-ai/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/pneumonia-detection/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/vgg16/</loc>
+    <lastmod>2025-03-19T14:35:19+13:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/genetic-algorithms/</loc>
     <lastmod>2023-06-20T10:58:08-04:00</lastmod>
   </url><url>
@@ -452,22 +365,13 @@
     <loc>http://localhost:1313/projects/project10/</loc>
     <lastmod>2023-05-12T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/densenet201/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/home/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/transfer-learning/</loc>
-    <lastmod>2023-05-12T10:58:08-04:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/projects/building-a-secure-client-server-system-with-python./</loc>
     <lastmod>2023-03-20T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/network-programming/</loc>
     <lastmod>2023-03-20T10:58:08-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/projects/project1/</loc>
+    <loc>http://localhost:1313/projects/ai-powered-recipe-classifier/</loc>
     <lastmod>2022-04-09T10:58:08-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/lime-interpretability/</loc>

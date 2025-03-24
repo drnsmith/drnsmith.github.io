@@ -157,9 +157,9 @@ best_solution = max(population, key=fitness)
 print("Best Solution:", best_solution)
 ```
 
-### Challenges Faced
+#### Challenges Faced
 
- - **Premature Convergence**:
+**Premature Convergence**:
 
  - Issue: The population became homogeneous too early.
  - *Solution*: Introduced higher mutation rates to maintain diversity.
@@ -174,9 +174,9 @@ print("Best Solution:", best_solution)
  - Issue: Higher population sizes increased runtime.
  - *Solution*: Optimised by parallelising fitness evaluations.
 
-### Applications of Genetic Algorithms
+#### Applications of Genetic Algorithms
 
-This project highlights the versatility of Genetic Algorithms for solving combinatorial problems. Other potential applications include:
+This project highlights the versatility of `Genetic Algorithms` for solving combinatorial problems. Other potential applications include:
 
  - *Schedulling*: Optimising work schedules or resource allocation.
  - *Route Optimisation*: Solving traveling salesman or logistics problems.
@@ -184,10 +184,6 @@ This project highlights the versatility of Genetic Algorithms for solving combin
 
 ### Conclusion
 
-The Genetic Algorithm successfully solved the 4x4 letter placement puzzle by mimicking evolutionary principles. 
-
-This project demonstrates the power of GAs in tackling complex optimisation problems where traditional methods fall short. 
-
-By iteratively evolving better solutions, GAs provide a robust framework for solving real-world challenges.
+The Genetic Algorithm successfully solved the 4x4 letter placement puzzle by mimicking evolutionary principles. This project demonstrates the power of GAs in tackling complex optimisation problems where traditional methods fall short. By iteratively evolving better solutions, GAs provide a robust framework for solving real-world challenges.
 
 *Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!*

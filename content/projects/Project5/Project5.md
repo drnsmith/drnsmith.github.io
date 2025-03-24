@@ -8,13 +8,21 @@ title: "AI-Powered Pneumonia Detection: Challenges, Model Comparisons, and Futur
 weight: 1
 ---
 {{< figure src="/images/project5_images/pr5.jpg">}}
-**View Project on GitHub**: 
 
-<a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
 
-# PART 1. Challenges in Medical Imaging Datasets
+
+<div style="display: flex; align-items: center; gap: 10px;">
+    <a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank" style="text-decoration: none;">
+        <img src="/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
+    </a>
+    <a href="https://github.com/drnsmith/pneumonia-detection-CNN" target="_blank" style="font-weight: bold; color: black;">
+        View Project on GitHub
+    </a>
+</div>
+
+
+
+# Part 1. Challenges in Medical Imaging Datasets
 
 Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges. In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like **dataset imbalance** and **small validation sets**, which can hinder model performance. This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.
 
@@ -24,7 +32,7 @@ The dataset consisted of labelled chest X-ray images classified as:
 
  - **Normal**
 
- - **Pneumonia** (further divided into bacterial and viral pneumonia).
+ - **Pneumonia** (further divided into "bacterial" and "viral pneumonia").
 
 #### Key Challenges
 1. *Class Imbalance*:
@@ -146,14 +154,12 @@ check_distribution("val")
 
  - *Resource Constraints*: Resampling large datasets can strain storage and computational resources. *Solution*: Optimise code for batch processing and utilise cloud storage if necessary.
 
-#### Concluding Thoughts
-Addressing challenges in medical imaging datasets is critical for building reliable deep learning models. By balancing class distributions and resplitting datasets, we improved the quality of training and evaluation for pneumonia detection.
+#### Summary
+Addressing challenges in medical imaging datasets is critical for building reliable DL models. By balancing class distributions and resplitting datasets, we improved the quality of training and evaluation for pneumonia detection.
 
 
-# PART 2. Boosting Model Generalisation with Data Augmentation
-Deep learning (DL) models often struggle with overfitting, especially when trained on limited datasets. To overcome this challenge in our pneumonia detection project, we used **data augmentation** (DA) techniques to artificially expand the training dataset. 
-
-DA techniques, such as *rotations, scaling, flipping, and zooming*, helped improve the model's generalisation to unseen chest X-ray images. In this part I explain the DA techniques we applied, provide with demonstrates the snippets of Python code used, and highlight how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.
+# Part 2. Boosting Model Generalisation with Data Augmentation
+DL models often struggle with overfitting, especially when trained on limited datasets. To overcome this challenge, we used **data augmentation** (DA) techniques to artificially expand the training dataset. DA techniques, such as *rotations, scaling, flipping, and zooming*, helped improve the model's generalisation to unseen chest X-ray images. In this part I'll explain the DA techniques we applied, provide with demonstrates the snippets of `Python` code used, and highlight how augmentation enhanced the performance of both the manual CNN and the pre-trained VGG16 models.
 
 ### Why Data Augmentation?
 
@@ -172,7 +178,7 @@ DA tackles these issues by generating diverse versions of existing images, effec
  - *Zooming*: Randomly zooms into or out of an image.
  - *Shifting*: Translates images along the X and Y axes.
 
-We used TensorFlow's `ImageDataGenerator` to apply augmentation during training.
+We used `TensorFlow`'s `ImageDataGenerator` to apply augmentation during training.
 
 #### Python Code: DA Setup
 ```python
@@ -243,22 +249,20 @@ DA significantly improved the generalisation capabilities of both models:
 
 {{< figure src="/images/confusion_matrix.png">}}
 
-### Challenges with Augmentation
+#### Challenges with Augmentation
 
  - *Computational Overhead*: Augmentation increases training time as new images are generated on the fly. *Solution*: Use GPU acceleration to speed up the process.
 
  - *Over-Augmentation*: Excessive transformations may distort critical features in medical images.
 *Solution*: Restrict parameters like rotation and zoom to realistic ranges.
 
-#### Concluding Thoughts
+#### Summary
 
 DA proved to be a powerful tool for enhancing model performance in this pneumonia detection project. By introducing variability in the training dataset, we improved the generalisation of both the manual CNN and the pre-trained VGG16 models.
 
-# PART 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis
+# Part 3. Manual CNN vs. Pre-Trained VGG16: A Comparative Analysis
 
-Deep learning provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models. In this part, I compare the performance of a **manual CNN** and the *VGG16* pre-trained model for pneumonia detection. 
-
-While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of **transfer learning** with its pre-trained *ImageNet* weights. This comparative analysis explores their architectures, training strategies, and results.
+DL provides multiple pathways to solving problems, including designing custom architectures or leveraging pre-trained models. In this part, I'll compare the performance of a **manual CNN** and the *VGG16* pre-trained model for pneumonia detection. While the manual CNN was lightweight and tailored to the dataset, VGG16 brought the power of **transfer learning** with its pre-trained *ImageNet* weights. This comparative analysis explores their architectures, training strategies, and results.
 
 ### Manual CNN: Tailored for the Dataset
 
@@ -289,17 +293,17 @@ def build_manual_cnn(input_shape):
 manual_cnn = build_manual_cnn((150, 150, 3))
 manual_cnn.summary()
 ```
-1. Strengths
+1. **Strengths**
  - *Lightweight*: Fewer parameters compared to large pre-trained models.
  - *Flexibility*: Architecture tailored to chest X-ray data.
 
-2. Limitations
+2. **Limitations**
  - *Learning from Scratch*: Lacks the knowledge pre-trained on large datasets like *ImageNet*.
  - *Longer Training Time*: Requires more epochs to converge.
 
 ### VGG16: Transfer Learning in Action
 
-VGG16 is a popular pre-trained CNN that has demonstrated strong performance in image classification tasks. By freezing its convolutional layers, we leveraged its pre-trained weights for feature extraction while fine-tuning the dense layers for pneumonia detection. Architecture:
+VGG16 is a popular pre-trained CNN that has demonstrated strong performance in image classification tasks. By freezing its convolutional layers, we leveraged its pre-trained weights for feature extraction while fine-tuning the dense layers for pneumonia detection. **Architecture**:
 
  - *Feature Extraction Layers*: Pre-trained convolutional layers from VGG16.
  - *Dense Layers*: Custom layers added for binary classification.
@@ -328,11 +332,11 @@ vgg16_model = build_vgg16((150, 150, 3))
 vgg16_model.summary()
 ```
 
-1. Strengths
+1. **Strengths**
  - *Transfer Learning*: Pre-trained weights accelerate training and improve accuracy.
  - *Feature Richness*: Extracts high-level features from images.
 
-2. Limitations
+2. **Limitations**
  - *Heavy Architecture*: High computational requirements.
  - *Over-fitting Risk*: Fine-tuning dense layers requires careful monitoring.
 
@@ -387,10 +391,10 @@ vgg16_model.fit(train_generator, validation_data=val_generator, epochs=10)
  - Transfer learning provides a significant performance boost.
  - Ideal for medical imaging projects with access to powerful hardware.
 
-#### Concluding Thoughts
+#### Summary
 Both models demonstrated strong performance, but VGG16’s transfer learning capabilities gave it a slight edge in accuracy and recall. However, the manual CNN remains a viable alternative for scenarios with limited computational resources or hardware constraints.
 
-# PART 4. Evaluating CNN Models for Pneumonia Detection
+# Part 4. Evaluating CNN Models for Pneumonia Detection
 
 Evaluating the performance of deep learning models in medical imaging projects requires more than just accuracy. Metrics like **precision**, **recall**, and **F1-score** provide deeper insights, especially when minimising false negatives is critical, as in pneumonia detection. In this part, I explore how our models—*Manual CNN* and *VGG16* — were evaluated and highlights the role of confusion matrices in understanding their performance.
 
@@ -459,7 +463,8 @@ evaluate_model(manual_cnn, "test")
 #### Results
 {{< figure src="/images/results.png">}}
 
-### Key Observations
+**Key Observations**
+
 *Manual CNN*:
 
  - High precision but slightly lower recall.
@@ -470,19 +475,17 @@ evaluate_model(manual_cnn, "test")
  - Slightly better performance across all metrics.
  - Higher recall reduced false negatives, making it better suited for pneumonia detection.
 
-### Challenges in Evaluation
+#### Challenges in Evaluation
  - *Class Imbalance*: Imbalanced test data can skew metrics. *Solution*: Use balanced datasets for evaluation or weighted metrics.
  - *Interpretation of Metrics*: Precision and recall trade-offs must be carefully analysed. *Solution*: Prioritise recall for medical applications to minimise missed cases.
  - *Threshold Tuning*: A fixed threshold (e.g., 0.5) may not work optimally for all models. *Solution*: Experiment with threshold values to maximise recall without sacrificing precision.
 
-#### Concluding Thoughts
+#### Summary
 Model evaluation provided crucial insights into the performance of our CNN models. While both models performed well, VGG16's higher recall made it the preferred choice for pneumonia detection, as it minimises the risk of missing positive cases.
 
-# PART 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection
+# Part 5. Insights from Sensitivity and Specificity Analysis in Pneumonia Detection
 
-When evaluating AI models for medical diagnostics, metrics like **sensitivity** and **specificity** are crucial. Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases. 
-
-For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential. In this part, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.
+When evaluating AI models for medical diagnostics, metrics like **sensitivity** and **specificity** are crucial. Unlike general-purpose accuracy, these metrics provide deeper insights into how well a model distinguishes between true positive and true negative cases. For pneumonia detection, where false negatives can have severe consequences, understanding these metrics is essential. In this part, I break down sensitivity and specificity, demonstrate their importance in model evaluation, and analyse how they influenced our choice between the Manual CNN and VGG16 models.
 
 ### Understanding Sensitivity and Specificity
 
@@ -535,6 +538,7 @@ print("Manual CNN Metrics:", manual_metrics)
 print("VGG16 Metrics:", vgg16_metrics)
 ```
 Output:
+
 *For Manual CNN*:
 
  - Sensitivity: 91.2%
@@ -561,7 +565,7 @@ Balancing sensitivity and specificity is key in medical diagnostics:
  - *High Specificity*: Reduces false positives, minimising unnecessary stress, costs, and resource usage.Important in resource-limited settings.
 
 #### Visualising the Trade-offs
-We used the Receiver Operating Characteristic (ROC) curve to visualise the sensitivity-specificity trade-off across different thresholds.
+We used the `Receiver Operating Characteristic (ROC)` curve to visualise the sensitivity-specificity trade-off across different thresholds.
 
 #### Python Code: ROC Curve
 ```python
@@ -603,13 +607,13 @@ plot_roc_curve(vgg16_model, test_generator)
  - Offers a balanced approach, with decent sensitivity and specificity.
  - Suitable for scenarios with resource constraints.
 
-#### Concluding Thoughts
+#### Summary
 Sensitivity and specificity are critical metrics in evaluating AI models for medical imaging. While both the Manual CNN and VGG16 demonstrated strong performance, VGG16’s superior sensitivity makes it the preferred choice for pneumonia detection, prioritising patient safety.
 
-# PART 6. Future Directions for AI-Assisted Medical Imaging
+# Part 6. Future Directions for AI-Assisted Medical Imaging
 
 AI made significant strides in medical imaging, as demonstrated by our pneumonia detection project. 
-However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery. In this part, we explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.
+However, the journey is far from complete. Future advancements in deep learning, real-world deployment, and ethical considerations will shape the role of AI in diagnostics and healthcare delivery. In this part, I'll explore the potential and challenges of AI in medical imaging, including future directions for improving model performance, ensuring ethical deployment, and scaling solutions for global healthcare.
 
 ### 1. Improving Model Performance
 
@@ -696,7 +700,7 @@ def generate_gradcam(model, img_array, last_conv_layer_name):
 generate_gradcam(model=vgg16_model, img_array=test_image, last_conv_layer_name="block5_conv3")
 ```
 
-#### 4. Scalling AI Solutions Globally
+### 4. Scalling AI Solutions Globally
 *Cloud-Based AI Services*: Cloud platforms like AWS and Google Cloud allow hospitals to access AI models without investing in local infrastructure.
 
 *Collaboration Across Institutions*: Sharing anonymised data and models between healthcare providers accelerates progress and improves model robustness.

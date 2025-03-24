@@ -6,4 +6,4 @@ tags: ["neural networks", "dense layers", "activation functions", "image classif
 type: "page"
 ---
 
-This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect. Click on each post to learn more about the project components.
+This section showcases the technical blog related to this project. 

@@ -7,13 +7,18 @@ title: "Building and Optimising a Data Warehouse: From Design to Business Insigh
 weight: 1
 ---
 {{< figure src="/images/project3_images/pr3.jpg">}}
-**View Project on GitHub**: 
 
-<a href="https://github.com/drnsmith/warehouse-management-system" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
+<div style="display: flex; align-items: center; gap: 10px;">
+    <a href="https://github.com/drnsmith/warehouse-management-system" target="_blank" style="text-decoration: none;">
+        <img src="/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
+    </a>
+    <a href="https://github.com/drnsmith/warehouse-management-system" target="_blank" style="font-weight: bold; color: black;">
+        View Project on GitHub
+    </a>
+</div>
 
-# PART 1. Building a Data Warehouse: Technical Implementation and Challenges
+
+# Part 1. Building a Data Warehouse: Technical Implementation and Challenges
 
 In today's data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW). In this part, I'll walk through the technical journey of building a data warehouse for a company named 'OfficeProducts', including some of the core challenges faced and how they were addressed. 
 This blog is written for those curious about the behind-the-scenes of data integration, schema design, and technical problem-solving involved in creating a functional data warehouse.
@@ -91,7 +96,7 @@ Building a data warehouse for 'OfficeProducts' was a learning-rich experience, e
 
 Building a data warehouse is both an art and a science. It involves careful planning, attention to data quality, and a deep understanding of how data will be used to derive insights. For 'OfficeProducts', the data warehouse built was not just a storage solution but a strategic tool that enables more informed business decisions. 
 
-# PART 2. Source Data and ETL Process Explained
+# Part 2. Source Data and ETL Process Explained
 
 In every data warehouse project, a critical step involves understanding the source data and developing an effective ETL process to consolidate that data. For 'OfficeProducts', the source data was primarily gathered from two main files: the **Datastream** file and the **Masterdata** file. These two files formed the backbone of the entire data warehouse, feeding the transactional and product-related information necessary for meaningful analysis.
 
@@ -176,7 +181,7 @@ The ETL process played a vital role in creating a single source of truth. By com
 
 Building a robust ETL process is the backbone of any data warehouse project. For 'OfficeProducts', this ETL process helped convert disparate data sources into a cohesive, analysable format, ultimately delivering insights that could drive better business strategies. By understanding the challenges and solutions involved in ETL, we can better appreciate the importance of well-integrated, high-quality data for any data-driven organisation.
 
-# PART 3. Designing the Snowflake Schema for Efficient Data Analysis
+# Part 3. Designing the Snowflake Schema for Efficient Data Analysis
 
 In the world of data warehousing, choosing the right schema is a pivotal decision that determines the efficiency of the entire project. For 'OfficeProducts', we opted for a **Snowflake Schema** to create a streamlined and high-performing data warehouse. This schema design allowed us to effectively reduce redundancy, maintain data integrity, and improve overall query performance, making it ideal for deep analysis of sales and product performance data.
 
@@ -266,11 +271,9 @@ The **Snowflake Schema** was instrumental in organising the data for 'OfficeProd
 For those looking to build their own data warehouse, the **Snowflake Schema** can be a great choice, especially when dealing with complex datasets that need normalisation to manage redundancy and maintain accuracy.
 
 
-# PART 4. Multidimensional Data Analysis: Practical Insights
+# Part 4. Multidimensional Data Analysis: Practical Insights
 
-The ultimate purpose of building a data warehouse is to be able to perform powerful and meaningful analyses to derive actionable business insights. For the 'OfficeProducts' project, we carried out several forms of multidimensional analysis to answer key business questions related to product sales, customer trends, and promotional effectiveness. 
-
-I'll next explore the practical insights gained through these analyses and how tools like **ROLLUP** and **CUBE** helped extract deeper trends from the data.
+The ultimate purpose of building a data warehouse is to be able to perform powerful and meaningful analyses to derive actionable business insights. For the 'OfficeProducts' project, we carried out several forms of multidimensional analysis to answer key business questions related to product sales, customer trends, and promotional effectiveness. I'll next explore the practical insights gained through these analyses and how tools like **ROLLUP** and **CUBE** helped extract deeper trends from the data.
 
 ### Multidimensional Data Analysis
 
@@ -387,7 +390,7 @@ The insights derived from these multidimensional analyses informed a variety of 
 
 Multidimensional data analysis is a core feature of any data warehouse, allowing businesses to understand their operations at a deeper level. By using **ROLLUP** and **CUBE** operations, we were able to derive valuable insights from our data warehouse for 'OfficeProducts'. These tools enabled us to perform complex aggregations and answer critical questions about sales, product performance, and promotional impacts.
 
-# PART 5. Sales Channels Performance and Promotions: Lessons Learned
+# Part 5. Sales Channels Performance and Promotions: Lessons Learned
 
 Sales channel performance and promotional effectiveness are key aspects that drive business success. For 'OfficeProducts', understanding which channels contributed the most to overall sales and evaluating how promotions influenced sales trends were crucial. I'll next walk you through how we analysed sales performance across various channels and promotions using the data warehouse, and the insights we gained from these analyses.
 
@@ -453,7 +456,7 @@ The **Envoy Ambassador** product, for instance, saw a dramatic increase in sales
 
 Products like **Envoy Ambassador** consistently performed well, and bundling them with complementary products could help clear inventory.
 
- - **Channel Strategy Recommendations**: Given the shift towards internet sales, it was recommended that 'OfficeProducts' invest more in their online sales platform. 
+ - **4. Channel Strategy Recommendations**: Given the shift towards internet sales, it was recommended that 'OfficeProducts' invest more in their online sales platform. 
 
 Enhancing the user experience, expanding digital marketing efforts, and improving logistics for online deliveries could help maximise the opportunities presented by this shift in consumer preference.
 
@@ -475,7 +478,7 @@ For example, targeting high-potential products and promotions for further invest
 
 The performance of sales channels and the impact of promotions are critical for shaping effective business strategies. For 'OfficeProducts', the data warehouse provided a robust platform for conducting detailed analyses that uncovered key trends and insights. By recognising the value of internet promotions and the shift away from traditional sales channels, 'OfficeProducts' can now better align its future marketing and sales strategies to match consumer expectations.
 
-# PART 6. Recommendations for Management and Business Insights
+# Part 6. Recommendations for Management and Business Insights
 
 Data-driven insights play a crucial role in helping businesses make informed decisions that align with market dynamics. For 'OfficeProducts', the analysis conducted using the data warehouse provided several valuable insights that translated into actionable recommendations for management. 
 

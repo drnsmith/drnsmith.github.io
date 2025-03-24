@@ -1,11 +1,10 @@
 ---
 date: 2022-04-09T10:58:08-04:00
-description: "In this project, I built an AI-powered tool for classifying recipe difficulty."
+description: "I built an AI-powered tool for classifying recipe difficulty."
 image: "/images/project1_images/pr1.jpg"
 tags: ["Machine Learning", "Natural Language Processing", "Feature Engineering", "Recipe Classification", "Random Forest", "AI in Cooking", "LIME Interpretability", "Text Processing", "Python for Machine Learning"]
-title: "AI-Powered Recipe Classifier."
-subtitle: ""
-weight: 1
+title: "AI-Powered Recipe Classifier"
+
 ---
 
 {{< figure src="/images/project1_images/pr1.jpg">}}
@@ -20,18 +19,11 @@ weight: 1
     </a>
 </div>
 
-# PART 1.
-## **Introduction**
-Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. 
+# Part 1.
+Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—**Easy, Medium, Hard, and Very Hard**—using **Natural Language Processing (NLP)** and **Machine Learning (ML)**. In the first part, I focus on and walk you through **data collection, cleaning, and pre-processing**, which lay the foundation for training a robust ML model. 
 
-The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—**Easy, Medium, Hard, and Very Hard**—using **Natural Language Processing (NLP)** and **Machine Learning (ML)**. 
-
-In the first part, I focus on and walk you through **data collection, cleaning, and pre-processing**, which lay the foundation for training a robust ML model. 
-
-## **Why Pre-process Recipe Data?**
-Raw textual data in recipes is often noisy, containing **special characters, punctuation, HTML tags, and non-standard formatting**. 
-
-If left untreated, these irregularities can reduce the performance of NLP models. To ensure high-quality inputs for ML, I applied a **multi-step text cleaning and transformation process**, which:
+### **Why Pre-process Recipe Data?**
+Raw textual data in recipes is often noisy, containing **special characters, punctuation, HTML tags, and non-standard formatting**. If left untreated, these irregularities can reduce the performance of NLP models. To ensure high-quality inputs for ML, I applied a **multi-step text cleaning and transformation process**, which:
 
 1. **Removes non-ASCII characters** to eliminate unwanted symbols.
 2. **Converts text to lowercase** for uniformity.
@@ -157,28 +149,17 @@ df['preprocessed_full_recipe'] = df['preprocessed_ingredients'] + ' ' + df['prep
 - A **combined column** (`preprocessed_full_recipe`) was created to represent the entire recipe.
 
 ### **To sum this part up,**
-Data pre-processing is a **crucial first step** in any NLP project. By cleaning and structuring text, I ensured the **ML model receives high-quality inputs** for training.
-
-**Key Takeaways:**
+Data pre-processing is a **crucial first step** in any NLP project. By cleaning and structuring text, I ensured the **ML model receives high-quality inputs** for training. Key Takeaways:
 - Cleaning text data removes noise and enhances NLP model performance.
 - Lemmatisation, stemming, and stopword removal improve text standardisation.
 - Pre-processed text is **structured, compact, and informative** for ML.
 
-# PART 2.
-### Introduction
-In ML, features are measurable characteristics or properties that help a model make predictions. 
+# Part 2.
+In ML, features are measurable characteristics or properties that help a model make predictions. In recipe classification, features such as ingredient complexity, cooking techniques, and step count become powerful predictors of recipe difficulty. **Feature engineering** helps us take unstructured data, such as recipe instructions, and turn it into structured data that the model can understand. 
 
-In recipe classification, features such as ingredient complexity, cooking techniques, and step count become powerful predictors of recipe difficulty. 
+For example, a recipe with advanced ingredients (like "saffron" or "truffle oil") is likely to be more challenging than one with everyday items like "salt" or "flour."  Similarly, recipes that involve techniques like "blanching" or "flambé" tend to require more skill than those involving basic steps like "stirring."  
 
-**Feature engineering** helps us take unstructured data, such as recipe instructions, and turn it into structured data that the model can understand. 
-
-For example, a recipe with advanced ingredients (like "saffron" or "truffle oil") is likely to be more challenging than one with everyday items like "salt" or "flour." 
-
-Similarly, recipes that involve techniques like "blanching" or "flambé" tend to require more skill than those involving basic steps like "stirring." 
-
-In this part, I’ll take you behind the scenes into one of the most critical aspects of this project: *feature engineering*. 
-
-This is where raw recipe data is transformed into a format that AI can interpret. By selecting and creating features, my model gets the context it needs to classify recipes effectively.
+In this part, I’ll take you behind the scenes into one of the most critical aspects of this project: *feature engineering*. This is where raw recipe data is transformed into a format that AI can interpret. By selecting and creating features, my model gets the context it needs to classify recipes effectively.
 
 
 ### Step-by-Step Guide to Key Features in Recipe Classification
@@ -197,9 +178,7 @@ data["ingredient_complexity"] = data["ingredients"].apply(lambda x: sum(1 for i 
 In this example, I created a list of rare ingredients and calculated the complexity score by counting how many rare ingredients appear in each recipe.
 
 #### Technique Identification
-Cooking techniques add another layer of difficulty. 
-
-A recipe that involves techniques like "poaching" or "julienne" is typically more complex than one that simply calls for "stirring." 
+Cooking techniques add another layer of difficulty. A recipe that involves techniques like "poaching" or "julienne" is typically more complex than one that simply calls for "stirring." 
 
 To identify and score these techniques, I used natural language processing (NLP). NLP kelped detecting specific terms associated with higher difficulty.
 
@@ -210,34 +189,24 @@ data["technique_complexity"] = data["steps"].apply(lambda x: sum(1 for technique
 ```
 By scanning each recipe for these advanced techniques, I assigned a score based on the presence of each technique.
 
-### Step Count and Length as Complexity Indicators
-The number of steps and the length of instructions provide insight into a recipe’s complexity. 
-
-My assumption was: recipes with many steps or lengthy instructions are generally more challenging.
+#### Step Count and Length as Complexity Indicators
+The number of steps and the length of instructions provide insight into a recipe’s complexity. My assumption was: recipes with many steps or lengthy instructions are generally more challenging.
 
 ```python
 # Extract step count and length as features
 data["step_count"] = data["steps"].apply(lambda x: len(x.split(". ")))  # Count sentences as steps
 data["step_length"] = data["steps"].apply(len)  # Total character length of the steps
 ```
-In this example, I used **sentence count** as a proxy for step count, and character length as an indicator of instruction complexity.
-
-Such features, when combined, create a profile of each recipe that our model can use to predict difficulty. 
-
-The more detailed the features, the better the model becomes at distinguishing between easy and difficult recipes.
+In this example, I used **sentence count** as a proxy for step count, and character length as an indicator of instruction complexity. Such features, when combined, create a profile of each recipe that our model can use to predict difficulty. The more detailed the features, the better the model becomes at distinguishing between easy and difficult recipes.
 
 ### Challenges in Feature Engineering for Textual Data
 Working with textual data from recipes posed some unique challenges. Here’s how I tackled a few of them:
 
 #### Handling Ambiguity in Recipe Difficulty
-Recipe difficulty can be subjective. An experienced chef may find a recipe easy, while a novice finds it challenging. 
-
-To address this, I used broad categories (`Easy`, `Medium`, `Hard`, and `Very Hard`) to create a more generalised difficulty scale.
+Recipe difficulty can be subjective. An experienced chef may find a recipe easy, while a novice finds it challenging. To address this, I used broad categories (`Easy`, `Medium`, `Hard`, and `Very Hard`) to create a more generalised difficulty scale.
 
 #### Data Imbalance
-The data was skewed toward certain difficulty levels, with many recipes labeled as `Easy`. 
-
-To address this imbalance, I used `SMOTE` (Synthetic Minority Over-sampling Technique): it synthesises new data points for under-represented classes, making it easier for the model to learn from all categories.
+The data was skewed toward certain difficulty levels, with many recipes labeled as `Easy`. To address this imbalance, I used `SMOTE` (Synthetic Minority Over-sampling Technique): it synthesises new data points for under-represented classes, making it easier for the model to learn from all categories.
 
 ```python
 from imblearn.over_sampling import SMOTE
@@ -259,13 +228,9 @@ data["steps"] = data["steps"].apply(lambda x: " ".join([lemmatizer.lemmatize(wor
 These pre-processing steps helped create consistency across the dataset, allowing the model to recognise terms despite variations in language.
 
 ### Results and Insights on Feature Importance
-After training the model, I analysed feature importance to understand which features had the biggest impact on recipe difficulty predictions.
+After training the model, I analysed feature importance to understand which features had the biggest impact on recipe difficulty predictions. Ingredient complexity was a strong predictor of recipe difficulty. Recipes with rare ingredients tended to be more challenging.
 
-Ingredient complexity was a strong predictor of recipe difficulty. Recipes with rare ingredients tended to be more challenging.
-
-Cooking techniques added nuance to the model, as advanced techniques were often associated with higher difficulty.
-
-Step count and instruction length provided valuable context, as recipes with longer instructions were generally more difficult.
+Cooking techniques added nuance to the model, as advanced techniques were often associated with higher difficulty. Step count and instruction length provided valuable context, as recipes with longer instructions were generally more difficult.
 
 #### Visualisation of Feature Importance
 Below is a sample code snippet to visualise feature importance using `matplotlib`:
@@ -292,18 +257,11 @@ By quantifying culinary concepts like ingredient rarity and cooking techniques, 
 
 This not only enhances the model’s predictive power but also enriched the cooking experience by enabling personalised recipe suggestions.
 
-# PART 3. 
-### Introduction
-Next, I explored how feature engineering transforms raw recipe data into valuable insights for predicting recipe difficulty. 
-
-With features like ingredient complexity, technique identification, and step count, my dataset is now ready for the next stage: **selecting, training, and evaluating** a ML model that can classify recipes by difficulty level. 
-
-Model selection was a crucial step in building a successful classifier. In this part, I’ll walk you through the models I tested, the training process, and the metrics I used to evaluate performance.
+# Part 3. 
+Next, I explored how feature engineering transforms raw recipe data into valuable insights for predicting recipe difficulty. With features like ingredient complexity, technique identification, and step count, my dataset is now ready for the next stage: **selecting, training, and evaluating** a ML model that can classify recipes by difficulty level. Model selection was a crucial step in building a successful classifier. In this part, I’ll walk you through the models I tested, the training process, and the metrics I used to evaluate performance.
 
 ### Why Model Selection Matters
-Choosing the right model is essential because each algorithm handles data differently. 
-
-A model that works well with structured numeric data might struggle with text-heavy datasets, while a model that excels with large datasets might not perform as well on smaller ones. 
+Choosing the right model is essential because each algorithm handles data differently. A model that works well with structured numeric data might struggle with text-heavy datasets, while a model that excels with large datasets might not perform as well on smaller ones. 
 
 For this project, I tested several popular classification models:
 
@@ -435,19 +393,11 @@ Here’s what I learned from model selection and evaluation:
  - Evaluation metrics like precision and recall gave me a deeper understanding of the model’s performance across each difficulty level.
 
 ### To sum up,
-Selecting and training the right model was a crucial part of this recipe difficulty classifier. 
+Selecting and training the right model was a crucial part of this recipe difficulty classifier. Through careful testing and tuning, I developed a robust model that accurately classifies recipes by difficulty. This classifier now has the potential to enhance user experiences on cooking platforms, helping chefs of all levels find recipes suited to their skill.
 
-Through careful testing and tuning, I developed a robust model that accurately classifies recipes by difficulty. 
+# Part 4. 
 
-This classifier now has the potential to enhance user experiences on cooking platforms, helping chefs of all levels find recipes suited to their skill.
-
-# PART 4. 
-### Introduction
-As I progressed with training my AI-powered recipe classifier, I noticed a common issue creeping in: *overfitting*, which happens when a model performs well on the training data but struggles to generalise to new, unseen data. 
-
-In ML, this can result in poor accuracy on validation or test data. In this part, I’ll walk you through how I identified overfitting in my model and the steps I took to address it. 
-
-I’ll also explain the visual clues from training and validation loss/accuracy graphs that helped me recognise this issue.
+As I progressed with training my AI-powered recipe classifier, I noticed a common issue creeping in: *overfitting*, which happens when a model performs well on the training data but struggles to generalise to new, unseen data. In ML, this can result in poor accuracy on validation or test data. In this part, I’ll walk you through how I identified overfitting in my model and the steps I took to address it. I’ll also explain the visual clues from training and validation loss/accuracy graphs that helped me recognise this issue.
 
 ### 1. Spotting Overfitting Through Training Metrics
 During the model training, I kept track of both training loss and validation loss as well as accuracy metrics for both datasets. Here's what I observed. 
@@ -477,7 +427,6 @@ model.add(Dropout(0.5))  # Dropout rate of 50%
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.3))  # Dropout rate of 30%
 ```
-
 b. *Reducing Model Complexity*
 Overly complex models with too many layers or neurons are prone to overfitting because they can “memorise” the training data. 
 
@@ -490,7 +439,6 @@ model.add(Dense(64, activation='relu', input_shape=(input_shape,)))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(num_classes, activation='softmax'))
 ```
-
 c. *Early Stopping*
 Early stopping is a technique that halts training once the validation loss starts increasing, even if the training loss is still decreasing. This prevents the model from overfitting further.
 
@@ -539,26 +487,14 @@ After implementing these techniques, I retrained the model and saw promising res
 The combination of these methods led to a more balanced performance across both training and validation sets, allowing the model to generalise better without compromising too much on training accuracy.
 
 ### To sum up,
-Overfitting can be a challenging issue, especially when working with complex datasets like recipe classification. 
+Overfitting can be a challenging issue, especially when working with complex datasets like recipe classification. However, with techniques like **dropout, early stopping, data augmentation, and regularisation**, I was able to create a model that performs well on both training and unseen data. Understanding the balance between learning and generalisation is key, and monitoring training metrics is crucial to spotting overfitting early on.
 
-However, with techniques like **dropout, early stopping, data augmentation, and regularisation**, I was able to create a model that performs well on both training and unseen data. 
+# Part 5. 
 
-Understanding the balance between learning and generalisation is key, and monitoring training metrics is crucial to spotting overfitting early on.
-
-# PART 5. 
-### Introduction
-In building a recipe difficulty classifier, I wanted to make sure the model's predictions weren’t just accurate but also understandable. 
-
-For anyone working with ML, especially in fields where transparency is key, model interpretability is crucial. This is where `LIME` (Local Interpretable Model-Agnostic Explanations) comes in. 
-
-In this part, I’ll walk you through how I used `LIME` to make sense of my classifier’s decisions, ensuring that its predictions are grounded and explainable.
+In building a recipe difficulty classifier, I wanted to make sure the model's predictions weren’t just accurate but also understandable. For anyone working with ML, especially in fields where transparency is key, model interpretability is crucial. This is where `LIME` (Local Interpretable Model-Agnostic Explanations) comes in. In this part, I’ll walk you through how I used `LIME` to make sense of my classifier’s decisions, ensuring that its predictions are grounded and explainable.
 
 ### Why Model Interpretability Matters
-ML models, particularly neural networks, are often referred to as "black boxes." They can make accurate predictions, but understanding why they make those predictions can be difficult. 
-
-This lack of transparency can be problematic, especially when models are used in real-world applications where trust and accountability are essential. 
-
-For my recipe classifier, understanding the model’s reasoning process was essential. I wanted to know:
+ML models, particularly neural networks, are often referred to as "black boxes." They can make accurate predictions, but understanding why they make those predictions can be difficult. This lack of transparency can be problematic, especially when models are used in real-world applications where trust and accountability are essential. For my recipe classifier, understanding the model’s reasoning process was essential. I wanted to know:
 
  - *Which ingredients or techniques contribute to the model classifying a recipe as "Easy" or "Hard"?*
  - *How does the model weigh different aspects of a recipe to arrive at a difficulty level?*
@@ -659,21 +595,13 @@ While `LIME` was incredibly helpful, it does have limitations:
 In future iterations of this project, it would be beneficial to explore other interpretability methods, such as `SHAP (SHapley Additive exPlanations)`, which offers a more holistic view of feature importance across all predictions.
 
 ### To sum up,
-Interpreting ML models is essential, especially in fields where transparency and accountability matter. 
+Interpreting ML models is essential, especially in fields where transparency and accountability matter. By using `LIME`, I was able to open up the "black box" of my recipe difficulty classifier, ensuring that its predictions were not only accurate but also explainable. 
 
-By using `LIME`, I was able to open up the "black box" of my recipe difficulty classifier, ensuring that its predictions were not only accurate but also explainable. 
+For anyone looking to build or use ML models responsibly, tools like LIME offer a powerful way to understand and trust the predictions that models make. If you're building your own classifiers or predictive models, I highly recommend experimenting with `LIME`. It’s a valuable tool in making machine learning not just effective, but also transparent and reliable.
 
-For anyone looking to build or use ML models responsibly, tools like LIME offer a powerful way to understand and trust the predictions that models make. 
+# Part 6. 
 
-If you're building your own classifiers or predictive models, I highly recommend experimenting with `LIME`. It’s a valuable tool in making machine learning not just effective, but also transparent and reliable.
-
-# PART 6. 
-### Introduction
-Once a model that classifies recipes by difficulty level is built and trained, the next challenge is deploying it into a real-world environment. 
-
-Next, we’ll cover the process of moving our trained model from a development setting to a production environment. 
-
-Deployment enables the model to make predictions and serve users in real-time, opening up possibilities for applications like recipe recommendation engines, cooking assistant apps, or culinary content platforms.
+Once a model that classifies recipes by difficulty level is built and trained, the next challenge is deploying it into a real-world environment. Next, we’ll cover the process of moving our trained model from a development setting to a production environment. Deployment enables the model to make predictions and serve users in real-time, opening up possibilities for applications like recipe recommendation engines, cooking assistant apps, or culinary content platforms.
 
 ### Preparing the Model for Deployment
 Before deploying, it's essential to package the model in a way that allows it to operate independently of the training environment. This preparation includes:
@@ -777,11 +705,7 @@ After deployment, it's crucial to monitor the model’s performance and update i
 I set up basic logging and monitoring, and in the future, automated retraining  - to ensure the model remains effective - can be integrated.
 
 ### To sum up,
-Deploying an AI model is an essential step in bringing ML solutions to end-users. 
-
-For my AI-powered recipe difficulty classifier, build a `REST API with Flask`, containerise it using `Docker`, and test it thoroughly to ensure reliability. 
-
-By monitoring and maintaining the model, we aim to provide a seamless experience for users seeking recipe insights.
+Deploying an AI model is an essential step in bringing ML solutions to end-users. For my AI-powered recipe difficulty classifier, build a `REST API with Flask`, containerise it using `Docker`, and test it thoroughly to ensure reliability. By monitoring and maintaining the model, we aim to provide a seamless experience for users seeking recipe insights.
 
 *Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy cooking!*
 

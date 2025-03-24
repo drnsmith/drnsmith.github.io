@@ -6,7 +6,7 @@ tags: ["explainable AI", "AI trust", "AI model calibration", "Grad-CAM", "LIME",
 title: "From Black Box to Bedside: Making AI Reliable and Interpretable in Cancer Diagnosis"
 weight: 1
 ---
-{{< figure src="/images/project15_images/pr15.png"}}
+{{< figure src="/images/project15_images/pr15.png">}}
 
 **View Project on GitHub**: 
 
@@ -14,13 +14,9 @@ weight: 1
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
 
-# PART 1. Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis
+# Part 1. Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis
 
-AI-powered tools are revolutionising healthcare by providing fast, accurate, and scalable diagnostic solutions. In breast cancer diagnosis, deep learning (DL) models, particularly Convolutional Neural Networks (CNNs), have shown remarkable promise. 
-
-However, a highly accurate model is not necessarily a reliable one. This is where **AI calibration** plays a critical role—ensuring that a model’s predicted probabilities align closely with the actual likelihood of events, making predictions more interpretable and trustworthy.
-
-In this blog, we explore the importance of model calibration in healthcare and delve into techniques like **Platt Scaling** and **Isotonic Regression** to improve the reliability of AI predictions in breast cancer diagnostics.
+AI-powered tools are revolutionising healthcare by providing fast, accurate, and scalable diagnostic solutions. In breast cancer diagnosis, deep learning (DL) models, particularly Convolutional Neural Networks (CNNs), have shown remarkable promise. However, a highly accurate model is not necessarily a reliable one. This is where **AI calibration** plays a critical role—ensuring that a model’s predicted probabilities align closely with the actual likelihood of events, making predictions more interpretable and trustworthy. In this blog, I explore the importance of model calibration in healthcare and delve into techniques like **Platt Scaling** and **Isotonic Regression** to improve the reliability of AI predictions in breast cancer diagnostics.
 
 
 ### What is AI Calibration?
@@ -158,11 +154,9 @@ plt.show()
 AI calibration is essential for reliable breast cancer diagnosis, ensuring that predicted probabilities are meaningful and trustworthy. Techniques like Platt Scaling and Isotonic Regression provide practical ways to achieve better calibration, improving the interpretability and safety of AI systems in healthcare. By integrating calibration into model development pipelines, we can build more reliable diagnostic tools that clinicians can trust.
 
 
-# PART 2. Evaluating AI Models for Healthcare: Beyond Accuracy
+# Part 2. Evaluating AI Models for Healthcare: Beyond Accuracy
 
-In healthcare, the stakes are higher than in most other fields. A seemingly high-performing AI model that achieves 95% accuracy may still fail to detect critical cases, leading to life-threatening consequences. For clinical applications, performance metrics like **sensitivity**, **specificity**, and **Area Under the Curve (AUC)** provide a more nuanced evaluation, ensuring AI models align with real-world needs.
-
-In this part, we explore these key metrics and their role in assessing and optimizing AI models for healthcare.
+In healthcare, the stakes are higher than in most other fields. A seemingly high-performing AI model that achieves 95% accuracy may still fail to detect critical cases, leading to life-threatening consequences. For clinical applications, performance metrics like **sensitivity**, **specificity**, and **Area Under the Curve (AUC)** provide a more nuanced evaluation, ensuring AI models align with real-world needs. In this part, we explore these key metrics and their role in assessing and optimizing AI models for healthcare.
 
 ### Why Accuracy Alone is Insufficient
 
@@ -174,7 +168,7 @@ In healthcare, **false negatives** (failing to detect disease) and **false posit
 
 ### Key Metrics for Evaluating AI Models in Healthcare
 
- - 1. *Sensitivity (Recall):* The proportion of actual positive cases (e.g., malignant) correctly identified by the model.
+1. *Sensitivity (Recall):* The proportion of actual positive cases (e.g., malignant) correctly identified by the model.
 
 \[
 \text{Sensitivity} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
@@ -295,18 +289,13 @@ plt.show()
 3. *Threshold Tuning*:
    - Adjust probability thresholds to balance sensitivity and specificity based on clinical needs.
 
-
 #### Summary
 
 Evaluating AI models for healthcare requires moving beyond accuracy to metrics like sensitivity, specificity, and AUC. These metrics provide a nuanced understanding of model performance, ensuring reliable and clinically meaningful predictions. By adopting this comprehensive evaluation approach, we can develop AI tools that clinicians can trust, ultimately improving patient outcomes.
 
-
-
 # PART 3. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis
 
-In the ever-evolving field of AI, DL has emerged as a transformative force, reshaping industries and driving innovation. In medical imaging, where precision and interpretability are critical, advanced techniques like **Grad-CAM (Gradient-weighted Class Activation Mapping)** and **LIME (Local Interpretable Model-agnostic Explanations)** are becoming essential tools for understanding how models make decisions.
-
-This project leveraged such techniques to explain predictions made by cutting-edge DL models like `ResNet50`, `EfficientNetB0`, and `DenseNet201` for breast cancer diagnosis. By visualising what a model "sees" and validating its decision-making process, we bridge the gap between AI's technical prowess and the human trust required for adoption in critical healthcare settings.
+In the ever-evolving field of AI, DL has emerged as a transformative force, reshaping industries and driving innovation. In medical imaging, where precision and interpretability are critical, advanced techniques like **Grad-CAM (Gradient-weighted Class Activation Mapping)** and **LIME (Local Interpretable Model-agnostic Explanations)** are becoming essential tools for understanding how models make decisions. This project leveraged such techniques to explain predictions made by cutting-edge DL models like `ResNet50`, `EfficientNetB0`, and `DenseNet201` for breast cancer diagnosis. By visualising what a model "sees" and validating its decision-making process, I bridge the gap between AI's technical prowess and the human trust required for adoption in critical healthcare settings.
 
 ### Problem Statement
 Despite the remarkable accuracy of DL models in diagnosing diseases like breast cancer, the lack of interpretability often limits their acceptance in clinical environments. Medical practitioners need to understand why a model makes a specific prediction. Without this transparency, integrating AI into real-world decision-making becomes a challenge.
@@ -391,7 +380,7 @@ The project achieved notable outcomes:
 
 Generated clear heatmaps showing that models focused on tumour-specific regions in histopathology slides, ensuring decision reliability.
 
-![Grad-CAM heatmaps](/images/images/grad.png)
+![Grad-CAM heatmaps](/images/grad.png)
 
 *Grad-CAM heatmaps for malignant histopathology image across ResNet50, EfficientNetB0, and DenseNet201 models.*
 
@@ -412,11 +401,11 @@ Grad-CAM analysis highlights the following:
 1. **LIME**:
 Demonstrated consistency between feature importance and medical expectations, further validating model outputs. `LIME` explanations provide a granular understanding of feature importance at the pixel level. 
 
-![LIME visualisations 1](/images/images/lime.png)
+![LIME visualisations 1](/images/lime.png)
 *LIME visualisations for malignant histopathology image using ResNet50, EfficientNetB0, and DenseNet201 models.*
 
 
-![LIME visualisations 2](/images/images/original.png)
+![LIME visualisations 2](/images/d.png)
 *Original histopathology image of a malignant case (Index: 3091)*
 
  - `ResNet50`: Regions in yellow indicate areas crucial for classification, focusing on cellular clusters.

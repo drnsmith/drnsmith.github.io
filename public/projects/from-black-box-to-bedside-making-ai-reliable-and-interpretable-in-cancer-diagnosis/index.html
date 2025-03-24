@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>From Black Box to Bedside: Making AI Reliable and Interpretable in Cancer Diagnosis | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Accuracy is meaningless without trust—especially in healthcare. This project focuses on building interpretable and clinically reliable AI systems for breast cancer histopathology. You’ll learn how to calibrate models using Platt Scaling and Isotonic Regression, apply interpretability tools like Grad-CAM and LIME, and evaluate models using sensitivity, specificity, and AUC to ensure confidence in real-world deployment.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project15_images/pr15.png');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            From Black Box to Bedside: Making AI Reliable and Interpretable in Cancer Diagnosis
+          </h1>
+          
+            <p class="f5">Accuracy is meaningless without trust—especially in healthcare. This project focuses on building interpretable and clinically reliable AI systems for breast cancer histopathology. You’ll learn how to calibrate models using Platt Scaling and Isotonic Regression, apply interpretability tools like Grad-CAM and LIME, and evaluate models using sensitivity, specificity, and AUC to ensure confidence in real-world deployment.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project15_images/pr15.png">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-why-ai-calibration-is-critical-for-reliable-breast-cancer-diagnosis">Part 1. Why AI Calibration is Critical for Reliable Breast Cancer Diagnosis</h1>
+<p>AI-powered tools are revolutionising healthcare by providing fast, accurate, and scalable diagnostic solutions. In breast cancer diagnosis, deep learning (DL) models, particularly Convolutional Neural Networks (CNNs), have shown remarkable promise. However, a highly accurate model is not necessarily a reliable one. This is where <strong>AI calibration</strong> plays a critical role—ensuring that a model’s predicted probabilities align closely with the actual likelihood of events, making predictions more interpretable and trustworthy. In this blog, I explore the importance of model calibration in healthcare and delve into techniques like <strong>Platt Scaling</strong> and <strong>Isotonic Regression</strong> to improve the reliability of AI predictions in breast cancer diagnostics.</p>
+<h3 id="what-is-ai-calibration">What is AI Calibration?</h3>
+<p>AI calibration refers to the process of adjusting a model’s predicted probabilities to better reflect real-world likelihoods. For example:</p>
+<ul>
+<li>A perfectly calibrated model predicts a 90% chance of malignancy, and in 90 out of 100 such cases, the outcome is indeed malignant.</li>
+</ul>
+<p>Without proper calibration:</p>
+<ul>
+<li><em>Overconfidence</em>: The model predicts probabilities that are too high, overestimating risk. Or,</li>
+<li><em>Underconfidence</em>: The model predicts probabilities that are too low, underestimating risk.</li>
+</ul>
+<p>Both scenarios are problematic in healthcare, where decisions often hinge on probability thresholds.</p>
+<h3 id="the-importance-of-calibration-in-breast-cancer-diagnosis">The Importance of Calibration in Breast Cancer Diagnosis</h3>
+<p>In breast cancer diagnostics, calibration ensures:</p>
+<ol>
+<li><em>Trustworthy Predictions</em>: Clinicians can rely on the model’s outputs for critical decisions.</li>
+<li><em>Threshold Sensitivity</em>: Calibrated probabilities allow more meaningful threshold adjustments for screening and treatment.</li>
+<li><em>Fairness</em>: Calibrated models reduce bias, particularly in underrepresented or challenging cases.</li>
+</ol>
+<h3 id="common-calibration-techniques">Common Calibration Techniques</h3>
+<h4 id="1-platt-scaling">1. Platt Scaling</h4>
+<p>Platt Scaling is a post-hoc calibration method that fits a logistic regression model to the outputs of an uncalibrated classifier.</p>
+<p><strong>How It Works</strong>:</p>
+<ol>
+<li>Train the CNN model to output uncalibrated probabilities (e.g., softmax probabilities).</li>
+<li>Fit a logistic regression model using these probabilities and the true labels from a validation set.</li>
+</ol>
+<p><strong>Implementation</strong>:
+Using <code>Scikit-learn</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LogisticRegression
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.calibration <span style="color:#f92672">import</span> calibration_curve
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Uncalibrated model predictions</span>
+</span></span><span style="display:flex;"><span>y_proba <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(x_val)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fit Platt Scaling (logistic regression) for calibration</span>
+</span></span><span style="display:flex;"><span>platt_scaler <span style="color:#f92672">=</span> LogisticRegression()
+</span></span><span style="display:flex;"><span>platt_scaler<span style="color:#f92672">.</span>fit(y_proba, y_val)
+</span></span><span style="display:flex;"><span>y_proba_calibrated <span style="color:#f92672">=</span> platt_scaler<span style="color:#f92672">.</span>predict_proba(y_proba)[:, <span style="color:#ae81ff">1</span>]
+</span></span></code></pre></div><p><strong>Advantages</strong>:</p>
+<ul>
+<li>Simple and effective for binary classification problems.</li>
+<li>Works well when the model’s predicted probabilities are roughly sigmoid-shaped.</li>
+</ul>
+<h4 id="2-isotonic-regression">2. Isotonic Regression</h4>
+<p>Isotonic Regression is a non-parametric calibration technique that maps predicted probabilities to true probabilities using a piecewise constant function.</p>
+<p><strong>How It Works</strong>:</p>
+<ol>
+<li>Train the CNN model to output uncalibrated probabilities.</li>
+<li>Fit an isotonic regression model using these probabilities and the true labels.</li>
+</ol>
+<p><strong>Implementation</strong>:
+Using <code>Scikit-learn</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.isotonic <span style="color:#f92672">import</span> IsotonicRegression
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fit Isotonic Regression for calibration</span>
+</span></span><span style="display:flex;"><span>iso_reg <span style="color:#f92672">=</span> IsotonicRegression(out_of_bounds<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;clip&#39;</span>)
+</span></span><span style="display:flex;"><span>y_proba_calibrated <span style="color:#f92672">=</span> iso_reg<span style="color:#f92672">.</span>fit_transform(y_proba, y_val)
+</span></span></code></pre></div><p><strong>Advantages</strong>:</p>
+<ul>
+<li>Does not assume a specific form for the relationship between predicted and true probabilities.</li>
+<li>More flexible than Platt Scaling, particularly for datasets with complex probability distributions.</li>
+</ul>
+<h3 id="evaluating-calibration"><strong>Evaluating Calibration</strong></h3>
+<p>To assess model calibration, the following tools and metrics are commonly used:</p>
+<ol>
+<li>
+<p><em>Reliability Diagram</em>:</p>
+<ul>
+<li>A graphical representation comparing predicted probabilities to observed frequencies.</li>
+<li>A perfectly calibrated model aligns with the diagonal line.</li>
+</ul>
+</li>
+<li>
+<p><em>Expected Calibration Error (ECE)</em>:</p>
+<ul>
+<li>Measures the difference between predicted and observed probabilities across probability bins.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.calibration <span style="color:#f92672">import</span> calibration_curve
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reliability diagram</span>
+</span></span><span style="display:flex;"><span>prob_true, prob_pred <span style="color:#f92672">=</span> calibration_curve(y_val, y_proba, n_bins<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(prob_pred, prob_true, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;o&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Uncalibrated Model&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Perfect Calibration&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Mean Predicted Probability&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Fraction of Positives&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Reliability Diagram&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="/images/calibration.png" alt="Calibration curves">
+<em>Calibration curves for six CNN models used in the project.</em></p>
+<p><strong>Results</strong></p>
+<ol>
+<li>
+<p><em>Baseline Model</em>:</p>
+<ul>
+<li>An uncalibrated CNN achieved high accuracy (96%) but overestimated probabilities for malignant cases, reducing trustworthiness.</li>
+</ul>
+</li>
+<li>
+<p><em>Calibration with Platt Scaling</em>:</p>
+<ul>
+<li>Improved probability alignment for malignant cases.</li>
+<li>Reliability diagram showed closer adherence to the diagonal line.</li>
+</ul>
+</li>
+<li>
+<p><em>Calibration with Isotonic Regression</em>:</p>
+<ul>
+<li>Further enhanced calibration for rare benign cases.</li>
+<li>Achieved better Expected Calibration Error (ECE) than Platt Scaling.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Best Practices for Calibration: Insights</strong></p>
+<ol>
+<li>
+<p><strong>Choose the Right Technique</strong>:</p>
+<ul>
+<li>Use Platt Scaling for simpler problems.</li>
+<li>Opt for Isotonic Regression for more complex datasets.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calibrate on Validation Data</strong>:</p>
+<ul>
+<li>Always reserve a separate validation set for calibration to prevent overfitting.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evaluate with Multiple Metrics</strong>:</p>
+<ul>
+<li>Use both reliability diagrams and numerical metrics like ECE for comprehensive evaluation.</li>
+</ul>
+</li>
+</ol>
+<h4 id="summary">Summary</h4>
+<p>AI calibration is essential for reliable breast cancer diagnosis, ensuring that predicted probabilities are meaningful and trustworthy. Techniques like Platt Scaling and Isotonic Regression provide practical ways to achieve better calibration, improving the interpretability and safety of AI systems in healthcare. By integrating calibration into model development pipelines, we can build more reliable diagnostic tools that clinicians can trust.</p>
+<h1 id="part-2-evaluating-ai-models-for-healthcare-beyond-accuracy">Part 2. Evaluating AI Models for Healthcare: Beyond Accuracy</h1>
+<p>In healthcare, the stakes are higher than in most other fields. A seemingly high-performing AI model that achieves 95% accuracy may still fail to detect critical cases, leading to life-threatening consequences. For clinical applications, performance metrics like <strong>sensitivity</strong>, <strong>specificity</strong>, and <strong>Area Under the Curve (AUC)</strong> provide a more nuanced evaluation, ensuring AI models align with real-world needs. In this part, we explore these key metrics and their role in assessing and optimizing AI models for healthcare.</p>
+<h3 id="why-accuracy-alone-is-insufficient">Why Accuracy Alone is Insufficient</h3>
+<p>Accuracy measures the proportion of correct predictions over total predictions, but it doesn’t tell the whole story. For example:</p>
+<ul>
+<li>In a dataset with 90% benign cases and 10% malignant cases, a model predicting &ldquo;benign&rdquo; for all samples achieves 90% accuracy—but fails to detect any malignant cases.</li>
+</ul>
+<p>In healthcare, <strong>false negatives</strong> (failing to detect disease) and <strong>false positives</strong> (falsely diagnosing disease) have vastly different implications, requiring metrics that account for this imbalance.</p>
+<h3 id="key-metrics-for-evaluating-ai-models-in-healthcare">Key Metrics for Evaluating AI Models in Healthcare</h3>
+<ol>
+<li><em>Sensitivity (Recall):</em> The proportion of actual positive cases (e.g., malignant) correctly identified by the model.</li>
+</ol>
+<p>[
+\text{Sensitivity} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
+]</p>
+<p><strong>Importance</strong>: High sensitivity ensures the model minimises false negatives, crucial for detecting diseases that require urgent intervention.</p>
+<ol start="2">
+<li><em>Specificity:</em> The proportion of actual negative cases (e.g., benign) correctly identified by the model.</li>
+</ol>
+<p>[
+\text{Specificity} = \frac{\text{True Negatives (TN)}}{\text{True Negatives (TN)} + \text{False Positives (FP)}}
+]</p>
+<p><strong>Importance</strong>: High specificity reduces false positives, preventing unnecessary anxiety and additional testing for patients.</p>
+<ol start="3">
+<li><em>Precision:</em> The proportion of predicted positive cases that are actually positive.</li>
+</ol>
+<p>[
+\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}
+]</p>
+<p><strong>Importance</strong>: High precision ensures that positive predictions are reliable, reducing the burden of follow-up testing.</p>
+<ol start="4">
+<li><em>F1-Score:</em> The harmonic mean of sensitivity and precision.</li>
+</ol>
+<p>[
+\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Sensitivity}}{\text{Precision} + \text{Sensitivity}}
+]</p>
+<p><strong>Importance</strong>: Useful for imbalanced datasets, balancing false positives and false negatives.</p>
+<ol start="5">
+<li><em>Area Under the Curve (AUC):</em> The area under the <code>Receiver Operating Characteristic (ROC)</code> curve, which plots the true positive rate (sensitivity) against the false positive rate (1-specificity).</li>
+</ol>
+<p><strong>Importance</strong>:</p>
+<ul>
+<li>AUC evaluates the model&rsquo;s ability to distinguish between classes across various probability thresholds.</li>
+<li>AUC close to 1.0 indicates excellent discrimination, while 0.5 represents random guessing.</li>
+</ul>
+<h3 id="case-study-breakhis-dataset-for-breast-cancer-diagnosis"><strong>Case Study: BreakHis Dataset for Breast Cancer Diagnosis</strong></h3>
+<p><strong>Dataset</strong>:</p>
+<ul>
+<li>Histopathological dataset with imbalanced benign (31%) and malignant (69%) cases.</li>
+</ul>
+<p><strong>Baseline Evaluation</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Metric</strong></th>
+          <th><strong>Value</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Accuracy</td>
+          <td>94.5%</td>
+      </tr>
+      <tr>
+          <td>Sensitivity</td>
+          <td>88.2%</td>
+      </tr>
+      <tr>
+          <td>Specificity</td>
+          <td>72.3%</td>
+      </tr>
+      <tr>
+          <td>Precision</td>
+          <td>90.1%</td>
+      </tr>
+      <tr>
+          <td>F1-Score</td>
+          <td>89.1%</td>
+      </tr>
+      <tr>
+          <td>AUC</td>
+          <td>0.92</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Analysis</strong>: While accuracy is high, the relatively low specificity indicates frequent false positives, causing unnecessary interventions.</p>
+<p><strong>Optimised Model</strong>: Using weighted loss functions and data augmentation, sensitivity and specificity were balanced.</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Metric</strong></th>
+          <th><strong>Value</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Accuracy</td>
+          <td>96.8%</td>
+      </tr>
+      <tr>
+          <td>Sensitivity</td>
+          <td>93.7%</td>
+      </tr>
+      <tr>
+          <td>Specificity</td>
+          <td>90.5%</td>
+      </tr>
+      <tr>
+          <td>Precision</td>
+          <td>94.2%</td>
+      </tr>
+      <tr>
+          <td>F1-Score</td>
+          <td>93.9%</td>
+      </tr>
+      <tr>
+          <td>AUC</td>
+          <td>0.96</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Outcome</strong>: The optimised model achieved a better balance between sensitivity and specificity, improving both diagnostic accuracy and reliability.</p>
+<h3 id="visualising-model-performance">Visualising Model Performance</h3>
+<ol>
+<li><strong>ROC Curve</strong>: A graphical representation showing trade-offs between sensitivity and specificity.
+It helps in selecting an optimal probability threshold.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_curve, auc
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Simulated data for ROC curve</span>
+</span></span><span style="display:flex;"><span>fpr, tpr, _ <span style="color:#f92672">=</span> roc_curve(y_test, model_probs)
+</span></span><span style="display:flex;"><span>roc_auc <span style="color:#f92672">=</span> auc(fpr, tpr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(fpr, tpr, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;ROC Curve (AUC = </span><span style="color:#e6db74">{</span>roc_auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;False Positive Rate (1-Specificity)&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;True Positive Rate (Sensitivity)&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;ROC Curve&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lower right&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="/images/rocs.png" alt="ROC curves">
+<em>ROC curves for the six CNNs used in the project.</em></p>
+<ol start="2">
+<li><strong>Confusion Matrix</strong>: Summarises true positives, false positives, true negatives, and false negatives.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> confusion_matrix, ConfusionMatrixDisplay
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conf_matrix <span style="color:#f92672">=</span> confusion_matrix(y_test, model_preds)
+</span></span><span style="display:flex;"><span>disp <span style="color:#f92672">=</span> ConfusionMatrixDisplay(conf_matrix, display_labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Benign&#34;</span>, <span style="color:#e6db74">&#34;Malignant&#34;</span>])
+</span></span><span style="display:flex;"><span>disp<span style="color:#f92672">.</span>plot(cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Blues&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Confusion Matrix&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="/images/confusion.png" alt="Confusion Matrices">
+<em>Confusion matrices for the six CNNs used in the project.</em></p>
+<h4 id="best-practices-for-evaluating-healthcare-ai-models">Best Practices for Evaluating Healthcare AI Models</h4>
+<ol>
+<li><em>Use Multiple Metrics</em>:
+<ul>
+<li>Rely on sensitivity, specificity, and AUC instead of accuracy alone.</li>
+</ul>
+</li>
+<li><em>Consider Clinical Context</em>:
+<ul>
+<li>Prioritise metrics like sensitivity for life-threatening conditions.</li>
+<li>Optimises specificity to reduce unnecessary follow-ups for benign cases.</li>
+</ul>
+</li>
+<li><em>Threshold Tuning</em>:
+<ul>
+<li>Adjust probability thresholds to balance sensitivity and specificity based on clinical needs.</li>
+</ul>
+</li>
+</ol>
+<h4 id="summary-1">Summary</h4>
+<p>Evaluating AI models for healthcare requires moving beyond accuracy to metrics like sensitivity, specificity, and AUC. These metrics provide a nuanced understanding of model performance, ensuring reliable and clinically meaningful predictions. By adopting this comprehensive evaluation approach, we can develop AI tools that clinicians can trust, ultimately improving patient outcomes.</p>
+<h1 id="part-3-making-ai-transparent-grad-cam-and-lime-in-medical-image-analysis">PART 3. Making AI Transparent: Grad-CAM and LIME in Medical Image Analysis</h1>
+<p>In the ever-evolving field of AI, DL has emerged as a transformative force, reshaping industries and driving innovation. In medical imaging, where precision and interpretability are critical, advanced techniques like <strong>Grad-CAM (Gradient-weighted Class Activation Mapping)</strong> and <strong>LIME (Local Interpretable Model-agnostic Explanations)</strong> are becoming essential tools for understanding how models make decisions. This project leveraged such techniques to explain predictions made by cutting-edge DL models like <code>ResNet50</code>, <code>EfficientNetB0</code>, and <code>DenseNet201</code> for breast cancer diagnosis. By visualising what a model &ldquo;sees&rdquo; and validating its decision-making process, I bridge the gap between AI&rsquo;s technical prowess and the human trust required for adoption in critical healthcare settings.</p>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>Despite the remarkable accuracy of DL models in diagnosing diseases like breast cancer, the lack of interpretability often limits their acceptance in clinical environments. Medical practitioners need to understand why a model makes a specific prediction. Without this transparency, integrating AI into real-world decision-making becomes a challenge.</p>
+<p>This project addresses the need for interpretability by:</p>
+<ul>
+<li>Applying <code>Grad-CAM</code> to highlight regions in histopathology images that most influence the model&rsquo;s predictions.</li>
+<li>Using <code>LIME</code> to validate and explain predictions at a local feature level.</li>
+</ul>
+<h3 id="technical-approach">Technical Approach</h3>
+<p>The methodology is built on two pillars: advanced CNN architectures and interpretable AI techniques.</p>
+<ol>
+<li><strong>Deep Learning Models</strong>:</li>
+</ol>
+<ul>
+<li><code>ResNet50</code>: A residual neural network known for handling vanishing gradients in deep architectures.</li>
+<li><code>EfficientNetB0</code>: A computationally efficient model that scales depth, width, and resolution optimally.</li>
+<li><code>DenseNet201</code>: A densely connected network ensuring better gradient flow and feature reuse.</li>
+</ul>
+<ol start="2">
+<li><strong>Grad-CAM</strong>:</li>
+</ol>
+<p><code>Grad-CAM</code> generates heatmaps overlayed on input images to show which regions contribute most to a specific prediction. This technique helps interpret CNNs by visualising their focus during classification.</p>
+<ol start="3">
+<li><strong>LIME</strong>:</li>
+</ol>
+<p><code>LIME</code> perturbs input data and observes changes in output, providing feature-level explanations of predictions. It offers a localised, human-readable explanation of the model’s decision-making process.</p>
+<h3 id="implementation-details">Implementation Details</h3>
+<p>The code is structured into three main phases.</p>
+<ul>
+<li><strong>1. Data Loading and Pre-processing:</strong> The data is pre-processed into tensors and split into training and testing sets. Images are resized to match the input dimensions of the chosen architectures.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> load_img, img_to_array
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/path/to/image&#34;</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> load_img(img_path, target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>))
+</span></span><span style="display:flex;"><span>img_array <span style="color:#f92672">=</span> img_to_array(img) <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>
+</span></span></code></pre></div><p><strong>2. Model Selection and Training:</strong> Pre-trained models from <code>keras.applications</code> are fine-tuned for breast cancer diagnosis.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> ResNet50
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> ResNet50(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;imagenet&#34;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>))
+</span></span></code></pre></div><p><strong>3. Grad-CAM Implementation:</strong> <code>Grad-CAM</code> is implemented to visualise the activations in the last convolutional layers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_gradcam_heatmap</span>(model, img_array, last_conv_layer_name):
+</span></span><span style="display:flex;"><span>    grad_model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>Model([model<span style="color:#f92672">.</span>inputs], [model<span style="color:#f92672">.</span>get_layer(last_conv_layer_name)<span style="color:#f92672">.</span>output, model<span style="color:#f92672">.</span>output])
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Compute gradients</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        conv_output, predictions <span style="color:#f92672">=</span> grad_model(img_array)
+</span></span><span style="display:flex;"><span>        predicted_class <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>argmax(predictions[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>        class_channel <span style="color:#f92672">=</span> predictions[:, predicted_class]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get gradients</span>
+</span></span><span style="display:flex;"><span>    grads <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(class_channel, conv_output)
+</span></span><span style="display:flex;"><span>    pooled_grads <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(grads, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> conv_output[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">@</span> pooled_grads[<span style="color:#f92672">...</span>, tf<span style="color:#f92672">.</span>newaxis]
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>squeeze(heatmap)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> heatmap<span style="color:#f92672">.</span>numpy()
+</span></span></code></pre></div><p><strong>4. LIME Implementation:</strong> <code>LIME</code> interprets the predictions by perturbing the image and observing output changes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> lime <span style="color:#f92672">import</span> lime_image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>explainer <span style="color:#f92672">=</span> lime_image<span style="color:#f92672">.</span>LimeImageExplainer()
+</span></span><span style="display:flex;"><span>explanation <span style="color:#f92672">=</span> explainer<span style="color:#f92672">.</span>explain_instance(img_array[<span style="color:#ae81ff">0</span>], model<span style="color:#f92672">.</span>predict)
+</span></span></code></pre></div><p><strong>5. Visualisation:</strong> <code>Grad-CAM</code> heatmaps are overlaid on original images to interpret focus regions, while LIME visualisations validate the features influencing predictions.</p>
+<h3 id="results">Results</h3>
+<p>The project achieved notable outcomes:</p>
+<ol>
+<li><strong>Grad-CAM:</strong></li>
+</ol>
+<p>Generated clear heatmaps showing that models focused on tumour-specific regions in histopathology slides, ensuring decision reliability.</p>
+<p><img src="/images/grad.png" alt="Grad-CAM heatmaps"></p>
+<p><em>Grad-CAM heatmaps for malignant histopathology image across ResNet50, EfficientNetB0, and DenseNet201 models.</em></p>
+<p>The ground truth label is <em>Malignant</em>, and predictions across models reveal key differences in interpretability:</p>
+<ul>
+<li>
+<p><code>ResNet50</code>: Grad-CAM at <code>conv2_block3_out</code> focuses sharply on regions containing dense nuclei clusters, correctly predicting the image as &ldquo;malignant&rdquo;. At <code>conv3_block4_out</code>, <code>ResNet50</code> continues to emphasise areas of diagnostic importance, reinforcing its prediction of malignancy.</p>
+</li>
+<li>
+<p><code>EfficientNetB0</code>: At <code>block3a_expand_activation</code>, <code>EfficientNetB0</code> diffuses its focus, spreading across less specific regions and misclassifying the image as &ldquo;benign&rdquo;. Similar behaviour is observed at <code>block6a_expand_activation</code>, indicating possible generalisation issues with this architecture for malignant samples.</p>
+</li>
+<li>
+<p><code>DenseNet201</code>: Visualisations from <code>conv2_block3_concat</code> and <code>conv4_block6_concat</code> suggest <code>DenseNet201</code> struggles with maintaining specificity. Like <code>EfficientNetB0</code>, it classifies the sample as &ldquo;benign&rdquo;.</p>
+</li>
+</ul>
+<p>Grad-CAM analysis highlights the following:</p>
+<ul>
+<li><em>Model Strengths</em>: <code>ResNet50</code> demonstrates superior focus and specificity for detecting malignancy, which aligns with its accurate predictions.</li>
+<li><em>Model Limitations</em>: <code>EfficientNetB0</code> and <code>DenseNet201</code> distribute attention broadly, leading to misclassification.</li>
+<li><em>Architectural Impact</em>: Grad-CAM visualisations underscore the differences in feature extraction and utilisation among architectures, shedding light on areas for improvement.</li>
+</ul>
+<ol>
+<li><strong>LIME</strong>:
+Demonstrated consistency between feature importance and medical expectations, further validating model outputs. <code>LIME</code> explanations provide a granular understanding of feature importance at the pixel level.</li>
+</ol>
+<p><img src="/images/lime.png" alt="LIME visualisations 1">
+<em>LIME visualisations for malignant histopathology image using ResNet50, EfficientNetB0, and DenseNet201 models.</em></p>
+<p><img src="/images/d.png" alt="LIME visualisations 2">
+<em>Original histopathology image of a malignant case (Index: 3091)</em></p>
+<ul>
+<li><code>ResNet50</code>: Regions in yellow indicate areas crucial for classification, focusing on cellular clusters.</li>
+<li><code>EfficientNetB0</code>: Similar focus as <code>ResNet50</code> but with additional spread across the image.</li>
+<li><code>DenseNet201</code>: Combines focused and diffused explanations, highlighting key cellular features.</li>
+</ul>
+<p>That is, <code>ResNet50</code> shows superior interpretability and accuracy compared to <code>EfficientNetB0</code> and <code>DenseNet201</code>, making it the preferred choice for deployment.</p>
+<h4 id="summary-2">Summary</h4>
+<p>This project underscores the importance of interpretable AI in critical fields like healthcare. By combining Grad-CAM and LIME, it offers a robust framework to validate and explain model predictions, instilling trust among medical practitioners. Key Takeaways:</p>
+<ul>
+<li>Grad-CAM excels in highlighting class-specific regions, while LIME offers feature-level explanations.</li>
+<li>Interpretability tools are as crucial as model performance in domains requiring high accountability.</li>
+</ul>
+<p><strong>Future Work</strong></p>
+<ul>
+<li><em>Automated Feedback Loops</em>: Integrating Grad-CAM and LIME explanations into model retraining for continuous improvement.</li>
+<li><em>Broader Dataset Analysis</em>: Expanding the dataset to include diverse histopathology images.</li>
+<li><em>Hybrid Interpretability</em>: Combining Grad-CAM with other saliency methods for deeper insights.</li>
+</ul>
+<p>Interpretable AI is the bridge between cutting-edge technology and real-world application. This project serves as a stepping stone toward trustworthy AI solutions in healthcare, setting a precedent for integrating explainability into AI pipelines.</p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

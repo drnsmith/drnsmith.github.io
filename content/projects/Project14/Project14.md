@@ -81,7 +81,7 @@ def save_recipe(title, ingredients, instructions):
     cursor.execute("INSERT INTO saved_recipes (title, ingredients, instructions) VALUES (?, ?, ?)", 
                    (title, ingredients, instructions))
 ```
-	•	Stored recipes appear under Saved Recipes.
+	•	Stored recipes appear under "Saved Recipes".
 	•	Users can delete unwanted recipes anytime.
 
 

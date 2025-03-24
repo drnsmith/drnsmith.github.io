@@ -1,12 +1,12 @@
 ---
 date: 2024-07-17T10:58:08-04:00
 description: "This project explores the architecture and data strategies needed to build high-performing AI models for breast cancer detection using histopathological images. From addressing class imbalance to implementing data augmentation, it dives deep into model optimisation. Comparative analysis of ResNet, DenseNet, and EfficientNet, followed by ensemble modelling, highlights the path to building more accurate and robust diagnostic systems."
-image: "/images/project13_images/pr13.jpg"
+image: "/images/project13_images/pr13.png"
 tags: ["AI in healthcare", "breast cancer detection", "deep learning models", "CNN architecture", "data augmentation", "ensemble learning", "medical imaging", "histopathology", "computer vision", "class imbalance"]
 title: "Precision by Design: Building Deep Learning Models for Breast Cancer Histopathology"
 weight: 1
 ---
-{{< figure src="/images/project13_images/pr13.jpg"}}
+{{< figure src="/images/project13_images/pr13.png">}}
 
 **View Project on GitHub**: 
 
@@ -14,9 +14,8 @@ weight: 1
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
 
-# PART 1. Transforming Breast Cancer Diagnosis with Deep Learning
+# Part 1. Transforming Breast Cancer Diagnosis with Deep Learning
 
-### Introduction
 The field of histopathology is witnessing a paradigm shift with the integration of artificial intelligence (AI) and deep learning (DL). This blog delves into a research project that explores advanced DL techniques to enhance breast cancer diagnosis using histopathology images (HIs). The project, based on the **BreakHis dataset**, leverages state-of-the-art convolutional neural networks (CNNs), ensemble methods, and interpretability tools such as **Grad-CAM and LIME**. These innovations aim to address critical challenges in clinical applications, including class imbalance, model reliability, and diagnostic accuracy.
 
 ### Problem Statement
@@ -255,7 +254,6 @@ Class imbalance is a critical challenge in medical imaging datasets, but techniq
 
 # Part 3. Choosing the Best CNN Architecture: How Ensemble Models Improve Breast Cancer Detection with AI
 
-### Introduction
 DL has revolutionised breast cancer detection, especially with histopathological image analysis. Among the arsenal of Convolutional Neural Network (CNN) architectures, models like **ResNet**, **DenseNet**, and **EfficientNet** have proven highly effective. However, instead of relying on a single architecture, combining them through ensemble learning often yields superior performance. In this part, we’ll compare these top architectures and explore how an **ensemble approach using logistic regression** as a meta-model improves diagnostic accuracy and robustness.
 
 ### The Role of CNNs in Histopathology
@@ -363,18 +361,11 @@ In this project, the ensemble model significantly outperformed individual CNN ar
 
 ### Summary
 
-Choosing the best CNN architecture for breast cancer detection depends on the dataset and requirements. While ResNet excels at hierarchical feature learning, DenseNet propagates features efficiently, and EfficientNet balances performance and resources. 
-
-Combining them through an ensemble approach with a logistic regression meta-model provides the best results, improving accuracy, sensitivity, and specificity. 
-
-This ensemble strategy represents a robust solution for leveraging AI in histopathology, paving the way for reliable and precise diagnostics.
+Choosing the best CNN architecture for breast cancer detection depends on the dataset and requirements. While `ResNet` excels at hierarchical feature learning, `DenseNet` propagates features efficiently, and `EfficientNet` balances performance and resources. Combining them through an ensemble approach with a logistic regression meta-model provides the best results, improving accuracy, sensitivity, and specificity. This ensemble strategy represents a robust solution for leveraging AI in histopathology, paving the way for reliable and precise diagnostics.
 
 # Part 4. Boosting AI Performance: Data Augmentation for Histopathological Imaging
 
-
-In medical imaging, especially in histopathology, DL models often face challenges such as limited datasets and class imbalances. These limitations can hinder the performance of models and their generalization to new data. 
-
-A powerful technique to overcome these issues is **data augmentation (DA)**—synthetically increasing the size and diversity of the training data. In this part, we’ll dive into how DA techniques like flipping, rotation, and scaling can enhance DL models for medical imaging.
+In medical imaging, especially in histopathology, DL models often face challenges such as limited datasets and class imbalances. These limitations can hinder the performance of models and their generalization to new data. A powerful technique to overcome these issues is **data augmentation (DA)**—synthetically increasing the size and diversity of the training data. In this part, we’ll dive into how DA techniques like flipping, rotation, and scaling can enhance DL models for medical imaging.
 
 ### **Challenges in Histopathological Imaging**
 

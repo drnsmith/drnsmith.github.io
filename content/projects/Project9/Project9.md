@@ -14,13 +14,9 @@ weight: 1
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
 
-# PART 1. The Importance of Data Cleaning in Environmental Analysis
+# Part 1. The Importance of Data Cleaning in Environmental Analysis
 
-Data is often called the backbone of ML, but in the real world, data is rarely clean or ready for use. This is especially true for environmental data, where missing values, outliers, and inconsistencies are common. 
-
-When predicting PM10 pollution levels in Auckland, the first challenge wasn’t building a model but cleaning the data. Imagine trying to build a house with warped bricks and missing mortar. Without proper cleaning, even the best models would struggle to produce meaningful results. 
-
-In this part, I'll explore the messy reality of working with air quality data and the critical role data cleaning played in this project.
+Data is often called the backbone of ML, but in the real world, data is rarely clean or ready for use. This is especially true for environmental data, where missing values, outliers, and inconsistencies are common. When predicting PM10 pollution levels in Auckland (NZ), the first challenge wasn’t building a model but cleaning the data. Imagine trying to build a house with warped bricks and missing mortar. Without proper cleaning, even the best models would struggle to produce meaningful results. In this part, I'll explore the messy reality of working with air quality data and the critical role data cleaning played in this project.
 
 ### The Challenges of Messy Data
 
@@ -120,11 +116,9 @@ plt.show()
 
 #### Summary: Laying the Foundation for Success
 
-Without clean data, even the most advanced ML models fail to deliver reliable predictions. The cleaning process transformed raw, messy inputs into a structured, usable dataset, setting the stage for accurate and actionable insights.
+Without clean data, even the most advanced ML models fail to deliver reliable predictions. The cleaning process transformed raw, messy inputs into a structured, usable dataset, setting the stage for accurate and actionable insights. Data cleaning isn’t glamorous, but it’s the unsung hero of any successful ML project. By addressing missing values, outliers, and temporal misalignment, we built a solid foundation for predicting PM10 levels in Auckland.
 
-Data cleaning isn’t glamorous, but it’s the unsung hero of any successful ML project. By addressing missing values, outliers, and temporal misalignment, we built a solid foundation for predicting PM10 levels in Auckland.
-
-# PART 2. Understanding the Predictors of Air Pollution
+# Part 2. Understanding the Predictors of Air Pollution
 What makes air pollution worse? Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels. In this part, I dive into the heart of the Auckland PM10 prediction project: **feature selection**. From traffic patterns to weather variables, I'll explore the key predictors of air pollution and how they were prepared to train ML models.
 
 ### 1. Why Feature Selection Matters
@@ -253,11 +247,9 @@ Why These Features?
 
 The predictors of air pollution are as complex as the phenomenon itself. By engineering meaningful features and understanding their relationships, we laid the groundwork for building effective ML models.
 
-# PART 3. Regression Models for Pollution Prediction
+# Part 3. Regression Models for Pollution Prediction
 
-Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes. 
-
-In this blog, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.
+Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes. In this part, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.
 
 ### 1. Why Regression Models?
 
@@ -376,21 +368,15 @@ Ridge regression performed better than OLS when predictors were correlated, such
 
 Regression models are not just simple tools—they provide foundational insights and benchmarks for more complex approaches. By identifying key predictors and addressing data challenges, these models laid the groundwork for exploring advanced techniques like neural networks and LSTM.
 
-# PART 4. Neural Networks in Environmental Data Analysis
-### Introduction
-When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine.
+# Part 4. Neural Networks in Environmental Data Analysis
 
-In this blog, we’ll explore how NNs were leveraged to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.
+When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine. In this part, I’ll explore how we leveraged NNs to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.
 
 ### 1. Why Neural Networks?
 
-**Addressing Non-Linearity**
+ - **Addressing Non-Linearity:** Air pollution data is influenced by a mix of factors—traffic volume, weather, and even time of day. These relationships aren’t always linear. NNs excel at capturing non-linear patterns, making them ideal for predicting PM10 levels.
 
-Air pollution data is influenced by a mix of factors—traffic volume, weather, and even time of day. These relationships aren’t always linear. NNs excel at capturing non-linear patterns, making them ideal for predicting PM10 levels.
-
-**Sequential Dependencies**
-
-Air quality data has strong temporal patterns. NNs, especially recurrent architectures like Long Short-Term Memory (LSTM), can process sequential data, identifying trends and seasonality over time.
+ - **Sequential Dependencies:** Air quality data has strong temporal patterns. NNs, especially recurrent architectures like Long Short-Term Memory (LSTM), can process sequential data, identifying trends and seasonality over time.
 
 ### 2. The Neural Network Models Used
 #### Multi-Layer Perceptron (MLP)
@@ -419,7 +405,7 @@ print(f"MLP RMSE: {rmse_mlp}")
 
 #### Long Short-Term Memory (LSTM)
 
-LSTM networks were used to model sequential dependencies in PM10 data. Unlike MLP, LSTMs can “remember” patterns over time, making them ideal for time-series predictions.
+`LSTM` networks were used to model sequential dependencies in PM10 data. Unlike `MLP`, `LSTMs` can “remember” patterns over time, making them ideal for time-series predictions.
 
 ```python
 from keras.models import Sequential
@@ -444,7 +430,7 @@ print(f"LSTM RMSE: {rmse_lstm}")
 
 NNs require specific data preparation steps to perform optimally:
 
- - *Feature Scaling* NNs are sensitive to the scale of input data. All features were normaliSed to ensure uniformity.
+ - *Feature Scaling:* NNs are sensitive to the scale of input data. All features were normaliSed to ensure uniformity.
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -454,7 +440,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 ```
 
-Reshaping for LSTM LSTM models expect input data to have three dimensions: **samples**, **timesteps**, and **features**.
+ - *Reshaping for LSTM*: LSTM models expect input data to have three dimensions: **samples**, **timesteps**, and **features**.
 
 ```python
 # Reshape data for LSTM
@@ -474,7 +460,7 @@ The LSTM model excelled at predicting both general trends and sudden spikes, mak
 #### Performance Comparison
 The table below summarizes the RMSE and MAE for both models:
 
-{{< figure src="/images/results2.png">}}
+{{< figure src="/images/results9.png">}}
 
 #### Insights Gained from NNs
 
@@ -497,28 +483,26 @@ The table below summarizes the RMSE and MAE for both models:
 
 NNs, particularly LSTMs, proved to be a game-changer in predicting PM10 levels in Auckland. They not only improved prediction accuracy but also provided deeper insights into the temporal and seasonal dynamics of air pollution.
 
-# PART 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data
+# Part 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data
 
-Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional ML models often struggle with. In this part, I delve into the use of Long Short-Term Memory (LSTM) networks, a type of recurrent neural network (RNN), to predict pollution in Auckland. I'll explore how LSTM networks work, their application in this project, and the hurdles we faced along the way.
+Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional ML models often struggle with. In this part, I delve deeper into the use of LSTM networks, a type of recurrent neural network (RNN), to predict pollution. I'll explore how LSTM networks work, their application in this project, and the hurdles we faced along the way.
 
 ### 1. Why LSTM for Air Pollution Data?
-**Sequential Dependencies**: Unlike regression or Random Forest models, LSTMs are specifically designed to handle sequential data. In air pollution forecasting:
+a. **Sequential Dependencies**: Unlike regression or Random Forest models, LSTMs are specifically designed to handle sequential data. In air pollution forecasting:
 
  - *Lagged Variables*: PM10 levels from previous hours directly influence current levels.
  - *Temporal Trends*: Patterns like rush hours or seasonal changes require a model that "remembers" past inputs.
 
-**Capturing Complex Dynamics**: LSTM networks excel at modelling complex, non-linear relationships in time-series data. This is especially valuable for air quality data, where pollution levels are influenced by traffic, weather, and geographic factors.
+b. **Capturing Complex Dynamics**: LSTM networks excel at modelling complex, non-linear relationships in time-series data. This is especially valuable for air quality data, where pollution levels are influenced by traffic, weather, and geographic factors.
 
 ### 2. How LSTMs Work
-**The Basics of Recurrent Neural Networks (RNNs)**: RNNs are NNs with loops that allow information to persist. However, standard RNNs struggle with long-term dependencies due to the vanishing gradient problem.
+**The Basics of Recurrent Neural Networks (RNNs)**: RNNs are NNs with loops that allow information to persist. However, standard RNNs struggle with long-term dependencies due to the vanishing gradient problem. LSTM networks address this limitation with their unique architecture:
 
-**Enter LSTM**: LSTM networks address this limitation with their unique architecture:
-
- - **Cell State**: A "memory" that flows through the network, carrying relevant information forward.
- - **Gates**: Mechanisms that control what information is added, removed, or retained:
-   -- **Forget Gate**: Decides what to discard.
-   -- **Input Gate**: Determines what new information to add.
-   -- **Output Gate**: Controls what information to output.
+1. **Cell State**: A "memory" that flows through the network, carrying relevant information forward.
+2. **Gates**: Mechanisms that control what information is added, removed, or retained:
+   - **Forget Gate**: Decides what to discard.
+   - **Input Gate**: Determines what new information to add.
+   - **Output Gate**: Controls what information to output.
 
 This structure allows LSTM networks to maintain long-term dependencies, making them ideal for time-series tasks.
 
@@ -603,7 +587,7 @@ To optimise the model's performance, we tuned key hyperparameters:
 
 By leveraging LSTM networks, we were able to uncover patterns and trends in air pollution data that traditional models missed. However, this approach comes with its own set of challenges, from computational demands to interpretability issues. Despite these hurdles, the insights gained from LSTM models have the potential to inform policies and actions aimed at improving air quality.
 
-# PART 6. Comparing Models and Real-World Implications
+# Part 6. Comparing Models and Real-World Implications
 AI and ML are not just tools for academic research—they hold transformative potential for real-world applications. In this final part, I focus on translating our findings into actionable insights:
 
  - *How can the models and predictions generated in this project help policymakers, urban planners, and individuals?*
@@ -691,10 +675,8 @@ Infographics, dashboards, and user-friendly apps can make complex data accessibl
  - **Data Privacy**: How do we ensure that data collection respects individuals’ privacy?
  - **Bias in Models**: Are the predictions equitable, or do they disproportionately benefit certain populations?
 
-### Conclusion: Bridging AI and Policy for Cleaner Air
+#### Conclusion: Bridging AI and Policy for Cleaner Air
  
-This project demonstrated the power of AI in addressing complex environmental challenges. By comparing models, we saw how traditional regression models, Random Forests, and advanced NNs bring unique value to pollution prediction.
-
-More importantly, the insights gained aren’t just theoretical—they have real-world implications for creating cleaner, healthier cities. But as powerful as AI is, the success of these efforts relies on collaboration between scientists, policymakers, and the public.
+This project demonstrated the power of AI in addressing complex environmental challenges. By comparing models, we saw how traditional regression models, Random Forests, and advanced NNs bring unique value to pollution prediction. More importantly, the insights gained aren’t just theoretical—they have real-world implications for creating cleaner, healthier cities. But as powerful as AI is, the success of these efforts relies on collaboration between scientists, policymakers, and the public.
 
 *Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let's keep our planet healthy!*

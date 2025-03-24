@@ -1,7 +1,7 @@
 ---
 date: 2025-03-22T10:58:08-04:00
 description: "This project dives into what happens after model training—how deep learning models uncover meaningful patterns in cancer images and how they can be deployed in the real world. It uses feature extraction with CNNs, clustering techniques, and statistical analysis to personalise diagnostics. I explore the technical and logistical challenges of deploying these models in clinical practice."
-image: "/images/project15_images/pr16.png"
+image: "/images/project16_images/pr16.png"
 tags: ["feature extraction", "personalised diagnostics", "CNN feature space", "clustering", "statistical analysis", "AI model deployment", "breast cancer imaging", "AI in clinical practice", "deep learning for healthcare", "histopathology analysis"]
 title: "Beyond Accuracy: Feature Insights and Deployment of AI in Breast Cancer Care"
 weight: 1
@@ -15,7 +15,7 @@ weight: 1
   </a>
 
 
-# PART 1. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs
+# Part 1. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs
 
 Medical imaging has revolutionised diagnostics, giving clinicians unprecedented insight into disease. But its real power emerges when paired with ML — especially DL models capable of uncovering patterns invisible to the human eye. In this post, we explore how three state-of-the-art CNNs — **ResNet50**, **EfficientNetB0**, and **DenseNet201** — can be repurposed as feature extractors for breast cancer histopathology. Using the `BreakHis` dataset, I demonstrate how these models enable advanced clustering, statistical analysis, and deeper diagnostic insight.
 
@@ -61,9 +61,9 @@ features_densenet = extract_features(densenet201_model, 'avg_pool', x_train)
 Extracted features were subjected to dimensionality reduction (PCA), hierarchical clustering, and statistical testing to evaluate separability.
 
 
- - 1. *PCA Visualisation*: PCA reduced high-dimensional embeddings into 2D space, revealing clear separation between benign and malignant clusters—especially for DenseNet201.
+1. *PCA Visualisation*: PCA reduced high-dimensional embeddings into 2D space, revealing clear separation between benign and malignant clusters—especially for DenseNet201.
 
-2. *Hierarchical Clustering*: Agglomerative clustering revealed structure within the feature space. `DenseNet201` produced the most distinct, cohesive clusters.
+1. *Hierarchical Clustering*: Agglomerative clustering revealed structure within the feature space. `DenseNet201` produced the most distinct, cohesive clusters.
 
 ```python
 from scipy.cluster.hierarchy import linkage, dendrogram
@@ -89,7 +89,7 @@ Two-sample t-tests revealed that features from `DenseNet201` had the highest dis
 
 Pre-trained CNNs like DenseNet201 offer powerful tools for extracting rich, interpretable features from medical images. With the right statistical tools, these features can be transformed into actionable insight—bringing us closer to real-time, AI-driven, patient-specific diagnostics.
 
-# PART 2. Clustering and Statistical Analysis
+# Part 2. Clustering and Statistical Analysis
 
 Breast cancer imaging datasets provide invaluable data for early detection and diagnostics. However, even within the same diagnostic category, significant variations can exist. These intra-class variations often hold critical information about tumour subtypes, aggressiveness, and treatment response. By employing **hierarchical clustering** and **statistical analysis**, researchers can uncover these subtle differences, enabling personalised diagnostics and treatment strategies. In this part, we’ll explore how these techniques can be applied to breast cancer imaging datasets to drive precision medicine.
 
@@ -196,16 +196,17 @@ print(f"T-statistic: {t_stat}, P-value: {p_val}")
 {{< figure src="/images/t.png">}}
 
  - **Boxplots**: Provide a clear comparison of the distribution of a key feature across benign and malignant classes.
-{{< figure src="/images/project13_images/b.png"}}
+{{< figure src="/images/project13_images/b.png">}}
 
  - **Dendrogram**: Visualises hierarchical clustering of features, helping to understand groupings and relationships among extracted features.
+
 {{< figure src="/images/project13_images/h.png">}}
 
 #### Summary
 
 Hierarchical clustering and statistical analysis are powerful tools for uncovering intra-class variations in breast cancer imaging datasets. By revealing the hidden diversity within diagnostic categories, these methods pave the way for personalised medicine. With advances in ML and statistical modelling, we can continue to push the boundaries of precision diagnostics, offering tailored care to every patient.
 
-# PART 3. Enhancing Interpretability in CNNs
+# Part 3. Enhancing Interpretability in CNNs
 
 Clinical adoption of AI requires trust and transparency. In breast cancer diagnostics, interpretability is essential for:
 - Ensuring AI models align with clinical knowledge.
@@ -242,9 +243,18 @@ significant_features = sorted(zip(range(len(t_stat)), t_stat, p_val), key=lambda
 
 Hierarchical clustering grouped features into clusters, revealing latent patterns in the data. Dendrograms highlighted similarities and relationships between features.
 
-{{< figure src="/images/project13_images/dendo_densenet201.png" title="Dendrogram for DenseNet201">}}
-{{< figure src="/images/project13_images/dendo_resnet50.png" title="Dendrogram for ResNet50">}}
-{{< figure src="/images/project13_images/dendo_eff_netB0.png" title="Dendrogram for EfficientNetB0">}}
+![Dendrogram for DenseNet201](/images/project13_images/dendo_densenet201.png)
+
+*Dendrogram for DenseNet201.*
+
+![Dendrogram for ResNet50](/images/project13_images/dendo_resnet50.png)
+
+*Dendrogram for ResNet50.*
+
+![Dendrogram for EfficientNetB0](/images/project13_images/dendo_eff_netB0.png)
+
+*Dendrogram for EfficientNetB0.*
+
 
 Boxplots illustrated the distribution of specific features across classes, aiding in identifying intra-class variations.
 
@@ -268,7 +278,7 @@ Correlation matrices assessed relationships between features, identifying redund
  - **T-Statistic Bar Plot**: Highlights the top 10 features most effective at distinguishing between classes based on their statistical significance.
 {{< figure src="/images/t.png">}}
  - **Boxplots**: Provide a clear comparison of the distribution of a key feature across benign and malignant classes.
-{{< figure src="/images/b.png"">}}
+{{< figure src="/images/b.png">}}
  - **Dendrogram**: Visualises hierarchical clustering of features, helping to understand groupings and relationships among extracted features.
 {{< figure src="/images/h.png">}}
 
@@ -282,10 +292,9 @@ Correlation matrices assessed relationships between features, identifying redund
 
 By combining CNN-based feature extraction with statistical analysis, this study bridges the gap between high-performance AI models and their clinical applicability. These techniques not only enhance interpretability but also provide actionable insights, paving the way for more transparent and reliable AI-driven diagnostics.
 
-# PART 4. Deploying AI Models for Breast Cancer Diagnosis: Challenges and Solutions Description
+# Part 4. Deploying AI Models for Breast Cancer Diagnosis
 
 Deploying AI models for clinical use, particularly in breast cancer diagnosis, is a multi-faceted challenge. My project on the BreakHis dataset highlighted several computational and practical hurdles, such as optimising resource usage, addressing class imbalance, and ensuring model compatibility with real-world clinical workflows. This part explores these challenges and the solutions implemented in my work, including specific metrics, code snippets, and insights.
-
 
 ### Challenges in Deploying AI Models for Clinical Use
 
@@ -296,7 +305,7 @@ High-resolution images in the BreakHis dataset (224x224 pixels) and deep models 
 - Training time per epoch: ~12 minutes on a single GPU.
 - Memory usage: ~8 GB for model inference on large batches.
 
-**Solution**:
+**Solutions**:
 - *GPU Optimisation*: Enabled efficient memory management to ensure smooth training.
 - *Model Optimisation*: Applied `TensorFlow Lite` for quantising the model for edge deployment, reducing inference time without compromising accuracy.
 

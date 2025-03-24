@@ -542,7 +542,7 @@
 •	PCA is great for linear projections.
 •	t-SNE is useful for visualisation.
 •	UMAP is fast and preserves more structure.</p>
-<h1 id="part-6-evaluating-clustering-performance--coherence-score-silhouette-score-and-davies-bouldin-index">PART 6. Evaluating Clustering Performance – Coherence Score, Silhouette Score, and Davies-Bouldin Index</h1>
+<h1 id="part-6-evaluating-clustering-performance--coherence-score-silhouette-score-and-davies-bouldin-index">Part 6. Evaluating Clustering Performance – Coherence Score, Silhouette Score, and Davies-Bouldin Index</h1>
 <p>After clustering recipes using K-Means, LDA, and the BERT-LDA Hybrid, we need to evaluate how well the clusters are formed. Clustering is an unsupervised learning technique, meaning <em>there are no predefined labels</em>, so evaluation is <strong>challenging</strong>.</p>
 <h3 id="1-coherence-score--evaluating-lda-topic-quality">1. Coherence Score – Evaluating LDA Topic Quality</h3>
 <p>For LDA topic modelling, the <strong>Coherence Score</strong> measures how interpretable the topics are. A higher score means the topics contain logically related words.</p>
@@ -562,13 +562,9 @@
 </span></span></code></pre></div><h4 id="how-to-interpret-coherence-scores">How to Interpret Coherence Scores?</h4>
 <p><code>Coherence Score</code> Interpretation:</p>
 <ul>
-<li>
-<blockquote>
-<p>0.5	Good topic coherence (words in each topic are highly related).</p>
-</blockquote>
-</li>
-<li>0.3 - 0.5	Medium coherence (topics are somewhat meaningful but noisy).</li>
-<li>&lt; 0.3	Poor coherence (topics are too random).</li>
+<li>&lsquo;&gt; 0.5&rsquo;	Good topic coherence (words in each topic are highly related).</li>
+<li>&lsquo;0.3 - 0.5&rsquo;	Medium coherence (topics are somewhat meaningful but noisy).</li>
+<li>&lsquo;&lt; 0.3&rsquo;	Poor coherence (topics are too random).</li>
 </ul>
 <p><strong>Tip</strong>: If `coherence`` is low, try increasing the number of topics or fine-tuning stop words.</p>
 <h3 id="2-silhouette-score--evaluating-cluster-separation">2. Silhouette Score – Evaluating Cluster Separation</h3>
@@ -602,14 +598,10 @@
 </span></span></code></pre></div><h4 id="how-to-interpret-dbi">How to Interpret DBI?</h4>
 <p><code>DBI Score</code> Interpretation:</p>
 <ul>
-<li>&lt; 0.5	Excellent clustering.</li>
-<li>0.5 - 1.5	Good clustering.</li>
-<li>1.5 - 2.5	Average clustering.</li>
-<li>
-<blockquote>
-<p>2.5	Poor clustering (overlapping or scattered).</p>
-</blockquote>
-</li>
+<li>&lsquo;&lt; 0.5&rsquo;	Excellent clustering.</li>
+<li>&lsquo;0.5 - 1.5&rsquo;	Good clustering.</li>
+<li>&lsquo;1.5 - 2.5&rsquo;	Average clustering.</li>
+<li>&lsquo;&gt; 2.5&rsquo;	Poor clustering (overlapping or scattered).</li>
 </ul>
 <h4 id="summing-up">Summing up,</h4>
 <p>To validate clustering, use:</p>

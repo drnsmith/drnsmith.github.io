@@ -15,11 +15,7 @@ title: "Building a Secure Client-Server System with Python."
   </a>
 
 ### Introduction
-In the world of distributed systems, client-server architecture forms the backbone of communication between applications. 
-
-This project demonstrates the development of a **secure client-server system** using Python, incorporating features like **serialisation**, **file encryption**, and **multi-threading** to ensure reliability and security.
-
-This blog walks through the design, implementation, and key features of this system, offering insights into how these concepts can be applied in real-world scenarios.
+In the world of distributed systems, client-server architecture forms the backbone of communication between applications. This project demonstrates the development of a **secure client-server system** using Python, incorporating features like **serialisation**, **file encryption**, and **multi-threading** to ensure reliability and security. This blog walks through the design, implementation, and key features of this system, offering insights into how these concepts can be applied in real-world scenarios.
 
 ### Project Overview
 

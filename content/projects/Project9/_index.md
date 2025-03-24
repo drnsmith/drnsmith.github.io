@@ -6,4 +6,4 @@ tags: ["Machine Learning", "Air Quality Prediction", "PM10 Forecasting", "Deep L
 type: "page"
 ---
 
-This section showcases the various blogs and technical posts related to this project. Click on each post to learn more about the project components.
+This section showcases the various blog and technical posts related to this project. 

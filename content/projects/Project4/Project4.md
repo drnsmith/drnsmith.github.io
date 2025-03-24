@@ -7,13 +7,20 @@ title: "Decoding Market Sentiments: Analysing NASDAQ Companies with Big Data and
 weight: 1
 ---
 {{< figure src="/images/project4_images/pr4.jpg">}}
-**View Project on GitHub**: 
 
-<a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank">
-    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
-  </a>
 
-# PART 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis
+
+<div style="display: flex; align-items: center; gap: 10px;">
+    <a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank" style="text-decoration: none;">
+        <img src="/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
+    </a>
+    <a href="https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets" target="_blank" style="font-weight: bold; color: black;">
+        View Project on GitHub
+    </a>
+</div>
+
+
+# Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis
 
 In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts. Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment. 
 
@@ -35,7 +42,7 @@ Social media data, while abundant, is messy. Tweets often contain URLs, user men
 
 1. **Removing URLs and Mentions**: Non-informative elements like hyperlinks (`https://...`) and user mentions (`@username`) were eliminated.
 
-2. **Converting to Lowercase**: Standardising text case to avoid redundancy (e.g., `Apple` and `apple` being treated as different words).
+2. **Converting to Lowercase**: Standardising text case to avoid redundancy (e.g., "Apple" and "apple" being treated as different words).
 
 3. **Removing Stop Words**: Common words like "and," "is," and "the" that don't contribute to sentiment were filtered out.
 
@@ -111,8 +118,6 @@ def mapper_sentiment(line):
     return (tweet_id, ticker, sentiment)
     
 ```
-### Visualisation
-
 Visualisation transforms raw numbers into compelling narratives. Using `Matplotlib`, we created:
 
  - *Pie Charts*: To display overall sentiment distribution.
@@ -125,15 +130,17 @@ Visualisation transforms raw numbers into compelling narratives. Using `Matplotl
 
 
 ![Sentiments by company](/images/pr4_sent_comp.png)
+
 *Percentage distribution of sentiments by company.*
 
 
  - *Word Clouds*: Highlighting the most frequent words for each sentiment.
 
 ![Word Clouds](/images/pr4_word_cloud.png)
+
 *Word Clouds.*
 
-Here is the Python code snippet: 
+Here is the `Python` code snippet: 
 
 ```python
 import matplotlib.pyplot as plt
@@ -175,11 +182,9 @@ To refine this analysis, future steps could include:
 This project exemplifies the power of combining Big Data tools like MapReduce with Python’s flexibility for text analysis. By unlocking the sentiment behind millions of tweets, we gained valuable insights into market trends, public perception, and corporate influence.
 
 
-# PART 2. Scalling Sentiment Analysis with MapReduce
+# Part 2. Scaling Sentiment Analysis with MapReduce
 
-Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern. To address this, we employed **MapReduce**, a distributed data processing model that enables parallel computation across multiple nodes.
-
-In this part, I'll walks through the implementation of **MapReduce** for sentiment analysis, focusing on how it handles data at scale. I'll include examples of mappers and reducers with Python code to explain the workflow.
+Sentiment analysis on massive datasets, like 4 million tweets, demands computational efficiency. Processing this data sequentially would take days or even weeks, making scalability a major concern. To address this, we employed **MapReduce**, a distributed data processing model that enables parallel computation across multiple nodes. In this part, I'll walk you through the implementation of **MapReduce** for sentiment analysis, focusing on how it handles data at scale. I'll include examples of mappers and reducers with `Python` code to explain the workflow.
 
 ### What is MapReduce?
 
@@ -191,7 +196,7 @@ In this part, I'll walks through the implementation of **MapReduce** for sentime
 
 In this project, **MapReduce** helped analyse millions of tweets by distributing sentiment classification tasks across multiple nodes.
 
-### Map Phase
+#### Map Phase
 
 The `mapper` processes each tweet to:
 
@@ -199,7 +204,7 @@ The `mapper` processes each tweet to:
 2. Compute sentiment using the AFINN lexicon.
 3. Emit a key-value pair for each tweet:  
    
-   `Key: Company ticker, Value: Sentiment (positive/neutral/negative).`
+   "Key: Company ticker, Value: Sentiment (positive/neutral/negative)."
 
 ```python
 def mapper_sentiment(line):
@@ -219,7 +224,7 @@ def mapper_sentiment(line):
     return (ticker, sentiment)
 ```
 
-### Reduce Phase
+#### Reduce Phase
 The `reducer` aggregates the sentiments by company, counting the number of positive, neutral, and negative tweets for each ticker.
 
 ```python
@@ -320,19 +325,13 @@ The `mapper` and `reducer` logic focus on specific tasks, abstracting the comple
 #### Summary
 MapReduce proved invaluable for processing millions of tweets efficiently, enabling us to scale sentiment analysis for large datasets. By distributing tasks, it transformed what could have been a challenging computational problem into a manageable workflow.
 
-# PART 3. Visualising Market Sentiments with Hive and Kibana
+# Part 3. Visualising Market Sentiments with Hive and Kibana
 
-Data visualisation bridges the gap between raw data and actionable insights. After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers. 
+Data visualisation bridges the gap between raw data and actionable insights. After processing over 4 million tweets for sentiment analysis, the next step was to aggregate the results and make them accessible to analysts and decision-makers. Using **Hive** for data aggregation and **Kibana** for visualisation, we uncovered trends in public discourse around NASDAQ companies. In this part, I'll walk you through the process of aggregating data with Hive and creating interactive dashboards in Kibana, complete with code snippets and visual examples.
 
-Using **Hive** for data aggregation and **Kibana** for visualisation, we uncovered trends in public discourse around NASDAQ companies. In this part, I'll walk you through the process of aggregating data with Hive and creating interactive dashboards in Kibana, complete with code snippets and visual examples.
+### Aggregating Data with Hive: Sentiment Aggregation
 
-### Aggregating Data with Hive
-
-Hive simplifies querying and analysing large datasets stored in distributed systems like **Hadoop**. For this project, Hive was used to summarise sentiment counts for each company.
-
-#### Hive Query: Sentiment Aggregation
-
-Below is the `HiveQL` query to count positive, neutral, and negative tweets for each company:
+`Hive` simplifies querying and analysing large datasets stored in distributed systems like **Hadoop**. For this project, `Hive` was used to summarise sentiment counts for each company. Below is the `HiveQL` query to count positive, neutral, and negative tweets for each company:
 
 ```sql
 CREATE TABLE sentiment_counts AS
@@ -385,16 +384,14 @@ Visualisations helped uncover key insights:
 #### Summary
 By combining **Hive** for data aggregation and **Kibana** for visualisation, we transformed millions of tweets into meaningful insights. The interactive dashboards allowed stakeholders to explore sentiment trends and make data-driven decisions with ease.
 
-# PART 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies
+# Part 4. Word Clouds in Action: Decoding Public Opinion on NASDAQ Companies
 
-While numerical analysis reveals overarching trends, visual representations like **Word Clouds** provide an intuitive way to explore the most frequently used terms in a dataset. For this project, Word Clouds were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. 
-
-These insights complemented the sentiment analysis, offering a richer understanding of public opinion. This part covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.
+While numerical analysis reveals overarching trends, visual representations like **Word Clouds** provide an intuitive way to explore the most frequently used terms in a dataset. For this project, `Word Clouds` were generated to uncover qualitative insights from positive, neutral, and negative tweets about NASDAQ companies. These insights complemented the sentiment analysis, offering a richer understanding of public opinion. This part covers how we created sentiment-specific word clouds, complete with Python code and examples of the insights they provided.
 
 
 ### Preparing Data for Word Clouds
 
-The first step in creating Word Clouds is to extract the text data corresponding to each sentiment category (positive, neutral, negative). Using the cleaned tweets from our dataset, we grouped text by sentiment.
+The first step in creating `Word Clouds` is to extract the text data corresponding to each sentiment category (positive, neutral, negative). Using the cleaned tweets from our dataset, we grouped text by sentiment.
 
 ```python
 import pandas as pd
@@ -417,7 +414,7 @@ print(grouped_tweets)
 
 ### Generating Word Clouds
 
-Using the `WordCloud` library in Python, we generated Word Clouds for each sentiment. This visualised the most frequently mentioned words, with their size reflecting their frequency in the text.
+Using the `WordCloud` library in Python, we generated `Word Clouds` for each sentiment. This visualised the most frequently mentioned words, with their size reflecting their frequency in the text.
 
 ```python
 
@@ -463,13 +460,13 @@ for _, row in grouped_tweets.iterrows():
  - Insight: Neutral tweets focused on factual updates, such as financial performance and product releases.
 
 #### Impact of Word Clouds
-Word Clouds added a qualitative layer to our analysis by:
+`Word Clouds` added a qualitative layer to our analysis by:
 
  - *Revealing Context*: Highlighting the topics driving positive or negative sentiments.
  - *Identifying Trends*: Frequently mentioned terms pointed to recurring themes, such as product launches or stock discussions.
  - *Enhancing Interpretability*: Providing a visual summary of large text datasets.
 
-### Challenges and Solutions
+#### Challenges and Solutions
 
  - *Overwhelming Common Words*: Words like "Tesla" or "Apple" dominated the clouds. *Solution*: Use custom stop word lists to filter out company names.
 
@@ -480,11 +477,9 @@ Word Clouds added a qualitative layer to our analysis by:
 #### Summary
 Word Clouds proved to be a valuable tool for decoding public opinion, offering intuitive and impactful visualisations of frequently mentioned terms. By pairing word clouds with sentiment-specific filtering, we gained additional context to our quantitative findings.
 
-# PART 5. Latent Themes in Tweets: Topic Modelling with LDA
+# Part 5. Latent Themes in Tweets: Topic Modelling with LDA
 
-Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. **Latent Dirichlet Allocation (LDA)**, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents. 
-
-In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions. In this part, I provide a step-by-step walkthrough of applying LDA on cleaned Twitter data, with Python code snippets and examples of the insights gained.
+Social media conversations often revolve around recurring themes, making it essential to identify hidden patterns in large datasets. **Latent Dirichlet Allocation (LDA)**, a popular topic modelling technique, enables us to uncover such latent themes by clustering similar words within documents.  In this project, LDA helped reveal key topics in tweets about NASDAQ companies, such as product launches, stock performance, and CEO-driven discussions. In this part, I provide a step-by-step walkthrough of applying `LDA` on cleaned Twitter data, with Python code snippets and examples of the insights gained.
 
 ### Preparing Data for Topic Modelling
 
@@ -510,8 +505,6 @@ dtm = vectorizer.fit_transform(cleaned_tweets)
 print("Features:", vectorizer.get_feature_names_out())
 print("Document-Term Matrix Shape:", dtm.shape)
 ```
-
-
 ### Building the LDA Model
 Using the document-term matrix (`DTM`) generated above, we trained an LDA model with a specified number of topics. The model identifies clusters of words that form coherent topics.
 
@@ -580,12 +573,12 @@ The visualisation provides:
 #### Summary
 LDA offered valuable insights into the themes driving public discourse on NASDAQ companies. By uncovering hidden patterns, we gained a deeper understanding of the topics influencing sentiment trends, such as product launches, market discussions, and CEO narratives.
 
-# PART 6. Sentiment Trends: Insights by Company and Year
+# Part 6. Sentiment Trends: Insights by Company and Year
 
 Understanding how public sentiment evolves over time provides critical insights into the factors shaping market perceptions. In this part, I'll talk how we analysed sentiment trends for NASDAQ companies, exploring how significant events—such as product launches, earnings calls, or controversies—impacted public opinion. Using time-series analysis, we visualised longitudinal sentiment patterns, highlighting their value for investors and analysts.
 
 
-### Aggregating Sentiment by Date**
+### Aggregating Sentiment by Date
 
 The first step was to aggregate sentiment counts for each company by date. This created a time-series dataset that allowed us to track changes in sentiment over time.
 
@@ -603,6 +596,7 @@ df = pd.DataFrame(data)
 # Group data by date, company, and sentiment
 sentiment_trends = df.groupby(["date", "company_ticker", "sentiment"]).size().reset_index(name="count")
 print(sentiment_trends)
+```
 Output:
 
 ```yaml
@@ -691,10 +685,9 @@ plt.show()
 Sentiment trend analysis revealed how public opinion evolves over time, reflecting the impact of market events and company announcements. By identifying key moments of sentiment change, this analysis provided actionable insights for stakeholders.
 
 
-# PART 7. Overcoming Challenges in Sentiment Analysis
+# Part 7. Overcoming Challenges in Sentiment Analysis
 
 Sentiment analysis offers a window into public opinion but comes with its own set of challenges. Sarcasm, evolving language, and biased data can lead to misclassification, impacting the reliability of results. In this concluding part, we dive into the hurdles encountered during sentiment analysis on over 4 million tweets about NASDAQ companies and explore solutions to address them.
-
 
 ### Key Challenges in Sentiment Analysis
 
@@ -782,7 +775,7 @@ balanced_df = pd.concat([positive_tweets, negative_tweets_upsampled]).sample(fra
 print(balanced_df["sentiment"].value_counts())
 ```
 
-### Lessons Learned
+#### Lessons Learned
  - *Sarcasm Requires Context*:
 Leveraging context-aware models like transformers significantly improves performance for nuanced expressions.
  - *Dynamic Language Needs Updating*:
@@ -798,7 +791,7 @@ To further address these challenges:
  - *Real-Time Sentiment Analysis*: Apply streaming frameworks like *Apache Kafka* for dynamic sentiment updates.
  - *Ethical Considerations*: Develop transparent, interpretable models to foster trust in AI-driven sentiment analysis.
 
-### Summary
+#### Summary
 Sentiment analysis is a powerful tool but requires careful handling of its inherent challenges. By addressing issues like sarcasm, slang, and biases, we can improve the accuracy and reliability of sentiment extraction. As language evolves, so too must our models and approaches, ensuring they remain robust in dynamic environments.
 
 *Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and happy tweeting!*

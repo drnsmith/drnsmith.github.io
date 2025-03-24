@@ -6,7 +6,7 @@ layout: "single"
 image: "/images/about.jpg"
 ---
 
-{{< figure src="/images/1.jpg" title="Hi 👋, I'm Natasha (Dr. Smith) — AI Data Scientist | Business Strategist" >}}
+{{< figure src="/images/me_smaller.png" title="Hi 👋, I'm Natasha (Dr. Smith) — AI Data Scientist | Business Strategist" >}}
 
 I’m most in my element where **data, AI, and business strategy** converge, tackling complex challenges that drive real-world impact. With 20+ years of hands-on data experience, I blend deep technical expertise with domain knowledge in **business economics, management, and innovation**.
 
@@ -17,4 +17,4 @@ What sets me apart? Connecting the dots. I bridge the gap between data science a
 Beyond the numbers, I explore the ethical and social implications of AI, ensuring technology is used responsibly and effectively. My work reflects this integration of analytical rigour, business insight, and human-centred innovation—where data meets strategy, intelligence, and impact.
 
 
-I believe in **building a community** of like-minded professionals who are passionate about AI, data, and its intersection with business.  **Let’s exchange ideas and grow together!** Connect with me on **[LinkedIn](www.linkedin.com/in/drnsmith)** and let’s learn from each other.  
+I believe in **building a community** of like-minded professionals who are passionate about AI, data, and its intersection with business.  **Let’s exchange ideas and grow together!** Connect with me on **[LinkedIn](https://www.linkedin.com/in/drnsmith)** and let’s learn from each other.  

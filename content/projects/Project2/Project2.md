@@ -8,6 +8,7 @@ weight: 2
 ---
 {{< figure src="/images/project2_images/pr2.jpg">}}
 
+
 <div style="display: flex; align-items: center; gap: 10px;">
     <a href="https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering" target="_blank" style="text-decoration: none;">
         <img src="/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
@@ -16,6 +17,8 @@ weight: 2
         View Project on GitHub
     </a>
 </div>
+
+
 
 # Part 1. Preparing Recipe Data for Natural Language Processing
 
@@ -598,7 +601,7 @@ Dimensionality reduction is critical for clustering:
 	•	UMAP is fast and preserves more structure.
 
 
-# PART 6. Evaluating Clustering Performance – Coherence Score, Silhouette Score, and Davies-Bouldin Index
+# Part 6. Evaluating Clustering Performance – Coherence Score, Silhouette Score, and Davies-Bouldin Index
 
 After clustering recipes using K-Means, LDA, and the BERT-LDA Hybrid, we need to evaluate how well the clusters are formed. Clustering is an unsupervised learning technique, meaning *there are no predefined labels*, so evaluation is **challenging**.
 
@@ -626,9 +629,9 @@ print(f"Coherence Score: {lda_coherence.get_coherence()}")
 #### How to Interpret Coherence Scores?
 
 `Coherence Score` Interpretation:
- - > 0.5	Good topic coherence (words in each topic are highly related).
- - 0.3 - 0.5	Medium coherence (topics are somewhat meaningful but noisy).
- - < 0.3	Poor coherence (topics are too random).
+ - '> 0.5'	Good topic coherence (words in each topic are highly related).
+ - '0.3 - 0.5'	Medium coherence (topics are somewhat meaningful but noisy).
+ - '< 0.3'	Poor coherence (topics are too random).
 
 **Tip**: If `coherence`` is low, try increasing the number of topics or fine-tuning stop words.
 
@@ -676,10 +679,10 @@ print(f"Davies-Bouldin Index: {dbi_score}")
 #### How to Interpret DBI?
 
 `DBI Score` Interpretation:
- - < 0.5	Excellent clustering.
- - 0.5 - 1.5	Good clustering.
- - 1.5 - 2.5	Average clustering.
- - > 2.5	Poor clustering (overlapping or scattered).
+ - '< 0.5'	Excellent clustering.
+ - '0.5 - 1.5'	Good clustering.
+ - '1.5 - 2.5'	Average clustering.
+ - '> 2.5'	Poor clustering (overlapping or scattered).
 
 #### Summing up,
 

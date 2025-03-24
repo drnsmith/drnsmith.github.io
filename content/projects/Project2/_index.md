@@ -6,4 +6,4 @@ tags: ["Natural Language Processing", "BERT Embeddings", "LDA Topic Modelling", 
 type: "page"
 ---
 
-This section showcases the technical blogs related to this project. Click on each post to learn more about the project components.
+This section showcases the technical blog related to this project. 

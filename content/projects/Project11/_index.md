@@ -6,4 +6,4 @@ tags: ["medical imaging", "data pre-processing", "histopathology", "machine lear
 type: "page"
 ---
 
-This section showcases the technical blogs related to this project. Each blog focuses on a specific aspect, from understanding CNN components to tackling data augmentation and evaluating model performance. Click on each post to learn more about the project components.
+This section showcases the technical blog related to this project. 

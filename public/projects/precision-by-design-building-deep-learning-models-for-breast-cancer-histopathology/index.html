@@ -51,7 +51,7 @@
       
       <header class="page-header"
         style="
-          background-image: url('/images/project13_images/pr13.jpg');
+          background-image: url('/images/project13_images/pr13.png');
           background-size: cover;
           background-position: center;
           height: 400px;
@@ -76,28 +76,27 @@
     <main class="pb7" role="main">
       
   <article class="mw8 center ph3">
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project13_images/pr13.jpg"><figcaption>
-      <h4>Photo by Ben Hershey on Unsplash</h4>
-    </figcaption>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project13_images/pr13.png">
 </figure>
 
 <p><strong>View Project on GitHub</strong>:</p>
 <a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
     <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
   </a>
-<h1 id="part-1-transforming-breast-cancer-diagnosis-with-deep-learning-the-future-of-ai-in-histopathology-innovations-and-challenges">Part 1. Transforming Breast Cancer Diagnosis with Deep Learning. The Future of AI in Histopathology: Innovations and Challenges</h1>
-<h3 id="introduction">Introduction</h3>
-<p>The field of histopathology is witnessing a paradigm shift with the integration of artificial intelligence (AI) and deep learning (DL). This blog delves into a research project that explores advanced deep learning techniques to enhance breast cancer diagnosis using histopathology images (HIs). The project, based on the BreakHis dataset, leverages state-of-the-art convolutional neural networks (CNNs), ensemble methods, and interpretability tools such as Grad-CAM and LIME. These innovations aim to address critical challenges in clinical applications, including class imbalance, model reliability, and diagnostic accuracy.</p>
+<h1 id="part-1-transforming-breast-cancer-diagnosis-with-deep-learning">Part 1. Transforming Breast Cancer Diagnosis with Deep Learning</h1>
+<p>The field of histopathology is witnessing a paradigm shift with the integration of artificial intelligence (AI) and deep learning (DL). This blog delves into a research project that explores advanced DL techniques to enhance breast cancer diagnosis using histopathology images (HIs). The project, based on the <strong>BreakHis dataset</strong>, leverages state-of-the-art convolutional neural networks (CNNs), ensemble methods, and interpretability tools such as <strong>Grad-CAM and LIME</strong>. These innovations aim to address critical challenges in clinical applications, including class imbalance, model reliability, and diagnostic accuracy.</p>
 <h3 id="problem-statement">Problem Statement</h3>
-<p>Breast cancer, a leading cause of cancer-related mortality worldwide, demands timely and precise diagnosis. Histopathology, the gold standard for breast cancer detection, often suffers from inter-observer variability and time constraints. This variability, coupled with the labour-intensive nature of manual diagnosis, underscores the need for AI-driven solutions that enhance accuracy, interpretability, and efficiency. The BreakHis dataset, comprising over 7,900 HIs, presents an opportunity to develop robust deep learning (DL) models capable of distinguishing between benign and malignant tissues.</p>
+<p>Breast cancer, a leading cause of cancer-related mortality worldwide, demands timely and precise diagnosis. Histopathology, the gold standard for breast cancer detection, often suffers from inter-observer variability and time constraints.</p>
+<p>This variability, coupled with the labour-intensive nature of manual diagnosis, underscores the need for AI-driven solutions that enhance accuracy, interpretability, and efficiency.</p>
+<p>The <code>BreakHis</code> dataset used in this project, comprising over 7,900 HIs, presents an opportunity to develop robust DL models capable of distinguishing between benign and malignant tissues.</p>
 <h3 id="technical-approach">Technical Approach</h3>
 <p>The research employs a multifaceted approach involving:</p>
 <ul>
 <li><strong>Dataset</strong>: The <code>BreakHis</code> dataset, featuring images at varying magnifications (40X to 400X), provides a comprehensive platform for analysis.</li>
-<li><strong>CNN Architectures</strong>: Six prominent architectures—<code>VGG16</code>, <code>VGG19</code>, <code>ResNet50</code>, <code>EfficientNetB0</code>, <code>DenseNet121</code>, and <code>DenseNet201</code>—were evaluated, with the top three models selected for further exploration.</li>
+<li><strong>CNN Architectures</strong>: Six prominent architectures—<code>VGG16</code>, <code>VGG19</code>, <code>ResNet50</code>, <code>EfficientNetB0</code>, <code>DenseNet121</code>, and <code>DenseNet201</code> — were evaluated, with the top three models selected for further exploration.</li>
 <li><strong>Ensemble Learning</strong>: Predictions from <code>ResNet50</code>, <code>EfficientNetB0</code>, and <code>DenseNet201</code> were combined using logistic regression to enhance diagnostic accuracy.</li>
 <li><strong>Interpretability</strong>: <strong>Grad-CAM</strong> and <strong>LIME</strong> were employed to visualise model decisions and identify key regions in the images influencing classification outcomes.</li>
-<li><strong>Calibration and Performance</strong>: Post-calibration, models were evaluated on metrics such as accuracy, sensitivity, specificity, and Area Under the Curve (AUC).</li>
+<li><strong>Calibration and Performance</strong>: Post-calibration, models were evaluated on metrics such as <strong>accuracy, sensitivity, specificity</strong>, and <strong>Area Under the Curve (AUC)</strong>.</li>
 </ul>
 <h3 id="implementation-details">Implementation Details</h3>
 <p><strong>1. Data Pre-processing</strong></p>
@@ -121,25 +120,27 @@
 <p>The project achieved significant milestones:</p>
 <ul>
 <li><strong>Performance Metrics</strong>: The ensemble model delivered a sensitivity of 99.56% and an F1 score of 99.68%, setting a new benchmark for breast cancer classification.</li>
-<li><strong>Visualisations</strong>: Grad-CAM and LIME outputs confirmed the models&rsquo; focus on diagnostically relevant regions, enhancing trust in AI predictions.</li>
+<li><strong>Visualisations</strong>: <code>Grad-CAM</code> and <code>LIME</code> outputs confirmed the models&rsquo; focus on diagnostically relevant regions, enhancing trust in AI predictions.</li>
 </ul>
+<p><img src="/images/final_results.png" alt="Comparative performance of six DL models">
+<em>Comparative performance of six DL models.</em></p>
 <h3 id="emerging-trends">Emerging Trends</h3>
 <p>The intersection of AI and histopathology is evolving rapidly. Key trends shaping the future include:</p>
 <ul>
 <li>
-<p><strong>Multi-Modal AI Models:</strong>
+<p><em>Multi-Modal AI Models:</em>
 Modern diagnostic workflows are moving towards integrating multiple data sources. Combining histopathological images with genomics, proteomics, or radiology data enables a more comprehensive understanding of breast cancer. These multi-modal models are set to revolutionise precision medicine, providing insights that go beyond traditional diagnostics.</p>
 </li>
 <li>
-<p><strong>Self-Supervised Learning:</strong>
+<p><em>Self-Supervised Learning:</em>
 Data scarcity in medical imaging is a persistent challenge. Self-supervised learning, which leverages unlabelled data for pre-training, has shown promise in reducing dependency on annotated datasets. This is especially crucial in histopathology, where labelling requires expert pathologists.</p>
 </li>
 <li>
-<p><strong>Foundation Models in Histopathology:</strong>
+<p><em>Foundation Models in Histopathology:</em>
 The success of foundation models like GPT in NLP is inspiring the development of large pre-trained models for medical imaging. These models, fine-tuned for specific tasks like breast cancer diagnosis, can reduce training times and improve generalisation across datasets.</p>
 </li>
 <li>
-<p><em><em>Cloud and Federated Learning</em>:</em>
+<p><em>Cloud and Federated Learning</em>:*
 Privacy concerns in medical data sharing are being addressed with federated learning, where models are trained across decentralised institutions without exchanging sensitive patient data. This approach enables collaboration while ensuring compliance with data protection regulations.</p>
 </li>
 </ul>
@@ -147,41 +148,43 @@ Privacy concerns in medical data sharing are being addressed with federated lear
 <p>The research presented here aligns with cutting-edge innovations in AI-driven histopathology:</p>
 <ul>
 <li>
-<p><strong>Explainable AI (XAI)</strong>:
-Tools like Grad-CAM and LIME exemplify how XAI is bridging the gap between AI systems and clinicians. By providing visual and interpretable insights, these tools build trust and enhance usability in clinical workflows.</p>
+<p><em>Explainable AI (XAI)</em>:
+Tools like <code>Grad-CAM</code> and <code>LIME</code> exemplify how XAI is bridging the gap between AI systems and clinicians. By providing visual and interpretable insights, these tools build trust and enhance usability in clinical workflows.</p>
 </li>
 <li>
-<p><strong>Class Imbalance Solutions</strong>:
+<p><em>Class Imbalance Solutions</em>:
 Tackling the inherent imbalance in medical datasets through weighted loss functions and data augmentation ensures that AI models deliver equitable performance across all patient groups, a step critical for ethical AI adoption in healthcare.</p>
 </li>
 <li>
-<p><strong>Ensemble Learning</strong>:
-The ensemble approach used in this project represents a trend towards leveraging complementary strengths of multiple models. By combining ResNet50, DenseNet201, and EfficientNetB0, the ensemble model delivers unparalleled accuracy and robustness.</p>
+<p><em>Ensemble Learning</em>:
+The ensemble approach used in this project represents a trend towards leveraging complementary strengths of multiple models. By combining <code>ResNet50</code>, <code>DenseNet201</code>, and <code>EfficientNetB0</code>, the ensemble model delivers unparalleled accuracy and robustness.</p>
+</li>
+<li>
+<p><em>Diagnostic Speed with Lightweight Architectures:</em>
+While <code>DenseNet201</code> offers superior accuracy, models like <code>ResNet50</code> cater to scenarios requiring faster predictions without compromising significantly on performance. This adaptability enables diverse applications across resource-constrained settings.</p>
 </li>
 </ul>
-<p><strong>Diagnostic Speed with Lightweight Architectures:</strong>
-While <code>DenseNet201</code> offers superior accuracy, models like <code>ResNet50</code> cater to scenarios requiring faster predictions without compromising significantly on performance. This adaptability enables diverse applications across resource-constrained settings.</p>
 <p><strong>Challenges:</strong>
 Despite its potential, the integration of AI in breast cancer diagnosis faces several challenges:</p>
 <ul>
 <li>
-<p><strong>Data Diversity and Generalisation</strong>:
-Histopathology datasets like BreakHis often lack diversity, which limits model generalisation. Images may vary based on staining techniques, equipment, and demographics. Addressing these biases requires larger, more diverse datasets and robust validation strategies.</p>
+<p><em>Data Diversity and Generalisation</em>:
+Histopathology datasets like <code>BreakHis</code> often lack diversity, which limits model generalisation. Images may vary based on staining techniques, equipment, and demographics. Addressing these biases requires larger, more diverse datasets and robust validation strategies.</p>
 </li>
 <li>
-<p><strong>Clinical Integration</strong>:
+<p><em>Clinical Integration</em>:
 Deploying AI models in real-world settings demands seamless integration with existing workflows. This involves designing intuitive user interfaces, managing infrastructure costs, and ensuring compatibility with clinical systems.</p>
 </li>
 <li>
-<p><strong>Interpretability and Trust</strong>:
-While tools like Grad-CAM and LIME improve transparency, clinicians still face challenges in trusting model predictions for high-stakes decisions. Future AI systems must offer even greater interpretability and align closely with human reasoning.</p>
+<p><em>Interpretability and Trust</em>:
+While tools like <code>Grad-CAM</code> and <code>LIME</code> improve transparency, clinicians still face challenges in trusting model predictions for high-stakes decisions. Future AI systems must offer even greater interpretability and align closely with human reasoning.</p>
 </li>
 <li>
-<p><strong>Regulatory and Ethical Concerns</strong>:
+<p><em>Regulatory and Ethical Concerns</em>:
 Medical AI must navigate a complex landscape of regulatory approvals and ethical considerations, including patient privacy and bias mitigation. Establishing globally accepted guidelines is essential for widespread adoption.</p>
 </li>
 <li>
-<p><strong>Sustainability of Models</strong>:
+<p><em>Sustainability of Models</em>:
 Advanced architectures like <code>DenseNet</code> and <code>EfficientNet</code> require significant computational resources, raising concerns about their environmental impact. Research into energy-efficient training and inference methods is crucial for long-term viability.</p>
 </li>
 </ul>
@@ -189,51 +192,55 @@ Advanced architectures like <code>DenseNet</code> and <code>EfficientNet</code> 
 <p>The future of AI in breast cancer diagnosis lies in harmonising innovation with practicality. Here&rsquo;s what lies ahead:</p>
 <ul>
 <li>
-<p>**Automated Screening*8:
+<p><em>Automated Screening</em>:
 AI could assist in pre-screening large volumes of histopathology slides, flagging suspicious cases for further review, thereby reducing the workload of pathologists.</p>
 </li>
 <li>
-<p><strong>Personalised Treatment</strong>:
+<p><em>Personalised Treatment</em>:
 By integrating histopathology with patient-specific data, AI can guide personalised treatment plans, including predicting responses to therapies.</p>
 </li>
 <li>
-<p><strong>Real-Time Analysis</strong>:
+<p><em>Real-Time Analysis</em>:
 Advances in edge computing and AI acceleration hardware could enable real-time analysis of histopathology images, making diagnostic tools more accessible in resource-limited settings.</p>
 </li>
 <li>
-<p><strong>AI-Powered Drug Development</strong>:
+<p><em>AI-Powered Drug Development</em>:
 Analysing histopathology images alongside molecular data could identify novel biomarkers and accelerate the development of targeted therapies.</p>
 </li>
 </ul>
-<h3 id="conclusions-and-insights">Conclusions and Insights</h3>
+<h3 id="summary-and-insights">Summary and Insights</h3>
 <p>This project underscores the transformative potential of AI in histopathology. Key takeaways include:</p>
 <ul>
-<li><strong>Model Reliability</strong>: Ensemble learning mitigates individual model weaknesses, ensuring robust performance across datasets.</li>
-<li><strong>Clinical Applicability</strong>: Interpretability tools like Grad-CAM and LIME bridge the gap between AI and clinicians, fostering adoption in medical workflows.</li>
-<li><strong>Challenges Addressed</strong>: Techniques such as weighted loss functions and data augmentation effectively tackled class imbalance, a common issue in medical datasets.</li>
+<li><em>Model Reliability</em>: Ensemble learning mitigates individual model weaknesses, ensuring robust performance across datasets.</li>
+<li><em>Clinical Applicability</em>: Interpretability tools like <code>Grad-CAM</code> and <code>LIME</code> bridge the gap between AI and clinicians, fostering adoption in medical workflows.</li>
+<li><em>Challenges Addressed</em>: Techniques such as <code>weighted loss</code> functions and <code>data augmentation</code> effectively tackled class imbalance, a common issue in medical datasets.</li>
 </ul>
 <h4 id="future-work">Future Work</h4>
 <p>Future research can explore:</p>
 <ul>
-<li><strong>External Validation</strong>: Testing models on diverse datasets to ensure generalisability.</li>
-<li><strong>Real-Time Applications</strong>: Optimising inference times for deployment in clinical settings.</li>
-<li><strong>Multi-Modal Analysis</strong>: Integrating histopathology with genetic or radiological data for comprehensive diagnostics.</li>
+<li><em>External Validation</em>: Testing models on diverse datasets to ensure generalisability.</li>
+<li><em>Real-Time Applications</em>: Optimising inference times for deployment in clinical settings.</li>
+<li><em>Multi-Modal Analysis</em>: Integrating histopathology with genetic or radiological data for comprehensive diagnostics.</li>
 </ul>
-<p>This project exemplifies the convergence of AI and medicine, showcasing how advanced DL models can revolutionise breast cancer diagnosis. By addressing critical challenges and leveraging innovative methodologies, it paves the way for AI-driven histopathology solutions that are accurate, interpretable, and clinically impactful.</p>
+<p>This project exemplifies the convergence of AI and medicine, showcasing how advanced DL models can revolutionise breast cancer diagnosis.</p>
+<p>By addressing critical challenges and leveraging innovative methodologies, it paves the way for AI-driven histopathology solutions that are accurate, interpretable, and clinically impactful.</p>
 <h4 id="closing-thoughts">Closing Thoughts</h4>
 <p>The journey of integrating AI into histopathology is marked by remarkable progress and persistent challenges. From cutting-edge innovations like explainable AI and ensemble learning to emerging trends such as federated learning and self-supervised models, the possibilities are vast. However, addressing challenges in trust, diversity, and clinical integration remains critical.</p>
 <p>As we look to the future, the vision is clear: AI will not replace pathologists but will empower them, enhancing their diagnostic capabilities and improving patient outcomes. By aligning technological advancements with ethical considerations and clinical needs, we can truly transform breast cancer diagnosis and pave the way for a new era in histopathology.</p>
 <h1 id="part-2-handling-class-imbalance-in-medical-imaging-a-deep-learning-perspective">Part 2. Handling Class Imbalance in Medical Imaging: A Deep Learning Perspective</h1>
-<p>Class imbalance is a common issue in histopathological datasets, such as the BreakHis dataset used for breast cancer detection. This imbalance, where benign samples constitute 31% and malignant samples 69%, can adversely affect model performance by causing the model to prioritize the majority class. In this blog, we explore techniques employed in your project, including <strong>weighted loss functions</strong>, <strong>data augmentation</strong>, and <strong>stratified sampling</strong>, to address this challenge and enhance model performance.</p>
-<hr>
-<h3 id="class-imbalance-in-the-breakhis-dataset"><strong>Class Imbalance in the BreakHis Dataset</strong></h3>
-<p>The BreakHis dataset comprises 7,909 images of breast tissue biopsies, categorized into benign and malignant classes. The dataset&rsquo;s inherent class imbalance highlights the need for tailored solutions to prevent the model from favoring the dominant malignant class at the expense of underrepresented benign samples.</p>
-<hr>
-<h3 id="techniques-to-address-class-imbalance"><strong>Techniques to Address Class Imbalance</strong></h3>
-<h4 id="1-weighted-loss-functions"><strong>1. Weighted Loss Functions</strong></h4>
-<p>Weighted loss functions penalize misclassifications in the minority class more heavily, ensuring the model learns to treat all classes with equal importance.</p>
-<p><strong>Implementation</strong>:
-A custom <strong>weighted binary cross-entropy loss function</strong> was implemented in the project, with weights inversely proportional to class frequencies:</p>
+<p>Class imbalance is a common issue in histopathological datasets, and the BreakHis dataset, used for breast cancer detection, is not an exception. The imbalance, where benign samples constitute 31% and malignant samples 69%, can adversely affect model performance by causing the model to prioritise the majority class.</p>
+<p>In this part, we explore techniques employed in this project, including <strong>weighted loss functions</strong>, <strong>data augmentation</strong>, and <strong>stratified sampling</strong>, to address this challenge and enhance model performance.</p>
+<h3 id="class-imbalance-in-the-breakhis-dataset">Class Imbalance in the BreakHis Dataset</h3>
+<p>The <code>BreakHis</code> dataset comprises 7,909 images of breast tissue biopsies, categorised into benign and malignant classes. The dataset&rsquo;s inherent class imbalance highlights the need for tailored solutions to prevent the model from favoring the dominant malignant class at the expense of underrepresented benign samples.</p>
+<h4 id="techniques-to-address-class-imbalance">Techniques to Address Class Imbalance</h4>
+<ul>
+<li>
+<ol>
+<li><strong>Weighted Loss Functions (WLF):</strong> Penalise misclassifications in the minority class more heavily, ensuring the model learns to treat all classes with equal importance.</li>
+</ol>
+</li>
+</ul>
+<p>I implemented a custom <strong>weighted binary cross-entropy loss function</strong>, with weights inversely proportional to class frequencies:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.losses <span style="color:#f92672">import</span> BinaryCrossentropy
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Compute class weights</span>
@@ -249,21 +256,26 @@ A custom <strong>weighted binary cross-entropy loss function</strong> was implem
 </span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(x_train, y_train, class_weight<span style="color:#f92672">=</span>class_weights, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, validation_data<span style="color:#f92672">=</span>(x_val, y_val))
 </span></span></code></pre></div><p><strong>Benefits</strong>:</p>
 <ul>
-<li>Reduces bias toward the majority class.</li>
-<li>Improves sensitivity for the minority class, crucial in detecting benign cases.</li>
+<li>
+<p>Reduces bias toward the majority class.</p>
+</li>
+<li>
+<p>Improves sensitivity for the minority class, crucial in detecting benign cases.</p>
+</li>
+<li>
+<ol start="2">
+<li><strong>Data Augmentation (DA):</strong> Expands the dataset by creating synthetic variations of existing images, increasing diversity and balancing class representation.</li>
+</ol>
+</li>
 </ul>
-<hr>
-<h4 id="2-data-augmentation"><strong>2. Data Augmentation</strong></h4>
-<p>Data augmentation expands the dataset by creating synthetic variations of existing images, increasing diversity and balancing class representation.</p>
-<p><strong>Augmentation Techniques Applied</strong>:</p>
+<p>I applied the following DA techniques:</p>
 <ul>
-<li><strong>Flipping</strong>: Simulates variations in orientation.</li>
-<li><strong>Rotation</strong>: Introduces diverse angles for the same sample.</li>
-<li><strong>Scaling</strong>: Mimics different magnification levels.</li>
-<li><strong>Shearing</strong>: Distorts images slightly for variation.</li>
+<li><em>Flipping</em>: Simulates variations in orientation.</li>
+<li><em>Rotation</em>: Introduces diverse angles for the same sample.</li>
+<li><em>Scaling</em>: Mimics different magnification levels.</li>
+<li><em>Shearing</em>: Distorts images slightly for variation.</li>
 </ul>
-<p><strong>Implementation</strong>:
-Using TensorFlow’s <code>ImageDataGenerator</code>, augmented samples were generated dynamically during training:</p>
+<p>I used <code>TensorFlow</code>’s <code>ImageDataGenerator</code> to dynamically generate augmented samples during training:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
@@ -277,16 +289,24 @@ Using TensorFlow’s <code>ImageDataGenerator</code>, augmented samples were gen
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply augmentation to training data</span>
 </span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(x_train, y_train, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
 </span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(train_generator, validation_data<span style="color:#f92672">=</span>(x_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
-</span></span></code></pre></div><p><strong>Benefits</strong>:</p>
+</span></span></code></pre></div><p><img src="/images/DA.png" alt="Examples of augmented images from the training set">
+<em>Examples of augmented images from the training set.</em>
+<strong>Benefits</strong>:</p>
 <ul>
-<li>Increases dataset diversity, reducing overfitting.</li>
-<li>Enhances the model&rsquo;s robustness to real-world variations.</li>
+<li>
+<p>Increases dataset diversity, reducing overfitting.</p>
+</li>
+<li>
+<p>Enhances the model&rsquo;s robustness to real-world variations.</p>
+</li>
+<li>
+<ol start="3">
+<li><strong>Stratified Sampling:</strong>
+Ensures that both training and validation sets maintain the same class distribution as the original dataset. This technique prevents evaluation biases caused by imbalanced splits.</li>
+</ol>
+</li>
 </ul>
-<hr>
-<h4 id="3-stratified-sampling"><strong>3. Stratified Sampling</strong></h4>
-<p>Stratified sampling ensures that both training and validation sets maintain the same class distribution as the original dataset. This technique prevents evaluation biases caused by imbalanced splits.</p>
-<p><strong>Implementation</strong>:
-Using <code>train_test_split</code> with stratification:</p>
+<p>I used <code>train_test_split</code> with stratification:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>x_train, x_val, y_train, y_val <span style="color:#f92672">=</span> train_test_split(
@@ -297,10 +317,9 @@ Using <code>train_test_split</code> with stratification:</p>
 <li>Maintains balanced class distributions in both training and validation sets.</li>
 <li>Provides consistent and reliable evaluation metrics.</li>
 </ul>
-<hr>
-<h3 id="results-and-insights"><strong>Results and Insights</strong></h3>
-<h4 id="impact-of-techniques"><strong>Impact of Techniques</strong></h4>
-<p>The combination of weighted loss functions, data augmentation, and stratified sampling significantly improved the model&rsquo;s ability to detect benign samples, addressing the class imbalance challenge.</p>
+<h3 id="results-and-insights">Results and Insights</h3>
+<h4 id="impact-of-techniques">Impact of Techniques</h4>
+<p>The combination of WLFs, DA, and stratified sampling significantly improved the model&rsquo;s ability to detect benign samples, addressing the class imbalance challenge.</p>
 <p><strong>Performance Metrics</strong>:</p>
 <table>
   <thead>
@@ -332,71 +351,73 @@ Using <code>train_test_split</code> with stratification:</p>
       </tr>
   </tbody>
 </table>
-<hr>
-<h3 id="visualization"><strong>Visualization</strong></h3>
-<h4 id="augmented-data-examples"><strong>Augmented Data Examples</strong></h4>
-<p>Augmented images from the BreakHis dataset, including rotated, flipped, and scaled variations, demonstrate the diversity introduced by augmentation techniques.</p>
-<h4 id="confusion-matrices"><strong>Confusion Matrices</strong></h4>
-<p>Comparison of confusion matrices with and without class imbalance handling highlights the improved detection of benign cases.</p>
-<hr>
-<h3 id="conclusion"><strong>Conclusion</strong></h3>
-<p>Class imbalance is a critical challenge in medical imaging datasets, but techniques like weighted loss functions, data augmentation, and stratified sampling provide effective solutions. By implementing these approaches, your project significantly enhanced the performance of deep learning models on the BreakHis dataset, improving sensitivity for minority classes and ensuring robust, fair predictions.</p>
-<h1 id="part-3-choosing-the-best-cnn-architecture-for-breast-cancer-detection-how-ensemble-models-improve-breast-cancer-detection-with-ai">Part 3. Choosing the Best CNN Architecture for Breast Cancer Detection: How Ensemble Models Improve Breast Cancer Detection with AI</h1>
-<h3 id="introduction-1">Introduction</h3>
-<h3 id="choosing-the-best-cnn-architecture-for-breast-cancer-detection-how-ensemble-models-improve-accuracy"><strong>Choosing the Best CNN Architecture for Breast Cancer Detection: How Ensemble Models Improve Accuracy</strong></h3>
-<p>Deep learning has revolutionized breast cancer detection, especially with histopathological image analysis. Among the arsenal of Convolutional Neural Network (CNN) architectures, models like <strong>ResNet</strong>, <strong>DenseNet</strong>, and <strong>EfficientNet</strong> have proven highly effective. However, instead of relying on a single architecture, combining them through ensemble learning often yields superior performance. In this blog, we’ll compare these top architectures and explore how an <strong>ensemble approach using logistic regression</strong> as a meta-model improves diagnostic accuracy and robustness.</p>
-<hr>
-<h3 id="the-role-of-cnns-in-histopathology"><strong>The Role of CNNs in Histopathology</strong></h3>
-<p>Histopathological imaging involves analyzing tissue samples to detect abnormalities like cancer. CNNs excel at this task, learning intricate patterns like cell shapes, textures, and densities. However, different architectures have unique strengths:</p>
+<p>Augmented images demonstrate the diversity introduced by augmentation techniques. Comparison of confusion matrices with and without class imbalance handling highlighted the improved detection of benign cases.</p>
+<h3 id="summary">Summary</h3>
+<p>Class imbalance is a critical challenge in medical imaging datasets, but techniques like weighted loss functions, data augmentation, and stratified sampling provide effective solutions. By implementing these approaches, I significantly enhanced the performance of DL models on the BreakHis dataset, improving sensitivity for minority classes and ensuring robust, fair predictions.</p>
+<h1 id="part-3-choosing-the-best-cnn-architecture-how-ensemble-models-improve-breast-cancer-detection-with-ai">Part 3. Choosing the Best CNN Architecture: How Ensemble Models Improve Breast Cancer Detection with AI</h1>
+<p>DL has revolutionised breast cancer detection, especially with histopathological image analysis. Among the arsenal of Convolutional Neural Network (CNN) architectures, models like <strong>ResNet</strong>, <strong>DenseNet</strong>, and <strong>EfficientNet</strong> have proven highly effective. However, instead of relying on a single architecture, combining them through ensemble learning often yields superior performance. In this part, we’ll compare these top architectures and explore how an <strong>ensemble approach using logistic regression</strong> as a meta-model improves diagnostic accuracy and robustness.</p>
+<h3 id="the-role-of-cnns-in-histopathology">The Role of CNNs in Histopathology</h3>
+<p>Histopathological imaging involves analysing tissue samples to detect abnormalities like cancer. CNNs excel at this task, learning intricate patterns like cell shapes, textures, and densities. However, different architectures have unique strengths:</p>
 <ul>
-<li>Some are better at hierarchical feature extraction (e.g., ResNet),</li>
-<li>Others excel at efficient feature propagation (e.g., DenseNet),</li>
-<li>And some balance performance with resource efficiency (e.g., EfficientNet).</li>
+<li>Some are better at hierarchical feature extraction (e.g., <code>ResNet</code>),</li>
+<li>Others excel at efficient feature propagation (e.g., <code>DenseNet</code>),</li>
+<li>And some balance performance with resource efficiency (e.g., <code>EfficientNet</code>).</li>
 </ul>
 <p>An ensemble approach leverages these strengths, combining models to create a powerful diagnostic system.</p>
-<hr>
-<h3 id="comparing-top-cnn-architectures"><strong>Comparing Top CNN Architectures</strong></h3>
-<h4 id="1-resnet-residual-networks"><strong>1. ResNet (Residual Networks)</strong></h4>
-<p>ResNet introduced residual connections, allowing for very deep networks by addressing the vanishing gradient problem.</p>
+<h3 id="comparing-top-cnn-architectures">Comparing Top CNN Architectures</h3>
+<ul>
+<li>
+<ol>
+<li><strong>ResNet (Residual Networks):</strong> Introduced residual connections, allowing for very deep networks by addressing the vanishing gradient problem.</li>
+</ol>
+</li>
+</ul>
 <p><strong>Key Features</strong>:</p>
 <ul>
 <li>Residual learning facilitates hierarchical feature extraction.</li>
-<li>ResNet50 and ResNet101 are highly accurate in classifying complex datasets.</li>
+<li><code>ResNet50</code> and <code>ResNet101</code> are highly accurate in classifying complex datasets.</li>
 </ul>
 <p><strong>Performance in Histopathology</strong>:</p>
 <ul>
-<li>ResNet50 showed strong performance in distinguishing benign from malignant tissue, especially for high-resolution images.</li>
+<li>
+<p><code>ResNet50</code> showed strong performance in distinguishing benign from malignant tissue, especially for high-resolution images.</p>
+</li>
+<li>
+<ol start="2">
+<li><strong>DenseNet (Densely Connected Networks):</strong> Connects each layer to every other layer, reducing redundancy and improving efficiency.</li>
+</ol>
+</li>
 </ul>
-<hr>
-<h4 id="2-densenet-densely-connected-networks"><strong>2. DenseNet (Densely Connected Networks)</strong></h4>
-<p>DenseNet connects each layer to every other layer, reducing redundancy and improving efficiency.</p>
 <p><strong>Key Features</strong>:</p>
 <ul>
 <li>Dense feature reuse enables compact but effective models.</li>
-<li>DenseNet201 is particularly adept at detecting subtle differences in histopathological images.</li>
+<li><code>DenseNet201</code> is particularly adept at detecting subtle differences in histopathological images.</li>
 </ul>
 <p><strong>Performance in Histopathology</strong>:</p>
 <ul>
-<li>Effective at identifying rare tumor subtypes and texture-based features.</li>
+<li>
+<p>Found to be very effective at identifying rare tumour subtypes and texture-based features.</p>
+</li>
+<li>
+<ol start="3">
+<li><strong>EfficientNet:</strong> Optimises network depth, width, and resolution simultaneously for better efficiency and scalability.</li>
+</ol>
+</li>
 </ul>
-<hr>
-<h4 id="3-efficientnet"><strong>3. EfficientNet</strong></h4>
-<p>EfficientNet optimizes network depth, width, and resolution simultaneously for better efficiency and scalability.</p>
 <p><strong>Key Features</strong>:</p>
 <ul>
 <li>Highly efficient models with excellent performance on smaller datasets.</li>
-<li>EfficientNetB0 performed particularly well in handling the BreakHis dataset’s limited size.</li>
+<li><code>EfficientNetB0</code> performed particularly well in handling the <code>BreakHis</code> dataset’s limited size.</li>
 </ul>
 <p><strong>Performance in Histopathology</strong>:</p>
 <ul>
 <li>Scalable performance makes it suitable for resource-constrained setups.</li>
 </ul>
-<hr>
-<h3 id="ensemble-learning-combining-the-best"><strong>Ensemble Learning: Combining the Best</strong></h3>
-<p>Rather than selecting one architecture, an ensemble model combines multiple CNNs to improve accuracy and robustness. In your project, <strong>ResNet50</strong>, <strong>DenseNet201</strong>, and <strong>EfficientNetB0</strong> were combined using a <strong>logistic regression meta-model</strong>.</p>
-<h4 id="how-the-ensemble-works"><strong>How the Ensemble Works</strong></h4>
+<h3 id="ensemble-learning-combining-the-best">Ensemble Learning: Combining the Best</h3>
+<p>Rather than selecting one architecture, an ensemble model combines multiple CNNs to improve accuracy and robustness. In this project, <strong>ResNet50</strong>, <strong>DenseNet201</strong>, and <strong>EfficientNetB0</strong> were combined using a <strong>logistic regression meta-model</strong>.</p>
+<p><strong>How the Ensemble Works</strong></p>
 <ol>
-<li><strong>Feature Extraction</strong>:
+<li><em>Feature Extraction</em>:
 <ul>
 <li>Each CNN independently predicts probabilities for benign and malignant classes.</li>
 </ul>
@@ -429,9 +450,6 @@ Using <code>train_test_split</code> with stratification:</p>
 <li>Combines the strengths of each architecture.</li>
 <li>Mitigates individual model weaknesses (e.g., sensitivity vs. specificity trade-offs).</li>
 </ul>
-<hr>
-<h3 id="results-ensemble-vs-individual-models"><strong>Results: Ensemble vs. Individual Models</strong></h3>
-<h4 id="dataset-breakhis-breast-cancer-histopathology-dataset"><strong>Dataset</strong>: BreakHis (breast cancer histopathology dataset)</h4>
 <p><strong>Performance Metrics</strong>:</p>
 <table>
   <thead>
@@ -475,9 +493,9 @@ Using <code>train_test_split</code> with stratification:</p>
   </tbody>
 </table>
 <hr>
-<h3 id="advantages-of-ensembles-in-histopathology"><strong>Advantages of Ensembles in Histopathology</strong></h3>
+<h4 id="advantages-of-ensembles-in-histopathology"><strong>Advantages of Ensembles in Histopathology</strong></h4>
 <ol>
-<li><strong>Improved Generalization</strong>:
+<li><strong>Improved Generalisation</strong>:
 <ul>
 <li>Ensembles combine diverse predictions, reducing overfitting and variance.</li>
 </ul>
@@ -493,45 +511,33 @@ Using <code>train_test_split</code> with stratification:</p>
 </ul>
 </li>
 </ol>
-<hr>
-<h3 id="case-study-breast-cancer-detection"><strong>Case Study: Breast Cancer Detection</strong></h3>
-<p>In your project, the ensemble model significantly outperformed individual CNN architectures:</p>
+<h4 id="case-study-breast-cancer-detection"><strong>Case Study: Breast Cancer Detection</strong></h4>
+<p>In this project, the ensemble model significantly outperformed individual CNN architectures:</p>
 <ul>
-<li><strong>Sensitivity</strong> for detecting benign samples improved dramatically, addressing the class imbalance issue.</li>
-<li><strong>Specificity</strong> and <strong>F1-score</strong> surpassed benchmarks set by individual models.</li>
+<li><em>Sensitivity</em> for detecting benign samples improved, addressing the class imbalance issue.</li>
+<li><em>Specificity</em> and <em>F1-score</em> surpassed benchmarks set by individual models.</li>
 </ul>
-<p><strong>Visualization Ideas</strong>:</p>
-<ul>
-<li><strong>ROC Curves</strong>: Show ROC curves for ResNet, DenseNet, EfficientNet, and the ensemble to highlight AUC improvements.</li>
-<li><strong>Confusion Matrices</strong>: Compare confusion matrices to visualize better detection rates for the ensemble model.</li>
-</ul>
-<hr>
-<h3 id="conclusion-1"><strong>Conclusion</strong></h3>
-<p>Choosing the best CNN architecture for breast cancer detection depends on the dataset and requirements. While ResNet excels at hierarchical feature learning, DenseNet propagates features efficiently, and EfficientNet balances performance and resources. Combining them through an ensemble approach with a logistic regression meta-model provides the best results, improving accuracy, sensitivity, and specificity. This ensemble strategy represents a robust solution for leveraging AI in histopathology, paving the way for reliable and precise diagnostics.</p>
-<h1 id="part-4-boosting-ai-performance-data-augmentation-for-histopathological-imaging">Part 4. Boosting AI Performance: Data Augmentation for Histopathological Imaging.</h1>
-<h3 id="introduction-2">Introduction</h3>
-<h3 id="boosting-ai-performance-data-augmentation-for-histopathological-imaging"><strong>Boosting AI Performance: Data Augmentation for Histopathological Imaging</strong></h3>
-<p>In medical imaging, especially in histopathology, deep learning models often face challenges such as limited datasets and class imbalances. These limitations can hinder the performance of models and their generalization to new data. A powerful technique to overcome these issues is <strong>data augmentation</strong>—synthetically increasing the size and diversity of the training data. In this blog, we’ll dive into how data augmentation techniques like flipping, rotation, and scaling can enhance deep learning models for medical imaging.</p>
-<hr>
+<h3 id="summary-1">Summary</h3>
+<p>Choosing the best CNN architecture for breast cancer detection depends on the dataset and requirements. While <code>ResNet</code> excels at hierarchical feature learning, <code>DenseNet</code> propagates features efficiently, and <code>EfficientNet</code> balances performance and resources. Combining them through an ensemble approach with a logistic regression meta-model provides the best results, improving accuracy, sensitivity, and specificity. This ensemble strategy represents a robust solution for leveraging AI in histopathology, paving the way for reliable and precise diagnostics.</p>
+<h1 id="part-4-boosting-ai-performance-data-augmentation-for-histopathological-imaging">Part 4. Boosting AI Performance: Data Augmentation for Histopathological Imaging</h1>
+<p>In medical imaging, especially in histopathology, DL models often face challenges such as limited datasets and class imbalances. These limitations can hinder the performance of models and their generalization to new data. A powerful technique to overcome these issues is <strong>data augmentation (DA)</strong>—synthetically increasing the size and diversity of the training data. In this part, we’ll dive into how DA techniques like flipping, rotation, and scaling can enhance DL models for medical imaging.</p>
 <h3 id="challenges-in-histopathological-imaging"><strong>Challenges in Histopathological Imaging</strong></h3>
 <ol>
-<li><strong>Data Scarcity</strong>: Medical imaging datasets are often small due to the difficulty of collecting labeled data.</li>
+<li><strong>Data Scarcity</strong>: Medical imaging datasets are often small due to the difficulty of collecting labelled data.</li>
 <li><strong>Class Imbalance</strong>: Some categories, like rare cancer types, are underrepresented in datasets.</li>
-<li><strong>Overfitting</strong>: Models trained on small datasets can memorize rather than generalize, leading to poor performance on unseen data.</li>
+<li><strong>Overfitting</strong>: Models trained on small datasets can memorise rather than generalise, leading to poor performance on unseen data.</li>
 </ol>
-<p>Data augmentation addresses these challenges by artificially expanding the dataset and introducing variations that simulate real-world scenarios.</p>
-<hr>
-<h3 id="data-augmentation-the-key-techniques"><strong>Data Augmentation: The Key Techniques</strong></h3>
-<p>Data augmentation involves applying transformations to images, creating variations while preserving their labels. Common techniques include:</p>
+<p>DA addresses these challenges by artificially expanding the dataset and introducing variations that simulate real-world scenarios.</p>
+<h3 id="data-augmentation-the-key-techniques">Data Augmentation: The Key Techniques</h3>
+<p>DA involves applying transformations to images, creating variations while preserving their labels. Common techniques include:</p>
 <ol>
-<li><strong>Flipping</strong>: Horizontal and vertical flips simulate different orientations.</li>
-<li><strong>Rotation</strong>: Rotating images at random angles helps models handle rotation-invariant features.</li>
-<li><strong>Scaling</strong>: Zooming in or out mimics variations in magnification.</li>
-<li><strong>Shearing</strong>: Distorting images at angles introduces diverse perspectives.</li>
-<li><strong>Color Jittering</strong>: Altering brightness, contrast, or saturation expands color-based variations.</li>
+<li><em>Flipping</em>: Horizontal and vertical flips simulate different orientations.</li>
+<li><em>Rotation</em>: Rotating images at random angles helps models handle rotation-invariant features.</li>
+<li><em>Scaling</em>: Zooming in or out mimics variations in magnification.</li>
+<li><em>Shearing</em>: Distorting images at angles introduces diverse perspectives.</li>
+<li><em>Colour Jittering</em>: Altering brightness, contrast, or saturation expands colr-based variations.</li>
 </ol>
-<p><strong>Code Example</strong>:
-Using TensorFlow’s <code>ImageDataGenerator</code> for data augmentation:</p>
+<p>For DA, I used <code>TensorFlow</code>’s <code>ImageDataGenerator</code>n:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
@@ -546,10 +552,8 @@ Using TensorFlow’s <code>ImageDataGenerator</code> for data augmentation:</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate augmented images</span>
 </span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(x_train, y_train, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
-</span></span></code></pre></div><hr>
-<h3 id="augmentation-in-action-training-with-resnet50"><strong>Augmentation in Action: Training with ResNet50</strong></h3>
-<h4 id="building-the-model"><strong>Building the Model</strong></h4>
-<p>A ResNet50 model is used as the backbone, extended with additional layers for binary classification (e.g., cancer detection).</p>
+</span></span></code></pre></div><h3 id="architecture">Architecture</h3>
+<p>I used <code>ResNet50</code> model as the backbone, and extended with additional layers for binary classification (e.g., cancer detection).</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> ResNet50
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Dropout, Flatten
@@ -562,8 +566,7 @@ Using TensorFlow’s <code>ImageDataGenerator</code> for data augmentation:</p>
 </span></span><span style="display:flex;"><span>    model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.5</span>))
 </span></span><span style="display:flex;"><span>    model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>))
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> model
-</span></span></code></pre></div><h4 id="training-with-augmented-data"><strong>Training with Augmented Data</strong></h4>
-<p>The model is trained using augmented data to improve generalization.</p>
+</span></span></code></pre></div><h4 id="training">Training</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>early_stop <span style="color:#f92672">=</span> EarlyStopping(monitor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;val_loss&#39;</span>, patience<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
 </span></span><span style="display:flex;"><span>reduce_lr <span style="color:#f92672">=</span> ReduceLROnPlateau(monitor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;val_loss&#39;</span>, factor<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, patience<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
 </span></span><span style="display:flex;"><span>
@@ -574,16 +577,21 @@ Using TensorFlow’s <code>ImageDataGenerator</code> for data augmentation:</p>
 </span></span><span style="display:flex;"><span>    validation_data<span style="color:#f92672">=</span>val_generator,
 </span></span><span style="display:flex;"><span>    callbacks<span style="color:#f92672">=</span>[early_stop, reduce_lr]
 </span></span><span style="display:flex;"><span>)
-</span></span></code></pre></div><hr>
-<h3 id="impact-of-data-augmentation"><strong>Impact of Data Augmentation</strong></h3>
-<h4 id="1-increased-dataset-diversity"><strong>1. Increased Dataset Diversity</strong></h4>
-<p>Data augmentation artificially expands the dataset size, introducing variations that the model can learn to handle.</p>
-<p><strong>Visualization</strong>:<br>
-<em>Show original and augmented versions of a histopathological image.</em><br>
-Include examples with rotations, flips, and zooms.</p>
-<hr>
-<h4 id="2-improved-generalization"><strong>2. Improved Generalization</strong></h4>
-<p>By learning from diverse augmented data, the model performs better on unseen data, reducing overfitting.</p>
+</span></span></code></pre></div><h4 id="impact-of-data-augmentation">Impact of Data Augmentation</h4>
+<ul>
+<li>
+<ol>
+<li><em>Increased Dataset Diversity:</em>
+DA artificially expands the dataset size, introducing variations that the model can learn to handle.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><em>Improved Generalisation:</em>
+By learning from diverse DA, the model performed better on unseen data, reducing overfitting.</li>
+</ol>
+</li>
+</ul>
 <p><strong>Results</strong>:</p>
 <table>
   <thead>
@@ -611,9 +619,14 @@ Include examples with rotations, flips, and zooms.</p>
       </tr>
   </tbody>
 </table>
-<hr>
-<h4 id="3-addressing-class-imbalances"><strong>3. Addressing Class Imbalances</strong></h4>
-<p>Augmentation can balance underrepresented classes by applying transformations more frequently to minority class samples.</p>
+<ul>
+<li>
+<ol start="3">
+<li><em>Addressing Class Imbalances:</em>
+Augmentation can balance underrepresented classes by applying transformations more frequently to minority class samples.</li>
+</ol>
+</li>
+</ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen_minority <span style="color:#f92672">=</span> ImageDataGenerator(
 </span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
 </span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>,
@@ -621,18 +634,14 @@ Include examples with rotations, flips, and zooms.</p>
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>minority_class_images <span style="color:#f92672">=</span> datagen_minority<span style="color:#f92672">.</span>flow(minority_images, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
-</span></span></code></pre></div><p><strong>Visualization</strong>:
-<em>Illustrate the effect of class-specific augmentation on dataset balance.</em></p>
-<hr>
-<h3 id="best-practices-for-medical-data-augmentation"><strong>Best Practices for Medical Data Augmentation</strong></h3>
+</span></span></code></pre></div><h4 id="best-practices-for-medical-data-augmentation">Best Practices for Medical Data Augmentation</h4>
 <ol>
-<li><strong>Domain Knowledge</strong>: Tailor augmentations to reflect real-world variability (e.g., rotations for tissue samples).</li>
-<li><strong>Avoid Over-Augmentation</strong>: Excessive transformations can distort the data and degrade performance.</li>
-<li><strong>Combine with Preprocessing</strong>: Apply augmentations alongside preprocessing steps like normalization.</li>
+<li><em>Domain Knowledge</em>: Tailor augmentations to reflect real-world variability (e.g., rotations for tissue samples).</li>
+<li><em>Avoid Over-Augmentation</em>: Excessive transformations can distort the data and degrade performance.</li>
+<li><em>Combine with Pre-processing</em>: Apply augmentations alongside pre-processing steps like normalisation.</li>
 </ol>
-<hr>
-<h3 id="conclusion-2"><strong>Conclusion</strong></h3>
-<p>Data augmentation is a powerful strategy for boosting the performance of deep learning models in histopathological imaging. By simulating real-world variations, it addresses data scarcity, class imbalance, and overfitting, enabling more robust and generalizable AI systems. Incorporating augmentation into your workflow is an essential step toward building effective and trustworthy models for medical imaging.</p>
+<h4 id="summary-2">Summary</h4>
+<p>DA is a powerful strategy for boosting the performance of DL models in histopathological imaging. By simulating real-world variations, it addresses data scarcity, class imbalance, and overfitting, enabling more robust and generalisable AI systems. Incorporating augmentation into your workflow is an essential step toward building effective and trustworthy models for medical imaging.</p>
 </div>
   </article>
 
