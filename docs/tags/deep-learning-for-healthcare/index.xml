@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep Learning for Healthcare on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/deep-learning-for-healthcare/</link>
+    <description>Recent content in Deep Learning for Healthcare on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/deep-learning-for-healthcare/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Beyond Accuracy: Feature Insights and Deployment of AI in Breast Cancer Care</title>
+      <link>https://drnsmith.github.io/projects/beyond-accuracy-feature-insights-and-deployment-of-ai-in-breast-cancer-care/</link>
+      <pubDate>Sat, 22 Mar 2025 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/beyond-accuracy-feature-insights-and-deployment-of-ai-in-breast-cancer-care/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project16_images/pr16.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith//Histopathology-AI-BreastCancer&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-unveiling-hidden-patterns-feature-extraction-with-pre-trained-cnns&#34;&gt;Part 1. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs&lt;/h1&gt;&#xA;&lt;p&gt;Medical imaging has revolutionised diagnostics, giving clinicians unprecedented insight into disease. But its real power emerges when paired with ML — especially DL models capable of uncovering patterns invisible to the human eye. In this post, we explore how three state-of-the-art CNNs — &lt;strong&gt;ResNet50&lt;/strong&gt;, &lt;strong&gt;EfficientNetB0&lt;/strong&gt;, and &lt;strong&gt;DenseNet201&lt;/strong&gt; — can be repurposed as feature extractors for breast cancer histopathology. Using the &lt;code&gt;BreakHis&lt;/code&gt; dataset, I demonstrate how these models enable advanced clustering, statistical analysis, and deeper diagnostic insight.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

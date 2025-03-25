@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Pre-Processing on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/data-pre-processing/</link>
+    <description>Recent content in Data Pre-Processing on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Jun 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/data-pre-processing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mastering Deep Learning for Medical Imaging: From Custom CNNs to Full Pipelines</title>
+      <link>https://drnsmith.github.io/projects/mastering-deep-learning-for-medical-imaging-from-custom-cnns-to-full-pipelines/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/mastering-deep-learning-for-medical-imaging-from-custom-cnns-to-full-pipelines/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-building-custom-cnn-architectures-from-scratch-to-mastery&#34;&gt;Part 1. Building Custom CNN Architectures: From Scratch to Mastery&lt;/h1&gt;&#xA;&lt;p&gt;Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous. But while pre-trained models like &lt;strong&gt;ResNet&lt;/strong&gt; and &lt;strong&gt;EfficientNet&lt;/strong&gt; are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch. In this part, I’ll explain how to construct a custom CNN tailored for binary classification tasks.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI in Histopathology: Enhancing Medical Image Analysis with Deep Learning</title>
+      <link>https://drnsmith.github.io/projects/ai-in-histopathology-enhancing-medical-image-analysis-with-deep-learning/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/ai-in-histopathology-enhancing-medical-image-analysis-with-deep-learning/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project10_images/pr10.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/ColourNorm-Histopathology-DeepLearning&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-enhancing-medical-image-consistency-colour-normalisation-techniques-for-histopathology&#34;&gt;Part 1. Enhancing Medical Image Consistency: Colour Normalisation Techniques for Histopathology&lt;/h1&gt;&#xA;&lt;p&gt;Histopathology, the microscopic study of tissue to detect diseases like cancer, heavily relies on stained images. However, variations in staining protocols, imaging devices, and lighting conditions can introduce inconsistencies, which pose a challenge for machine learning (ML) models. Colour normalisation (CN) is a pre-processing step that standardises these images, ensuring consistency and enabling ML models to focus on disease-relevant features like cell shapes and abnormal structures.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications</title>
+      <link>https://drnsmith.github.io/projects/project11/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project11/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cancer Detection in Histopathology: The Role of Colour Normalisation in Model Calibration and Performance</title>
+      <link>https://drnsmith.github.io/projects/project10/</link>
+      <pubDate>Fri, 12 May 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project10/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

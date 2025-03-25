@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Deep Learning for Air Quality Prediction: From Data Cleaning to LSTMs. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This project explores the power of machine learning and deep learning in predicting air pollution levels. It begins with data cleaning techniques to handle missing values and outliers, followed by feature engineering to extract key predictors of PM10 concentrations. The study evaluates regression models and progresses to advanced neural networks, including Multi-Layer Perceptrons (MLP) and Long Short-Term Memory (LSTM) networks, for time-series forecasting. A final comparison of models highlights their strengths and real-world applicability in environmental policy and urban health initiatives.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project9_images/pr9.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Deep Learning for Air Quality Prediction: From Data Cleaning to LSTMs.
+          </h1>
+          
+            <p class="f5">This project explores the power of machine learning and deep learning in predicting air pollution levels. It begins with data cleaning techniques to handle missing values and outliers, followed by feature engineering to extract key predictors of PM10 concentrations. The study evaluates regression models and progresses to advanced neural networks, including Multi-Layer Perceptrons (MLP) and Long Short-Term Memory (LSTM) networks, for time-series forecasting. A final comparison of models highlights their strengths and real-world applicability in environmental policy and urban health initiatives.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project9_images/pr9.jpg"
+    alt="Photo by Markus Distelrath on Pexels"><figcaption>
+      <p>Photo by Markus Distelrath on Pexels</p>
+    </figcaption>
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Pollution-Prediction-Auckland" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-the-importance-of-data-cleaning-in-environmental-analysis">Part 1. The Importance of Data Cleaning in Environmental Analysis</h1>
+<p>Data is often called the backbone of ML, but in the real world, data is rarely clean or ready for use. This is especially true for environmental data, where missing values, outliers, and inconsistencies are common. When predicting PM10 pollution levels in Auckland (NZ), the first challenge wasn’t building a model but cleaning the data. Imagine trying to build a house with warped bricks and missing mortar. Without proper cleaning, even the best models would struggle to produce meaningful results. In this part, I&rsquo;ll explore the messy reality of working with air quality data and the critical role data cleaning played in this project.</p>
+<h3 id="the-challenges-of-messy-data">The Challenges of Messy Data</h3>
+<p>Real-world environmental data comes with inherent complexities:</p>
+<ul>
+<li><em>Missing Values</em>: Monitoring stations often fail to record data consistently due to sensor malfunctions or maintenance issues.</li>
+<li><em>Negative Values</em>: Some datasets included nonsensical negative readings for PM10, likely due to equipment errors.</li>
+<li><em>Outliers</em>: Extreme pollution spikes appeared in the data. Were they genuine events, like fires, or sensor glitches?</li>
+<li><em>Temporal Misalignment</em>: Different datasets (e.g., air quality, weather, traffic) used varied time intervals, making integration difficult.</li>
+</ul>
+<p>Dirty data can lead to inaccurate predictions, misleading insights, and a loss of trust in AI-driven solutions. Cleaning the data wasn’t just a preliminary step—it was a cornerstone of the project’s success.</p>
+<h3 id="the-data-cleaning-process">The Data Cleaning Process</h3>
+<p><strong>Handling Missing Values:</strong> Missing data is common in environmental datasets. For this project here what we did:</p>
+<ul>
+<li><em>Interpolation</em>: Missing PM10 values were filled using linear interpolation, which estimates a value based on neighbouring data points.</li>
+<li><em>Seasonal Averages</em>: For larger gaps, we replaced missing data with seasonal averages to retain temporal trends.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Filling missing values using interpolation</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>interpolate(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;linear&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Replacing large gaps with seasonal averages</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>fillna(data<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Month&#39;</span>)[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>transform(<span style="color:#e6db74">&#39;mean&#39;</span>))
+</span></span></code></pre></div><p><strong>Removing Negative Values:</strong> Negative PM10 readings, which are physically impossible, were flagged and removed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Removing negative PM10 values</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data[data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><p><strong>Identifying and Handling Outliers</strong>: Outliers were identified using the <code>Interquartile Range (IQR)</code> method. Genuine pollution spikes were retained, while anomalies were excluded.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Identifying outliers using IQR</span>
+</span></span><span style="display:flex;"><span>Q1 <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>quantile(<span style="color:#ae81ff">0.25</span>)
+</span></span><span style="display:flex;"><span>Q3 <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>quantile(<span style="color:#ae81ff">0.75</span>)
+</span></span><span style="display:flex;"><span>IQR <span style="color:#f92672">=</span> Q3 <span style="color:#f92672">-</span> Q1
+</span></span><span style="display:flex;"><span>lower_bound <span style="color:#f92672">=</span> Q1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1.5</span> <span style="color:#f92672">*</span> IQR
+</span></span><span style="display:flex;"><span>upper_bound <span style="color:#f92672">=</span> Q3 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.5</span> <span style="color:#f92672">*</span> IQR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filtering out anomalies</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data[(data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&gt;=</span> lower_bound) <span style="color:#f92672">&amp;</span> (data[<span style="color:#e6db74">&#39;PM10&#39;</span>] <span style="color:#f92672">&lt;=</span> upper_bound)]
+</span></span></code></pre></div><p><strong>Aligning Temporal Data</strong>: Air quality data was recorded hourly, while traffic and weather data were recorded at different intervals. To unify these datasets, we resampled them to a common hourly frequency.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Re-sampling traffic and weather data to match PM10 data</span>
+</span></span><span style="display:flex;"><span>traffic_data <span style="color:#f92672">=</span> traffic_data<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;H&#39;</span>)<span style="color:#f92672">.</span>mean()
+</span></span><span style="display:flex;"><span>weather_data <span style="color:#f92672">=</span> weather_data<span style="color:#f92672">.</span>resample(<span style="color:#e6db74">&#39;H&#39;</span>)<span style="color:#f92672">.</span>mean()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Merging datasets on timestamp</span>
+</span></span><span style="display:flex;"><span>merged_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(pm10_data, traffic_data, how<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;inner&#39;</span>, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Timestamp&#39;</span>)
+</span></span><span style="display:flex;"><span>merged_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(merged_data, weather_data, how<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;inner&#39;</span>, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Timestamp&#39;</span>)
+</span></span></code></pre></div><h3 id="visualising-the-cleaned-data">Visualising the Cleaned Data</h3>
+<p>Data cleaning isn’t just about numbers; visualisations help verify the results. For example:</p>
+<ul>
+<li><strong>Time-Series Plots</strong>: Highlighted gaps before and after interpolation.</li>
+<li><strong>Boxplots</strong>: Identified outliers and confirmed their removal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualising PM10 levels before and after cleaning</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(raw_data[<span style="color:#e6db74">&#39;PM10&#39;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Raw Data&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.6</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(cleaned_data[<span style="color:#e6db74">&#39;PM10&#39;</span>], label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Cleaned Data&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;PM10 Levels: Before vs. After Cleaning&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Time&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;PM10 Concentration&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><figure><img src="/images/plot_box.png">
+</figure>
+
+<h3 id="reflections-on-the-data-cleaning-process">Reflections on the Data Cleaning Process</h3>
+<p><strong>Lessons Learned</strong></p>
+<ul>
+<li><em>Cleaning is Iterative</em>: There’s no one-size-fits-all method; each dataset presented unique challenges.</li>
+<li><em>Context Matters</em>: Understanding the environmental and technical context (e.g., sensor behaviour) was crucial for making informed decisions.</li>
+<li><em>Quality Over Quantity</em>: Sacrificing some data (e.g., excluding large gaps) was better than compromising accuracy.</li>
+</ul>
+<p><strong>Challenges Faced</strong></p>
+<ul>
+<li><em>Judgment Calls</em>: Deciding whether an outlier was genuine or an anomaly required careful analysis.</li>
+<li><em>Time-Intensity</em>: Cleaning the data took longer than anticipated but was essential for downstream modeling.</li>
+</ul>
+<h4 id="summary-laying-the-foundation-for-success">Summary: Laying the Foundation for Success</h4>
+<p>Without clean data, even the most advanced ML models fail to deliver reliable predictions. The cleaning process transformed raw, messy inputs into a structured, usable dataset, setting the stage for accurate and actionable insights. Data cleaning isn’t glamorous, but it’s the unsung hero of any successful ML project. By addressing missing values, outliers, and temporal misalignment, we built a solid foundation for predicting PM10 levels in Auckland.</p>
+<h1 id="part-2-understanding-the-predictors-of-air-pollution">Part 2. Understanding the Predictors of Air Pollution</h1>
+<p>What makes air pollution worse? Is it just traffic, or does the weather play a role too? Predicting air quality isn’t just about using machine learning (ML)—it’s about understanding the variables that drive pollution levels. In this part, I dive into the heart of the Auckland PM10 prediction project: <strong>feature selection</strong>. From traffic patterns to weather variables, I&rsquo;ll explore the key predictors of air pollution and how they were prepared to train ML models.</p>
+<h3 id="1-why-feature-selection-matters">1. Why Feature Selection Matters</h3>
+<p>ML models rely on features—the independent variables that explain or predict the outcome. Selecting the right features is crucial because:</p>
+<ul>
+<li><em>Irrelevant Features</em>: Adding unnecessary variables can confuse the model and reduce accuracy.</li>
+<li><em>Multicollinearity</em>: Highly correlated variables can distort model interpretations.</li>
+<li><em>Data Overhead</em>: Too many features increase computational costs and risk overfitting.</li>
+</ul>
+<p>For this project, we identified and engineered features that influence PM10 pollution in Auckland.</p>
+<h3 id="2-key-predictors-of-pm10-pollution">2. Key Predictors of PM10 Pollution</h3>
+<h4 id="traffic-volume">Traffic Volume</h4>
+<p>Traffic is a major contributor to air pollution, especially in urban areas. Vehicle emissions release PM10 directly into the air. Traffic volume data from Auckland’s highways was integrated into the dataset as a leading feature.</p>
+<h4 id="weather-variables">Weather Variables</h4>
+<p>Weather has a significant impact on pollution levels:</p>
+<ul>
+<li><em>Wind Speed</em>: Disperses pollutants, lowering PM10 concentrations.</li>
+<li><em>Temperature</em>: Affects chemical reactions in the atmosphere, influencing pollution levels.</li>
+<li><em>Humidity</em>: Can trap particulate matter closer to the ground, increasing PM10 levels.</li>
+<li><em>Precipitation</em>: Cleanses the air by washing pollutants away.</li>
+</ul>
+<h4 id="time-features">Time Features</h4>
+<p>Pollution levels follow temporal patterns:</p>
+<ul>
+<li><em>Hour of the Day</em>: Morning and evening rush hours typically see spikes in PM10.</li>
+<li><em>Day of the Week</em>: Weekends may have lower traffic and, consequently, less pollution.</li>
+<li><em>Season</em>: Winter often shows higher pollution levels due to stagnant air and increased heating emissions.</li>
+</ul>
+<h4 id="lagged-pm10-values">Lagged PM10 Values</h4>
+<p>Past PM10 values were used as lagged predictors, capturing temporal dependencies in pollution trends.</p>
+<h3 id="3-feature-engineering">3. Feature Engineering</h3>
+<p>Feature engineering bridges raw data and machine learning models. For this project, it involved:</p>
+<ul>
+<li><em>Creating Lagged Variables</em>: To capture temporal trends, lagged PM10 values were added for 1-hour, 2-hour, and 24-hour delays.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Adding lagged PM10 values</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_lag_1&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>shift(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_lag_24&#39;</span>] <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;PM10&#39;</span>]<span style="color:#f92672">.</span>shift(<span style="color:#ae81ff">24</span>)
+</span></span></code></pre></div><ul>
+<li><em>Encoding Time Variables</em>: Hour, day, and season were encoded as categorical variables for use in regression and neural network models.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Encoding time features</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Hour_sin&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;Hour&#39;</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">24</span>)
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;Hour_cos&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cos(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> data[<span style="color:#e6db74">&#39;Hour&#39;</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">24</span>)
+</span></span></code></pre></div><ul>
+<li><em>Handling Correlations</em>: To address multicollinearity, highly correlated features were flagged, and a few were removed based on their   <code>variance inflation factor (VIF)</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> statsmodels.stats.outliers_influence <span style="color:#f92672">import</span> variance_inflation_factor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculating VIF</span>
+</span></span><span style="display:flex;"><span>vif_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
+</span></span><span style="display:flex;"><span>vif_data[<span style="color:#e6db74">&#34;feature&#34;</span>] <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>columns
+</span></span><span style="display:flex;"><span>vif_data[<span style="color:#e6db74">&#34;VIF&#34;</span>] <span style="color:#f92672">=</span> [variance_inflation_factor(data<span style="color:#f92672">.</span>values, i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(data<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>])]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(vif_data)
+</span></span></code></pre></div><ul>
+<li><em>Transformations</em>: PM10 values were log-transformed to reduce skewness and stabilise variance.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Log transformation</span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#e6db74">&#39;PM10_log&#39;</span>] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>log1p(data[<span style="color:#e6db74">&#39;PM10&#39;</span>])
+</span></span></code></pre></div><h3 id="4-correlations-and-initial-observations">4. Correlations and Initial Observations</h3>
+<p>Visualising correlations provided valuable insights into the relationships between variables:</p>
+<ul>
+<li><em>PM10 vs. Traffic Volume</em>: A positive correlation indicated that more traffic led to higher PM10 levels.</li>
+<li><em>PM10 vs. Wind Speed</em>: A negative correlation confirmed wind’s role in dispersing pollutants.</li>
+<li><em>Seasonality</em>: Pollution levels were higher in winter months, correlating with stagnant air conditions.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Correlation heatmap</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>heatmap(data<span style="color:#f92672">.</span>corr(), annot<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;coolwarm&#39;</span>, fmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.2f&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Correlation Heatmap&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><figure><img src="/images/project9_images/heat_map.png">
+</figure>
+
+<h3 id="5-feature-selection-for-model-training">5. Feature Selection for Model Training</h3>
+<p>After engineering and analysing features, we selected the following predictors for model training:</p>
+<ul>
+<li><em>Traffic Variables</em>: Traffic volume and congestion metrics.</li>
+<li><em>Weather Features</em>: Wind speed, temperature, and humidity.</li>
+<li><em>Temporal Features</em>: Encoded hour, day, and season.</li>
+<li><em>Lagged PM10 Values</em>: 1-hour and 24-hour delays.</li>
+</ul>
+<p>Why These Features?</p>
+<ul>
+<li><em>Predictive Power</em>: Each variable contributed significantly to explaining PM10 variability.</li>
+<li><em>Interpretability</em>: The selected features offered actionable insights for stakeholders.</li>
+</ul>
+<h3 id="6-reflections-on-feature-engineering">6. Reflections on Feature Engineering</h3>
+<p><strong>Lessons Learned:</strong></p>
+<ul>
+<li><em>Feature Engineering is Iterative</em>: Adding lagged values and encoded time variables significantly improved model accuracy.</li>
+<li><em>Context is Key</em>: Understanding the environmental factors behind the data ensured meaningful feature selection.</li>
+</ul>
+<p><strong>Challenges Faced:</strong></p>
+<ul>
+<li><em>Multicollinearity</em>: Balancing the inclusion of highly correlated weather features required careful judgment.</li>
+<li><em>Data Transformations</em>: Deciding when and how to transform variables, like applying logarithms to PM10, required trial and error.</li>
+</ul>
+<h4 id="summary-laying-the-groundwork-for-accurate-predictions">Summary: Laying the Groundwork for Accurate Predictions</h4>
+<p>The predictors of air pollution are as complex as the phenomenon itself. By engineering meaningful features and understanding their relationships, we laid the groundwork for building effective ML models.</p>
+<h1 id="part-3-regression-models-for-pollution-prediction">Part 3. Regression Models for Pollution Prediction</h1>
+<p>Regression models form the backbone of many predictive analytics projects. They are simple yet powerful tools for understanding relationships between variables and forecasting outcomes. In this part, I’ll explore how regression models were used to predict PM10 pollution levels in Auckland, their strengths and limitations, and how they provided valuable insights into air quality trends.</p>
+<h3 id="1-why-regression-models">1. Why Regression Models?</h3>
+<p>Regression models are often the first step in predictive analysis because:</p>
+<ul>
+<li><em>Simplicity</em>: They are easy to implement and interpret.</li>
+<li><em>Baseline Performance</em>: They establish a benchmark for more complex models.</li>
+<li><em>Insights</em>: Regression models identify which predictors have the most significant impact on the target variable.</li>
+</ul>
+<p>In this project, we tested multiple regression models, each tailored to address specific challenges in the dataset.</p>
+<h3 id="2-models-explored">2. Models Explored</h3>
+<h4 id="ordinary-least-squares-ols-regression">Ordinary Least Squares (OLS) Regression</h4>
+<p>OLS regression minimises the sum of squared differences between the observed and predicted PM10 values. It provides a baseline for understanding the linear relationships between predictors and PM10 levels.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LinearRegression
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train OLS regression model</span>
+</span></span><span style="display:flex;"><span>ols_model <span style="color:#f92672">=</span> LinearRegression()
+</span></span><span style="display:flex;"><span>ols_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate the model</span>
+</span></span><span style="display:flex;"><span>ols_predictions <span style="color:#f92672">=</span> ols_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_ols <span style="color:#f92672">=</span> mean_squared_error(y_test, ols_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;OLS Regression RMSE: </span><span style="color:#e6db74">{</span>rmse_ols<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="ridge-regression">Ridge Regression</h4>
+<p>Ridge regression adds a penalty term to the OLS objective function to reduce over-fitting, especially when predictors are highly correlated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> Ridge
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train Ridge regression model</span>
+</span></span><span style="display:flex;"><span>ridge_model <span style="color:#f92672">=</span> Ridge(alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>ridge_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate the model</span>
+</span></span><span style="display:flex;"><span>ridge_predictions <span style="color:#f92672">=</span> ridge_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_ridge <span style="color:#f92672">=</span> mean_squared_error(y_test, ridge_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Ridge Regression RMSE: </span><span style="color:#e6db74">{</span>rmse_ridge<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="weighted-least-squares-wls-regression">Weighted Least Squares (WLS) Regression</h4>
+<p>WLS regression accounts for heteroscedasticity (non-constant variance in errors) by assigning weights to observations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> statsmodels.api <span style="color:#66d9ef">as</span> sm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train WLS regression model</span>
+</span></span><span style="display:flex;"><span>weights <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (X_train<span style="color:#f92672">.</span>var(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))  <span style="color:#75715e"># Example of weighting</span>
+</span></span><span style="display:flex;"><span>wls_model <span style="color:#f92672">=</span> sm<span style="color:#f92672">.</span>WLS(y_train, X_train, weights<span style="color:#f92672">=</span>weights)<span style="color:#f92672">.</span>fit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate the model</span>
+</span></span><span style="display:flex;"><span>wls_predictions <span style="color:#f92672">=</span> wls_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_wls <span style="color:#f92672">=</span> mean_squared_error(y_test, wls_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;WLS Regression RMSE: </span><span style="color:#e6db74">{</span>rmse_wls<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="3-feature-selection-for-regression-and-evaluation-metrics">3. Feature Selection for Regression and Evaluation Metrics</h3>
+<p>Feature selection played a crucial role in improving model performance:</p>
+<ul>
+<li>Lagged PM10 Values: Past PM10 levels provided temporal context.</li>
+<li>Weather Variables: Wind speed and temperature had significant predictive power.</li>
+<li>Traffic Volume: A key driver of PM10 pollution in urban areas.</li>
+</ul>
+<p>Using correlation analysis and feature importance scores, we refined the set of predictors for each model.</p>
+<p>Regression models were evaluated using:</p>
+<ul>
+<li><strong>Root Mean Squared Error (RMSE)</strong>: Measures the average magnitude of prediction errors.</li>
+<li><strong>Mean Absolute Error (MAE)</strong>: Indicates the average absolute error between predicted and observed values.</li>
+<li><strong>R-Squared</strong>: Explains the proportion of variance in PM10 levels captured by the model.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> mean_squared_error, mean_absolute_error, r2_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate model performance</span>
+</span></span><span style="display:flex;"><span>rmse <span style="color:#f92672">=</span> mean_squared_error(y_test, predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>mae <span style="color:#f92672">=</span> mean_absolute_error(y_test, predictions)
+</span></span><span style="display:flex;"><span>r2 <span style="color:#f92672">=</span> r2_score(y_test, predictions)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;RMSE: </span><span style="color:#e6db74">{</span>rmse<span style="color:#e6db74">}</span><span style="color:#e6db74">, MAE: </span><span style="color:#e6db74">{</span>mae<span style="color:#e6db74">}</span><span style="color:#e6db74">, R-Squared: </span><span style="color:#e6db74">{</span>r2<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p><strong>Key Insights</strong></p>
+<ul>
+<li><em>Importance of Traffic and Weather</em>:
+Regression models consistently highlighted the importance of traffic volume and wind speed. For example:</li>
+</ul>
+<p>&ndash; Higher traffic volume correlated with increased PM10 levels.
+&ndash; High wind speeds dispersed pollutants, reducing PM10 concentrations.</p>
+<ul>
+<li>
+<p><em>Strengths of Ridge Regression</em>:
+Ridge regression performed better than OLS when predictors were correlated, such as temperature and wind speed.</p>
+</li>
+<li>
+<p><em>Limitations of Regression Models</em>:
+&ndash; Non-Linearity: Regression models struggled to capture complex relationships in the data.
+&ndash; Sequential Dependencies: They couldn’t fully utilize temporal patterns, like hourly or daily trends in PM10 levels.</p>
+</li>
+</ul>
+<p><strong>Lessons Learned</strong></p>
+<ul>
+<li><em>Baseline Models Matter</em>: Regression models provided a strong starting point for understanding PM10 pollution.</li>
+<li><em>Iterative Feature Engineering</em>: Adding lagged variables and addressing multicollinearity improved performance.</li>
+</ul>
+<p><strong>Challenges Faced</strong></p>
+<ul>
+<li><em>Heteroscedasticity</em>: Weighted least squares addressed this challenge but required careful tuning.</li>
+<li><em>Data Transformation</em>: Log-transforming PM10 values stabilised variance and improved model accuracy.</li>
+</ul>
+<h4 id="summary-building-a-strong-foundation">Summary: Building a Strong Foundation</h4>
+<p>Regression models are not just simple tools—they provide foundational insights and benchmarks for more complex approaches. By identifying key predictors and addressing data challenges, these models laid the groundwork for exploring advanced techniques like neural networks and LSTM.</p>
+<h1 id="part-4-neural-networks-in-environmental-data-analysis">Part 4. Neural Networks in Environmental Data Analysis</h1>
+<p>When it comes to predicting air pollution, traditional regression models can only go so far. They’re great at identifying linear relationships but fall short when faced with the complex, non-linear patterns that often define real-world data. This is where neural networks (NNs) shine. In this part, I’ll explore how we leveraged NNs to predict PM10 levels in Auckland, how they addressed the limitations of regression models, and why they became a critical tool in this project.</p>
+<h3 id="1-why-neural-networks">1. Why Neural Networks?</h3>
+<ul>
+<li>
+<p><strong>Addressing Non-Linearity:</strong> Air pollution data is influenced by a mix of factors—traffic volume, weather, and even time of day. These relationships aren’t always linear. NNs excel at capturing non-linear patterns, making them ideal for predicting PM10 levels.</p>
+</li>
+<li>
+<p><strong>Sequential Dependencies:</strong> Air quality data has strong temporal patterns. NNs, especially recurrent architectures like Long Short-Term Memory (LSTM), can process sequential data, identifying trends and seasonality over time.</p>
+</li>
+</ul>
+<h3 id="2-the-neural-network-models-used">2. The Neural Network Models Used</h3>
+<h4 id="multi-layer-perceptron-mlp">Multi-Layer Perceptron (MLP)</h4>
+<p>The Multi-Layer Perceptron was the first NN architecture we implemented. It’s a feedforward network, meaning data flows in one direction—from inputs to outputs—through hidden layers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.neural_network <span style="color:#f92672">import</span> MLPRegressor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define MLP parameters</span>
+</span></span><span style="display:flex;"><span>mlp_model <span style="color:#f92672">=</span> MLPRegressor(
+</span></span><span style="display:flex;"><span>    hidden_layer_sizes<span style="color:#f92672">=</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>,
+</span></span><span style="display:flex;"><span>    max_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>,
+</span></span><span style="display:flex;"><span>    random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>mlp_model<span style="color:#f92672">.</span>fit(X_train, y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>mlp_predictions <span style="color:#f92672">=</span> mlp_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_mlp <span style="color:#f92672">=</span> mean_squared_error(y_test, mlp_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;MLP RMSE: </span><span style="color:#e6db74">{</span>rmse_mlp<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="long-short-term-memory-lstm">Long Short-Term Memory (LSTM)</h4>
+<p><code>LSTM</code> networks were used to model sequential dependencies in PM10 data. Unlike <code>MLP</code>, <code>LSTMs</code> can “remember” patterns over time, making them ideal for time-series predictions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> keras.layers <span style="color:#f92672">import</span> LSTM, Dense
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define LSTM model</span>
+</span></span><span style="display:flex;"><span>lstm_model <span style="color:#f92672">=</span> Sequential()
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>add(LSTM(<span style="color:#ae81ff">50</span>, input_shape<span style="color:#f92672">=</span>(X_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>], X_train<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>])))
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mse&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>lstm_model<span style="color:#f92672">.</span>fit(X_train, y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, validation_data<span style="color:#f92672">=</span>(X_test, y_test), verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict and evaluate</span>
+</span></span><span style="display:flex;"><span>lstm_predictions <span style="color:#f92672">=</span> lstm_model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>rmse_lstm <span style="color:#f92672">=</span> mean_squared_error(y_test, lstm_predictions, squared<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;LSTM RMSE: </span><span style="color:#e6db74">{</span>rmse_lstm<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="3-preparing-the-data-for-neural-networks">3. Preparing the Data for Neural Networks</h3>
+<p>NNs require specific data preparation steps to perform optimally:</p>
+<ul>
+<li><em>Feature Scaling:</em> NNs are sensitive to the scale of input data. All features were normaliSed to ensure uniformity.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> StandardScaler()
+</span></span><span style="display:flex;"><span>X_train_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>fit_transform(X_train)
+</span></span><span style="display:flex;"><span>X_test_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>transform(X_test)
+</span></span></code></pre></div><ul>
+<li><em>Reshaping for LSTM</em>: LSTM models expect input data to have three dimensions: <strong>samples</strong>, <strong>timesteps</strong>, and <strong>features</strong>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Reshape data for LSTM</span>
+</span></span><span style="display:flex;"><span>X_train_lstm <span style="color:#f92672">=</span> X_train_scaled<span style="color:#f92672">.</span>reshape((X_train_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>, X_train_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>X_test_lstm <span style="color:#f92672">=</span> X_test_scaled<span style="color:#f92672">.</span>reshape((X_test_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>, X_test_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]))
+</span></span></code></pre></div><h3 id="4-results-and-observations">4. Results and Observations</h3>
+<h4 id="multi-layer-perceptron">Multi-Layer Perceptron</h4>
+<p>The MLP model performed well but struggled with sequential dependencies. It provided good general predictions but missed certain spikes in PM10 levels.</p>
+<h4 id="long-short-term-memory">Long Short-Term Memory</h4>
+<p>The LSTM model excelled at predicting both general trends and sudden spikes, making it the most accurate model for this project. It captured the time-dependent nature of PM10 levels, particularly during rush hours and seasonal changes.</p>
+<h4 id="performance-comparison">Performance Comparison</h4>
+<p>The table below summarizes the RMSE and MAE for both models:</p>
+<figure><img src="/images/results9.png">
+</figure>
+
+<h4 id="insights-gained-from-nns">Insights Gained from NNs</h4>
+<ul>
+<li><em>Temporal Trends</em>: The LSTM model revealed that PM10 levels spiked during weekday mornings and evenings, aligning with rush-hour traffic.</li>
+<li><em>Seasonality</em>: Winter months showed consistently higher PM10 levels due to stagnant air conditions.</li>
+<li><em>Impactful Predictors Features</em> like traffic volume and wind speed emerged as the most significant predictors, reinforcing the findings from regression models.</li>
+</ul>
+<h3 id="5-reflections-on-nns">5. Reflections on NNs</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Captured non-linear relationships and sequential dependencies.</li>
+<li>Provided actionable insights into temporal trends and pollution hotspots.</li>
+</ul>
+<p><strong>Challenges:</strong></p>
+<ul>
+<li><em>Computational Complexity</em>: Training LSTM models required significant processing power and time.</li>
+<li><em>Hyperparameter Tuning</em>: Finding the optimal architecture and parameters for NNs was time-intensive.</li>
+<li><em>Data Pre-processing</em>: Scaling and reshaping the data added extra steps to the workflow.</li>
+</ul>
+<h4 id="summary-a-leap-forward-with-nns">Summary: A Leap Forward with NNs</h4>
+<p>NNs, particularly LSTMs, proved to be a game-changer in predicting PM10 levels in Auckland. They not only improved prediction accuracy but also provided deeper insights into the temporal and seasonal dynamics of air pollution.</p>
+<h1 id="part-5-exploring-long-short-term-memory-lstm-for-time-series-data">Part 5. Exploring Long Short-Term Memory (LSTM) for Time-Series Data</h1>
+<p>Time-series data presents unique challenges and opportunities. The sequential nature of the data requires models capable of capturing dependencies over time—something traditional ML models often struggle with. In this part, I delve deeper into the use of LSTM networks, a type of recurrent neural network (RNN), to predict pollution. I&rsquo;ll explore how LSTM networks work, their application in this project, and the hurdles we faced along the way.</p>
+<h3 id="1-why-lstm-for-air-pollution-data">1. Why LSTM for Air Pollution Data?</h3>
+<p>a. <strong>Sequential Dependencies</strong>: Unlike regression or Random Forest models, LSTMs are specifically designed to handle sequential data. In air pollution forecasting:</p>
+<ul>
+<li><em>Lagged Variables</em>: PM10 levels from previous hours directly influence current levels.</li>
+<li><em>Temporal Trends</em>: Patterns like rush hours or seasonal changes require a model that &ldquo;remembers&rdquo; past inputs.</li>
+</ul>
+<p>b. <strong>Capturing Complex Dynamics</strong>: LSTM networks excel at modelling complex, non-linear relationships in time-series data. This is especially valuable for air quality data, where pollution levels are influenced by traffic, weather, and geographic factors.</p>
+<h3 id="2-how-lstms-work">2. How LSTMs Work</h3>
+<p><strong>The Basics of Recurrent Neural Networks (RNNs)</strong>: RNNs are NNs with loops that allow information to persist. However, standard RNNs struggle with long-term dependencies due to the vanishing gradient problem. LSTM networks address this limitation with their unique architecture:</p>
+<ol>
+<li><strong>Cell State</strong>: A &ldquo;memory&rdquo; that flows through the network, carrying relevant information forward.</li>
+<li><strong>Gates</strong>: Mechanisms that control what information is added, removed, or retained:
+<ul>
+<li><strong>Forget Gate</strong>: Decides what to discard.</li>
+<li><strong>Input Gate</strong>: Determines what new information to add.</li>
+<li><strong>Output Gate</strong>: Controls what information to output.</li>
+</ul>
+</li>
+</ol>
+<p>This structure allows LSTM networks to maintain long-term dependencies, making them ideal for time-series tasks.</p>
+<h3 id="3-applying-lstm-to-predict-pm10-levels">3. Applying LSTM to Predict PM10 Levels</h3>
+<p><strong>Data Preparation</strong>:</p>
+<ul>
+<li><em>Feature Scaling</em>: Scaling the features ensured that the LSTM model could converge efficiently.</li>
+<li><em>Reshaping for Time-Series</em>: The input data was reshaped into a 3D format—samples, timesteps, and features.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> MinMaxScaler
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Scaling the data</span>
+</span></span><span style="display:flex;"><span>scaler <span style="color:#f92672">=</span> MinMaxScaler()
+</span></span><span style="display:flex;"><span>X_scaled <span style="color:#f92672">=</span> scaler<span style="color:#f92672">.</span>fit_transform(X)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reshaping for LSTM</span>
+</span></span><span style="display:flex;"><span>X_lstm <span style="color:#f92672">=</span> X_scaled<span style="color:#f92672">.</span>reshape((X_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>, X_scaled<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]))
+</span></span></code></pre></div><p><strong>Model Architecture and Training</strong>: We designed and trained an LSTM network with the following parameters:</p>
+<ul>
+<li><em>Hidden Units</em>: 64 neurons in the LSTM layer to capture temporal patterns.</li>
+<li><em>Optimisation</em>: <code>Adam optimiser</code> for efficient learning.</li>
+<li><em>Loss Function</em>: <code>Mean Squared Error (MSE)</code> to minimise prediction errors.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> keras.layers <span style="color:#f92672">import</span> LSTM, Dense
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the LSTM model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential()
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(LSTM(<span style="color:#ae81ff">64</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, input_shape<span style="color:#f92672">=</span>(X_lstm<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>], X_lstm<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">2</span>])))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mse&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(X_lstm, y, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, validation_split<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>)
+</span></span></code></pre></div><h3 id="4-hyperparameter-tuning">4. Hyperparameter Tuning</h3>
+<p>To optimise the model&rsquo;s performance, we tuned key hyperparameters:</p>
+<ul>
+<li><em>Batch Size</em>: We tested batch sizes of 4, 8, 16, 32, and 64, with 32 emerging as the optimal size for balancing runtime and stability.</li>
+<li><em>Epochs</em>: Although 30 epochs were used for training, the 10th epoch was identified as a trade-off between cost and accuracy.</li>
+<li><em>Hidden Layer Neurons</em>: 64 neurons provided a balance between accuracy and computational efficiency.</li>
+</ul>
+<h3 id="5-results-and-insights">5. Results and Insights</h3>
+<p><strong>Performance Metrics</strong>: The LSTM model demonstrated significant improvements over traditional models</p>
+<ul>
+<li><strong>RMSE</strong>: 0.97 (compared to 1.21 for Random Forest).</li>
+<li><strong>MAE</strong>: 0.73 (compared to 0.85 for Random Forest).</li>
+</ul>
+<p><strong>Capturing Temporal Trends</strong>: The LSTM model successfully captured</p>
+<ul>
+<li><em>Rush Hour Spikes</em>: Morning and evening traffic peaks.</li>
+<li><em>Seasonal Patterns</em>: Higher pollution levels during winter due to stagnant air conditions.</li>
+</ul>
+<p><strong>Feature Contributions</strong>: SHAP analysis revealed that lagged PM10 values, wind speed, and traffic volume were the most influential predictors in the LSTM model.</p>
+<p><strong>Challenges Faced</strong></p>
+<ul>
+<li>
+<p><em>Computational Complexity</em>: Training LSTM networks on large datasets is computationally intensive. Each epoch required significant processing power, and hyperparameter tuning added to the computational burden.</p>
+</li>
+<li>
+<p><em>Data Preparation</em>: Environmental data is inherently messy. Missing values, outliers, and inconsistencies made the pre-processing phase critical. Lagged variables and feature engineering were essential to capture temporal patterns.</p>
+</li>
+<li>
+<p><em>Overfitting</em>: With a limited amount of high-quality data, over-fitting became a concern. We mitigated this by</p>
+</li>
+<li>
+<p>Using <code>dropout layers</code> to prevent the network from relying too heavily on specific neurons.</p>
+</li>
+<li>
+<p><code>Regularisation techniques</code> like <code>early stopping</code>.</p>
+</li>
+</ul>
+<p><strong>Lessons Learned:</strong></p>
+<ul>
+<li>The Power of Sequential Models: LSTM networks proved invaluable for capturing temporal dependencies in PM10 data.</li>
+<li>Importance of Pre-processing: High-quality data pre-processing laid the foundation for accurate predictions.</li>
+</ul>
+<p><strong>Challenges to Overcome:</strong></p>
+<ul>
+<li><em>Resource Intensity</em>: LSTM models require significant computational resources.</li>
+<li><em>Interpretability</em>: Advanced tools like SHAP values are essential for explaining model predictions.</li>
+</ul>
+<h4 id="summary-unlocking-the-potential-of-lstm-for-environmental-data">Summary: Unlocking the Potential of LSTM for Environmental Data</h4>
+<p>By leveraging LSTM networks, we were able to uncover patterns and trends in air pollution data that traditional models missed. However, this approach comes with its own set of challenges, from computational demands to interpretability issues. Despite these hurdles, the insights gained from LSTM models have the potential to inform policies and actions aimed at improving air quality.</p>
+<h1 id="part-6-comparing-models-and-real-world-implications">Part 6. Comparing Models and Real-World Implications</h1>
+<p>AI and ML are not just tools for academic research—they hold transformative potential for real-world applications. In this final part, I focus on translating our findings into actionable insights:</p>
+<ul>
+<li><em>How can the models and predictions generated in this project help policymakers, urban planners, and individuals?</em></li>
+<li><em>What are the future possibilities for AI in environmental health?</em></li>
+</ul>
+<h3 id="the-power-of-predictions">The Power of Predictions</h3>
+<ol>
+<li><strong>Turning Numbers Into Actions</strong></li>
+</ol>
+<p>The predictions generated by our ML models are more than just numbers. They are insights that can:</p>
+<ul>
+<li><em>Warn Communities</em>: Provide advance warnings about poor air quality, allowing individuals to take precautions.</li>
+<li><em>Guide Policy Decisions</em>: Help governments and local councils implement targeted interventions, such as re-routing traffic or introducing green infrastructure.</li>
+<li><em>Enable Smarter Cities</em>: Integrate predictions into urban planning, optimising traffic flow and reducing emissions in high-pollution zones.</li>
+</ul>
+<ol start="2">
+<li><strong>Use Cases</strong></li>
+</ol>
+<ul>
+<li><em>Real-Time Alerts</em>: Imagine a system that sends notifications to residents when PM10 levels are expected to spike, advising outdoor activity restrictions or mask use.</li>
+<li><em>Traffic Management</em>: Cities could re-route vehicles during peak pollution hours based on real-time model predictions.</li>
+<li><em>Green Infrastructure</em>: Predictions can identify hotspots where tree planting or green walls would have the most significant impact.</li>
+</ul>
+<h3 id="policy-implications">Policy Implications</h3>
+<ol>
+<li><strong>Data-Driven Decision Making</strong></li>
+</ol>
+<p>Our project demonstrated that AI could provide actionable insights for policymaking. For example:</p>
+<ul>
+<li><em>Targeted Interventions</em>: By identifying areas with consistently high PM10 levels, policymakers can prioritise resources for pollution mitigation.</li>
+<li><em>Informed Regulations</em>: Data-driven insights can support stricter regulations on industrial emissions or vehicle usage during critical times.</li>
+</ul>
+<ol start="2">
+<li><strong>Case Study</strong>:
+In Auckland, our models revealed specific areas where PM10 concentrations spiked regularly. These findings could inform:</li>
+</ol>
+<ul>
+<li><em>Public Transport Development</em>: Expanding bus or train networks to reduce traffic congestion in these areas.</li>
+<li><em>Emission Zones</em>: Introducing low-emission zones where only electric or hybrid vehicles are allowed.</li>
+</ul>
+<h3 id="comparing-the-models">Comparing the Models</h3>
+<ol>
+<li><strong>Regression Models</strong>
+Linear regression, <code>Ridge regression</code>, and <code>Weighted Least Squares (WLS)</code> served as baseline models.</li>
+</ol>
+<ul>
+<li><em>Strengths</em>: Simple to interpret, provided a benchmark for model performance.</li>
+<li><em>Limitations</em>: Struggled with non-linear and sequential patterns.</li>
+</ul>
+<ol start="2">
+<li><strong>Random Forest</strong>
+Effective for identifying feature importance and handling non-linear relationships.</li>
+</ol>
+<ul>
+<li><em>Strengths</em>: Robust to over-fitting, excellent for feature analysis.</li>
+<li><em>Limitations</em>: Limited in capturing temporal dependencies.</li>
+</ul>
+<ol start="3">
+<li><strong>Neural Networks (MLP and LSTM)</strong></li>
+</ol>
+<ul>
+<li>MLP: Captured non-linear interactions but failed to handle sequential data.</li>
+<li>LSTM: Excelled in modelling time-series data, capturing trends and seasonality.</li>
+</ul>
+<figure><img src="/images/results9.png">
+</figure>
+
+<h3 id="future-directions-for-ai-in-environmental-health">Future Directions for AI in Environmental Health</h3>
+<ol>
+<li><strong>Integrating IoT and AI</strong>: The future lies in combining Internet of Things (IoT) sensors with AI models</li>
+</ol>
+<ul>
+<li>IoT Sensors: Real-time air quality monitoring at a granular level.</li>
+<li>AI Models: Predictive analytics to forecast pollution trends and identify causal factors.</li>
+</ul>
+<ol start="2">
+<li><strong>Expanding Beyond PM10</strong>: While this project focused on PM10 levels, similar techniques can be applied to</li>
+</ol>
+<ul>
+<li><em>PM2.5 and Other Pollutants</em>: Expanding the scope to include finer particulate matter and gases like NO2 or CO2.</li>
+<li><em>Water and Soil Quality</em>: Predicting and mitigating pollution in other environmental domains.</li>
+</ul>
+<ol start="3">
+<li><strong>Climate Change Insights</strong>: AI can play a pivotal role in understanding and mitigating the impacts of climate change</li>
+</ol>
+<ul>
+<li><em>Wildfire Predictions</em>: Forecasting air quality during wildfire events.</li>
+<li>*Urban Heat Islands8: Identifying areas where heat and pollution combine to exacerbate health risks.</li>
+</ul>
+<ol start="4">
+<li><strong>The Role of Public Awareness</strong>: Beyond government and industry, the public has a vital role to play. By raising awareness of air quality issues and providing actionable insights, AI can</li>
+</ol>
+<ul>
+<li>Encourage behavioural changes, such as reduced vehicle use during high-pollution periods.</li>
+<li>Foster support for environmental policies and initiatives.</li>
+</ul>
+<p>Infographics, dashboards, and user-friendly apps can make complex data accessible to everyone, ensuring that insights don’t just stay in research papers.</p>
+<ol start="5">
+<li><strong>Reflections on Challenges</strong></li>
+</ol>
+<ul>
+<li>
+<p><em>Data Limitations</em>: The success of AI models depends heavily on the quality of data. Issues like missing values, inconsistencies, and lack of granularity remain significant hurdles.</p>
+</li>
+<li>
+<p><em>Ethical Considerations</em>: As AI becomes more integrated into decision-making, ethical questions arise.</p>
+</li>
+<li>
+<p><strong>Data Privacy</strong>: How do we ensure that data collection respects individuals’ privacy?</p>
+</li>
+<li>
+<p><strong>Bias in Models</strong>: Are the predictions equitable, or do they disproportionately benefit certain populations?</p>
+</li>
+</ul>
+<h4 id="conclusion-bridging-ai-and-policy-for-cleaner-air">Conclusion: Bridging AI and Policy for Cleaner Air</h4>
+<p>This project demonstrated the power of AI in addressing complex environmental challenges. By comparing models, we saw how traditional regression models, Random Forests, and advanced NNs bring unique value to pollution prediction. More importantly, the insights gained aren’t just theoretical—they have real-world implications for creating cleaner, healthier cities. But as powerful as AI is, the success of these efforts relies on collaboration between scientists, policymakers, and the public.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and let&rsquo;s keep our planet healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

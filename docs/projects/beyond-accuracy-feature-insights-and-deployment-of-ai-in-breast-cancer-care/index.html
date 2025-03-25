@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Beyond Accuracy: Feature Insights and Deployment of AI in Breast Cancer Care | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This project dives into what happens after model training—how deep learning models uncover meaningful patterns in cancer images and how they can be deployed in the real world. It uses feature extraction with CNNs, clustering techniques, and statistical analysis to personalise diagnostics. I explore the technical and logistical challenges of deploying these models in clinical practice.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project16_images/pr16.png');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Beyond Accuracy: Feature Insights and Deployment of AI in Breast Cancer Care
+          </h1>
+          
+            <p class="f5">This project dives into what happens after model training—how deep learning models uncover meaningful patterns in cancer images and how they can be deployed in the real world. It uses feature extraction with CNNs, clustering techniques, and statistical analysis to personalise diagnostics. I explore the technical and logistical challenges of deploying these models in clinical practice.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project16_images/pr16.png">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith//Histopathology-AI-BreastCancer" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-unveiling-hidden-patterns-feature-extraction-with-pre-trained-cnns">Part 1. Unveiling Hidden Patterns: Feature Extraction with Pre-Trained CNNs</h1>
+<p>Medical imaging has revolutionised diagnostics, giving clinicians unprecedented insight into disease. But its real power emerges when paired with ML — especially DL models capable of uncovering patterns invisible to the human eye. In this post, we explore how three state-of-the-art CNNs — <strong>ResNet50</strong>, <strong>EfficientNetB0</strong>, and <strong>DenseNet201</strong> — can be repurposed as feature extractors for breast cancer histopathology. Using the <code>BreakHis</code> dataset, I demonstrate how these models enable advanced clustering, statistical analysis, and deeper diagnostic insight.</p>
+<h3 id="the-models-resnet50-efficientnetb0-and-densenet201">The Models: ResNet50, EfficientNetB0, and DenseNet201</h3>
+<p>CNNs pre-trained on large-scale datasets like <code>ImageNet</code> are adept at capturing visual structure. When used as feature extractors, they generate <strong>embeddings</strong> — dense, abstract representations of the input—that retain clinically relevant information. Each model brings distinct strengths:</p>
+<ul>
+<li><strong>ResNet50</strong>: Deep residual connections improve gradient flow, enabling richer feature hierarchies.</li>
+<li><strong>EfficientNetB0</strong>: Balances model size and performance with compound scaling.</li>
+<li><strong>DenseNet201</strong>: Leverages dense connectivity for feature reuse and efficient learning.</li>
+</ul>
+<p>In my experiments, <strong>DenseNet201</strong> consistently outperformed the others in both classification accuracy (98.3%) and clustering separability (Silhouette Score: 0.78). Its embeddings offered clearer distinction between benign and malignant classes—confirmed via hierarchical clustering and t-tests.</p>
+<h3 id="feature-extraction-pipeline">Feature Extraction Pipeline</h3>
+<h4 id="1-pre-processing">1. Pre-processing</h4>
+<p>Images from the <code>BreakHis</code> dataset were resized to (224 \times 224) and normalised to match model input requirements.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x_train, x_val, y_train, y_val <span style="color:#f92672">=</span> train_test_split(images, labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, stratify<span style="color:#f92672">=</span>labels)
+</span></span></code></pre></div><h4 id="2-feature-extraction">2. Feature Extraction</h4>
+<p>Features were extracted from the avg_pool layer using Keras’ Model() interface.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_features</span>(model, layer_name, data):
+</span></span><span style="display:flex;"><span>    extractor <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>input, outputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>get_layer(layer_name)<span style="color:#f92672">.</span>output)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> extractor<span style="color:#f92672">.</span>predict(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>features_resnet <span style="color:#f92672">=</span> extract_features(resnet50_model, <span style="color:#e6db74">&#39;avg_pool&#39;</span>, x_train)
+</span></span><span style="display:flex;"><span>features_densenet <span style="color:#f92672">=</span> extract_features(densenet201_model, <span style="color:#e6db74">&#39;avg_pool&#39;</span>, x_train)
+</span></span></code></pre></div><h4 id="3-analysis-and-key-insights">3. Analysis and Key Insights</h4>
+<p>Extracted features were subjected to dimensionality reduction (PCA), hierarchical clustering, and statistical testing to evaluate separability.</p>
+<ol>
+<li>
+<p><em>PCA Visualisation</em>: PCA reduced high-dimensional embeddings into 2D space, revealing clear separation between benign and malignant clusters—especially for DenseNet201.</p>
+</li>
+<li>
+<p><em>Hierarchical Clustering</em>: Agglomerative clustering revealed structure within the feature space. <code>DenseNet201</code> produced the most distinct, cohesive clusters.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.cluster.hierarchy <span style="color:#f92672">import</span> linkage, dendrogram
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>linked <span style="color:#f92672">=</span> linkage(features_densenet, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ward&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">7</span>))
+</span></span><span style="display:flex;"><span>dendrogram(linked, truncate_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lastp&#39;</span>, p<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Hierarchical Clustering: DenseNet201 Features&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>Two-sample t-tests revealed that features from <code>DenseNet201</code> had the highest discriminatory power.</p>
+<h4 id="future-directions">Future Directions</h4>
+<ul>
+<li>
+<ol>
+<li><em>Greater Interpretability:</em> Integrate statistical findings with tools like <code>Grad-CAM</code> to visually map features to tissue regions.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li><em>Automated Pipelines:</em> Build end-to-end workflows that include clustering, interpretation, and model deployment for real-time insights.</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li><em>Expanded Feature Analysis:</em> Introduce correlation matrices, ANOVA, and non-parametric testing for deeper insights.</li>
+</ol>
+</li>
+</ul>
+<h4 id="summary">Summary</h4>
+<p>Pre-trained CNNs like DenseNet201 offer powerful tools for extracting rich, interpretable features from medical images. With the right statistical tools, these features can be transformed into actionable insight—bringing us closer to real-time, AI-driven, patient-specific diagnostics.</p>
+<h1 id="part-2-clustering-and-statistical-analysis">Part 2. Clustering and Statistical Analysis</h1>
+<p>Breast cancer imaging datasets provide invaluable data for early detection and diagnostics. However, even within the same diagnostic category, significant variations can exist. These intra-class variations often hold critical information about tumour subtypes, aggressiveness, and treatment response. By employing <strong>hierarchical clustering</strong> and <strong>statistical analysis</strong>, researchers can uncover these subtle differences, enabling personalised diagnostics and treatment strategies. In this part, we’ll explore how these techniques can be applied to breast cancer imaging datasets to drive precision medicine.</p>
+<h3 id="the-challenge-of-intra-class-variations">The Challenge of Intra-Class Variations</h3>
+<p>Breast cancer imaging datasets are typically annotated with broad categories like &ldquo;benign&rdquo; or &ldquo;malignant.&rdquo; However, these categories often fail to capture the full complexity of the disease. Factors such as:</p>
+<ul>
+<li>Tumour size,</li>
+<li>Shape,</li>
+<li>Texture,</li>
+<li>And surrounding tissue features,</li>
+</ul>
+<p>contribute to intra-class variability. Ignoring these differences can lead to oversimplified models and suboptimal patient outcomes.</p>
+<h3 id="hierarchical-clustering-grouping-subtypes">Hierarchical Clustering: Grouping Subtypes</h3>
+<p>Hierarchical clustering is a method that groups data points into clusters based on their similarity, represented in a dendrogram. Unlike other clustering methods, hierarchical clustering does not require predefining the number of clusters, making it particularly useful for exploratory data analysis.</p>
+<h4 id="steps-in-hierarchical-clustering">Steps in Hierarchical Clustering</h4>
+<ol>
+<li><em>Feature Extraction</em>: Extract meaningful features from breast cancer images using pre-trained DL models like <code>ResNet50 </code>or custom texture descriptors.</li>
+<li><em>Clustering</em>: Perform agglomerative clustering to group images into hierarchies.</li>
+<li><em>Visualisation</em>: Use dendrograms to visualize the relationships between data points and clusters.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> AgglomerativeClustering
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.cluster.hierarchy <span style="color:#f92672">import</span> dendrogram, linkage
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform clustering</span>
+</span></span><span style="display:flex;"><span>clustering <span style="color:#f92672">=</span> AgglomerativeClustering(n_clusters<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, distance_threshold<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>fit(features)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot dendrogram</span>
+</span></span><span style="display:flex;"><span>linked <span style="color:#f92672">=</span> linkage(features, method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ward&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">7</span>))
+</span></span><span style="display:flex;"><span>dendrogram(linked, truncate_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lastp&#39;</span>, p<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="/images/den.png" alt="Feature extraction"><br>
+<em>Dendrograms showing clustering of features extracted by DenseNet201 (left), EfficientNetB0 (centre), and ResNet50 (right).</em></p>
+<p><strong>Interpretation of Dendrograms</strong></p>
+<ol>
+<li>
+<p><em>DenseNet201 (left panel):</em>
+•	Shows clear, well-separated branches with a more balanced tree structure.
+•	There are distinct vertical jumps between merged clusters, suggesting higher inter-cluster dissimilarity.
+•	This means <code>DenseNet201</code>’s feature embeddings are more effective at capturing meaningful differences between image samples.
+•	Clusters formed here likely correlate with strong biological distinctions—e.g., benign vs malignant, or even finer subtypes like invasive ductal vs lobular carcinoma.</p>
+</li>
+<li>
+<p><em>EfficientNetB0 (centre panel):</em>
+•	Displays long horizontal stretches with very few large separations.
+•	This indicates low inter-cluster variance—the features extracted are less discriminative.
+•	Most samples fall into a dense blob before finally splitting, which makes subtype separation harder.
+•	Suggests <code>EfficientNetB0</code>, at least in this configuration, may be underfitting or not capturing enough visual detail for clustering.</p>
+</li>
+<li>
+<p><em>ResNet50 (right panel):</em>
+•	Sits somewhere in the middle—some structure is visible, but the separations are less sharp than <code>DenseNet201</code>.
+•	The branches are uneven and some clusters are less compact, hinting at weaker feature disentanglement.
+•	Better than <code>EfficientNetB0</code>, but less definitive than DenseNet201.</p>
+</li>
+</ol>
+<h3 id="statistical-analysis-identifying-significant-differences">Statistical Analysis: Identifying Significant Differences</h3>
+<p>Clusters identified through hierarchical clustering can be compared using statistical tests to pinpoint significant intra-class differences. For example:</p>
+<ul>
+<li>Comparing <strong>shape-related features</strong> (e.g., roundness, sharpness of edges) between clusters may reveal differences in tumor subtypes.</li>
+<li><strong>Texture-based metrics</strong> can help distinguish between clusters with high and low tumor cellularity.</li>
+</ul>
+<h4 id="t-tests-for-cluster-comparison">T-Tests for Cluster Comparison</h4>
+<p>For example, a two-sample t-test evaluates whether the means of two clusters are significantly different for a given feature.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.stats <span style="color:#f92672">import</span> ttest_ind
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Split data based on cluster labels</span>
+</span></span><span style="display:flex;"><span>cluster_1_features <span style="color:#f92672">=</span> features[clustering<span style="color:#f92672">.</span>labels_ <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>cluster_2_features <span style="color:#f92672">=</span> features[clustering<span style="color:#f92672">.</span>labels_ <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform t-test</span>
+</span></span><span style="display:flex;"><span>t_stat, p_val <span style="color:#f92672">=</span> ttest_ind(cluster_1_features, cluster_2_features)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;T-statistic: </span><span style="color:#e6db74">{</span>t_stat<span style="color:#e6db74">}</span><span style="color:#e6db74">, P-value: </span><span style="color:#e6db74">{</span>p_val<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="insights-from-clustering-and-analysis">Insights from Clustering and Analysis</h4>
+<ol>
+<li><em>Subtype Identification</em>: Clusters may correspond to tumour subtypes, aiding in tailored treatment planning.</li>
+<li><em>Anomaly Detection</em>: Outliers in clusters could represent rare or aggressive tumour types.</li>
+<li><em>Biomarker Discovery</em>: Statistically significant features provide potential biomarkers for disease characterization.</li>
+</ol>
+<p><strong>Future Directions</strong></p>
+<ol start="4">
+<li><em>Integrating Clinical Data</em>: Combine imaging data with clinical metadata (e.g., hormone receptor status) to enrich clustering results.</li>
+<li><em>Explainability</em>: Use tools like <code>SHAP</code> or <code>Grad-CAM</code> to interpret how features influence clustering outcomes.</li>
+<li><em>Real-Time Diagnostics</em>: Develop automated pipelines that integrate clustering and statistical analysis into diagnostic workflows.</li>
+</ol>
+<p><strong>Visualisations to illustrate key insights into the data:</strong></p>
+<ul>
+<li>
+<p><strong>PCA Scatter Plot</strong>: Shows how the features separate benign and malignant samples in a reduced two-dimensional space.
+<figure><img src="/images/pca.png">
+</figure>
+</p>
+</li>
+<li>
+<p><strong>T-Statistic Bar Plot</strong>: Highlights the top 10 features most effective at distinguishing between classes based on their statistical significance.
+<figure><img src="/images/t.png">
+</figure>
+</p>
+</li>
+<li>
+<p><strong>Boxplots</strong>: Provide a clear comparison of the distribution of a key feature across benign and malignant classes.
+<figure><img src="/images/project13_images/b.png">
+</figure>
+</p>
+</li>
+<li>
+<p><strong>Dendrogram</strong>: Visualises hierarchical clustering of features, helping to understand groupings and relationships among extracted features.</p>
+</li>
+</ul>
+<figure><img src="/images/project13_images/h.png">
+</figure>
+
+<h4 id="summary-1">Summary</h4>
+<p>Hierarchical clustering and statistical analysis are powerful tools for uncovering intra-class variations in breast cancer imaging datasets. By revealing the hidden diversity within diagnostic categories, these methods pave the way for personalised medicine. With advances in ML and statistical modelling, we can continue to push the boundaries of precision diagnostics, offering tailored care to every patient.</p>
+<h1 id="part-3-enhancing-interpretability-in-cnns">Part 3. Enhancing Interpretability in CNNs</h1>
+<p>Clinical adoption of AI requires trust and transparency. In breast cancer diagnostics, interpretability is essential for:</p>
+<ul>
+<li>Ensuring AI models align with clinical knowledge.</li>
+<li>Validating AI predictions with expert pathologists.</li>
+<li>Identifying and mitigating biases or inaccuracies in models.</li>
+</ul>
+<p>Statistical methods applied to features extracted from CNNs like ResNet50, EfficientNetB0, and DenseNet201 provide a pathway for understanding how these models make decisions. This ensures that critical insights are accessible and actionable in clinical settings.</p>
+<h3 id="extracting-features-with-cnns">Extracting Features with CNNs</h3>
+<p>Feature extraction involves using CNNs to distill high-dimensional image data into embeddings representing the most critical patterns. For this study, <code>ResNet50</code>, <code>EfficientNetB0</code>, and <code>DenseNet201</code> were employed as feature extractors. The hierarchical nature of CNNs allowed capturing both low-level details (e.g., textures) and high-level structures (e.g., tissue organisation).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> load_model, Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load pre-trained model and extract features</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_features</span>(model, layer_name, data):
+</span></span><span style="display:flex;"><span>    feature_model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>input, outputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>get_layer(layer_name)<span style="color:#f92672">.</span>output)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> feature_model<span style="color:#f92672">.</span>predict(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>features_resnet <span style="color:#f92672">=</span> extract_features(resnet_model, <span style="color:#e6db74">&#39;avg_pool&#39;</span>, x_train)
+</span></span><span style="display:flex;"><span>features_densenet <span style="color:#f92672">=</span> extract_features(densenet_model, <span style="color:#e6db74">&#39;avg_pool&#39;</span>, x_train)
+</span></span></code></pre></div><p>By applying <code>t-tests</code> and <code>ANOVA</code>, the statistical significance of features was assessed. This helped identify which features most effectively distinguish benign from malignant samples. <code>DenseNet201</code> features showed higher statistical significance compared to <code>ResNet50</code> and <code>EfficientNetB0</code>, consistent with its superior classification performance (accuracy: 98.31%, AUC: 99.67%).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.stats <span style="color:#f92672">import</span> ttest_ind
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Perform t-tests between benign and malignant classes</span>
+</span></span><span style="display:flex;"><span>t_stat, p_val <span style="color:#f92672">=</span> ttest_ind(features_benign, features_malignant, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>significant_features <span style="color:#f92672">=</span> sorted(zip(range(len(t_stat)), t_stat, p_val), key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: x[<span style="color:#ae81ff">2</span>])
+</span></span></code></pre></div><p>Hierarchical clustering grouped features into clusters, revealing latent patterns in the data. Dendrograms highlighted similarities and relationships between features.</p>
+<p><img src="/images/project13_images/dendo_densenet201.png" alt="Dendrogram for DenseNet201"></p>
+<p><em>Dendrogram for DenseNet201.</em></p>
+<p><img src="/images/project13_images/dendo_resnet50.png" alt="Dendrogram for ResNet50"></p>
+<p><em>Dendrogram for ResNet50.</em></p>
+<p><img src="/images/project13_images/dendo_eff_netB0.png" alt="Dendrogram for EfficientNetB0"></p>
+<p><em>Dendrogram for EfficientNetB0.</em></p>
+<p>Boxplots illustrated the distribution of specific features across classes, aiding in identifying intra-class variations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualise feature distributions</span>
+</span></span><span style="display:flex;"><span>feature_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(features, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Feature_</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(features<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>])])
+</span></span><span style="display:flex;"><span>feature_df[<span style="color:#e6db74">&#39;Class&#39;</span>] <span style="color:#f92672">=</span> labels
+</span></span><span style="display:flex;"><span>sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Class&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Feature_10&#39;</span>, data<span style="color:#f92672">=</span>feature_df)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Distribution of Feature_10 Across Classes&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h4 id="correlation-analysis"><strong>Correlation Analysis</strong></h4>
+<p>Correlation matrices assessed relationships between features, identifying redundancies and complementary patterns. These analyses were critical for understanding the interplay between features extracted by different CNNs.</p>
+<ul>
+<li><strong>PCA Scatter Plot</strong>: Shows how the features separate benign and malignant samples in a reduced two-dimensional space.
+<figure><img src="/images/pca.png">
+</figure>
+</li>
+<li><strong>T-Statistic Bar Plot</strong>: Highlights the top 10 features most effective at distinguishing between classes based on their statistical significance.
+<figure><img src="/images/t.png">
+</figure>
+</li>
+<li><strong>Boxplots</strong>: Provide a clear comparison of the distribution of a key feature across benign and malignant classes.
+<figure><img src="/images/b.png">
+</figure>
+</li>
+<li><strong>Dendrogram</strong>: Visualises hierarchical clustering of features, helping to understand groupings and relationships among extracted features.
+<figure><img src="/images/h.png">
+</figure>
+</li>
+</ul>
+<p><strong>Insights Gained</strong></p>
+<ol>
+<li><em>Feature Importance</em>: Statistical methods highlighted key features contributing to classification, improving interpretability and model transparency.</li>
+<li><em>Class-Specific Patterns</em>: Hierarchical clustering revealed how different features corresponded to tumor subtypes, providing actionable insights for pathologists.</li>
+<li><em>Inter-Model Comparisons</em>: <code>DenseNet201</code> consistently produced features with higher discriminatory power, aligning with its overall performance metrics.</li>
+</ol>
+<h4 id="summary-2">Summary</h4>
+<p>By combining CNN-based feature extraction with statistical analysis, this study bridges the gap between high-performance AI models and their clinical applicability. These techniques not only enhance interpretability but also provide actionable insights, paving the way for more transparent and reliable AI-driven diagnostics.</p>
+<h1 id="part-4-deploying-ai-models-for-breast-cancer-diagnosis">Part 4. Deploying AI Models for Breast Cancer Diagnosis</h1>
+<p>Deploying AI models for clinical use, particularly in breast cancer diagnosis, is a multi-faceted challenge. My project on the BreakHis dataset highlighted several computational and practical hurdles, such as optimising resource usage, addressing class imbalance, and ensuring model compatibility with real-world clinical workflows. This part explores these challenges and the solutions implemented in my work, including specific metrics, code snippets, and insights.</p>
+<h3 id="challenges-in-deploying-ai-models-for-clinical-use">Challenges in Deploying AI Models for Clinical Use</h3>
+<h4 id="1-computational-resource-constraints">1. Computational Resource Constraints</h4>
+<p>High-resolution images in the BreakHis dataset (224x224 pixels) and deep models like <code>ResNet50</code> and <code>DenseNet201</code> require significant computational resources. Training and inference on such models can strain hardware, particularly in resource-constrained clinical settings.</p>
+<p><strong>Metrics from Project</strong>:</p>
+<ul>
+<li>Training time per epoch: ~12 minutes on a single GPU.</li>
+<li>Memory usage: ~8 GB for model inference on large batches.</li>
+</ul>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li><em>GPU Optimisation</em>: Enabled efficient memory management to ensure smooth training.</li>
+<li><em>Model Optimisation</em>: Applied <code>TensorFlow Lite</code> for quantising the model for edge deployment, reducing inference time without compromising accuracy.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert a saved model to TensorFlow Lite with quantisation</span>
+</span></span><span style="display:flex;"><span>converter <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>lite<span style="color:#f92672">.</span>TFLiteConverter<span style="color:#f92672">.</span>from_saved_model(<span style="color:#e6db74">&#34;saved_model_path&#34;</span>)
+</span></span><span style="display:flex;"><span>converter<span style="color:#f92672">.</span>optimizations <span style="color:#f92672">=</span> [tf<span style="color:#f92672">.</span>lite<span style="color:#f92672">.</span>Optimize<span style="color:#f92672">.</span>DEFAULT]
+</span></span><span style="display:flex;"><span>quantized_model <span style="color:#f92672">=</span> converter<span style="color:#f92672">.</span>convert()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the optimised model</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;quantized_model.tflite&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(quantized_model)
+</span></span></code></pre></div><h4 id="2-dataset-imbalance-and-augmentation">2. Dataset Imbalance and Augmentation</h4>
+<p>In the BreakHis dataset, malignant cases constituted 69% of the data, leading to potential bias in predictions. Augmentation techniques like flipping, rotation, and scaling were implemented to balance the dataset and improve generalisation.</p>
+<p><strong>Key Metrics</strong>:</p>
+<ul>
+<li>Post-augmentation class balance: Benign (45%) vs. Malignant (55%).</li>
+<li>Model sensitivity on benign cases improved from 78% to 91%.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply data augmentation for balanced training</span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nearest&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>augmented_data <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow(x_train, y_train, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span></code></pre></div><h4 id="3-interpretability-and-trust">3. Interpretability and Trust</h4>
+<p>Clinicians require interpretable predictions to trust AI models. In my project, <code>Grad-CAM</code> visualisations were employed to highlight the regions of histopathological images that influenced model decisions.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li>Visualisation clarity: 90% of Grad-CAM overlays matched areas of interest.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Model
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Grad-CAM implementation</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">grad_cam</span>(model, img_array, last_conv_layer_name, pred_index<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    grad_model <span style="color:#f92672">=</span> Model(inputs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>inputs, outputs<span style="color:#f92672">=</span>[model<span style="color:#f92672">.</span>get_layer(last_conv_layer_name)<span style="color:#f92672">.</span>output, model<span style="color:#f92672">.</span>output])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>GradientTape() <span style="color:#66d9ef">as</span> tape:
+</span></span><span style="display:flex;"><span>        conv_outputs, predictions <span style="color:#f92672">=</span> grad_model(img_array)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> pred_index <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>            pred_index <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>argmax(predictions[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>        loss <span style="color:#f92672">=</span> predictions[:, pred_index]
+</span></span><span style="display:flex;"><span>    grads <span style="color:#f92672">=</span> tape<span style="color:#f92672">.</span>gradient(loss, conv_outputs)
+</span></span><span style="display:flex;"><span>    pooled_grads <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(grads, axis<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    conv_outputs <span style="color:#f92672">=</span> conv_outputs[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>multiply(pooled_grads, conv_outputs), axis<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    heatmap <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>maximum(heatmap, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">/</span> tf<span style="color:#f92672">.</span>math<span style="color:#f92672">.</span>reduce_max(heatmap)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> heatmap
+</span></span></code></pre></div><h4 id="4-scalability-and-deployment">4. Scalability and Deployment</h4>
+<p>Scalable deployment was achieved using <code>TensorFlow Serving</code>, allowing seamless integration with clinical systems. Docker containers ensured portability and ease of deployment across different hospital infrastructures.</p>
+<p><strong>Key Metrics</strong>:</p>
+<ul>
+<li>Inference time: Reduced from 1.5 seconds to 0.8 seconds per image.</li>
+<li>Deployment environment compatibility: Achieved using Docker with <code>TensorFlow Serving</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Docker command to deploy model with TensorFlow Serving</span>
+</span></span><span style="display:flex;"><span>docker run -p 8501:8501 --name<span style="color:#f92672">=</span>tf_model_serving --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span>/path/to/saved_model,target<span style="color:#f92672">=</span>/models/model -e MODEL_NAME<span style="color:#f92672">=</span>model -t tensorflow/serving
+</span></span></code></pre></div><h3 id="breakhis-dataset-deployment">BreakHis Dataset Deployment</h3>
+<p><strong>Deployment Workflow:</strong></p>
+<ol>
+<li><strong>Model Optimisation</strong>: Quantised DL models for efficient inference.</li>
+<li><strong>Augmented Training</strong>: Balanced the dataset using data augmentation techniques.</li>
+<li><strong>Interpretability</strong>: Integrated <code>Grad-CAM</code> for explainable predictions.</li>
+</ol>
+<p><strong>Performance Improvements:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Metric</strong></th>
+          <th><strong>Pre-Deployment</strong></th>
+          <th><strong>Post-Deployment</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Sensitivity (Benign)</td>
+          <td>78%</td>
+          <td>91%</td>
+      </tr>
+      <tr>
+          <td>Specificity</td>
+          <td>88%</td>
+          <td>94%</td>
+      </tr>
+      <tr>
+          <td>Inference Time</td>
+          <td>1.5s</td>
+          <td>0.8s</td>
+      </tr>
+      <tr>
+          <td>Trust Score</td>
+          <td>-</td>
+          <td>4.5/5</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="summary-3">Summary</h4>
+<p>Deploying AI models for breast cancer diagnosis involves addressing challenges like resource optimisation, class imbalance, and interpretability. By leveraging techniques such as model quantisation, data augmentation, and Grad-CAM visualisations, my project successfully navigated these hurdles. These solutions not only improved performance metrics but also enhanced trust and usability in clinical settings, paving the way for impactful AI applications in healthcare.</p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

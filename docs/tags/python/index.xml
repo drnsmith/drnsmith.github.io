@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/python/</link>
+    <description>Recent content in Python on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Mar 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decoding Market Sentiments: Analysing NASDAQ Companies with Big Data and NLP.</title>
+      <link>https://drnsmith.github.io/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1-unveiling-sentiments-analysing-nasdaq-companies-through-big-data-and-sentiment-analysis&#34;&gt;Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis&lt;/h1&gt;&#xA;&lt;p&gt;In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts. Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Assistant: Smart Cooking with AI</title>
+      <link>https://drnsmith.github.io/projects/ai-powered-recipe-assistant-smart-cooking-with-ai/</link>
+      <pubDate>Wed, 20 Mar 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/ai-powered-recipe-assistant-smart-cooking-with-ai/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project14_images/project14.png&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/AI-Assistant-Recipe&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;The &lt;strong&gt;AI-Powered Recipe Assistant&lt;/strong&gt; is an interactive tool designed to help users &lt;strong&gt;generate, customise, and save recipes&lt;/strong&gt; using AI. It leverages &lt;strong&gt;large language models (LLMs)&lt;/strong&gt; to dynamically create recipes based on user-provided ingredients and preferences.&lt;/p&gt;&#xA;&lt;p&gt;Built with &lt;strong&gt;Streamlit&lt;/strong&gt;, the assistant offers a clean UI where users can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Find recipes from a curated database.&lt;/li&gt;&#xA;&lt;li&gt;Generate AI-created recipes when no match is found.&lt;/li&gt;&#xA;&lt;li&gt;Save and manage favourite recipes.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This project demonstrates the &lt;strong&gt;fusion of AI, NLP, and data-driven decision-making&lt;/strong&gt;, transforming how users interact with recipe recommendations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sentiment Speaks: Analysing Twitter Discourse on NASDAQ Companies</title>
+      <link>https://drnsmith.github.io/projects/project4/</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project4/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Solving a 4x4 Letter Placement Puzzle Using Genetic Algorithms.</title>
+      <link>https://drnsmith.github.io/projects/solving-a-4x4-letter-placement-puzzle-using-genetic-algorithms./</link>
+      <pubDate>Tue, 20 Jun 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/solving-a-4x4-letter-placement-puzzle-using-genetic-algorithms./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project7_images/pr7.jpg&#34;&#xA;    alt=&#34;Photo by Magda Ehlers on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Magda Ehlers on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Solving-a-4x4-Letter-Placement-Puzzle-Using-Genetic-Algorithms&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;Combinatorial optimisation problems, like puzzles and scheduling tasks, often have large solution spaces that make them challenging to solve using traditional methods. This project leverages &lt;strong&gt;Genetic Algorithms (GAs)&lt;/strong&gt;, a nature-inspired optimisation technique, to solve a &lt;strong&gt;4x4 letter placement puzzle&lt;/strong&gt;. The puzzle requires arranging letters in a grid while meeting specific constraints. This blog will explore the problem definition, the design of the Genetic Algorithm, key challenges faced, and how the solution was evaluated.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Building a Secure Client-Server System with Python.</title>
+      <link>https://drnsmith.github.io/projects/building-a-secure-client-server-system-with-python./</link>
+      <pubDate>Mon, 20 Mar 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/building-a-secure-client-server-system-with-python./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project6_images/pr6.jpg&#34;&#xA;    alt=&#34;Image by Brett Sayles on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Image by Brett Sayles on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Client-Server-Network-Socket-Programming&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;In the world of distributed systems, client-server architecture forms the backbone of communication between applications. This project demonstrates the development of a &lt;strong&gt;secure client-server system&lt;/strong&gt; using Python, incorporating features like &lt;strong&gt;serialisation&lt;/strong&gt;, &lt;strong&gt;file encryption&lt;/strong&gt;, and &lt;strong&gt;multi-threading&lt;/strong&gt; to ensure reliability and security. This blog walks through the design, implementation, and key features of this system, offering insights into how these concepts can be applied in real-world scenarios.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

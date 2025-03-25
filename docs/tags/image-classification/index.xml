@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Image Classification on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/image-classification/</link>
+    <description>Recent content in Image Classification on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Mar 2025 14:35:19 +1300</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/image-classification/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fashion MNIST Demystified: Building and Optimising Neural Networks from the Ground Up</title>
+      <link>https://drnsmith.github.io/projects/fashion-mnist-demystified-building-and-optimising-neural-networks-from-the-ground-up/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/fashion-mnist-demystified-building-and-optimising-neural-networks-from-the-ground-up/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning&#34;&gt;Part 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning&lt;/h1&gt;&#xA;&lt;p&gt;You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts. But here’s the thing — MNIST is old news. It’s solved, overused, and no longer representative of real-world challenges. &lt;strong&gt;Fashion MNIST&lt;/strong&gt; is a modern, robust alternative that brings fresh complexity to the table.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Pneumonia Detection: Challenges, Model Comparisons, and Future Directions</title>
+      <link>https://drnsmith.github.io/projects/ai-powered-pneumonia-detection-challenges-model-comparisons-and-future-directions/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/ai-powered-pneumonia-detection-challenges-model-comparisons-and-future-directions/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project5_images/pr5.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/pneumonia-detection-CNN&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1-challenges-in-medical-imaging-datasets&#34;&gt;Part 1. Challenges in Medical Imaging Datasets&lt;/h1&gt;&#xA;&lt;p&gt;Medical imaging datasets provide critical opportunities for deep learning (DL) applications, but they also come with unique challenges. In this project, aimed at detecting pneumonia using chest X-rays, we faced hurdles like &lt;strong&gt;dataset imbalance&lt;/strong&gt; and &lt;strong&gt;small validation sets&lt;/strong&gt;, which can hinder model performance. This blog discusses the key challenges and demonstrates pre-processing techniques—such as dataset re-sampling, data augmentation, and re-splitting—that helped us overcome these obstacles.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Building Robust CNN Pipelines for Fashion MNIST: From Data to Deployment</title>
+      <link>https://drnsmith.github.io/projects/project12/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project12/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Driven Pneumonia Detection Using Convolutional Neural Networks</title>
+      <link>https://drnsmith.github.io/projects/project5/</link>
+      <pubDate>Tue, 12 Sep 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project5/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

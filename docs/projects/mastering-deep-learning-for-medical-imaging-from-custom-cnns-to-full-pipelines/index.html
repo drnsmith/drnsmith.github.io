@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Mastering Deep Learning for Medical Imaging: From Custom CNNs to Full Pipelines | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This project explores the full lifecycle of deep learning in medical imaging, focusing on histopathology classification. It begins with building a custom Convolutional Neural Network (CNN) from scratch, followed by essential data preparation and augmentation techniques. The project then dives into model evaluation using advanced performance metrics, tackling overfitting with regularisation strategies, and leveraging ensembling techniques to boost accuracy. The final phase integrates all components into a robust, end-to-end image classification pipeline, bridging the gap between research and real-world AI applications in healthcare.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project11_images/pr11.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Mastering Deep Learning for Medical Imaging: From Custom CNNs to Full Pipelines
+          </h1>
+          
+            <p class="f5">This project explores the full lifecycle of deep learning in medical imaging, focusing on histopathology classification. It begins with building a custom Convolutional Neural Network (CNN) from scratch, followed by essential data preparation and augmentation techniques. The project then dives into model evaluation using advanced performance metrics, tackling overfitting with regularisation strategies, and leveraging ensembling techniques to boost accuracy. The final phase integrates all components into a robust, end-to-end image classification pipeline, bridging the gap between research and real-world AI applications in healthcare.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project11_images/pr11.jpg">
+</figure>
+
+<p><strong>View Project on GitHub</strong>:</p>
+<a href="https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification" target="_blank">
+    <img src="/images/github.png" alt="GitHub" style="width:40px; height:40px; vertical-align: middle;">
+  </a>
+<h1 id="part-1-building-custom-cnn-architectures-from-scratch-to-mastery">Part 1. Building Custom CNN Architectures: From Scratch to Mastery</h1>
+<p>Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous. But while pre-trained models like <strong>ResNet</strong> and <strong>EfficientNet</strong> are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch. In this part, I’ll explain how to construct a custom CNN tailored for binary classification tasks.</p>
+<h3 id="what-are-cnns">What Are CNNs?</h3>
+<p>At their core, CNNs are specialised neural networks (NNs) designed to process grid-structured data like images. Unlike traditional NNs, CNNs use layers of convolutional filters to automatically extract hierarchical features, from simple edges to complex patterns. A CNN architecture typically consists of:</p>
+<ul>
+<li><em>Convolutional Layers</em>: Extract features from the input image using filters.</li>
+<li><em>Pooling Layers</em>: Reduce the spatial dimensions of feature maps to lower computational cost.</li>
+<li><em>Fully Connected Layers</em>: Perform classification based on the extracted features.</li>
+<li><em>Dropout Layers</em>: Mitigate overfitting by randomly deactivating neurons during training.</li>
+<li><em>Activation Functions</em>: Introduce non-linearity, enabling the model to learn complex patterns.</li>
+</ul>
+<h3 id="designing-a-custom-cnn">Designing a Custom CNN</h3>
+<p>Here’s how to construct a custom CNN for binary classification:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the CNN model</span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add convolutional layers</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Conv2D(<span style="color:#ae81ff">32</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(BatchNormalization())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Conv2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Conv2D(<span style="color:#ae81ff">128</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Flatten and add dense layers</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Flatten())
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.5</span>))
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>add(Dense(<span style="color:#ae81ff">1</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sigmoid&#39;</span>))  <span style="color:#75715e"># Binary classification</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compile the model</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;binary_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Print model summary</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>summary()
+</span></span></code></pre></div><h3 id="training-the-model-and-visualising-training-progress">Training the Model and Visualising Training Progress</h3>
+<p>After defining the architecture, the next step is to train the model. Training involves feeding the CNN with labelled data, enabling it to learn patterns associated with each class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(
+</span></span><span style="display:flex;"><span>    train_data, train_labels,
+</span></span><span style="display:flex;"><span>    validation_data<span style="color:#f92672">=</span>(val_data, val_labels),
+</span></span><span style="display:flex;"><span>    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>To monitor the model&rsquo;s learning curve, I ploted the training and validation accuracy and loss.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract metrics</span>
+</span></span><span style="display:flex;"><span>acc <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;accuracy&#39;</span>]
+</span></span><span style="display:flex;"><span>val_acc <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_accuracy&#39;</span>]
+</span></span><span style="display:flex;"><span>loss <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>]
+</span></span><span style="display:flex;"><span>val_loss <span style="color:#f92672">=</span> history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot accuracy</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(acc, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training Accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(val_acc, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Validation Accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Training and Validation Accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epochs&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Accuracy&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot loss</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(loss, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training Loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(val_loss, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Validation Loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Training and Validation Loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epochs&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Loss&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p>Here are two visualisations showcasing the training dynamics of a CNN:</p>
+<p><figure><img src="/images/training_validation_accuracy.png">
+</figure>
+
+<em>Training and Validation Accuracy</em></p>
+<p><figure><img src="/images/training_validation_loss.png">
+</figure>
+
+<em>Training and Validation Loss</em></p>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<h4 id="why-build-custom-cnns">Why Build Custom CNNs?</h4>
+<p>Custom CNNs allow to:</p>
+<ul>
+<li>Tailor architectures for unique datasets, such as high-resolution images or imbalanced classes.</li>
+<li>Experiment with architectural innovations to achieve better performance.</li>
+<li>Gain a deeper understanding of how CNNs learn and generalise.</li>
+</ul>
+<h4 id="real-world-use-case-medical-imaging-diagnostics">Real-World Use Case: Medical Imaging Diagnostics</h4>
+<p>Custom CNNs are widely used in medical diagnostics to detect anomalies like tumours or fractures.
+For example, a CNN trained on mammography images can classify lesions as benign or malignant, aiding early detection of breast cancer. By designing the CNN with appropriate layers and regularisation, practitioners can address challenges like small dataset sizes and class imbalances.</p>
+<h4 id="summary">Summary</h4>
+<p>Building a custom CNN is an invaluable skill that bridges the gap between understanding DL and applying it to real-world problems. Whether you&rsquo;re working on medical imaging, autonomous vehicles, or any other domain, custom CNNs empower us to create tailored solutions with deep learning.</p>
+<h1 id="part-2-mastering-data-preparation-and-augmentation-building-the-foundation-for-better-image-classification-models">Part 2. Mastering Data Preparation and Augmentation: Building the Foundation for Better Image Classification Models</h1>
+<p>The journey to building a high-performing image classification model begins long before training. Data preparation and augmentation are often overlooked but vital steps in ensuring your model learns effectively and generalises well. These processes form the bridge between raw, unstructured data and the structured inputs a machine learning model can use. In this part, I&rsquo;ll discuss:</p>
+<ul>
+<li>The essential techniques of data pre-processing, including resizing, normalisation, and train-test splitting.</li>
+<li>How data augmentation enhances model generalisation.</li>
+<li>Strategies for addressing class imbalance to prevent biased models.</li>
+<li>How these steps contribute to real-world applications like medical imaging and fraud detection.</li>
+</ul>
+<h3 id="technical-explanation">Technical Explanation</h3>
+<h4 id="why-data-preparation-matters">Why Data Preparation Matters</h4>
+<p>Before diving into the specifics, let’s address the “why.” Data preparation ensures that:</p>
+<ul>
+<li><em>Models receive structured input</em>: DL models expect data to follow a specific format, including consistent dimensions and value ranges.</li>
+<li><em>Training is efficient</em>: Pre-processed data allows the model to converge faster by eliminating noise and redundancies.</li>
+<li><em>Generalisation improves</em>: Techniques like augmentation create a diverse dataset, reducing the risk of overfitting.</li>
+</ul>
+<h3 id="key-techniques-in-data-preparation">Key Techniques in Data Preparation</h3>
+<ul>
+<li>
+<ol>
+<li><strong>Loading and Pre-processing Images</strong></li>
+</ol>
+</li>
+</ul>
+<p><em>Reading Images</em>: Each image I loaded and resised to a standard dimension of <code>224x224</code> pixels to ensure consistency across the dataset. <code>OpenCV</code> and <code>TensorFlow</code> libraries were used for this task. I created a function to load and pre-process the images:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to load and pre-process images</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_images_from_folder</span>(folder, label):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> os<span style="color:#f92672">.</span>listdir(folder):
+</span></span><span style="display:flex;"><span>        img_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder, file)
+</span></span><span style="display:flex;"><span>        img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(img_path)  <span style="color:#75715e"># Load image</span>
+</span></span><span style="display:flex;"><span>        img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2RGB)  <span style="color:#75715e"># Convert to RGB</span>
+</span></span><span style="display:flex;"><span>        img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>resize(img, (<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>))  <span style="color:#75715e"># Resize to 224x224</span>
+</span></span><span style="display:flex;"><span>        data<span style="color:#f92672">.</span>append((img, label))  <span style="color:#75715e"># Append image and label</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load data for both classes</span>
+</span></span><span style="display:flex;"><span>benign_data <span style="color:#f92672">=</span> load_images_from_folder(benign_dir, label<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>malignant_data <span style="color:#f92672">=</span> load_images_from_folder(malignant_dir, label<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><ul>
+<li>
+<ol start="2">
+<li><strong>Data Splitting</strong></li>
+</ol>
+</li>
+</ul>
+<p><em>Train-Test Split</em>: I split the dataset into training, validation, and test sets with an <code>80-10-10</code> ratio. I used the <code>train_test_split</code> function from <code>sklearn</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Combine benign and malignant data</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> benign_data <span style="color:#f92672">+</span> malignant_data
+</span></span><span style="display:flex;"><span>images, labels <span style="color:#f92672">=</span> zip(<span style="color:#f92672">*</span>data)
+</span></span><span style="display:flex;"><span>images <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(images)
+</span></span><span style="display:flex;"><span>labels <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Split data</span>
+</span></span><span style="display:flex;"><span>X_train, X_temp, y_train, y_temp <span style="color:#f92672">=</span> train_test_split(images, labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>X_val, X_test, y_val, y_test <span style="color:#f92672">=</span> train_test_split(X_temp, y_temp, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Training set size: </span><span style="color:#e6db74">{</span>len(X_train)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Validation set size: </span><span style="color:#e6db74">{</span>len(X_val)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Test set size: </span><span style="color:#e6db74">{</span>len(X_test)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>
+<ol start="3">
+<li><strong>Resizing and Normalising Images:</strong>
+Images captured from real-world sources often come in varying sizes and resolutions. Resizing ensures uniformity, while normalisation scales pixel values to [0, 1], preventing large gradients that could slow training.</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preprocess_image</span>(image, target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>)):
+</span></span><span style="display:flex;"><span>    resized_image <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>resize(image, target_size)  <span style="color:#75715e"># Resize to target dimensions</span>
+</span></span><span style="display:flex;"><span>    normalized_image <span style="color:#f92672">=</span> resized_image <span style="color:#f92672">/</span> <span style="color:#ae81ff">255.0</span>       <span style="color:#75715e"># Normalize pixel values</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> normalized_image
+</span></span></code></pre></div><ul>
+<li>
+<ol start="4">
+<li><strong>Data augmentation:</strong> artificially increases dataset size by creating variations of existing images. Common transformations include:</li>
+</ol>
+</li>
+<li>
+<p><em>Rotation</em>: Simulates different orientations.</p>
+</li>
+<li>
+<p><em>Flipping</em>: Improves robustness to mirrored inputs.</p>
+</li>
+<li>
+<p><em>Zooming</em>: Focuses on finer details.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>augmented_examples <span style="color:#f92672">=</span> [datagen<span style="color:#f92672">.</span>random_transform(train_images[<span style="color:#ae81ff">0</span>]) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>)]
+</span></span></code></pre></div><figure><img src="/images/examples.png">
+</figure>
+
+<ul>
+<li>
+<ol start="5">
+<li><strong>Handling Class Imbalance:</strong>
+In datasets with skewed class distributions, models tend to favour the majority class.
+<figure><img src="/images/split.png">
+</figure>
+</li>
+</ol>
+</li>
+<li>
+<p><em>Oversampling with Data Augmentation</em>: I applied data augmentation to the minority class (benign images) to artificially increase its representation in the training data. This ensures the model is exposed to more diverse examples from the smaller class without altering the original dataset.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Data augmentation for training data</span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Apply augmentation to training data</span>
+</span></span><span style="display:flex;"><span>datagen<span style="color:#f92672">.</span>fit(X_train)
+</span></span></code></pre></div><p><strong>Key Points</strong>: I applied augmentation techniques like rotation, flips, zoom, and shifts. This approach creates variations of existing benign images to balance the dataset.</p>
+<p><strong>Weighted Loss Function</strong>: To account for the imbalance in class distribution, I applied <code>class weights</code> when compiling the model. This technique ensures the model assigns more importance to the minority class during training, reducing the likelihood of biased predictions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.utils.class_weight <span style="color:#f92672">import</span> compute_class_weight
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compute class weights</span>
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> compute_class_weight(<span style="color:#e6db74">&#39;balanced&#39;</span>, classes<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>unique(y_train), y<span style="color:#f92672">=</span>y_train)
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> dict(enumerate(class_weights))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Class Weights: </span><span style="color:#e6db74">{</span>class_weights<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pass class weights during model training</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fit(X_train, y_train, validation_data<span style="color:#f92672">=</span>(X_val, y_val), epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, class_weight<span style="color:#f92672">=</span>class_weights)
+</span></span></code></pre></div><p><strong>Key Points</strong>: The <code>compute_class_weight</code> function calculates weights inversely proportional to class frequencies. This ensures that the malignant class (majority) does not dominate the learning process.</p>
+<p><strong>Stratified Sampling</strong>: I used <code>stratified sampling</code> when splitting the dataset into training, validation, and test sets. This maintains the original class distribution in each subset, ensuring balanced representation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Stratified split</span>
+</span></span><span style="display:flex;"><span>X_train, X_temp, y_train, y_temp <span style="color:#f92672">=</span> train_test_split(images, labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, stratify<span style="color:#f92672">=</span>labels, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>X_val, X_test, y_val, y_test <span style="color:#f92672">=</span> train_test_split(X_temp, y_temp, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, stratify<span style="color:#f92672">=</span>y_temp, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span></code></pre></div><p><strong>Key Points</strong>: The <code>stratify parameter</code> ensures each subset maintains the original class proportions. This prevents under-representation of the minority class during training or testing.</p>
+<p><strong>Evaluation Metrics to Address Imbalance</strong>: I used metrics such as <em>F1-score</em>, <em>Precision</em>, <em>Recall</em>, and <em>ROC-AUC</em> instead of relying solely on accuracy. These metrics are more suitable for imbalanced datasets, as they account for the performance of each class independently.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report, roc_auc_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Evaluate model</span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>print(classification_report(y_test, y_pred <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate ROC-AUC</span>
+</span></span><span style="display:flex;"><span>roc_auc <span style="color:#f92672">=</span> roc_auc_score(y_test, y_pred)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ROC-AUC: </span><span style="color:#e6db74">{</span>roc_auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p><strong>Key Points</strong>: The F1-score balances precision and recall, especially important for the minority class. <code>ROC-AUC</code> provides a comprehensive measure of the model’s ability to distinguish between classes.</p>
+<h4 id="summary-1">Summary</h4>
+<p>Data preparation is not just a preliminary step; but a foundation upon which robust models are built. Resizing, normalising, augmenting, and balancing datasets enable models to learn effectively and generalise well to unseen data. Key Takeaways:</p>
+<ul>
+<li>Uniformity in data input is critical for efficient training.</li>
+<li>Data augmentation improves generalisation, reducing overfitting.</li>
+<li>Addressing class imbalance prevents biased models.</li>
+<li>Invest time in preparing your data—because in machine learning, quality input leads to quality output.</li>
+</ul>
+<h1 id="part-3-evaluating-model-performance-metrics-beyond-accuracy-for-better-insights">Part 3. Evaluating Model Performance: Metrics Beyond Accuracy for Better Insights</h1>
+<p>Accuracy is one of the most common metrics used to evaluate ML models, but it’s not always sufficient—especially in scenarios involving imbalanced datasets or high-stakes decisions. For example, a model with high accuracy might still fail to detect rare but critical events like fraud or disease. In this part, I&rsquo;ll:</p>
+<ul>
+<li>Discuss how <em>precision, recall, specificity, and F1-score</em> metrics provide deeper insights into model performance.</li>
+<li>Introduce the <em>Receiver Operating Characteristic (ROC) curve and AUC</em> for evaluating classification thresholds.</li>
+<li>Demonstrate these metrics with Python code and visualisations.</li>
+</ul>
+<h3 id="technical-explanation-why-accuracy-isnt-always-enough">Technical Explanation: Why Accuracy Isn’t Always Enough</h3>
+<ol>
+<li><strong>Accuracy:</strong> simply measures the percentage of correct predictions over total number of predictions. While useful in balanced datasets, accuracy fails when the data is imbalanced. For example:</li>
+</ol>
+<ul>
+<li>Dataset: 90% benign, 10% malignant.</li>
+<li>Model predicts all cases as benign.</li>
+<li><strong>Accuracy = 90%, but the model identifies zero malignant cases.</strong></li>
+</ul>
+<p>This is where other metrics come into play.</p>
+<ol start="2">
+<li>
+<p><strong>Specificity</strong>: measures the ability of a model to correctly identify true negatives (negative cases that are correctly classified as negative). High specificity ensures the model avoids falsely classifying negative cases as positive. This is especially crucial in medical diagnostics, where a false positive can lead to unnecessary treatments and anxiety for patients.</p>
+</li>
+<li>
+<p><strong>Precision:</strong> focuses on the proportion of true positive predictions out of all positive predictions. High precision means the model avoids false alarms. It is critical in applications like spam detection or cancer diagnosis, where false positives can be costly.</p>
+</li>
+<li>
+<p><strong>Recall:</strong> measures the proportion of actual positives correctly identified. High recall ensures the model captures as many true positives as possible. This is crucial in medical diagnostics where missing a positive case (false negative) can have serious consequences.</p>
+</li>
+<li>
+<p><strong>F1-Score:</strong> provides a balance between precision and recall. Use F1-score when there’s an uneven class distribution and you need a single metric that balances false positives and false negatives.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> precision_score, recall_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y_true <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>precision <span style="color:#f92672">=</span> precision_score(y_true, y_pred)
+</span></span><span style="display:flex;"><span>recall <span style="color:#f92672">=</span> recall_score(y_true, y_pred)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Precision: </span><span style="color:#e6db74">{</span>precision<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Recall: </span><span style="color:#e6db74">{</span>recall<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><ol start="6">
+<li><strong>ROC-AUC (Receiver Operating Characteristic - Area Under Curve):</strong> evaluates the model&rsquo;s ability to distinguish between classes at various threshold settings. <strong>The Area Under the Curve (AUC)</strong> quantifies the ROC curve. An AUC of 1.0 represents a perfect model, while 0.5 indicates random guessing. AUC values range from 0.5 (random guessing) to 1 (perfect classification). Higher AUC indicates better model performance.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_curve, roc_auc_score
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y_scores <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.35</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">0.65</span>, <span style="color:#ae81ff">0.7</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.9</span>, <span style="color:#ae81ff">0.6</span>, <span style="color:#ae81ff">0.3</span>]
+</span></span><span style="display:flex;"><span>fpr, tpr, _ <span style="color:#f92672">=</span> roc_curve(y_true, y_scores)
+</span></span><span style="display:flex;"><span>auc <span style="color:#f92672">=</span> roc_auc_score(y_true, y_scores)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(fpr, tpr, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ROC Curve (AUC = </span><span style="color:#e6db74">{</span>auc<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;--&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Random Guess&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;False Positive Rate&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;True Positive Rate&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;ROC Curve&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h4 id="visualising-the-metrics">Visualising the Metrics</h4>
+<p>The <strong>confusion matrix</strong> summarises true positives, true negatives, false positives, and false negatives.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> confusion_matrix, ConfusionMatrixDisplay
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cm <span style="color:#f92672">=</span> confusion_matrix(y_true, y_pred)
+</span></span><span style="display:flex;"><span>disp <span style="color:#f92672">=</span> ConfusionMatrixDisplay(confusion_matrix<span style="color:#f92672">=</span>cm, display_labels<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;Class 0&#34;</span>, <span style="color:#e6db74">&#34;Class 1&#34;</span>])
+</span></span><span style="display:flex;"><span>disp<span style="color:#f92672">.</span>plot(cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Blues&#39;</span>, values_format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;d&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Confusion Matrix&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><figure><img src="/images/conf.png">
+</figure>
+
+<p><strong>Insights</strong></p>
+<ul>
+<li>
+<p><em>Strengths</em>: The model has high precision and recall for identifying malignant cases, making it reliable for detecting positive cases. A high accuracy of 93.5% shows the overall performance is strong.</p>
+</li>
+<li>
+<p><em>Areas for Improvement</em>: Specificity (88.5%) indicates room for improvement in correctly identifying benign cases. The False Positive rate (28 misclassified benign cases) could be reduced.</p>
+</li>
+<li>
+<p><em>Use Case Context</em>: In medical diagnostics, recall (sensitivity) is typically prioritised to avoid missing malignant cases (false negatives). This model achieves an excellent recall of 95.8%.</p>
+</li>
+</ul>
+<h3 id="real-world-applications-1">Real-World Applications</h3>
+<h4 id="medical-diagnostics">Medical Diagnostics</h4>
+<ul>
+<li><em>Precision</em>: Avoid unnecessary treatments by minimising false positives.</li>
+<li><em>Recall</em>: Ensure all potential cases are flagged for further examination.</li>
+</ul>
+<h4 id="fraud-detection">Fraud Detection</h4>
+<ul>
+<li><em>Precision</em>: Focus on correctly identifying fraudulent transactions.</li>
+<li><em>Recall</em>: Minimise missed fraudulent cases to protect users.</li>
+</ul>
+<h4 id="search-engines">Search Engines</h4>
+<ul>
+<li><em>Precision</em>: Deliver highly relevant results to users.</li>
+<li><em>Recall</em>: Ensure comprehensive coverage of relevant documents.</li>
+</ul>
+<h4 id="marketing-campaigns">Marketing Campaigns</h4>
+<ul>
+<li><em>F1-Score</em>: Balance between targeting the right audience and ensuring campaign reach.</li>
+</ul>
+<h4 id="summary-2">Summary</h4>
+<p>Model evaluation is more than just maximising accuracy. Metrics like precision, recall, F1-score, and ROC-AUC provide nuanced insights into a model&rsquo;s performance, especially in the face of imbalanced datasets. These metrics enable to align the model&rsquo;s outputs with real-world needs, ensuring better decision-making and impactful applications.</p>
+<p><strong>Key Takeaways:</strong></p>
+<ul>
+<li>Accuracy alone is insufficient for imbalanced datasets or critical applications.</li>
+<li>Metrics like precision, recall, specificity, and F1-score provide deeper insights.</li>
+<li>ROC curves and AUC offer a holistic view of model performance across thresholds.</li>
+<li>Evaluating models comprehensively ensures they meet the demands of real-world scenarios.</li>
+<li>By adopting these metrics, we can build models that not only perform well on paper but also deliver meaningful results in practice.</li>
+</ul>
+<h1 id="part-4-tackling-overfitting-in-deep-learning-models">Part 4. Tackling Overfitting in Deep Learning Models</h1>
+<p>DL models have revolutionised ML, enabling breakthroughs in image recognition, natural language processing, and more. However, one common challenge that haunts even the most skilled practitioners is overfitting. Overfitting occurs when a model learns the training data too well, including its noise and irrelevant patterns, at the cost of generalising to new, unseen data.</p>
+<p>Imagine training a model to classify histopathological images of cancer (as in my case). If the model overfits, it might memorise specific features of the training examples rather than learning the general structure of benign and malignant cases. The result? Stellar performance on the training data but poor results on validation or test data.</p>
+<p>In this part, I’ll talk about:</p>
+<ul>
+<li>What overfitting is and how to detect it.</li>
+<li>Key strategies to prevent overfitting, including regularisation techniques, dropout, early stopping, and data augmentation.</li>
+<li>Practical, real-world applications of these methods to build robust deep learning models.</li>
+</ul>
+<h3 id="technical-explanation-1">Technical Explanation</h3>
+<p>Overfitting happens when a model becomes overly complex relative to the amount of training data. It optimises its performance on the training dataset at the expense of generalisation to unseen data.</p>
+<p><strong>Indicators of Overfitting</strong>:</p>
+<ul>
+<li>
+<p><em>Training Loss Drops, Validation Loss Increases</em>: During training, the model achieves lower training loss, but validation loss stagnates or rises.</p>
+</li>
+<li>
+<p><em>Accuracy Divergence</em>: High accuracy on the training set but significantly lower accuracy on validation/test sets.</p>
+</li>
+</ul>
+<h3 id="strategies-to-address-overfitting">Strategies to Address Overfitting</h3>
+<h4 id="dropout">Dropout</h4>
+<p><code>Dropout</code> is used as a regularisation technique. It randomly sets a fraction of the input units to zero during training, which helps prevent the model from relying too heavily on specific neurons.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Dropout layers in the model architecture</span>
+</span></span><span style="display:flex;"><span>ldam_model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.4</span>))  <span style="color:#75715e"># After the third convolutional layer</span>
+</span></span><span style="display:flex;"><span>ldam_model<span style="color:#f92672">.</span>add(Dropout(<span style="color:#ae81ff">0.2</span>))  <span style="color:#75715e"># After the fourth convolutional layer</span>
+</span></span></code></pre></div><p>In my model, <code>dropout</code> with rates of 0.4 and 0.2 is applied after specific convolutional layers. This ensures that the network learns robust patterns rather than memorising the training data.</p>
+<h4 id="regularisation-with-class-weights">Regularisation with Class Weights</h4>
+<p><code>Regularisation</code> helps address overfitting by penalising the model for biasing its predictions towards the majority class. In my model, <code>class weights</code> are used to balance the training process.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Class weights calculation</span>
+</span></span><span style="display:flex;"><span>class_weights <span style="color:#f92672">=</span> {i: n_samples <span style="color:#f92672">/</span> (n_classes <span style="color:#f92672">*</span> class_counts[i]) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n_classes)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Passing class weights during model training</span>
+</span></span><span style="display:flex;"><span>history <span style="color:#f92672">=</span> cw_model<span style="color:#f92672">.</span>fit(
+</span></span><span style="display:flex;"><span>    datagen<span style="color:#f92672">.</span>flow(training_images, training_labels, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>),
+</span></span><span style="display:flex;"><span>    validation_data<span style="color:#f92672">=</span>(val_images, val_labels),
+</span></span><span style="display:flex;"><span>    epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    callbacks<span style="color:#f92672">=</span>[early_stop, rlrp],
+</span></span><span style="display:flex;"><span>    verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    class_weight<span style="color:#f92672">=</span>class_weights
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>Class Weights in My Code:
+<code>{0: 1.58, 1: 0.73}</code></p>
+<p>These weights ensure that the model does not overly prioritise the majority class (malignant cases) while neglecting the minority class (benign cases).</p>
+<h4 id="learning-rate-scheduling">Learning Rate Scheduling</h4>
+<p><code>Learning rate</code> scheduling is used in my model to gradually reduce the learning rate during training. This prevents the model from overshooting the optimal weights and allows for finer adjustments as training progresses.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Learning rate schedulling</span>
+</span></span><span style="display:flex;"><span>lr_schedule <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>optimizers<span style="color:#f92672">.</span>schedules<span style="color:#f92672">.</span>InverseTimeDecay(
+</span></span><span style="display:flex;"><span>    initial_learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>,
+</span></span><span style="display:flex;"><span>    decay_steps<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    decay_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    staircase<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>The learning rate starts at 0.001 and decreases over time, ensuring smoother convergence during training.</p>
+<h4 id="early-stopping">Early Stopping</h4>
+<p><code>Early stopping</code> halts training when the validation loss stops improving, preventing the model from overfitting on the training data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Early stopping callback</span>
+</span></span><span style="display:flex;"><span>early_stop <span style="color:#f92672">=</span> EarlyStopping(monitor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;val_loss&#39;</span>, patience<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>In my model, <code>training</code> will stop after 5 epochs of no improvement in validation loss, saving computational resources and reducing overfitting.</p>
+<h4 id="data-augmentation">Data Augmentation</h4>
+<p><code>Data augmentation</code> artificially increases the diversity of the training data by applying random transformations like rotations, flips, and zooms. This helps the model generalise better to unseen data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    shear_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    fill_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>,
+</span></span><span style="display:flex;"><span>    zoom_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>Augmented images are generated during training, exposing the model to diverse views of the data, making it more robust to real-world variations.</p>
+<figure><img src="/images/training_validation_accuracy.png">
+</figure>
+
+<figure><img src="/images/training_validation_loss.png">
+</figure>
+
+<p><strong>Observations:</strong></p>
+<ul>
+<li><em>Training/Validation Loss</em>:</li>
+</ul>
+<p>The training loss steadily decreases over the epochs, which is expected as the model continues to learn patterns in the training data. Validation loss decreases initially, indicating improved performance on unseen data. However, after a certain number of epochs (~25-30), the validation loss stabilises and starts to fluctuate slightly. This could suggest overfitting, where the model begins to memorise the training data rather than generalising.</p>
+<p><strong>Insights:</strong> The gap between training and validation loss is relatively small, which indicates that the applied techniques (dropout, regularisation, etc.) are effective in reducing overfitting. Early stopping could have been triggered around epoch 30 to avoid unnecessary training beyond the optimal point.</p>
+<ul>
+<li><em>Training/Validaton Accuracy</em>:</li>
+</ul>
+<p>Training accuracy improves consistently over the epochs, reaching close to 90%. Validation accuracy lags behind training accuracy initially, which is expected. Both metrics improve steadily, but a divergence is noticeable toward the later epochs (~30-40), suggesting that the model starts overfitting.</p>
+<p><strong>Insights:</strong> The upward trend in validation accuracy shows the model generalises well for most of the training duration. Techniques like early stopping and learning rate scheduling likely helped delay the onset of overfitting.</p>
+<h3 id="real-world-applications-2">Real-World Applications</h3>
+<p>In tasks like <strong>cancer diagnosis</strong> using histopathological images, overfitting is a significant challenge due to the small dataset sizes. The use of dropout and data augmentation helps reduce overfitting, ensuring the model generalises well to unseen cases.</p>
+<p>In <strong>fraud detection</strong> systems, overfitting can result in a model that performs well on past data but fails to identify new fraud patterns. Techniques like early stopping and class weights applied in your code create robust models that adapt to evolving fraud tactics.</p>
+<p>In tasks like <strong>sentiment analysis</strong>, overfitting on specific words or phrases is common. Dropout and regularisation techniques, as used in your model, can prevent memorisation of spurious patterns, enhancing generalisation.</p>
+<h4 id="summary-3">Summary</h4>
+<p>Overfitting is a common but solvable challenge in DL. By using strategies like dropout, regularisation, learning rate scheduling, early stopping, and data augmentation we can build models that strike a balance between learning and generalisation.</p>
+<p>Detecting overfitting early through validation metrics and visualisations ensures the model performs well on unseen data. By applying these techniques, we can do both improve model’s performance and build trust in its ability to generalise to real-world scenarios.</p>
+<h1 id="part-5-advanced-regularisation-techniques-for-cnns">Part 5. Advanced Regularisation Techniques for CNNs</h1>
+<p>Convolutional Neural Networks (CNNs) have transformed ML, excelling in fields like image recognition, object detection, and medical imaging. However, like all ML models, CNNs are prone to overfitting, where the model performs well on the training data but struggles to generalise to unseen data. This is where regularisation comes into play.</p>
+<p>Regularisation techniques are designed to prevent overfitting and improve generalisation, making CNNs robust and reliable. Beyond the basics, advanced regularisation methods like L1/L2 regularisation, batch normalisation, and data-driven regularisation techniques offer powerful ways to fine-tune your model.</p>
+<p>In this part, I will:</p>
+<ul>
+<li>Talk why regularisation is crucial for CNNs.</li>
+<li>Explore advanced regularisation techniques, including their mathematical foundations and practical implementation.</li>
+<li>Discuss real-world applications of these techniques to enhance CNN performance.</li>
+</ul>
+<h3 id="technical-explanation-2">Technical Explanation</h3>
+<p>CNNs often have millions of parameters due to their complex architectures, making them susceptible to overfitting. Regularisation combats this by introducing constraints or additional information to the learning process. This ensures the model focuses on essential patterns rather than noise in the data.</p>
+<h3 id="advanced-regularisation-techniques">Advanced Regularisation Techniques</h3>
+<p><strong>L1 Regularisation (Lasso):</strong> penalises the sum of the absolute values of the weights. It encourages sparsity by driving less important weights to zero; and is useful for feature selection in CNNs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.regularizers <span style="color:#f92672">import</span> l1, l2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, kernel_regularizer<span style="color:#f92672">=</span>l2(<span style="color:#ae81ff">0.01</span>)),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">64</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>, kernel_regularizer<span style="color:#f92672">=</span>l1(<span style="color:#ae81ff">0.01</span>)),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><p><strong>L2 Regularisation (Ridge):</strong> penalises the sum of the squared weights. It encourages smaller weights, reducing the model’s sensitivity to individual parameters.</p>
+<p><strong>Batch Normalisation:</strong> normalises the inputs of each layer during training, stabilising learning and reducing the dependence on initialisation. It also acts as an implicit regularzer by reducing internal covariate shift. It accelerates training by allowing higher learning rates; and reduces the need for dropout in some cases.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> BatchNormalization
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">128</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),
+</span></span><span style="display:flex;"><span>    BatchNormalization(),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">64</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),
+</span></span><span style="display:flex;"><span>    BatchNormalization(),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><p><strong>Learning Rate Schedulling:</strong> dynamically adjusts the learning rate during training to improve convergence and prevent overfitting. The inverse time decay schedule, for example, reduces the learning rate as training progresses.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.optimizers.schedules <span style="color:#f92672">import</span> InverseTimeDecay
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lr_schedule <span style="color:#f92672">=</span> InverseTimeDecay(
+</span></span><span style="display:flex;"><span>    initial_learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>,
+</span></span><span style="display:flex;"><span>    decay_steps<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    decay_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    staircase<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>This schedule starts with a learning rate of <code>0.001</code> and decreases it over time for finer adjustments during training.</p>
+<h3 id="real-world-applications-3">Real-World Applications</h3>
+<h4 id="medical-imaging">Medical Imaging</h4>
+<p>Regularisation techniques like dropout and batch normalisation are crucial in medical imaging tasks, where datasets are often small. These methods ensure the CNN generalises well and avoids overfitting, enabling accurate diagnoses.</p>
+<p>For example,</p>
+<ul>
+<li>Histopathological image classification of cancer cells using L2 regularisation and dropout.</li>
+</ul>
+<h4 id="autonomous-vehicles">Autonomous Vehicles</h4>
+<p>CNNs used in autonomous vehicles must generalise across varied lighting and weather conditions. Data augmentation plays a critical role in creating robust models capable of handling real-world variability.</p>
+<p>For example,</p>
+<ul>
+<li>Augmenting road scene datasets with brightness shifts, rotations, and flips.</li>
+</ul>
+<h4 id="retail-image-analysis">Retail Image Analysis</h4>
+<p>In tasks like product categorisation or shelf analysis, CNNs must handle high intra-class variability. Techniques like learning rate scheduling and L1 regularisation ensure the models are both accurate and efficient.</p>
+<h4 id="summary-4">Summary</h4>
+<p>Advanced regularisation techniques like L1/L2 regularisation, batch normalisation, dropout, and data-driven methods such as data augmentation are powerful tools to combat overfitting and enhance model generalisation. These techniques ensure your CNNs remain robust, scalable, and reliable in real-world scenarios. By applying these methods, we can build models that balance learning and generalisation, unlocking the full potential of DL.</p>
+<h1 id="part-6-mastering-ensembling-techniques-boosting-model-performance-with-stacking-and-voting">Part 6. Mastering Ensembling Techniques: Boosting Model Performance with Stacking and Voting</h1>
+<p>No single model is perfect, and each has its own strengths and weaknesses. Ensembling techniques address this by combining predictions from multiple models to create a stronger, more robust model. Whether we’re using bagging, boosting, stacking, or voting, ensembling is a powerful strategy to achieve higher accuracy and better generalisation. In this part, I’ll focus on:</p>
+<ul>
+<li>The fundamentals of stacking and soft voting.</li>
+<li>Implementing stacking with a meta-model.</li>
+<li>Using soft voting for combined predictions.</li>
+<li>Evaluating ensemble models with metrics like ROC-AUC.</li>
+</ul>
+<h3 id="technical-explanation-3">Technical Explanation</h3>
+<p>Ensembling reduces overfitting and variance by leveraging the strengths of multiple models. It improves generalisation, making predictions more reliable, especially for complex datasets.</p>
+<h4 id="1-stacking">1. Stacking</h4>
+<p>Combines predictions from base models (e.g., neural networks, decision trees) into a feature matrix, which is then used as input for a meta-model. The meta-model learns how to combine these predictions optimally.</p>
+<p><strong>Step 1: Combine Base Model Predictions</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Assuming predictions from base models</span>
+</span></span><span style="display:flex;"><span>ldam_predictions <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">100</span>)  <span style="color:#75715e"># Example predictions from model 1</span>
+</span></span><span style="display:flex;"><span>cw_predictions <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">100</span>)    <span style="color:#75715e"># Example predictions from model 2</span>
+</span></span><span style="display:flex;"><span>smote_predictions <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">100</span>) <span style="color:#75715e"># Example predictions from model 3</span>
+</span></span><span style="display:flex;"><span>custom_loss_predictions <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">100</span>) <span style="color:#75715e"># Example predictions from model 4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Combine predictions into a feature matrix</span>
+</span></span><span style="display:flex;"><span>ensemble_features <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>column_stack((ldam_predictions, cw_predictions, smote_predictions, custom_loss_predictions))
+</span></span></code></pre></div><p><strong>Step 2: Train-Test Split for Ensemble Features</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Assuming val_labels are the true labels</span>
+</span></span><span style="display:flex;"><span>ensemble_features_train, ensemble_features_test, val_labels_train, val_labels_test <span style="color:#f92672">=</span> train_test_split(
+</span></span><span style="display:flex;"><span>    ensemble_features, val_labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p><strong>Step 3: Train a Meta-Model</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LogisticRegression
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize and train the meta-model</span>
+</span></span><span style="display:flex;"><span>meta_model <span style="color:#f92672">=</span> LogisticRegression()
+</span></span><span style="display:flex;"><span>meta_model<span style="color:#f92672">.</span>fit(ensemble_features_train, val_labels_train)
+</span></span></code></pre></div><p><strong>Step 4: Evaluate the Meta-Model</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> roc_auc_score
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predict probabilities for ROC-AUC calculation</span>
+</span></span><span style="display:flex;"><span>meta_probabilities <span style="color:#f92672">=</span> meta_model<span style="color:#f92672">.</span>predict_proba(ensemble_features_test)[:, <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>roc_auc <span style="color:#f92672">=</span> roc_auc_score(val_labels_test, meta_probabilities)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;ROC AUC Score:&#34;</span>, roc_auc)
+</span></span></code></pre></div><figure><img src="/images/pr11_roc.png">
+</figure>
+
+<p><strong>Results:</strong></p>
+<ul>
+<li>Accuracy: 94.41%</li>
+<li>Precision: 95.10%</li>
+<li>Recall: 97% F1</li>
+<li>F-Score: 96.04%</li>
+</ul>
+<p>It appears that the meta-model has performed exceptionally well, suggesting that the stacking ensemble approach effectively combined the strengths of your base models to achieve high performance across all key metrics. This is a strong result, especially in fields requiring high sensitivity and precision, such as medical image analysis or other critical applications.</p>
+<p>The high recall (97%) is particularly noteworthy, as it indicates that the meta-model is very effective at identifying the positive class, which could be crucial for applications like disease detection where missing a positive case could have serious consequences.</p>
+<p>The balance between precision and recall, reflected in the high F1 score (96.04%), suggests that your meta-model manages to maintain a low rate of false positives while still correctly identifying most of the true positives, which is often a challenging balance to achieve.</p>
+<p>These results validate the efficacy of using a stacking ensemble method in scenarios where you have multiple predictive models, each with its own approach to handling class imbalances or other dataset-specific challenges. It demonstrates the power of combining these models to leverage their individual strengths and mitigate their weaknesses.</p>
+<h4 id="real-world-applications-4">Real-World Applications</h4>
+<p>For example, in <strong>Medical Diagnostics</strong>, ensemble models can combine predictions from CNNs trained on different features of medical images, improving diagnostic accuracy. In <strong>Fraud Detection</strong>, stacking meta-models can combine predictions from various algorithms (e.g., decision trees, SVMs) to identify fraudulent transactions more effectively. In <strong>Customer Segmentation</strong>, soft voting ensembles improve segmentation by leveraging multiple clustering or classification algorithms.</p>
+<h4 id="summary-5">Summary</h4>
+<ul>
+<li>Ensembling techniques like stacking and voting improve model performance by leveraging the strengths of multiple models.</li>
+<li>Stacking combines predictions with a meta-model, while voting averages predictions for a consensus.</li>
+<li>Evaluation metrics like ROC-AUC provide insights into the ensemble&rsquo;s effectiveness.</li>
+<li>Ensembling is a powerful addition to your machine learning toolkit. Experiment with these techniques to improve your models&rsquo; robustness and performance!</li>
+</ul>
+<h1 id="part-7-building-robust-end-to-end-image-classification-pipelines">Part 7. Building Robust End-to-End Image Classification Pipelines</h1>
+<p>In the world of ML, image classification is one of the most common and impactful applications. From detecting diseases in medical imaging to identifying products in e-commerce, the ability to categorise images accurately has transformed industries. However, building an effective image classification model requires more than just training a neural network—it demands a robust, end-to-end pipeline that can handle the entire process, from raw data to deployment. This part will guide you through creating a production-ready image classification pipeline, tying together key concepts such as data preparation, model training, evaluation, and deployment.</p>
+<h3 id="technical-explanation-4">Technical Explanation</h3>
+<p>An end-to-end image classification pipeline consists of the following critical stages:</p>
+<h4 id="1-data-preparation">1. Data Preparation</h4>
+<p>The foundation of any image classification model lies in well-prepared data. This stage involves:</p>
+<ul>
+<li><em>Data Collection</em>: Sourcing images from reliable datasets or raw data (e.g., scraped images, medical scans).</li>
+<li><em>Data Cleaning</em>: Removing duplicates, corrupted images, or mislabelled examples.</li>
+<li><em>Data Augmentation</em>: Expanding the dataset by applying transformations such as rotations, flips, and zooms.</li>
+</ul>
+<p>For example,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.preprocessing.image <span style="color:#f92672">import</span> ImageDataGenerator
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>datagen <span style="color:#f92672">=</span> ImageDataGenerator(
+</span></span><span style="display:flex;"><span>    rotation_range<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+</span></span><span style="display:flex;"><span>    width_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    height_shift_range<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>    horizontal_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    vertical_flip<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>    rescale<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span><span style="color:#f92672">/</span><span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train_generator <span style="color:#f92672">=</span> datagen<span style="color:#f92672">.</span>flow_from_directory(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;data/train&#39;</span>,
+</span></span><span style="display:flex;"><span>    target_size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>),
+</span></span><span style="display:flex;"><span>    batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>,
+</span></span><span style="display:flex;"><span>    class_mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;categorical&#39;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>In the pipeline, data augmentation with techniques like rotation and flipping ensures the model learns diverse patterns, improving generalisation.</p>
+<h4 id="2-model-training">2. Model Training</h4>
+<p>Training the model involves selecting an appropriate architecture, regularization techniques, and hyperparameters to optimise performance. Common steps include:</p>
+<ul>
+<li><em>Choosing a Base Model</em>: Use a pretrained CNN such as ResNet or VGG to leverage transfer learning.</li>
+<li><em>Fine-Tuning the Model</em>: Adjusting the pretrained layers to fit your specific dataset.</li>
+<li><em>Applying Regularisation</em>: Techniques like dropout and L2 regularisation help combat overfitting.</li>
+</ul>
+<p>For example,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.applications <span style="color:#f92672">import</span> ResNet50
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.models <span style="color:#f92672">import</span> Sequential
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tensorflow.keras.layers <span style="color:#f92672">import</span> Dense, Dropout, Flatten
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>base_model <span style="color:#f92672">=</span> ResNet50(weights<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;imagenet&#39;</span>, include_top<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, input_shape<span style="color:#f92672">=</span>(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> Sequential([
+</span></span><span style="display:flex;"><span>    base_model,
+</span></span><span style="display:flex;"><span>    Flatten(),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">256</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>),
+</span></span><span style="display:flex;"><span>    Dropout(<span style="color:#ae81ff">0.5</span>),
+</span></span><span style="display:flex;"><span>    Dense(<span style="color:#ae81ff">10</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;categorical_crossentropy&#39;</span>, metrics<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;accuracy&#39;</span>])
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li>The ResNet50 base model extracts robust features.</li>
+<li>A dropout layer with a rate of 0.5 reduces overfitting.</li>
+<li>The final dense layer outputs class probabilities.</li>
+</ul>
+<h4 id="3-evaluation">3. Evaluation</h4>
+<p>Evaluation ensures that your model performs well not only on training data but also on unseen test data. Key metrics include:</p>
+<ul>
+<li><em>Accuracy</em>: Proportion of correct predictions.</li>
+<li><em>Precision, Recall, and F1-Score</em>: Measure performance in imbalanced datasets.</li>
+<li><em>Confusion Matrix</em>: Visualises the distribution of predictions.</li>
+</ul>
+<p>For example,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report, confusion_matrix
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Predictions on test data</span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmax(model<span style="color:#f92672">.</span>predict(X_test), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(confusion_matrix(y_test, y_pred))
+</span></span><span style="display:flex;"><span>print(classification_report(y_test, y_pred))
+</span></span></code></pre></div><p><strong>Key Insight:</strong>
+A confusion matrix helps identify misclassified examples, guiding improvements in data preprocessing or model tuning.</p>
+<h4 id="4-deployment">4. Deployment</h4>
+<p>Deployment involves integrating the trained model into a real-world application. This stage includes:</p>
+<ul>
+<li><em>Model Serialisation</em>: Saving the model in formats like <code>TensorFlow SavedModel</code> or <code>ONNX</code>.</li>
+<li><em>API Integration</em>: Using tools like <code>Flask</code> or <code>FastAPI</code> to serve predictions.</li>
+<li><em>Monitoring</em>: Tracking performance in production to handle concept drift or model degradation.</li>
+</ul>
+<p>For example,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, request, jsonify
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>keras<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>load_model(<span style="color:#e6db74">&#39;saved_model&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/predict&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">predict</span>():
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>files[<span style="color:#e6db74">&#39;file&#39;</span>]<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> preprocess_image(image)  <span style="color:#75715e"># Function to preprocess the input</span>
+</span></span><span style="display:flex;"><span>    prediction <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(image)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> jsonify({<span style="color:#e6db74">&#39;prediction&#39;</span>: prediction<span style="color:#f92672">.</span>tolist()})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>run(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, port<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>)
+</span></span></code></pre></div><p><strong>Explanation:</strong></p>
+<ul>
+<li>The model is served through a Flask API for real-time predictions.</li>
+<li>Monitoring tools like Prometheus can be added to track model usage and accuracy over time.</li>
+</ul>
+<h3 id="real-world-applications-5">Real-World Applications</h3>
+<p>In <strong>Medical Diagnostics</strong>, end-to-end pipelines are crucial in medical imaging, where models classify X-rays, CT scans, or histopathological slides. Robust pre-processing (e.g., normalising intensities) and monitoring in production ensure accuracy in life-critical applications. In <strong>Retail and E-Commerce</strong>, image classification pipelines help e-commerce platforms automatically tag products based on images, improving inventory management and search relevance. In <strong>Autonomous Vehicles/Driving</strong>, image classification models identify traffic signs, pedestrians, and obstacles. Real-time deployment ensures reliable and timely predictions under varying conditions.</p>
+<h4 id="summary-6">Summary</h4>
+<p>Building an end-to-end image classification pipeline involves more than just training a model. From robust data preparation to careful evaluation and seamless deployment, every step plays a crucial role in ensuring the pipeline’s effectiveness. By implementing these practices, you can handle real-world challenges confidently and build scalable, production-ready systems.</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding and stay healthy!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

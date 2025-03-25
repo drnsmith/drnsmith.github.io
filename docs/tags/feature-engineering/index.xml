@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Feature Engineering on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/feature-engineering/</link>
+    <description>Recent content in Feature Engineering on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Nov 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/feature-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI and Air Quality: Predicting Pollution for a Cleaner Future.</title>
+      <link>https://drnsmith.github.io/projects/ai-and-air-quality-predicting-pollution-for-a-cleaner-future./</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/ai-and-air-quality-predicting-pollution-for-a-cleaner-future./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project8_images/pr8.jpg&#34;&#xA;    alt=&#34;Photo by Dom J on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Dom J on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/PM-London-Pollution&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-cleaning-the-air-data-pre-processing-for-pm10-prediction&#34;&gt;Part 1. Cleaning the Air: Data Pre-processing for PM10 Prediction&lt;/h1&gt;&#xA;&lt;p&gt;Have you ever stopped to think about the data behind environmental predictions? We hear a lot about air pollution and its devastating effects on our health, but what’s often overlooked is the behind-the-scenes work required to make accurate predictions. The first step in any data-driven environmental project is cleaning the data—and let me tell you, it’s not as simple as it sounds.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Difficulty Classification</title>
+      <link>https://drnsmith.github.io/projects/project1/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project1/</guid>
+      <description>&lt;h2&gt;Read the Paper:&lt;/h2&gt;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://drnsmith.github.io/papers/project_1_paper.pdf&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/pdf-icon.png&#34; alt=&#34;PDF&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://drnsmith.github.io/papers/project_1_paper.pdf&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        Click to View PDF&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>Predicting Pollution (PM10 Levels): Leveraging Data Science and Machine Learning to Combat Urban Air Pollution in London, UK</title>
+      <link>https://drnsmith.github.io/projects/project8/</link>
+      <pubDate>Mon, 20 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project8/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Classifier</title>
+      <link>https://drnsmith.github.io/projects/ai-powered-recipe-classifier/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/ai-powered-recipe-classifier/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1&#34;&gt;Part 1.&lt;/h1&gt;&#xA;&lt;p&gt;Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong&gt;Easy, Medium, Hard, and Very Hard&lt;/strong&gt;—using &lt;strong&gt;Natural Language Processing (NLP)&lt;/strong&gt; and &lt;strong&gt;Machine Learning (ML)&lt;/strong&gt;. In the first part, I focus on and walk you through &lt;strong&gt;data collection, cleaning, and pre-processing&lt;/strong&gt;, which lay the foundation for training a robust ML model.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

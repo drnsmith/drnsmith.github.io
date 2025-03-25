@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Multi-Layer Perceptrons on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/multi-layer-perceptrons/</link>
+    <description>Recent content in Multi-Layer Perceptrons on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Feb 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/multi-layer-perceptrons/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deep Learning for Air Quality Prediction: From Data Cleaning to LSTMs.</title>
+      <link>https://drnsmith.github.io/projects/deep-learning-for-air-quality-prediction-from-data-cleaning-to-lstms./</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/deep-learning-for-air-quality-prediction-from-data-cleaning-to-lstms./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project9_images/pr9.jpg&#34;&#xA;    alt=&#34;Photo by Markus Distelrath on Pexels&#34;&gt;&lt;figcaption&gt;&#xA;      &lt;p&gt;Photo by Markus Distelrath on Pexels&lt;/p&gt;&#xA;    &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Pollution-Prediction-Auckland&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-the-importance-of-data-cleaning-in-environmental-analysis&#34;&gt;Part 1. The Importance of Data Cleaning in Environmental Analysis&lt;/h1&gt;&#xA;&lt;p&gt;Data is often called the backbone of ML, but in the real world, data is rarely clean or ready for use. This is especially true for environmental data, where missing values, outliers, and inconsistencies are common. When predicting PM10 pollution levels in Auckland (NZ), the first challenge wasn’t building a model but cleaning the data. Imagine trying to build a house with warped bricks and missing mortar. Without proper cleaning, even the best models would struggle to produce meaningful results. In this part, I&amp;rsquo;ll explore the messy reality of working with air quality data and the critical role data cleaning played in this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Predicting Air Quality in Auckland (NZ): Harnessing AI to Tackle PM10 Pollution</title>
+      <link>https://drnsmith.github.io/projects/project9/</link>
+      <pubDate>Sat, 03 Feb 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project9/</guid>
+      <description>&lt;p&gt;This section showcases the various blog and technical posts related to this project.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

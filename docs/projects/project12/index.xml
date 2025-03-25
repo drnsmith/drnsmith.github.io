@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Building Robust CNN Pipelines for Fashion MNIST: From Data to Deployment on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/projects/project12/</link>
+    <description>Recent content in Building Robust CNN Pipelines for Fashion MNIST: From Data to Deployment on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Jun 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/projects/project12/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fashion MNIST Demystified: Building and Optimising Neural Networks from the Ground Up</title>
+      <link>https://drnsmith.github.io/projects/fashion-mnist-demystified-building-and-optimising-neural-networks-from-the-ground-up/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/fashion-mnist-demystified-building-and-optimising-neural-networks-from-the-ground-up/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project12_images/pr12.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Designing-Dense-NNs-Using-MNIST&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-decoding-fashion-mnist-a-modern-benchmark-for-deep-learning&#34;&gt;Part 1. Decoding Fashion MNIST: A Modern Benchmark for Deep Learning&lt;/h1&gt;&#xA;&lt;p&gt;You’ve seen it before: the iconic handwritten digits from the MNIST dataset, the quintessential benchmark for machine learning enthusiasts. But here’s the thing — MNIST is old news. It’s solved, overused, and no longer representative of real-world challenges. &lt;strong&gt;Fashion MNIST&lt;/strong&gt; is a modern, robust alternative that brings fresh complexity to the table.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

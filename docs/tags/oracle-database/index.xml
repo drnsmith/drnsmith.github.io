@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oracle Database on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/oracle-database/</link>
+    <description>Recent content in Oracle Database on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Nov 2023 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/oracle-database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building and Optimising a Data Warehouse: From Design to Business Insights.</title>
+      <link>https://drnsmith.github.io/projects/building-and-optimising-a-data-warehouse-from-design-to-business-insights./</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/building-and-optimising-a-data-warehouse-from-design-to-business-insights./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project3_images/pr3.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/warehouse-management-system&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/warehouse-management-system&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1-building-a-data-warehouse-technical-implementation-and-challenges&#34;&gt;Part 1. Building a Data Warehouse: Technical Implementation and Challenges&lt;/h1&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW). In this part, I&amp;rsquo;ll walk through the technical journey of building a data warehouse for a company named &amp;lsquo;OfficeProducts&amp;rsquo;, including some of the core challenges faced and how they were addressed.&#xA;This blog is written for those curious about the behind-the-scenes of data integration, schema design, and technical problem-solving involved in creating a functional data warehouse.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Data Warehouse Design and Multidimensional Analysis for OfficeProducts</title>
+      <link>https://drnsmith.github.io/projects/project3/</link>
+      <pubDate>Thu, 09 Nov 2023 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project3/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

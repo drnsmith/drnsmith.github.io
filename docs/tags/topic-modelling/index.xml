@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Topic Modelling on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/topic-modelling/</link>
+    <description>Recent content in Topic Modelling on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Feb 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/topic-modelling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decoding Market Sentiments: Analysing NASDAQ Companies with Big Data and NLP.</title>
+      <link>https://drnsmith.github.io/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/decoding-market-sentiments-analysing-nasdaq-companies-with-big-data-and-nlp./</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project4_images/pr4.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1-unveiling-sentiments-analysing-nasdaq-companies-through-big-data-and-sentiment-analysis&#34;&gt;Part 1. Unveiling Sentiments: Analysing NASDAQ Companies through Big Data and Sentiment Analysis&lt;/h1&gt;&#xA;&lt;p&gt;In an era defined by social media and digital transformation, the sheer volume of unstructured text data has emerged as a goldmine for businesses, investors, and analysts. Twitter, with its instantaneous and candid nature, offers a unique window into public sentiment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Combining advanced NLP techniques (BERT embeddings) with LDA topic modelling.</title>
+      <link>https://drnsmith.github.io/projects/project2/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project2/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sentiment Speaks: Analysing Twitter Discourse on NASDAQ Companies</title>
+      <link>https://drnsmith.github.io/projects/project4/</link>
+      <pubDate>Sat, 10 Aug 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project4/</guid>
+      <description>&lt;p&gt;This section showcases the technical blog related to this project.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Building and Optimising a Data Warehouse: From Design to Business Insights. | Natasha Smith Portfolio</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This project documents the complete end-to-end process of designing, building, and optimising a data warehouse. It covers key technical aspects, including schema design, ETL processes, data integration, and performance tuning using Oracle. The project also explores multidimensional analysis, demonstrating how aggregated data can drive business intelligence insights. Finally, it delves into sales performance evaluation and strategic recommendations, showcasing how structured data can transform decision-making in an enterprise environment.">
+
+    <meta name="generator" content="Hugo 0.142.0">
+
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" >
+
+
+
+    <link rel="stylesheet" href="/css/custom.css">
+    
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+    
+    <nav class="pa3 pa4-ns flex justify-end items-center">
+    <ul class="list flex ma0 pa0">
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/">Home</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/about/">About</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/projects/">Projects</a>
+      </li>
+      
+      <li class="ml3">
+        <a class="link dim dark-gray f5" href="/contact/">Contact</a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+  
+
+    
+    
+      
+      <header class="page-header"
+        style="
+          background-image: url('/images/project3_images/pr3.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.4); padding: 1rem; border-radius: 4px;">
+          <h1 class="f1 athelas mt3 mb1">
+            Building and Optimising a Data Warehouse: From Design to Business Insights.
+          </h1>
+          
+            <p class="f5">This project documents the complete end-to-end process of designing, building, and optimising a data warehouse. It covers key technical aspects, including schema design, ETL processes, data integration, and performance tuning using Oracle. The project also explores multidimensional analysis, demonstrating how aggregated data can drive business intelligence insights. Finally, it delves into sales performance evaluation and strategic recommendations, showcasing how structured data can transform decision-making in an enterprise environment.</p>
+          
+        </div>
+      </header>
+      
+    
+
+    
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray"><figure><img src="/images/project3_images/pr3.jpg">
+</figure>
+
+<div style="display: flex; align-items: center; gap: 10px;">
+    <a href="https://github.com/drnsmith/warehouse-management-system" target="_blank" style="text-decoration: none;">
+        <img src="/images/github.png" alt="GitHub" style="width: 40px; height: 40px; vertical-align: middle;">
+    </a>
+    <a href="https://github.com/drnsmith/warehouse-management-system" target="_blank" style="font-weight: bold; color: black;">
+        View Project on GitHub
+    </a>
+</div>
+<h1 id="part-1-building-a-data-warehouse-technical-implementation-and-challenges">Part 1. Building a Data Warehouse: Technical Implementation and Challenges</h1>
+<p>In today&rsquo;s data-driven world, the ability to analyse large datasets and derive meaningful insights is a game-changer for businesses. One of the most important tools that helps achieve this goal is a Data Warehouse (DW). In this part, I&rsquo;ll walk through the technical journey of building a data warehouse for a company named &lsquo;OfficeProducts&rsquo;, including some of the core challenges faced and how they were addressed.
+This blog is written for those curious about the behind-the-scenes of data integration, schema design, and technical problem-solving involved in creating a functional data warehouse.</p>
+<h3 id="designing-the-data-warehouse-schema">Designing the Data Warehouse Schema</h3>
+<p>The foundation of any data warehouse is its schema. For &lsquo;OfficeProducts&rsquo;, we designed a <strong>Snowflake Schema</strong> to organise and centralise sales and product information efficiently. This schema design revolved around a <em>Transactional Fact Table</em> that holds the transactional data, along with several dimension tables to provide contextual information for each sale.</p>
+<p>These dimension tables include data on products, clients, sales channels, suppliers, and dates. The Snowflake Schema was chosen specifically for its ability to normalise data and reduce redundancy, which enhances query performance.</p>
+<p>The fact table connects to dimension tables through primary and foreign keys. For example, the <em>PRODUCT ID</em> column serves as a <strong>foreign key</strong> that links transactions to product details in the <strong>DIM PRODUCT</strong> dimension table.</p>
+<p>The use of <strong>VARCHAR</strong> data types for ID columns was an important decision, offering the benefit of flexibility when dealing with multiple data sources. While using <strong>VARCHAR</strong> helps maintain adaptability across different sources, it does come with challenges, such as potential data errors or slower searches compared to integer columns. Nevertheless, it was selected for its balance of compatibility and performance.</p>
+<h3 id="etl-process-overview">ETL Process Overview</h3>
+<p>The next crucial component of building the data warehouse is the ETL process — <strong>Extract, Transform, and Load</strong>. This is where data from various sources is consolidated into a unified format for easy querying. In the &lsquo;OfficeProducts&rsquo; project, the ETL process involved extracting data from two main files: the <strong>Datastream</strong> and <strong>Masterdata</strong> files.</p>
+<p>The <strong>Datastream</strong> file contained transactional information such as product IDs, client IDs, channels, and dates. Meanwhile, the <strong>Masterdata</strong> file contained detailed product and supplier information. After extraction, the data underwent transformation, which included joining tables on common keys like <em>PRODUCT ID</em> to create a holistic dataset ready for analysis.</p>
+<p>Finally, the loading phase brought the transformed data into the data warehouse using <em>Oracle SQL</em>. During this phase, we created indexes on foreign keys to optimise retrieval speed when querying the data. For instance, indexes on columns like <em>PRODUCT ID</em>, <em>CLIENT ID</em>, and <em>CHANNEL ID</em> helped enhance query efficiency by reducing the time taken to access related data.</p>
+<p>Below is an example snippet of SQL used to create one of the dimension tables:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> DIMPRODUCT (
+</span></span><span style="display:flex;"><span>    PRODUCT_ID VARCHAR2(<span style="color:#ae81ff">6</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    PRODUCT_NAME VARCHAR2(<span style="color:#ae81ff">30</span>),
+</span></span><span style="display:flex;"><span>    SUPPLIER_ID VARCHAR2(<span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>    PRICE NUMBER(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    BRAND_NAME VARCHAR2(<span style="color:#ae81ff">30</span>),
+</span></span><span style="display:flex;"><span>    WEIGHT VARCHAR2(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    COLOR VARCHAR2(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    AVAILABILITY_STATUS VARCHAR2(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>This SQL snippet shows how the <strong>DIM PRODUCT</strong> dimension table was structured, capturing product and supplier data in a normalised form. By defining primary keys and establishing clear relationships, we made the data model consistent and easy to use for future analysis.</p>
+<h3 id="challenges-encountered">Challenges Encountered</h3>
+<p>Building the data warehouse wasn’t without its challenges. Below are some of the primary issues we faced and how we tackled them:</p>
+<ul>
+<li>
+<p><em>Handling Data Variety and Quality</em>: One of the major challenges was integrating data from multiple sources with different data types and formats. Using <strong>VARCHAR</strong> for <strong>ID</strong> columns helped to normalise the structure across sources, but ensuring consistency in data quality was an ongoing effort.</p>
+</li>
+<li>
+<p><em>Performance Optimisation</em>: Query performance became critical as the volume of data increased. To address this, we used a combination of indexing and partitioning to speed up data retrieval. The <strong>ROLLUP</strong> and <strong>CUBE SQL</strong> operations were also used to aggregate data efficiently, which allowed for deeper analysis into product sales and promotional impacts.</p>
+</li>
+<li>
+<p><em>Data Consistency and Referential Integrity</em>: Maintaining referential integrity was another challenge, as multiple dimension tables were linked to the fact table. We had to be cautious in ensuring foreign key relationships were properly established and indexed to prevent data anomalies.</p>
+</li>
+</ul>
+<h3 id="implementation-in-oracle">Implementation in Oracle</h3>
+<p>The final data warehouse was implemented using <strong>Oracle</strong>, aligning with client requirements. Oracle provided a stable environment for handling complex queries and aggregations. Moreover, <em>materialised views</em> were used for efficient querying of large datasets, which helped reduce query times during reporting.</p>
+<p>For example, the materialised view was built to speed up sales analysis queries:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> MATERIALIZED <span style="color:#66d9ef">VIEW</span> Promotion_Analysis_mv
+</span></span><span style="display:flex;"><span>BUILD <span style="color:#66d9ef">IMMEDIATE</span>
+</span></span><span style="display:flex;"><span>REFRESH COMPLETE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AS</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> s.PROMO_ID, s.PROD_ID, <span style="color:#66d9ef">SUM</span>(s.AMOUNT_SOLD) <span style="color:#66d9ef">AS</span> TOTAL_SALES
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> SH.SALES s
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> s.PROMO_ID, s.PROD_ID;
+</span></span></code></pre></div><p>This SQL snippet shows how the <strong>Promotion Analysis</strong> materialised view was designed to aggregate sales data by promotion and product, which made querying faster and more efficient for analysts.</p>
+<h3 id="lessons-learned">Lessons Learned</h3>
+<p>Building a data warehouse for &lsquo;OfficeProducts&rsquo; was a learning-rich experience, especially when it came to balancing schema design complexity with performance requirements. Some key lessons include:</p>
+<ul>
+<li><em>Schema Choice Matters</em>: Choosing the right schema type (like the Snowflake Schema) can significantly impact both the efficiency and scalability of a data warehouse.</li>
+<li><em>ETL is More Than Just Loading Data</em>: A well-planned ETL process can streamline operations and reduce errors when integrating diverse data sources.</li>
+<li><em>Optimising for Performance</em>: Creating indexes and materialised views can make a huge difference when dealing with large-scale data, especially for frequent queries.</li>
+</ul>
+<h4 id="summary">Summary</h4>
+<p>Building a data warehouse is both an art and a science. It involves careful planning, attention to data quality, and a deep understanding of how data will be used to derive insights. For &lsquo;OfficeProducts&rsquo;, the data warehouse built was not just a storage solution but a strategic tool that enables more informed business decisions.</p>
+<h1 id="part-2-source-data-and-etl-process-explained">Part 2. Source Data and ETL Process Explained</h1>
+<p>In every data warehouse project, a critical step involves understanding the source data and developing an effective ETL process to consolidate that data. For &lsquo;OfficeProducts&rsquo;, the source data was primarily gathered from two main files: the <strong>Datastream</strong> file and the <strong>Masterdata</strong> file. These two files formed the backbone of the entire data warehouse, feeding the transactional and product-related information necessary for meaningful analysis.</p>
+<h3 id="understanding-the-source-data">Understanding the Source Data</h3>
+<ul>
+<li><strong>Datastream File</strong></li>
+</ul>
+<p>The Datastream file provides transactional data with attributes like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TRANSACTION</span> ID: <span style="color:#66d9ef">Unique</span> identifier <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">each</span> <span style="color:#66d9ef">transaction</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PRODUCT ID: Identifies the product involved <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">each</span> sale.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CLIENT ID <span style="color:#66d9ef">and</span> CLIENT NAME: Details about the client making the purchase.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CHANNEL ID <span style="color:#66d9ef">and</span> CHANNEL <span style="color:#66d9ef">DESC</span>: Information about the sales channel (e.<span style="color:#66d9ef">g</span>., direct sales, online, partner).
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DATE <span style="color:#66d9ef">and</span> QUANTITY: The date <span style="color:#66d9ef">of</span> the <span style="color:#66d9ef">transaction</span> <span style="color:#66d9ef">and</span> the number <span style="color:#66d9ef">of</span> products sold.
+</span></span></code></pre></div><ul>
+<li><strong>Masterdata File</strong></li>
+</ul>
+<p>The Masterdata file provides the master information about products, such as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>PRODUCT ID: <span style="color:#66d9ef">Unique</span> identifier <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">each</span> product, used <span style="color:#66d9ef">to</span> <span style="color:#66d9ef">match</span> <span style="color:#66d9ef">with</span> transactional <span style="color:#66d9ef">data</span>.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PRODUCT NAME, SUPPLIER ID, SUPPLIER NAME, PRICE: Information that enriches the analysis <span style="color:#66d9ef">with</span> details <span style="color:#66d9ef">like</span> pricing <span style="color:#66d9ef">and</span> supplier <span style="color:#66d9ef">data</span>.
+</span></span></code></pre></div><p>These files were complementary—the <strong>Datastream</strong> file held dynamic, transaction-specific information, while the <strong>Masterdata</strong> file enriched that information with static details about products and suppliers.</p>
+<h3 id="step-by-step-etl-process">Step-by-Step ETL Process</h3>
+<ul>
+<li><strong>Extract</strong></li>
+</ul>
+<p>In the extraction phase, data was pulled from both the <strong>Datastream</strong> and <strong>Masterdata</strong> files. The focus during this step was on ensuring that all the necessary data was extracted without loss or corruption, as the quality of this data would directly impact the accuracy of all subsequent analyses.</p>
+<ul>
+<li><strong>Transform</strong></li>
+</ul>
+<p>The transformation phase was critical in ensuring consistency and usability of the data. We needed to join tables based on common identifiers, such as <strong>PRODUCT ID</strong>, to create a unified view of sales that linked each transaction with product and client details. Additionally, some of the specific transformations included:</p>
+<ul>
+<li><em>Data Cleaning</em>: Handling missing values and ensuring consistent formats for fields like IDs and dates.</li>
+<li><em>Data Enrichment</em>: Adding calculated fields such as <strong>TOTAL SALE</strong> by multiplying QUANTITY with PRICE.</li>
+</ul>
+<p>Below is an example of the transformation logic used to join data from the two files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> d.TRANSACTION_ID, m.PRODUCT_NAME, d.CLIENT_NAME, d.QUANTITY, (d.QUANTITY <span style="color:#f92672">*</span> m.PRICE) <span style="color:#66d9ef">AS</span> TOTAL_SALE
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> DATASTREAM d
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span> MASTERDATA m <span style="color:#66d9ef">ON</span> d.PRODUCT_ID <span style="color:#f92672">=</span> m.PRODUCT_ID;
+</span></span></code></pre></div><p>This snippet illustrates how the product details from the <strong>Masterdata</strong> file were joined to the transactions from the <strong>Datastream</strong> file, creating a unified structure that allowed for comprehensive sales analysis.</p>
+<ul>
+<li><strong>Load</strong></li>
+</ul>
+<p>The final step was loading the transformed data into the Oracle data warehouse. During the loading phase, indexes were created on key columns like <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, and <strong>CHANNEL ID</strong>.</p>
+<p>These indexes were instrumental in ensuring the warehouse could handle large queries efficiently and provide results promptly.</p>
+<p>Below is an example of a load command used to create one of the indexes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> IDX_PRODUCT_ID <span style="color:#66d9ef">ON</span> FACT_TRANSACTIONS(PRODUCT_ID);
+</span></span></code></pre></div><p>This command helps to speed up queries involving <strong>PRODUCT ID</strong>, which was frequently used in aggregations and joins.</p>
+<h3 id="challenges-faced-during-integration">Challenges Faced During Integration</h3>
+<ul>
+<li><em>Data Quality Issues</em>: Ensuring data quality was a major challenge. The extracted data had missing values and inconsistent formats, which required thorough cleaning and transformation steps. The use of <strong>VARCHAR</strong> for ID columns added flexibility but also introduced potential data entry inconsistencies.</li>
+<li><em>Schema Normalisation</em>: With the <em>Snowflake Schema</em>, the aim was to minimise redundancy. However, achieving this required careful planning during the transformation phase to ensure all tables were properly normalised while maintaining referential integrity.</li>
+<li><em>Handling Large Data Volumes</em>: As the volume of transactional data increased, optimising the ETL workflow became essential. The use of indexes and materialised views was key in ensuring efficient querying and performance.</li>
+</ul>
+<h3 id="importance-of-etl-for-unified-data-structure">Importance of ETL for Unified Data Structure</h3>
+<p>The ETL process played a vital role in creating a single source of truth. By combining data from different sources, transforming it to meet quality standards, and loading it into a data warehouse, the &lsquo;OfficeProducts&rsquo; data warehouse became a reliable tool for strategic decision-making. The data could now be queried with ease, enabling detailed analyses of sales trends, client behavior, and product performance.</p>
+<h3 id="to-sum-up">To sum up,</h3>
+<p>Building a robust ETL process is the backbone of any data warehouse project. For &lsquo;OfficeProducts&rsquo;, this ETL process helped convert disparate data sources into a cohesive, analysable format, ultimately delivering insights that could drive better business strategies. By understanding the challenges and solutions involved in ETL, we can better appreciate the importance of well-integrated, high-quality data for any data-driven organisation.</p>
+<h1 id="part-3-designing-the-snowflake-schema-for-efficient-data-analysis">Part 3. Designing the Snowflake Schema for Efficient Data Analysis</h1>
+<p>In the world of data warehousing, choosing the right schema is a pivotal decision that determines the efficiency of the entire project. For &lsquo;OfficeProducts&rsquo;, we opted for a <strong>Snowflake Schema</strong> to create a streamlined and high-performing data warehouse. This schema design allowed us to effectively reduce redundancy, maintain data integrity, and improve overall query performance, making it ideal for deep analysis of sales and product performance data.</p>
+<h3 id="what-is-a-snowflake-schema">What is a Snowflake Schema?</h3>
+<p>The Snowflake Schema is an extension of the <strong>Star Schema</strong>, where dimension tables are normalised into multiple related tables. Unlike a traditional star schema, where each dimension table is typically denormalised and contains redundant data, the <strong>Snowflake Schema</strong> breaks those dimensions into smaller, normalised tables.</p>
+<p>This results in a more structured and layered approach that enhances data integrity and reduces storage requirements. In our case, the <strong>Transactional Fact Table</strong> was the central hub of the schema, which contained transactional data linked to multiple dimensions like products, clients, channels, suppliers, and dates.</p>
+<p>These dimension tables were normalised to minimise redundancy and make it easier to maintain data accuracy across the warehouse.</p>
+<h3 id="designing-the-tables">Designing the Tables</h3>
+<p>The <strong>Snowflake Schema</strong> revolves around the <strong>Transactional Fact Table</strong> and various dimension tables. Let’s break down the tables we designed:</p>
+<ul>
+<li><strong>Transactional Fact Table</strong>: holds information about each transaction, including fields like <strong>TRANSACTION ID</strong>, <strong>PRODUCT ID</strong>, <strong>CLIENT ID</strong>, <strong>CHANNEL ID</strong>, <strong>DATE</strong>, and <strong>QUANTITY</strong>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> FACT_TRANSACTIONS (
+</span></span><span style="display:flex;"><span>    TRANSACTION_ID VARCHAR2(<span style="color:#ae81ff">8</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    PRODUCT_ID VARCHAR2(<span style="color:#ae81ff">6</span>),
+</span></span><span style="display:flex;"><span>    CLIENT_ID VARCHAR2(<span style="color:#ae81ff">4</span>),
+</span></span><span style="display:flex;"><span>    CHANNEL_ID VARCHAR2(<span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>    DATE_ID DATE,
+</span></span><span style="display:flex;"><span>    QUANTITY NUMBER(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>    TOTAL_SALE NUMBER(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (PRODUCT_ID) <span style="color:#66d9ef">REFERENCES</span> DIMPRODUCT(PRODUCT_ID),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (CLIENT_ID) <span style="color:#66d9ef">REFERENCES</span> DIMCLIENT(CLIENT_ID),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (CHANNEL_ID) <span style="color:#66d9ef">REFERENCES</span> DIMCHANNEL(CHANNEL_ID),
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (DATE_ID) <span style="color:#66d9ef">REFERENCES</span> DIMDATE(DATE_ID)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><ul>
+<li><strong>DIM PRODUCT Dimension Table</strong>: contains details about products, including product name, brand, supplier, and availability.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> DIMPRODUCT (
+</span></span><span style="display:flex;"><span>    PRODUCT_ID VARCHAR2(<span style="color:#ae81ff">6</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    PRODUCT_NAME VARCHAR2(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    BRAND_NAME VARCHAR2(<span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    SUPPLIER_ID VARCHAR2(<span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>    AVAILABILITY_STATUS VARCHAR2(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><ul>
+<li><strong>DIM CLIENT Dimension Table</strong>: stores information about clients, including customer lifetime value (CLV), client type, and contact details.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> DIMCLIENT (
+</span></span><span style="display:flex;"><span>    CLIENT_ID VARCHAR2(<span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    CLIENT_NAME VARCHAR2(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    CLV NUMBER(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>    CLIENT_TYPE VARCHAR2(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>    CLIENT_ADDRESS VARCHAR2(<span style="color:#ae81ff">100</span>),
+</span></span><span style="display:flex;"><span>    PHONE_NUMBER VARCHAR2(<span style="color:#ae81ff">15</span>),
+</span></span><span style="display:flex;"><span>    EMAIL_ADDRESS VARCHAR2(<span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="advantages-of-the-snowflake-schema">Advantages of the Snowflake Schema</h3>
+<p>The Snowflake Schema offers several advantages for data analysis, especially in a large-scale data warehouse like &lsquo;OfficeProducts&rsquo;:</p>
+<ul>
+<li><em>Reduced Data Redundancy</em>: By normalising dimension tables, we reduced the repetition of data, which also reduced storage requirements and simplified data maintenance.</li>
+<li><em>Data Integrity</em>: With multiple, smaller tables connected via foreign keys, it was easier to maintain data consistency and integrity. Each table contains only unique and non-redundant data, reducing the risk of discrepancies.</li>
+<li><em>Improved Query Performance</em>: Normalised tables can optimise <strong>read performance</strong> in specific use cases, particularly when dealing with high-cardinality attributes like products or clients. Oracle&rsquo;s capabilities in handling joins ensured that query performance remained robust even when dimension tables were heavily normalised.</li>
+</ul>
+<h3 id="challenges-and-solutions">Challenges and Solutions</h3>
+<p>While the Snowflake Schema provided many benefits, there were also challenges:</p>
+<ul>
+<li><em>Complex Joins</em>: With more normalised tables, the number of joins in queries increased, which could impact performance. To mitigate this, we leveraged <strong>Oracle indexes</strong> to enhance retrieval speed.</li>
+<li><em>Maintenance Overhead</em>: Normalised tables require careful maintenance and updates, especially when new data types or dimensions are added. We addressed this through automated ETL scripts that ensured data was accurately propagated across all linked tables.</li>
+</ul>
+<h3 id="snowflake-schema-in-practice-entity-relationship-diagram">Snowflake Schema in Practice: Entity-Relationship Diagram</h3>
+<p>The <strong>Entity-Relationship Diagram</strong> (ERD) of the Snowflake Schema visually represents the relationships between the Transactional Fact Table and its connected dimensions.
+<figure><img src="/images/project3_images/ERD.png">
+</figure>
+</p>
+<p>Each dimension table serves a specific purpose in providing context to the transactions, such as product characteristics, client demographics, or sales channel types. The ERD acts as a blueprint, guiding us in understanding the structure and relationships of our data.</p>
+<p>The central fact table is surrounded by dimension tables, connected by foreign keys that represent the logical relationships between entities.</p>
+<h4 id="summary-1">Summary</h4>
+<p>The <strong>Snowflake Schema</strong> was instrumental in organising the data for &lsquo;OfficeProducts&rsquo; into a highly efficient structure. By reducing redundancy, maintaining data integrity, and leveraging Oracle&rsquo;s capabilities, we created a schema that supported fast, reliable, and insightful data analysis.</p>
+<p>For those looking to build their own data warehouse, the <strong>Snowflake Schema</strong> can be a great choice, especially when dealing with complex datasets that need normalisation to manage redundancy and maintain accuracy.</p>
+<h1 id="part-4-multidimensional-data-analysis-practical-insights">Part 4. Multidimensional Data Analysis: Practical Insights</h1>
+<p>The ultimate purpose of building a data warehouse is to be able to perform powerful and meaningful analyses to derive actionable business insights. For the &lsquo;OfficeProducts&rsquo; project, we carried out several forms of multidimensional analysis to answer key business questions related to product sales, customer trends, and promotional effectiveness. I&rsquo;ll next explore the practical insights gained through these analyses and how tools like <strong>ROLLUP</strong> and <strong>CUBE</strong> helped extract deeper trends from the data.</p>
+<h3 id="multidimensional-data-analysis">Multidimensional Data Analysis</h3>
+<p>The data warehouse for &lsquo;OfficeProducts&rsquo; enabled us to conduct multidimensional analysis by organising the data in a way that allowed easy aggregation and exploration across various dimensions, such as products, sales channels, clients, and time. These analyses helped in understanding sales performance, identifying top-performing products, and exploring the effectiveness of different promotional campaigns. The following sections provide a detailed overview of the questions we addressed and the insights derived.</p>
+<p><strong>Question a: Top Countries by Total Sales</strong></p>
+<p>The first analysis involved identifying the top three countries in terms of total sales. By using an aggregate <strong>SUM</strong> function, we were able to rank countries based on their total sales.</p>
+<p>Here is a snippet of the SQL code that facilitated this analysis:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> CountrySales <span style="color:#66d9ef">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">c</span>.country_iso_code, <span style="color:#66d9ef">c</span>.country_name, <span style="color:#66d9ef">SUM</span>(s.amount_sold) <span style="color:#66d9ef">AS</span> total_sales
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SH.COUNTRIES <span style="color:#66d9ef">c</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.CUSTOMERS cust <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">c</span>.country_id <span style="color:#f92672">=</span> cust.country_id
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.SALES s <span style="color:#66d9ef">ON</span> cust.cust_id <span style="color:#f92672">=</span> s.cust_id
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">c</span>.country_iso_code, <span style="color:#66d9ef">c</span>.country_name
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> country_iso_code, country_name, total_sales
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> country_iso_code, country_name, total_sales,
+</span></span><span style="display:flex;"><span>           RANK() OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> total_sales <span style="color:#66d9ef">DESC</span>) <span style="color:#66d9ef">AS</span> ranking
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> CountrySales
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> ranking <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><p>This query highlighted which countries contributed the most to overall sales, providing valuable insight into geographic markets that could be further targeted for promotions or resource allocation.</p>
+<p><strong>Question b: Top-Selling Products by Year</strong></p>
+<p>To understand product trends, we analysed the most sold products in the US for each year from 1998 to 2001. This analysis helped identify the popularity of products over time, which in turn informed inventory planning and promotional strategies.</p>
+<p>Below is a portion of the SQL code used for this analysis:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">WITH</span> RankedProducts <span style="color:#66d9ef">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> t2.calendar_year <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">year</span>,
+</span></span><span style="display:flex;"><span>           p2.prod_name,
+</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">SUM</span>(s2.quantity_sold) <span style="color:#66d9ef">AS</span> total_quantity,
+</span></span><span style="display:flex;"><span>           RANK() OVER (PARTITION <span style="color:#66d9ef">BY</span> t2.calendar_year <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">SUM</span>(s2.quantity_sold) <span style="color:#66d9ef">DESC</span>) <span style="color:#66d9ef">AS</span> prod_rank
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> SH.TIMES t2
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.SALES s2 <span style="color:#66d9ef">ON</span> t2.time_id <span style="color:#f92672">=</span> s2.time_id
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.CUSTOMERS c2 <span style="color:#66d9ef">ON</span> s2.cust_id <span style="color:#f92672">=</span> c2.cust_id
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.PRODUCTS p2 <span style="color:#66d9ef">ON</span> s2.prod_id <span style="color:#f92672">=</span> p2.prod_id
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">JOIN</span> SH.COUNTRIES co2 <span style="color:#66d9ef">ON</span> c2.country_id <span style="color:#f92672">=</span> co2.country_id
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">WHERE</span> co2.country_iso_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;US&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">AND</span> t2.calendar_year <span style="color:#66d9ef">BETWEEN</span> <span style="color:#e6db74">&#39;1998&#39;</span> <span style="color:#66d9ef">AND</span> <span style="color:#e6db74">&#39;2001&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> t2.calendar_year, p2.prod_name
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">year</span>, prod_name, total_quantity
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> RankedProducts
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> prod_rank <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>This query enabled us to track changes in product popularity and helped us adjust our marketing strategies accordingly.</p>
+<p><strong>Question c: Comprehensive Sales Analysis Using ROLLUP and CUBE</strong></p>
+<p>One of the most advanced analyses we performed involved using <strong>ROLLUP</strong> and <strong>CUBE</strong> operations to uncover trends in product sales across different promotions. The <strong>ROLLUP</strong> operation helped aggregate data in a hierarchical manner, from the most detailed level to a grand total, while <strong>CUBE</strong> provided a more granular, multi-dimensional aggregation.</p>
+<p><strong>Using ROLLUP for Aggregation</strong></p>
+<p>Here is an example SQL snippet that shows how we used the <strong>ROLLUP</strong> operation to perform hierarchical aggregations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>    p.PROMONAME,
+</span></span><span style="display:flex;"><span>    pr.PRODNAME,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SUM</span>(mv.TOTAL_SALES) <span style="color:#66d9ef">AS</span> TOTAL_SALES
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>
+</span></span><span style="display:flex;"><span>    Promotion_Analysis_mv mv
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
+</span></span><span style="display:flex;"><span>    SH.PRODUCTS pr <span style="color:#66d9ef">ON</span> mv.PROD_ID <span style="color:#f92672">=</span> pr.PROD_ID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
+</span></span><span style="display:flex;"><span>    SH.PROMOTIONS p <span style="color:#66d9ef">ON</span> mv.PROMO_ID <span style="color:#f92672">=</span> p.PROMO_ID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ROLLUP</span> (p.PROMONAME, pr.PRODNAME)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>
+</span></span><span style="display:flex;"><span>    p.PROMONAME, pr.PRODNAME;
+</span></span></code></pre></div><p>The <strong>ROLLUP</strong> operation here provided a hierarchy of aggregate sales, from specific products under a particular promotion to a total sales figure across all promotions. This allowed us to understand which promotions were most effective in driving sales.</p>
+<p><strong>Using CUBE for Multi-Dimensional Analysis</strong></p>
+<p>We also used the <strong>CUBE</strong> operation to create a multi-dimensional view of the data, enabling us to explore all possible combinations of aggregation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span>
+</span></span><span style="display:flex;"><span>    p.PROMONAME,
+</span></span><span style="display:flex;"><span>    pr.PRODNAME,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SUM</span>(mv.TOTAL_SALES) <span style="color:#66d9ef">AS</span> TOTAL_SALES
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span>
+</span></span><span style="display:flex;"><span>    Promotion_Analysis_mv mv
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
+</span></span><span style="display:flex;"><span>    SH.PRODUCTS pr <span style="color:#66d9ef">ON</span> mv.PROD_ID <span style="color:#f92672">=</span> pr.PROD_ID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span>
+</span></span><span style="display:flex;"><span>    SH.PROMOTIONS p <span style="color:#66d9ef">ON</span> mv.PROMO_ID <span style="color:#f92672">=</span> p.PROMO_ID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">CUBE</span> (p.PROMONAME, pr.PRODNAME)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>
+</span></span><span style="display:flex;"><span>    p.PROMONAME, pr.PRODNAME;
+</span></span></code></pre></div><p>The <strong>CUBE</strong> operation offered a detailed, multi-dimensional aggregation, providing cross-tabulations and allowing us to identify broader patterns across promotions and products. This depth of analysis was instrumental in refining promotional strategies and identifying opportunities for bundling products.</p>
+<h3 id="insights-and-recommendations">Insights and Recommendations</h3>
+<p>The insights derived from these multidimensional analyses informed a variety of strategic decisions for &lsquo;OfficeProducts&rsquo;:</p>
+<ul>
+<li><em>Promotion Effectiveness</em>: It became clear that some promotions (e.g., Internet promotions) performed significantly better than others. The analysis showed which products benefitted the most from specific promotional types, helping to tailor future marketing efforts.</li>
+<li><em>Top Products and Sales Channels</em>: Products like the <em>Envoy Ambassador</em> consistently ranked among the best sellers, indicating that these should be prioritised for restocking and perhaps bundled with other items to increase sales.</li>
+<li><em>Market Focus</em>: The top-performing countries provided a clear indication of where the company should focus its marketing and expansion efforts, while also revealing markets that underperformed and required different strategies.</li>
+</ul>
+<h4 id="summary-2">Summary</h4>
+<p>Multidimensional data analysis is a core feature of any data warehouse, allowing businesses to understand their operations at a deeper level. By using <strong>ROLLUP</strong> and <strong>CUBE</strong> operations, we were able to derive valuable insights from our data warehouse for &lsquo;OfficeProducts&rsquo;. These tools enabled us to perform complex aggregations and answer critical questions about sales, product performance, and promotional impacts.</p>
+<h1 id="part-5-sales-channels-performance-and-promotions-lessons-learned">Part 5. Sales Channels Performance and Promotions: Lessons Learned</h1>
+<p>Sales channel performance and promotional effectiveness are key aspects that drive business success. For &lsquo;OfficeProducts&rsquo;, understanding which channels contributed the most to overall sales and evaluating how promotions influenced sales trends were crucial. I&rsquo;ll next walk you through how we analysed sales performance across various channels and promotions using the data warehouse, and the insights we gained from these analyses.</p>
+<h3 id="overview-of-sales-channels">Overview of Sales Channels</h3>
+<p>In the &lsquo;OfficeProducts&rsquo; data warehouse, sales channels were represented as a distinct dimension table called <strong>DIM CHANNEL</strong>. This table contained details about each sales channel, such as the channel ID, channel type (e.g., direct sales, internet sales, partners), and other relevant metadata.</p>
+<p>Sales data from the <strong>FACT TRANSACTIONS</strong> table was linked to this dimension, allowing us to explore sales metrics for each channel. The key sales channels analysed were:</p>
+<ul>
+<li>
+<p><strong>Direct Sales</strong>: Traditional sales channel with direct contact with customers.</p>
+</li>
+<li>
+<p><strong>Internet Sales</strong>: Online sales, which became increasingly popular in recent years.</p>
+</li>
+<li>
+<p><strong>Partner Sales</strong>: Sales conducted through partners and resellers.</p>
+</li>
+</ul>
+<h3 id="analysing-channel-performance-over-time">Analysing Channel Performance Over Time</h3>
+<p>To analyse how each sales channel performed over time, we looked at the total sales recorded for each channel from 1998 to 2002.</p>
+<p>The following SQL code was used to extract and summarise the sales for each channel by year:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">YEAR</span> <span style="color:#66d9ef">FROM</span> WEEKENDINGDAY) <span style="color:#66d9ef">AS</span> sales_year,
+</span></span><span style="display:flex;"><span>       CHANNEL_DESC,
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">SUM</span>(DOLLARS) <span style="color:#66d9ef">AS</span> total_sales
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sh.fweek_pscat_sales_mv
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> <span style="color:#66d9ef">ROLLUP</span>(<span style="color:#66d9ef">EXTRACT</span>(<span style="color:#66d9ef">YEAR</span> <span style="color:#66d9ef">FROM</span> WEEKENDINGDAY), CHANNEL_DESC)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> sales_year, CHANNEL_DESC;
+</span></span></code></pre></div><p>This <strong>ROLLUP</strong> operation allowed us to generate yearly totals as well as channel-level subtotals, which provided a clear overview of how sales were distributed across channels.</p>
+<p>The analysis revealed that <strong>Direct Sales</strong> was the most dominant channel, especially during the early years (1998-2001).</p>
+<p>However, we observed a significant decline in sales for this channel in 2002, which prompted further investigation into potential shifts in customer preferences.</p>
+<h3 id="promotion-analysis-impact-on-sales">Promotion Analysis: Impact on Sales</h3>
+<p>To evaluate the impact of various promotions, we used both <strong>ROLLUP</strong> and <strong>CUBE</strong> operations to aggregate sales data by promotion type.  The <strong>Promotion Analysis Materialised View (Promotion_Analysis_mv)</strong> was instrumental in this process, as it allowed us to easily analyse promotional impacts without repeatedly joining large tables.</p>
+<p>The following SQL snippet illustrates the analysis of sales under different promotions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> p.PROMONAME,
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">SUM</span>(mv.TOTAL_SALES) <span style="color:#66d9ef">AS</span> TOTAL_SALES
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Promotion_Analysis_mv mv
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span> SH.PROMOTIONS p <span style="color:#66d9ef">ON</span> mv.PROMO_ID <span style="color:#f92672">=</span> p.PROMO_ID
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> p.PROMONAME
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> TOTAL_SALES <span style="color:#66d9ef">DESC</span>;
+</span></span></code></pre></div><p>This analysis allowed us to identify which promotions were most successful in boosting sales. For instance, <strong>Internet Promotions (#29-350)</strong> emerged as the most effective, significantly outpacing other types of promotions such as TV Promotions and Post Promotions.</p>
+<h3 id="insights-derived">Insights Derived</h3>
+<ul>
+<li><strong>1. Direct Sales Channel Decline</strong>: The declining performance of the <strong>Direct Sales channel</strong> in 2002 suggested changing consumer behaviour, with a shift towards online purchases.</li>
+</ul>
+<p>This insight was crucial for the company to adapt its strategies, potentially investing more in digital marketing and enhancing the online sales experience.</p>
+<ul>
+<li><strong>2. Promotional Effectiveness</strong>: The analysis showed that promotions focused on <strong>Internet sales</strong> had the highest impact.</li>
+</ul>
+<p>The <strong>Envoy Ambassador</strong> product, for instance, saw a dramatic increase in sales during internet promotional campaigns, suggesting that some products are particularly well-suited to online advertising.</p>
+<ul>
+<li><strong>3. Bundling Opportunities</strong>: By analysing the most effective promotions, we identified opportunities to bundle high-performing products with lower-demand items to increase overall sales.</li>
+</ul>
+<p>Products like <strong>Envoy Ambassador</strong> consistently performed well, and bundling them with complementary products could help clear inventory.</p>
+<ul>
+<li><strong>4. Channel Strategy Recommendations</strong>: Given the shift towards internet sales, it was recommended that &lsquo;OfficeProducts&rsquo; invest more in their online sales platform.</li>
+</ul>
+<p>Enhancing the user experience, expanding digital marketing efforts, and improving logistics for online deliveries could help maximise the opportunities presented by this shift in consumer preference.</p>
+<h3 id="lessons-learned-1">Lessons Learned</h3>
+<ul>
+<li><em>Channel Adaptability</em>: The decline in Direct Sales and the rise of <strong>Internet Sales</strong> highlighted the importance of channel adaptability.</li>
+</ul>
+<p>Businesses must be able to adapt their strategies to match evolving consumer behaviours, and data from a well-designed warehouse helps to spot these trends early.</p>
+<ul>
+<li><em>Promotion Targeting</em>: Not all promotions yield equal results, and understanding which channels and product types respond best to which promotions is key.</li>
+</ul>
+<p>The success of <strong>Internet Promotions</strong> underscored the power of digital channels for certain product lines.</p>
+<ul>
+<li><em>Data-Driven Decision Making</em>: The insights gained from the multidimensional analyses enabled us to provide clear, data-backed recommendations for marketing, sales strategy, and inventory management.</li>
+</ul>
+<p>For example, targeting high-potential products and promotions for further investment became a strategic priority.</p>
+<h4 id="summary-3">Summary</h4>
+<p>The performance of sales channels and the impact of promotions are critical for shaping effective business strategies. For &lsquo;OfficeProducts&rsquo;, the data warehouse provided a robust platform for conducting detailed analyses that uncovered key trends and insights. By recognising the value of internet promotions and the shift away from traditional sales channels, &lsquo;OfficeProducts&rsquo; can now better align its future marketing and sales strategies to match consumer expectations.</p>
+<h1 id="part-6-recommendations-for-management-and-business-insights">Part 6. Recommendations for Management and Business Insights</h1>
+<p>Data-driven insights play a crucial role in helping businesses make informed decisions that align with market dynamics. For &lsquo;OfficeProducts&rsquo;, the analysis conducted using the data warehouse provided several valuable insights that translated into actionable recommendations for management.</p>
+<p>In this part, I&rsquo;ll cover key strategies derived from the data, including <strong>sales trends, promotion effectiveness</strong>, and <strong>bundling opportunities</strong>, which were designed to help &lsquo;OfficeProducts&rsquo; optimise its business performance.</p>
+<h3 id="strategic-recommendations-derived-from-analysis">Strategic Recommendations Derived from Analysis</h3>
+<p>The data warehouse and the subsequent analyses offered deep insights into sales performance, product trends, and the impact of promotions. Based on these insights, the following strategic recommendations can be formulated:</p>
+<p><strong>1. Invest in Digital Sales Channels</strong></p>
+<p>The sales channel analysis highlighted a significant shift in consumer behaviour, with a clear increase in <strong>Internet Sales</strong> and a decline in <strong>Direct Sales</strong> by 2002. To adapt to these changes, we recommend that &lsquo;OfficeProducts&rsquo; invest more in enhancing its digital sales platform.</p>
+<ul>
+<li><em>User Experience</em>: Enhance the user experience of the website to make it easier for customers to browse and purchase products.</li>
+<li><em>Digital Marketing</em>: Increase digital marketing efforts to attract more customers through online channels.</li>
+</ul>
+<p>Promotions through social media and targeted advertising could help boost online sales further.</p>
+<ul>
+<li><em>Delivery Logistics</em>: Improving delivery options and ensuring fast, reliable shipping can increase customer satisfaction and make online purchasing more appealing.</li>
+</ul>
+<p><strong>2. Focus on High-Performing Products for Promotions</strong></p>
+<p>Certain products, such as the <strong>Envoy Ambassador</strong> and the <strong>Mini DV Camcorder</strong>, consistently ranked among the top-performing items. Promotions that focused on these high-demand products led to substantial increases in sales.</p>
+<ul>
+<li><em>Product-Specific Promotions</em>: Allocate promotional budgets towards top-performing products.</li>
+</ul>
+<p>For example, internet-based promotions worked very well for the <strong>Envoy Ambassador</strong> product. Tailoring promotions based on the performance of each product will maximise return on investment.</p>
+<ul>
+<li><em>Seasonal Campaigns</em>: Utilise the monthly and yearly trends identified in the sales data to time promotions effectively.</li>
+</ul>
+<p>Products with peaks in specific months, such as <strong>December</strong>, should be heavily promoted during those periods to capitalise on heightened demand.</p>
+<p><strong>3. Leverage Product Bundling to Increase Sales</strong></p>
+<p>Product bundling provides an excellent opportunity to boost overall sales, particularly when combining high-performing items with lesser-known or lower-demand products.</p>
+<ul>
+<li><em>Bundle Top-Sellers with Lower-Demand Items</em>: Products like the <strong>Envoy Ambassador</strong> could be bundled with items that have lower demand to increase visibility and drive more purchases of less popular inventory.</li>
+</ul>
+<p>Bundling also creates a perceived value for customers, encouraging them to make a larger purchase.</p>
+<ul>
+<li><em>Cross-Promotions</em>: Promote bundles that group complementary products, such as office supplies and related gadgets, which can be marketed together to boost overall sales volumes.</li>
+</ul>
+<p><strong>4. Revisit Ineffective Promotional Strategies</strong></p>
+<p>The analysis also showed that some promotional strategies were less effective. For example, <strong>Post Promotions</strong> underperformed in comparison to internet or TV campaigns.</p>
+<ul>
+<li>
+<p><em>Optimise Promotional Budget Allocation</em>: By reallocating promotional budgets away from underperforming channels like <strong>Post Promotions</strong> and focusing more on effective channels, &lsquo;OfficeProducts&rsquo; can ensure a higher return on marketing investments.</p>
+</li>
+<li>
+<p><em>Analyse Customer Preferences</em>: Further analysis into why certain promotions failed may reveal insights into customer preferences.</p>
+</li>
+</ul>
+<p>For example, customers might find online promotions more convenient than traditional post-based methods, indicating a trend towards more digital and immediate promotional formats.</p>
+<p><strong>5. Increase Inventory for Popular Products</strong></p>
+<p>To prevent stockouts and ensure high-demand products are always available, the following recommendations are suggested:</p>
+<ul>
+<li>
+<p><em>Real-Time Stock Monitoring</em>: Set up alerts and monitoring for products with consistently high sales volumes, such as the <strong>Envoy Ambassador</strong>. Running out of these products could lead to missed sales opportunities.</p>
+</li>
+<li>
+<p><em>Predictive Inventory Management</em>: Utilise historical sales data from the data warehouse to predict demand and proactively manage inventory levels.</p>
+</li>
+</ul>
+<p>This approach can help balance supply and demand, particularly for products with seasonal peaks.</p>
+<h3 id="summary-of-recommendations">Summary of Recommendations</h3>
+<p>The data-driven analysis provided several actionable recommendations for &lsquo;OfficeProducts&rsquo; to optimise sales and promotional strategies, including:</p>
+<ul>
+<li>
+<p><strong>Investing in Digital Sales Channels</strong>: Enhance user experience, marketing, and logistics for online platforms.</p>
+</li>
+<li>
+<p><strong>Targeted Promotions</strong>: Focus promotional efforts on high-performing products and align promotions with seasonal trends.</p>
+</li>
+<li>
+<p><strong>Product Bundling</strong>: Create product bundles to drive sales of underperforming items.</p>
+</li>
+<li>
+<p><strong>Reallocate Promotional Budget</strong>: Move funds away from ineffective promotions and focus on digital channels.</p>
+</li>
+<li>
+<p><strong>Inventory Optimisation</strong>: Monitor inventory and predict demand to prevent stockouts of popular products.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The recommendations derived from the data warehouse analyses underscore the value of data-driven decision-making. By leveraging the insights obtained through multidimensional data analysis, &lsquo;OfficeProducts&rsquo; can strategically adjust its marketing, sales, and inventory management practices to better align with customer preferences and market conditions.</p>
+<p>If you have any questions about the insights discussed in this post or how to implement similar strategies in your business, feel free to reach out directly. The power of data-driven decision-making lies in transforming insights into tangible actions that improve business performance!</p>
+<p><em>Feel free to explore the project on GitHub and contribute if you’re interested. Happy coding!</em></p>
+</div>
+  </article>
+
+    </main>
+
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://drnsmith.github.io/" >
+    &copy;  Natasha Smith Portfolio 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
+
+

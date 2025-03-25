@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/projects/project11/</link>
+    <description>Recent content in Mastering Convolutional Neural Networks (CNNs): A Comprehensive Guide to Building, Training, and Optimising CNNs for Real-World (Healthcare) Applications on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Jun 2024 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/projects/project11/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mastering Deep Learning for Medical Imaging: From Custom CNNs to Full Pipelines</title>
+      <link>https://drnsmith.github.io/projects/mastering-deep-learning-for-medical-imaging-from-custom-cnns-to-full-pipelines/</link>
+      <pubDate>Wed, 05 Jun 2024 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/mastering-deep-learning-for-medical-imaging-from-custom-cnns-to-full-pipelines/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project11_images/pr11.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;&lt;strong&gt;View Project on GitHub&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;a href=&#34;https://github.com/drnsmith/Custom-CNNs-Histopathology-Classification&#34; target=&#34;_blank&#34;&gt;&#xA;    &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width:40px; height:40px; vertical-align: middle;&#34;&gt;&#xA;  &lt;/a&gt;&#xA;&lt;h1 id=&#34;part-1-building-custom-cnn-architectures-from-scratch-to-mastery&#34;&gt;Part 1. Building Custom CNN Architectures: From Scratch to Mastery&lt;/h1&gt;&#xA;&lt;p&gt;Convolutional Neural Networks (CNNs) have become the cornerstone of modern computer vision applications. From self-driving cars to medical imaging diagnostics, their applications are both transformative and ubiquitous. But while pre-trained models like &lt;strong&gt;ResNet&lt;/strong&gt; and &lt;strong&gt;EfficientNet&lt;/strong&gt; are readily available, there’s something uniquely empowering about building your own CNN architecture from scratch. In this part, I’ll explain how to construct a custom CNN tailored for binary classification tasks.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

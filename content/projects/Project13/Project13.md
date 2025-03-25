@@ -247,7 +247,7 @@ The combination of WLFs, DA, and stratified sampling significantly improved the 
 
 Augmented images demonstrate the diversity introduced by augmentation techniques. Comparison of confusion matrices with and without class imbalance handling highlighted the improved detection of benign cases.
 
-### Summary
+#### Summary
 
 Class imbalance is a critical challenge in medical imaging datasets, but techniques like weighted loss functions, data augmentation, and stratified sampling provide effective solutions. By implementing these approaches, I significantly enhanced the performance of DL models on the BreakHis dataset, improving sensitivity for minority classes and ensuring robust, fair predictions.
 
@@ -340,7 +340,6 @@ final_preds = meta_model.predict(ensemble_input)
 | EfficientNetB0      | 92.4%       | 90.3%           | 94.8%           | 91.0%         |
 | **Ensemble (LogReg)** | **96.8%**   | **94.7%**       | **98.5%**       | **96.1%**     |
 
----
 
 #### **Advantages of Ensembles in Histopathology**
 
@@ -359,7 +358,7 @@ In this project, the ensemble model significantly outperformed individual CNN ar
 - *Specificity* and *F1-score* surpassed benchmarks set by individual models.
 
 
-### Summary
+#### Summary
 
 Choosing the best CNN architecture for breast cancer detection depends on the dataset and requirements. While `ResNet` excels at hierarchical feature learning, `DenseNet` propagates features efficiently, and `EfficientNet` balances performance and resources. Combining them through an ensemble approach with a logistic regression meta-model provides the best results, improving accuracy, sensitivity, and specificity. This ensemble strategy represents a robust solution for leveraging AI in histopathology, paving the way for reliable and precise diagnostics.
 

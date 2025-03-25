@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI in Cooking on Natasha Smith Portfolio</title>
+    <link>https://drnsmith.github.io/tags/ai-in-cooking/</link>
+    <description>Recent content in AI in Cooking on Natasha Smith Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Feb 2025 10:58:08 -0400</lastBuildDate>
+    <atom:link href="https://drnsmith.github.io/tags/ai-in-cooking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI-Powered Recipe Difficulty Classification</title>
+      <link>https://drnsmith.github.io/projects/project1/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/project1/</guid>
+      <description>&lt;h2&gt;Read the Paper:&lt;/h2&gt;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://drnsmith.github.io/papers/project_1_paper.pdf&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/pdf-icon.png&#34; alt=&#34;PDF&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://drnsmith.github.io/papers/project_1_paper.pdf&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        Click to View PDF&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>From Words to Vectors: Embedding Techniques in Recipe Analysis – A Deep Dive into Text Representation in AI Models</title>
+      <link>https://drnsmith.github.io/projects/from-words-to-vectors-embedding-techniques-in-recipe-analysis-a-deep-dive-into-text-representation-in-ai-models/</link>
+      <pubDate>Thu, 20 Feb 2025 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/from-words-to-vectors-embedding-techniques-in-recipe-analysis-a-deep-dive-into-text-representation-in-ai-models/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project2_images/pr2.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/RecipeNLG-Topic-Modelling-and-Clustering&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1-preparing-recipe-data-for-natural-language-processing&#34;&gt;Part 1. Preparing Recipe Data for Natural Language Processing&lt;/h1&gt;&#xA;&lt;p&gt;Data preparation is one of the most crucial steps in any ML project. For this project, I started with raw recipe text data, which contained a lot of unstructured information (i.e., ingredient lists and cooking directions/steps).&lt;/p&gt;&#xA;&lt;p&gt;I used various data preparation techniques to clean, tokenise, and transform recipe data into a structured format. This foundation made it possible to extract meaningful insights from the data and apply techniques like clustering and topic modelling effectively.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AI-Powered Recipe Classifier</title>
+      <link>https://drnsmith.github.io/projects/ai-powered-recipe-classifier/</link>
+      <pubDate>Sat, 09 Apr 2022 10:58:08 -0400</pubDate>
+      <guid>https://drnsmith.github.io/projects/ai-powered-recipe-classifier/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;https://drnsmith.github.io/images/project1_images/pr1.jpg&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;div style=&#34;display: flex; align-items: center; gap: 10px;&#34;&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;text-decoration: none;&#34;&gt;&#xA;        &lt;img src=&#34;https://drnsmith.github.io/images/github.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 40px; height: 40px; vertical-align: middle;&#34;&gt;&#xA;    &lt;/a&gt;&#xA;    &lt;a href=&#34;https://github.com/drnsmith/AI-Recipe-Classifier&#34; target=&#34;_blank&#34; style=&#34;font-weight: bold; color: black;&#34;&gt;&#xA;        View Project on GitHub&#xA;    &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&lt;h1 id=&#34;part-1&#34;&gt;Part 1.&lt;/h1&gt;&#xA;&lt;p&gt;Cooking varies in complexity. Some recipes are straightforward, while others demand precision, technique, and skill. The challenge in this project was to develop a machine learning (ML) model that classifies recipes into four difficulty levels—&lt;strong&gt;Easy, Medium, Hard, and Very Hard&lt;/strong&gt;—using &lt;strong&gt;Natural Language Processing (NLP)&lt;/strong&gt; and &lt;strong&gt;Machine Learning (ML)&lt;/strong&gt;. In the first part, I focus on and walk you through &lt;strong&gt;data collection, cleaning, and pre-processing&lt;/strong&gt;, which lay the foundation for training a robust ML model.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
